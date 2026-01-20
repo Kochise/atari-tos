@@ -39,6 +39,7 @@ Here is the general architecture of the TOS:
 Each part is subdivided into functions, parameters and files.
 
 ```mermaid
+%%{ init: { 'flowchart': { 'padding': 1, 'nodeSpacing': 24, 'rankSpacing': 1, 'diagramPadding': 1 }}}%%
 flowchart TD
 	subgraph TOS
 		subgraph HARDWARE
