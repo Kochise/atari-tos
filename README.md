@@ -9,28 +9,6 @@ Atari ST TOS documents, source codes and development tools.
 
 From various locations, including cross-compilers to create programs and ROM image.
 
-https://docs.dev-docs.org
-
-http://info-coach.fr/atari
-
-https://www.yardley.cc/atari
-
-https://bus-error.nokturnal.pl/atari_compendium/html/toc.htm
-
-https://www.fplanque.com/tech/retro/atari/atari-st-fd-image-file-formats
-
-https://github.com/freemint/tos.hyp/tree/gh-pages -> https://freemint.github.io/tos.hyp
-
-* Sources
-
-https://github.com/th-otto/tos1x
-
-https://github.com/th-otto/tos3x
-
-https://github.com/kelihlodversson/pTOS
-
-https://github.com/ggnkua/Atari_ST_Sources
-
 * Home
 
 https://github.com/Kochise/atari-tos
@@ -44,6 +22,36 @@ https://github.com/Kochise/atari-tos
 [atari-emu] provides different emulators and TOS images.
 
 [atari-emu]: https://github.com/Kochise/atari-emu
+
+<details>
+<summary>Sources (click to expand)</summary>
+
+https://github.com/th-otto/tos1x
+
+https://github.com/th-otto/tos3x
+
+https://github.com/kelihlodversson/pTOS
+
+https://github.com/ggnkua/Atari_ST_Sources
+
+</details>
+
+<details>
+<summary>Documentations (click to expand)</summary>
+
+https://docs.dev-docs.org
+
+http://info-coach.fr/atari
+
+https://www.yardley.cc/atari
+
+https://bus-error.nokturnal.pl/atari_compendium/html/toc.htm
+
+https://www.fplanque.com/tech/retro/atari/atari-st-fd-image-file-formats
+
+https://github.com/freemint/tos.hyp/tree/gh-pages -> https://freemint.github.io/tos.hyp
+
+</details>
 
 ## History
 
@@ -254,10 +262,19 @@ The ATARI ST is based on the [68000] processor which is 32 bits internal but "on
 
 Thus typical data size is considered 16 bits in TOS. Here is the table of data size name depending on the language used:
 
-| Size		| Assembler	| C			| GEM		| GFA		| Omikron			|
-| :---		| :---		| :---		| :---		| :---		| :---				|
-| 8 bits	| .b		| char		| BYTE		| BYTE(%)	| %B				|
-| 16 bits	| .w		| short		| WORD		| CARD(%)	| %W or %			|
-| 32 bits	| .l		| integer	| LONG		| % 		| %L or no suffix	|
-| float		| .f		| float		| 			| no suffix	| ! (6 bytes)		|
-| double	| .d		| double	| 			| 	 		| # (10 bytes)		|
+| Size			| Assembler		| C			| GEM		| GFA v3				| Omikron			|
+| :---			| :---			| :---		| :---		| :---					| :---				|
+| 1 bit			| 				| bool		| 			| ! (16 bits)			| %F				|
+| 8 bits		| .b			| char		| BYTE		| | - BYTE()			| %B				|
+| 16 bits		| .w			| short		| WORD		| & - CARD()			| %W or %			|
+| 32 bits		| .l			| integer	| LONG		| % 					| %L or no suffix	|
+| [float]		| .f (32 bits)	| float		| 			| 						| ! (6 bytes)		|
+| [double]		| .d (64 bits)	| double	| 			| # or no suffix[^1]	| 					|
+| [extended]	| .x (80 bits)	| 			| 			| 						| # (10 bytes)		|
+| string		| 				| 			| 			| $ (32767 bytes)		| $					|
+
+[^1]: depends on DEFBIT(!), DEFBYT(|), DEFWRD(&), DEFINT(%), DEFFLT(#) or DEFSTR($)
+
+[float]: https://en.wikipedia.org/wiki/Single-precision_floating-point_format
+[double]: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
+[extended]: https://en.wikipedia.org/wiki/Extended_precision
