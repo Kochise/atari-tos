@@ -81,6 +81,11 @@ The GEMDOS in the lower level part of the operating system, dealing with IO and 
 > [!NOTE]
 > Also while most of the ASCII table is identical (0-127) with MS DOS and allows a pretty good compatibility, the upper part (128-255) is quite different (accented and graphic characters) which breaks European language support and TUI (Text User Interface). And of course the TOS is neither UTF nor Unicode capable, having only one "code page" available.
 
+<p align="center">
+<!-- ![TOS ASCII table](./img/atariscii.png "TOS ASCII table") -->
+<img src="./img/atariscii.png" alt="TOS ASCII table" />
+</p>
+
 Due to TOS being in ROM, it was harder to upgrade than a disk based version. Several RAM resident patches needed to be loaded during the boot, either from floppy disk or the hard drive. And the loading order was also important for most of them due to cross dependencies, something hardly documented and figured out from trial and error or system crashes.
 
 Also keep in mind this is an OS created for a consumer product in the middle of the 80s. The ATARI ST computers of the time were barely able to run the full scale of what the GEM could offer, mostly due to memory constraints, hence the choice to skip the 128 KB and 256 KB versions but sell 512 KB and 1 MB configurations instead. The ROM size constraint also required the GDOS part to be offloaded to floppy disc as it couldn't be integrated into the TOS.
@@ -265,13 +270,13 @@ Thus typical data size is considered 16 bits in TOS. Here is the table of data s
 | Size			| Assembler		| C			| GEM		| GFA v3				| Omikron			|
 | :---			| :---			| :---		| :---		| :---					| :---				|
 | 1 bit			| 				| bool		| 			| ! (16 bits)			| %F				|
-| 8 bits		| .b			| char		| BYTE		| | - BYTE()			| %B				|
+| 8 bits		| .b			| char		| BYTE		| \| - BYTE()			| %B				|
 | 16 bits		| .w			| short		| WORD		| & - CARD()			| %W or %			|
 | 32 bits		| .l			| integer	| LONG		| % 					| %L or no suffix	|
 | [float]		| .f (32 bits)	| float		| 			| 						| ! (6 bytes)		|
 | [double]		| .d (64 bits)	| double	| 			| # or no suffix[^1]	| 					|
 | [extended]	| .x (80 bits)	| 			| 			| 						| # (10 bytes)		|
-| string		| 				| 			| 			| $ (32767 bytes)		| $					|
+| string		| 				| 			| 			| $ (32767 bytes max)	| $					|
 
 [^1]: depends on DEFBIT(!), DEFBYT(|), DEFWRD(&), DEFINT(%), DEFFLT(#) or DEFSTR($)
 
