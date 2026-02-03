@@ -26,9 +26,17 @@ https://github.com/Kochise/atari-tos
 <details>
 <summary>Sources (click to expand)</summary>
 
+https://github.com/ocgis/otosis
+
+https://github.com/ocgis/oaesis
+
+https://github.com/ocgis/ovdisis
+
 https://github.com/th-otto/tos1x
 
 https://github.com/th-otto/tos3x
+
+https://github.com/ocgis/libotosis
 
 https://github.com/kelihlodversson/pTOS
 
