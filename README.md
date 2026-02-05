@@ -71,7 +71,7 @@ The TOS is the operating system of the ATARI ST computers sold from 1985 to arou
 [Jack TRAMIEL]: https://en.wikipedia.org/wiki/Jack_Tramiel
 
 > [!NOTE]
-> TOS means "The Operating System", while you may find some external references as it being called "Tramiel Operating System". Much like the ATARI ST was considered a cheap Macintosh rip-off and nicknamed "Jackintosh", Jack's Macintosh. Yet with the proper extension ([Spectre]) it could indeed emulate a Macintosh for a fraction of the price, and faster. For a time though, the ATARI ST line of computer evolving at a much slower pace (16 MHz and 4 MB of memory at most).
+> TOS means "The Operating System", while you may find some external references as it being called "Tramiel Operating System". Much like the ATARI ST was considered a cheap Macintosh rip-off and nicknamed "Jackintosh", Jack's Macintosh. Yet with the proper extension ([Spectre]) it could indeed emulate a Macintosh for a fraction of the price, and faster. For a time though, the ATARI ST line of computer evolving at a much slower pace than Apple's (16 MHz and 4 MB of memory in Mega STe).
 
 [Spectre]: https://lowendmac.com/2016/atari-st-magic-sac-spectre-128-and-spectre-gcr/
 
@@ -79,7 +79,9 @@ It is most notably a port from DRI's GEMDOS, a successor to CP/M, and the GEM, a
 
 While the TOS got a graphical interface, it lacked a command line and scripting capabilities. Booting up an ATARI ST wasn't even providing an integrated programming language (ie. BASIC) like the less "gifted" 8 bits computers did until then. From a bare ST machine, you could just move icons around and that was it.
 
-The GEM is inspired from the Xerox Alto, that also "inspired" APPLE for the Lisa and then the Macintosh. APPLE sued DRI's PC port of GEM for being too close of their own "inspiration", however the ATARI version was considered a too different product, mostly due to ATARI's own development, and not a big threat (no business credibility and no school contract).
+The GEM is inspired from the Xerox Alto, that also "inspired" APPLE for the Lisa and then the Macintosh. APPLE sued DRI's PC port of GEM for being too close of their own "inspiration", however the ATARI version was considered a too different product, mostly due to ATARI's own development[^1], and not a big threat (no business credibility and no school contract).
+
+[^1]: https://en.wikipedia.org/wiki/GEM_(desktop_environment)#Atari_versions
 
 The GEMDOS in the lower level part of the operating system, dealing with IO and disks. Unlike CP/M, it features a hierarchical file system (folders) but most of its file extensions are present in the TOS (ie. executable file's extension is also PRG).
 
@@ -197,15 +199,24 @@ flowchart TD
 			IO
 			...
 		end
+		subgraph OTHER
+			XBRA
+			JAR
+			STING
+			LDG
+			VA
+		end
 		subgraph BDOS
 			BIOS
 			XBIOS
 			GEMDOS
+			METADOS
 		end
 		subgraph GEM
 			AES
 			VDI
 			GDOS
+			LINEA
 		end
 		subgraph VD[VIRTUAL DEVICES]
 			subgraph DRIVER
@@ -220,16 +231,26 @@ flowchart TD
 	click HAL "https://github.com/Kochise/atari-tos/tree/master/HAL" _blank
 	click CPU "https://github.com/Kochise/atari-docs/tree/master/CPU68030" _blank
 	click BLITTER "https://github.com/Kochise/atari-docs/tree/master/BLITTER" _blank
+	click IO "https://github.com/Kochise/atari-docs/tree/master/IOPORTS" _blank
+
+	click OTHER "https://github.com/Kochise/atari-tos/tree/master/OTHER" _blank
+	click XBRA "https://github.com/Kochise/atari-tos/tree/master/OTHER/XBRA.md" _blank
+	click JAR "https://github.com/Kochise/atari-tos/tree/master/OTHER/JAR.md" _blank
+	click STING "https://github.com/Kochise/atari-tos/tree/master/OTHER/STING.md" _blank
+	click LDG "https://github.com/Kochise/atari-tos/tree/master/OTHER/LDG.md" _blank
+	click VA "https://github.com/Kochise/atari-tos/tree/master/OTHER/VA.md" _blank
 
 	click BDOS "https://github.com/Kochise/atari-tos/tree/master/BDOS" _blank
 	click BIOS "https://github.com/Kochise/atari-tos/tree/master/BDOS/BIOS.md" _blank
 	click XBIOS "https://github.com/Kochise/atari-tos/tree/master/BDOS/XBIOS.md" _blank
 	click GEMDOS "https://github.com/Kochise/atari-tos/tree/master/BDOS/GEMDOS.md" _blank
+	click METADOS "https://github.com/Kochise/atari-tos/tree/master/BDOS/METADOS.md" _blank
 
 	click GEM "https://github.com/Kochise/atari-tos/tree/master/GEM" _blank
 	click AES "https://github.com/Kochise/atari-tos/tree/master/GEM/AES.md" _blank
 	click VDI "https://github.com/Kochise/atari-tos/tree/master/GEM/VDI.md" _blank
 	click GDOS "https://github.com/Kochise/atari-tos/tree/master/GEM/GDOS.md" _blank
+	click LINEA "https://github.com/Kochise/atari-tos/tree/master/GEM/LINEA.md" _blank
 
 	click VD "https://github.com/Kochise/atari-tos/tree/master/VD" _blank
 	click SCREEN "https://github.com/Kochise/atari-tos/tree/master/VD/SCREEN.md" _blank
@@ -250,15 +271,24 @@ flowchart TD
 	class IO lvl2
 	class ... lvl2
 
+	class OTHER lvl1
+	class XBRA lvl2
+	class JAR lvl2
+	class STING lvl2
+	class LDG lvl2
+	class VA lvl2
+
 	class BDOS lvl1
 	class BIOS lvl2
 	class XBIOS lvl2
 	class GEMDOS lvl2
+	class METADOS lvl2
 
 	class GEM lvl1
 	class AES lvl2
 	class VDI lvl2
 	class GDOS lvl2
+	class LINEA lvl2
 
 	class VD lvl1
 	class DESKTOP lvl2
@@ -282,11 +312,11 @@ Thus typical data size is considered 16 bits in TOS. Here is the table of data s
 | 16 bits		| .w			| short		| WORD		| & - CARD()			| %W or %			|
 | 32 bits		| .l			| integer	| LONG		| % 					| %L or no suffix	|
 | [float]		| .f (32 bits)	| float		| 			| 						| ! (6 bytes)		|
-| [double]		| .d (64 bits)	| double	| 			| # or no suffix[^1]	| 					|
+| [double]		| .d (64 bits)	| double	| 			| # or no suffix[^2]	| 					|
 | [extended]	| .x (80 bits)	| 			| 			| 						| # (10 bytes)		|
 | string		| 				| 			| 			| $ (32767 bytes max)	| $					|
 
-[^1]: depends on DEFBIT(!), DEFBYT(|), DEFWRD(&), DEFINT(%), DEFFLT(#) or DEFSTR($)
+[^2]: depends on DEFBIT(!), DEFBYT(|), DEFWRD(&), DEFINT(%), DEFFLT(#) or DEFSTR($)
 
 [float]: https://en.wikipedia.org/wiki/Single-precision_floating-point_format
 [double]: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
