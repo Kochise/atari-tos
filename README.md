@@ -29,38 +29,38 @@ https://github.com/Kochise/atari-tos
 <details>
 <summary>Sources (click to expand)</summary>
 
-	https://github.com/ocgis/otosis
+https://github.com/ocgis/otosis
 
-	https://github.com/ocgis/oaesis
+https://github.com/ocgis/oaesis
 
-	https://github.com/ocgis/ovdisis
+https://github.com/ocgis/ovdisis
 
-	https://github.com/th-otto/tos1x
+https://github.com/th-otto/tos1x
 
-	https://github.com/th-otto/tos3x
+https://github.com/th-otto/tos3x
 
-	https://github.com/ocgis/libotosis
+https://github.com/ocgis/libotosis
 
-	https://github.com/kelihlodversson/pTOS
+https://github.com/kelihlodversson/pTOS
 
-	https://github.com/ggnkua/Atari_ST_Sources
+https://github.com/ggnkua/Atari_ST_Sources
 
 </details>
 
 <details>
 <summary>Documentations (click to expand)</summary>
 
-	https://docs.dev-docs.org
+https://docs.dev-docs.org
 
-	http://info-coach.fr/atari
+http://info-coach.fr/atari
 
-	https://www.yardley.cc/atari
+https://www.yardley.cc/atari
 
-	https://bus-error.nokturnal.pl/atari_compendium/html/toc.htm
+https://bus-error.nokturnal.pl/atari_compendium/html/toc.htm
 
-	https://www.fplanque.com/tech/retro/atari/atari-st-fd-image-file-formats
+https://www.fplanque.com/tech/retro/atari/atari-st-fd-image-file-formats
 
-	https://github.com/freemint/tos.hyp/tree/gh-pages -> https://freemint.github.io/tos.hyp
+https://github.com/freemint/tos.hyp/tree/gh-pages -> https://freemint.github.io/tos.hyp
 
 </details>
 
@@ -106,20 +106,22 @@ https://web.archive.org/web/20190531084112/http://www.fultonsoft.com/category/at
 <details>
 <summary>GEMDOS on Lisa (click to expand)</summary>
 
-	https://68kmla.org/bb/threads/gemdos-on-the-lisa-can-be-built-again.35896/
+https://68kmla.org/bb/threads/gemdos-on-the-lisa-can-be-built-again.35896/
 
-	https://github.com/cheesestraws/lisa-gemdos
+https://github.com/cheesestraws/lisa-gemdos
 
 </details>
 
 <details>
 <summary>Additional back stories (click to expand)</summary>
 
-	https://lowresmag.wordpress.com/2009/12/28/a-brief-history-of-the-st/
+https://mcurrent.name/atarihistory/tramel_technology.html
 
-	https://news.ycombinator.com/item?id=39368972
+https://lowresmag.wordpress.com/2009/12/28/a-brief-history-of-the-st/
 
-	https://www.quora.com/Why-did-some-developers-choose-to-drop-support-for-the-Atari-ST-altogether-after-developing-for-the-Amiga
+https://news.ycombinator.com/item?id=39368972
+
+https://www.quora.com/Why-did-some-developers-choose-to-drop-support-for-the-Atari-ST-altogether-after-developing-for-the-Amiga
 
 </details>
 
@@ -258,6 +260,7 @@ Here is the general architecture of the **TOS**:
 			* BOS: Basic Operating System
 			* DOS: Disk Operating System
 		* MINT: loadable multitasking kernel
+		* VT52: terminal emulator
 	* OTHER: software extensions and protocols
 		* XBRA: vector redirecting signature
 		* JAR: short list of informations
@@ -307,11 +310,9 @@ flowchart TD
 			XBIOS
 			GEMDOS
 			LINEA
-			subgraph METADOS
-				BOS
-				DOS
-			end
+			METADOS
 			MINT
+			VT52
 		end
 		subgraph GEM
 			AES
@@ -350,9 +351,8 @@ flowchart TD
 	click GEMDOS "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/GEMDOS" _blank
 	click LINEA "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/LINEA" _blank
 	click METADOS "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/METADOS" _blank
-	click METADOS "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/METADOS/BOS" _blank
-	click METADOS "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/METADOS/DOS" _blank
 	click MINT "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/MINT" _blank
+	click VT52 "https://github.com/Kochise/atari-tos/tree/master/doc/BDOS/VT52" _blank
 
 	click GEM "https://github.com/Kochise/atari-tos/tree/master/doc/GEM" _blank
 	click AES "https://github.com/Kochise/atari-tos/tree/master/doc/GEM/AES" _blank
@@ -395,9 +395,8 @@ flowchart TD
 	class GEMDOS lvl2
 	class LINEA lvl2
 	class METADOS lvl2
-	class BOS lvl3
-	class DOS lvl3
 	class MINT lvl2
+	class VT52 lvl2
 
 	class GEM lvl1
 	class AES lvl2
