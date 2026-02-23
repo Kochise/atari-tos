@@ -1,0 +1,130 @@
+;
+;  Teradesk. Copyright (c)       1993 - 2002  W. Klaren.
+;                                2002 - 2011  H. Robbers,
+;                                2003 - 2011  Dj. Vukovic
+;
+;  This file is part of Teradesk.
+;
+;  Teradesk is free software; you can redistribute it and/or modify
+;  it under the terms of the GNU General Public License as published by
+;  the Free Software Foundation; either version 2 of the License, or
+;  (at your option) any later version.
+;
+;  Teradesk is distributed in the hope that it will be useful,
+;  but WITHOUT ANY WARRANTY; without even the implied warranty of
+;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;  GNU General Public License for more details.
+;
+;  You should have received a copy of the GNU General Public License
+;  along with Teradesk; if not, write to the Free Software
+;  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+;
+;
+; Name of the created executable file:
+
+desk_cf.prg				; with _MINT_=1  for all systems
+.C [-27]				; Coldfire/68020 compatible
+
+
+; Compiler and linker options:
+;
+; -K: unsigned char;
+; -Y: debug info
+; -C: nested comments;
+; -P: absolute calls;
+; -G: size optimization (compiler); global symbols (linker)
+; -L: local symbols (linker)
+; -V: verbose output (assembler & linker)
+
+.C[-C-]
+.C[-P]
+.C[-G]
+.C[-Y]
+.C[-Ilibrary\xdialog -Ilibrary\utility]
+.L[-S=32000]
+
+; without debug info
+;.L[-G- -L- -Y-]
+
+; with debug info
+;.L[-G -L -Y]
+
+=
+
+; Standard startup code
+
+ahcstart.o
+
+; Note: set autodependencies in Pure-C shell options
+
+;GEM part and main program
+
+main.c
+config.c
+resource.c
+icon.c
+window.c
+copy.c
+printer.c
+lists.c
+applik.c
+prgtype.c
+icontype.c
+filetype.c
+screen.c
+showinfo.c
+font.c
+va.c
+dragdrop.c
+
+;TOS part
+
+environm.c
+startprg.c
+floppy.c
+video.c
+file.c
+
+
+;Builtin modules
+
+dir.c
+open.c
+viewer.c
+
+
+
+;Replacements of and additions to library functions
+
+events.c
+slider.c
+stringf.c
+xfilesys.c
+error.c
+
+
+;Specific libraries:
+
+library\xdialog\xdialog.c
+library\xdialog\xdnmdial.c
+library\xdialog\xdevent.c
+library\xdialog\xddraw.c
+library\xdialog\xdutil.c
+library\xdialog\xdemodes.c
+library\xdialog\xwindow.c
+
+library\utility\pathutil.c
+library\utility\cookie.c
+library\utility\gettos.c
+library\utility\xerror.c
+library\utility\strsncpy.c
+library\utility\minmax.c
+library\utility\other.c
+library\utility\nf_ops.c
+library\utility\nf_shutd.c
+
+
+;Standard libraries
+
+ahccstdf.lib
+ahccgemf.lib

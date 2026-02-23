@@ -1,0 +1,18 @@
+common.lib
+.L[ -J]
+.C[ -P -I..]
+=              ; list of modules follows...
+mediach.s
+charutil.c
+cookie.c
+fileutil.c
+genargv.c
+memfile.c
+walkdir.c
+wildmat.c
+xbra.c
+xhdi.c
+shelfunc.c
+alloc.c
+strerror.c
+fncase.c
