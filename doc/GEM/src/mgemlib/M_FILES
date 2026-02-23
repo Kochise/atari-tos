@@ -1,0 +1,67 @@
+#
+# m_files:
+#
+# m_files contain variables for filenames.
+# m_files will be included in all other makefiles.
+#
+
+# 
+# hierarchie used:
+#
+# .             -- root contains sources, makefiles, CHANGELO...
+# ./include     -- headers files
+# ./lib/gcc     -- lib compiled for gcc 2.95.3 (SpareMiNT)
+# ./lib/gcc281  -- lib compiled for gcc 2.81c
+# ./lib/sozobon -- lib compiled for sozobonx
+# ./lib/purec   -- lib compiled for pure c
+#
+
+# needed for 'zip' to create the following directories
+
+LIB_PATH = lib/gcc lib/gcc281 lib/sozobon lib/purec
+
+# library filenames
+
+LIB_GCC           = lib/gcc/libmgem.a
+LIB_GCC281        = lib/gcc281/mgem.olb
+LIB_GCC281_MSHORT = lib/gcc281/mgem16.olb
+LIB_SOZOBON       = lib/sozobon/mgem.a
+LIB_PUREC         = lib/purec/mgemlib.lib
+
+# sources
+
+FILES_SRC = \
+ a_appl.c a_evnt.c a_form.c a_fsel.c a_graf.c a_menu.c a_objc.c a_rsrc.c \
+ a_scrp.c a_shel.c a_wind.c a_rect.c \
+ v_attrib.c v_contrl.c v_escape.c v_input.c \
+ v_inquir.c v_output.c v_raster.c v_misc.c  \
+ x_edit.c x_fnts.c x_form.c x_fslx.c x_lbox.c \
+ x_nvdi.c x_objc.c x_pdlg.c x_wdlg.c \
+ globals.c \
+ _gc_asm.s _pc_asm.s _sx_asm.s \
+ makefile m_files m_sox m_zip m_gcc m_gcc281.16 m_gcc281 \
+ MGEMLIB.PRJ CONTROL.TXT CHANGELO
+
+# headers
+
+FILES_INC = \
+ include/mgem.h include/mgemx.h
+
+# binaries (lib)
+
+FILES_BIN = \
+ $(LIB_GCC) $(LIB_GCC281) $(LIB_GCC281_MSHORT) $(LIB_PUREC) $(LIB_SOZOBON)
+
+# objects files
+
+OBJ = \
+ x_lbox.o x_nvdi.o x_objc.o x_pdlg.o x_fnts.o x_wdlg.o x_form.o x_fslx.o\
+ x_edit.o a_appl.o a_rsrc.o v_inquir.o a_evnt.o a_scrp.o v_misc.o a_form.o\
+ a_shel.o v_output.o a_fsel.o a_wind.o v_attrib.o v_raster.o a_graf.o\
+ v_contrl.o a_menu.o v_escape.o a_objc.o v_input.o a_rect.o globals.o
+
+# object file specific to compiler
+
+SX_OBJ = _sx_asm.o
+GC_OBJ = _gc_asm.o
+PC_OBJ = _pc_asm.o

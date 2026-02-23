@@ -1,0 +1,28 @@
+/*
+ *  $Id: vdi_str2array.c,v 1.4 2003/02/28 20:46:43 a_bercegeay Exp $
+ */
+
+#include "mt_gem.h"
+
+/** 
+ *
+ *  @param src input string (standard null-terminated C-string)
+ *  @param des outpur string (VDI format, each char occupied 16 bits)
+ *
+ *  @return the len of the string
+ *
+ */
+
+short
+vdi_str2array (const char *src, short *des)
+{
+	short                 len = 0;
+	const unsigned char *c  = (const unsigned char *) src;
+
+	while (*c)
+	{
+		*(des++) = *(c++);
+		len++;
+	}
+	return len;
+}

@@ -1,0 +1,37 @@
+
+
+<SUBMENU name=example>
+
+	<LABEL>Preferences</LABEL>
+
+	<ENTRY name=popup type=popup range="value 1;value 2;etc" value="Click me">
+		<LABEL>A popup entry: </LABEL>		
+	</ENTRY>
+
+	<ENTRY name=checkbutton type=checkbut value="true">
+		<LABEL>A check button entry </LABEL>		
+	</ENTRY>
+
+	<ENTRY name=radiobutton type=radiobut range="value 1;value 2;etc" value="value 1">
+		<LABEL>Radio buttons entry: </LABEL>		
+	</ENTRY>
+
+	<ENTRY name=fedit type=fedit data=string value="Hello">
+		<LABEL>An editable entry: </LABEL>		
+	</ENTRY>
+
+	<ENTRY name=fontsel type=fontsel value="System">
+		<LABEL>A font selector: </LABEL>		
+	</ENTRY>
+
+	<ENTRY name=colorsel type=colorsel value="1">
+		<LABEL>A color selector: </LABEL>		
+	</ENTRY>
+
+	<SUBMENU name=submenu>
+		<LABEL>A group of variables</LABEL>		
+	</SUBMENU>
+
+</SUBMENU>
+
+<REQUIRE SRC=WINDOM.WCF>

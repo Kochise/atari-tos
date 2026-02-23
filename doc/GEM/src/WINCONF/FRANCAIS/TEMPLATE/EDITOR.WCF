@@ -1,0 +1,7 @@
+<!- EDITOR : un programme de test
+             pour mes routines d'‚dition
+             de textes (lib WINEDIT) 
+ -->
+
+<require src="windom.wcf">
+<require src="winedit.wcf">

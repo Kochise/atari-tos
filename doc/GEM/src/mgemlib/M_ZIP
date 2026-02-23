@@ -1,0 +1,24 @@
+#
+# build the ZIP archive
+#
+
+# note:
+# ZIP must point to your zip.ttp program
+
+# when makefile read m_zip, the current directory
+# must be the top dir.
+
+include m_files
+
+ZIP_SRC = mgemlib-src.zip
+ZIP_ALL = mgemlib.zip
+
+all : $(ZIP_SRC) $(ZIP_ALL)
+
+.PHONY: $(ZIP_SRC) $(ZIP_ALL)
+
+$(ZIP_SRC):
+	$(ZIP) -u $@  $(FILES_SRC) $(FILES_INC) $(LIB_PATH)
+
+$(ZIP_ALL):
+	$(ZIP) -u $@ $(FILES_SRC) $(FILES_INC) $(FILES_BIN)

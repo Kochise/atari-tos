@@ -1,0 +1,582 @@
+/******************************************************************************/
+/*                                                                            */
+/*    Eine handoptimierte Bibliothek fr Pure-C, Pure-Pascal und GNU-C        */
+/*                                                                            */
+/* Die AES-Funktionen - EVNT-Bibliothek                                       */
+/*                                                                            */
+/* (c) 1998-2003 by Martin Els„sser @ LL                                      */
+/* (c) 2008 Gerhard Stoll @ B                                                 */
+/*                                                                            */
+/*                                                 Tabsize: 1 Tab = 3 Spaces  */
+/******************************************************************************/
+
+/******************************************************************************/
+/*                                                                            */
+/* Lokale Konstanten                                                          */
+/*                                                                            */
+/******************************************************************************/
+
+/* Die Anzahl der Words des contrl-Arrays mu von diesem Modul konfiguriert   */
+/* werden. Ferner wird das Makro CTRLCOPY auf das passende Makro MEMCPY_n     */
+/* umgesetzt. Mit diesen beiden Parametern wird die gesamte Befllung des     */
+/* control-Arrays fr dieses Modul definiert!                                 */
+/* Achtung: die Definitionen mssen vor dem Lesen von PCGEM_I.H stehen!       */
+#define CTRL_WORDS   5
+#define CTRLCOPY     MEMCPY_5
+
+/******************************************************************************/
+/*                                                                            */
+/* Ben”tigte Header-Dateien                                                   */
+/*                                                                            */
+/******************************************************************************/
+
+#include "pcgem_i.h"
+
+/******************************************************************************/
+/*                                                                            */
+/* Lokale Datentypen                                                          */
+/*                                                                            */
+/******************************************************************************/
+
+typedef struct
+{
+   int16 contrl[CTRL_WORDS];
+   GlobalArray *globl;
+   int16 intin[17];
+   int16 intout[7];
+   void *addrin[2];
+   void *addrout[1];
+} AESData;
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 20:  evnt_keybd                                                        */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_keybd( GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {20, 0, 1, 0, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 21:  evnt_button                                                       */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_button( int16 ev_bclicks, uint16 ev_bmask,
+            uint16 ev_bstate, int16 *ev_bmx, int16 *ev_bmy, int16 *ev_bbutton,
+            int16 *ev_bkstate, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {21, 3, 5, 0, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0] = ev_bclicks;
+   data.intin[1] = ev_bmask;
+   data.intin[2] = ev_bstate;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben */
+   if( ev_bmx!=NULL )
+      *ev_bmx=data.intout[1];
+   if( ev_bmy!=NULL )
+      *ev_bmy=data.intout[2];
+   if( ev_bbutton!=NULL )
+      *ev_bbutton=data.intout[3];
+   if( ev_bkstate!=NULL )
+      *ev_bkstate=data.intout[4];
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 21:  evnt_xbutton - Erweiterung um Wheels gem. TORG 105                */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_xbutton( int16 ev_bclicks, uint16 ev_bmask,
+            uint16 ev_bstate, int16 *ev_bmx, int16 *ev_bmy, int16 *ev_bbutton,
+            int16 *ev_bkstate, int16 *ev_bwhlpbuff, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {21, 3, 5, 1, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0] = ev_bclicks;
+   data.intin[1] = ev_bmask;
+   data.intin[2] = ev_bstate;
+
+   data.addrin[0] = ev_bwhlpbuff;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben */
+   if( ev_bmx!=NULL )
+      *ev_bmx=data.intout[1];
+   if( ev_bmy!=NULL )
+      *ev_bmy=data.intout[2];
+   if( ev_bbutton!=NULL )
+      *ev_bbutton=data.intout[3];
+   if( ev_bkstate!=NULL )
+      *ev_bkstate=data.intout[4];
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 22:  evnt_mouse                                                        */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_mouse( int16 ev_moflags, int16 ev_mox, int16 ev_moy,
+            int16 ev_mowidth, int16 ev_moheight, int16 *ev_momx, int16 *ev_momy,
+            int16 *ev_mobutton, int16 *ev_mokstate, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {22, 5, 5, 0, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0] = ev_moflags;
+   data.intin[1] = ev_mox;
+   data.intin[2] = ev_moy;
+   data.intin[3] = ev_mowidth;
+   data.intin[4] = ev_moheight;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben */
+   if( ev_momx!=NULL )
+      *ev_momx = data.intout[1];
+   if( ev_momy!=NULL )
+      *ev_momy = data.intout[2];
+   if( ev_mobutton!=NULL )
+      *ev_mobutton = data.intout[3];
+   if( ev_mokstate!=NULL )
+      *ev_mokstate = data.intout[4];
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 23:  evnt_mesag                                                        */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_mesag( int16 *pbuff, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {23, 0, 1, 1, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.addrin[0] = pbuff;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 24:  evnt_timer                                                        */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_timer( uint32 count, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {24, 2, 1, 0, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   *(uint32 *)&data.intin[1] = (count>0 ? count : 1);
+   data.intin[0] = data.intin[2];
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 25:  evnt_multi                                                        */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_multi( int16 ev_mflags, int16 ev_mbclicks, int16 ev_mbmask,
+            int16 ev_mbstate, int16 ev_mm1flags, int16 ev_mm1x,
+            int16 ev_mm1y, int16 ev_mm1width, int16 ev_mm1height,
+            int16 ev_mm2flags, int16 ev_mm2x, int16 ev_mm2y,
+            int16 ev_mm2width, int16 ev_mm2height, int16 *ev_mmgpbuff,
+            int32 ev_mtimer, int16 *ev_mmox, int16 *ev_mmoy, int16 *ev_mmbutton,
+            int16 *ev_mmokstate, int16 *ev_mkreturn, int16 *ev_mbreturn, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {25, 16, 7, 1, 0};
+   ConvInt32To2Int16 tmp;
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0]  = ev_mflags;
+   data.intin[1]  = ev_mbclicks;
+   data.intin[2]  = ev_mbmask;
+   data.intin[3]  = ev_mbstate;
+   data.intin[4]  = ev_mm1flags;
+   data.intin[5]  = ev_mm1x;
+   data.intin[6]  = ev_mm1y;
+   data.intin[7]  = ev_mm1width;
+   data.intin[8]  = ev_mm1height;
+   data.intin[9]  = ev_mm2flags;
+   data.intin[10] = ev_mm2x;
+   data.intin[11] = ev_mm2y;
+   data.intin[12] = ev_mm2width;
+   data.intin[13] = ev_mm2height;
+   if( ev_mtimer!=0 )
+   {
+      /* Optimierung - anstelle von                            */
+      /*                                                       */
+      /* data.intin[14] = (int16)(ev_mtimer & 0xFFFF);         */
+      /* data.intin[15] = (int16)((ev_mtimer>>16) & 0xFFFF);   */
+      /*                                                       */
+      /* steht nun:                                            */
+      tmp.val32 = ev_mtimer;
+      data.intin[14] = tmp.val16.lowWord;
+      data.intin[15] = tmp.val16.highWord;
+   }
+   else
+   {
+      data.intin[14] = 1;
+      data.intin[15] = 0;
+   }
+
+   data.addrin[0] = ev_mmgpbuff;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben */
+   if( ev_mmox!=NULL )
+      *ev_mmox = data.intout[1];
+   if( ev_mmoy!=NULL )
+      *ev_mmoy = data.intout[2];
+   if( ev_mmbutton!=NULL )
+      *ev_mmbutton = data.intout[3];
+   if( ev_mmokstate!=NULL )
+      *ev_mmokstate = data.intout[4];
+   if( ev_mkreturn!=NULL )
+      *ev_mkreturn = data.intout[5];
+   if( ev_mbreturn!=NULL )
+      *ev_mbreturn = data.intout[6];
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 25:  evnt_xmulti - Erweiterung von evnt_multi um Wheels gem. TORG 105  */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_xmulti( int16 ev_mflags, int16 ev_mbclicks, int16 ev_mbmask,
+            int16 ev_mbstate, int16 ev_mm1flags, int16 ev_mm1x,
+            int16 ev_mm1y, int16 ev_mm1width, int16 ev_mm1height,
+            int16 ev_mm2flags, int16 ev_mm2x, int16 ev_mm2y,
+            int16 ev_mm2width, int16 ev_mm2height, int16 *ev_mmgpbuff,
+            int32 ev_mtimer, int16 *ev_mmox, int16 *ev_mmoy, int16 *ev_mmbutton,
+            int16 *ev_mmokstate, int16 *ev_mkreturn, int16 *ev_mbreturn, int16 *ev_mwhlpbuff,
+            GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {25, 16, 7, 1, 0};
+   ConvInt32To2Int16 tmp;
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0]  = ev_mflags;
+   data.intin[1]  = ev_mbclicks;
+   data.intin[2]  = ev_mbmask;
+   data.intin[3]  = ev_mbstate;
+   data.intin[4]  = ev_mm1flags;
+   data.intin[5]  = ev_mm1x;
+   data.intin[6]  = ev_mm1y;
+   data.intin[7]  = ev_mm1width;
+   data.intin[8]  = ev_mm1height;
+   data.intin[9]  = ev_mm2flags;
+   data.intin[10] = ev_mm2x;
+   data.intin[11] = ev_mm2y;
+   data.intin[12] = ev_mm2width;
+   data.intin[13] = ev_mm2height;
+   if( ev_mtimer!=0 )
+   {
+      /* Optimierung - anstelle von                            */
+      /*                                                       */
+      /* data.intin[14] = (int16)(ev_mtimer & 0xFFFF);         */
+      /* data.intin[15] = (int16)((ev_mtimer>>16) & 0xFFFF);   */
+      /*                                                       */
+      /* steht nun:                                            */
+      tmp.val32 = ev_mtimer;
+      data.intin[14] = tmp.val16.lowWord;
+      data.intin[15] = tmp.val16.highWord;
+   }
+   else
+   {
+      data.intin[14] = 1;
+      data.intin[15] = 0;
+   }
+
+   data.addrin[0] = ev_mmgpbuff;
+   if( ev_mwhlpbuff!=NULL )
+   {
+      data.addrin[1] = ev_mwhlpbuff;
+      data.contrl[3]++;
+   }
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben */
+   if( ev_mmox!=NULL )
+      *ev_mmox = data.intout[1];
+   if( ev_mmoy!=NULL )
+      *ev_mmoy = data.intout[2];
+   if( ev_mmbutton!=NULL )
+      *ev_mmbutton = data.intout[3];
+   if( ev_mmokstate!=NULL )
+      *ev_mmokstate = data.intout[4];
+   if( ev_mkreturn!=NULL )
+      *ev_mkreturn = data.intout[5];
+   if( ev_mbreturn!=NULL )
+      *ev_mbreturn = data.intout[6];
+
+   return data.intout[0];
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 25:  EVNT_event (aus MT_AES.LIB)                                       */
+/*                                                                            */
+/******************************************************************************/
+
+#if 0
+void mt_EVNT_multi( int16 ev_mflags, int16 ev_mbclicks, int16 ev_mbmask,
+            int16 ev_mbstate, MOBLK *m1, MOBLK *m2, int32 ev_mtimer,
+            EVNT *event, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {25, 16, 7, 1, 0};
+   ConvInt32To2Int16 tmp;
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0]  = ev_mflags;
+   data.intin[1]  = ev_mbclicks;
+   data.intin[2]  = ev_mbmask;
+   data.intin[3]  = ev_mbstate;
+
+   /* Mouse rectangle 1? */
+   if( (ev_mflags & MU_M1) && m1!=NULL )
+      MEMCPY_5(data.intin + 4, m1);
+
+   /* Mouse rectangle 2? */
+   if( (ev_mflags & MU_M2) && m2!=NULL )
+      MEMCPY_5(data.intin + 9, m2);
+
+   /* Timer */
+   if( ev_mtimer!=0 )
+   {
+      /* Optimierung - anstelle von                            */
+      /*                                                       */
+      /* data.intin[14] = (int16)(ev_mtimer & 0xFFFF);         */
+      /* data.intin[15] = (int16)((ev_mtimer>>16) & 0xFFFF);   */
+      /*                                                       */
+      /* steht nun:                                            */
+      tmp.val32 = ev_mtimer;
+      data.intin[14] = tmp.val16.lowWord;
+      data.intin[15] = tmp.val16.highWord;
+   }
+   else
+   {
+      data.intin[14] = 1;
+      data.intin[15] = 0;
+   }
+
+   /* Nachrichtenpuffer */
+   data.addrin[0] = event->msg;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben - optimiert, denn genau so ist EVNT definiert! */
+   MEMCPY_7(event, data.intout);
+}
+#endif
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 25:  evnt_event                                                        */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_event( MultiEventIn *input, MultiEventOut *output, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {25, 16, 7, 2, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   if( input==NULL || output==NULL )
+      return 0;
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die "Arrays" fertig fllen */
+   if( input->ev_mtcount==0 )
+      input->ev_mtcount = 1;
+   input->reserved = (int16)(input->ev_mtcount & 0xFFFF);
+
+   data.addrin[0] = input->ev_mmgpbuff;
+   data.addrin[1] = input->ev_mwhlpbuff;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, (int16 *)input, (int16 *)output, data.addrin, data.addrout);
+
+   /* Die Werte zurckgeben */
+   return input->reserved;
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 25:  EvntMulti                                                         */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_EvntMulti( EVENT *evnt_data, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {25, 16, 7, 1, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   if( evnt_data==NULL )
+      return 0;
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.addrin[0] = evnt_data->ev_mmgpbuf;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, &evnt_data->ev_mflags, &evnt_data->ev_mwich,
+      data.addrin, data.addrout);
+
+   return evnt_data->ev_mwich;
+}
+
+/******************************************************************************/
+/*                                                                            */
+/* AES 26:  evnt_dclick                                                       */
+/*                                                                            */
+/******************************************************************************/
+
+int16 mt_evnt_dclick( int16 rate, int16 setit, GlobalArray *globl )
+{
+   /* AES-Datenblock anlegen */
+   static int16 contrl[] = {26, 2, 1, 0, 0};
+   AESData data;
+
+   /* Das contrl-Array initialisieren */
+   CTRLCOPY(data.contrl, contrl);
+
+   /* Das globl-Array eintragen */
+   data.globl = globl;
+
+   /* Die Arrays fllen */
+   data.intin[0] = rate;
+   data.intin[1] = setit;
+
+   /* Ab in die AES... */
+   aes(data.contrl, data.globl, data.intin, data.intout, data.addrin, data.addrout);
+
+   return data.intout[0];
+}

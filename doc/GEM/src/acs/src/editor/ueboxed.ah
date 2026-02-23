@@ -1,0 +1,423 @@
+#if COUNTRY == COUNTRY_DE
+static char BUBBLE_01[] = "Die énderungen werden Åbernommen und Åberschreiben die alten Einstellungen.";
+static char BUBBLE_02[] = "Die énderungen werden verworfen, die alten Einstellungen bleiben erhalten.";
+static char BUBBLE_03[] = "Hier kann der String, der fÅr BubbleGEM verwendet werden soll, eingegeben werden.";
+static char BUBBLE_04[] = "Hier kann der String eingegeben werden, der das aufzurufende Context-Popup beschreibt (siehe in der Dokumentation zu Ame_strpopup).";
+static char PMT00[] = "  alle Zeichen";
+static char PMT01[] = "  normaler Pfad";
+static char PMT02[] = "  normale Datei";
+static char PMT03[] = "  TOS-Datei";
+static char PMT04[] = "  TOS-Datei-Muster";
+static char PMT05[] = "  TOS-Pfad";
+static char PMT06[] = "  TOS-Pfad-Muster";
+static char PMT07[] = "  normal";
+static char PMT08[] = "  Buchstaben";
+static char PMT09[] = "  Buchstaben & Zahlen";
+static char PMT10[] = "  BinÑrzahl";
+static char PMT11[] = "  neg. BinÑrzahl";
+static char PMT12[] = "  Oktalzahl";
+static char PMT13[] = "  neg. Oktalzahl";
+static char PMT14[] = "  Dezimalzahl";
+static char PMT15[] = "  neg. Dezimalzahl";
+static char PMT16[] = "  Hexadezimalzahl";
+static char PMT17[] = "  neg. Hexadezimalzahl";
+static char PMT18[] = "  Flieûkommazahl";
+static char PMT19[] = "  neg. Flieûkommazahl";
+static char PMT20[] = "  TT.MM.JJJJ";
+static char PMT21[] = "  TT/MM/JJJJ";
+static char PMT22[] = "  MM.TT.JJJJ";
+static char PMT23[] = "  MM/TT/JJJJ";
+static char PMT24[] = "  Stunden unbegrenzt";
+static char PMT25[] = "  max. 12 Stunden";
+static char PMT26[] = "  max. 24 Stunden";
+static char TEXT_005[] = "  Datum             \003";
+static char TEXT_009[] = "Abbruch";
+static char TEXT_01[] = "3D-Modus";
+static char TEXT_02[] = "unsichtbarer Text";
+static char TEXT_05[] = "Sonstiges";
+static char TEXT_06[] = "  Zeit              \003";
+static char TEXT_07[] = "Kapitalisieren";
+static char TEXT_08[] = "BubbleGEM-Text";
+static char TEXT_09[] = "unten:";
+static char TEXT_10[] = "Rahmen:                ";
+static char TEXT_11[] = "Farbe:";
+static char TEXT_12[] = "Grîûe:";
+static char TEXT_13[] = "LÑnge:";
+static char TEXT_14[] = "Text:";
+static char TEXT_15[] = "Maske:";
+static char TEXT_16[] = "Context-Popup";
+static char TEXT_18[] = "Eingabe:";
+static char TEXT_19[] = "oben:";
+static char TEXT_20[] = "Format: Std:Min:Sek";
+static char TEXT_21[] = "links/";
+static char TEXT_22[] = "rechts/";
+static char TEXT_30[] = "  Zahlen            \003";
+static char TEXT_41[] = "OK";
+static char TXT0[] = "  Pfad              \003";
+static char TXT1[] = "  Datei             \003";
+static char help_title[] = "Der BoxEdit-Editor";
+static char title[] = "BOXEDIT -";
+#endif
+
+#if COUNTRY == COUNTRY_US
+static char BUBBLE_01[] = "öbernimmt die Einstellungen";
+static char BUBBLE_02[] = "Verwirft die Einstellungen";
+static char BUBBLE_03[] = "Hier kann der String, der fÅr BubbleGEM verwendet werden soll, eingegeben werden.";
+static char BUBBLE_04[] = "Hier kann der String eingegeben werden, der das aufzurufende Context-Popup beschreibt (siehe in der Dokumentation zu Ame_strpopup).";
+static char PMT00[] = "  All Chars";
+static char PMT01[] = "  normal path";
+static char PMT02[] = "  normal file";
+static char PMT03[] = "  TOS file";
+static char PMT04[] = "  TOS file pattern";
+static char PMT05[] = "  TOS path";
+static char PMT06[] = "  TOS path pattern";
+static char PMT07[] = "  Normal";
+static char PMT08[] = "  Chars";
+static char PMT09[] = "  Chars & Numbers";
+static char PMT10[] = "  binary number";
+static char PMT11[] = "  neg. binary number";
+static char PMT12[] = "  octal number";
+static char PMT13[] = "  neg. octal number";
+static char PMT14[] = "  decimal number";
+static char PMT15[] = "  neg. decimal number";
+static char PMT16[] = "  hexadecimal number";
+static char PMT17[] = "  neg. hexadezimal number";
+static char PMT18[] = "  floatingpoint number";
+static char PMT19[] = "  neg. floating point number";
+static char PMT20[] = "  DD.MM.YYY";
+static char PMT21[] = "  DD/MM/YYY";
+static char PMT22[] = "  MM.DD.YYYY";
+static char PMT23[] = "  MM/DD/YYY";
+static char PMT24[] = "  hours unlimited";
+static char PMT25[] = "  max. 24 hours";
+static char PMT26[] = "  max. 12 hours";
+static char TEXT_005[] = "  Date              \003";
+static char TEXT_009[] = "Cancel";
+static char TEXT_01[] = "3D-Mode ";
+static char TEXT_02[] = "hidden text      ";
+static char TEXT_05[] = "Sonstiges";
+static char TEXT_06[] = "  Time              \003";
+static char TEXT_07[] = "capitalize    ";
+static char TEXT_08[] = "BubbleGEM-Text";
+static char TEXT_09[] = "down:";
+static char TEXT_10[] = "Frame:                 ";
+static char TEXT_11[] = "Color:";
+static char TEXT_12[] = "Size:";
+static char TEXT_13[] = "Length:";
+static char TEXT_14[] = "Text:";
+static char TEXT_15[] = "Mask:";
+static char TEXT_16[] = "Context Popup";
+static char TEXT_18[] = "Input:";
+static char TEXT_19[] = "up:";
+static char TEXT_20[] = "Format: hrs:min:sec";
+static char TEXT_21[] = "left/";
+static char TEXT_22[] = "right/";
+static char TEXT_30[] = "  Numbers           \003";
+static char TEXT_41[] = "OK";
+static char TXT0[] = "  Path              \003";
+static char TXT1[] = "  File              \003";
+static char help_title[] = "Der BoxEdit-Editor";
+static char title[] = "BOXEDIT -";
+#endif
+
+static AUSERBLK A_3DBUTTON01 =   { A_3Dbutton, 0x09f10178L, Auo_string, TXT1, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON02 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT00, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON03 =   { A_3Dbutton, 0x09f10178L, Auo_string, TEXT_30, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON04 =   { A_3Dbutton, 0x09f10178L, Auo_string, TEXT_005, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON05 =   { A_3Dbutton, 0x09f10178L, Auo_string, TXT0, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON06 =   { A_3Dbutton, 0x21f10178L, Auo_string, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON07 =   { A_3Dbutton, 0x09f10178L, Auo_string, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON08 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT02, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON09 =   { A_3Dbutton, 0x29c10178L, Auo_string, TEXT_009, NULL, NULL, BUBBLE_02, NULL };
+static AUSERBLK A_3DBUTTON10 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT03, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON11 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT07, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON12 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT10, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON13 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT08, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON14 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT09, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON15 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT11, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON16 =   { A_3Dbutton, 0x29c10178L, Auo_string, TEXT_41, NULL, NULL, BUBBLE_01, NULL };
+static AUSERBLK A_3DBUTTON25 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT20, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON26 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT22, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON27 =   { A_3Dbutton, 0x09f10178L, Auo_string, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON28 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT21, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON29 =   { A_3Dbutton, 0x09f10178L, Auo_string, TEXT_06, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON30 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT24, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON31 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT25, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON32 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT26, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON33 =   { A_3Dbutton, 0x69000178L, Auo_string, TEXT_20, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON34 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT23, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON35 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT01, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON36 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT05, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON37 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT06, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON38 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT04, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON39 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT12, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON40 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT13, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON41 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT14, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON42 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT15, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON43 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT16, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON44 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT17, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON45 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT18, NULL, NULL, NULL, NULL };
+static AUSERBLK A_3DBUTTON46 =   { A_3Dbutton, 0x09f10178L, Auo_string, PMT19, NULL, NULL, NULL, NULL };
+static AUSERBLK A_ARROWS02 =     { A_arrows, 0x13010001L, NULL, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_BOXED01 =      { A_boxed, 0x9000ff12L, Auo_boxed, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_BOXED02 =      { A_boxed, 0x9038ff12L, Auo_boxed, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_BOXED03 =      { A_boxed, 0x90700512L, Auo_boxed, NULL, NULL, NULL, NULL, NULL };
+static AUSERBLK A_BOXED04 =      { A_boxed, 0x9038ff12L, Auo_boxed, NULL, NULL, NULL, BUBBLE_03, NULL };
+static AUSERBLK A_BOXED05 =      { A_boxed, 0x9038ff12L, Auo_boxed, NULL, NULL, NULL, BUBBLE_04, NULL };
+static AUSERBLK A_CHECKBOX01 =   { A_checkbox, 0x00000001L, Auo_string, TEXT_01, NULL, NULL, NULL, NULL };
+static AUSERBLK A_CHECKBOX02 =   { A_checkbox, 0x00000001L, Auo_string, TEXT_07, NULL, NULL, NULL, NULL };
+static AUSERBLK A_CHECKBOX03 =   { A_checkbox, 0x00000001L, Auo_string, TEXT_02, NULL, NULL, NULL, NULL };
+static AUSERBLK A_INNERFRAME01 = { A_innerframe, 0x18008f19L, Auo_string, TEXT_10, NULL, NULL, NULL, NULL };
+static AUSERBLK A_INNERFRAME02 = { A_innerframe, 0x18008f19L, Auo_string, TEXT_14, NULL, NULL, NULL, NULL };
+static AUSERBLK A_INNERFRAME03 = { A_innerframe, 0x18008f19L, Auo_string, TEXT_05, NULL, NULL, NULL, NULL };
+static AUSERBLK A_INNERFRAME04 = { A_innerframe, 0x18008f19L, Auo_string, TEXT_18, NULL, NULL, NULL, NULL };
+
+static struct {
+	OBJECT  root;
+	OBJECT  _01_POP_MASKSEL;
+	AOBJECT _01aPOP_MASKSEL;
+	OBJECT  _03_POP_MASKSEL;
+	AOBJECT _03aPOP_MASKSEL;
+	OBJECT  _05_POP_MASKSEL;
+	AOBJECT _05aPOP_MASKSEL;
+	OBJECT  _07_POP_MASKSEL;
+	AOBJECT _07aPOP_MASKSEL;
+	OBJECT  _09_POP_MASKSEL;
+	OBJECT  _10_POP_MASKSEL;
+	OBJECT  _11_POP_MASKSEL;
+	AOBJECT _11aPOP_MASKSEL;
+	OBJECT  _13_POP_MASKSEL;
+	AOBJECT _13aPOP_MASKSEL;
+	OBJECT  _15_POP_MASKSEL;
+	AOBJECT _15aPOP_MASKSEL;
+	OBJECT  _17_POP_MASKSEL;
+	OBJECT  _18_POP_MASKSEL;
+	OBJECT  _19_POP_MASKSEL;
+	AOBJECT _19aPOP_MASKSEL;
+	OBJECT  _21_POP_MASKSEL;
+	AOBJECT _21aPOP_MASKSEL;
+	OBJECT  _23_POP_MASKSEL;
+	AOBJECT _23aPOP_MASKSEL;
+	OBJECT  _25_POP_MASKSEL;
+	OBJECT  _26_POP_MASKSEL;
+	OBJECT  _27_POP_MASKSEL;
+	AOBJECT _27aPOP_MASKSEL;
+	OBJECT  _29_POP_MASKSEL;
+	AOBJECT _29aPOP_MASKSEL;
+	OBJECT  _31_POP_MASKSEL;
+	AOBJECT _31aPOP_MASKSEL;
+	OBJECT  _33_POP_MASKSEL;
+	AOBJECT _33aPOP_MASKSEL;
+	OBJECT  _35_POP_MASKSEL;
+	AOBJECT _35aPOP_MASKSEL;
+	OBJECT  _37_POP_MASKSEL;
+	AOBJECT _37aPOP_MASKSEL;
+	OBJECT  _39_POP_MASKSEL;
+	AOBJECT _39aPOP_MASKSEL;
+	OBJECT  _41_POP_MASKSEL;
+	AOBJECT _41aPOP_MASKSEL;
+	OBJECT  _43_POP_MASKSEL;
+	AOBJECT _43aPOP_MASKSEL;
+	OBJECT  _45_POP_MASKSEL;
+	AOBJECT _45aPOP_MASKSEL;
+	OBJECT  _47_POP_MASKSEL;
+	OBJECT  _48_POP_MASKSEL;
+	OBJECT  _49_POP_MASKSEL;
+	AOBJECT _49aPOP_MASKSEL;
+	OBJECT  _51_POP_MASKSEL;
+	AOBJECT _51aPOP_MASKSEL;
+	OBJECT  _53_POP_MASKSEL;
+	AOBJECT _53aPOP_MASKSEL;
+	OBJECT  _55_POP_MASKSEL;
+	AOBJECT _55aPOP_MASKSEL;
+	OBJECT  _57_POP_MASKSEL;
+	OBJECT  _58_POP_MASKSEL;
+	OBJECT  _59_POP_MASKSEL;
+	OBJECT  _60_POP_MASKSEL;
+	AOBJECT _60aPOP_MASKSEL;
+	OBJECT  _62_POP_MASKSEL;
+	AOBJECT _62aPOP_MASKSEL;
+	OBJECT  _64_POP_MASKSEL;
+	AOBJECT _64aPOP_MASKSEL;
+} POP_MASKSEL = {
+	{ -1,  1, 57, G_BOX, 0x0000, 0x0020, C_UNION(0x00ff1100L), 0, 0, 22, 9 },
+	{  3, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON02), 0, 0, 22, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_ALL, NULL, 0, 0 },
+	{  5, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON11), 0, 1, 22, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_NORM, NULL, 0, 0 },
+	{  7, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON13), 0, 2, 22, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_ALPHA, NULL, 0, 0 },
+	{  9, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON14), 0, 3, 22, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_ALPHADIGIT, NULL, 0, 0 },
+	{ 17, 10, 10, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON05), 0, 4, 22, 1 },
+	{  9, 11, 15, G_BOX, 0x0080, 0x0020, C_UNION(0x00ff1101L), 0, 0, 18, 3 },
+	{ 13, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON35), 0, 0, 18, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_PATH, NULL, 0, 0 },
+	{ 15, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON36), 0, 1, 18, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_TOSPATH, NULL, 0, 0 },
+	{ 10, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON37), 0, 2, 18, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_TOSPATHSPEC, NULL, 0, 0 },
+	{ 25, 18, 18, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON01), 0, 5, 22, 1 },
+	{ 17, 19, 23, G_BOX, 0x0080, 0x0020, C_UNION(0x00ff1101L), 0, 0, 19, 3 },
+	{ 21, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON08), 0, 0, 19, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_FILE, NULL, 0, 0 },
+	{ 23, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON10), 0, 1, 19, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_TOSFILE, NULL, 0, 0 },
+	{ 18, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON38), 0, 2, 19, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_TOSFILESPEC, NULL, 0, 0 },
+	{ 47, 26, 26, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON03), 0, 6, 22, 1 },
+	{ 25, 27, 45, G_BOX, 0x0080, 0x0020, C_UNION(0x00ff1101L), 0, 0, 23, 10 },
+	{ 29, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON12), 0, 0, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_BIN, NULL, 0, 0 },
+	{ 31, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON15), 0, 1, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_NEGBIN, NULL, 0, 0 },
+	{ 33, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON39), 0, 2, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_OCT, NULL, 0, 0 },
+	{ 35, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON40), 0, 3, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_NEGOCT, NULL, 0, 0 },
+	{ 37, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON41), 0, 4, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_DEC, NULL, 0, 0 },
+	{ 39, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON42), 0, 5, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_NEGDEC, NULL, 0, 0 },
+	{ 41, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON43), 0, 6, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_HEX, NULL, 0, 0 },
+	{ 43, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON44), 0, 7, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_NEGHEX, NULL, 0, 0 },
+	{ 45, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON45), 0, 8, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_FLOAT, NULL, 0, 0 },
+	{ 26, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON46), 0, 9, 23, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_NEGFLOAT, NULL, 0, 0 },
+	{ 57, 48, 48, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON04), 0, 7, 22, 1 },
+	{ 47, 49, 55, G_BOX, 0x0080, 0x0020, C_UNION(0x00ff1101L), 0, 0, 14, 4 },
+	{ 51, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON25), 0, 0, 14, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_DATEEURO, NULL, 0, 0 },
+	{ 53, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON28), 0, 1, 14, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_DATEEURO_SEP, NULL, 0, 0 },
+	{ 55, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON26), 0, 2, 14, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_DATEUS, NULL, 0, 0 },
+	{ 48, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON34), 0, 3, 14, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_DATEUS_SEP, NULL, 0, 0 },
+	{  0, 58, 58, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON29), 0, 8, 22, 1 },
+	{ 57, 59, 64, G_BOX, 0x0080, 0x0020, C_UNION(0x00ff1101L), 0, 0, 21, 4 },
+	{ 60, -1, -1, G_USERDEF, 0x0000, 0x0000, C_UNION(&A_3DBUTTON33), 0, 0, 21, 1 },
+	{ 62, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON30), 0, 1, 21, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_TIME, NULL, 0, 0 },
+	{ 64, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON31), 0, 2, 21, 1 },
+	{ NULL, NULL, AEO, 0x0000, (void *)(int32)BEM_TIME12, NULL, 0, 0 },
+	{ 58, -1, -1, G_USERDEF, 0x0001, 0x0000, C_UNION(&A_3DBUTTON32), 0, 3, 21, 1 },
+	{ NULL, NULL, AEO | OF_LASTOB, 0x0000, (void *)(int32)BEM_TIME24, NULL, 0, 0 }
+};
+
+static struct {
+	OBJECT  root;
+	OBJECT  _01_ED_BOXED;
+	OBJECT  _02_ED_BOXED;
+	OBJECT  _03_ED_BOXED;
+	AOBJECT _03aED_BOXED;
+	OBJECT  _05_ED_BOXED;
+	AOBJECT _05aED_BOXED;
+	OBJECT  _07_ED_BOXED;
+	OBJECT  _08_ED_BOXED;
+	AOBJECT _08aED_BOXED;
+	OBJECT  _10_ED_BOXED;
+	OBJECT  _11_ED_BOXED;
+	OBJECT  _12_ED_BOXED;
+	AOBJECT _12aED_BOXED;
+	OBJECT  _14_ED_BOXED;
+	OBJECT  _15_ED_BOXED;
+	OBJECT  _16_ED_BOXED;
+	OBJECT  _17_ED_BOXED;
+	OBJECT  _18_ED_BOXED;
+	AOBJECT _18aED_BOXED;
+	OBJECT  _20_ED_BOXED;
+	OBJECT  _21_ED_BOXED;
+	OBJECT  _22_ED_BOXED;
+	OBJECT  _23_ED_BOXED;
+	OBJECT  _24_ED_BOXED;
+	AOBJECT _24aED_BOXED;
+	OBJECT  _26_ED_BOXED;
+	AOBJECT _26aED_BOXED;
+	OBJECT  _28_ED_BOXED;
+	AOBJECT _28aED_BOXED;
+	OBJECT  _30_ED_BOXED;
+	OBJECT  _31_ED_BOXED;
+	OBJECT  _32_ED_BOXED;
+	OBJECT  _33_ED_BOXED;
+	OBJECT  _34_ED_BOXED;
+	OBJECT  _35_ED_BOXED;
+	OBJECT  _36_ED_BOXED;
+	OBJECT  _37_ED_BOXED;
+	AOBJECT _37aED_BOXED;
+	OBJECT  _39_ED_BOXED;
+	OBJECT  _40_ED_BOXED;
+	OBJECT  _41_ED_BOXED;
+	OBJECT  _42_ED_BOXED;
+	OBJECT  _43_ED_BOXED;
+	OBJECT  _44_ED_BOXED;
+	AOBJECT _44aED_BOXED;
+	OBJECT  _46_ED_BOXED;
+	OBJECT  _47_ED_BOXED;
+	OBJECT  _48_ED_BOXED;
+	AOBJECT _48aED_BOXED;
+	OBJECT  _50_ED_BOXED;
+	OBJECT  _51_ED_BOXED;
+	OBJECT  _52_ED_BOXED;
+	OBJECT  _53_ED_BOXED;
+	OBJECT  _54_ED_BOXED;
+} ED_BOXED = {
+	{ -1,  1, 50, G_USERDEF, 0x0000, 0x0010, C_UNION(&A_3DBUTTON06), 0, 0, 60, 20 },
+	{  3,  2,  2, G_USERDEF, 0x0040, 0x0010, C_UNION(&A_3DBUTTON07), 0, 0, 23, 3 },
+	{  1, -1, -1, G_USERDEF, 0x0000, 0x0010, C_UNION(&A_BOXED02), 2, 1, 19, 1 },
+	{  5, -1, -1, G_USERDEF, 0x4007, 0x0010, C_UNION(&A_3DBUTTON16), 32, 1, 12, 2 },
+	{ edbe_ok, NULL, AEO, 0x884f, NULL, NULL, 0, 0 },
+	{  7, -1, -1, G_USERDEF, 0x4005, 0x0010, C_UNION(&A_3DBUTTON09), 46, 1, 12, 2 },
+	{ edbe_abort, NULL, AEO, 0x8841, NULL, NULL, 0, 0 },
+	{ 23,  8, 22, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_INNERFRAME02), 1, 4, 58, 5 },
+	{ 10, -1, -1, G_USERDEF, 0x0048, 0x0010, C_UNION(&A_BOXED01), 1, 1, 56, 2 },
+	{ Aus_boxed, NULL, AEO, 0x0000, NULL, NULL, 0, 0 },
+	{ 12, 11, 11, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_11), 1, 3, 6, 1 },
+	{ 10, -1, -1, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_ARROWS02), 0, 0, 1, 1 },
+	{ 16, 14, 15, G_BOX, 0x0040, 0x0020, C_UNION(0x00ff1101L), 8, 3, 18, 1 },
+	{ edbe_textcol, NULL, AEO, 0x8846, NULL, NULL, 0, 0 },
+	{ 15, -1, -1, G_BOX, 0x0000, 0x0000, C_UNION(0x00011171L), 16, 0, 2, 1 },
+	{ 12, -1, -1, G_USERDEF, 0x0000, 0x0000, C_UNION(&A_3DBUTTON27), 0, 0, 16, 1 },
+	{ 18, 17, 17, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_12), 29, 3, 6, 1 },
+	{ 16, -1, -1, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_ARROWS02), 0, 0, 1, 1 },
+	{ 21, 20, 20, G_BOX, 0x0040, 0x0020, C_UNION(0x00ff1101L), 36, 3, 8, 1 },
+	{ edbe_size, NULL, AEO, 0x8847, NULL, NULL, 0, 0 },
+	{ 18, -1, -1, G_USERDEF, 0x0000, 0x0000, C_UNION(&A_3DBUTTON07), 0, 0, 8, 1 },
+	{ 22, -1, -1, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_13), 47, 3, 7, 1 },
+	{  7, -1, -1, G_USERDEF, 0x0008, 0x0010, C_UNION(&A_BOXED03), 54, 3, 3, 1 },
+	{ 33, 24, 31, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_INNERFRAME04), 1, 9, 30, 6 },
+	{ 26, -1, -1, G_USERDEF, 0x0041, 0x0000, C_UNION(&A_CHECKBOX02), 7, 1, 17, 1 },
+	{ edbe_autobig, NULL, AEO, 0x884b, NULL, NULL, 0, 0 },
+	{ 28, -1, -1, G_USERDEF, 0x0041, 0x0000, C_UNION(&A_CHECKBOX03), 7, 2, 20, 1 },
+	{ edbe_secret, NULL, AEO, 0x0000, NULL, NULL, 0, 0 },
+	{ 31, 30, 30, G_BOX, 0x0040, 0x0020, C_UNION(0x00ff1101L), 7, 4, 22, 1 },
+	{ edbe_mask, NULL, AEO, 0x884d, NULL, NULL, 0, 0 },
+	{ 28, -1, -1, G_USERDEF, 0x0000, 0x0000, C_UNION(&A_3DBUTTON07), 0, 0, 22, 1 },
+	{ 23, 32, 32, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_15), 1, 4, 6, 1 },
+	{ 31, -1, -1, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_ARROWS02), 0, 0, 1, 1 },
+	{ 50, 34, 48, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_INNERFRAME01), 31, 9, 28, 6 },
+	{ 36, 35, 35, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_21), 2, 1, 6, 1 },
+	{ 34, -1, -1, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_ARROWS02), 0, 0, 1, 1 },
+	{ 37, -1, -1, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_19), 3, 2, 5, 1 },
+	{ 41, 39, 40, G_BOX, 0x0040, 0x0020, C_UNION(0x00ff1101L), 9, 2, 18, 1 },
+	{ edbe_outcol, NULL, AEO, 0x884c, NULL, NULL, 0, 0 },
+	{ 40, -1, -1, G_BOX, 0x0000, 0x0000, C_UNION(0x43011371L), 16, 0, 2, 1 },
+	{ 37, -1, -1, G_USERDEF, 0x0000, 0x0000, C_UNION(&A_3DBUTTON27), 0, 0, 16, 1 },
+	{ 43, 42, 42, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_22), 1, 3, 7, 1 },
+	{ 41, -1, -1, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_ARROWS02), 0, 0, 1, 1 },
+	{ 44, -1, -1, G_STRING, 0x0040, 0x0000, C_UNION(&TEXT_09), 2, 4, 6, 1 },
+	{ 48, 46, 47, G_BOX, 0x0040, 0x0020, C_UNION(0x00ff1101L), 9, 4, 18, 1 },
+	{ edbe_incol, NULL, AEO, 0x8852, NULL, NULL, 0, 0 },
+	{ 47, -1, -1, G_BOX, 0x0000, 0x0000, C_UNION(0x43011371L), 16, 0, 2, 1 },
+	{ 44, -1, -1, G_USERDEF, 0x0000, 0x0000, C_UNION(&A_3DBUTTON27), 0, 0, 16, 1 },
+	{ 33, -1, -1, G_USERDEF, 0x0041, 0x0000, C_UNION(&A_CHECKBOX01), 7, 0, 11, 1 },
+	{ edbe_3d, NULL, AEO, 0x8844, NULL, NULL, 0, 0 },
+	{  0, 51, 54, G_USERDEF, 0x0040, 0x0000, C_UNION(&A_INNERFRAME03), 1, 15, 58, 5 },
+	{ 52, -1, -1, G_STRING, 0x0000, 0x0000, C_UNION(&TEXT_08), 1, 1, 14, 1 },
+	{ 53, -1, -1, G_STRING, 0x0000, 0x0000, C_UNION(&TEXT_16), 1, 3, 13, 1 },
+	{ 54, -1, -1, G_USERDEF, OF_EDITABLE, 0x0010, C_UNION(&A_BOXED04), 16, 1, 41, 1 },
+	{ 50, -1, -1, G_USERDEF, OF_EDITABLE | OF_LASTOB, 0x0010, C_UNION(&A_BOXED05), 16, 3, 41, 1 }
+};

@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['ob_5fflags',['ob_flags',['../structobject.html#a831e2e5e57e921046e9cfaffef8774ad',1,'object']]],
+  ['ob_5fhead',['ob_head',['../structobject.html#ab4fc483d89085d112bdf59f52ea13602',1,'object']]],
+  ['ob_5fheight',['ob_height',['../structobject.html#a15182ff79cc286ec38880c247237bc51',1,'object']]],
+  ['ob_5fnext',['ob_next',['../structobject.html#a450caddbf0f4819f1ad64d6393fac388',1,'object']]],
+  ['ob_5fspec',['ob_spec',['../structobject.html#ae9f04d5cd092706b8936af461fdfefa7',1,'object']]],
+  ['ob_5fstate',['ob_state',['../structobject.html#adc8fc3783c5fc3498a44acfd3382d797',1,'object']]],
+  ['ob_5ftail',['ob_tail',['../structobject.html#a92de66eaa27f125048352c0c86683923',1,'object']]],
+  ['ob_5ftype',['ob_type',['../structobject.html#af14405d822e1c7710c0b96481d58deb7',1,'object']]],
+  ['ob_5fwidth',['ob_width',['../structobject.html#aa026567425cee339bb613d7211562892',1,'object']]],
+  ['ob_5fx',['ob_x',['../structobject.html#a301ed0078e1bb6ac5a5f4e22ed03e73e',1,'object']]],
+  ['ob_5fy',['ob_y',['../structobject.html#a35153cf9045e7a16f3b5436b0a4f8949',1,'object']]],
+  ['obj',['obj',['../structHNDL__OBJ__args.html#a66eb335cfff939ee758e7366eb8bbf6e',1,'HNDL_OBJ_args']]],
+  ['obj_5findex',['obj_index',['../structSLCT__ITEM__args.html#a80952d775fcaea70f996486573820360',1,'SLCT_ITEM_args::obj_index()'],['../structSET__ITEM__args.html#afc44548219c411ad474ad0229745f950',1,'SET_ITEM_args::obj_index()']]],
+  ['objnr',['objnr',['../structSCANX.html#a2952cadb417b65423aeb0c88f9d22fde',1,'SCANX']]],
+  ['obspec',['obspec',['../unionobspecptr.html#a27570b120e9d940ce7b2f70a6bcb9c19',1,'obspecptr']]],
+  ['opaque',['opaque',['../structobjc__colorword.html#a1282d640ede420e05f8e59e7a2446d79',1,'objc_colorword']]],
+  ['option_5fflags',['option_flags',['../struct__pdlg__sub.html#a9e50c6e67134ae93dafb8aed5e40f1a3',1,'_pdlg_sub']]],
+  ['orientation',['orientation',['../struct__prn__settings.html#a71ca0482b0c4f9a0a43d6316c30397d1',1,'_prn_settings']]],
+  ['outline',['outline',['../struct__fnts__item.html#a235c7870bcd2e4e13fe172b4305dc92b',1,'_fnts_item']]],
+  ['output_5fid',['output_id',['../struct__prn__settings.html#a2862e6de75660037e381b8e908b0efc4',1,'_prn_settings']]],
+  ['output_5ftrays',['output_trays',['../struct__prn__entry.html#a7965e36361eff6ac03b30f95501633c4',1,'_prn_entry']]]
+];

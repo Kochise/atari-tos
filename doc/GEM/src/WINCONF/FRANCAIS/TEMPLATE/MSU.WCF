@@ -1,0 +1,1 @@
+<!- Configuration de MagiC Set Up     Une seul variable   -><entry name=shutdown type=filesel value="C:\GEMSYS\MAGIC\GEMDESK\SHUTDOWN.APP">	<label>Shudown program</label>	<help>Magic Set Up : chemin du programme d'extinction.</help></entry><!- WinConf utilise WinDom bien sur -><require src="windom.wcf"><!- Fin de config ->

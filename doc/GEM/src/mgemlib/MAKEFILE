@@ -1,0 +1,86 @@
+#!make -f
+# @(#)mgemlib.mk, 
+#
+# make file for 'MGEMLIB'
+#
+
+all:
+	@echo 
+	@echo "usage: 'make [target]'"
+	@echo 
+	@echo "list of possible target are:"
+	@echo "- gcc      (compile MGEMLIB for gcc 2.95)"
+	@echo "- gcc281   (compile MGEMLIB for gcc 2.81 with -mshort)"
+	@echo "- gcc28116 (compile MGEMLIB for gcc 2.81 with -mlong)"
+	@echo "- sox      (compile MGEMLIB for sozobonX)"
+	@echo "- clean    (erase all object files)"
+	@echo "- zip      (make a mgemlib.zip archive)"
+	@echo "- total    (all)"
+	@echo 
+
+total:
+	@echo
+	@echo "============================================"
+	@echo " compiling MGEMLIB for sozobon C"
+	@echo "============================================"
+	@echo
+	@echo "clean up working directory..."
+	rm -f *.o
+	make -f m_sox
+	@echo
+	@echo "============================================"
+	@echo " compiling MGEMLIB for GNU C 2.81c (16 bits)"
+	@echo "============================================"
+	@echo
+	@echo "clean up working directory..."
+	rm -f *.o
+	make -f m_gcc281.16
+	@echo
+	@echo "============================================"
+	@echo " compiling MGEMLIB for GNU C 2.81c (32 bits)"
+	@echo "============================================"
+	@echo
+	@echo clean up working directory...
+	rm -f *.o
+	make -f m_gcc281
+	@echo
+	@echo "============================================"
+	@echo " compiling MGEMLIB with default GCC compiler"
+	@echo "============================================"
+	@echo
+	@echo clean up working directory...
+	rm -f *.o
+	make -f m_gcc
+	@echo
+	@echo "============================================"
+	@echo " building archives"
+	@echo "============================================"
+	@echo
+	@echo clean up working directory...
+	rm -f *.o
+	make zip
+
+.PHONY : clean pc sox gcc281 gcc28116 gcc zip
+
+clean:
+	rm -f *.o
+
+pc:
+	make -f m_pc
+
+sox:
+	make -f m_sox
+
+gcc281:
+	make -f m_gcc281
+
+gcc28116:
+	make -f m_gcc281.16
+
+gcc:
+	make -f m_gcc
+
+zip:
+	make -f m_zip
+
+#eof

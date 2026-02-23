@@ -1,0 +1,25 @@
+#
+# makefile for mgemlib 
+# gcc 2.95.3 (sparemint) version
+#
+
+CC     = gcc
+AR     = ar
+CFLAGS = -O2 -Wall -fomit-frame-pointer -Iinclude
+
+include m_files
+
+.SUFFIXES:
+.SUFFIXES: .c .s .o
+
+.c.o:
+	$(CC) $(CFLAGS) -c $*.c -o $*.o
+
+.s.o:
+	$(CC) $(CFLAGS) -c $*.s -o $*.o
+
+TARGET = $(LIB_GCC)
+
+$(TARGET): $(OBJ) $(GC_OBJ)
+	$(RM) $@
+	$(AR) cru $@ $^

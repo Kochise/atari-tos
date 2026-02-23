@@ -1,0 +1,12 @@
+menuuhr.am
+.C[-I..\..\include]
+.C[-IC:\pc\include]
+.C[-D__ACS_MODULE__]
+.L[-S=0]
+.C[-A- -C- -T- -K- -P- -G- -S-]
+.C[-J- -Z- -M- -R-]
+=
+..\..\src\lib\modul\acs_load.s
+menuuhr.c
+..\..\lib\pcstdlib.lib
+..\..\lib\pctos.lib

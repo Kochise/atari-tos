@@ -1,0 +1,127 @@
+acs.app
+;
+; Not nice to use absolute paths here,
+; but we must ensure that we use the current versions
+; of acs header files, not the ones that are already installed in
+; the default directory.
+; For the same reason, we have to add the default include directory
+; here.
+; Important: make sure to *not* use any include directory
+; in your shell directory settings,
+; because that would be looked up first.
+;
+.C[-I..\include]
+.C[-IC:\pc\include]
+
+.C[ -A- ]		; no strict ANSI
+.C[ -C- ]		; no nested comments
+.C[ -T- ]		; no stack checking
+.C[ -K- ]		; Default Char is signed
+.C[ -P  ]		; Absolute calls
+.C[ -G- ]		; optimize for speed
+.C[ -S- ]		; no standard stack frames
+
+; Flags for the Debug-Version
+;.C[ -D_DEBUG -DDEBUG ]
+;.C[ -J+ ]		; No jump optimization
+;.C[ -Z+ ]		; No register optimization
+;.C[ -M+ ]		; No String Merging
+;.C[ -R+ ]		; No Register Variables
+
+; Flags for the Release-Version
+.C[ -J- ]		; Jump optimization
+.C[ -Z- ]		; Register optimization
+.C[ -M- ]		; String Merging
+.C[ -R- ]		; Register Variables
+
+.S[-U]
+
+.L[-S=40960]
+
+=
+..\lib\stupargv.s
+
+acsbase.c
+palette.c
+edbehave.c
+general.c
+about.c
+edutil.c
+
+io\protocol.c
+io\fixacs.c
+io\acsio.c
+io\rcsin.c
+io\pc_head.c
+io\pc_out.c
+io\pp_out.c
+io\str_out.c
+io\workout.c
+
+edit2\eddescr.c
+edit2\eddataed.c
+edit2\edrefed.c
+edit2\edaled.c
+edit2\ediconed.c
+edit2\edimaged.c
+edit2\edmoused.c
+edit2\edusred.c
+edit2\edteded.c
+edit2\edstred.c
+edit2\edwinded.c
+edit2\edparts.c
+
+editor\edobjced.c
+editor\edmenued.c
+editor\edpuped.c
+editor\ueboxed.c
+editor\ueselect.c
+editor\ueeditor.c
+editor\ueslider.c
+editor\uepictur.c
+editor\uecycle.c
+editor\uearrow.c
+editor\uepatter.c
+editor\ueinner.c
+editor\ue3dbutt.c
+editor\uecheck.c
+editor\ueftext.c
+editor\uetitle.c
+editor\edobclas.c
+editor\edobstru.c
+editor\edobsurf.c
+editor\edobobjc.c
+editor\edobusrm.c
+editor\edobboxm.c
+editor\edobicm.c
+editor\edobimm.c
+editor\edobstrm.c
+editor\edobtedm.c
+editor\edobaflm.c
+editor\edobaeom.c
+editor\edobkeys.c
+
+list\edlist.c
+list\edalert.c
+list\eddata.c
+list\edwind.c
+list\edicon.c
+list\edimage.c
+list\eduser.c
+list\edmenu.c
+list\edmouse.c
+list\edobject.c
+list\edpopup.c
+list\edref.c
+list\edstring.c
+list\edtedi.c
+
+acsplus\acsplus.prj
+lib\acslib.prj
+lib\acsmod.prj
+
+..\pcgem\pcgem.prj
+..\pctos\pctos.prj
+
+..\lib\pcfltlib.lib
+..\lib\pcstdlib.lib

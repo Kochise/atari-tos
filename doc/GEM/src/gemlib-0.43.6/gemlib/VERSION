@@ -1,0 +1,6 @@
+
+# $Id: VERSION,v 1.9 2005/12/19 20:03:32 a_bercegeay Exp $
+#
+
+# Define this to the version of the package.
+VERSION=0.43.6

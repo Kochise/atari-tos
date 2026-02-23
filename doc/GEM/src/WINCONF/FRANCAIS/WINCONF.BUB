@@ -1,0 +1,54 @@
+5 1 Affichage par nom ou par label.
+5 2 Ouvrir tous les sous menus.
+5 3 Fermer tous les sous menus.
+5 4 Chercher une variable de configuration.
+5 8 Sauver la configuration courante.
+5 10 Choisir une application … configurer.
+5 11 Cycler les applications.
+5 6 Cr‚er une nouvelle application … configurer.
+5 7 Supprimer la configuration courante.
+5 9 Afficher des informations sur le fichier de configuration.
+5 5 Ajouter rapidement une variable dans la configuration.
+3 2 Appliquer des modifs.
+3 5 Sauver les modifs.
+3 6 Annuler les modifs.
+3 7 Ouvrir la fenˆtre principale au lancement de WinConf (ne concerne que les systŠmes monotƒches).
+3 8 Cr‚er une copie carbone du fichier de configuration WinDom.
+3 4 Fixer le chemin des fichiers templates.
+3 9 Pr‚server les commentaires lors de l'‚criture des configurations.
+3 10 Afficher les bulles d'aides automatiquement aprŠs un temps d'inaction.
+8 2 Fermer le formulaire.
+8 7 Afficher dans ST-Guide le fichier de configuration.
+8 4 Chemin du fichier de configuration.
+8 5 Nombre d'applications dans le fichier de configuration.
+8 6 Taille du fichier de configuration.
+9 1 Fixer le nom de l'application … configurer.
+9 2 Cr‚er la configuration par d‚faut.
+4 2 D‚clencher la recherche.
+4 4 Entrer ici la variable … rechercher.
+4 6 ??
+4 7 ??
+4 8 ??
+4 9 ??
+4 10 ??
+4 11 Afficher plus d'information sur la variable (via ST-Guide).
+4 12 Fermer le formulaire.
+13 2 D‚clencher la recherche et fermer le formulaire.
+13 4 Entrer ici la r‚f‚rence … rechercher.
+0 9 Information sur WinConf.
+0 18 Ouvrir le fichier de configuration standard.
+0 19 Ouvrir ou cr‚‚r un fichier de configuration.
+0 21 Non implant‚.
+0 22 Non implant‚.
+0 23 Configurer WinConf.
+0 25 Quitter WinConf.
+0 33 Afficher l'aide m‚moire.
+0 34 Afficher l'aide sur ST-Guide.
+0 35 Afficher la documentation de WinConf.
+0 36 Chercher une r‚f‚rence dans le fichier d'aide.
+0 37 Afficher l'index de l'aide.
+0 27 Ferme la fenˆtre (l'application quitte s'il n'a plus de fenˆtre de configuration ouverte).
+0 29 (D‚s)iconifie la fenˆtre.
+0 31 Cache les fenˆtres.
+0 30 Agrandie … la taille maximale la fenˆtre.
+0 28 Cycle en premier-plan les fenˆtres.

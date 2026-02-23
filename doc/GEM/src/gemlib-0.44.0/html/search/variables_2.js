@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['character',['character',['../structBFOBSPEC.html#a36f5f1afef03ad67308e5ee150c56caf',1,'BFOBSPEC']]],
+  ['ciconblk',['ciconblk',['../unionobspecptr.html#a99413ee945fc6b4bcae7c13c2757dabe',1,'obspecptr']]],
+  ['clicks',['clicks',['../structHNDL__OBJ__args.html#a26dbf77ddd3f5d1fc71a67307f5bdf39',1,'HNDL_OBJ_args']]],
+  ['clip_5frect',['clip_rect',['../structUTXT__FN__args.html#a73296d6dad8820f7ac897df49a557ac5',1,'UTXT_FN_args']]],
+  ['close_5fpanel',['close_panel',['../struct__prn__entry.html#ac3e491ed3aef3bd47a533bed2928fe3c',1,'_prn_entry']]],
+  ['cmyk',['cmyk',['../unionCOLOR__ENTRY.html#a6cf00fd94e742c9b89bf2d9937a06f71',1,'COLOR_ENTRY']]],
+  ['col_5fdata',['col_data',['../structcicon__data.html#a1b3b57809fd692fcbc8f4e2ceb816826',1,'cicon_data']]],
+  ['col_5fmask',['col_mask',['../structcicon__data.html#ae5049a88ca222453485a6cc537f93da3',1,'cicon_data']]],
+  ['color_5fcapabilities',['color_capabilities',['../struct__prn__mode.html#a8bc58ff6cee90fa7b280dc1b111a268e',1,'_prn_mode']]],
+  ['color_5fmode',['color_mode',['../struct__prn__settings.html#a06fa8c62d7fdb2bde88b2865c99b5900',1,'_prn_settings']]],
+  ['color_5fmodes',['color_modes',['../struct__dither__mode.html#a80291223d2cf8dfd510442691fe700ca',1,'_dither_mode']]],
+  ['color_5fspace',['color_space',['../structCOLOR__TAB.html#a1622bd99d6c357f5038125488b46ff4f',1,'COLOR_TAB::color_space()'],['../structCOLOR__TAB256.html#a3b7bbad7011755cba3cc85bcb7c87d7e',1,'COLOR_TAB256::color_space()']]],
+  ['colors',['colors',['../structCOLOR__TAB.html#ae4f298a4ba0c6a570a25dd3d281a3a19',1,'COLOR_TAB::colors()'],['../structCOLOR__TAB256.html#a892faa777c5f36a1589ac5d62fa3c32d',1,'COLOR_TAB256::colors()']]],
+  ['command',['command',['../structXSHW__COMMAND.html#ab603ab7f7b0e8443a366844a841c5001',1,'XSHW_COMMAND']]],
+  ['contrast',['contrast',['../struct__prn__settings.html#ade0464430176735ffef3128fc5616dc5',1,'_prn_settings']]],
+  ['control',['control',['../structAESPB.html#afc2a5dd67e2544e38083bbeef0214f4f',1,'AESPB::control()'],['../structVDIPB.html#a38481021a33db36b3c85e90c3fa87ba5',1,'VDIPB::control()']]],
+  ['ctab',['ctab',['../struct__gcbitmap.html#a70f6c5478d28c6080884220cdd9e3dea',1,'_gcbitmap']]],
+  ['ctrl',['ctrl',['../structXDO__INF.html#a46a40b1bcbb8955162fbe9f0df030c7c',1,'XDO_INF']]],
+  ['cyan',['cyan',['../structCOLOR__CMYK.html#a4fe7e4d7d917cb4dc4e0a91eaf306580',1,'COLOR_CMYK']]]
+];

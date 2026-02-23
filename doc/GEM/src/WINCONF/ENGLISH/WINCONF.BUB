@@ -1,0 +1,46 @@
+5 1 Toggle between variable name and label
+5 2 Open all submenus
+5 3 Close all submenus
+5 4 Search a variable
+5 8 Save current settings
+5 10 Choice an application configuration
+5 11 Cycle application configuration
+5 6 Create a new application configuration
+5 7 Delete current configuration
+5 9 Show informations about the current file
+5 5 Add quickly a new variable in current configuration
+8 2 Close the dialog box
+8 7 Send to ST-Guide (should be in memory) the file content
+8 4 Full path of configuration file
+8 5 Number of application inside the file
+8 6 Size of the file
+9 1 Set the application name
+9 2 Create the defaut configuration
+4 2 Start the search
+4 4 Variable name to find
+4 6 ??
+4 7 ??
+4 8 ??
+4 9 ??
+4 10 ??
+4 11 Show more information on the variable (use several ST-Guide files such as WINDOM.HYP)
+4 12 Close the dialog box
+13 2 Sends the request to ST-Guide (should be loaded in memory)
+13 4 Reference name to find
+0 9 Legal information about WinConf
+0 18 Open the standard configuration file
+0 19 Open or create a new configuration file
+0 21 Not available
+0 22 Not available
+0 23 Configure WinConf
+0 25 Quit WinConf
+0 33 Show a quick help on WinConf
+0 34 Display ST-Guide information
+0 35 Display WinConf documentation (using ST-Guide)
+0 36 Find a reference in ST-Guide
+0 37 Display the help index
+0 27 Close the window. The last window closed makes WinConf quit
+0 29 Iconify or uniconify the window
+0 31 Hide WinConf
+0 30 Maximise or minimise the window
+0 28 Cycle windows

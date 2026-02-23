@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['scale',['scale',['../struct__prn__settings.html#a9f2f6207c96df8130f66e6b8280291b8',1,'_prn_settings']]],
+  ['scancode',['scancode',['../structSCANX.html#a8fa528c954dd3ff61938bb54d5172ed8',1,'SCANX']]],
+  ['scrollpos',['scrollpos',['../structPOPUP__INIT__args.html#a170ee38f1eeafbc33d9b921d9d17ecf0',1,'POPUP_INIT_args']]],
+  ['sel_5fdata',['sel_data',['../structcicon__data.html#a26634a4754789d0b1911ad44cf544cf7',1,'cicon_data']]],
+  ['sel_5fmask',['sel_mask',['../structcicon__data.html#a49499e9b55c770cf02666509c7bdd8b8',1,'cicon_data']]],
+  ['selected',['selected',['../structlbox__item.html#a7e51c4144cf6cbaa9a7c7f57d93af5bc',1,'lbox_item']]],
+  ['settings',['settings',['../structPDLG__HNDL__args.html#a6840330aea59f66f5084acce2ed3bd8c',1,'PDLG_HNDL_args']]],
+  ['setup_5fpanel',['setup_panel',['../struct__prn__entry.html#a804d694b2f9dd164dd978b3e032ff755',1,'_prn_entry']]],
+  ['shift',['shift',['../structXDO__INF.html#a47718ba4ec7ba2b3e660f11b317961dc',1,'XDO_INF']]],
+  ['size',['size',['../structXFNT__INFO.html#af53798dbf3e5858daf99553d237a8b34',1,'XFNT_INFO']]],
+  ['size_5fid',['size_id',['../struct__media__size.html#a658f4774af1416ba6927dd81f6b24368',1,'_media_size::size_id()'],['../struct__prn__settings.html#a799b6e6b43b981763314d2e02978550e',1,'_prn_settings::size_id()']]],
+  ['speed',['speed',['../struct__mn__set.html#a163c5882d7e98f8c582ed7737fa7d027',1,'_mn_set']]],
+  ['stacksize',['stacksize',['../structTHREADINFO.html#a6126bb820be8e492e6b9bc42357c63f4',1,'THREADINFO']]],
+  ['string',['string',['../structUTXT__FN__args.html#ac8ecbdcff183a482b79fa2e4149bcb8d',1,'UTXT_FN_args']]],
+  ['style_5fname',['style_name',['../struct__fnts__item.html#a6dc57699d92eb4571f563ac2d01c944e',1,'_fnts_item::style_name()'],['../structXFNT__INFO.html#a72ba5c960c3dfe8ae7bd9524a4ae0942',1,'XFNT_INFO::style_name()']]],
+  ['sub',['sub',['../structPDLG__HNDL__args.html#ac67de535e38fcc185ded65545f696f52',1,'PDLG_HNDL_args']]],
+  ['sub_5fdialogs',['sub_dialogs',['../struct__prn__entry.html#aff15b7bf718e3f92eb8f16d43c5b5601',1,'_prn_entry']]],
+  ['sub_5fflags',['sub_flags',['../struct__prn__entry.html#a86536a6b3dd20d443673980314861dd6',1,'_prn_entry']]],
+  ['sub_5ficon',['sub_icon',['../struct__pdlg__sub.html#a27070e099cc767c07c3f828b1f47c10d',1,'_pdlg_sub']]],
+  ['sub_5fid',['sub_id',['../struct__pdlg__sub.html#a82340c85f9e0fec4fe7dc3bee6c5e09a',1,'_pdlg_sub']]],
+  ['sub_5ftree',['sub_tree',['../struct__pdlg__sub.html#a54d880730201db487124c6e0c24b2c72',1,'_pdlg_sub']]]
+];

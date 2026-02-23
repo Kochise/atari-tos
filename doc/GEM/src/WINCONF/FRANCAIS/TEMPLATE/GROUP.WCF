@@ -1,0 +1,36 @@
+<!-- Configuration de Group
+ -->
+
+
+<submenu name=group>
+	<label>Configuration des groupes</label>
+	<help>Configuration du programe GROUP (par Dominique B‚r‚ziat).</help>
+	<submenu name=viewer>
+		<label>Afficheur externe</label>
+		<help>Lorsque le bureau n'a pas de programme associ‚ … l'objet que vous manipulez, il utilise un afficheur par d‚faut. Ce menu vous permet de le configurer.</help>
+		<entry name=path type=filesel data="bede">
+			<label>  Chemin complet: </label>
+		</entry>
+		<entry name=vastart type=checkbut data=boolean value=true>
+			<label>Accepte VA_START: </label>
+		</entry>
+	</submenu>
+	<submenu name=dragdrop>
+		<label>Glisser-D‚poser</label>
+		<entry name=effect type=checkbut >
+			<label>Effect de s‚lection: </label>
+		</entry>
+		<entry name=timer type=fedit data=integer value=300>
+			<label>  Temps de r‚action: </label>
+		</entry>
+	</submenu>
+	
+	<submenu name=save>
+		<label>Options de sauvegarde</label>
+		<entry name=timer type=fedit data=integer value=13>
+			<label>Temps entre deux sauvegardes</label>
+		</entry>
+	</submenu>
+</submenu>
+<require src="windom.wcf">
+

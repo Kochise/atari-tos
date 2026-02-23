@@ -1,0 +1,88 @@
+..\..\lib\acs.lib
+
+.C[-I..\..\include]
+.C[-I..]
+.S[-I..]
+.C[-IC:\pc\include]
+
+.C[ -A- ]		; no strict ANSI
+.C[ -C- ]		; no nested comments
+.C[ -T- ]		; no stack checking
+.C[ -K- ]		; Default Char is signed
+.C[ -P  ]		; Absolute calls
+.C[ -G- ]		; optimize for speed
+.C[ -S- ]		; no standard stack frames
+
+; Flags for the Debug-Version
+.C[ -D_DEBUG -DDEBUG ]
+.C[ -J+ ]		; No jump optimization
+.C[ -Z+ ]		; No register optimization
+.C[ -M+ ]		; No String Merging
+.C[ -R+ ]		; No Register Variables
+
+; Flags for the Release-Version
+;.C[ -J- ]		; Jump optimization
+;.C[ -Z- ]		; Register optimization
+;.C[ -M- ]		; String Merging
+;.C[ -R- ]		; Register Variables
+
+.S[-U]
+
+.L[-J] ; generate library
+
+=
+acsinit0.c
+main.c
+initterm.c
+vdi_data.c
+vdidatas.s
+mygemdos.s [-S]
+nkcc_s.s
+nkcc.c
+config.c
+string.c
+drag.c
+event.c
+fileutil.c
+memory.c
+menu.c
+mouse.c
+object.c
+wobject.c
+backplan.c
+window.c
+shelutil.c
+thermo.c
+keytab.c
+
+messages\msgserv.c
+messages\screen.c
+messages\xacc.c
+messages\av.c
+messages\dd.c
+messages\dhst.c
+messages\bubble.c
+messages\gemscr.c
+messages\olga.c
+messages\stguide.c
+messages\seproto.c
+messages\ssp.c
+messages\pc_help.c
+
+userdef\userobj.c
+userdef\userobj2.c
+userdef\ftext.c
+userdef\cycle.c
+userdef\picture.c
+userdef\boxed.c
+
+utility\util.c
+utility\date.c
+
+wdialog\filesel.c
+wdialog\printsel.c
+wdialog\fontsel.c
+
+listen\ulinlist.c
+listen\stack.c
+listen\queue.c
