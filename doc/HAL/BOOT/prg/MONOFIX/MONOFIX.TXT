@@ -1,0 +1,34 @@
+    MONOFIX
+    -------
+
+    The ATARI Falcon030 can be connected to the SM124/144/146. It will 
+    then automatically display ST-high-resolution. But there is a 
+    little problem (at least with TOS 4.01): Some (older) programs quit 
+    saying they only work in high resolution, but the resolution 
+    definitivly is "ST-high". And Maccel doesn't invert the screen 
+    periodically, as it is used to be in ST-high, it only inverts it 
+    once.
+
+    So I searched for a reason and found two things: One system-variable 
+    isn't initialized correctly (sshiftmd, it's saying 3 instead of 2) and 
+    the palette-size of the vdi work_out-field shows 4096 (which is, 
+    according to Julian F. Reschke, correct, but causes some programs to 
+    think they don't run in ST-high).
+
+    MONOFIX is a patch for the AUTO-folder that hooks itself into trap #2 
+    (XBRA MFIX) and waits for the v_opnwk-call of the AES. It then sets the 
+    the palette-size to 2 and initialises sshiftmd correctly. Now Maccel 
+    works as expected and most programs will run without complaining that 
+    they are only running in ST-high.
+
+    MONOFIX may be freely distributed, the only condition is that both 
+    files (MONOFIX.PRG and MONOFIX.TXT) are copied completely and unchanged 
+    (archiving is allowed).
+
+    My address:
+    Thomas Binder
+    Hauptstraže 43b
+    61169 Friedberg/Germany
+    InterNet: binder@rbg.informatik.th-darmstadt.de
+
+    End of message...

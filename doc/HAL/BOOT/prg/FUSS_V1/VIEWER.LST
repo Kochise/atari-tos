@@ -1,0 +1,89 @@
+RESERVE
+RESERVE 256000
+'
+'
+fname$="e:\tmp\saver.f30"
+'
+CLS
+PRINT ".F30 File Viewer"
+PRINT
+IF BYTE{BASEPAGE+&H80}
+  CLR f$
+  ad%=BASEPAGE+&H81
+  BYTE{ad%+BYTE{BASEPAGE+&H80}}=0
+  WHILE BYTE{ad%}
+    f$=f$+CHR$(BYTE{ad%})
+    INC ad%
+  WEND
+  IF EXIST(f$)
+    fname$=f$
+  ENDIF
+ELSE
+  PRINT "Default file: ";fname$
+  PRINT "Load file (c/r for default): ";
+  INPUT f$
+  IF f$<>"" AND EXIST(f$)
+    fname$=f$
+  ENDIF
+ENDIF
+PRINT "Loading ";fname$
+'
+oldstack%=GEMDOS(&H20,L:0)
+OPEN "i",#1,fname$
+' xxxx xxxF SOPV8NNN
+'
+CLR mode%
+BGET #1,V:mode%+2,2
+initscr(mode%)
+ON BREAK GOSUB reset
+ON ERROR GOSUB reset
+'
+IF NOT BTST(mode%,2)
+  IF BTST(mode%,7)
+    pal%=&HFFFF8240
+    len%=32
+  ELSE
+    pal%=&HFFFF9800
+    len%=1024
+  ENDIF
+  pal$=SPACE$(2048)
+  BGET #1,V:pal$,len%
+  BMOVE V:pal$,pal%,len%
+ENDIF
+size%=XBIOS(91,mode%)
+BGET #1,screenbase%,size%
+CLOSE #1
+~GEMDOS(&H20,L:oldstack%)
+'
+reset
+END
+'
+'
+> PROCEDURE reset
+  KEYGET r%
+  '
+  resetscr
+  RESERVE
+  END
+RETURN
+> PROCEDURE initscr(mode%)
+  oldmode%=XBIOS(88,-1)                  ! vsetmode
+  size%=XBIOS(91,mode%)                  ! vgetsize
+  logbase%=XBIOS(2)
+  physbase%=XBIOS(3)
+  '
+  screenbase%=MALLOC(size%)
+  IF screenbase%<>0
+    ~XBIOS(5,L:screenbase%,L:screenbase%,3,mode%)       ! setscreen
+  ELSE
+    RESERVE
+    PRINT "Erreur: memoire insuffisante"
+    KEYGET r%
+    END
+  ENDIF
+RETURN
+> PROCEDURE resetscr
+  ~XBIOS(5,L:logbase%,L:physbase%,3,oldmode%)       ! setscreen
+  VSYNC
+  ~MFREE(screenbase%)
+RETURN

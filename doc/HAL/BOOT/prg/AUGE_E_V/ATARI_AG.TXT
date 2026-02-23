@@ -1,0 +1,69 @@
+
+                                                                    pb/88 
+
+ATARI - AG der AUGE : Was ist das denn bitteschoen ? 
+------------------- 
+
+AUGE ist der groesste private Computerverein in Deutschland. Wir beschaeftigen
+uns privat, einige auch beruflich, mit Apple, Atari und IBM Mikrocomputern. 
+Natuerlich duerfen die kompatiblen Geraete auch nicht fehlen. 
+
+Die Atari AG ( AG = Arbeitsgemeinschaft = Kontakt, Erfolg, Erfahrungsberichte )
+versucht nun, die Fragen und Probleme der User aufzugreifen und zu einer 
+Loesung zu bringen. Jeder, der Probleme hat, kann diese an die Redaktion des
+Newsletter schicken. Ist sie interessant fuer alle, so wird sie in unser
+Kommunikationblatt, dem STACK aufgenommen. Hierin finden sich auch Erfahrungs-
+berichte von anderen Mitgliedern. Das koennen BUGS in einem Programm sein,das 
+ist vielleicht eine Beschreibung eines ganz guten oder eines ganz neuen Pro-
+duktes, alles Interessante zum Thema ATARI.
+
+Bisher sind erschienen : ATARI Newsletter #1 / #2  (1985/86) 
+                         STACK            #1       (1987) 
+
+Wer Kontake zu USERN in seiner Umgebung haben moechte, der wende sich bitte an
+den Leiter der Atari AG. Ebenso bei Anfragen, Problemen etc. Wenn etwas ins
+Newsletter soll, dann bitte den betreffenden anschreiben. 
+
+PD Software fuer den Atari : 
+--------------------------
+
+Gibt es , so glaube ich, eine ganze Menge. Der dafuer zustaendige, und das ist
+der Autor dieses Textes, hat eine Sammlung von ca. 40 Disketten einseitig mit
+Public Domain Software. Diese koennen von Mitgliedern gegen Einsenden einer 
+Diskette & Rueckporto & 2.- Unkostenerstattung pro Sendung , nicht Diskette, 
+kopiert werden. Eine Liste der verfuegbaren PD Software gibt es beim AG Leiter.
+Eine weitere Liste ist in den bisher erschienenen Newslettern abgedruckt. 
+
+Ca. 15 Disketten sind bisher schon ueberarbeitet worden (12/87), weitere 15 
+sind bei mir angekuendigt.  
+Ihr koennt Euch dann die besten heraussuchen, denn manchmal sind einfache 
+Programme besser als umfangreiche, die eine lange Ladezeit benoetigen. Auf 
+Wunsch gibt es die Programme geARCt, also komprimiert. Normalerweise werden
+die Disketten einseitig verschickt, da nicht jeder ueber ein doppelseitiges 
+Laufwerk verfuegt.  
+
+Weiterhin ist geplant, ein Verzeichnis auf Diskette mit allen Programmen auf-
+zubauen, so dass ihr, liebe User, es moeglich einfach habt, auf die entsprech-
+enden Programme zurueck zu greifen. 
+
+Wer nicht AUGE User ist, der kann sich trotzdem mal melden , wenn er Interesse
+an der Sache hat. Und jetzt noch die Adressen der 'zustaendigen' Personen , 
+sprich der Leute, die sich den Kopf ausreissen, damit niemand vom Hochhaus 
+springt, wenn er Probleme mit dem Atari hat : 
+
+  AG Leiter  : Klaus Garms, Clemensstrasse 5, 6100 Darmstadt ,  06151-661978
+
+  Newsletter : Gerhard Lingenberg, Adlerstrasse 15, 
+               6920 Sinsheim                                    07261-63182
+
+  Software   : !! nur Public Domain !! 
+               Peter Bauer, Dr. Schoenemannstr. 46, 66 SBR.      0681-65206 
+
+
+
+Ich bin uebrigens jeder Zeit sehr dankbar, wenn ich Tips ueber gute Programme
+bekomme. Ebenso ueber gute Bezugsquellen. Ein kleines Geschenk, in Form eines 
+PD Programmes, ist Euch in jedem Falle sicher. Und ein klein wenig 
+Mitarbeit in der ATARI AG, sei es durch einen kleinen Artikel oder durch
+Bearbeiten einer Public Domain Diskette, ist immer gesucht !
+ 

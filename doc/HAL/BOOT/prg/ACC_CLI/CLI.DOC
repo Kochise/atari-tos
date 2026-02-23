@@ -1,0 +1,15 @@
+Installing CLI:
+
+Simply copy the file CLI.ACC to the Root Directory of a disk. The
+Root Directory is the directory that is displayed when your ST boots
+up e.g. The Name CLI.ACC should be displayed when your ST has finished
+booting up.
+
+Using CLI:
+
+Simply click on the DESK menu and again on the Command Interface
+option. You are now in the Command Line Interpretor. This enables DOS
+commands to be entered directly into the computer without accessing
+GEM. Pressing the HELP key will display all the commands available to
+you. Typing QUIT will return you to the desktop.
+

@@ -1,0 +1,73 @@
+                                  UNCLERAM IV
+                   - - - - - - - - - - - - - - - - - - - - - - 
+                   Uncle Carl's Famous RAM Accessory Version 4
+                   - - - - - - - - - - - - - - - - - - - - - -
+                                ½ Carl J. Hafner
+                                  July 26, 1996
+
+    ````````````````````````````````````````````````````````````````````````
+    FEATURES described within this text file may not apply to the version of
+    the program you are using. Please check the copyright information within
+    the program ITSELF before assuming a feature doesn't work. This file may
+    or may not be for a different version of the program.
+    ````````````````````````````````````````````````````````````````````````
+
+    DISCLAIMER
+    ----------
+    The author cannot be responsible for any damage to your equipment, other
+    software or hardware products or physical or mental well being caused by
+    the use, misuse, abuse or inability to use this program. The author ALSO
+    makes  NO GUARANTEE  as to the compatibility of this software with other
+    software OR hardware products and hereby disclaims any implied warranty
+    with respect to fitness for any particular purpose.
+
+    By using this program you are stating that you completely understand AND
+    agree with these terms AND agree to accept  FULL  responsibility for ANY
+    and ALL events arising from it's implementation.If you do NOT understand
+    AND agree with these terms, do NOT use this program !
+
+    DISTRIBUTION
+    ------------
+    You are free to copy and distribute this program as long as the files...
+
+    UNCLERAM.PRG / UNCLERAM.TXT / UNCLERAM.LST / UNCLCARL.xxx
+
+    are included, are  NOT  modified in ANY way and  NO FEE  of ANY type is
+    incurred upon the recipient for the files _themselves_. If ANY of these
+    files are missing, contact your supplier immediately !
+
+    You ARE free to do whatever you like with the contents of UNCLERAM.LST .
+    You  _MUST_ , however, distribute the  _ORIGINAL_  copy of the file when    
+    distributing the UNCLERAM 4 package.
+
+    RUNNING IT
+    ----------
+    UncleRam works as either an accessory or a program.
+
+    FREE RAM
+    --------
+    This is the amount of the LARGEST block of free memory in your computer.
+    This doesn't necessarily mean it is  ALL  the free memory you have left.
+
+    TOS VERSION
+    -----------
+    This reports the version of TOS you have installed ( the version number
+    of your operating system ).
+
+    TOS DATE
+    --------
+    This shows the release date for your version of TOS.
+
+    COLD
+    ----
+    Clicking on this button performs a  "Cold Reset"  of your computer. This
+    is basically the same as turning your computer OFF and then back ON.
+
+    WARM
+    ----
+    This is the same as pressing the "reset" button on the back of your
+    computer.
+
+    EXIT
+    ----
+    Click on this box to exit the alert box without any changes.

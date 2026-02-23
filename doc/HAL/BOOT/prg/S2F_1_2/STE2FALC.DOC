@@ -1,0 +1,528 @@
+ ________________________________________________
+|                                                |     .___ .
+| Programme:     STE TO FALCON (STE2FALC)        |    //  //|
+| Type:          Application PRG                 |    || || |
+| Version:       2.21                            |    || || /\_
+| Distribution:  FreeWare                        |  _/|| ||\_ /|
+| SystŠme:       Atari Falcon030                 | |_/ |_| \_|/
+|                toutes r‚solutions              |
+|                                                |
+| Date update:   16 Octobre 1994                 |   
+| Auteurs:       David CARRERE (SPLASH)          |
+|                et un peu                       |
+|                Julien BARRET (EdOX)            |         
+|                                                | 
+|           ½1994 FAUCONtact Association         |
+|                                                |
+| But:           Faire tourner des softs ST/STE  |
+|                sur FALCON 030                  | 
+ ------------------------------------------------
+
+!! ATTENTION !!
+Suite … une faure de frappe cette version a ‚t‚ difus‚e sous le 
+numero de version 2.21. Il s'agit en fait de la 1.21, mais pour eviter
+des problemes de mis … jour (1.22<2.21) elle conserve son numero 2.21
+Les prochaines versions prevues porteront les numeros 2.22 et plus.
+
+
+                        p** STE TO FALCON (STE2FALC) **q
+
+
+
+
+                     Programme qui tente tant bien que mal
+                  de rendre le Falcon 030 compatible avec les
+                    programmes & les jeux pour ATARI ST/STE.
+
+
+                     The soft which tries to make ST/STE
+                     softs compatible with the Falcon 030.
+                     (English doc at the end of this file)
+
+
+
+
+ LONGUE INTRO (le mode d'emploi est plus bas):
+ ----------------------------------------------
+
+   Au d‚but,il y avait un utilisateur qui venait d'acheter son Falcon 
+030
+   et qui disposait de peu de softs dessus.N‚ammoins une obscession le
+   suivait: "...et tous ces jeux de mon ST,haaa... si ils pouvaient se
+   lancer sur mon Falcon...… 16Mhz,ce serait vraiment le pied...".
+
+   Malhereusement,les essais que je fit se conclurent h‚las par de
+   cuisants echecs:Bombes qui scrollent (sisi ! c'est vrai ! et en une
+   VBL en plus !!),ecran noir et le lecteur de disquettes qui s'arrete,
+   plantage inopin‚ au milieu du jeu,etc...
+
+   Mais problŠme,l'utilisateur en question ‚tait tˆtu.Et il voulait
+   absolument lancer ses jeux,et cela malgr‚ les copains d'… cot‚ qui
+   ricanaient en coeur: "Mais t'est nul !!‡a sert … rien de lancer des
+   jeux ST tout pourris ! le Falcon c'est l'avenir !!".Ils n'avaient 
+pas
+   tort,mais en attendant d'avoir des vrais jeux pour Falcon,autant
+   essayer de faire marcher ceux pour ST surtout s'ils sont am‚lior‚s !
+   (d'ailleurs les copains en questions on chang‚ de discours quand ils
+   ont vu Out Run par exemple !)...
+
+   Alors je me dit:fait quelque chose !! ainsi naquit NO_CACHE,un
+   programme qui d‚sactivait le cache du 68030.Le bilan ‚tait trŠs
+   moyen:seuls quelques rƒres jeux se lan‡aient...ce n'‚tait
+   manifestement pas assez...de plus ce programme se pla‡ait dans le
+   dossier AUTO,donc adieu les jeux en auto-boot (c.a.d. qui se 
+chargent
+   … partir du bootsecteur...).
+   D'autres version de NO_CACHE apparurent,mais elle n'apportaient que
+   des am‚liorations mineures...(couper le haut parleur,lancer … partir
+   du bootsecteur,etc...)
+
+   Et puis,croyant … l'‚poque que le Falcon acc‚dait en 32 bits … la 
+RAM,j'ai
+   fait une petite bidouille qui ignorait les bits 24 … 32 des adresses 
+(du
+   moins je croyais que c'‚tait ‡a),‚vitant ainsi les accŠs … des zones
+   fantaisistes (lorsque les bits d'adresse 24 … 32 contenaient des 
+parasites).
+   Il s'est av‚r‚ par la suite que le Falcon acc‚dait … la RAM en 24
+   bits.Inutile de dire que je suis rest‚ con...car cette bidouille 
+faisait
+   marcher les 3/4 des jeux ! sans elle : plantages assur‚s ! MAIS:
+   Il semblerait que juste aprŠs le haut de la RAM se trouve une zone
+   "myst‚rieuse" qui fait lamentablement planter le Falcon ... (entre 
+nous
+   d'aprŠs mes test cette zone ressemble ‚trangement … l'adresse .. 
+zero ! trŠs
+   zarbi ce truc ...) et justement le systŠme utilise la zone la plus 
+haute
+   de la RAM pour d‚clarer son ‚cran.Moralit‚: si dans un jeu un sprite
+   "d‚borde" vers le bas de l'‚cran et si le programmeur n'a pas pr‚vu 
+cela
+   (il laisse d‚border,quoi !) et bien il y a des gros parasites qui 
+vont
+   aprŠs le haut de la RAM,c'est … dire...en plein dans la zone qui 
+plante !
+   D'autre part,certains jeux accŠdent un peu n'importe o— en m‚moire 
+(parfois
+   pour d‚terminer la m‚moire disponible...vachement propre la m‚thode 
+!),et
+   ils se vautrent lamentablement.
+
+   En fait ce que fait ma bidouille,c'est qu'elle fait r‚agir le Falcon
+   un peu comme un ST:si jamais on d‚passe le haut de la RAM,alors la 
+PMMU
+   intervient et renvoie je ne sais quelle adresse.Amusez vous aprŠs 
+avoir
+   lanc‚ STE2FALC version GEM … regarder ce qu'il y a aprŠs le haut de 
+la RAM:
+   cette fois-ci:il y a une serie d'octets qui se r‚pŠte … l'infini.Et 
+votre
+   Falcon ch‚ri ne vous renvoie plus ces 2 bombinettes horribles ! 
+sympa le
+   truc, non ? dommage que je n'ai pas encore tout ‚lucid‚ mais il y a 
+quand
+   meme du mieux par rapport … la premiŠre version de la documentation 
+ou je me
+   plantais lamentablement !!
+   Si jamais vous pouvez ‚clairer ma lanterne,'seriez sympa de me 
+contacter
+   dans mes BALs (en pr‚cisant que c'est pour Splash en d‚but de 
+message...
+   cherchez pas … comprendre...faites-le c'est tout !).
+
+   Alors sorti le programme que vous avez entre les mains:STE2FALC...
+   j'ai chang‚ le nom car il faisait nettement plus que NO_CACHE !!
+   En effet,comme je viens de l'expliquer,j'ai dit au 68030 
+:"kestenatafoutre
+   de la zone aprŠs l'ecran,hein ? T'en a rien … peter de cette 
+zone..alors
+   dŠs qu'on sort de cette zone..tu d‚vies tout le monde vers un lieu 
+s–r!"
+   (oui,enfin je lui ai dit un peu diff‚remment...pour les curieux 
+disons
+   que j'utilise le registre TT0 de la PMMU du 68030...(ainsi vous 
+trouverez
+   plus facilement l'instruction qui le fait, en desassemblant mon 
+prog. !!)).
+   Et puis quelques jours aprŠs que j'ai fini STE2FALC,ST MAG du mois 
+de
+   Mai est sorti.Et c'est l… que j'ai appris que le Falcon avait une
+   adresse trŠs particuliere qui permettait "d'‚muler" un 
+STE...j'appris
+   aussi que certains jeux plantaient tout simplement car la machine 
+avait
+   4 m‚gas de RAM !!! ( Merci … M.Agopian pour ces 2 choses )
+
+   Alors (mon truc d'ignorer la zone qui 'bombe')+(le registre 
+d'‚mulation
+   STE)= GENIAL !!!
+
+   En effet c'est la folie !!alors que la majorit‚ des jeux plantaient,
+   c'est le contraire qui se passe !!sur l'ensemble des jeux que je
+   possŠde,plus de la moiti‚ s'est lanc‚ !!et avec les jeux d'un copain
+   ce sont...90 % des jeux qui sont pass‚s !!! (on a eu du pot,OK !)
+   Inutile de vous dire que dans certains cas les jeux deviennent 
+vraiment
+   GEANTS !!des exemples ?
+
+   -Carrier Command    : marche..h‚ oui..et la 3D est fllluuiiiidddeeee 
+!
+   -Starglider 2       : marche...h‚ oui...et la 3D est       (idem)
+   -Out run            : marche..heu..il ramait sur ST mais l… il rame 
+plus
+                         trop !! (l'animation est toujours saccad‚e 
+mais elle 
+                         est bien plus rapide)
+   -Road Blasters      : ...pareil sauf que le jeu est … la limite de 
+la
+                        jouabilit‚ tellement ‡a bombe !!
+   -Super Cycle        : un vieux jeu d'Epyx...il tourne en 50 images 
+par sec.
+                         mais il est injouable:le moindre mouvement du 
+joystick
+                         et vlan ! dans le d‚cor (qui est moche 
+d'ailleurs...)
+   -Lotus Turbo Esprit : ...l'animation me semble encore plus rapide 
+mais
+                         c'est … v‚rifier !!
+   -Formula one        : marche...la 3D est un peu plus rapide,mais 
+surtout le
+                         jeu est bien plus souple … manier. 
+   -Arkanoid 2         : marche...mais le jeu est … peu de choses prŠs 
+le mˆme !!
+                         j'avoue que je me demande un peu pourquoi...
+   -N‚bulus            : marche..vu qu'il ‚tait d‚j… en 50 
+images/secondes,il 
+                         l'est encore !!! c'‚tait d‚j… un jeu g‚nial,il 
+l'est 
+                         toujours !!
+   -F19 Stealth Fighter: marche....inutile de vous parler de la 3D !!
+
+
+                              ~~~~~~~~~~~~~~~~
+   Au depart il y avait deux programmes, un pour installer STE2FALC sur 
+un
+   bootsecteur et un autre pour configurer le Falcon depuis le bureau.
+   
+   Les deux programmes ont ‚t‚s rassembl‚s en un seul depuis la version 
+1.2                         
+      
+                              
+                              ~~~~~~~~~~~~~~~~
+
+ REMARQUES:
+ ----------
+
+   Comme vous pouvez le voir,mˆme des vieux jeux peuvent devenir 
+potables
+   (si je puis dire...).Malgr‚ tout,il subsiste quelques r‚serves:
+
+   *Les jeux sont malgr‚s tout lŠgŠrement ralentis car le travail de la 
+PMMU
+    afin d'‚viter les d‚bordements ralenti le travail du 68030 
+semble-t-il.
+    Mais rassurez vous c'est quand mˆme bien plus rapide que sur un ST 
+!
+   
+   *Tout d'abord au niveau du son:Certains jeux utilisent des routines 
+de
+    son digit ou soundtrack...mais j'ai l'impression que la vitesse du
+    68030 ne leur convient pas (ex:Le manoir de Morteville)..ou alors
+    c'est autre chose mais quoi qu'il en soit si ‡a gr‚sille ‡a ne 
+vient
+    pas de votre Falcon ch‚ri !!!
+    Ce sont les routines qui ne comprennent plus trop ce qui leur 
+arrive !!
+    
+   *Certains jeux sont coriaces et ne veulent pas se lancer,cela malgr‚
+    tous mes efforts..je pense … Xenon 2 qui serait une pure merveille 
+sur
+    Falcon,ou … Gods....(tiens tiens:chose amusante ils ont ‚t‚ 
+programm‚s
+    tous les deux par les Bitmap Brothers...)..ou bien encore … 
+Turrican
+    (imaginez le scroll !)
+    Je suis en train d'essayer de chercher ce qui les fait planter afin
+    de les faire marcher,mais je ne vais pas m'y attarder trop...(il 
+vaut
+    mieux s'attarder … exploiter le Falcon !!!).
+   
+   *Les jeux pirat‚s:HHAAAAA !! les beaux programmes ! Les belles
+    intros...mais c'est qu'elles sont bien programm‚es les intros hein 
+?
+    hein qu'elles ne s'automodifient pas ? hein qu'elles n'utilisent 
+QUE
+    les registres document‚s par Atari ? hein qu'elle utilisent les
+    routines du XBIOS pour charger des pistes lors du boot (ou 
+aprŠs...)
+    au lieu d'aller trifouiller dans les registres du FDC ? hein 
+qu'elles
+    utilisent des packers bien faits pour faire tenir trois disquettes
+    sur une seule ? (et faire parfois sauter une partie du jeu..)
+    ...H‚ bien non !!! elles font tout ce qui est interdit !! moi je 
+suis
+    d‚sol‚ je suis programmeur mais pas magicien !!! il fallait bien
+    programmer,na !!
+
+                              ~~~~~~~~~~~~~~~~~
+
+ MODE D'EMPLOI:
+ --------------
+
+     Comment utiliser STE2FALC ???
+     J'ai fait en sorte que son utilisation soit la plus simple 
+possible!
+     (enfin du moins je l'espŠre...) donc il devrait etre utilisable 
+par
+     tout le monde,mˆme les d‚butants !
+
+     Pour vous faciliter la tƒche la version 1.2 est entierement sous 
+GEM.
+     
+I VERSION BOOT SECTEUR
+----------------------
+   
+  I-1 Pour installer un S2F en boot secteur
+  -----------------------------------------
+  
+     1) Vous lancez le programme S2F.PRG et vous cliquez sur le bouton
+        'Sur Bootsecteur' afin de mettre STE2FALC sur le boot secteur 
+(et sur 
+        une piste annexe car le programme est trop long pour tenir sur 
+le boot 
+        secteur !)
+        Le programme vous demande alors confirmation.
+
+p* DANGER * qFaites bien attention d'inserer une disquette formatt‚e 
+SANS
+        AUCUN FICHIER DESSUS !! C'est trŠs important car si il y a des
+        fichiers certains pourraient etre abim‚s (sans pour autant que
+        ‡a soit visible du Bureau Gem).
+
+        Vous cliquez sur INSTALLER et quelques instants plus tard...
+        c'est bon ! le programme vous avertit que tout s'est bien pass‚
+        ou vous informe qu'une erreur s'est produite.
+        
+      2) Vous laissez la disquette avec STE2FALC et vous faites un 
+reset
+         … FROID.(CONTROL ALTERNATE DELETE et Shift Droit) Et c'est 
+tout !
+	
+	(Quand on vous disait que c'etait simple...)
+	
+	
+  Remarques IMPORTANTES :
+  
+     * Par la suite ne copiez AUCUN fichier sur la disquette car vous 
+effaceriez
+  	 la partie de S2F presente sur la piste 1. Ce qui conduirait
+  	 inevitablement … des bombes au boot...
+	
+     * Sur boot secteur la configuration est predefinie pour faire 
+tourner des
+	 jeux ST. Une eventuelle configuration avec 'CONFIGURER 
+L'EMULATION' 
+	 n'est pas pris en compte.
+	 
+      
+  I-2 Utilisation de S2F install‚ sur boot secteur
+  ------------------------------------------------
+     
+       Une fois lanc‚,STE2FALC vous demande d'inserer la disquette …
+       executer...ensuite il y a plusieurs possibilit‚s:
+
+       *Le programme se lance … partir du boot secteur.
+        appuyez alors sur B et c'est parti...
+       *Le programme se lance … partir d'un dossier AUTO...
+        Appuyez alors sur F ,et gardez appuy‚ la touche ALTERNATE pour
+        indiquer au Falcon que vous voulez lancer un programme sur la
+        disquette.Il testera si un dossier AUTO est pr‚sent.
+       *Le programme se lance … partir du bureau GEM en cliquant 
+dessus...
+        Appuyez sur F ,et gardez appuy‚ la touche ALTERNATE jusqu'a ce
+        que le bureau GEM apparaisse.Et cliquez sur le programme.
+
+        Et si vous ne savez pas comment se lance le programme ? 
+ha....ben
+        commencez par essayer l'option 'B',si vous avez des bombinettes
+        essayez alors l'option 'F' !!! c'est nul, je sais....
+
+      NOTE: Parfois sur des disquettes il y a le fichier "DESKTOP.INF"
+            qui est pr‚sent,pour que le bureau GEM soit configur‚ d'une
+            certaine maniŠre (par ex. pour ouvrir tout seul le
+            lecteur A et vous mettre le fichier … executer dans une
+            fenˆtre...) .Mais parfois le Falcon interprŠte mal ce 
+fichier
+            et vous vous retrouvez avec un bureau GEM en overscan,en
+            entrelac‚ ou autre chose du mˆme style...inutile de dire 
+que
+            le logiciel … lancer ne va pas appr‚cier...
+
+
+            SOLUTION:
+            
+            Laissez la disquette de STE2FALC dans le lecteur !! puis
+            vous tapez F et gardez ALTERNATE appuy‚.Comme il n'y a rien
+            sur la disquette de STE2FALC,le bureau GEM va se lancer 
+dans
+            la r‚solution standard c'est … dire ST BASSE RESOLUTION !!
+            Vous n'avez alors plus qu'a mettre votre disquette avec le
+            programme … lancer,… ouvrir le lecteur A et GO !!
+
+                               ~~~~~~~~~~~~~~
+
+ 
+
+                                
+
+II VERSION GEM
+--------------
+
+     Ici rien de bien compliqu‚.Cette version est faite pour lancer les
+     utilitaires n‚c‚ssitant le GEM,ou de la m‚moire,ou je ne sais 
+quoi.
+     Elle fait a peu prŠs les mˆmes modifications que l'autre si ce 
+n'est
+     qu'elle ne touche pas … la m‚moire...
+     Vous aurez donc quatre (ou 14) m‚gas de RAM disponibles et non pas
+     un seul comme avec la version bootsecteur !
+
+     
+     Une fois le programme S2F.PRG lanc‚ cliquez sur 'CONFIGURER 
+L'EMULATION'
+     configurez alors votre Falcon comme vous l'entendez, si cela vous 
+semble
+     trop compliqu‚ vous avez en bas des 'configurations type' pour 
+vous aider:
+     vous cliquez sur la case 'ST/E' et hop, STE2FALC se reconfigure
+     automatiquement.Vous n'avez plus qu'a cliquer sur OK.
+     Pareil pour les boutons 'MEGA-STE' et 'FALCON 030'.J'en vois qui 
+rient:
+     … quoi ‡a sert d'emuler un Falcon sur un Falcon !! z'ont rien 
+compris...
+     Si vous ˆtes en mode STE par exemple, h‚ b‚ vous n'avez pas besoin 
+de
+     faire un reset pour revenir en mode Falcon ! il vous suffit de 
+relancer
+     S2F_GEM et hop vous selectionnez la case Falcon 030 et voil… !cela
+     permet ainsi de zapper d'un mode … un autre rapidement.
+
+     Une fois votre choix effectu‚, cliquez sur OK pour revenir … la 
+page
+     principale et cliquez sur 'EN RAM' afin de rendre effective la 
+configuration
+     que vous avez choisi. Une boite d'alerte vous informe de celle ci 
+au cas
+     ou vous l'ignorerez. 
+     En effet grace au bouton 'SAUVER LES PARAMETRES' on peut sauver 
+une
+     configurationqui sera recharg‚e au prochain lancement du 
+programme.
+     Ainsi vous n'aurez qu'a lancer S2F.PRG et cliquer directement sur 
+EN RAM
+     pour installer votre emulation.
+     Si S2F.PRG ne trouve pas de fichier S2F.INF il prends pour 
+configuration
+     celle d'un MEGA STE
+     
+     Au fait, n'oubliez pas de copier le fichier S2F_COUL.RSC et 
+S2F_MONO.RSC 
+     en mˆme temps que S2F.PRG et dans le mˆme r‚pertoire....sans quoi 
+le programme
+     vous demandera de lui indiquer o— sont ces fichiers.
+     
+     
+
+                              ~~~~~~~~~~~~~~~~~~~
+
+
+
+    Enfin voil…,j'espŠre que vous arriverez … lancer certains jeux et
+    certains utilitaires avec ce programme et que vous les 
+red‚couvrirez
+    sous un jour nouveau....
+    Mais bien ‚videmment cela ne doit pas vous faire perdre de vue que 
+le
+    Falcon est une machine qui n'a rien … voir avec un ST...‡a a la 
+gueule
+    d'un ST (plus pour longtemps),‡a a certaines choses du ST....mais 
+€A
+    N'EST PAS UN ST !!!
+
+    Le ST est (presque) mort !! vive le Falcon !!
+
+
+                     Splash & EdOX.
+
+HOW TO USE IT ?
+----------------
+
+      Just a short text for our english (& other foreign) friends !!
+
+      *First : excuse me, my english is really horrible.Yes,I know,...
+      *STE2FALC is a "STE emulator" for Falcon 030.This program will
+       try to execute games programmed for Atari ST/STE.
+       The program "S2F.PRG" will install the emulator 
+       A) on the bootsector of a diskette by cliking on "SUR 
+BOOTSECTEUR"
+          TAKE CARE It will install a boot emulation programm on the 
+bootsector
+          but also on other tracks.That's why, NEVER INSTALL STE2FALC 
+ON A
+          DISKETTE WITH FILES ON IT !! You may damage some files.
+          When you have decided to install STE2FALC it will ask you to 
+insert a
+          new disk to install the emulator,then to clik on INSTALLER
+          (or ANNULER to cancel)
+          After the installation,you must do a COLD RESET 
+(CONTROL+ALTERNATE+
+          Right SHIFT + DELETE).
+       When the emulator is loaded ,insert the disk to execute,and 
+press
+       B to execute a program on the bootsector,or press F to execute a
+       file (and keep the ALTERNATE key pressed to boot on the drive A
+       if you have a Hard Disk).
+     
+      B) In memory (you keep your all RAM)
+         by cliking on 'EN RAM" it is the same program as STE2FALC 
+except that
+         it is only for the GEM desktop.You must before click on 
+CONFIGURER
+         L'EMULATION.Then configure your Falcon (you want to have a STe 
+??
+         click on the button 'ST/E'..you want to have a MEGA-STe ?? 
+click on
+         the button  'MEGA-STe'...simple, no ? And clik on FALCON 030 
+to return
+         in the Falcon mode).
+         This configuration can be saved and reloaded next time. Just 
+clik on
+         SAUVER LES PARAMETRES. This will avoid you of configure the 
+emulation.
+         (If no S2F.INF file is found, the MEGA STE configuration will 
+be 
+         selected)
+           
+
+       That's all !!
+
+       
+
+    PS:Des problŠmes ? des remarques ? des insultes ?
+    Contactez nous ! 
+    Par minitel: 3615 STMAG
+     		     3614 G4*ST
+     		     3614 RTEL1
+     		     66 60 52 76 (RTC V23 en province)
+     		      
+    en B.A.L. SPLASH, EDOX ou FAUCONTACT
+    
+    Par courrier:
+    			SPALSH/EDOX
+    			c/o ASSOCIATION FAUCONTACT
+    			MAS DU CRES
+    			30140 BOISSET ET GAUJAC 
+    			FRANCE
+    			
+    PSS:tenez moi au courant des softs que vous avez lanc‚ avec 
+STE2FALC!

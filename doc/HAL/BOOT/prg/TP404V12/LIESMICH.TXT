@@ -1,0 +1,55 @@
+
+     Datei: LIESMICH.TXT          ½ Michael Ruge     Rsselsheim, den 25.11.1994
+
+     Email: Michael Ruge @WI2.MAUS.DE)
+
+
+
+     Ich kann nicht absch„tzen, inwieweit diese Umbauanleitung bzw. Modifizie-
+     rung des Computers, Ihrer (dem geneigten Leser) F„higkeit zum umsetzen in 
+     die Realit„t entspricht. Diese beschriebene Modifizierung durchzufhren 
+     unterliegt immer der Verantwortung des Ausfhrenden, im zweifelsfall las-
+     sen Sie die Modifizierung einen Bekannten oder sogar Ihren Fachh„ndler 
+     durchfhren. Fr unsachgem„e ausgefhrte Arbeiten (Computer ist defekt)
+     kann ich keine Verantwortung bernehmen weil ich nicht nachprfen kann,
+     ob Ihre F„higkeit der Forderung entspricht diese Arbeiten auszufhren.
+     
+     
+     
+     
+     Die Datei "404_F030.GER" in einen Texteditor laden und die gewnschten 
+     Patches aktivieren (Default sind keine aktiviert!) und wieder abspeichern.
+
+     TOSPATCH.TTP per Doppelklick starten und in der erscheinenden Dialogbox den
+     Text "404_F030.GER" eintippen und die RETURN- oder ENTER Taste drcken.
+     Dann wird das TOS 4.04 aus dem ROM ausgelesen, gepatcht und als "TOS.IMG" 
+     auf dem aktuellen Laufwerk abgespeichert, nun mu diese Datei noch mit 
+     einem Eprom Programmierger„t in ein bzw. zwei Eproms "geschossen" werden.
+     
+     
+     Alle Kabel abziehen am Computer (auch das Netzkabel)!
+     
+     Um das gepatchte Betriebssystem einsetzen zu k”nnen, mu der Falcon030 aus-
+     einandergeschraubt werden. Dies geschieht am einfachsten indem man den Com-
+     puter mit der Tastatur auf den Tisch legt und alle Schrauben entfernt. Nun 
+     den Computer festhalten und umdrehen, jetzt kann das Oberteil auf der 
+     linken Seite angehoben werden.
+     
+     Nun mu der Blechk„fig komplett entfernt werden, dazu alle sichtbaren 
+     Schrauben entfernen. Als letztes mu noch die Ramkarte abgezogen werden, 
+     zum entnehmen des PLCC-Chips welcher mit dem Original TOS unter der RAM-
+     Karte sitzt ist ein PLCC Entziehwerkzeug unabdingbarer Minimum! Versuchen 
+     Sie KEINESFALLS den Chip mit einem Schraubenzieher/Messer oder „hnlichen 
+     Herauszuhebeln. Ist der Sockel erstmal zerbr”selt hilft alles Fluchen etc
+     nicht, der Rechner mu in die Werkstatt damit ein neuer Sockel eingel”tet 
+     wird.
+     
+     Merken Sie sich die Stellung des Chips (Pin 1 ist die kleine Mulde auf der 
+     Chipoberseite) und setzen Sie den neuen PLCC Chip GENAUSO wie den alten 
+     ein.
+     
+     Nun wieder den Rechner in umgekehrter Reihenfolge zusammensetzen und 
+     verschrauben!
+      
+     Das war es.
+     

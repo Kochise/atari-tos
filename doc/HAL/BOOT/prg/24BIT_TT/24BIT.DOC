@@ -1,0 +1,110 @@
+DOCUMENTATION FOR 24BIT.PRG
+Revision 2 / September 7, 1990
+
+The ST uses a 68000 CPU, which has a 24-bit address bus.  That means that the
+high-order eight bits of a 32-bit longword used as an address don't matter. 
+Some programs use those bits to mean something, like the type or size of the
+thing a pointer points to.
+
+Those programs are "not 32-bit clean," won't work normally on the TT, because
+the 68030 CPU uses all 32 bits of a longword as the address.  If you run
+them, you will get bombs or more horrible kinds of system crashes.
+
+Running the program "24BIT.PRG" in your AUTO folder programs the
+memory-management unit built into the 68030 so those eight bits are ignored
+again.  Some programs which are not 32-bit clean will work after running
+24BIT.PRG.
+
+If you run an ST program on your TT and it bombs, you can consider doing
+this:
+
+	1. Reboot.  It's always a good idea to reboot after a program
+	   bombs, because it might have put things in a funny state and
+	   not cleaned up after itself.
+
+	2. Put 24BIT.PRG in your AUTO folder and reboot again so it
+	   executes.
+
+	3. Run the program that bombed.  If it works normally, then you
+	   know you have to use 24BIT.PRG before you can run that
+	   program.
+
+Microsoft Write and programs written in compiled GFA BASIC are known to
+require the use of 24BIT.PRG.
+
+There are a number of things to keep in mind:
+
+There might be more wrong with a program than not being 32-bit clean.
+programs that use the high eight bits of pointers might also play other
+tricks which render them incompatible.
+
+24BIT.PRG makes sure the 68030's cache is disabled when it exits, but it is
+possible for other programs, like the Desktop or the Control Panel to enable
+it again.  You must make sure that the cache is OFF when running programs
+which aren't 32-bit clean, because the cache always uses all 32 bits of an
+address, even if the memory manager is programmed to ignore them.  Here is an
+example of how you can get into trouble:
+
+	1. Write $00 to $23XXXXXX.
+
+	2. Write $FF to $44XXXXXX (the same address, but with a different
+	   value in the upper eight bits.
+
+	3. Read from    $23XXXXXX (the same address as the write in 
+	   step 1).  This will read $00, not $FF, because the cache
+	   uses all 32 bits of the address.
+
+You can't access TT RAM using only 24 bits of address, so you can't be using
+TT RAM and use this program.  If you have no TT RAM, or if you have some
+installed but aren't using it, you can run this program. The program will
+tell you if it can't run because there is something in TT RAM.  If you have
+TT RAM but aren't using it, the program will run, and arrange it so the
+system "forgets" that there is any TT RAM until you reboot.  That is the
+price these programs make you pay.
+
+Devices on the VMEbus can not be accessed using only 24 bits of address,
+either, so you lose access to them, too, when you run this program. Since
+this program can't "allocate" a VMEbus device the way it can TT RAM, there is
+no way to protect against this, and the system will probably just crash if
+you run a program that access the VMEbus after running this program.
+
+Programs which actually pass 32-bit addresses with nonzero high bytes as
+parameters to OS calls can still die, because all 32 bits are written to
+(e.g.) the SCSI DMA controller.
+
+24BIT.PRG must run in the AUTO folder because the TT Desktop itself uses TT
+RAM if it's available, so 24BIT.PRG must run before the Desktop comes up.  In
+addition, 24BIT.PRG must appear in the AUTO folder before anything which
+stays resident and has its TT-RAM-allowed bits set; otherwise 24BIT.PRG will
+find that thing and refuse to let you into "24-bit mode."
+
+The program 24BIT.PRG must not have its "load in TT RAM" bit set, because
+otherwise it will find that TT RAM is not empty and refuse to run.
+
+----------------------------------------------------------------------
+
+Technically speaking, this program rewrites the page tables in memory so bits
+31-24 are always mapped to zero.  This way programs which use the high bytes
+of pointers can run.
+
+If you have no TT RAM, 24BIT.PRG will program the 68030's memory management
+unit and exit without taking up any resources.  It simply re-uses the memory
+where the TOS ROM memory-management tables are.
+
+The program will print a message and refuse to run if you aren't on a TT, or
+if there is anything in TT RAM.  "Anything in TT RAM" is defined as follows:
+the system variables _ramtop and _ramvalid are used to find out if you have
+any TT RAM, and if you do, how much.  Mxalloc() is used to allocate all of
+it.  If the call fails, it means there's something in there and the program
+aborts.
+
+If there's nothing in TT RAM, the program rewrites the page tables and does a
+TSR so the TT RAM block it allocated isn't freed.  That way subsequent
+programs which have their TT-RAM-enable bits set still won't load there.
+
+This remapping trick will be defeated by programs which somehow install
+themselves at the top of TT RAM and bump _ramtop down.  Do not run any of
+these if you want to use 24BIT.PRG.  If you write software, don't write
+programs that fool with ramtop, or your users won't be able to use 24BIT.PRG
+to run their favorite "unclean" software.
+

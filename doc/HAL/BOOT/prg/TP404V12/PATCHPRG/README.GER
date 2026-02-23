@@ -1,0 +1,79 @@
+
+README.404 zum Patch-File fr TOS 4.04 vom Falcon030              ½ Michael Ruge
+
+Rsselsheim, den 25.11.1994
+
+
+
+Hier sind sie also, die langersehnten Patches, um dem TOS 4.04 einige von Atari
+eingebaute Unarten auszutreiben.
+
+
+Bitte lest dieses File UND das Patch-File genau durch und handelt danach.
+ 
+Dieses Patchfile ist AUSSCHLIESSLICH fr das TOS 4.04 des Falcon030 gedacht. Wird
+dieses Patchfile unbefugt ge„ndert, um damit eine andere TOS Version zu patchen,
+braucht sich derjenige keinerlei Gedanken mehr zu machen, ob der Computer nach
+Einsetzen des gepatchten TOS berhaupt noch regt, weil die Adressen ABSOLUT auf
+das Falcon030 TOS 4.04 angepat sind!
+
+
+
+GENERELL GILT:
+
+Ich kann nicht absch„tzen, inwieweit diese Umbauanleitung bzw. Modifizierung des
+Computers Ihrer (dem geneigten Leser) F„higkeit zur Umsetzung in die Realit„t
+entspricht. Diese beschriebene Modifizierung durchzufhren unterliegt immer der 
+Verantwortung des Ausfhrenden, im Zweifelsfall lassen Sie die Modifizierung 
+einen Bekannten oder sogar Ihren Fachh„ndler durchfhren. Fr unsachgem„e aus-
+gefhrte Arbeiten (Computer ist defekt) kann ich keine Verantwortung berneh-
+men, weil ich nicht nachprfen kann, ob Ihre F„higkeit der Forderung entspricht,
+diese Arbeiten auszufhren.
+
+  
+
+
+FEATURES
+
+  IDE-Timeout wird verkrzt (schnelleres Booten von SCSI oder Floppydisk)
+  Initiator Identification (SCSI-Ger„t 7 (Fr Bus Arbitration))
+  M”glichkeit, die original Bomben durch andere Objekte zu ersetzen
+  Druckertimeout (Centronics) verkrzen
+  DTR und REQ Signal am LAN und Modem Port richtig behandeln
+  Fastload fr die Diskettenlaufwerke (ausprobieren!)
+  Laufwerk B Check wird unterdrckt, dadurch bootet der Falcon030 schneller
+  Grow- und Shrinkboxen ausschalten, bringt Speed beim Bildschirmaufbau!
+  Fuji-Logo beim Booten gegen eigenes oder vorgefertiges ersetzen
+  Hardcopy Papiervorschub fr NEC/EPSON Drucker angepasst (ST-HOCH)
+  Peseta Zeichen gegen Esszet-Zeichen ersetzen
+  Standardtastaturbelegung fr die Desktopfunktionen „ndern
+  Deutsche ROM TOS NEWDESK.INF „ndern
+
+
+
+
+RECHTE
+
+Dieses Patchfile darf mit Ausnahme der Firmen Hard & Soft in Castrop-Rauxel
+und Synthesizer Studio Jacob GmbH in Taunusstein jeder benutzen, der es unent-
+geltlich zum Patchen des Original TOS 4.04 (welches eh PHYSIKALISCH im Rechner
+vorhanden sein mu) benutzt.
+
+Die aktuellste Version liegt IMMER in der X Factor Rsselsheim (06142/33669)
+
+
+
+
+Was fehlt
+
+  Tja, alles, was eine h”here Versionsnummer als 1.2 gerechtfertigen wrde :-)
+  
+
+
+Danke an,
+
+  -Jens Fellmuth (IDE-Timeout) und Steffen Engel (Bus Arbitration) fr die Hilfe 
+   
+
+
+Michael Ruge (Email: Michael Ruge @WI2.MAUS.DE)

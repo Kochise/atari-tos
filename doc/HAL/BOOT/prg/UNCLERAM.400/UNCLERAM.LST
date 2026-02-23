@@ -1,0 +1,71 @@
+' NOTE This code is not intended to be the model of efficiency nor does it
+' cover every possible contingency (such as someone giving the file a mask
+' other than PR? or AC?) . It is really intended for the novice programmer
+' looking to pick up a few ideas. Use this information at your own risk !
+'
+' ````````````````````````````
+$m1000                        ! Reserve 1000 bytes storage space.
+ap_id&=APPL_INIT()            ! Declare program a GEM application and get an
+'                             ! application ID. MultiTasking environments
+'                             ! return ID numbers for programs, so let's be
+'                             ! CERTAIN we're running as a program by using...
+' ````````````````````````````
+'
+' `````````````````````````````
+sr&=SHEL_READ(sr1$,sr2$)      ! which returns the name and the command
+'                             | line which called the application.
+sr3$=".PR"                    ! The string we'll search shel_read for.
+' `````````````````````````````
+'
+' ````````````````````````````
+IF sr&<=0                     ! shel_read returns zero if there's an error.
+  '                           |
+  ALERT 3,"An error has |occurred..! |return: "+STR$(sr&)+" ",1," abort ",lk%
+  END                         !
+ENDIF                         !
+' ```````````````````````````
+'
+' ```````````````````````````
+IF INSTR(sr1$,sr3$)           ! If sr3$ (.PR) is contained in sr1$
+  @u_ram                      ! (UNCLERAM.PRG), then the operating system
+  END                         ! thinks we want to run as a program, so let's
+ENDIF                         ! not disappoint it :-)
+' ````````````````````````````
+'
+' If we were to run as a program, the END statement would prevent us from
+' getting this far. If however, it doesn't, then we must be running as an
+' accessory, so let's do that routine...
+'
+' ````````````````````````````````````````````
+me_id&=MENU_REGISTER(ap_id&,"  UncleRam ")    ! Pass the ACCs name to GEM
+'                                             ! and get a menu ID number.
+' ````````````````````````````````````````````
+'
+' ````````````````````````````````````````````
+DO                                            ! Start an endless loop.
+  ~EVNT_MESAG(0)                              ! Scan the message buffer.
+  IF MENU(1)=40                               ! If selected from menu
+    @u_ram                                    ! run the routine,
+  ENDIF                                       !
+LOOP                                          ! otherwise keep looping and
+'                                             ! scanning the message buffer.
+' ````````````````````````````````````````````
+'
+PROCEDURE u_ram
+  adr%=LPEEK(&H4F2)           ! Get location of TOS version and date
+  c$=HEX$(DPEEK(adr%+2))      ! Isolate TOS version and assign "value" to c$
+  d$=HEX$(LPEEK(adr%+24))     ! Isolate TOS date and assign "value" to d$
+  MODE 1                      ! Display TIME$ and DATE$ in MODE 1
+  z$="[0][ ST Free RAM: "+STR$(MALLOC(-1))+" | TOS Version: "+c$+" |    TOS Date: "+d$+"|        Time: "+TIME$+"   |        Date: "+DATE$+" ][ Cold | Warm | Exit ] "
+  rr%=FORM_ALERT(3,z$)        ! Place ALERT box on screen
+  IF rr%=1                    ! Cold reboot
+    SLPOKE &H420,0
+    SLPOKE &H426,0
+    SLPOKE &H43A,0
+    ~XBIOS(38,L:LPEEK(4))
+  ELSE IF rr%=2               ! Warm reboot
+    ~XBIOS(38,L:LPEEK(4))
+  ENDIF
+  ' If you select EXIT, rr% will equal 3, in which case nothing happens and
+  ' you are returned to the loop.
+RETURN

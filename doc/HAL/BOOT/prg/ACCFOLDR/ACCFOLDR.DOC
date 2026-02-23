@@ -1,0 +1,23 @@
+ACCFOLDR.PRG is a Falcon only utliity which allows you to load your accessories
+from a folder. Simply copy ACCFOLDR.PRG into your AUTO folder and place all
+your accessories in a folder called ACCS on your boot drive.  
+
+This is the first accessory redirection utility ( That I know of) to be
+completely clean. It only redirects access to accessories on boot up and
+after a res change. Try copying files with an ACC extension from the root
+directory of your boot drive with any other utility installed and you'll
+see what I mean.
+
+Bug reports, suggestions etc to : - 
+
+	Dave Murphy
+	4 Ballaig Crescent
+	Stepps
+	Glasgow, G33 6NR
+	Scotland, UK
+
+
+	NeST	Dave Murphy on 90:100/109.0
+	Email	dmurphy@nest.demon.co.uk
+
+

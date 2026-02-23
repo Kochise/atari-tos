@@ -1,0 +1,370 @@
+TOS4 Trap v1.0
+--------------
+
+[released April 4, 1994]
+
+Copyright ½ 1994 Trace Technologies
+
+Program by Keith Gerdes
+
+
+ARCHIVE CONTENTS
+================
+
+TOS4TRAP.TXT - this file
+TOS4TRAP.PRG - TOS4 Trap v1.0
+
+
+General info
+============
+
+  TOS4TRAP was scheduled to be part of a "Falcon-specific" utility
+package I am currently working on.  Due to the present demand for
+this program, I didn't think I should delay its release until the
+entire package was ready.
+
+  Look for details about the package in the near future.  Also, a
+demo of one of the modules should be available at the time of release.
+
+o What does TOS4 Trap do?
+
+  Monitors certain GEMDOS calls to make passed parameters
+"TOS4 GEMDOS compatible".
+
+  When it runs, it checks the version of TOS and will not install
+in memory if you do not have TOS 4.xx.
+
+o Which programs are indirectly addressed by this system patch?
+
+  Currently I am aware of:
+
+  STalker - print block in terminal window
+          - w/o TOS4TRAP, an error alert
+
+  NeoDesk - delete folder  (NOTE: pre-NeoDesk4)
+          - w/o TOS4TRAP, contents are deleted but the folder is not
+
+  MaxiFile - delete folder
+           - w/o TOS4TRAP, contents are deleted but the folder is not
+
+  Desk Manager - file renaming
+               - w/o TOS4TRAP, files are not renamed
+
+  and others I would think.
+
+o Shareware?
+
+  You may evaluate this program for a 14 day trial period.  If you
+find the program a useful addition to your system, you are expected
+to register.
+See the 'Contact Info' and 'Shareware' sections for further details.
+
+
+Operation
+=========
+
+  TOS4 Trap installs a routine into the GEMDOS system vector, checking
+for certain system calls matching specific input conditions.
+
+
+Installation
+============
+
+  Copy TOS4TRAP.PRG to your AUTO folder.
+  
+  It should run early in the bootup sequence to allow monitoring of
+other AUTO programs.  This does not mean first or second or any
+particular location, just as long as it can do its job.
+
+
+Usage
+=====
+
+  When run TOS4 Trap in the AUTO folder, it will stay resident
+after execution.  You can run TOS4 Trap from the desktop, but
+the ideal location is the AUTO folder with the rest of your
+Terminate and Stay Resident (TSR) programs.
+
+
+Configuration
+=============
+
+  None...
+
+
+Errors
+======
+
+  If you do not have TOS 4.xx in your computer, TOS4 Trap will not
+be installed in memory after it runs- ie. no "program info" will
+be printed on screen.
+
+
+Troubleshooting
+===============
+
+  You should not run into any problems with TOS4 Trap installed in
+your system.  However, if you do find a conflict, try changing
+the run order of your AUTO folder.
+
+  Feel free to contact me for assistance.
+
+
+Misc
+====
+
+  The above list of programs is by now means complete.  To keep it
+up-to-date, please send feedback.
+
+
+Technical stuff
+===============
+
+1) Wildcard characters in Fopen(), Pexec() and Frename()
+
+  TOS4TRAP allows you to specify a wildcard (ie. ? or *) in a GEMDOS
+Fopen [file open], Pexec [execute a process] or Frename [file rename]
+system call.
+
+  All TOS versions prior to TOS4 allowed wildcards to be used in a
+filename passed to these calls.  This was not supposed to happen, so
+TOS4 corrected the oversight- breaking some programs.
+
+  For example, a common operation I used to perform was saving info
+to a program which could be named either APP or ACC- ie.
+Fopen(FILENAME.A??).  The correct method is to find a file match then
+open that file- ie. Fsfirst(FILENAME.A??), Fopen(found filename).
+
+  Another example: At the NewDesktop, try 'loading the desktop INF'
+file with a filename NEWDESK.IN?.  TOS2 & 3 GEMDOS allowed this.
+TOS4 won't.
+
+2) Ddelete() with trailing backslash
+
+  Under TOS4, you can delete a folder's contents without problem.
+However, deleting the folder itself changed in TOS4.
+
+  If a Ddelete() [delete directory] call is made with a trailing
+backlash, '\', the backslash is removed from the path spec by
+TOS4TRAP; enabling you to delete a folder in certain programs-
+ie. NeoDesk and MaxiFile.
+
+NOTE for 1) & 2): Changes are made by copying the path spec to local
+memory, processing the path for TOS4 compatibility and then passing
+this new path on to GEMDOS.
+
+3) Fwrite (send data to printer)
+
+TOS4 broke one type of GEMDOS printer output.
+
+Using TOS4TRAP enables output in certain programs- ie. STalker.
+
+
+Support
+=======
+
+  Great strides are taken to make sure TOS4 Trap will not cause
+problems as a new addition to your system.
+
+  If you do run into any difficulties, report them to me ASAP.
+
+  You can reach me by phone, GEmail (includes Internet) and GEnie's
+ST-RT, CAT2 TOP12.
+
+- Keith Gerdes
+
+
+       GEnie: K.GERDES
+    Internet: k.gerdes@genie.geis.com
+Tech support: (713)771-8332  [weekdays 1PM-5PM Central Time]
+
+
+Shareware
+=========
+
+Registering is easy:
+
+Send in the shareware fee of US$5.
+
+
+What else do you get for your investment?
++ Tech support and bug fix updates!
++ Plus a special discount on a future product.
+
+
+Please make payment by check (issued by a U.S. bank), U.S. funds
+money order (drawn on a U.S. bank), or postal money order.
+[NOTEs: GEnie gifts of time are not accepted.  And no credit card orders.]
+
+Payable to:
+ Trace Technologies or Keith Gerdes
+
+Send to:
+ Trace Technologies [TOS4TRAP]
+ PO Box 711403
+ Houston, TX  77271-1403
+
+
+TraceTech products
+==================
+
+  TraceTech's products are compatible with all Atari ST/TT/Falcon
+computers and all TOS versions.
+
+Commercial:
+
+* Data Diet v2  (++)
+
+  A realtime file compression system.
+
+  Use files the same as always, but have them occupy MUCH less disk
+  space!  The programs you use don't know Data Diet is trimming away
+  the fat, but you'll notice the difference right away.  Also includes
+  DD Tools, DD INFo Editor and Squish v1.  A complete system for saving
+  megabytes of storage space.
+
+  Flexible user options put you in control of your data.  You can
+  exclude files, folders and drives which you don't want compressed.
+  You can even specify the compression type to use by several methods-
+  filesize, extender, path name and program name.  And you have the
+  choice of compressing your data in three modes- offline, realtime
+  or program transition.
+
+  Data Diet - simple to install, easy to use and flexible enough to
+  adapt to your system needs.
+
+  New for v2:
+  Reserve memory, VROdisk, 3 more INF sections, DDINFOED, DD Tools
+  operation filters, improved compression speed and percentage by
+  utilizing available memory, etc.
+
+(++) An upgrade from Data Diet v1 is available.
+     Contact TraceTech.
+
+* Data Rescue
+
+  The complete realtime data recovery solution.
+
+  o Realtime tracking
+  ALL file and folder deletions are monitored so you can immediately
+  rescue accidental deletions, or at any timespan afterwards assuming
+  the associated data is still valid.
+
+  o Efficient resident program
+  The memory resident portion of Data Rescue occupies less than 10K
+  of RAM.
+
+  o Two delete tracking modes
+  1) DAT tracks file AND folder deletions by using a small data file.
+  2) RESCUEfolder is a trashcan system which moves files to \RESCUE
+     upon deletion, with each folder intelligently maintained.
+
+  o Intelligent maintenance
+  Any time GEMDOS encounters an out of storage space error, the
+  RESCUE folder is automatically purged of the oldest files and
+  the aborted operation completed.  And on bootup each RESCUE
+  folder is maintained by two criteria- file age and/or content
+  size.
+
+  o RESCUEfolder
+  You can set any temporary paths used by programs to a RESCUE folder
+  so that the temp files are automatically maintained for you.
+
+  o Small DAT size
+  The size of the DAT tracking file is constant and can be computed by
+  taking the size of the drive in bytes and dividing by 512 for a hard
+  disk or by 682 for a floppy disk.
+  [ie. a 5Meg partition would have a 10K DATARESC.DAT file]
+
+  o Deleted fragmented data
+  Rescuing fragmented data is a breeze requiring NO user interaction!
+
+  o Partial data recovery
+  If part of a deleted file is overwritten, you can still rescue the
+  available data.
+
+  o Rescue Data
+  And not to forget this user convenience- the first character in a
+  name is encoded so the user does not have to remember it or even
+  enter it when rescuing a file/folder.
+
+  A specialized solution, not just another feature.
+
+  [NOTE: Compatible with DATAlite2.]
+
+* Squish II  (++)
+
+  An executable file compression system.  Save storage space quick
+  and easy by compressing your programs and accessories.
+
+  Multitasking operation.
+  Advanced windowed graphical user interface.
+  Memory efficient design.
+  Transparent, on-the-fly file uncompression in memory.
+
+  Flexible user options.  You control the system!
+  Recursive batch mode.
+  Commandline support.
+  Converts several "packed" formats:
+   ie. PFX, Ice, Fire, BA, Pompey, Squish v1, etc.
+
+  Faster and better compression than v1.
+  Compression Factor is a user adjustment for the compression routine,
+  ranging from 0 to 9.
+   CF0 gives ~Squish v1.4 compression percentage, ~3x faster.
+   CF3 gives ~PFX compression percentage, ~3x faster.
+
+  Squish II includes these options:
+  Turbo, Compression Factor, Set Fast bit, Clear Fast bit,
+  Clear Heap, Recursion, Skip Squished, Squished Only,
+  No CF Update, Keep TimeDate, Keep Backup, Specify Destination,
+  Show Alerts, Excluded Filename List, Included Extender List,
+  Excluded Root Folders and Exclude Filesize > xxxxK.
+
+  Definitely NOT just another "packer"!
+
+(++) An upgrade from Squish v1 (aka DC Squish) is available.
+     Contact TraceTech.
+
+
+Shareware:
+
+* Load Aladdin
+
+  Use ST Aladdin on your Falcon030.
+  Use the extra serial ports on your MSTe or TT in ST Aladdin.
+  Frees up the serial port on all Atari computers when not online.
+   Enabling other programs to access the serial port when running
+   ST Aladdin.
+  And save connect charges with the included Idle Guard feature-
+   automatically hangs up the modem after serial I/O has been
+   idle X minutes.
+
+* TOS4 Trap
+
+  This program.
+
+
+Projects in the queue: FastMenu, Missouri and the "Falcon" Utilities.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+This program is supplied in the belief that it operates as specified,
+neither the company (Trace Technologies) nor the authors shall be liable
+in any circumstance whatsoever for any direct or indirect loss or damage
+to property incurred or suffered by the customer or any other person as
+a result of any fault or defect in the goods or services supplied by the
+company and in no circumstances shall the company be liable against
+consequential damage or loss of profits -whether or not the possibility
+thereof was separately advised to it or reasonably forseeable- arising
+from the use or performance of such goods or services.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+This archive contains a SHAREWARE version of the program TOS4 Trap.  You
+may freely distribute this archive in its _entirety_, but you cannot
+charge for it or alter the programs or contents of the documentation in
+any manner.  Trace Technologies retains all copyright exclusive rights
+except exclusive distribution of this SHAREWARE version.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Reprint notice:
+
+Permission to reprint this document must be obtained from TraceTech.

@@ -1,0 +1,460 @@
+[COOKIES]
+
+;****************************
+;* BIOS Cookies				*
+;****************************
+
+[_CPU]
+NAME = "Prozessortyp";
+CREATOR = "Atari Corporation";
+<SECTION_0>
+CODED = 32,VALUE;
+VALUE_0 = 0,"68000";
+VALUE_1 = 10,"68010";
+VALUE_2 = 20,"68020";
+VALUE_3 = 30,"68030";
+
+[_FPU]
+NAME = "FPU-Typ";
+CREATOR = "Atari Corporation";
+<SECTION_0>
+CODED = 12,UNUSED;
+<SECTION_1>
+CODED = 1,BITS;
+BIT_0 = "68040"
+<SECTION_2>
+CODED = 2,VALUE;
+VALUE_0 = 0,"Keine FPU";
+VALUE_1 = 1,"68881 oder 68882";
+VALUE_2 = 2,"68881";
+VALUE_3 = 3,"68882";
+<SECTION_3>
+CODED = 1,BITS
+BIT_0 = "SFP 004 oder kompatibel";
+
+[_FRB]
+NAME = "Fast-RAM-Buffer";
+CREATOR = "Atari Corporation";
+
+[_MCH]
+NAME = "Maschinentyp";
+CREATOR = "Atari Corporation";
+<SECTION_0>
+CODED = 16,VALUE;
+VALUE_0 = 0,"ST";
+VALUE_1 = 1,"STE";
+VALUE_2 = 2,"TT";
+VALUE_3 = 3,"F030";
+
+[_SND]
+NAME = "Soundhardware";
+CREATOR = "Atari Corporation";
+<SECTION_0>
+CODED = 32,BITS;
+BIT_0 = "PSG";
+BIT_1 = "SDMA";
+BIT_2 = "CODEC";
+BIT_3 = "DSP";
+BIT_4 = "MULTIPLEXER"
+
+[_SWI]
+NAME = "DIP-Switches";
+CREATOR = "Atari Corporation";
+<SECTION_0>
+CODED = 32,UNUSED;
+
+[_VDO]
+NAME = "Videohardware";
+CREATOR = "Atari Corporation";
+<SECTION_0>
+CODED = 16,VALUE;
+VALUE_0 = 0,"ST";
+VALUE_1 = 1,"STE";
+VALUE_2 = 2,"TT";
+<SECTION_1>
+CODED = 16,UNUSED;
+
+;****************************
+;* Weitere ATARI-Cookies	*
+;****************************
+
+[_AKP]
+NAME = "Tastaturtyp und Landessprache"
+CREATOR = "Atari Corporation"
+
+[_FDC]
+NAME = "Floppydisk Controller";
+CREATOR = "Atari Corporation (Standardcookie)";
+<SECTION_0>
+CODED = 8,VALUE;
+VALUE_0 = 0,"Normales Floppyinterface";
+VALUE_1 = 1,"High-Density";
+VALUE_2 = 2,"Extra High Density";
+<SECTION_1>
+CODED = 24,VALUE;
+VALUE_0 = 0x000000,"Keine Information verfÅgbar";
+VALUE_1 = 0x415443,"ATC Atari kompatibel";
+VALUE_2 = 0x445031,"DP1 DreamPark Dev.";
+
+[_FLK]
+NAME = "File-Locking";
+CREATOR = "Atari Corporation (Standardcookie)";
+
+[_INF]
+NAME = "STEFIX";
+CREATOR = "Atari Corporation";
+
+[_INF]
+NAME = "Datumsformat";
+CREATOR = "Atari Corporation";
+
+[_NET]
+NAME = "GEMDOS-Netzwerkerweiterung";
+CREATOR = "Atari Corporation (Standardcookie)";
+
+[_OOL]
+NAME = "POOLFIX3";
+CREATOR = "Atari Corporation";
+
+[_SLM]
+NAME = "Diablo-Emulator";
+CREATOR = "Atari Corporation";
+
+;****************************
+;* Andere Cookies			*
+;****************************
+
+[FSMC]
+NAME = "Fontscaling mechanism";
+CREATOR = "Atari Corporation (Standardcookie)";
+<SECTION_0>
+CODED = 32,STRUCTURE;
+<SECTION_0_0>
+ELEMENT = "Typ:",SIMPLE,VALUE,4
+VALUE_0 = 0x5F535044,"Speedo";
+VALUE_1 = 0x5F46534D,"FSM";
+DEFAULT = "Scaler ist unbekannt"
+
+[BIGS]
+NAME = "BigScreen 2"
+CREATOR = "Julian Reschke, SciLab Gmbh"
+
+[CHAM]
+NAME = "ChamÑleon"
+CREATOR = "Karsten Isakovic"
+
+[CLCK]
+NAME = "Clock"
+CREATOR = "Sieghard SchÑfer"
+
+[CRIT]
+NAME = "CRYPT-IT"
+CREATOR = "Thomas Schrîter"
+
+[CTCH]
+NAME = "Master-Modul catch.mmx"
+CREATOR = "Edgar Rîder"
+
+[DATL]
+NAME = "TwiLight"
+CREATOR = "Delirium Arts"
+
+[DEPI]
+NAME = "DeskPic"
+CREATOR = "Norbert Marschalleck"
+
+[DBFX]
+NAME = "Diablo-Fix"
+CREATOR = "Julian Reschke"
+
+[DYNL]
+NAME = "Dynamic Link Library"
+CREATOR = "Robert Federle"
+
+[EdDI]
+NAME = "EdDI";
+CREATOR = "Sven&Wilfried Behne, BELA";
+
+[ENVR]
+NAME = "Environment-Setter"
+CREATOR = "Pascal Fellerich"
+
+[FIX2]
+NAME = "FIX24"
+CREATOR = "Uwe Seimet"
+
+[FLTP]
+NAME = "FlyTop"
+CREATOR = "Patrick Dubbrow"
+
+[FOse]
+NAME = "Fontselector"
+CREATOR = "Hayo Schmidt"
+
+[FSEL]
+NAME = "fsel_exinput() aktiv"
+CREATOR = "Standardcookie"
+
+[FSER]
+NAME = "Fast_Ser"
+CREATOR = "Franz Sirl"
+
+[GDEV]
+NAME = "GNU-C Device-Driver"
+CREATOR = "Edgar Rîder"
+
+[GMNI]
+NAME = "GEMINI"
+CREATOR = "Stefan Eissing & Gereon Steffens"
+
+[HFIX]
+NAME = "Handle-Fix"
+CREATOR = "Patrick Dubbrow"
+
+[HDJR]
+
+[INSJ]
+NAME = ""
+CREATOR = "Oliver Groeger"
+
+[INXR]
+NAME = "Indexgenerator"
+CREATOR = "Dietmar PÅttmann/Dietmar Rabich"
+
+[JFTP]
+NAME = "SCSI-Treiber fÅr generische BandgerÑte"
+CREATOR = "Jan-Hinrich Fessel"
+
+[JINX]
+NAME = "Jinx";
+
+[LAWC]
+NAME = "Look-Ahead-Write-Cache V1.10"
+CREATOR = "Robert Federle"
+
+[LTMF]
+NAME = "Let 'em Fly!"
+CREATOR = "Oliver Scheel"
+
+[macc]
+NAME = "MACCEL 3.3"
+CREATOR = "Ken Badertscher, Atari Corporation"
+
+[MagX]
+NAME = "Mag!X";
+CREATOR = "Sven&Wilfried Behne, BELA";
+
+[MADD]
+NAME = "ADDMEM"
+CREATOR = "Uwe Seimet"
+
+[MFNT]
+NAME = "Fontloader-Accessory"
+CREATOR = "Hayo Schmidt"
+
+[MGEM]
+NAME = "Multi-GEM"
+CREATOR = "Pascal Merle"
+
+[MiNT]
+NAME = "MiNT (MiNT is Not TOS)"
+CREATOR = "Eric Smith"
+
+[MMAC]
+NAME = "MagicMouse, Mausbeschleuniger"
+CREATOR = "Emanuel Moecklin"
+
+[MOGR]
+NAME = "GEMRAM"
+CREATOR = "Martin Osieka"
+
+[MSPO]
+NAME = "MagicSpooler, Druckerspooler"
+CREATOR = "Emanuel Moecklin"
+
+[MUPF]
+NAME = "'Mupfel' (Unix-Shell, bis Version 1.2x)"
+CREATOR = "Gereon Steffens"
+
+[NCLN]
+NAME = "Niceline"
+CREATOR = "Oliver Scheel"
+
+[NVDI]
+NAME = "NVDI";
+CREATOR = "Sven&Wilfried Behne, BELA";
+
+[OFLS]
+NAME = "Check Open Files";
+CREATOR = "Hans-JÅrgen Richstein (Standardcookie)";
+DESCRIPTION_0 = "Merkt sich alle auf einem Laufwerk offenen"
+DESCRIPTION_1 = "Dateien, so daû Programme, die auf der FAT"
+DESCRIPTION_2 = "operieren (z.B. KOBOLD, Diskus) keinen Daten-"
+DESCRIPTION_3 = "verlust forcieren. Eine '-1' als Status heiût,"
+DESCRIPTION_4 = "daû das Laufwerk fÅr Dateioperationen gesperrt"
+DESCRIPTION_5 = "ist, weil eine FAT-orientierte Anwendung auf"
+DESCRIPTION_6 = "dem Laufwerk arbeitet."
+
+<SECTION_0>
+CODED = 32,STRUCTURE
+<SECTION_0_0>
+ELEMENT = "Produkt:   ",SIMPLE,VALUE,4
+VALUE_0 = 0x4F464C53,"CHK_OFLS.PRG (Kaktus)";
+DEFAULT = "Unbekannt";
+<SECTION_0_1>
+ELEMENT = "Version:   ",SIMPLE,HEX,0
+<SECTION_0_2>
+ELEMENT = "Status A-P:  ",ARRAY,INT,16
+<SECTION_0_3>
+ELEMENT = "Status Q-...:",ARRAY,INT,16
+
+[OPMM]
+NAME = "Open Helper";
+CREATOR = "Martin Mertens";
+
+[OVER]
+NAME = "AutoSwitch-OverScan";
+CREATOR = "Karsten Isakovic, OverScan GbR";
+
+[PBUG]
+NAME = "Backgrounddebugger";
+CREATOR = "Emanuel Moecklin";
+
+[PMMU]
+NAME = "...zur Programmierung der PMMU";
+CREATOR = "Alexander Herzlinger";
+
+[PTOS]
+NAME = "ROMRAM";
+CREATOR = "Alexander Herzlinger (Standardcookie)";
+
+[RFLX]
+NAME = "AutoSwitch-Treiber fÅr die REFLEX Graphic Card";
+CREATOR = "Karsten Isakovic, OverScan GbR";
+
+[RSpd]
+NAME = "RS_Speed";
+CREATOR = "Stephan Skrodzki";
+
+[RWIN]
+NAME = "RootWin";
+CREATOR = "Karsten Isakovic";
+
+[SCRN]
+NAME = "Master-Modul screen.mmx";
+CREATOR = "Edgar Rîder";
+
+[SCRW]
+NAME = "SCREENWATCH.PRG";
+CREATOR = "Uwe Seimet";
+
+[SFA^]
+NAME = "FONT_BLK.PRG";
+CREATOR = "Sevo Stille";
+
+[SM00]
+NAME = "SOTA Printer Spooler";
+CREATOR = "STAGE Microsystems";
+
+[SM01]
+NAME = "ReProK Bueromanagement DUO";
+CREATOR = "STAGE Microsystems";
+
+[SM02]
+NAME = "ReProK international";
+CREATOR = "STAGE Microsystems";
+
+[SMTT]
+NAME = "SM124-Emulator";
+CREATOR = "Karsten Isakovic, OverScan GbR";
+
+[SPEX]
+NAME = "Druckerspooler fÅr ST/STE und TT";
+CREATOR = "Stefan Eissing, SciLab Gmbh";
+
+[STRX]
+NAME = "SAT-Trax";
+CREATOR = "Martin Sperber";
+
+[SWAP]
+NAME = "OUTSIDE.PRG ";
+CREATOR = "Uwe Seimet, Maxon Computer";
+
+[SYMB]
+NAME = "Resident Symbol Driver";
+CREATOR = "Robert Federle";
+
+[TCRB]
+NAME = "TCache";
+CREATOR = "Ralf Biedermann";
+
+[THNX]
+NAME = "THINX (Shell)";
+CREATOR = "Dirk Haun";
+
+[TMon]
+NAME = "Templemon";
+
+[TSWP]
+NAME = "TonySoft Write Protection";
+CREATOR = "Matthias Becker";
+
+[TTTF]
+NAME = "Thirty-Two to Twenty-Four";
+CREATOR = "Marcel Waldvogel";
+
+[Typ1]
+NAME = "TYPENRAD-Accessory";
+CREATOR = "Frank Knobbe";
+
+[USHD]
+NAME = "Diskus-Plattentreiber ab Version 2.5";
+CREATOR = "Uwe Seimet";
+
+[USRS]
+NAME = "ROMSPEED";
+CREATOR = "Uwe Seimet";
+
+[VFIX]
+NAME = "VDI-Handle Fix";
+CREATOR = "Karsten Isakovic";
+
+[VRAM]
+NAME = "VRAM";
+CREATOR = "Alexander Herzlinger, OverScan GbR";
+
+[VSCR]
+NAME = "Informations-Struktur fÅr Groûbildschirm-Simulatoren";
+CREATOR = "Julian F. Reschke (Standardcookie)";
+
+[WDOG]
+NAME = "Watchdog";
+CREATOR = "Robert Federle";
+
+[WEGA]
+NAME = "WEGA-Library";
+CREATOR = "Dietmar Rabich";
+
+[WPRO]
+NAME = "WProtect";
+CREATOR = "Christoph Conrad";
+
+[XDsk]
+NAME = "X-Disk, resetfeste Ramdisk";
+CREATOR = "Thomas Schallar";
+
+[XFS1]
+NAME = "Master-Modul xfs.mmx";
+CREATOR = "Edgar Rîder";
+
+[XHDI]
+NAME = "eXtended HardDisk Interface";
+CREATOR = "Standardcookie";
+
+[xRmt]
+NAME = "Fernwartung per Modem";
+CREATOR = "Markus Gutschke";
+
+[zDCF]
+NAME = "DCF-TIME";
+CREATOR = "Ralf Zimmermann";

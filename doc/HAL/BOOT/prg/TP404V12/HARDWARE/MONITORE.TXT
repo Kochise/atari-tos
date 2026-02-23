@@ -1,0 +1,235 @@
+
+
+     Datei: MONITOR.TXT          Ω Michael Ruge    RÅsselsheim, den 13.11.1994
+
+     Email: Michael Ruge @WI2.MAUS.DE)
+
+
+
+     Einige MultiScan-Monitore haben einen H.- und V.-Frequenz-Arbeitsbereich,
+     der auûerhalb der H.- und V.-Frequenz liegt, die der ST/STE durch die Hard
+     ware vorgibt. Diese Monitore kînnen die gewÅnschten Auflîsungen nicht wie-
+     dergeben und kînnen ggf. Schaden nehmen.
+
+     Um einen MultiScan-Monitor am ST/STE (in allen Auflîsungen) zu betreiben, 
+     muû der Monitor die Horizontal-Frequenzen aller gewÅnschten Auflîsungen 
+     darstellen kînnen.
+
+     Diese sind beim ST/STE in:
+     Farbe           -   15,625 KHz
+     S/W (SM124)     -   35,700 KHz
+
+     Diese sind beim TT030 in:
+     Farbe (VGA)     -   31,500 KHz
+     Monochrom       -   72.000 KHz (NUR TTM194/TTM195/Protar 19Zoll Monitor
+                                     mit ECL-Eingang)
+
+     Diese sind beim Falcon030 in:
+     Farbe (RGB/TV)  - 15,625 KHz
+     Farbe (VGA)     - 31,470 KHz (~31,500KHz)
+     ST-Hoch (VGA)   - 31,470 KHz (~31,500KHz) mit 60Hz Bildwiederholfrequenz
+     SM124 (SM124)   - 35,700 KHz mit gewohnten 71HZ Bildwiederholfrequenz
+
+
+     Er sollte also einen H.-Frequenzbereich von 15,625 - 35,7 kHz haben, wobei
+     das Frequenzband auch grîûer sein darf, also z.B. 15,5 - 38,5 kHz.
+
+     Ferner muû der Monitor auch die Vertikal-Frequenzen der gewÅnschten Auflî-
+     sungen darstellen kînnen, da er sonst nicht synchronisiert wird.
+
+     Diese sind beim ST/STE in:
+     Farbe           -   50-60 Hz
+     S/W (SM124)     -   72 Hz
+
+     Diese sind beim TT030 in:
+     Farbe (VGA)     -   60 Hz
+     Monochrom       -   72 Hz (NUR TTM194/TTM195/Protar 19" Monitor mit ECL)
+
+     Diese sind beim Falcon030 in:
+     Farbe (RGB/TV)  - 50 Hz Interlaced oder auch nicht
+     Farbe (VGA)     - 61 Hz
+     ST-Hoch (VGA)   - 61 Hz
+     SM124 (SM124)   - 71 Hz 
+                        
+     Er sollte einen V.-Frequenzbereich von 50 - 72 Hz haben, wobei ebenfalls 
+     das Frequenzband wieder grîûer sein darf, aber - wie bei der H.-Frequenz
+     - die beiden Frequenzen beinhalten muû.
+
+
+
+
+     Anschluû eines Multisync (z.B. NEC3D) an ST, um alle Auflîsungen von ST
+     Low bis ST Mono inclusive Overscan auf einem Schirm darzustellen.
+     (Will der NEC 3D das Bild nicht korrekt darstellen, entweder den Pin 12 
+      im Stecker des Monitores abpetzen oder das Kabel ablîten)
+
+
+     Moni.Buchse    Signal-    Schalter      Mulitsync
+     ATARI ST       name       4fachUm       15PolVGA
+      Pin                                    Pin
+                                /*--\
+       4---------Sensor-------*/ *   \--------4---an GND
+                                               da unten
+                                /*
+       6---------Green--------*/ *---*--------2
+                                     R1
+                                /*   ü
+       7---------Red----------*/ *---ü--*-----1
+                                     ü  R2
+       9---------HSync---------------ü--ü-----13
+                                     ü  ü
+                                /*   ü  ü
+       10--------Blue---------*/ *---ü--ü--*--3
+                                     ü  ü  R3
+                                     ü  ü  ü
+       11-------Monochrom------------*--*--*
+    
+       12--------VSync------------------------14
+
+       13--------GND----------------------*--4--und da oben
+                                           \-5
+                                           \-6
+                                           \-7
+                                           \-8
+                                           \-10
+                                           \-11
+
+                              ______
+     R1 usw bedeutet:    ____/__   ü
+                      ---ü  /  ü---*--- Die R's regeln den jeweiligen Anteil
+                         ˇˇˇˇˇˇˇ        von Rot, GrÅn und Blau an der Misch-
+                                        farbe "Weiû" und alle zusammen die
+                                        Helligkeit von "Weiû". Die sollte un-
+                                        gefÑhr so hell sein wie der Farbmodus.
+
+     Vorschlag von mir fÅr die Widerstandswerte:
+     
+     VGA PIN1(rot) 180R 5% + 15R 5%
+     VGA PIN2(gn)  267R 2% + 7R5 2%
+     VGA PIN3(bl)  309R 2%
+
+     Das Bild hat SM124-QualitÑt und ist genau s/w abgeglichen.
+
+
+     Falcon Seite                                        Multiscan Seite
+     ==============                                      ===============
+     DB 19 weiblich                                      DB 15 weiblich
+
+                                   ----------
+      1 --------------- Red -------| 68 Ohm |--------------- 1
+                                   ----------
+                                   ----------
+      2 --------------- Green -----| 68 Ohm |--------------- 2
+                                   ----------
+                                   ----------
+      3 --------------- Blue ------| 68 Ohm |--------------- 3
+                                   ----------
+                                   |------------------------ 4
+      5 --------------- GND -------|
+                                   |------------------------ 5
+
+      6 --------------- Red GND ---------------------------- 6
+   
+      7 --------------- Green GND -------------------------- 7
+
+      8 --------------- Blue GND --------------------------- 8
+      
+     10 --------------- GND ------------------------------- 10
+                                   ----------
+     13 --------------- HSync -----| 68 Ohm |-------------- 13
+                                   ----------
+                                   ----------
+     14 --------------- VSync -----| 68 Ohm |-------------- 14
+                                   ----------
+
+     11 ------------| GND
+                    |
+     15 ------------| EXTCLOCK
+                    |
+     18 -----/ -----| M1
+                    |       (2-polig DIP Schalter nach Masse)
+     19 -----/ -----| M0
+
+
+      4, 9, 12, 16 und 17 --- NC      NC --- 9, 11, 12 und 15
+
+     Die 68 Ohm WiderstÑnde sind notwendig um den Falcon030 Videosignalpegel
+     von 1.0 V peek-peek nach VGApegel 0.7 V zu konvertieren.
+
+     Pins 18 und 19 (M1 und M0) sind "Monitor select" und mit DIP Schalter 
+     wÑhlbar, sie sind so belegt:
+
+     M1 (pin 18)   M0 (pin 19)     Monitor
+     ===========   ===========     =======
+         0             0          ST Mono
+         0             1          ST Farb
+         1             0          VGA
+         1             1          TV
+
+
+
+
+     Pinbelegung der Videobuchse am ATARI ST/STE/MEGA STE:
+
+      1 - Audio-Ausgang
+      2 - Horizontal- und Vertikal-Synchron-Gemisch
+      3 - Port A, Bit 6 Soundchip
+      4 - Monochrom-Sensor (auf Masse ziehen fÅr Monochrom Betrieb!)
+      5 - Audio-Eingang
+      6 - GrÅn-Signal
+      7 - Rot-Signal
+      8 - +12 V (max. 10 mA)
+      9 - Horizontal-Synchron-Signal
+     10 - Blau-Signal
+     11 - Monochromsignal
+     12 - Vertikal-Synchron-Signal
+     13 - Masse
+
+     Pinbelegung der Videobuchse am ATARI TT030:
+
+      1 - Rot-Signal
+      2 - GrÅn-Signal
+      3 - Blau-Signal
+      4 - Monochrom Out (ECL Plus)
+      5 - Masse
+      6 - Rot-Masse
+      7 - GrÅn-Masse
+      8 - Blau-Masse
+      9 - Monochrom-Sensor (auf Masse ziehen fÅr Monochrom Betrieb!)
+     10 - Masse
+     11 - nicht belegt
+     12 - nicht belegt
+     13 - Horizontal-Synchron-Signal
+     14 - Vertikal-Synchron-Signal
+     15 - Monochrom Out (ECL Minus)
+
+     Pinbelegung der Videobuchse am ATARI Falcon030:
+
+      1 - Rot-Signal
+      2 - GrÅn-Signal
+      3 - Blau-Signal
+      4 - Monochrom Out (fÅr SM124 Betrieb)
+      5 - Masse
+      6 - Rot-Masse
+      7 - GrÅn-Masse
+      8 - Blau-Masse
+      9 - Audio In
+     10 - Masse
+     11 - Masse
+     12 - Composite Sync
+     13 - Horizontal-Synchron-Signal
+     14 - Vertikal-Synchron-Signal
+     15 - Extern Clock Input (Genlock, Screenblaster, Blow Up)
+     16 -
+     17 - +12 V (max. 10 mA)
+     18 - Video Master Control Bit 1
+     19 - Video Master Control Bit 2
+     
+     **************************************************************************
+     
+     Reine VGA-Monitore sind zum Betrieb am ST/STE vîllig ungeeignet!
+     (Ich kann Dir genug Monitore zeigen, die SThoch eben nicht machen, weil es 
+     reine VGA-Monis sind. Also ist ein Blick in die Doku dringend angeraten, 
+     ob der Typ 38KHz horizontal macht, denn auch 35.5KHz-BÅchsen liefern z.T.
+     saumÑûige oder gar keine Bilder, und die reinen 31.5KHz liefern Åberhaupt 
+     kein brauchbares Bild.

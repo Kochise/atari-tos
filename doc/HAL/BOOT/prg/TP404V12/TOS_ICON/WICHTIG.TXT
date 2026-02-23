@@ -1,0 +1,31 @@
+
+WICHTIG.TXT
+===========
+
+Keinesfalls dieses beiden Funktionen auf das TOS des Falcon030 loslassen, diese
+beiden Funktionen sind auf das TOS 2.06 und TOS 3.06 abgestimmt!
+
+4.1. TOS -> Icon
+Liest aus einer TOS-Datei, die in 256K- oder 512K-Form vorliegen mu, das
+darin gespeicherte Icon direkt in den Editor.
+Falls auf dem Schirm zu diesem Zeitpunkt nur Schrott erscheint, stimmt
+irgendetwas mit der Datei nicht (falsches Format, neuere oder ausl„ndische
+TOS-Version). Die folgende Funktion darf dann AUF KEINEN FALL auf diese
+Datei angewendet werden!
+
+4.2. Icon -> TOS
+Geht den umgekehrten Weg, d.h. manipuliert direkt die anzugebende TOS-Datei,
+indem es darin das Icon durch das momentan im Editor befindliche ersetzt.
+Da Atari mittlerweile beim Booten eine Prfsumme ber das ROM bildet
+(ausdrckliches Lob von meiner Seite), mu diese nach der Manipulation
+angepat werden. Dafr ruft TOS_ICON das Programm TOSCRC auf, das im
+gleichen Verzeichnis stehen mu wie TOS_ICON.
+
+
+
+Vielen Dank an Reiner Rosin fr die Freistellung von TOS_ICON.PRG!
+
+TOS_ICON.PRG l„uft nur und ausschlielich in ST-HOCH!
+
+
+Michael Ruge - Rsselsheim, den 25.11.1994

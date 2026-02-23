@@ -1,0 +1,33 @@
+**********************************************************************
+                           Accessories 2.0
+
+                       Micka‰l Cousin - 1997 May 19th
+**********************************************************************
+
+
+This is a program that allow you, with single TOS, to load accessories
+from a directorie of your choice.
+
+So you can keep clean the root of your boot disk and if you use Magic or
+Multitos you still have your desk accessories when you have to use single
+TOS.
+
+Installation :
+
+Copy ACCS.PRG and ACCS.INF to your AUTO folder and edit the file ACCS.INF
+to configure the path of your accessories. If that file is empty or not
+here, accessories will be loaded from the \ACCS\ folder.
+
+The path in the configuration file must be like this :
+\path\of\the\accessories\     (don't forget the '\' at the end)
+
+This is an exemple :
+\SYSTEM\ACCS\
+
+All the accessories will be loaded from this path and be re-loaded after
+changing resolutions from the desktop.
+
+Contact :
+
+For bugs or reactions :
+   mika@uco.fr

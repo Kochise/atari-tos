@@ -1,0 +1,644 @@
+
+
+   Datei: SCSI.TXT       ½ Michael Ruge    Rsselsheim, den 17.12.1994
+
+   Email: Michael Ruge @WI2.MAUS.DE)
+
+
+   Der Ursprung
+
+   Die Geschichte von SCSI (Small Computer System Interface) begann
+   1981, als sich der Amerikanische Massenspeicherhersteller Shugart
+   (Sch”pfer war Al Shugart, heute Gesch„ftsfhrer von Seagate) und
+   NCR zusammentaten und gemeinsam bei ANSI (American National Stan-
+   dards Institute) auf die Einrichtung einer Arbeitsgruppe fr ei-
+   nen neuen Standard beantragten. Auf Basis des bereits 1979 von
+   Shugart entworfenen SASI (Shugart Associates System Interfaces)
+   entwickelte das X3T0.2-Komitee (der offizielle Name des Komitee's)
+   die erste SCSI-Version.
+
+
+
+   Der ATARI TT030 und Falcon030 k”nnen SCSI-2. SCSI-2 ist eine Software
+   -Sache. Wide-SCSI und Fast-SCSI sind optionale Features (die mit
+   dem von ATARI eingebauten SCSI-Chip 5380 und 53C80 nicht m”glich
+   sind).
+
+
+   Die wesentlichen Unterschiede von SCSI-1 zu SCSI-2 sind folgende:
+
+   - Die Regeln fr den Phasenablauf haben sich von SCSI-1 nach SCSI-2
+     ge„ndert.
+     W„hrend Arbitrierung und die MESSAGE-OUT-Phase nach der Selektion
+     in SCSI-1 optional waren, sind sie in SCSI-2 Pflicht geworden.
+
+   - Bei SCSI-2 kann man nur ber eine MESSAGE-Phase in eine Folge von
+     Kommando- und Datenphasen eintreten oder aus ihr herauskommen.
+
+   - Arbitrierung findet in SCSI-2 immer statt, auch wenn es nur einen
+     Initiator in der Konfiguration gibt. Auch ein Target muss um den
+     Bus arbitrieren, n„mlich dann, wenn es den Bus vorher
+     freigegeben hatte und sich jetzt zum Initiator zurckverbinden
+     lassen will. Falls Bus-Arbitration nicht zwingend untersttzt
+     wird, ist es ein zus„tzliches Feature!
+
+   - Synchroner Transfer ist eine šbertragungsart fr SCSI-Daten, die
+     in ihrer ursprnglichen Definition Datenraten von bis zu 5 MByte
+     pro Sekunde zul„sst (Asynchron ist eine Transferrate von 3.3 MByte
+     pro Sekunde definiert). Synchroner Transfer ist schon in SCSI-1
+     als optional definiert. SCSI-2 erlaubt als Erweiterung dazu den
+     schnellen synchronen SCSI (Fast SCSI), der Datenbertragungsraten
+     mit bis zu 10MHz erlaubt. Die Angabe in MHz deshalb, weil mit
+     SCSI-2 ausserdem der bis zu 32-bit-breite Transfer eingefhrt
+     wurde. Die Datenrate bei 10 MHz ist also je nach SCSI-Busbreite
+     verschieden:
+
+     10MB/sek bei 8-Bit
+     20MB/sek bei 16-Bit
+     40MB/sek bei 32-Bit
+
+     Wobei zu sagen ist, da nur sehr wenige Ger„te 16- oder 32-Bit
+     breiten SCSI untersttzen (auch der ATARI nicht). Bei Scannern
+     ist mir da keiner bekannt, die gebr„uchlichen Scanner wie Epson
+     oder Paragon haben auf jeden Fall nur 8-Bit breites SCSI.
+
+   - Targetroutinen sind Prozesse, die im Target ablaufen. Sie wurden
+     mit SCSI-2 eingefhrt und k”nnen zum Beispiel fr Diagnosezwecke
+     verwendet werden. Sie sind Herstellerspezifisch.
+
+   - Erweiterungen im MODE-SENSE bzw. MODE-SELECT-Kommando (Page-For-
+     mat).
+
+   - SCSI1-Bandger„te schreiben die gepufferten Daten nicht notwendi-
+     gerweise vor der Ausfhrung des REWIND-Kommandos...
+
+   - SCSI 1 hatte aber ein entscheidendes Manko!
+     Es lie den Herstellern zuviel Freiraum bei der Schaffung Ger„te-
+     spezifischer Kommandos.
+     Es wurde dann das SCSI-1-CCS (CCS = Common Command Set) einge-
+     fhrt, welches dann die sogenannten Mode-Pages beinhaltete, wo-
+     durch sich dann das Verhalten von Ger„ten einheitlich steuern
+     l„t.
+
+   1986 setzte sich das X3T9.2-Komitee wieder zusammen, um eine Weiter-
+   entwicklung von SCSI zu erarbeiten, die aber abw„rtskompatibel sein
+   sollte, damit SCSI-1- und SCSI-2-Ger„te am selben Bus arbeiten k”n-
+   nen. Das CCS gab damals schon die Marschrichtung an.
+
+
+   - SCSI-2 hat jetzt 10 Ger„tetypen, die jeweils eine eigene
+     "Media Type" Kennung besitzen. Jede dieser Gruppen hat einen ei-
+     genen Befehlssatz und den mu ein SCSI-2 konformes Ger„t unter-
+     sttzen.
+   Es gibt folgende "Media Type's":
+
+   Direct Access Device     - Festplatten, Wechselplatten, Floppy's
+   Sequential Access Device - Streamer, Bandlaufwerke
+   Printer Devices          - Drucker und Plotter mit SCSI-BUS
+   Prozessor Devices        - Alle Arten von Computern
+                              (Table Area Network)
+   Write Once Devices       - WORM-Schreiber, CD-ROM Schreiber
+   CD ROM Devices           - CD-ROMs
+                              unter anderem legt SCSI-2 auch die
+                              "Audio READ" Kommandos fest.
+                              Photo-CD ist nicht enthalten, dies wird
+                              ber die sogenannten VENDOR-Kommandos
+                              (Herstellerabh„ngige Befehle) abgewickelt
+   Scanner Devices          - Farbscanner, etc
+   Optical Memory Devices   - MO-Laufwerke, etc
+   Medium Changer Devices   - Platten, Streamertape, CD-Wechsler
+   Communication Devices    - Modems, Netzwerkadapter
+
+
+   Du siehst also, da es sich ausschliesslich um Erweiterungen in
+   der Software oder um optionale Hardware-Features handelt. Auch an
+   einem TT kann man ohne Probleme SCSI-2-Ger„te betreiben und aus-
+   nutzen!
+
+
+
+
+   Die Terminierung:
+
+   Richtig ist 330 gegen GND und 220 gegen 5V (Passive Terminierung)
+   oder eben die Parallelschaltung (eine Spannungsquelle hat Ri = 0
+   Ohm) der beiden gegen den Spannungswert, der sich bei so einem
+   Teiler einstellt, d.h. 110 Ohm gegen ~2.85 (3)Volt (Aktive Termi-
+   nierung).
+
+   PS: Wegen des geringeren Widerstandes (110 Ohm), der eher mit der
+       wirklichen Kabelimpedanz bereinstimmt als bei der passiven
+       Variante 132 Ohm) sind die Reflexionen geringer.
+
+
+   Man nehme fr 50-polige Terminatoren:
+                                18 Widerst„nde 330 Ohm
+                               18 Widerst„nde 220 Ohm
+
+   oder Widerstands-Arrays :-)
+   Bei den Arrays mit 8 Pins ist Pin 1 GND und Pin 8 +5Volt, alle
+   anderen Pins kommen an die Datenleitungen.
+
+   Die 330er kommen mit einem Ende an Masse, die 220er an TERMPWR.
+
+   Und dann noch jeweils ein Ende an die 18 Signalfhrenden Leitungen.
+
+   Am SCSI Bus w„ren das die Leitungen Nummer: 2, 4, 6, 8, 10, 12, 14,
+   16, 18, 32, 36, 38, 40, 42, 44, 46, 48, 50.
+
+   TERMPWR ist an Leitung 26. Alle ungeraden Leitungen sind Masse.
+
+   Am Centronics-Stecker sind das die Pins: 26, 27, 28, 29, 30, 31, 32,
+   33, 34, 41, 43, 44, 45, 46, 47, 48, 49, 50.
+
+   Beim Falcon030 befindet sich TERMPWR an Pin 38. Die Pins 1-25 sind
+   Masse.      Alles Klar?
+
+
+   Man nehme fr 25-polige Terminatoren (NUR TT030 und Apple MAC):
+
+                               18 Widerst„nde 330 Ohm
+                               18 Widerst„nde 220 Ohm
+
+   oder Widerstands-Array's :-)
+   Bei den Array's mit 8 Pins ist Pin 1 GND und Pin 8 +5Volt, alle
+   anderen Pins kommen an die Datenleitungen.
+
+   Die 330er kommen mit einem Ende an Masse, die 220er an TERMPWR.
+
+   Und dann noch jeweils ein Ende an die 18 Signalfhrenden Leitungen.
+
+   Am SCSI Bus w„ren das die Leitungen Nummer: 1, 2, 3, 4, 5, 6, 8, 10,
+   11 12, 13, 15, 17, 19, 20, 21, 22, 23.
+
+   TERMPWR ist an Pin 25 der externen 25 poligen DSub-Buchse.
+
+   Achtung: Pin 25 ist definitiv beim TT030 nicht belegt, also mu Pin
+            25 ber eine Diode vom Typ 1N4001 und einer 1 Ampere
+            Sicherung (Typ Flink) mit +5V verbunden werden, sonst funk-
+            tioniert der externe Terminator nicht!
+
+
+
+   Hier noch die Belegung fr SCSI-1-Ger„te (50pol.`Centronics-Buchse'):
+
+       Pin 1  2
+      GND  o  o Data 0
+           o  o Data 1
+           o  o Data 2
+           o  o Data 3
+           o  o Data 4
+           o  o Data 5
+           o  o Data 6
+           o  o Data 7
+           o  o Parity
+           o  o GND
+           o  o OPEN
+           o  o OPEN
+      Open o  o Term Power
+           o  o OPEN
+           o  o GND
+           o  o /ATN              auf den ungeraden Pins
+           o  o GND               liegt nur GND
+           o  o /BSY              (auer PIN 25, der ist ist OFFEN)
+           o  o /ACK
+           o  o /RST
+           o  o /MSG
+           o  o /SEL
+           o  o /C/D
+           o  o /REQ
+      GND  o  o /I/O
+      Pin 49  50
+
+
+   Hier noch die Belegung fr den ATARI Falcon030:
+
+       Pin 1-10 GND
+          11    ber 10 Kiloohm Widerstand auf +5V gelegt!
+          12-14 Open
+          15-25 GND
+          26    Datenbit 0
+          27    Datenbit 1
+          28    Datenbit 2
+          29    Datenbit 3
+          30    Datenbit 4
+          31    Datenbit 5
+          32    Datenbit 6
+          33    Datenbit 7
+          34    Datenbit PARITY
+          35+36 GND
+          37    NC
+          38    TermPower
+          39    NC
+          40    GND
+          41    -ATN (Attention)
+          42    GND
+          43    -BSY (Busy)
+          44    -ACK (Acknoledge)
+          45    -RST (Reset)
+          46    -MSG (Message)
+          47    -SEL (Select)
+          48    -C/D (Commund or Data)
+          49    -REQ (Request)
+          50    -I/O
+
+
+   Hier noch die Belegung fr die externe Buchse am ATARI TT030 und
+   Apple Macintosh:
+
+   Die Terminatoren beim TT030 werden so in die Sockel gesteckt, da
+   der mit einem Kreis markierte Pin 1 in Richtung CPU zeigt (also
+   nach LINKS)!
+
+          Pin
+           1 -REQ
+           2 -MSG
+           3 -I/O
+           4 -RST
+           5 -ACK
+           6 -BSY
+           7 -GND
+           8 -Data 0
+           9 -GND
+          10 -Data 3
+          11 -Data 5
+          12 -Data 6
+          13 -Data 7
+          14 -GND
+          15 -C/D
+          16 -GND
+          17 -ATN
+          18 -GND
+          19 -SEL
+          20 -Data PARITY
+          21 -Data 1
+          22 -Data 2
+          23 -Data 3
+          24 -GND
+          25 -TermPwr (ist beim TT030 und Macintosh NICHT belegt)
+
+
+   Bei der Aktiven Terminierung (110 Ohm) darf diese KEINESFALLS gegen
+   TERM-PWR des SCSI-BUS geschaltet werden.
+
+
+
+
+   Im Elektor-Halbleiterheft 1993 (7/8) ist auf Seite 40 eine Bauan-
+   leitung fr eine aktive SCSI-Terminierung:
+                               __________
+                        IC1   |          |
+                        ------2-----     |
+                       |            |    |                 je 120R
+    +5V )-----------*--1    L200    5----*--------*-------*---###---( *
+                    |  |            |    |        |       |
+   von Pin 26       |   --3------4--     # R3     # R1    *---###---( *
+   des SCSI-Kabels  |     |      |       # 39R    # 330R  |
+   (TermPwr)        |     |      |       |        |       *---###---( *
+                    |     |      *-------*        |       |
+             C1    ---    |      |       |        |         usw, 18
+             220nF ---    |      # R2   --- C2    |       Widerst„nde
+                    |     |      # 820R --- 100nF |      jeweils an die
+                    |     |      |       |        |       SCSI-Signale
+    Gnd )-----------*-----*------*-------*--------*
+                    |
+                   ---
+
+   * Die 18 120-Ohm-Widerst„nde kommen an die Anschlsse Nr. 2, 4, 6,
+     8, 10 und 12, 14, 16, 18, 32, 36, 38, 40, 42, 44, 46, 48, 50.
+   * Masse an alle ungeraden Pinnummern (ausgenommen 25, die ist n.c.),
+     zus„tzlich an die Pins 20, 22, 24, 28, 30, 34.
+   * +5V (TermPwr) liegt auf Pin 26.
+
+   * Widerstandsarrays
+       Pin 1 GND
+       Pin 2-7 an die Pins des SCSI-Steckers/Buchse
+       Pin 8 +5V
+
+
+   Auf dem SCSI-Bus mu grunds„tzlich das Ende des Bus durch Termi-
+   natoren abgeschlossen werden. Dabei handelt es sich um Widerst„nde
+   (die, wie oben beschrieben angeschlossen werden mssen!), die an den
+   Kabelenden Reflektionen unterdrcken und die SCSI-Signale auf einen
+   definierten Pegel bringen.
+
+   Ein Terminator ist etwa das gleiche, wie eine Schallschluckende
+   Oberfl„che in einem Raum. Wenn man eine harte und glatte Wand hat,
+   so gibt es Echos in dem Raum, bringt man jedoch eine weiche Ober-
+   fl„che an der Wand an (z.B. Schaumstoff), so gibt es keine Echos
+   mehr.
+
+   Von diesen Terminatoren drfen immer nur zwei Stck angebracht sein:
+   an den Enden des Kabels. Bei einem Terminator handelt es sich um
+   Widerstandarrays, die meistens auf dem Ger„t oder als externer Stek-
+   ker angebracht werden. Auf einem Ger„t besteht ein Terminator norma-
+   lerweise aus zwei (meist mit 10 Beinchen) oder drei (meist mit 8
+   Beinchen) schmalen, roten, schwarzen oder gelben Steckerchen, die bei
+   dem SCSI-Anschlu des Ger„tes in die Platine eingesteckt sind. Bei
+   den Festplatten der Firma Fujitsu ist der Terminator ein kleiner
+   grauer Plastikchip, der gesockelt direkt am SCSI-Anschlu der Fest-
+   platte sitzt.
+
+   Eine andere Variante sind aktive Terminatoren. Diese k”nnen im all-
+   gemeinen durch einen Jumper auf der Festplatte aktiviert werden
+   z.B. Quantum LPS525S : Jumper TE (Termination Enable))
+
+   Beachten Sie, da die Terminatoren an den Enden des Kabels sein
+   mssen, dies hat nichts damit zu tun, welche Ger„tenummer das Ger„t
+   hat, an dem die Terminatoren sitzen.
+
+   Es ist immer zu beachten, da sich die Terminatoren am Ende des KA-
+   BELS befinden mssen. Befindet sich am Ende des Kabels ein Ger„t,
+   so mu das Ger„t terminiert werden, handelt es sich um ein offenes
+   Kabelende, so mu das Kabel terminiert werden!
+
+
+   Ein paar Beispiele:
+
+   ATARI TT030:
+
+   Die Terminatoren beim TT030 werden so in die Sockel gesteckt, da
+   der mit einem Kreis markierte Pin 1 in Richtung CPU zeigt!
+
+
+   Hat der TT030 eine interne Festplatte und kein extern angeschlosse-
+   nes SCSI-Ger„t, mu sowohl die interne Festplatte, als auch das
+   Mainboard des TT030 (direkt hinter der 25pol SUB-D-Buchse) termi-
+   niert sein.
+
+   ACHTUNG: ATARI hat den Pin25 TermPwr nicht mit Spannung versorgt,
+   es mu also dafr gesorgt werden, da die Ger„te (Festplatten,
+   Wechselplatten, MO-Laufwerk, Streamer, etc.) die ben”tigte Span-
+   nung liefern oder man versorgt Pin 25 des externen SCSI-Ports (25
+   pol SUB-D-Buchse) ber eine 1N4001 Diode UND eine Sicherung (maxi-
+   mal 1 Ampere) mit der erforderlichen Spannung.
+
+   Hat der TT030 eine interne Festplatte und ein extern angeschlosse-
+   nes SCSI-Ger„t, mssen sowohl die interne Festplatte, als auch das
+   externe Ger„t, jedoch niemals das Mainboard des TT030 (direkt hin-
+   ter der 25pol SUB-D-Buchse), terminiert sein.
+
+   Anmerkung:
+
+   Hat man nur die interne Festplatte (in der Butterdose) angeschlos-
+   sen und mu aber permanent mal ohne externes Ger„t und dann mal
+   wieder mit externem Ger„t arbeiten, MU die interne Platte an ei-
+   nem sehr kurzen (so kurz wie m”glich!) Kabel angeschlossen werden
+   und auerdem terminiert sein. Dann kann man auch ohne Mainboard-
+   Terminierung arbeiten, aber NUR dann. ATARI hat das auch im MegaSTE
+   (dort ist aber der Hostadapter terminiert; die Platte darf KEINES-
+   FALLS im MegaSTE terminiert sein) so gemacht und Adaptec und Apple
+   machen es auch so (und es funktioniert auch).
+
+
+   Hat der TT030 keine interne Festplatte und nur extern angeschlos-
+   sene SCSI-Ger„te, mu sowohl die letzte externe Festplatte, als auch
+   das Mainboard des TT030 (direkt hinter der 25pol SUB-D-Buchse) ter-
+   miniert sein.
+
+   ACHTUNG: ATARI hat den Pin25 TermPwr nicht mit Spannung versorgt, es
+   mu also dafr gesorgt werden, da die Ger„te (Festplatten, Wech-
+   selplatten, MO-Laufwerk, Streamer, etc.) die ben”tigte Spannung
+   liefern oder man versorgt Pin 25 des externen SCSI-Ports (25pol
+   SUB-D-Buchse) ber eine 1N4001 Diode UND eine Sicherung (maximal 1
+   Ampere) mit der erforderlichen Spannung.
+
+
+   ATARI Falcon030:
+
+   Ob der Falcon030 ber eine interne (IDE/AT-BUS) Festplatte verfgt,
+   ist fr den sicheren Betrieb des SCSI-Ports belanglos, da der
+   IDE/AT-BUS Port nichts mit dem SCSI-Port zu tun hat.
+
+   Der Falcon ist grunds„tzlich das erste/letzte Ger„t am SCSI-BUS
+   (jenachdemm, aus welcher Seite man den Bus betrachtet), daher ist der
+   Falcon030 auch Standardm„ig (Standard schreibt man mit D!) auf dem
+   Mainboard terminiert. Es mu nur noch das letzte Ger„t am SCSI-Bus
+   terminiert werden, im Gegensatz zum TT030 liefert der Falcon030
+   jedoch die ben”tigte Speisespannung fr TermPwr an Pin 38 der
+   SCSI-2-Buchse.
+
+   Achtung: Die internen Terminatoren werden ber eine andere Diode
+   (D6) mit Spannung aus dem Falcon030 Netzteil versorgt! Fr den
+   SCSI-BUS ist beim Falcon030 die Diode (D5) und die Sicherung
+   (F1) zust„ndig!
+
+
+   Ger„te an DMA-Adaptern am ACSI-Port (ST/STE, MegaST, MegaSTE und
+   ACSI-Port am TT030:
+
+   Im allgemeinen besitzen die Hostadapter eine Terminierung. Damit
+   sollte der Hostadapter am einem Ende des Kabels angeschlossen wer-
+   den und am letzten angeschlossenen Ger„t mu ein Terminator sein.
+   Ausnahme: Die Hostadapter des ATARI MegaSTE und der Megafile, da
+   drfen die angeschlossenen Ger„te nicht terminiert sein!
+
+   Wieso denn das, werden Sie sich jetzt fragen?
+   Beide Hostadapter sind A.) nur fr kurze Kabelwege gebaut
+                          B.) verfgen nur ber einfache Treiber
+                          C.) genaueres und Ausfhrlicheres in den
+                              Dateien MSTEPRTY.TXT und MF44PRTY.TXT
+
+   Einige Hostadapter haben keine Terminatoren, daher sollten sie ir-
+   gendwo in der Mitte des Kabels liegen, und die Ger„te an den Enden
+   sollten terminiert sein. Der GE-V und GE SOFT TOPlink ist ein sol-
+   cher Adapter.
+
+
+   Falls Zweifel bestehen, ob ein Ger„t (egal, ob Hostadapter oder Fest-
+   platte, Wechselplatte, MO-Laufwerk, Streamer, etc.) terminiert ist,
+   kann man dies mit einem einfachen Meger„t selbst berprfen:
+
+   Einfach von Pin 2/4/6/8/10/12/14/16/18/32/36/38/40/42/44/46/48/50
+   einmal nach Pin 1-49 (die ungeraden!) messen ob ein Widerstandswert
+   von ca. 330 Ohm vorhanden ist und von Pin 2/4/6/8/10/12/14/16/18/32
+   /36/38/40/42/44/46/48/50 gegen Pin 26 messen ob ein Widerstandswert
+   von ca. 220 Ohm vorhanden ist, dann kann man eigentlich sicher sein
+   das da Ger„t terminiert ist.
+
+
+   Ob ein Ger„t die Spannung fr TermPwr liefert, kann man einfach
+   durch messen der Spannung zwischen Pin 26 und Pin 1 am SCSI-Bus
+   feststellen. Dort sollten knapp 5V (abzgl. der Diodenspannung)
+   anliegen.
+
+
+   Terminator Power by Single-ended SCSI devices
+
+   Die Spannung (TermPwr) soll zwischen 4.00 und 5.25 Volt Gleichspan-
+   nung betragem. Minimal sollte ein Laststrom von 0.8 Ampere gew„hr-
+   leistet sein. Auerdem MU jedes Ger„t eine Sicherung von 1.0 Am-
+   pere besitzen.
+
+
+
+
+   Unit-Attention
+
+   Einige Festplatten senden das "Unit-Attention" Signal nach einem
+   RESET und sind daher nicht sofort ansprechbar. ltere TOS-Version
+   vor TOS 2.05 (also 1.00 - 1.62) fragen den Festplattenport nur ein-
+   mal nach einem Reset oder dem Einschalten ab und booten dann, wenn
+   die Festplatte nicht richtig antwortet, vom Diskettenlaufwerk A.
+   Neuere TOS-Version als 2.05 fragen den Festplattenport zweimal ab
+   und booten auch dann von Festplatte, wenn Unit-Attention im Fest-
+   platten-Setup eingeschaltet ist.
+
+   Also: Vor TOS 2.05 sollte man Unit-Attention abschalten.
+         Nach TOS 2.05 ist es egal, ob Unit-Attention ein- oder abge-
+         schaltet ist.
+
+
+
+
+   Bus-Arbitration
+
+   Jetzt h”re ich hier st„ndig von Bus-Arbitrierung, aber: Was ist das
+   genau?
+
+   Wenn mehrere Initiatoren auf einem SCSI-Bus aktiv sind, mssen sie
+   sich verst„ndigen, wer den Bus gerade benutzen darf.
+
+   Dazu gibt es die Arbitraton-Phase (Schiedsrichter-Phase), in der ent-
+   schieden wird, wer als n„chstes den Bus bekommt. Wollen mehrere Ini-
+   tiatoren gleichzeitig den Bus benutzen, bekommt der mit der h”chsten
+   SCSI-ID den Bus.
+   Der Bus geh”rt diesem dann, bis er ihn wieder freigibt (Bus-Free
+   signalisiert)
+
+   Damit k”nnen tats„chlich mehrere Ger„te gemeinsam ein Ger„t benut-
+   zen.
+
+   Zus„tzlich k”nnen die Rechner sich auch untereinander unterhalten
+   und damit eine Netzverbindung aufbauen.
+
+   Initiatoren k”nnen Rechner sein (mehrere Rechner auf einer Platte),
+   oder auch Streamer (selbstt„tiges Copy einer Festplatte) oder auch
+   F„lle von Reselektion (Ger„t hat sich wegen einer lang dauernden
+   Aktion abgemeldet und meldet sich mit Vollzug zurck)
+
+   Ach ja, wesentliche Voraussetzung: echte SCSI-Ports! Mit einem
+   ACSI-Hostadapter geht das nicht!
+
+
+   Bei mehreren Ger„ten am SCSI-Bus gibt es verschiedene Dinge, die zu
+   beachten sind oder erfllt sein mssen:
+
+
+   1. Wollen mehrere Initiatoren _gleichzeitig_ den Bus benutzen, so
+   _mssen_ sie selbst eine ID haben und bei Benutzung des Bus
+   arbitrieren.
+   Desweiteren mssen sie zwingend Informationen austauschen, wenn
+   einer die Daten auf einem Laufwerk ver„ndert, damit der andere das
+   mitbekommt.
+
+   2. So mu zB arbitriert werden, wenn man zwei TTs hat, die auf der
+   gleichen Platte Linux und TOS fahren. Austausch von Informationen
+   ist dann nicht n”tig, aber dennoch ist Arbitrierung n”tig.
+
+   3. Ist ein Initiator aktiv, so darf dies bei keinem anderen Inita-
+   tor zu Reaktionen fhren.
+
+   4. Mit ACSI-Hostadaptern ist eine Arbitrierung und Identifikation
+   (siehe 1.) nicht m”glich. Eine auf dem Adapter fest verdrahtete
+   Identifikation w„re zwar m”glich, mir ist aber kein Hostadpater
+   bekannt, der dies tut.
+
+   5. ACSI-Hostadapter best„tigen selbstt„tig den Empfang eines Msg-
+   Bytes (wird nach jedem Kommando verschickt). Vermutlich machen alle
+   Hostadapter dies auch dann, wenn sie vorher gar nicht aktiv waren,
+   also eigentlicher Empf„nger des Msg-Bytes sind. Damit funken sie
+   dem aktiven Initiator in den Empfang des Msg-Bytes rein, was dazu
+   fhrt, da der echte SCSI-Port in seinem Betrieb gest”rt wird.
+
+   Ergo: ein gemischter Betrieb mit einem ACSI-Hostadapter ist nicht
+   m”glich.
+
+   Ausnahmen: Lacom-Adapter der letzten Bauart haben das Problem mit
+   Punkt 5. nicht, daher ist ein Betrieb gem„ Punkt 2. m”glich.
+   Punkt 1. ist evtl. mit speziellen Hostadaptern m”glich (das veba-
+   Interface kann dies angeblich)
+
+   Zwischen zwei Rechnern mit _echten_ SCSI-Ports (TT, Falcon, Medusa,
+   Eagle, Mac) ist ein paralleler Betrieb m”glich, es ist auch m”glich,
+   ein Netzwerk aufzubauen, indem ein Rechner nach dem Booten alle
+   Laufwerke abmeldet und nur noch ber den servenden anderen Rechnern
+   ber den als SCSI-Netzwerk funktionierenden SCSI-Bus zugreift.
+
+   Dazu noch eine Bemerkung: einige Festplatten ben”tigen eine Initia-
+   tor Identifikation (beim Zugriff sagt man, wer man ist). Dies ist
+   keine Arbitrierung! Arbitrierung beinhaltet allerdings diese Iden-
+   tifikation. Damit ben”tigt z.B. die Quantum Empire keine Arbitrie-
+   rung, sondern nur eine Identifikation!
+
+   Will man von der Quantum Empire booten, mu das TOS des Rechners
+   gepatcht werden, weil das TOS ja schon beim Versuch den Rootsektor
+   zu lesen keinerlei eigene ID auf den Bus legt. Will man nicht von
+   der Platte booten, reicht ein Harddisktreiber aus, der Bus-Arbitra-
+   tion beherscht!
+
+
+
+
+   Das Kabel
+
+   Achtung, nicht jedes Kabel ist SCSI-tauglich!
+
+
+   Yepp, SCSI-Kabel mit guter Qualit„t (Premium Qualit„t) weisen fol-
+   gende Punkte auf:
+
+   * Doppelte Schirmung
+     Bestehend aus Folienschirmung und verwebter Schirmung
+
+   * Paarweise Verdrillung
+     Sie verst„rkt den Effekt der Abschirmung
+
+   * Vergossen geschirmte Abschlsse
+     Sehr wichtig fr reibungslose SCSI-Verbindung
+
+   * Vergoldete Kontakte
+     Sie sorgen fr Korrosionsschutz und einwandfreie Verbindung der
+     Kontakte.
+
+   * korrekter Wellenwiderstand nach SCSI-Norm - sonst ntzt der ganze
+     Rest n„mlich nichts.
+
+
+   Konkrete Daten laut SCSI-Spezifikation
+
+   Impedanz 90 - 132 Ohm
+   Leitungswiderstand maximal 0.23 Ohm/Meter bei 20 Grad Celsius
+   D„mpfung 0.095 Dezibel/Meter bei 5MHz
+   Laufzeitunterschied zwischen zwei Leitern <0.2 nanosekunden/meter
+
+
+   Die einzige M”glichkeit der Qualit„tskontrolle (ohne spezielle Me-
+   ger„te) liegt im aufschneiden der Kabel, da auch ein dickes Kabel
+   (Groer Auendurchmesser) nicht unbedingt die oben genannten Punkte
+   /Features hat bzw. aufweist.
+
+   Sollte sich der H„ndler weigern, eine lebenslange Garantie auf das
+   Kabel zu geben (Ausnahme: mechanische Besch„digung), sollte man
+   vorsichtig sein. Der Ausdruck bzw. die Bezeichnung PREMIUM QUALITT
+   ist n„mlich
+
+                                NICHT  GESCHšTZT
+
+   und daher kann jedes billige Kabel auch als SCSI-Kabel bezeichnet
+   und verkauft werden!
+
+   Nichts ist „rgerlicher als ein SCSI-Kabel fr 12.90 DM mit sieben
+   Anschlssen (Buchsenleisten), welches dann doch fr Datenverlust
+   sorgt, weil die elektrischen Spezifikationen NICHT eingehalten
+   werden!
+
+
+              ANMERKUNG: Die jeweils aktuelle
+
+   ENGLISCHSPRACHIGE FAQ liegt unter SCSI.ZIP
+
+   ENGLISCHSPRACHIGE original Spezifikation liegt unter SCSI2DOC.LZH
+
+   in den Mailboxen (auf alle F„lle in der X Factor +49-6142-33669)
+

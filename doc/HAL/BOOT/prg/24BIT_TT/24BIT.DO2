@@ -1,0 +1,41 @@
+Organization: Atari Corp., Sunnyvale CA
+Lines: 118
+
+david@bdt.UUCP (David Beckemeyer) writes:
+>I know GFA programs don't run on the TT.
+
+This is not exactly true.  Programs compiled with GFA 2.x will run on
+the TT if you use ||e program 24BIT.PRG (included below) in your AUTO
+folder.  What that program does is use the MMU to cause the CPU to
+ignore the high byte of all addresses.  GFA BASIC uses the high bytes
+of addresses for something, like a type value, and therefore isn't
+"32-bit clean." 24BIT.PRG lets you run those programs.  You should also
+run with the cache OFF, because the cache uses all 32 bits: $01xxxxxx
+doesn't appear to be the same address as $02xxxxxx, even though they
+are after they get through the MMU.
+
+24BIT.PRG must run in your AUTO folder.  It has to run before any TSR's
+that have their "alternative RAM load/alloc" bits set, so alternative
+RAM is empty.  24BIT gobbles up your alternative RAM, so your system
+runs as if you don't have any.  (If you *really* don't have any, this
+is a no-op.)  You lose access to the VMEbus, too.  This is the price
+you pay to run non-32-bit-clean programs.  GFA is working on their
+problem.
+
+GFA BASIC itself doesn't run on a TT, even under 24BIT.PRG.  I don't
+know about programs compiled with other versions of the compiler, or
+whether the compiler itself runs.
+
+In addition to not being 32-bit clean, GFA BASIC uses memory it doesn't
+own.  This means they are very sensitive to having other things in
+memory (like another process if you're multitasking), and sensitive to
+the TOS version (because they rely on certain undefined behavior of
+Malloc.)  These practices are Not a Good Thing, and I yelled at them
+about this when I was in Dusseldorf.
+
+24BIT will run, but complain, if you're not on a TT, if your TT RAM
+isn't empty, or if anything else is funky.
+
+============================================
+Opinions expressed above do not necessarily     -- Allan Pratt, Atari Corp.
+reflect those of Atari Corp. or anyone else.      ...ames!atari!apratt

@@ -1,0 +1,22 @@
+                       RS232 Configuration program  21 Jan 1995
+
+
+	Having recently obtained Ghostlink, an excellent utility which allows
+you to link a PC to your Atari and use the PC as a slave, I found that the ST
+was not defaulting to a baud rate which was compatible. I found that the rate
+19200 gave the best result. So I needed a program, just a simple one, to give
+me the opportunity of changing the RS232 configuration. Here is the result.
+
+	Actually this only sets the flow control off (default anyway) and the
+baud rate to 19200 unless you select otherwise.  The program whould be placed
+in an AUTO folder.  By pressing either the left or right shift key whilst the
+program loads and runs you can select a rate to use. Just letting the program
+run will result in 19200 being used.
+
+	If there is demand  (I somehow doubt it!)  and perhaps with financial 
+reward (doubt increases!) I may change the program so that you can change the
+default value.
+
+	Have fun. Contact me (PC swaps, ST swaps, etc)...
+	
+	Martin Cubitt, 14 Deepdene Avenue, Rayleigh, Essex SS6 9LG    England

@@ -1,0 +1,125 @@
+      /ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ\
+     /                                                                       /
+     \                                                                      /
+      \   \ÿ\______________________________________________________________/
+   /ÿ/_\   \  /ÿ\  /ÿÿÿÿÿÿÿ\  /ÿ\  /ÿÿÿÿÿÿ/ /ÿÿÿÿÿÿÿ/ /ÿÿÿÿÿÿÿÿ/ /ÿÿÿÿÿÿ\ 
+  /        / /  / /  /ÿÿ/  / /  /  \   \ÿÿ  ÿÿ/  /ÿÿ /  /ÿÿÿÿÿÿ /  /ÿÿ/ / 
+ /        / /  / /  /  /  / /  / ___/   \    /  /   /  /ÿÿÿÿ   /  /ÿÿ\  \  
+/        / /  / /  /  /  / /  / /       /   /  /   /  /_____  /  /   /  /
+\_______/ /__/ /__/  /__/ /__/ /_______/   /__/   /________/ /__/   /__/
+
+       /ÿÿ\   /ÿ/ÿÿ /ÿ/ /ÿ/  /ÿ/ÿÿ  /ÿ/   /ÿÿ\   /ÿÿ\   
+      /   /  / /_  / / / /  / /__  / /   /   /  /   /
+     /   /  / /    \ \/ /  / /    / /   /   /  / /ÿÿ  
+    /___/  /_/__    \__/  /_/__  /_/__  \__/  /_/    
+  
+                                 /ÿ/ÿ/ÿ/ÿ/  /ÿ/ÿÿ  /ÿ/ÿ/ÿ/ ÿÿ/ÿ/ÿÿ /ÿ/ÿÿ
+                                / / / / /  / /__  / / / /   / /   /_/__
+                               / /   / /  / /    / / / /   / /      / /
+                              /_/   /_/  /_/__  /_/ /_/   /_/    __/_/
+
+
+                                 FALCON BOOT 
+                                 ===========
+
+                                 Version 1.2
+                                 ===========
+
+                              A FALCON FREEBIE!!
+                              =-=-=-=-=-=-=-=-=-
+
+Ok folks, I wrote a rough version of this program the day I got my FALCON.
+It simply turned off the internal speaker after the fright I got when the
+music in lotus turbo 3 came pounding out that infernal speaker.
+
+The program on the disk installs a boot sector onto the disk in drive A.
+
+Simply reboot and it gives you the following options:-
+
+1 - Disable the 68030's INSTRUCTION cache.
+2 - Disable the 68030's DATA cache.
+3 - Disable the 68030's MMU. 
+4 - Turn down volume of Falcons internal speaker. 
+5 - Quit and run a bootsector
+6 - Quit and bypass hard drive.
+7 - Quit and continue as normal.
+
+Sorry for the rather brief text in the bootsector but when you have got less
+than 500 bytes to play around with, something has to go. Of course if 
+something like this was built into the ROM (like in the A1200) then we would
+not have any problems with space ;)
+
+For best results try to leave both the caches switched on.
+Most ST games will need the MMU switched off(see below for problems). 
+The sound chip will still cause problems but apart from modifying the game
+there are no solutions at the moment :( 
+
+For some strange reason the operating system grinds to a halt when the MMU
+is disabled so its best to run boot disks like No second prize and hunter.
+If you do have to use GEM then moving the mouse will speed things up.
+
+The program won't work on any other machine, it does this by checking the
+cookie jar for a '_MCH' entry if present then a value of $30000 indicates
+that the machine is a falcon.
+
+If you want to contact me then write to :- Mike Watson,
+                                           42 Gilmore Place,
+                                           Edinburgh, 
+                                           SCOTLAND,
+                                           EH3 9NQ
+
+************************** SOME OF THE GAMES TESTED **************************
+
+3D POOL
+ARCHER MACLEANS POOL
+BUGGY BOY
+CLOUD KINGDOMS - RUNS IN A FRAME!!
+CRACKDOWN
+DRAGON BREED
+ELITE
+FORMULA ONE GRAND PRIX  - YEAH!!
+GAUNTLET 2
+GHOSTS & GOBLINS
+GODS (DEMO) - RELEASE CRASHES IN DIGI MUSIC
+HAWKEYE
+HUNTER
+KICK OFF 2       -  TOO FAST TO BE PLAYABLE
+KNIGHTS OF THE SKY      - IS MUCH MORE PLAYABLE!!
+MIG 29 SUPER FULCRUM
+MOONSHINE RACERS - THIS ACTUALLY SHOWS A *BIG* IMPROVEMENT
+MOONSHINE RACERS (DEMO)
+NIGEL MANSELLS WORLD CHAMPIONSHIP
+NITRO
+NO SECOND PRIZE  -  DAMN COOL AS WELL B)  (HAPPY GUY WITH SUNGLASSES!!)
+P47
+PACMANIA
+PARASOL STARS
+QUARTZ
+R-TYPE
+ROBOZONE
+RODLANDS
+SPEEDBALL 2
+STARGLIDER 2
+U.N SQUADRON
+VIRUS
+
+
+Feel free to add to the list....
+********************************** HISTORY ***********************************
+
+Version 1.1 released - 29/04/1993
+More games now work. How? Well the 68030 has a built in MMU which can be used
+to protect memory (essential when you are multi-tasking) but since most ST
+games like to grab all of the RAM the MMU gets a bit upset and the machine 
+crashes. The new option toggle MMU allows you to overcome this.
+
+******************************************************************************
+
+Version 1.2 released - 02/05/1993
+A small 'bugette' fixed and the option to turn either or both of the caches
+has been added.
+Disable speaker changed to turn down volume instead. This cannot be 'un done'
+by ST programs that poke the sound chip illegally.(unlike a straight disable 
+of the speaker).
+
+******************************************************************************

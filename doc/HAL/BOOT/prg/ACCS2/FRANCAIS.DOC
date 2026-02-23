@@ -1,0 +1,36 @@
+**********************************************************************
+                           Accessories 2.0
+
+                       Micka‰l Cousin - 19 mai 1997
+**********************************************************************
+
+
+Voici un programme qui permet de charger les accessoires dans le
+r‚pertoire de son choix sous TOS monotƒche.
+
+Cela permet de garder une racine de boot moins encombr‚e, et les
+utilisateurs de Magic ou Multitos (qui intŠgrent cette option) peuvent
+retrouver leurs accessoires quand ils ont besoin de revenir en TOS
+monotƒche.
+
+Installation :
+
+Copiez ACCS.PRG et ACCS.INF dans le dossier AUTO de votre disque de boot,
+et ‚ditez le fichier ACCS.INF pour configurer le chemin des accessoires.
+Si ce fichier est vide ou manquant, les accessoires sont charg‚s … partir
+du chemin \ACCS\.
+
+Le chemin du fichier de configuration doit ˆtre de la forme :
+\chemin\des\accessoires\   (ne pas oublier le '\' … la fin)
+
+Vous pouvez avoir, par exemple :
+   \GEMSYS\ACCS\
+
+Tous les accessoires seront alors charg‚s … partir de ce r‚pertoire et
+seront recharg‚s aprŠs un changement de r‚solution.
+
+Contact :
+
+Pour les bugs, r‚actions, ou n'importe quoi :
+   mika@uco.fr
+

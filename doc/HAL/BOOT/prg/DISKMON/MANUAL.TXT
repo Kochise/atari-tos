@@ -1,0 +1,319 @@
+                          Anleitung fuer DISKMON
+                          ======================
+
+                  Entwickelt mit ST-Pascal Plus von CCD
+
+                          Public Domain Version
+
+                             (C) Januar 1988
+
+                              Juerg Moeckli
+                             Oberwilerstr. 14
+
+                             CH-8444 Henggart
+
+1. Copyright
+------------
+
+Dieses Programm ist frei kopierbar. Es darf weder vermarktet noch verkauft 
+werden. Alle Dateien in diesem Ordner muessen beisammenbleiben.
+
+Dieser Monitor entstand, weil ich mit der Bedienung saemtlicher bestehen-
+der Programme dieser Art einfach nicht mehr zufrieden war. Ich habe mir 
+daher vor allem bei der Bedienerfuehrung sehr viel Muehe gegeben. 
+Wenn Du den Monitor brauchen kannst, haette ich darum gegen eine kleine 
+Spende an obige Adresse nichts einzuwenden. Gegen DM 20.-/sFr 15.- und 
+eine bereits formatierte Diskette erhaeltst Du auf jeden Fall den 
+dokumentierten Pascal-Source-Code (Nuetzt aber sicher auch den GFA- und C-
+Programmieren etwas).
+Momentan arbeite ich an einer neuen Version dieses Monitors mit Datei-
+modus, Datei-Restaurierung, FAT-Anlyse, tieferes Eindringen in die Track-
+Struktur, Spezialformate, usw.
+
+2. Einfuehrung
+--------------
+
+Bei DISKMON handelt es sich um ein Hilfsprogramm, um einen sog. Disketten-
+Monitor. Mit diesem Werkzeug k”nnen die Daten und die Strukturen auf einem 
+Disk-Laufwerk untersucht werden. Fuer die, die darueber nicht so genau 
+Bescheid wissen, sei auf weiterfuehrend Literatur verwiesen (z. B. Sybex : 
+ST Profibuch).
+DISKMON funktioniert nur im hoechstaufloesendem Modus (640*400 Pixels), 
+dafuer aber auf allen ST-Computern. Es k”nnen beinahe alle Arten von ST-
+Disketten, Harddisks, Ramdisks, usw untersucht werden. Der Monitor ist 
+durch seine vollkommene GEM-Steuerung sehr einfach zu bedienen und erlaubt 
+daher vor allem auch dem Anfaenger eine gute Einarbeitung in dieses 
+Gebiet.
+Doch nun zu einer kurzen Anleitung: Ein ' vor einer Tastenangabe bedeuted 
+immer, dass betreffende Taste zusammen mit einer der beiden Shift-Tasten 
+zu betaetigen ist.
+
+3. Starten des Programmes
+-------------------------
+
+Doppelklick auf DISKMON.PRG. Achte darauf, dass sich die RSC-Datei im 
+gleichen Ordner befindet! Nach wenigen Sekunden erscheint das Desktop von 
+DISKMON. Es wird dabei automatisch der erste Sektor vom Laufwerk, von dem 
+DISKMON gestartet wurde, geladen und auf dem Bildschirm angezeigt.
+
+4. Die Menu-Leiste
+------------------
+
+4.1. Das Atari-Menu
+-------------------
+
+4.1.1. PD-Version
+-----------------
+
+Bewirkt das Erscheinen der Copyright-Meldung. 
+
+4.1.2. Accessories
+------------------
+
+Accessories k”nnen wie ueblich benutzt werden. Wenn diese richtig pro-
+grammiert wurden, sollten keine Schwierigkeiten in der Zusammenarbeit mit 
+DISKMON entstehen.
+
+4.2. Das Sektor-Menu
+--------------------
+
+4.2.1. Speichern
+----------------
+
+Der auf dem Bildschirm angezeigte Sektor wird ohne Rueckfrage auf die 
+aktuelle Disk geschrieben. Dasselbe passiert, wenn Du F9 drueckst. Dieser 
+Punkt ist  fuer Deine Disketten natuerlich der gefaehrlichste. Pass also 
+auf. Dafuer ist er aber auch der einzige, welcher irgendetwas auf der Disk 
+aendert.
+
+4.2.2. Beenden
+--------------
+
+Verlaesst den Monitor sofort. Dasselbe geschieht bei Druecken der F10-
+Taste oder bei Anklicken der Fenster-Schliessbox.
+
+4.3. Floppy
+-----------
+
+Hier kann ein neues Floppy angewaehlt werden. Es stehen die beim BIOS 
+angmeldeten Laufwerke zur Verfuegung; maximal sind dies A:\ bis P:\. Der 
+Rest wird "disabled" dargestellt. Die Sektorzahl wird bei einem Laufwerks-
+Wechsel gegebenfalls angepasst.
+Durch Anwaehlen des aktuellen Laufwerkes (erkenntlich am Haeckchen) wird 
+der gerade angezeigte Sektor nochmals eingelesen. Bei den Laufwerken C:\ 
+bis P:\ kann es sich um Harddisks, Ramdisks, usw. handeln. Sie solten aber 
+das normale Atari-Format benutzen.
+
+4.4. Suchen
+-----------
+
+4.4.1. Suche
+------------
+
+Es erscheint eine Dialogbox, in welche eine Zeichenkette eingegeben werden 
+kann. Mit den Knoepfen darunter kann angegeben werden, ob nach einer 
+Zeichenkette (Ascii) oder nach einer hexadezimalen (so wissen schon 0..9, 
+A..F oder a..f) Zahl (Hex)  gesucht werden soll. 
+Bei der Suche nach einer Zeichenkette kann dabei noch angegeben werden, ob 
+dabei die Gross-Kleinschreibung ignoriert oder beachtet werden soll.
+Die Suche kann jederzeit durch Druecken der Esc-Taste unterbrochen werden. 
+Gesucht wird immer ab dem Zeichen hinter der momentanen Cursorposition im 
+Edit-Fenster! 
+Dasselbe geschieht uebrigens bei Betaetigung der F3-Taste.
+
+4.4.2. Wiederholen
+------------------
+
+Die vorher eingebene Suche wird ab der aktuellen Cursorposition wiederholt 
+(Weitersuchen). Dasselb passiert durch 'F3. Abgebrochen wird wiederum 
+durch Esc.
+
+4.5. Gehe zu ...
+----------------
+
+Damit kann direkt zu wichtigen Sektoren auf der Disk gesprungen werden.
+
+4.6. Diverses
+-------------
+
+4.6.1. Diskinfo
+---------------
+
+Es wird ein Dialog mit den wichtigsten Informationen ueber die aktuelle 
+Floppy darbestellt. Bei Harddisks koennen einige Angaben im Bootsektor 
+natuerlich Unsinn bedeuten.
+
+4.6.2. Tastatur
+---------------
+
+Es werden einige besondere Tasten erlaeutert.
+
+
+5. Das Editier-Fenster
+----------------------
+
+Das Editierfenster besteht aus drei Teilen:
+  - Adressen-Angabe in Hexadezimaler Darstellung
+  - Hexadezimale Sektor-Darstellung
+  - Ascii-Sektor-Darstellung
+
+Mit dem Maximalvergroesserung-Knopf rechts oben im Fenster kann zwischen 
+zwei Schriftarten umgeschaltet werden. Mit der groesseren Schrift kann ein 
+halbe Sektor (16*16 Zeichen = 256 Bytes) dargestellt werden; mit der 
+kleineren ein ganzer (32*16 Zeichen)!! Dasselbe bewirkt das Druecken der 
+Insert-Taste.
+
+5.1. Adressen
+-------------
+
+Die Adressen sind die erste Kolonne im Fenster und beziehen sich immer nur 
+auf einen Sektor. Daher beginnen sie mit $000 und enden mit $1F0. Es ist 
+damit die Position des ersten Bytes in einer Zeile gemeint.
+
+5.2. Hex-Darstellung
+--------------------
+
+Zeigt den Sektor in hexa-(se-)dezimaler Darstellung. Darum sind als Ein-
+gabe nur die Zahlen 0..9  und die Buchstaben A..F erlaubt. Die Buchstaben 
+koennen in Klein- oder in Grossschrift eingeben werden. Immer zwei Ziffern 
+gehoeren dabei zu einem Byte im Sektor.
+
+5.3. Ascii-Darstellung
+----------------------
+
+Der Sektor wird als Ascii-Buchstaben angezeigt. Es sind dabei saemtliche 
+Eingaben aus dem ST-Zeichensatz erlaubt. Mit der Tab-Taste kann zwischen 
+den beiden Edit-Modi umgeschaltet werden. Der momentan aktuelle Modus wird 
+ganz links unten angezeigt.
+
+5.4. Die Cursor
+---------------
+
+Es existieren immer zwei Cursor, einer im Ascii-, und einer im Hex-Feld. 
+Die Positionen entsprechen sich dabei natuerlich. 
+Der Cursor kann durch Maus-Klick oder mit den Pfeil-Tasten auf der Tasta-
+tur verschoben werden.
+'Pfeil auf und 'Pfeil ab bringen den Cursor an den Anfang oder an das Ende 
+der der angezeigten Seite;
+'Pfeil links oder 'Pfeil rechts bringen ihn an den Anfang oder an das Ende 
+einer Zeile;
+Home und 'Home positionieren ihn auf das erste oder das letzte Byte im 
+Sektor.
+
+5.5. Der vertikale Scroll-Balken
+--------------------------------
+
+Falls die grosse Schrift gewaehlt ist, kann mit diesem Scrollbalken in 
+ueblicher Weise innerhalb eines Sektors geblaettert werden.
+
+5.6. Der horizontale Scroll_Balken
+----------------------------------
+
+Mit diesem Balken werden neue Sektoren eingelesen. Mit den Pfeilen wird 
+ein logischer Sektor zurueck  oder vorgegangen. Durch Anklicken der 
+punktierten Bereiche geschieht das gleiche mit neun Sektoren. Mit dem 
+verschiebbaren weissen Teil kann stufenlos vor- oder zurueckgegangen 
+werden.
+
+
+6. Die Anzeige-Felder
+---------------------
+
+Die Anzeigefelder sind in sechs Bereiche gegliedert:
+  - Editiermodus (Ascii/Hex)
+  - Absolute Kopf-Position
+  - Logische Position
+  - Datei-Position (nicht verfuegbar)
+  - Offset
+  - Wert
+
+Alle Felder, die nicht disabled dargestellt sind koennen mit der Maus 
+direkt angewaehlt und auch editiert werden.
+
+6.1. Edit-Modus
+---------------
+
+Hier wird angezeigt, ob momentan im Ascii- oder im Hex-Modus edidiert 
+wird. Zwischen den beiden Modi kann auch durch Ankicken dieser Felder 
+umgeschaltet werden.
+
+6.2. Absolute Position
+----------------------
+
+Fuer die Laufwerke A:\ und B:\ wird hier die wirkliche (absolute) Kopf-
+Position angezeigt. Mit den Pfeil-Knoepfen kann die Sektor-, Spur- oder 
+Seitenzahl erhoeht oder erniedrigt werden.
+bei Anklicken eines der Editierfelder wird das ganze Feld schwarz. 
+Es kann dann direkt eine Seite/Spur/Sektor wie in Dialogboxen ueblich 
+angegeben werden. Durch 'Return' wird der ausgewaehlte Sektor eingelesen.
+
+Dabei sind folgende Bereiche moeglich:
+  Seiten   : 0..1;
+  Tracks   : 0..84;
+  Sektoren : 0..12;
+
+Bei unueblichen Angaben kann unter Umstaenden die Anzeige der logischen 
+Position falsch sein.
+Bei den Laufwerken C:\ bis P:\ wird dieses Feld ausgeblendet, da bei 
+diesen die Kopfposition ja nicht mehr absolut angegeben werden kann.
+
+6.3. Logische Position
+----------------------
+
+Hier wird die logische Sektornummer angegeben. Dabei ist ein Bereich von
+  0..Anzahl Sektoren-1 (letztr)
+moeglich.
+Bei Cluster kann direkt ein Cluster auf Disk angsprungen werden. Die 
+Zaehlung beginnt hier erst bei 2, da der erste Datensektor auf Disk immer 
+zur Clusternummer 2 gehoert.
+Bei den Laufwerken A:\ und B:\ wird die Absolute Position immer auch 
+nachgefuehrt.
+
+6.4. Offset
+-----------
+
+Zeigt die Cursor-Position im Sektor in dezimaler und in hex-Darstellung 
+an.
+
+6.5. Wert
+---------
+
+Zeigt den Wert des Bytes an der Cursor-Position in dezimaler und binaerer 
+Schreibweise an. Diese Werte koennen ebenfalls direkt eingegeben werden.
+
+7. Tastenbelegung
+-----------------
+
+Hier nochmals Zusammenfassend die Tastenbelegung von DISKMON:
+
+ Tab          : Umschalten zwischen Editieren in Hex oder in Ascii
+ Insert       : Umschalten zwischen grosser und kleiner Schrift
+ Pfeile       : Bewegen den Cursor auf, ab, links, rechts
+'Pfeil links  : Bewegt den Cursor an den Anfang einer Zeile
+'Pfeil rechts : Bewegt den Cursor an das Ende einer Zeile
+'Pfeil auf    : Bewegt den Cursor an den Anfang der Seite
+'Pfeil ab     : Bewegt den Cursor an das Ende der Seite
+ Home         : Positioniert den Cursor auf das erste Byte im Sektor
+'Home         : Positioniert den Cursor auf das letzte Byte im Sektor
+ linke MTaste : Positioniert den Cursor unter Mauszeiger, Schaltet ev. 
+                auch zwischen Ascii- und Hex-Edit um
+
+ F1           : log. Sektor vor
+'F1           : 9 log. Sektoren vor
+ F2           : log. Sektor zurueck 
+'F2           : 9 log. Sektoren zurueck
+ F9           : Sektor speichern
+
+ F3           : suchen
+'F3           : suchen wiederholen
+
+ F10          : Ende
+  
+
+8. Fehler
+---------
+
+Ich habe mein Programm nach Fehlern abgesucht und ausgetestet. 
+Ich habe keinen gefunden. Sollte aber jemand einen finden, waere 
+ich um eine Mitteilung sehr froh.
+

@@ -1,0 +1,182 @@
+
+              Dies ist die freundliche Anleitung zu einem 
+                     ebenso freundlichen Programm:
+
+                 ***** ELKSOFT'S AB-INS-RAM V2.2 *****
+
+              von Thomas J”rn, Saarbrcken, 16.April 1988
+
+             _____________________________________________
+
+
+             Eigentlich mu zum Programm selbst nicht 
+             mehr viel erkl„rt werden, denn schlielich 
+             ist es dazu gedacht, alles alleine zu machen.
+             Der einzige "Menpunkt" heit "unterbrechen".
+             Doch dazu sp„ter mehr.
+
+             AB-INS-RAM dient - wie der Name unzweifelhaft
+             ausdrckt - dem Bestcken einer Ram-Disk mit 
+             einer Anzahl frei ausgew„hlter Files und(!) 
+             Ordner. Irgendwann ging es mir n„mlich grnd-
+             lich auf den Geist, da die mir zur Verfgung
+             stehenden Programme „hnlichen Charakters ent-
+             weder nur Einzeldateien oder nur komplette 
+             Ordner kopieren konnten, oftmals gar nur mit-
+             tels Parameterbergabe zu starten waren.
+             Was ich wollte, war ein Programm, das mir die 
+             Ram-Disk auf's Arbeitsfertigste vorbereitet, 
+             w„hrend ich - je nach Kopiermasse - noch mit 
+             all den Dingen versehen werden kann, von denen 
+             das Rechnerhandbuch so eindringlich abr„t: 
+                    Kaffee, Kippen, Krmelkekse!
+             Und sollte w„hrenddessen irgendetwas Bemer-
+             kenswertes stattfinden, dann soll der Atari 
+             mir das gef„lligst mitteilen. Dazu z„hlt z.B.
+             eine fehlende Programmvorarbeit. AB-INS-RAM 
+             ohne eine dazugeh”rige Batch-Datei ist so 
+             sinnvoll wie ein Schu durch die Socke!
+             Dieses File stellt denn auch die notwendige 
+             Hauptarbeit dar. Es kann mit einem ganz nor-
+             malen Editor erstellt werden und mu die Na-
+             men der zu kopierenden Dateien zeilenweise 
+             enthalten. Das mal ganz grob gesagt, es gibt 
+             da noch ein paar "Steuerzeichen", die dabei 
+             verwendet werden k”nnen und mssen, ganz nach 
+             Wunsch.
+
+                   ' - Mit dem Apostroph (oder Remzeichen 
+                       oder ...) k”nnen Segmentierungen, 
+                       Bemerkungen oder auch Ausmarkierun-
+                       gen vorgenommen werden.
+
+                   = - Das Gleichheitszeichen am Ende(!)
+                       eines Filenamens bedeutet der 
+                       Einleseroutine, da die Datei in 
+                       der Ram-Disk unter einem anderen 
+                       Namen eingeschrieben werden soll. 
+                       Dieser neue Name mu dann in der 
+                       n„chstfolgenden Zeile der Batchda-
+                       tei stehen. Das kann zum Beispiel 
+                       das Herauskopieren aus einem Ordner 
+                       in das Wurzelverzeichnis des neuen 
+                       Laufwerkes sein. Umgekehrt funktio-
+                       niert das allerdings nicht so ohne 
+                       weiteres, bei einem Einzelfile 
+                       ben”tigt das Programm von der 
+                       Batch-Datei die Anweisung, einen 
+                       Ordner erst einmal anzulegen.
+
+                   * - Der einfache Stern gefolgt von dem 
+                       dazugeh”rigen Namen erledigt genau 
+                       das. Natrlich kann auch ein Ordner 
+                       im Ordner eingerichtet werden, 
+                       wobei man aber logischerdings die 
+                       Reihenfolge einhalten und zwei Be-
+                       fehle dazu verwenden sollte.
+
+                  ** - Ganz automatisch geht alles mit dem
+                       Doppelstern, der das Programm ver-
+                       anlat einen kompletten Ordner zu 
+                       kopieren, indem selbiger zuerst an-
+                       gelegt und dann auf Diskette sauber
+                       durchsucht wird. Dabei werden s„mt-
+                       liche angetroffenen Files und Unter-
+                       directories als solche erkannt und 
+                       hinbergezogen.
+
+             Nun ein kleines Beispiel, wie die Batch-Datei 
+             aussehen kann, anhand einer Megamax-C-Disk:
+
+                   '
+                   ' Hier ein paar Bemerkungen...
+                   '
+                   SHELL.PRG
+                   SHELL.SET
+                   '
+                   ' Ein Ordner fr die Quelltexte
+                   *SOURCES.C
+                   *SOURCES.C\NOCHENS.C
+                   '
+                   ' Aus einem Ordner in Wurzelverzeichnis
+                   QTEXTE.C\BEISPIEL.C=
+                   BEISPIEL.C
+                   '
+                   ' Komplette Umbenennung
+                   MMCC.TTP=
+                   COMPILER.PRG
+                   '
+                   ' Ein vollst„ndiges Unter-Directory
+                   **MEGAMAX
+                   ' Letzteres ist ja grad bei Megamax-C 
+                   ' voll wichtig
+
+                       (...)
+
+
+             Nun zu den Fehlermeldungen und sonstigen Mit- 
+             teilungen, die AB-INS-RAM so informativ von 
+             sich gibt. Das Programm ist in erster Linie 
+             dazu gedacht, aus einem Auto-Ordner heraus 
+             gestartet zu werden, weshalb ich auf GEM-Ap- 
+             plikationen verzichtet habe. Ebenso erwartet 
+             das Programm seine Batch-Datei ABINSRAM.BAT im 
+             Auto-Ordner. Um berhaupt ein Kopierziel anvi-
+             sieren zu k”nnen, sollte natrlich bereits 
+             eine Ram-Disk installiert sein, die daher 
+             praktischerdings zuerst in den Auto-Ordner 
+             geh”rt, damit sie auch als erstes gebootet 
+             wird. AB-INS-RAM verlangt die Kennung "D:" fr 
+             diese Disk, da ich "C:" als fr die Hard-Disk 
+             reserviert betrachte. Kennung im Desktop.Info
+             abspeichern.
+             Diese beiden Fehler fhren, ebenso wie eine zu 
+             klein dimensionierte Ram-Disk, zum Programmab-
+             bruch. Im Unterschied dazu werden nicht aufge-
+             fundene Dateien bzw. doppelt angelegte Ordner 
+             l„ssig verschmerzt. Hierfr gibt's dann ledig-
+             lich ein Info.
+             Appropos Info: AB-INS-RAM gibt w„hrend des ge-
+             samten Programmablaufes Auskunft ber den Fl-
+             lungsgrad der Ram-Disk. Hier komme ich dann 
+             auch zu dem erw„hnten einzigen "Menpunkt".
+             Manche Ram-Disks sind nicht nur resetfest, 
+             sondern auch bootf„hig, andere wieder nicht. 
+             Insbesondere die resetfesten Typen, die z.B. 
+             durch Neubooten der Systemdiskette wieder re- 
+             inkarniert werden, behalten ja ihren Inhalt. 
+             Wrde also das zwangweise erneut gestartete 
+             Kopierprogramm seine Befehle ordnungsgem„ 
+             durchfhren, k”nnten mittlerweile evtl. ver- 
+             „nderte Dateien berschrieben werden. Um dem 
+             vorzubeugen, kann AB-INS-RAM bereits beim 
+             Start durch anhaltendes(!) Drcken der Alter- 
+             nate-Taste gestoppt werden. Dies funktioniert 
+             brigens auch zwischen den einzelnen von Dis-
+             kette eingelesenen Befehlen.
+
+             Zum Abschlu noch ein paar Grunds„tzlichkeiten.
+             Das Programm ist in kompiliertem GfA-Basic 
+             geschrieben (Danke, Frank!!!), was wohl auch 
+             den Umfang erkl„rt, mich aufgrund ein paar 
+             kleiner Compiler-Fehler aber auch zum Trick-
+             sen zwang. In Sachen Trick: Es lassen sich 
+             auch Files von mehreren Laufwerken kopieren, 
+             was aber in der Batch-Datei ber eine voran- 
+             gestellte Laufwerkskennung (z.B. B:\ELCH.TOP) 
+             zu realisieren ist. Freilich mu dann das
+             "="-Zeichen verwendet werden, weil ja sonst 
+             nur eine ewig dumme šberschreiberei statt- 
+             f„nde.
+
+             Weiterentwicklungspl„ne: Programm noch kom- 
+             fortabler machen durch mehr Optionen und Fle- 
+             xibilit„t, Quelltext in C schreiben, Zusatz- 
+             programm zur schnellen Batch-File-Erstellung 
+             schreiben.
+
+
+                                  Bis dahin erstmal...
+
+                                             ...gell ?!?
+

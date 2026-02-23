@@ -1,0 +1,55 @@
+				Cook-it by Seb/The Removers
+				
+				
+	Welcome to this marvellous real-time renderer !!!!!!!!
+	
+	
+	No, just joking !
+	
+	Well, do you know Videl Inside ?? Yes this splendid screen-blower !
+
+	Cook-it was written to correct a little bug of Videl Inside v 1.2 .
+	Indeed Videl Inside doesn't install properly his cookie in the cookie-jar and the bug
+is apparent when you start for the first time your Falcon . You open the CPX 'Show-Cookie' and
+you can see that the Cookie-jar is almost empty, because of the bug of VI .
+	So what does Cook-it ??
+	Cook-it checks if the Cookie-Jar exists :
+		- if not, Cook-It create a Cookie-Jar and that's all !!
+		- otherwise, Cook-it allows a new cookie-jar which could contain up to 256
+		cookies and copys the current cookie-jar in it . Then he informs the system
+		and that's all !!
+	How to install ??
+	Put Cook-It in your AUTO Folder before all the other programs .
+	But what about Videl Inside ???
+	No more problems . ( but if it continues to bug, put Cook-It just after Videl Inside
+	in your AUTO folder )
+
+							Have fun !
+							
+								Seb/The Removers .
+								
+	
+	Connaissez-vous VIDEL-Inside ?? ( j'espŠre pour vous parce que c'est une r‚alisation
+fran‡aise ) Oui, vous y ˆtes, c'est l'‚clateur d'‚cran ultime !!
+
+	Cook-It a ‚t‚ ‚crit pour parer un petit bug de VI 1.2 .
+	En effet, VI n'installe pas correctement son cookie dans la cookie-jar et ce bug est
+gˆnant lors d'un d‚marrage … froid de votre Falcon car vous pourrez constater avec le CPX
+'Show Cookie' que la Cookie-jar est bien vide pour un Falcon, tout cela … cause de VI .
+	Bon, mais que fait donc Cook-It ??
+	Cook-It teste si une cookie-jar existe :
+		- si non, il en cr‚e une et c'est tout !!
+		- sinon, Cook-It r‚serve une nouvelle cookie-jar de 256 entr‚es et copie
+		l'ancienne cookie-jar dedans puis informe le systŠme et c'est tout !! 
+		( enfin presque sinon ‡a serait trop facile !! :-) )
+	Comment l'installer ??
+	Placez Cook-It en premiŠre position dans le dossier AUTO .
+	Mais alors Videl Inside ??
+	Th‚oriquement plus de problŠmes . Toutefois si cela persistait, placez Cook-It
+juste aprŠs Videl Inside dans le dossier AUTO . 
+( tout cela parce que Videl Inside ‚crase sans scrupule la longueur totale du Cookie-Jar !! )
+
+
+							Que la Force soit avec vous !
+
+								Seb/The	Removers .

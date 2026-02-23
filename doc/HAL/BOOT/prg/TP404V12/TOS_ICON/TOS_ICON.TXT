@@ -1,0 +1,110 @@
+
+1. Werbeteil
+============
+Achtung! Dies ist ein
+
+Furchbar berflssiger Text zu einer in jeder Hinsicht berzeugenden
+Entwicklung der Rosin Datentechnik Inc. Unlitimited Corporation
+
+Dieses Programm ist anders als alles andere, was Sie bisher in Diskettenform
+in Ihren Computer stecken konnten.
+Dieses Programm setzt v”llig neue Mast„be in puncto Softwareergonomie.
+Alle knftigen Entwicklungen werden sich an diesem Programm orientieren
+mssen.
+Dieses Programm...  usw.
+
+
+2. Worum geht's?
+================
+Besitzern von Atari-Rechnern (das sind diese popeligen grauen oder weien
+K„sten mit den vielen Kn”pfen und den lustigen Bomben auf dem Bildschirm),
+die als Betriebssystem TOS2.06 oder 3.06 fahren, werden beim Kaltstart
+ihres Computers mit einem Signet auf dem Bildschirm begrt.
+Im Regelfall wird dies das Fuji-Logo von Atari sein, aufgekl„rtere
+Zeitgenossen haben dieses bereits durch den Flower-Power-Slogan der
+90er Jahre (der aber auch schon vor 10 Jahren seine Berechtigung gehabt
+h„tte) "Gib DOS keine Chance" ersetzt.
+
+Immer nur Atari-Logo ist aber langweilig, DOS hat eigentlich sowieso
+keine Chance mehr und andere Bildchen konnte man bisher nicht verwenden.
+Kurz und knapp: jetzt kann man. TOS-ICON ist n„mlich genau dafr und nur
+dafr zu gebrauchen. Wahnsinn, gell?
+
+
+3. Ausfhrliche Beschreibung
+============================
+Gibt's keine, allerh”chstens eine
+
+4. Kurzbeschreibung
+===================
+Der Editierteil drfte klar sein (linke/rechte Maustaste), ebenso das
+Scrollen, L”schen und Fllen. Allenfalls die 6 Buttons am rechten Rand
+bedrfen vielleicht einer Erkl„rung.
+
+4.1. TOS -> Icon
+Liest aus einer TOS-Datei, die in 256K- oder 512K-Form vorliegen mu, das
+darin gespeicherte Icon direkt in den Editor.
+Falls auf dem Schirm zu diesem Zeitpunkt nur Schrott erscheint, stimmt
+irgendetwas mit der Datei nicht (falsches Format, neuere oder ausl„ndische
+TOS-Version). Die folgende Funktion darf dann AUF KEINEN FALL auf diese
+Datei angewendet werden!
+
+4.2. Icon -> TOS
+Geht den umgekehrten Weg, d.h. manipuliert direkt die anzugebende TOS-Datei,
+indem es darin das Icon durch das momentan im Editor befindliche ersetzt.
+Da Atari mittlerweile beim Booten eine Prfsumme ber das ROM bildet
+(ausdrckliches Lob von meiner Seite), mu diese nach der Manipulation
+angepat werden. Dafr ruft TOS_ICON das Programm TOSCRC auf, das im
+gleichen Verzeichnis stehen mu wie TOS_ICON.
+
+4.3. PIC/PAC laden
+Eine Datei im Bildschirm- oder STad-Format wird eingeladen.
+
+4.4. Icon ausschneiden
+Schneidet aus der geladenen Bilddatei ein Icon aus.
+
+4.5. Icon speichern
+Das momentan im Editor befindliche Icon wird auf Diskette/Festplatte
+gespeichert. Dazu wird eine zu berhaupt nichts kompatible Form verwendet,
+die nur aus den reinen Pixelinformationen besteht. Die Dateil„nge ist
+konstant 1032 Bytes und die Default-Dateiendung ".IKN".
+
+4.6. Icon laden
+Mu ich's wirklich erkl„ren? Wohl kaum...
+
+
+5. Sonstiges
+============
+
+5.1. Das Programm l„uft nur auf der monochromen Aufl”sung mit 640*400
+     Punkten. Ich wei, das ist nicht gerade die feine englische Art,
+     aber das Wetter drauen ist viel zu gut, heut' nachmittag geht's
+     zum Grillen nach Naurod und allzu oft wird man das Programm eh nicht
+     brauchen - also was soll's? Und auerdem ist's auch noch umsonst,
+     also gibt's wohl keinen Grund zu meckern.
+
+5.2. TOSCRC von Martin Osieka liegt diesem Programm bei. Somit drfte
+     klar sein, da TOS_ICON genau wie TOSCRC Freeware ist. Jeder darf
+     und soll es also nach Belieben kopieren und weitergeben.
+
+5.3. Der Bildaufbau ist zur Zeit noch ekelhaft langsam. Auerdem kann man
+     die Icons noch nicht seperat speichern und wieder einladen. Wenn
+     ich mal wieder Lust habe, wird das sicherlich ge„ndert.
+5.3.b. (ab Version 1.1)
+     Der Bildaufbau ist mittlerweile mordsm„ig beschleunigt und auch das
+     Laden und Speichern von Icons ist m”glich. Klasse, oder?
+
+5.4. Das Anfertigen und Verbreiten von Kopien des TOS 2.06 oder 3.06 (und
+     natrlich auch jeder anderen TOS-Version) ist immer noch nicht
+     zul„ssig und damit STRAFBAR. Das darf weiterhin nur Atari!
+
+5.5. Always look on the bright side of life!
+
+5.6. Autor und floppyride von TOS_ICON
+     Reiner Rosin
+     Peter-Spahn-Str. 4
+     D-6227 Oestrich-Winkel
+     Tel./Fax 06723 4978
+     Kontonummer: -entf„llt-
+
+     Bei o.g. Adresse gibt's dann auch Updates (und natrlich bei obi!).

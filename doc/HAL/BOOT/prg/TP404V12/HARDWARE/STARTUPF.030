@@ -1,0 +1,70 @@
+
+     Datei: STARTUPF.030          Ω Michael Ruge     RÅsselsheim, den 25.11.1994
+
+     Email: Michael Ruge @WI2.MAUS.DE)
+
+
+
+     SYSTEM STARTUP
+
+     After a RESET (power-up or reset button) the cpu (68030) will start exe-
+     cuting at the address pointed to by locations 4-7 which is ROM (MCU maps 
+     the frist 8 bytes of ROM at $E00000-7 (by ROM-TOS 4.01 - 4.04).
+     Location $000004 points to the start of the operating system code in ROM.
+     The following sequence is then executed:
+
+      1. Perforam a reset instruction (outputs a reset pulse)
+
+      2. Read the longword at cartridge address $FA0000. If the 
+         data read is a "magic number", execute from the cartridge
+         (ROM cartridge instructions take over here). If not, 
+         continue.
+
+      3. Check for a warm start (see if RAM locations were written),
+         initialize the memory controller.
+
+      4. Initialize the PSG-Chip, deselect disk drives.
+  
+      5. Initialize color palettes and set screen address.
+
+      6. if not a warm start, zero memory.
+
+      7. Set up operating system variables in RAM.
+
+      8. Set up exception vectors.
+
+      9. Initialize the MFP-Chip
+
+     10. Set screen resolution.
+
+     11. Attempt to boot floppy; attempt to bood harddisk, run 
+         program if succeeded.
+
+     12. if no boot disk, the 192/256/512K boot ROM will bring 
+         up the desktop.
+
+
+
+
+     Number of Bombs and Meaning
+     
+       Bombs    Meaning
+         2      Bus Error
+         3      Adress Error
+         4      Illegal Instruktion
+         5      Divide by Zero Error
+         6      CHK-Exception-CPU Interrupt 
+         7      TRAPV-Exception-CPU Interrupt
+         8      Privilege Violation-CPU Inter-
+         9      TRACE-Exception-CPU TRACE Interrupt
+        10      Line 1010 Emulator
+        11      Line 1011 Emulator
+        12-23   Unassigned, should be no occurrence
+        24      Spurios interrupt, Bus error during interrupt
+                processing.
+        25-31   Autovector Interrupt, Even numbered vectors are used,
+                others should have no occurence
+        32-63   Trap Instruction, CPU read instruction which forced
+                exception processing
+        64-79   MFP Interrupt
+        80-255  User Interrupt

@@ -1,0 +1,265 @@
+COOKIES(5)                     Dateiformate                    COOKIES(5)
+
+NNAAMMEE
+     cookies - Datei mit Beschreibungen zu installierten Cookies
+
+BBEESSCCHHRREEIIBBUUNNGG
+     Das Kommando ccooookkiiee braucht zur Interpretation der in einem
+     Cookie eingetragen Werte eine Datei mit Beschreibungen Åber bekannte
+     Cookies.
+
+     Die Datei soll sich in einem Verzeichnis befinden, das durch die Environ-
+     mentvariable 'ETCDIR' beschrieben wird (achten Sie darauf 'ETCDIR' mit 
+     via 'export' und nicht mittels 'setenv' ins Environment einzufÅgen). 
+     Die Struktur von 'COOKIES' wird durch folgende Regeln (EBNF) beschrieben:
+     
+     >>>---------------------------------------------------------------------<<<
+
+          <COOKIE-FILE>
+
+               ["COOKIE"]                    Programm-identifier
+
+               {<cookie> | <comment>}        Liste von Cookiebeschreibungen
+                                             oder Kommentaren
+
+          ----------------------------------------------------------------------
+          <cookie>                           ein einzelner Cookie
+
+               "[" <string_4> "]"
+               [<name> | <creator> | <description> | <section> | <comment>]
+
+                                             ein Cookie kann aus dem Namen, dem
+                                             Erzeuger und einer Beschreibung
+                                             bestehen. Kommentare dÅrfen na-
+                                             tÅrlich auch hier nicht fehlen.
+                                             
+          ----------------------------------------------------------------------
+          <name>
+
+               "NAME="<string_48>            Der volle Name eines Cookies
+
+          ----------------------------------------------------------------------
+          <creator
+
+               "CREATOR="<string_48>         Der 'Erzeuger' eines Cookies
+
+          ----------------------------------------------------------------------
+          <description>
+
+               "DESCRIPTION_"<number>"="     Hier kann eine langatmige Beschrei-
+                                             bung des Cookies erfolgen. Die 
+                                             erste Beschreibung trÑgt die Nr. 0,
+                                             alle weiteren mÅssen in aufstei-
+                                             gender Nummerierung folgen.
+
+          ----------------------------------------------------------------------
+          <section>
+
+               "<SECTION_"<number>">"        Die Beschreibung eines Abschnittes.
+                                             Ein Abschnitt ist dabei eine Bit-
+                                             gruppe innerhalb des zweiten long-
+                                             wertes des Cookies. z.B. der _FPU-
+                                             Cookie ist in 4 Abschnitte aufge-
+                                             teilt:
+                                                  12 Bits sind unbenutzt
+                                                  1  Bit 68040?
+                                                       durch Bitcodierung
+                                                  2  Bits 68881 oder 68882?
+                                                       durch Wertcodierung
+                                                  1  Bit SFP 004 komp. ?
+                                             Die erste Section trÑgt die Nr.
+                                             0, alle weiteren mÅssen in auf-
+                                             steigender Nummerierung folgen.
+               "CODED = "<section_coding>    Die Codierung eines Abschnittes
+               {(<values> | <bits> | <structure>)}
+                                             Die Beschreibung der EintrÑge
+
+          ----------------------------------------------------------------------
+          <section_coding>
+               
+               <number> "," ("UNUSED" | "VALUE" | "BITS" | "STRUCTURE")
+                                             <number> gibt die Anzahl von der
+                                                  Section verwendeten Bits an.
+                                                  Die Bits werden Åber alle
+                                                  Sections aufaddiert. Die In-
+                                                  terpretation startet beim
+                                                  hîchsten Bit angefangen und
+                                                  ended mit Bit 0.
+                                             "UNSUSED": Bits sind unbenutzt
+                                             "VALUE": Die Section besteht aus 
+                                                  fixen Werten (Wertcodierung).
+                                             "BITS": Die Section besteht aus 
+                                                  einzelnen Bits (Bitcodierung),
+                                                  die jeweils ein bestimmte Be-
+                                                  deutung haben.
+                                             "STRUCTURE": Der komplette zweite
+                                                  Wert des Cookie wird als Zei-
+                                                  ger auf eine Struktur inter-
+                                                  pretiert. <number> wird igno-
+                                                  riert.
+
+          ----------------------------------------------------------------------
+          <structure>
+
+               {"<SECTION_" <number> "_" <number> ">"
+
+                                             Die Beschreibung eines Elementes.
+
+                {"ELEMENT =" <string_48> "," <type> "," ("UNUSED"|
+                                                         "VALUE" |
+                                                         "BITS" |
+                                                         "CHAR" |
+                                                         "CHAR_POINTER" |
+                                                         "INT" |
+                                                         "INT_POINTER" |
+                                                         "HEX" |
+                                                         "HEX_POINTER"|
+                                                         "LONG" |
+                                                         "LONG_POINTER" |
+                                                         "LONG") "," <number>
+                                                         
+                                             <string_48> Name des Elementes
+                                             <type> Es kann entweder ein ein-
+                                                  facher Typ oder ein Feld mit
+                                                  einfachen Typen ausgegeben
+                                                  werden.
+                                             <number>: ist der <type> = "ARRAY"
+                                                  dann gibt <number> die Anzahl
+                                                  der Elemente im Feld wieder.
+                                                  Bei "SIMPLE" wird <number> 
+                                                  nur dann herangezogen, wenn
+                                                  "VALUE"s aktiv ist. Dann kann
+                                                  <number> 2 oder 4 (Byte) sein.
+                                                  Damit lassen sich dann int
+                                                  oder long "VALUE"s unterschei-
+                                                  den.
+
+                  {(<values> | <bits>)}
+                }
+               }
+               
+          ----------------------------------------------------------------------
+          <values>
+
+               [{"VALUE_" <number> " = " <number> "," <string_48>} | 
+                 "DEFAULT = " <string_48>]
+
+                                             Der erste "VALUE" trÑgt die Nr.
+                                             0, alle weiteren mÅssen in auf-
+                                             steigender Reihe folgen.
+                                             Die zweite <number> gibt den Wert
+                                             an, der als PrÅfbedingung fÅr den
+                                             Vergleich und die anschlieûende
+                                             Ausgabe von <string_48> dient. Der
+                                             Wert kann int oder long sein.
+                                             Wenn keiner der "VALUE"s trifft, 
+                                             dann versucht das Programm den
+                                             "DEFAULT"-Wert zufinden, der nur
+                                             eine ErlÑuterung (<string_48>) als
+                                             Parameter trÑgt.
+                                                            
+          ----------------------------------------------------------------------
+          <bits>
+
+               ["BIT_" <number> " = <string_48>"," <string_48>]
+
+                                             Hiermit werden einzelne Bits ge-
+                                             prÅft. Die <number>, die zur Spezi-
+                                             fizierung des Bits angegeben wird,
+                                             darf zwischen 0 und 31 liegen.
+                                             Der erste <string_48> gibt die Be-
+                                             deutung des Bits wieder wenn es 
+                                             gesetzt ist, der zweite wenn es 
+                                             nicht gesetzt ist. Meist unter-
+                                             bleibt der zweite Wert, weil nicht
+                                             gesetzte Bits selten eine Bedeu-
+                                             tung haben.
+               
+          ----------------------------------------------------------------------
+          <type>
+
+               ("SIMPLE" | "ARRAY")          "SIMPLE": Ein einfacher Datentyp
+                                             "ARRAY": Ein Feld einfacher Daten-
+                                                  typen
+               
+          ----------------------------------------------------------------------
+          <number>
+
+               {"0" | ... | "9"}             Normale Zahlen
+
+          ----------------------------------------------------------------------
+          <string_4>
+          
+               Alle Zeichen mit Ausnahme des '"'-Zeichens
+               
+                                             Anzahl der Wiederholungen auf 4
+                                             beschrÑnkt
+
+          ----------------------------------------------------------------------
+          <string_48>
+          
+               Alle Zeichen mit Ausnahme des '"'-Zeichens
+               
+                                             Anzahl der Wiederholungen auf 48
+                                             beschrÑnkt
+
+     >>>---------------------------------------------------------------------<<<
+
+     Beispiel:
+     
+     Check Open Files legt einen Cookie namens "OFLS" an, dessen zweiter long-
+     Wert auf eine Struktur im Speicher zeigt, die in "C" wie folgt notiert 
+     wird:
+
+          struct ofls_cookie
+          {
+             long  product;             /* 'OFLS' (0x4F464C53)    */
+             unsigned short version;    /* z.B. 0x0103 fÅr V 1.03 */
+             signed short drives[32];   /* Infos fÅr 32 Laufwerke */
+             signed short reserved[32]; /* FÅr evt. Erweiterungen */
+          };
+
+     Eine Umsetzung der obigen Beschreibung in die Syntax von COOKIES sieht wie
+     folgt aus:
+
+          [OFLS]
+          NAME = "Check Open Files";
+          CREATOR = "Hans-JÅrgen Richstein (Standardcookie)";
+          DESCRIPTION_0 = "Merkt sich alle auf einem Laufwerk offenen"
+          DESCRIPTION_1 = "Dateien, so daû Programme, die auf der FAT"
+          DESCRIPTION_2 = "operieren (z.B. KOBOLD, Diskus) keinen Daten-"
+          DESCRIPTION_3 = "verlust forcieren. Eine '-1' als Status heiût,"
+          DESCRIPTION_4 = "daû das Laufwerk fÅr Dateioperationen gesperrt"
+          DESCRIPTION_5 = "ist, weil eine FAT-orientierte Anwendung auf"
+          DESCRIPTION_6 = "dem Laufwerk arbeitet."
+
+          <SECTION_0>
+          CODED = 32,STRUCTURE
+          <SECTION_0_0>
+          ELEMENT = "Produkt:   ",SIMPLE,VALUE,4
+          VALUE_0 = 0x4F464C53,"CHK_OFLS.PRG (Kaktus)";
+          DEFAULT = "Unbekannt";
+          <SECTION_0_1>
+          ELEMENT = "Version:   ",SIMPLE,HEX,0
+          <SECTION_0_2>
+          ELEMENT = "Status A-P:  ",ARRAY,INT,16
+          <SECTION_0_3>
+          ELEMENT = "Status Q-...:",ARRAY,INT,16
+
+     Um weitere Beispiele kennenzulernen schauen Sie bitte in die mitgelieferte 
+     "COOKIES"-Datei. Neben dem schon angesprochenen "OFLS"-Cookie haben die
+     Cookies "_FDC" und "FSMC" besonderen Beispielcharakter.
+
+
+EERRWWEEIITTEERRUUNNGGEENN
+     DÅrfen vom Benutzer in freier Eigenverantwortung vorgenommen werden. Sicher-
+     lich wÑre es sinnvoll, solche Erweiterungen dem Autor mitzuteilen, damit so 
+     auf Dauer eine umfangreiche Sammlung entsteht. Besonders interessant sind 
+     hier Beschreibungen fÅr Strukturen, auf die ein Cookie zeigt kann.
+
+DDAATTEEIIEENN
+     $ETCDIR\cookies
+     .\cookies
+          An diesen Orten (und in dem Verzeichnis, in dem cookie.ttp 
+          selbst sich befindet) wird nach der Cookies-Datei gesucht.
+

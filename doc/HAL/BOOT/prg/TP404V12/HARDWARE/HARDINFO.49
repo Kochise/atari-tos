@@ -1,0 +1,52 @@
+
+     Datei: HARDINFO.49          Ω Michael Ruge     RÅsselsheim, den 25.11.1994
+
+     Email: Michael Ruge @WI2.MAUS.DE)    
+
+
+
+     HARDWARE INFORMATION Nr. 49                    
+
+     Bei unregelmÑûigen Knacksen im Falcon030 Soundsystem und Fehlern
+     bei verwendung von DMA2DSP.PRG, sollte der SMD-Widerstand R221
+     (zwischen CPU und Combel U56) direkt neben dem R217 durch eine
+     Null Ohm BrÅcke oder Lîtzinn ersetzt werden.
+     Falls das nicht ausreicht muû noch auf der RÅckseite der SMD-
+     Kondensator C208 entfernt werden.
+
+
+     Spontanes `Knistern' und `Knacken' im Lautsprecher
+
+     Einige wenige Falcon030 zeigen, nach dem Einschalten oder auch nach
+     einiger Zeit Betrieb ein unregelmÑûiges spontanes `Knistern' und 
+     `Knacken' im Lautsprecher.
+     Dieses Problem kann behoben werden, indem ein Widerstand von 10KOhm
+     zwischen Pin2 und Pin11 von U21 (SMD-Chip) gelîtet wird (Eingangsstrombe-
+     grenzung fÅr OpAmp).
+
+
+     `Line Level' input auf der Mikrofonbuchse am Falcon030
+
+     Folgende énderungen sind durchzufÅhren:
+
+     Entfernen der Bauteile: R56, R47, R90, R92 sowie C21 und C81
+
+     éndern an vorhandenen Bauteilen:
+
+     R66 von 100KOhm gegen 15KOhm tauschen
+     R87 von 100KOhm gegen 15KOhm tauschen
+     C129 von 0.01 uF gegen 330pf +/-5% tauschen
+     C124 von 0.01 uF gegen 330pf +/-5% tauschen
+     
+     Folgende Bauteile mÅssen noch hinzugefÅgt werden:
+
+     Kondensator 470pf NPO, parallel zu R67
+     Kondensator 470pf NPO, parallel zu R88
+     Kondensator 330pf NPO, parallel zu R66
+     Kondensator 330pf NPO, parallel zu R87
+     
+     Widerstand 100 Ohm in Serie mit dem Ausgang des Pin 4 des LM387
+     (Chip U9)
+     Widerstand 100 Ohm in Serie mit dem Ausgang des Pin 5 des LM387
+     (Chip U9)
+     Achtung: Beide Pins mÅssen vom Board gelîst werden!

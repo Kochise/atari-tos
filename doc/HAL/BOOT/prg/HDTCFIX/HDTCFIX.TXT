@@ -1,0 +1,10 @@
+
+  Hddriver Timer C fix.
+
+Small TSR program which solves problem of Hddriver stuck
+by some games (Defender 2, Dark Castle, Car Vup ....).
+
+Run it after Hddriver is installed, what should be not
+problem by regular booting.
+
+PP, July 2009.

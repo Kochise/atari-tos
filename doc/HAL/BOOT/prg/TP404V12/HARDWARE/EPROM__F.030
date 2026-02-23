@@ -1,0 +1,125 @@
+
+
+     Datei: EPROM__F.030         Ω Michael Ruge     RÅsselsheim, den 25.11.1994
+
+     Email: Michael Ruge @WI2.MAUS.DE)
+        
+     
+
+     Der Falcon030 wird ab Werk mit sogenannten PLCC-Chips (fÅr das ROM-TOS) be-
+     stÅckt. Diese PLCC-Chips sind in den meisten FÑllen, leider OPTROM Chips
+     (d.h. einmal programmierbar und nicht lîschbar, z.b. 27C4096/27PC240 -
+     16Bit breite PLCC-Chips).
+     Diese Chips kann man nicht weiterverwenden fÅr ein gepatchtes TOS.
+     
+     Es gibt nun DREI mîglichkeiten zu einer gepatchten TOS Version zu kommen:
+     
+     A.) Man hat die mîglichkeit PLCC Eproms auf der Arbeiten zu Programmieren,
+         bzw. besitzt das Archiv JP40_FRE.LZH (C) By Harun Scheutzow und den 
+         Adapter fÅr den Junior Prommer und die dazugehîrige Software PINATUBO
+         (C) By Michael Schwingen. 
+         Beide Archive "JP40_FRE.LZH" und "PINATUBO.ZIP" sind in den gÑngigen
+         Mailboxen mit ATARI Programmteil erhÑltlich.
+     
+     B.) Eine Adapterkarte fÅr ein 16Bit breites DIL-Eprom (27C4096) zu verwenden
+         (C) By Harun Scheutzow
+     
+     C.) Bei leeren Expansion Slot, sich einfach auf einer Lochrasterplatine eine
+         ROM TOScard aufzubauen.
+
+
+         Eprom 27C020 (32 Pin DIL-Eprom)
+         
+         Pin  1 Vpp (+5V)         2 Adreûleitung 16
+              3 Adreûleitung 15   4 Adreûleitung 12
+              5 Adreûleitung  7   6 Adreûleitung  6
+              7 Adreûleitung  5   8 Adreûleitung  4
+              9 Adreûleitung  3  10 Adreûleitung  2
+             11 Adreûleitung  1  12 Adreûleitung  0
+             13 Datenleitung  0  14 Datenleitung  1
+             15 Datenleitung  2  16 GND (Masse)
+             17 Datenleitung  3  18 Datenleitung  4
+             19 Datenleitung  5  20 Datenleitung  6
+             21 Datenleitung  7  22 Chip-Enable
+             23 Adreûleitung 10  24 Output Enable
+             25 Adreûleitung 11  26 Adreûleitung  9
+             27 Adreûleitung  8  28 Adreûleitung 13
+             29 Adreûleitung 14  30 Adreûleitung 17
+             31 PGM (+5V)        32 Vcc (+5V)
+             
+ 
+         Eprom 27C4096 (PLCC-Chip im Atari Falcon)
+         
+         Pin  1                   2 Vpp (+5V)         
+              3 Chip Enable       4 Datenleitung 15
+              5 Datenleitung 14   6 Datenleitung 13
+              7 Datenleitung 12   8 Datenleitung 11
+              9 Datenleitung 10  10 Datenleitung  9
+             11 Datenleitung  8  12                 
+             13                  14 Datenleitung  7
+             15 Datenleitung  6  16 Datenleitung  5
+             17 Datenleitung  4  18 Datenleitung  3
+             19 Datenleitung  2  20 Datenleitung  1
+             21 Datenleitung  0  22 Output Enable
+             23                  24 Adreûleitung  0
+             25 Adreûleitung  1  26 Adreûleitung  2
+             27 Adreûleitung  3  28 Adreûleitung  4
+             29 Adreûleitung  5  30 Adreûleitung  6
+             31 Adreûleitung  7  32 Adreûleitung  8
+             33                  34               
+             35 Adreûleitung  9  36 Adreûleitung 10
+             37 Adreûleitung 11  38 Adreûleitung 12
+             39 Adreûleitung 13  40 Adreûleitung 14
+             41 Adreûleitung 15  42 Adreûleitung 16
+             43 Adreûleitung 17  44                
+             
+         (Pin 3 ist Chip Select - XROM2)
+             
+        
+         Expansion Connector J16 im Falcon030
+         
+         Pin  1 GND               2 GND
+              3 XBGK              4 XAS
+              5 XLDS              6 XUDS
+              7 RXW               8 EDTACK
+              9 FC2              10 FC1
+             11 FC0              12 BMODE
+             13 nicht belegt     14 XIACK
+             15 XCMBLBGO         16 XBR
+             17 XRESET           18 XHALT
+             19 EBERR            20 XIPL0
+             21 XIPL1            22 XIPL2
+             23 CPUCLKC (16MHz)  24 +5V
+             25 +5V              26 Adreûleitung 23
+             27 Adreûleitung 22  28 Adreûleitung 21
+             29 Adreûleitung 20  30 Adreûleitung 19
+             31 Adreûleitung 18  32 Adreûleitung 17
+             33 Adreûleitung 16  34 Adreûleitung 15
+             35 Adreûleitung 14  36 Adreûleitung 13
+             37 Adreûleitung 12  38 Adreûleitung 11
+             39 Adreûleitung 10  40 Adreûleitung  9
+             41 Adreûleitung  8  42 Adreûleitung  7
+             43 Adreûleitung  6  44 Adreûleitung  5             
+             45 Adreûleitung  4  46 Adreûleitung  3         
+             47 Adreûleitung  2  48 Adreûleitung  1             
+             49 EXPAND           50 nicht belegt               
+
+
+       
+         Expansion Connector J20 im Falcon030
+         
+         Pin  1 Datenleitung 14   2 Datenleitung 13
+              3 Datenleitung 12   4 Datenleitung 11
+              5 Datenleitung 10   6 Datenleitung  9
+              7 Datenleitung  8   8 Datenleitung  7
+              9 Datenleitung  6  10 Datenleitung  5
+             11 Datenleitung  4  12 Datenleitung  3
+             13 Datenleitung  2  14 Datenleitung  1
+             15 Datenleitung  0  16 Datenleitung 15
+             17 GND              18 GND            
+             19 GND              20 XEXPBG                      
+             21 EINT 1           22 XCPUBG                  
+             23 500Khz           24 nicht belegt             
+             25 XIEI_MFP         26 XMFPINT     
+             27 EINT 3           28 +5V
+             29 +5V              30 +5V

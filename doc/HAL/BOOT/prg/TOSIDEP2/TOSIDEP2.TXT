@@ -1,0 +1,38 @@
+Patches for diverse TOS versions - for having boot
+from IDE hard disks
+
+Patches are now dual - for regular and twisted IDE
+Look into T14IDUB2.S for how it works.
+
+Patching may be done with some good hex/file editor.
+For instance HxD for Win. It's freeware.
+First part of patch is link to new code, it is 1 jump
+by all versions - 6 bytes:  word $4EF9 + 4 bytes of long
+address. Then need to insert TOS version's BIN file
+into proper place of TOS image - while keeping byte count
+of file unchanged. It goes always in unused end.
+
+
+TOS 1.04 patch:
+pos $462 :  $4EF900FEFD00  (jmp $fefd00)
+pos $2FD00 : insert file T14IDUB2.BIN (338 bytes)
+
+KAOS 1.4.2 patch:
+pos $5D2 :  $4EF900FEFD00  (jmp $fefd00)
+pos $2FD00 : insert file K142DUB2.BIN (338 bytes)
+
+TOS 1.06/1.62 patch:
+pos $572 :  $4EF900E32000  (jmp $e32000)
+pos $32000 : insert file T16IDUB2.BIN (338 bytes)
+
+
+TOS 2.06 patch:
+pos $1672 :  $4EF900E3FA00  (jmp $e3fa00)
+pos $3FA00 : insert file T206DUB3.BIN (292 bytes)
+After it you will get error message of bad CRC after powering
+on machine. So, better to fix CRC with mine ROM splitter
+PRG. Get it on page "SW with sources" .
+
+
+P. Putnik, Nov. 2008.
+

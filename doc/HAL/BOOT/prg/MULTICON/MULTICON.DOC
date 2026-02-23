@@ -1,0 +1,66 @@
+MULTICON
+--------
+
+Allows you to get correct colors icons with MultiTOS and a graphic card,
+tested on TT.
+
+To correct the icons colors
+---------------------------
+What you need:
+
+C:\DESKCICN.RSC file with color icons that are loaded by the system.
+	The name of the first icon must be SSSSTTTTAAAA
+	The name of the very last icon must be EEEENNNNDDDD
+
+If you have TT RAM, then this file is loaded in TT RAM, so the flags of
+MULTICON.PRG must be set to run from TT RAM.
+
+path\MULTICON.PRG that must be installed as auto run file.
+So, your NEWDESK.INF must contain the line:
+
+#Z 01 path\MULTICON.PRG@
+
+For example, I have saved the file in C:\MULTITOS, so my line is:
+
+#Z 01 C:\MULTITOS\MULTICON.PRG@
+
+If you want a background...
+---------------------------
+
+	You must have TGA 16 bits uncompressed images for every
+resolution. The name of the file gives the resolution:
+	08000600.TGA for 800x600.
+	Always eight digits for xxxxyyyy.TGA.
+	The images are located in the same folder as MULTICON.
+
+	To get the image as a background, the desktop setting must be:
+	- white color
+	- one of the 6 intermediate patterns
+
+	So your NEWDESK.INF file must contain a line:
+
+#Q .. .. .. .. 10 ..
+	The fifth number indicates the pattern (1) and the color (0
+	white).
+
+	If you want to go back to a simple background, just modify the
+settings, if you want a white background, just select the empty (0) or
+solid (7) pattern.
+
+If you want a sound at start...
+-------------------------------
+	You must have a file named MULTICON.SND with raw data:
+	- mono sound, 8 bits signed, 12.5KHz.
+	Always in the same folder!
+
+That's all !
+
+Should run on every graphic card with 15-16-24 or 32 bits colors.
+
+At start, the desktop is displayed for a few seconds with bad icons, then
+the patch is applied.
+And after some more seconds, the colors are correct!
+
+Guillaume Tello
+2020 guillaume.tello@orange.fr
+

@@ -1,0 +1,70 @@
+Dirsort v1.1 (c) 1993-95 by Christoph Zwerschke
+============================================================================
+
+About Dirsort
+-------------
+Dirsort is designed to sort the order of files in directories, this is 
+particularly useful for sorting Auto folder programs because the sort 
+order is the order programs are executed.
+
+Features
+--------
+Dirsort runs as either a program or desktop accessory and accepts 
+command lines including a directory path.
+Dirsort is also useful for sorting the order of CPX and desktop 
+accessories.
+
+Installation
+------------
+To install Dirsort as an accessory under Single TOS rename DIRSORT.PRG 
+to DIRSORT.ACC and place the program in the root directory in the root 
+of your boot drive/partition.
+Dirsort runs like any other program from the desktop and requires no no 
+configuration files.
+
+Using Dirsort
+-------------
+The 'Read' button reads the directory which is by default set to 
+C:\AUTO. To re-order files simply Drag&Drop them into any desired 
+sequence using the mouse then select the 'Write' button to save the 
+files in the new order.
+A disk cache noticablably speeds up this operation. To exit Dirsort 
+select the 'Quit' button.
+
+Limitations and known problems
+------------------------------
+I've been using Dirsort for years on my Mega ST and TT and it's never 
+caused any problems. If your drive is almost full or the 'Write' 
+operation is interrupted you're likely to lose data, you've been 
+warned!
+
+Liability
+---------
+Neither I nor any appointed agent accept any liability or 
+responsibility for any direct or indirect damage that may arise, either 
+financial, material or any other kind from either the use or misuse of 
+this software and associated documentation. All trademarks used are 
+recognised and acknowledged.
+
+Copyright
+---------
+Copyright (c) 1994-95 by Christoph Zwerschke. All rights reserved.
+
+Distribution
+------------
+Dirsort is Freeware and may be freely distributed in non-commercial 
+channels. If you use the program regularly please contribute towards 
+its future developement, either directly with me or via the InterActive 
+support scheme run by Joe Connor, please refer to SUPPORT.TXT for more 
+details.
+Commercial PD/Shareware libraries and magazines may NOT distribute this 
+software except by prior agreement.
+
+Contact
+-------
+The programmer:
+
+Christoph Zwerschke             Bank address:
+Am Steinfeld 4                  Bezirkssparkasse Heidelberg
+59379 Selm-Cappenberg           BLZ (Sort code): 67250020
+Germany                         Konto Nr. (Account No): 4338405

@@ -1,0 +1,512 @@
+Documentation for M-Disk 6.x for Atari ST
+=========================================
+
+M-Disk provides
+  - a sizable removable multi-function ramdisk
+  - a floppy disk copy program (with virus detection logic)
+  - a fast ramdisk load/save program
+  - a harddisk backup/restore program
+  - a PS/2 compatible floppy disk formatting program
+  - a boot sector virus destruction program
+all in one program.
+
+What's NEW:
+===========
+
+Version 6.0: - New GEM dialog: Setting of format parameters is now inside
+               the main dialog. Faster GEM dialog handling.
+             - Adapted to speed boards, 68030, etc.
+             - Adapted to TT (and it's brain damaged ``fast RAM'').
+             - Formatting is much faster under MiNT now !
+             - Verify may be turned off (Harakiris will like this).
+             - The `Format selection' button (see below !!)
+             - The `Clear M-Disk' button.
+             - When the selected format for `save+format' is too small,
+               M-Disk can do automatic format extension
+             - Support for disk labels.
+
+Version 5.97: Some internal cleanup. M-Cache no longer included in the
+              distribution.
+
+Version 5.96: Copy button as shorthand for load + save
+
+Version 5.95: Set the mouse into the dialog
+
+Version 5.9: Many wonderful new features:
+             - Optional reset resident M-Disk
+             - Optional auto-installing M-Disk
+             - Optional support for TEMPLMON user trace vector
+             - Optional automatic check of a magic number on every disk access
+               ==> You may get disk error dialog boxes now on the Ram Disk !!!
+
+Since Version 4.x M-Disk does not use any undocumened variables. It should work
+with any TOS Version. Tested with Disk TOS 1.0 (1986), TOS 1.6 (STE TOS),
+KAOS 1.4.1, and MiNT 0.71.
+
+M-Disk 6.0 should work with all known Atari ST harware configurations including
+16-MHz-boards, 68030 Boards, STE, TT, etc.
+
+Notes about Cache: Old M-Disk Versions included a simple cache. In Version 5.8
+  this went into the separate program M-Cache. M-Cache did never work, since it
+  accidently forgot to install itself. I do no longer include M-Cache because:
+  a) The cache does not check for media changes and thus has problems with
+     media changes like in the Atari Megafile 44.
+  b) The cache layout was for a fixed sector size of 512 Bytes, but did not
+     check this. So it did not work with the new big Partitions of AHDI 3.0.
+  c) Nowadays nearly everybody has TOS 1.4. Use CACHE100.PRG in the AUTO folder
+     and this will be better and give you less problems than most cache programs
+     floating around.
+  d) I could adapt M-Cache to AHDI 3.0 and Megafile 44, but I don't have the
+     time in the moment and since one may well use CACHE100, there is no more
+     reason for having a separate cache program.
+  e) If you don't have TOS 1.4 (or above) you should hurry to get it.
+
+Mixed hints:
+  - do *always* have POOLFIX3.PRG in the AUTO folder when using TOS 1.4 or 1.6.
+  - do *always* have FOLDR100.PRG in the AUTO folder when using TOS 1.4 or 1.6.
+  - do *never* use the buggy TURBODOS.
+  - do *not* use CACHExxx.PRG with old TOS Versions (below 1.4).
+  - do *not* use the cache of the old M-Disk versions on Partitions that are
+    bigger than 15 MB.
+  
+Included files:
+===============
+
+    NAME           Length       Comment
+
+  - MDISK.ACC       27034       the program
+  - MDISK6xx.DOC    22617       this document; Version = 6.xx
+  - CLEAR_M.PRG        78	utility program for old TOS versions
+
+Installing the RamDisk:
+=======================
+
+Move MDISK.ACC to the root directory of your boot disk, then reboot.
+Now there's a Desk Accessory entry "M-Disk" that lets you select
+a size for your ramdisk. Enter a size, then click "Install". Now M-Disk
+is active. Install a disk Icon for M-Disk, so you can click on it. M-Disk
+is always on drive M.
+
+M-Disk can now be used like any normal RAM disk.
+
+Copying from/to the M-Disk:
+===========================
+
+Since Floppy Disks are soooooo slow there is an option to load/save a whole
+Floppy Disk at once. This will make a plain copy of all files an directories,
+destroying the whole prior contents. The serial number of the Disk however
+is not changed.
+
+>>>> The load/save option actually is the clou of the program.
+>>>> Use it often, it will save you lots of time.
+>>>> 
+>>>> load/save only works for Ram Disk size <= 1700 k !
+
+Use as Disk Copier:
+===================
+
+First load the source disk into M-Disk, then save onto the target disk.
+Most common floppy formats are supported. The formats of the source and
+target disks need not be the same, so you can quick and easy copy
+a single sided disk to a double sided or IBM PS/2 or 800 KB Disk. You may
+even copy a double sided to a single sided disk if the target disk has
+enough space.
+
+If the target disk is unformatted or you want to reformat it into fast format
+use the "+ format" button. The format options are used then to select a format
+for the disk to write.
+
+If you want to make more than one copy you may want to use the 'copy' button.
+This allows you to make up to three copies and thus is equivalent to pressing
+first 'load' and then 'save' one to three times for each original to copy.
+
+The 'copy' button is a true equivalent of 'load'+'save': After the 'copy'
+operation the new RamDisk contents are still intact and may be used for
+further operations.
+
+Use as Backup Program:
+======================
+
+Backup:
+  You probably won't Backup the whole Hard disk at once. So select the
+  part you want to save, then install an M-Disk that is big enough to
+  hold your data. If you make it small enough to fit on your floppy disk
+  you can copy files from the Harddisk to M-Disk until M-Disk is full.
+  Now save the data with the "save" option onto a floppy.
+Restore:
+  Load your Backup Disk into M-Disk (with "load disk"). Then copy the files
+  from M-Disk to your Hard Disk. This is *much* faster than copying
+  directly from floppy to harddisk.
+Incremental Backup:
+  Load your (old) backup floppy into M-Disk. Delete some files, copy new
+  versions from the harddisk to M-Disk. When your finished save the result
+  again onto your floppy.
+
+Use as fast Ramdisk load/save program
+=====================================
+
+Don't you think loading files from floppy to your (reset resident,
+auto-compressing, super-hyper) Ram-Disk needs a little speed up ?!?
+
+Here it is:
+
+After having installed your Ram-Disk you install M-Disk, then load
+from floppy to M-Disk (with M-Disk's "load"). Now you copy everything
+as usual file-by-file to your Ram-Disk. You may kill M-Disk thereafter.
+
+Saving your work when you are finished is just the other way round:
+Copy file-by-file to M-Disk, then use M-Disk's "save".
+
+Formatting floppy disks
+=======================
+
+You may format a disk at any time. Among the various formats that can
+be formatted there are two MSDOS compatible formats:
+
+- 80 tracks, 2 sides, 9 sectors: The standard 3.5" PS/2 format.
+- 40 tracks, 2 sides, 9 sectors: The standard 5.25" MSDOS/PCDOS format.
+
+These two formats are at least "300% compatible", i. e. the logical disk
+structure is 100% compatible, the boot sector and media byte is 100% compatible
+and the physical disk structure (GAPs between sectors etc.) is 100% compatible.
+Of course you cannot boot your PS/2 computer from an Atari formatted disk.
+
+While remaining compatible the disks formatted with M-Disk still run fast
+on the ST. Since M-Disk Version 4.0, they also run fast on the PC.
+
+The `+format' button
+====================
+
+When the `+format' button is active (dark) M-disk formats all the disks
+on-the-fly while writing out a disk from a `save' or `copy' command.
+This saves an additional format run if you want to write unformatted disks.
+
+It's also wise to reformat floppys from time to time if they
+- were not formatted on the same drive on which they are to be used.
+- have not been formatted for a long time. As the years go by, floppy disks
+  may loose their formatting information.
+
+The verify flags
+================
+
+M-Disk verifies every operation. For this reason no quick- or superquick-
+formatting routines are possible. Routines that format a 80 Track double
+sided disk in under 1 minute must time out the controller before each track
+is competely written. This leaves some garbage at the end of each track.
+If you are unlucky you would get another valid sector header in this area.
+So you might get e.g. "sector 1" two times on one track. Now these two
+will be read/written by TOS randomly, causing big problems. So M-Disk
+does not use these quick-and-dirty routines but always formats till the
+end of track assuring no anomaly can occur (additional verify is done also).
+
+Since M-Disk 6.0 the verify on 'format' and 'format+save' can be turned off.
+There may be some people out there who want to speed up writing at the
+risk of damaged disks. For the 'save' button without '+format' the normal
+TOS routines are used. Verify is then controlled by the TOS verify flag
+which is turned ON by default.
+
+There is one thing that M-Disk cannot verify: When you are formats with
+more than 80 tracks your head (floppy disk head, not yours) may run against
+the wall. You hear a click. On normal formatting programs this will result
+in a misplaced last track (slightly off correct position). But M-Disk starts
+formatting at the last track. So if you hear this click with M-Disk *all*
+tracks will be formatted on incorrect place.
+
+***         For this reason you should formats over 80 tracks only
+***         if you are absolutely sure that your floppy can hold this
+***         without running its head against the wall.
+
+The normal TOS formatted disk speed is rather slow. M-Disk formats standard
+fast-runing disks like DCFORMAT, FCOPY, CopyStar etc.
+
+If you format/write 40-track disks on a 80-tracks double-stepping disk drive
+it's wise to write the data several times if you later want to read it on
+40-track disks (e.g. press `save' with `+ format' several times).
+
+The `Format selection' button
+=============================
+
+When the `Format selection' button is turned off (white) M-Disk automatically
+sets the Format parameters to those found on the disk on every `load'
+operation. This is especially useful with the `copy' button when used
+together with `+format':
+
+- When `Format selection' is active (dark) all copies are formatted in the
+  pre-selected way.
+- When `Format selection' is inactive (white) all copies are formatted in
+  the format that was found on the corrosponding original.
+
+The automatic format extension
+==============================
+
+When the selected format for `save+format' (or `copy+format') is too small
+but it's possible to make up a format that fits, M-Disk will ask you
+if you want to extend the current format.
+
+As a consequence when copying floppy disks with `copy' you may select a small
+format for the standard, make `Format selection' active, and copy all of the
+disks onto standard-formatted disks until you get to a disk that is too big
+for it. When using the automatic format extension only those big disks will
+be formatted in the bigger format.
+
+Exercise (easy): What happens with the automatic format extension when you
+`copy+format' with `Format selection' inactive?
+
+Wiping disks
+============
+
+The `wipe' function only clears the FATs and the root directory of the
+specified device. This is much faster than erasing every single file or
+reformatting the disk. `wipe' can also be applied to non-floppy media
+(e.g. M:). M-Disk will not wipe media with 12-Bit FATs or more than
+5 FAT sectors without an additional reconfirmation dialog.
+
+Wipe is activated by clicking on one of the `Label' drives while the
+`CONTROL' key is pressed. So this function is somewhat hidden.
+
+Disk labels
+===========
+
+Support for disk labels was added although GEMDOS does not support them
+very well. You can, however, see the disk label in the `Show info' dialog
+applied to a disk.
+
+Disk labels produced by PC-DOS will show up in the directory because
+GEMDOS does not allow the archive bit with disk labels but PC-DOS seems
+to set it.
+
+In old TOS versions disk labels can only be removed again via a trick (which
+M-Disk uses: Create a plain file with the label's name, then delete this
+file).
+
+Since TOS 1.4 disk labels can never be removed so M-Disk must use another
+trick here (create a label with the strange name "\xE5").
+
+Since disks without labels do well there is normally no need to use disk
+labels.
+
+The `Clear M-Disk' button
+=========================
+
+The small button that looks like a `window closer' provides a function to
+quickly clear the M-Disk. This is similar to do `wipe' on disk `M:'.
+
+What floppy Disk format should I use ?
+======================================
+
+The 2 sides 80 track 9 sector format is the normal (and fastest) format.
+Use this whenever you do not need extremly much space on disk.
+
+10 sector format is safe. You may well use this whenever you want some
+more space on the disk. 10 sector disks run a little slower than 9 sector
+disks.
+
+11 sector format may only be used if your floppy disk drive is not too fast
+and do not use some cheap and bad disks. 11 sector disks run a little slower
+than 10 sector disks. It is normally better to use 11 sector formats than
+to format over 80 tracks.
+
+Formats over 80 tracks may not run on some disks and (much more evil)
+on some drives. So if it all works on your disk drive carry the disk to
+a friend and (s)he maybe will not be able to read the additional tracks.
+If the floppy disk head hits its limit while formatting you yourself
+may eventually not be able to read the disks on your own system. So use
+this option seldom or never.
+
+40 track disks can be used for special applications e.g. formatting
+IBM PC-DOS compatible 5.25 inch floppies. You will not need this for your
+normal work with the ST.
+
+Customizing M-Disk
+==================
+
+You may want to set up your own startup-defaults for M-Disk. To do this,
+make the drive containing M-Disk the actual drive (e.g. Top window),
+enter the value for `Ram Disk size' you want as the default value,
+then click `setup'.
+
+Set the preferences you like. The `user trace' option sets up a user
+trace vector for the TEMPLMON monitor. This user trace checks the
+validity of the RAM disk and may thus be useful in finding the critical
+point in a bad program that corrupts the M-Disk buffer.
+
+At last, click `save setup'. The setup is then saved to MDISK.ACC on
+the root of the current active drive (i.e. current window in desktop).
+
+Strike the Virus out !
+======================
+
+When you use normal Disk-Copy Programs you may get a boot sector virus
+onto the copy disk. This is due to the fact that normal disk copy programs
+copy the boot sector as it is onto the copy disk. So any virus on the original
+gets copied to the copy.
+
+M-Disk however does not copy the boot sector. So boot a sector virus does not
+get copied when copying disks with M-Disk. For this reason M-Disk copies
+are more safe.
+
+M-Disk version 5.5 (and up) has an additional virus detection logic that
+detects executable boot sectors on every disk operation. You get messages of
+2 levels:
+
+1. "Bootsector executable. This may be a virus or bootable program."
+   This message is no reason to panic. There is an executable boot sector
+   on the disk. This can be a virus, but it can also be startup code for a
+   game, time-setting, hard-disk related or other programs. Before destroying
+   it, you should test it with a more sophisticated virus destruction program
+   or the procedure described below.
+
+   Conclusion: In this first case, you do not know, if you have a virus.
+
+2. "*** Attention: VIRUS ***   Your system is infected !".
+   Now you should be in panic !!! You booted with a virus-infected disk and
+   probably all disks, that have been in your floppy drive since the last
+   re-boot are infected now ! Let's hope you did not loose data !
+
+   You should destroy the virus now (with the "virus check" button),
+   write-protect that disk and do a coldboot with this now virus-free
+   disk inserted in the floppy drive. Pressing the reset button
+   is not sufficient in this case. You must turn your computer off,
+   wait for 10 seconds, and turn it on again with a non-infected disk
+   in the drive. If you have TOS 1.4 and think CTRL-ALT-SHIFT-DEL is
+   sufficient please note that a virus may catch this vector !
+
+   Conclusion: In this second case, you do absolutely sure have a virus !!!
+
+(3. You see no message. Then you probably don't have a boot sector virus,
+    but you may have a link virus or something else.)
+
+Test: Do I have a boot sector virus ?
+=====================================
+
+If you are not sure if a particular boot sector on some disk is a virus,
+you can test it with the following procedure:
+
+1. Copy MDISK.ACC to the suspicious disk. Turn off the hard disk (we do
+   not want trouble on it). Put the suspicious disk in floppy drive A: and
+   press the reset button.
+
+2. Take an unformatted disk, format it with M-Disk, then wipe it, load
+   something into the M-Disk, then copy the M-Disk onto the newly formatted
+   disk with M-Disk save. Load and save again, etc. When you see the message:
+       "*** Attention: VIRUS ***   Your system is infected !".
+   somewhere in this process, you know, that you definitely have a virus.
+
+   When you don't see that message, you may or may not have a virus.
+
+Little virology
+===============
+
+There are many virus types in the world. M-Disk only recognises the most
+harmless (but also most common) type: "boot sector virus".
+This virus type sits in the boot sector and gets loaded whenever you boot
+with an infected disk in the boot drive.
+
+A boot sector virus can easily be found and destroyed. If you copy all your
+data only with M-Disk (Version 5.5 and up), you will probably never have
+trouble with any "boot sector" type virus.
+
+More trouble comes with the "link virus" type, which is not recognised by
+M-Disk. A link virus links itself to any program, therefore it can never be
+found in the boot sector. It comes to your system along with some new program
+and as time goes by infects all of your programs. Whenever you start one of
+your programs now, you activate the virus.
+
+All virus programs reproduce themselves. But that's not all. There are some,
+that give funny messages on the screen, some that produce bombs from time to
+time, some destroy data on your floppy or hard disk, some destroy your monitor
+or floppy disk drive etc. So take care to eliminate every virus as soon as
+possible.
+
+There are also some special boot sector virus types that destroy everything
+they find in the boot sector (sometimes called anti-virus) and dummy boot sector
+programs (sometimes called virus protection programs). I don't like the concept
+of the anti-virus because it is just another virus and you never know what's
+going on in your floppy drive. I prefer a clean boot sector i. e. one that
+is filled up with zeroes after the first 30 Bytes of disk information.
+
+Care for executable boot sectors
+================================
+
+Some disks (especially some games) have executable boot sectors. These sectors
+cannot be copied with M-Disk. Use other Programs to copy those disks.
+M-Disk will warn you whenever it detects an executable boot sector
+because this could also be a virus.
+
+Copy protected disks
+====================
+
+M-Disk cannot copy copy-protected software.
+
+Recognise disk changes !
+========================
+
+When making backups of your data disk with normal disk copy programs
+the boot sector is copied as it is. This results in two 100% identical disks.
+The problem now is that the serial number of these two disks is the same.
+TOS uses this serial number to detect disk changes.
+
+So if you now swap between these two disks TOS does not notice any disk change
+and you may get strange results i. e. lots of garbage on your disk. This
+may go up to complete data loss.
+
+With M-Disk copy this won't happen since every disk gets a new serial number
+and so TOS will recognise every disk change correctly.
+
+CLEAR_M.PRG
+===========
+
+Old TOS Versions (pre 1987) don't clear the _drvbits system variable on reset
+time. For proper work with M-Disk, those Systems should have CLEAR_M.PRG
+in the AUTO folder of the boot disk. TOS Versions of 1987 and later do not
+need this.
+
+WARNING:
+========
+
+TurboDos had Problems with older M-Disk Versions. Versions >= 3.1 were
+not tested with TurboDos but it may eventually work together.
+(TurboDos is very buggy so you shouldn't use it anyway.)
+
+There's no need to use M-Disk with TurboDos. Use FATSPEED and you will get
+TurboDos speed without TurboDos. Since M-Disk Version 5.5 FATSPEED is no 
+longer included in this distribution. You can get it from various sources,
+but you should better get the TOS 1.4 ROMs of April 6, 1989 (Rainbow TOS)
+into your computer.
+
+Be sure to always use POOLFIX3.PRG with TOS 1.4 and TOS 1.6 (STE TOS).
+This program fixes (or at least tries to fix) the 40-folder bug, that was
+fixed and simultaneously re-introduced in TOS 1.4.
+
+Disclaimer:
+===========
+
+WARNING: I'm using this program every day but I do not make any warranty
+         with respect to this documentation and the program it describes.
+         I disclaim any implicit/explicit suggestions of usefulness for any
+         particular purpose. I will not be responsible for any damages or
+         data lossage caused by using this program. If you want to use it
+         use it at your own risk.
+
+This Program may be used and distributed freely as long as the program is
+left unchanged and this documentation goes unchanged with it.
+It may not be sold.
+
+M-Disk was compiled with the new Lattice C 5.06.01 with a few Assembler
+subroutines.
+
+For the rare case, that anybody wants to send me a little donation, here's the
+place where you can put it:
+'Nr. 2197 04-507' at the 'Postgiroamt Koeln', 'BLZ 370 100 50' (Germany).
+
+My adress until the mid of 1991 is:
+
+  Christoph Strunk
+  Wartburgstr. 10
+D-4630 Bochum 7
+  (Federal Republic of Germany)
+
+
+P.S.: The answer to above exercise is: You will never see it.
+
+- End of Document -

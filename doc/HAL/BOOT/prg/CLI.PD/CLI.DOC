@@ -1,0 +1,73 @@
+
+
+
+Dieser Commando Interpreter ist Public Domain, also frei kopierbar und
+genauso frei abzugeben. Seit so nett und gebt den ganzen Ordner weiter.
+
+Wer den unbÑndigen Wunsch nach einer vernÅnftigen Anleitung, oder nach
+Anerkennung meiner  MÅhe verspÅrt, sende bitte DM 20.- an :
+
+     C.Holdack      Eltzestr. 8         3100 Celle
+
+Kritik (positiv wie negativ) sind natÅrlich genauso willkommen.
+
+
+Das Programm kann: - fast alles was das Desk Top kann, aber ohne Bilder.
+
+                   - alle File Operationen mit Namensmustern (Wildcards)
+                     durchfÅhren, z.B. copy a:cli.* b:  kopiert alles was cli
+                     heiût auf das B-Laufwerk.
+
+                   - als Kopier-Prg. fÅr die Ram-Disk dienen. Cli in den
+                     Auto Ordner und in die "AUTO_CLI.BAT" alles rein
+                     schreiben was kopiert werden soll.
+                     Der "AUTO_CLI" Ordner wird beim Programm Start gesucht
+                     und, wenn vorhanden, abgearbeitet.
+
+                   - bis zu zehn Parameter (%0 bis %9) an die Batch
+                     Dateien Åbergeben.
+
+                   - die Funktions Tasten kînnen frei belegt werden.
+                     Der Command String darf max. 70 Zeichen lang sein.
+
+                   - Wenn der Interpreter CLI.PRG heiût,kînnen GEM Prg. laufen.
+                     Wenn der Interpreter CLI.TOS heiût laufen KEINE GEM Prg. !
+
+
+Das Programm gibt eine Help Seite aus, wenn man HELP <CR> eintippt,
+oder die Help Taste benutzt.
+
+In der Batch Datei CLI.BAT sind Beispiele fÅr jeden Command enthalten.
+
+In der nÑchsten Version, die in Arbeit ist, werden die folgenden Sachen
+mîglich sein:
+              - Schachtelbare Batch Dateien (eine Batch Datei kann eine
+                andere aufrufen).
+
+              - Verzweigungen in den Batch Dateien.
+
+              - Die beliebte I/O Umleitung.
+
+Und nun fÅr die, die mit so einem Programm noch nie in Kontakt kamen, die
+Frage - Wie starte ich ein Programm ?
+
+Programm Starten - prg_name <cr>
+                 - bei prg mit der Extension ".prg" muû die Extension
+                   nicht eingetippt werden.
+                 - editor.tos test.txt <cr>
+                   den Editor starten und die Datei test.txt editieren.
+
+Was ist eine Batch Datei ?
+Eine Batch Datei spart beim Programmschreiben viel Tipparbeit.
+Man kann die ganzen Programmaufrufe wie Compiler, Linker usw. einmal in
+die Datei schreiben und das war es. Wie das geht ?
+
+Batch Datei      - batch_name p1 ... p10 <cr>
+                 - Batch Datei abarbeiten. Die Extension ".bat" muû auch
+                   nicht eingetippt werden.
+                 - p0 ... p9 sind die 10 mîglichen Parameter.
+                   Sie werden in der Batch Datei durch %0 bis %9 dargestellt.
+                 - Als Beispiel die "DEMO.BAT" mit den folgenden Werten
+                   aufrufen :  demo test0 test1 mist.xxx
+
+

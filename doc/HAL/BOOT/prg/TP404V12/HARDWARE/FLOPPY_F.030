@@ -1,0 +1,84 @@
+
+     Datei: FLOPPY_F.030          ½ Michael Ruge     Rsselsheim, den 25.11.1994
+
+     Email: Michael Ruge @WI2.MAUS.DE)
+
+
+
+     Internal FloppyDisk Drives
+     
+     
+     C301371-101   = Floppy Drive 1.44MB (Epson SMD-340-139-01)
+     MegaSTE/TT030   Jumpertable: * * * * * *-* *
+                                        |
+                                  *-* * * * * * *
+     
+     C303073-001   = Floppy Drive 1.44MB (Epson SMD-340-601-04)
+     Falcon030       Jumpertable: * * * * * *-* *
+                                        |
+                                  *-* * * * * * *
+                                  
+                   = Floppy Drive 1.44MB (Epson SMD-340-135-06)
+                     Jumpertable: * * * * * *-* *  (Austauschtyp, nicht von Atari
+                                        |           ab Werk eingebaut!)
+                                  *-* * * * * * *  Im normalen Handel erh„ltlich!                          
+     
+     FšR ALLE EPSON SMD-340 LAUFWERKE GILT:
+     Die entsprechenden Felder sind auf meinem Datenblatt mit Nummern anstelle
+     von Buchstaben gekennzeichnet: links unten (die Seite, wo der Spannungs-
+     anschlu ist) ist 1, darber liegt 9, Rechts unten (Seite, auf welcher der
+     Shugart-Bus ist) ist 8, darber liegt 16. Also etwa so:
+
+              ______     9      16    ______________________
+              |....|     ........     |                    |
+              ------     ........     |                    |
+                         1      8     ----------------------
+ 
+     Jetzt gelten folgende Zuordnungen:
+                                       
+     14-15 Drive select 0
+     15-16 Drive select 1
+      6- 7 Drive select 2
+      7- 8 Drive select 3
+      4- 5 DD/HD-Umschaltung ber den internen Laufwerkssensor
+      5-13 DD/HD-Umschaltung ber Pin2 (VOM Controller ZUM Laufwerk!)
+      1- 2 1,44 MB Modus bei HIGH-Pegel am PIN 2
+      2- 3 1,44 MB Modus bei LOW-Pegel am PIN 2
+      1- 8 Grounding
+      9-   Grounding
+     10+11 Test-Terminal (differentiated signal output terminal)
+        12 Test-Terminal (terminal for factory drive adjustment)
+
+
+
+     Die Epson SMD340 gibt KEIN HD-OUT Signal von sich!
+     Abhilfe: Laufwerk ”ffnen (nur 1 Schraube, Laufwerk aus Blechmantel ziehen).
+     So drehen, da man auf die Platine schaut, Diskettenschlitz zum K”rper:
+     links sieht man jetzt ein angel”tetes 9-adriges weies Flachbandkabel.
+     Pin 8 mu nun mit Pin 2 des Shugart-Busses verbunden werden.
+
+        ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+        ³                         1øøøøøøøøøøøøøøøøø ³
+        ³   Ú----------------------øøøøøøøøøøøøøøøøø ³
+        ³   |                     2                34³
+        ³   |                                        ³
+        ³   |\                                       ³
+        ³   | \___ diese Verbindung herstellen       ³
+        ³   |                                        ³
+        ³ 9 |       1                                ³
+        ³ ÚĞĞĞĞĞĞĞĞĞ¿                                ³
+        ³ ³         ³                                ³
+
+
+
+
+     Achtung: Wird statt der originalen Floppy eine Floppy vom PC angeschlos-
+              sen, kann es passieren das sich die Floppy nicht ansprechen 
+              l„t! Ab Werk sind die meisten Floppy als Laufwerk B eingestellt
+              wem dies zust”t kommt nicht ohne Ger„tedokumentation bzw. einer
+              Jumperliste aus, also immer darauf achten das die Dokumentation
+              vom H„ndler mitgeliefert wird.
+              
+              Weiteres Problem, ist das bei PC Floppy's der Diskettenwechsel
+              nicht klappt, ebenfalls einen Blick in die Dokumentation werfen
+              und dann das Laufwerk entsprechend jumpern!

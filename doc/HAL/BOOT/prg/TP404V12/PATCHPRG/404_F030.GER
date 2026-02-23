@@ -1,0 +1,330 @@
+;*******************************************************************************
+;*   Patchfile fÅr TOS 4.04 (Falcon030) V 1.2 (TosPatch > V2.4 erforderlich)   *
+;*                                      Vom 03.05.1995                         *
+;* Copyright 25.11.1994 by:  Michael Ruge                                      *
+;*                           Konrad-Adenauer-Ring 14                           *
+;*                           65428 RÅsselsheim-KînigstÑdten                    *
+;*                           Telefon +49-6142/33429 (evtl. Anrufbeantworter)   *
+;*                           Mailbox +49-6142/33669                            *
+;*                                                                             *
+;*                                                                             *
+;* Wer einen neuen Patch fÅr das TOS 4.04 hat, mîge sich bitte vor der Verîff- *
+;* entlichung mit mir in Verbindung setzen! Damit man jederzeit nach vollziehen*
+;* kann von wem der Patch ist und was er macht, also keinen Wildwuchs mit die- *
+;* ser Patchliste veranstalten!                                                *
+;*                                                                             *
+;*                                                                             *
+;* Diese Patchliste ist Pizzaware das heiût,jeder der sich sein TOS 4.04       *
+;* patcht ist verpflichtet mindestens eine Pizza im Gegenwert von mindestens   *
+;* 10.- DM zu verzehren! SÑumige Zahler werden verfolgt und mit scharfer Pep-  *
+,* peroni ÅberwÑltigt :-)                                                      *
+;*                                                                             *
+;* Statt TosPatch eignet sich das Programm Çgale ebenfalls fÅr Patches dieser  *
+;* Art. Dazu mÅssen Sie lediglich das ROM irgendwie auslesen und manuell mit   *
+;* Çgale anhand dieser Datei (BinÑr laden!) patchen.                           *
+;* Das Programm ist z.B. per Modem in der KGB, Tel. 0611/375201 erhÑltlich.    *
+;*                                                                             *
+;*                                                                             *
+;*       Name                KÅrzel              Datum                         *
+;*  --------------------------------------------------------                   *
+;*  Michael Ruge             MR                  24.09.94                      *
+;*  Steffen Engel            SE                  01.10.94                      *
+;*  Jens Fellmuth            JF                  23.10.94                      *
+;*                                                                             *
+;*                                                                             *
+;*******************************************************************************
+;* 
+;* TOS-Daten festlegen
+;* >>> TOS-LÑnge _MUSS_ durch $20000 teilbar sein!
+
+.BASE   = E00000    ;TOS-ROM-Adresse (Default $E00000)
+.LENGTH =  80000    ;TOS-LÑnge (Default $80000)
+.WIDTH  = .8        ;CRC-Checksumm korrekt erstellen
+
+;*******************************************************************************
+;* 
+;* Einleseformat des Patchprogramms
+
+<*              ;ungepatches TOS 4.04 aus dem ROM lesen 
+=08.03.1993     ;muû die Version vom 08.03.1993 sein! (sonst Message!)
+
+
+;*******************************************************************************
+;* 
+;* Berechnen und Setzen der CRC-PrÅfsumme von TOS 4.04
+;* Beim ROM-TOS erscheint sonst die Message ;* 'CRC-error in chip E.', falls der
+;* Test nicht ausgeschaltet ist
+
+›
+
+;*******************************************************************************
+;* 
+;* Ausgabeformat des Patchprogramms
+
+>1                  ;eine Datei abspeichern fÅr PLCC-Chip
+;>2                  ;zwei Dateien abspeichern fÅr DIL-Eproms
+
+;*******************************************************************************
+;*
+;* CPU auf 16Mhz
+;* CPU und BLITTER Taktfrequenz wird vom ROM TOS mit 16MHz gesetzt, lediglich 
+;* in der RESET-Phase wird die CPU mit 8MHz getaktet um sÑmtliche Systemkompo-
+;* nenten synchronisieren zu kînnen, daher kein Patch erforderlich 
+                             
+;*******************************************************************************
+;*
+;* MR/JF 08.11.1994 (V1.0)
+;*
+;* Vorteilhaft wenn man nur SCSI-Festplatten am Falcon betreibt und keine IDE-
+;* Platte eingebaut ist (Gedenkminute fÅr nicht gefundene IDE-Platte wird unter-
+;* drÅckt!), somit wird dann schneller von einer SCSI-Platte gebootet.
+;* Mit besonderen Dank an Steffen Engel und Jens Fellmuth fÅr die Tips und Hilfe
+;* bei der Suche nach dieser verlausten Routine
+
+;1F16 $03E8   ; 5 Sekunden Timeout (Gedenkminute) -> Atari Defaulteinstellung
+;1F16 $0190   ; 2 Sekunden Timeout
+;1F16 $00C8   ; 1 Sekunde Timeout
+;1F16 $0000   ; 0 Sekunden Timeout
+
+;*******************************************************************************
+;*
+;* MR 08.11.1994 (V1.0)
+;*
+;* IDE Festplatte wird abgewÅrgt beim Systemstart und es wird von einer falls
+;* vorhandenen und bootbaren SCSI Festplatte, ansonsten von Diskette gebootet.
+;* Nur sinnvoll, falls der Rechner beim starten beim Zugriff auf die IDE Fest-
+;* platte (Rootprogramm und Festplattentreiber laden und starten) mit Bomben
+;* umsich wirft und nicht in den Desktop kommt.
+;*
+;* Eigentlich nur wegen der VollstÑndigkeit halber mit aufgenommen, im normalen
+;* Betrieb absolut unsinnig (Also mehr was fÅr HÑndler/WerkstÑtten)!
+;*
+
+;1ECE $00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00                     
+;1EEC $00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00                     
+
+;*******************************************************************************
+;*
+;* SE/MR 08.11.1994 (V1.0)
+;*
+;* Falcon meldet sich bei Selektion als SCSI-GerÑt 7 (Initiator identification)
+;* Sinnvoll ist es, wenn dann bei arbitrierenden Festplattentreibern auch
+;* SCSI-ID 7 gesetzt wird, damit der Treiber und eine evtl. Verwendung von
+;* DMARead/Write nicht zu Selektion verschiedener Initiatoren fÅhren.
+;*
+;* Dieser Patch sollte nur verwendet werden, wenn man eine SCSI-Platte
+;* benutzt, die Initiator Identification verlangt (zB Quantum Empire, Fujitsu MOD)
+;* und nicht den Plattentreiber von IDE bootet.
+;*
+;* Hierzu MUû ein Festplattentreiber verwendet werden, der Bus Arbitration unter-
+;* stÅtzt (z.b. HDDriver ab Version 3.50 von Uwe Seimet (ist enthalten bei 
+;* OUTSIDE - Vertrieb Maxon und DISKUS - Vertrieb CCD oder einzeln als Paket bei
+;* Uwe Seimet selbst.
+;*
+;* Der ATARI Festplattentreiber AHDI unterstÅtzt dieses Feature (Bus Arbitration)
+;* NICHT!
+
+; 1C0E $7080
+
+;*******************************************************************************
+;*
+;* MR 08.11.1994 (V1.0)
+;*
+;* Ersetzt die Atari-Bomben durch die ursprÅnglichen Atom-Pilze...         
+
+;12BC $07,C0,1F,F0,3B,F8,77,F4,B7,FA,BB,FA,DF,F6,66,FC,32,88,02,80,04,40,04,40,05,40,05,20,09,20,09,20 
+
+;* Ersetzt die Atom-Pilze durch die originalen Atari-Bomben                
+
+;12BC $06,00,29,00,00,80,48,40,11,F0,01,F0,07,FC,0F,FE,0D,FE,1F,FF,1F,EF,0F,EE,0F,DE,07,FC,03,F8,00,E0 
+
+;* Ersetzt die Atari-Bomben durch einen Stinkefinger                       
+
+;12BC $0C,00,12,00,11,00,09,00,09,F0,04,A8,1C,A4,26,54,22,04,28,04,3C,04,44,02,40,02,30,02,0E,02,01,01
+
+;*******************************************************************************
+;*
+;* MR 15.04.94 (V1.2)
+;*
+;* REQ (DTR)-Signal am LAN-Port (SCC_Port A) auf LOW legen   
+
+;2D3B $62   ; orignalwert ist $E2
+
+;* DTR-Signal am Modem-Port (SCC_Port B) auf LOW legen
+
+;2D51 $62   ; orignalwert ist $EA
+
+;* Initialisierungswerte fÅr SCC-Chip ab $2D32
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;*
+;* Druckertimeout (Centronics) auf XXs statt auf 30s (Atari Default) einstellen   
+
+;241C $1770   ; 30 Sekunden (Atari default)
+;241C $0FA0   ; 20 Sekunden
+;241C $07D0   ; 10 Sekunden
+;241C $03E8   ;  5 Sekunden
+;241C $00C8   ;  1 Sekunde 
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;*
+;* Fast-Load-Bit fÅr schnelleres Laden (siehe ST-Computer 1/90)
+;* Produziert Fehler bei einigen Laufwerken (Original Falcon030 Floppy von Atari)
+;* deswegen hier nur als Kommentar
+                                                                           
+;447F $10
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;*
+;* Suche nach Laufwerk 'B' unterbinden -> Schnelleres Booten
+;* >>> Funktioniert nicht mit 2 (Physikalischen) Floppylaufwerken!
+
+;4803 $01  ;JA, die Routinen die gepatcht werden mÅssen, existieren DREIMAL! 
+;A497 $01                                                                   
+;3E55D $01                                                                  
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;* 
+;* Grow- und Shrinkboxen ausschalten, bringt Speed beim Bildschirmaufbau!
+
+;33AAA $4E,75                                                               
+;33AEE $4E,75                                                               
+
+;*******************************************************************************
+;* 
+;* MR 08.11.94 (V1.0)
+;* 
+;* Atari-Anfangsfuji 
+;49434 ATARI.ABS                                                           
+
+;* Atari-Anfangsfuji gegen 'Gib-Dos keine Chance' ersetzen.
+;* Fuji von Reiner Rosin 
+;49434 GIB_DOS.ABS                                                         
+
+;* Atari-Anfangsfuji gegen 'GeTuned'-Figur ersetzen.
+;* Figur von Sven Spitzmacher
+;49434 GT_TOS.ABS                                                          
+
+;* Atari-Anfangsfuji gegen 'United Federations of Planet - Logo (Star Trek)' ersetzen
+;* Logo gezeichnet von Michael Ruge
+;49434 UFP_LOGO.ABS                                                        
+
+;* Atari-Anfangsfuji gegen 'X' ersetzen
+;* X gezeichnet von Michael Ruge
+;49434 X.ABS                                                               
+
+;* Atari-Anfnagsfuji gegen "Ç" (Scheiss Çgale) ersetzen. (David hat es so gewollt)
+;* Ç gezeichnet von Michael Ruge
+;49424 SCHEGALE.ABS
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;* 
+;* éndert den Papiervorschub bei der Hardcopy ab. Somit kann sowohl auf einem
+;* NEC P6, wie auch weiterhin auf einem EPSON eine Hardcopy gemacht werden
+;* (öbernommen aus der ST-Computer 10/90, funktioniert eh nur in ST-Hoch (SM124)
+;* habe es daher auch nicht getestet!
+
+;4AE48 $1B,41,07,FF                                                         
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;*
+;* Mit diesem Patch wird das Peseta Zeichen durch das Esszet-Zeichen ersetzt.
+;* Dies sieht nun mal auf den meisten Nadeldruckern besser aus, allerdings wirkt
+;* es natÅrlich nur bei Texten, welche mit dem gepachten TOS eingegeben werden.
+;* In den alten Texten steht ja noch das û drin.
+;*
+;* Macht Probleme bei Everest, Wordplus 3.20 TT auf meinem Falcon030, daher als Kommentar
+
+;36778 $E1                                                                 
+;36878 $E1
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;*
+;* Im Dialog `FORMATIEREN` "Hohe Schreibdichte" durch "Dreiseitig" ersetzen
+;*
+
+;5B80F $20,20,20,20,44,72,65,69,73,65,69,74,69,67,20,20,20,20               
+
+;*******************************************************************************
+;*
+;* MR 03.12.94 (V1.1)
+;*
+;* Im Dialog BILDSCHIRMTYP "True Color" durch "High Color" ersetzen 15 bzw. 16Bit 
+;* Farbgrafik wie Sie der Falcon030 hat, ist kein True Color!
+
+;5674A $48,69,67,68 : Englische RSC
+;56B37 $48,69,67,68 : Englische RSC
+;57D3A $48,69,67,68 : Englische RSC
+
+;5C1CA $48,69,67,68 ; Deutsche RSC
+;5C402 $48,69,67,68 ; Deutsche RSC
+;5C854 $48,69,67,68 ; Deutsche RSC
+
+;68786 $48,69,67,68 ; Franzîsische RSC
+
+;*******************************************************************************
+;*
+;* MR 03.12.94 (V1.1)
+;*
+;* Im Deutschen Dialog `Desktop Info` steht die Jahreszahl auf 1992, muû aber 
+;* 1993 heiûen. Das TOS Datum lautet nÑmlich auf den 08.03.1993!
+
+;5B5AD $33                       
+
+;*******************************************************************************
+;*
+;* MR 20.01.1995 (V1.2)
+;*
+;* Standardtastaturbelegung fÅr die Desktopfunktionen Ñndern
+;* ASCII-Werte der Standardtastenbelegung (aus dem NEWDESK.INF Åbernommen)
+;* Nicht belegte Tasten erhalten den Wert 00!
+
+;51062 $4F,53,4C,44,46,42,43,57,45,4D,54,49,58,4E,41,47,52,55,50,48,4B,51,59,5A,56,30,2B,2D,2A
+
+;*******************************************************************************
+;*
+;* MR 20.01.1995 (V1.2)
+;*
+;* Deutsche ROM TOS NEWDESK.INF Ñndern
+
+;61B00 $30,30,20,30,30,20,30,41,20,30,31,20,31,46,20,31,43,20,30,30 ; Window 1 Plazieren
+;61B1B $30,30,20,30,30,20,32,43,20,30,31,20,31,46,20,31,43,20,30,30 ; Window 2 Plazieren
+;61C18 $30,30,20,30,30,20,30,30,20,46,46                            ; Icon Floppy A Plazieren
+;61C3A $30,30,20,30,31,20,30,30,20,46,46                            ; Icon Floppy B Plazieren
+;61C5C $30,30,20,30,37,20,30,32,20,46,46                            ; Icon Papierkorb Plazieren
+
+;*******************************************************************************
+;*
+;* MR 08.11.94 (V1.0)
+;*
+;* Anfangsadressen der verschiedenen ROM-TOS NESWESK.INF                   
+
+;5975A - Englische    - English
+;61A5A - Deutsche     - German
+;69FCA - Franzîsische - French
+;7231A - Italienische - Italia
+;7A81A - Spanische    - Spanish                          
+
+; Falls jetzt jemand auf die Idee kommen sollte, zu versuchen die NEWDESK.INF so
+; zu patchen damit der Falcon bei gedrÅckter Control/Alternate-Taste statt in 
+; ST-LOW, in 640*480*16 oder so bootet, den muû ich enttÑuschen.
+; Genau dieses Byte wird NICHT ausgewertet, der Videochip wird direkt program-
+; miert :-((((((((((((((((((((((((((
+
+;*******************************************************************************
+
+;* Ende der Datei... Viel Spaû mit dem gepatchten TOS 4.04!

@@ -1,0 +1,68 @@
+
+
+   Ersatzteil-Teilebezeichnung
+
+   C103803-001   = IC LM386 Audio OperationsverstÑrker
+   C302900-001   = IC LM387
+   C302096-001   = Ajax Floppydiskcontroller
+   C302799-022   = YM3439 Soundchip
+   C302829-001   = IC Custom Chip Videl
+   C302995-001   = IC Custom Chip Combel
+   C302996-001   = IC Custom Chip SoundDMA
+   C303001-001   = 68030 CPU (Aufdruck (M) MOTOROLA-Zeichen,
+                   SC414230FE16)
+   C303002-001   = DSP 56001 (SSP4240220FJ33
+   C303003-001   = Crystal Codec (CS4216-KL EP)
+                 = ITT Codec (ASCO 2300, G001006.007, 3044'12)
+   C303004-001   = DSP SRam 32K*8 (Alliance AS7C256-25JL)
+   C302830-001   = GAL16V8-12 ECLK
+   C302831-001   = GAL16V8-12 UDS/LDS
+   C302832-001   = GAL16V8-12 DSACK
+   C302833-001   = GAL16V8-12 AS/BG
+   C302834-001   = GAL20V8-12 DSP
+   C302897-001   = 53C80 SCSI-Chip
+   C302824-001   = STV8438 (DAC)
+   27C4096       = 44 Pin PLCC-Prom (Fa. TI) fÅr TOS 4.0x (Unter
+                   der Ramkarte)
+ TMP27PC240-12FNL= 44 Pin PLCC-Prom (Fa. TI) fÅr TOS 4.0x (Unter
+                   der Ramkarte)
+   HN27C4096CC-12= 44 Pin PLCC-Eprom (Fa. Hitachi) fÅr TOS 4.0x
+   68901 MFP     = MFP (MegaSTE/TT/Falcon) 44Pin PLCC-AusfÅhrung
+   EF6850P       = ACIA (Signetics-Thomson)
+   Z53C80        = Falcon030-SCSI-Chip, Fa. Logic
+   Z8530         = SCC-Chip (Mega STE, TT030 und Falcon030)
+   MK48T87B-24   = RealTimeClock (Fa. Signetics-Thomson)
+   MCCS146818BM  = RealTimeClock (Fa. Motorola)
+   MC68030       = CPU 68030 mit 32MHz im PVC PLCC-GehÑuse von Mo-
+                   torola
+   C302763-001   = Ramcard mit 4MB
+   C401294-001   = Ramcard mit 14/16MB
+   C302096-001A  = Ajax (Produziert bei Toshiba), DD/HD/ED-fÑhig
+   C302434-001A  = Ajax (Produziert bei National), DD/HD/ED-fÑhig
+   C303109-001   = Falcon030 VGA-Adapter
+   C303108-001   = Falcon030 SM-Adapter
+   C303073-001   = Floppy Drive SMD-340
+   C302867-001   = Power Supply Unit F030
+   C100186       = HF Modulator
+   C070122-002   = Keyboardprozessor
+   C070777-002   = Keyboard Germany
+   CA401297-003  = Keyboard QWERTY - UK
+   CA401369-005  = Keyboard QWERTZU - GER
+   CA401297-006  = Keyboard QWERTY - Italy
+   CA401297-004  = Keyboard AZERTY - FRA
+                 = Seagate ST9077A 2,5 Zoll Internal IDE-Harddisk-
+                   drive 60MB, 16ms, 32KB Cache,
+                 = Seagate ST9080A 2,5 Zoll Internal IDE-Harddisk-
+                   drive (61MB, 16ms, 32KB Cache, 4 Heads, 823 Cy-
+                   linder, 38 Sectors pro Track)
+                 = Conner CP2044 - Falcon Prototyp only!
+                   42.6MB, 19ms, 4 Heads, 548 Cylinder)
+                 = Conner CP2064 2,5 Zoll Internal IDE-Harddiskdrive
+                   (61MB, 4 Heads, 823 Cylinder, 38 Sectors pro Track)
+                 = Conner CP2088 2,5 Zoll Internal IDE-Harddiskdrive
+                   (81.3MB, 19ms, 8 Heads, 548 Cylinder, 38 Sectors
+                   pro Track)
+                 = Toshiba MK1522FCV 2,5 Zoll Internal IDE-Harddisk-
+                   drive (120MB, 15ms, 8 Heads, 812 Cylinder, 38
+                   Sectors pro Track)
+

@@ -1,0 +1,30 @@
+DIRSORT V1.1 vom 18.6.1993
+==========================
+
+Dieses Hilfsprogramm sortiert beliebige Directories. Insbesondere beim
+AUTO-Ordner ist dies ab und zu erforderlich, da die Programme in der
+Reihenfolge gestartet werden, in der sie im AUTO-Ordner gespeichert sind und
+da es bei einigen Programmen auf diese Reihenfolge ankommt. Aber auch fÅr
+den CPX-Ordner ist ein solches Sortieren sinnvoll. Mit dem Knopf "Read"
+liest man das zu sortierende Directory ein. Beim AUTO-Ordner ist das nicht
+nîtig, da er bereits voreingestellt ist. Man kann das Directory auch in der
+Parameterzeile an DIRSORT Åbergeben. Danach kann man die Dateien durch
+Verschieben mit der Maus in die gewÅnschte Reihenfolge bringen. Die neue
+Reihenfolge schreibt man dann mit dem Knopf "Write" wieder zurÅck. An dieser
+Stelle macht sich Åbrigens ein Cache-Programm angenehm bemerkbar. Ohne ein
+solches dauert das Speichern wesentlich lÑnger, da sehr oft auf das Laufwerk
+zugegriffen werden muû. Mit dem Knopf "Quit" verlÑût man DIRSORT wieder.
+
+Das Programm ist nun bei mir schon zwei Jahre auf dem Mega ST und dem TT im
+Einsatz gewesen und hat dabei noch nie Probleme bereitet. Es lÑuft sogar als
+Accessory und kommt nun auch mit "Let 'em Fly" zurecht. Trotzdem weise ich
+darauf hin, daû die Benutzung des Programms auf eigene Gefahr geschieht.
+Falls das Laufwerk randvoll ist oder beim Speichern unterbrochen wird, ist
+nicht auszuschlieûen, daû Dateien verloren gehen.
+
+DIRSORT ist "Public Domain".
+
+Christoph Zwerschke
+Am Steinfeld 4
+D-59379 Selm-Cappenberg
+

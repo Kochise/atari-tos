@@ -1,0 +1,117 @@
+FUSS v1.0
+F030 Universal Screen Saver
+By T.AL 93
+
+
+  - "encore un screen saver !"
+  - "eh oui mais ..."
+
+    . celui-la marche dans *tous* les modes falcon et ST compatibles
+    initialis‚s par XBIOS(5) (SetScreen)
+    . version 1 cod‚e en environ une aprŠs-midi
+    . installable
+    . desinstalable !
+    . on peut meme modifier le nom du fichier de sauvegarde
+    . le format des fichiers F30 g‚n‚r‚s par Fuss est fourni
+    . les sources de Fuss v1.0 et de son viewer sont fournis
+    . la doc est carrement g‚niale
+    
+  - "euh? mais comment j'ai fait pour vivre avant Fuss ?"
+	- "va comprendre Charles, aujourd'hui ..."
+	
+	
+	
+Fonctionnement:
+
+    FUSS_V1.TTP
+    
+    Si Fuss n'est pas install‚, il s'installe avec "\saver.f30"
+comme nom de fichier de sauvegarde. (on peut le modifier dans fuss.s
+au label 'defaultfname'.)
+
+    Si Fuss ‚tait d‚j… install‚ il se d‚sinstalle.
+    
+    FUSS_V1.TTP f:\f30\save1.f30
+    
+    Si Fuss n'est pas install‚, il s'installe avec "f:\f30\save1.f30"
+comme nom de fichier de sauvegarde.
+
+    Si Fuss ‚tait d‚j… install‚ la prochaine image sera sauv‚e sous
+le nom f:\f30\save1.f30.
+
+
+  - "euh? c'est g‚nial"
+  - "ben ouais ..."
+
+    Pour lancer la capture il ne reste plus qu'a appuyer sur Alt+Help.  
+
+  
+    VIEWER.TTP
+
+    Demande le nom du fichier F30 … charger ("e:\tmp\saver.f30" sera
+pris en compte sur une validation … vide).
+
+  - "et l'image ripp‚e fut ..."
+  - "WHAAOUOUOUUO"
+  
+  
+    VIEWER.TTP f:\f30\save2.f30
+    
+    Charge et affiche le fichier image f:\f30\save2.f30.
+    
+    
+remarque: si le fichier sp‚fici‚ n'exsite pas viewer essaie de charger
+l'image par defaut "e:\tmp\saver.f30".
+
+
+
+Commentaires:
+
+
+    fuss_v1.s: bof
+    
+    viewer.gfa: bof
+    
+    
+Format des images F30:
+
+    Le premier mot du fichier est le mode retourn‚ par Vsetmode(-1)
+(c'est aussi le parametre de SetScreen(3))
+
+    Ensuite la palette pour les modes bitmap,
+                    32 octets pour les modes ST compatibles
+                    1024 octets pour les modes Falcon bitmap
+                    
+    et la ram vid‚o pour les modes bitmap.
+
+    Pour les modes truecolor le fichier n'est constitu‚ que du mot de
+mode ‚cran et de la ram vid‚o.
+
+
+    En fait il suffit de tester le bit 2 du mot de mode pour
+determiner si l'affichage est truecolor ou bitmap.
+    Pour un bitmap il faut aussi tester le bit 7 pour savoir si le
+mode est compatible ST. Si oui la palette fait 32 octets sinon elle
+fait 1024 octets (256 mots longs).
+
+    C'est beaucoup plus clair dans le source de viewer.gfa.
+    
+Petite remarque: il faut acceder aux registres de la palette falcon
+par mots longs sinon problŠmes de couleurs. (la composante rouge est
+mal initialis‚e.)
+
+
+
+  - "c'est fini, au revoir les petits enfants"
+  - " ..."
+
+
+  atchao bonsoir.
+  
+  
+  Jean Claude IEHL
+  Chemin des allees
+  65460 BAZET
+  
+  internet: si2g23@cix.cict.fr (pour l'ann‚e 93-94)    
+  

@@ -1,0 +1,86 @@
+
+BARREL:  The Versatile RAM Buffer and Printer Spooler.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+by  Moshe Braner   	<braner@amvax.tn.cornell.edu>
+
+
+Consider the following situations:
+
+You want to print long files without holding your computer up in the
+meanwhile...
+
+You would like to save the screen as a disk file when you press Alt-Help,
+instead of printing a hardcopy...
+
+You're trying to do some fancy printout, but your word processor doesn't
+print what you think you told it to.  You would like to be able to see
+exactly what control characters were sent to the printer...
+
+You want to print on a remote printer, send a document e-mail, or input it
+to another program, but your word processor (or whatever) will only save
+documents in its own wierd format, not as a formatted ASCII file...
+
+You have a printer-driver to print graphics from program X on printer A.
+But you would like to use printer B.  You have the documentation for both
+printers.  You could easily write a "post-processor" program that will
+replace one set of control chars with another.  But first you need a
+method of capturing the output for printer A in a file...
+
+It is all possible with the program "BARREL".
+
+When you run BARREL for the first time in a session (from the desktop or
+from the auto folder) it installs a RAM buffer plus some resident code.
+You enter the desired size of the buffer in units of 12K: a number between
+1 and 9.  (You need to press '3' (i.e. a 36K buffer) or more if you want
+to capture DEGAS format screen dumps.) Then, and every time you run the
+(same) program later in the session, you get to choose items from a menu:
+
+	Capture printouts in barrel
+	Immediate hardcopy printouts
+	Empty barrel                         - make room for new stuff
+	Write barrel to a disk file          - file the RAM buffer
+	Read a file into barrel              - for background printing
+	Hardcopy screen dumps
+	SCODE format screen dumps
+	DEGAS format screen dumps
+	Background printing                  - after Capture or Reading
+	Foreground printing only             - but can resume later
+	Quit                                 - but leave settings intact
+
+BARREL intercepts all BIOS calls, and when they concern the printer it
+redirects them to a RAM buffer.  BARREL achieves background printing by
+installing a routine in the 200 Hz system timer interrupt (that's plenty
+fast enough for text but rather slow when printing graphics).  You can
+also ask BARREL to read a file into the RAM buffer.  That is a faster way
+of setting a file up for background printing.  The barrel is automatically
+emptied whenever background printing catches up with the saved stuff.  It
+is NOT emptied upon writing to a file, so if you want to do both you
+should write the file first.
+
+BARREL also redirects the screen dump vector, enabling capture of the
+screen dump in RAM, in either SCODE or DEGAS format.  A "screen dump" is
+caused by either pressing Alt-Help, or by a program (e.g. N-Vision)
+calling the XBIOS screen- dump function.  If the screen dump is successful
+(i.e. there was enough space available in the barrel) the screen will
+'blink' as a confirmation.  The captured data may then be saved to disk by
+re-running BARREL and pressing 'W'.  SCODE is a format that is both
+compressed and coded as text, so it is ideal for sending pictures via
+electronic mail (no uuencoding necessary).  You must use the SDECODE
+program to view the picture, print it, or save it in a standard bit-map
+form.  Note that when using DEGAS format dumps in BARREL, repeated
+Alt-Helps overwrite each other, only the last saved screen is still there.
+When using SCODE format dumps, they accumulate in the barrel as long
+as there is enough space.  Individual dumps are separated by a blank
+line.  After you write the barrel to disk you must use a text editor
+to separate the dumps (and remove any other text preceding coded dumps).
+Also note that the format of the saved graphics is NOT printable, while
+the normal screen dump does not go through any BIOS calls.  Therefore, you
+cannot print an Alt-Help screen dump in the background without some extra
+software.  You CAN spool the output of a program that prints graphics from
+a file (e.g.  a GEM metafile) as long as the program calls the BIOS
+Bconout() function to print each byte.
+
+Asking for "immediate hardcopy printouts" just turns off interception of
+printer output.  If you want to actually remove BARREL and reclaim the
+memory it holds, you have to reboot.

@@ -1,0 +1,146 @@
+                    *** Dokumentation zu VIEW Version v1.1 ***
+
+(c) 1987 R. Fuchs, Am Weingarten 13, 6000 Frankfurt 90
+
+Dieses Programm kann fuer nicht-kommerziellen Gebrauch frei kopiert und 
+auch wieder geloescht werden, falls es keinen interessiert...
+
+VIEW  ist ein Programm zum Betrachten und Blaettern in  Text-
+und Programmfiles und zu deren Ausdruck.
+
+Aufruf: Anklicken von VIEW.TTP und Eingabe des Filenamens,
+        bzw. Eingabe von VIEW.TTP filename unter einer Shell.
+
+VIEW  laedt  dann  das gewuenschte File ein und zeigt es auf  dem 
+Bildschirm  an.  Dabei werden Steuerzeichen (unter ASCII 32)  als 
+Punkt dargestellt (mit Ausnahme von CR und LF).  Es  lassen  sich 
+daher  auch  Programmfiles anzeigen und  diese  nach  Textstellen 
+durchsuchen.  
+
+Es werden jeweils 24 Zeilen auf einmal dargestellt.  Die unterste 
+Bildschirmzeile  zeigt den Filenamen,  die Laenge der  Datei, die 
+sich momentan am oberen Bildschirmrand befindliche Zeile und  die 
+Gesamtzahl der Zeilen des Files.
+
+Folgende Optionen stehen auf Tastendruck zur Verfuegung:
+
+     SPACE     - Eine Seite, dh. 23 Zeilen vorblaettern.
+     BACKSPACE - Eine Seite, dh. 23 Zeilen zurueckblaettern.
+     RETURN    - Eine Zeile weiter.
+     TAB       - Eine Zeile zurueck.
+
+     G         - Goto. Es wird nach einer Zeilennummer gefragt und 
+                 dann der Text ab dieser Zeile angezeigt.
+
+     HOME      - Blaettern zu Textanfang bzw. Textende.
+
+     P         - Print. Die Datei wird ausgedruckt mit einer 
+                 Headerzeile, die Filenamen und Laenge enthaelt.
+                 Der  Druckvorgang  kann mit  ESCape  abgebrochen 
+                 werden.
+
+     B         - Block Print. Der Ausdruck erfolgt ab der 
+                 momentan obersten Textzeile.
+
+     S         - Suchen nach einem bestimmten String. Die Zeile, 
+                 die den Suchstring enthaelt, wird als oberste 
+                 Zeile dargestellt.
+     
+     HELP      - Anzeige einer HELP-Seite.
+
+     UNDO oder ESCape - Abbrechen des Programms.
+
+
+Ideal ist die Anwendung dieses Programms in Zusammenhang mit  dem 
+auf der Diskette befindlichen DESKTOP.INF File.
+Dazu einige Erlaeuterungen:
+
+Wer  kennt das Problem nicht?  Man will sich nur  einmal  schnell 
+eine  bestimmte  Stelle in einer Textdatei anschauen  und oeffnet 
+daher das entsprechende Symbol. In der nun erscheinenden Auswahl-
+box  waehlt  man  'Anzeigen' und scrollt sich nun  mit  Hilfe der 
+Space-Taste bis zum gesuchten Textteil.  Oder besser:  man wollte 
+dies  tun,  denn  schon sieht man die gesuchte Stelle  am  oberen 
+Bildrand entschwinden...Also, alles wieder von vorne...
+
+VIEW und DESKTOP.INF bieten dazu eine angenehme Alternative !
+
+Wie das?
+
+Dies soll ein gewoehnliches DESKTOP.INF File sein:
+
+#a030000
+#b001000
+#c7770007000700070055200505552220770557075057705504111603
+#d                                             
+#E 7B 03 
+#W 03 01 06 01 33 0A 09 A:\*.*@
+#W 00 00 00 01 4F 12 00 @
+#W 00 00 18 01 1E 13 00 @
+#W 00 00 00 04 4F 11 00 @
+#M 02 07 00 FF A DOUBLE-SIDED@ @ 
+#M 03 07 00 FF B DOUBLE-SIDED@ @ 
+#T 07 07 02 FF   GO TO HELL@ @  
+#F FF 04   @ *.*@ 
+#D FF 01   @ *.*@ 
+#G 03 FF   *.PRG@ @ 
+#G 03 FF   *.APP@ @ 
+#F 03 04   *.TOS@ @ 
+#P 03 04   *.TTP@ @ 
+#G 03 04   A:\WORDPLUS.PRG@ *.DOC@ 
+
+Oeffnet man ein Dokument auf dem Desktop, dann ueberprueft der ST, 
+ob  die  Extension  dieses Files  sich in  der  durch  DESKTOP.INF 
+vorgegeben  Tabelle  findet.  Interessant dabei  ist,  dass  diese 
+Tabelle  von unten her angegangen wird.  In  diesem Beispiel  also 
+bedeutet dies, dass zuerst ueberprueft wird,  ob  das  angewaehlte 
+Dokument  vom  Typ  *.DOC ist;  gegebenenfalls wird  das  Programm 
+WORDPLUS gestartet.  Anderenfalls wird ueberprueft, ob es sich  um 
+ein  *.TTP-,  ein  *.TOS-,  ein  *.APP- oder  zuletzt  ein  *.PRG-
+Dokument  handelt.  In  diesen Faellen wird das  angeklickte  File 
+direkt  gestartet.  Ist  nichts von dem der Fall,  dann  wird  die 
+bekannte Auswahlbox 'Anzeigen Drucken Abbrechen' angezeigt.
+
+Und genau hier kann man nun einhaken:
+Das File DESKTOP.INF laesst sich mit jedem Texteditor bearbeiten.
+Fuegt  man in  die  Zeile  #F FF 04   @  *.*@  den  Namen  seines 
+bevorzugten  Editors ein,  so wird automatisch dieser  aufgerufen 
+anstelle der unerwuenschten Auswahlbox. Ist dieser Editor ein GEM-
+Programm, dann muss #F durch #G ersetzt werden. Zwei Beispiele:
+     #F FF 04   C:\VIEW.TTP@ *.*@
+oder #G FF 04   C:\EDITOREN\TEMPUS.PRG@ *.*@
+Es sind dabei beliebige Pfadname erlaubt.
+  
+Klickt  man  nun  ein Textfile  an,  dann  wird  automatisch  der 
+angegebene  Editor  gestartet und der  Pfadname  des  angewaehlten 
+Dokuments uebergeben. In den obigen Beispielen wuerde also das TOS-
+Programm VIEW.TTP von Laufwerk C: (Festplatte oder RAM-Disk) bzw. 
+das  GEM-Programm TEMPUS aus dem Ordner Editoren auf Laufwerk  C: 
+gestartet.
+
+Ein Nachteil soll nicht verschwiegen werden:
+Eine  Zeile #F FF 04   A:\VIEW.TTP@ *.*@ ist zwar  moeglich,  dann 
+muss  sich  aber  VIEW auch auf  der  entsprechenden  Diskette  A: 
+befinden!  Ist  dies nicht der Fall,  erfolgt eine Meldung   'Kann 
+Anwendung nicht finden'.  Diese Methode bietet sich  daher  beson-
+ders fuer Besitzer einer Festplatte an, da auf dieser VIEW ja immer
+zur Verfuegung  steht.
+Alternativ  kann  man natuerlich eine der vielen  PD-RAM-Disks  im 
+Auto-Ordner halten und mit einem Autocopy-Programm den  Editor  in 
+die RAM-Disk kopieren.
+
+Es sei noch erwaehnt, dass man natuerlich nicht auf einen  Editor 
+festgelegt  ist als automatisch  aufgerufenes  Programm.  Denkbar 
+waere auch eine eigene Printer-Routine oder aehnliches.
+
+Installation auf Festplatte oder RAM-Disk:
+Das auf der Diskette befindliche File DESKTOPC.INF umbenennen in
+DESKTOP.INF und zusammen mit VIEW.TTP auf Laufwerk C: kopieren.
+Nach Booten von C: wird dann automatisch beim Anklicken eines
+nicht lauffaehigen Files oder eines umbenannten Programmfiles
+VIEW.TTP gestartet und ermoeglicht das Betrachten dieses Files.
+
+Credits: Die Idee zu diesem Programm kam mir durch MORE von Moshe 
+Braner, das aber im Direktmodus weniger Moeglichkeiten bietet.
+
+
