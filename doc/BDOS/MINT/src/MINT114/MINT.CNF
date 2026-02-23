@@ -1,0 +1,65 @@
+#
+# sample configuration file for mint
+# commands that are legal are:
+# echo		-- print a message
+# cd		-- change directory+drive
+# sln		-- create a symbolic link
+# ren		-- rename a file
+# exec		-- execute a program
+# setenv	-- set an environment variable
+#
+# variables that can be set are
+# INIT		-- program to run at boot-up
+# HARDSCROLL	-- number of lines of hardware scrolling
+#		   for u:\dev\fasttext
+# CON		-- default console device
+# PRN		-- default printer device
+# BIOSBUF=NO	-- disables buffering of output; this
+#		   may be needed with a few programs
+#
+# lines that start with '#' are comments
+
+SLICES=5
+
+ren u:\dev\modem1  u:\dev\ttya
+ren u:\dev\modem2  u:\dev\ttyb
+ren u:\dev\serial1 u:\dev\ttyc
+ren u:\dev\serial2 u:\dev\ttyd
+ren u:\dev\midi    u:\dev\ttye
+
+sln f:\usr\bin  u:\bin
+sln f:\etc      u:\etc
+sln f:\home     u:\home
+sln f:\usr      u:\usr
+sln f:\tmp      u:\tmp
+sln f:\var      u:\var
+
+sln U:\pipe\pty.A u:\dev\pty.A
+sln U:\pipe\pty.B u:\dev\pty.B
+sln U:\pipe\pty.C u:\dev\pty.C
+sln U:\pipe\pty.D u:\dev\pty.D
+sln U:\pipe\pty.E u:\dev\pty.E
+sln U:\pipe\pty.F u:\dev\pty.F
+sln U:\pipe\pty.G u:\dev\pty.G
+sln U:\pipe\pty.H u:\dev\pty.H
+sln U:\pipe\pty.I u:\dev\pty.I
+sln U:\pipe\pty.J u:\dev\pty.J
+sln U:\pipe\pty.K u:\dev\pty.K
+
+setenv PCONVERT PATH,HOME,SHELL
+
+setenv UNIXMODE /brUs
+
+setenv PATH /usr/local/bin
+
+setenv TMP /tmp
+setenv TEMP /tmp
+setenv TMPDIR /tmp
+
+setenv TZ MET-1METDST
+
+
+CON=u:\dev\console
+PRN=u:\dev\console
+
+cd u:\

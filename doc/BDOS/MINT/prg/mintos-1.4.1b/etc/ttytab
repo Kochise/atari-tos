@@ -1,0 +1,11 @@
+# This is the ttytab file I use on my TT. As you can see, with the TT you
+# can have up to five interactive terminals without resorting to using the
+# midi port as a serial port.
+#
+# The names of the ports are changed using the mint.cnf file.
+#
+console	"/usr/sbin/getty console"	st52		on secure
+ttya	"/usr/sbin/getty std.2400"	dialup		off secure	# v:/modem1
+ttyb	"/usr/sbin/getty std.1200"	dialup		off secure	# v:/modem2
+ttyc	"/usr/sbin/getty std.9600"	dialup		off secure	# v:/serial1
+ttyd	"/usr/sbin/getty std.9600"	dialup		off secure	# v:/serial2

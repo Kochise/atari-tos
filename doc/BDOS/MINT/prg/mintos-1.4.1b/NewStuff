@@ -1,0 +1,29 @@
+What's new?
+-----------
+
+Release 1.4.1
+-------------
+
+Merely a bug fix release.
+
+Release 1.4
+-----------
+
+Many bug fixes including a glaring security bug in the Net-2 BSD login program.
+
+wall(1) and hostname(1) have been added, though you can't set the hostname
+using hostname(1) yet. finger now knows how to display the hostname of a
+remote machine if someone if logged in remotely (via rlogin or telnet).
+
+The "etc" directory has been augmented so as to include sample files for
+MiNTnet, the rc files are also MiNTnet ready. The rc files themselves have
+been reworked quite a bit, so I suggest that use use the ones supplied and
+then modify them to suit your taste later. The sample "mint.cnf" file has
+been moved into its own directory.
+
+The "/etc/motd" file is now updated every time you boot to give the correct
+version information, this is so as to help me work out which version of the
+package someone is using when they give a bug report. The program which does
+this blindly replaces the first line with the info, so if you want to keep
+the text from your original message of the day make sure that you have at
+least one blank line at the top before rebooting.

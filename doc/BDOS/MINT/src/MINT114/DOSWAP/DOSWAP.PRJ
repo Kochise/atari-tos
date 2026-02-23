@@ -1,0 +1,9 @@
+DOSWAP.TTP
+.C	[-b4 -r6 -d0 -m0 -rs -fm -j*i]
+.S	[-m0]
+.L	[TTMALLOC TTLOAD ADDSYM]
+=
+C.O
+MAIN.C	[-b4 -ms -r6 -d4 -m0 -rs -fm -j*i -Oloop,alias,nocolor]
+ROUTS.S
+LC.LIB

@@ -1,0 +1,45 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1990,1991,1992 Eric R. Smith.
+Copyright 1992,1993,1994 Atari Corporation
+All rights reserved.
+
+THE MiNT EXECUTABLE CODE IS PROVIDED FREE OF CHARGE, AS IS. ATARI
+CORPORATION AND ERIC R. SMITH MAKE NO REPRESENTATIONS OR
+WARRANTIES WITH RESPECT TO THIS CODE, AND IN PARTICULAR
+SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF
+MERCHANTIBILITY OR FITNESS FOR A PARTICULAR PURPOSE. USE THIS
+CODE AT YOUR OWN RISK.
+----------------------------------------------------------------------------
+Here is the executable for the newest version of MiNT. This binary
+may be redistributed, subject to the conditions in the file "copying".
+Please read the notice in "copying" carefully. This code is completely
+unsupported; you use it at your own risk.
+
+Instructions:
+
+(1) To upgrade your existing MultiTOS installation:
+	Look in your AUTO folder. You should have a file in there
+	called either MINT.PRG or MINTNP.PRG. Rename that file to
+	MINT.BAK or MINTNP.BAK (so that you can recover if something
+	goes wrong). Copy the file MINTNP.PRG from this distribution
+	into the AUTO folder.
+
+(2) To run MiNT without MultiTOS:
+	Copy MINTNP.PRG into your AUTO folder. Generally it should be
+	the last thing in the AUTO folder, although this is not
+	absolutely required; some experimentation may be necessary
+	to figure out where the best place to put it is.
+
+(3) Now reboot. The new version of MiNT will run. If you have software
+    that knows about MiNT (e.g. MultiTOS's GEM.SYS program) then you're
+    all set. Otherwise, you won't notice much difference; your system
+    will be capable of multitasking, but unless you have a desktop or
+    shell that can launch multiple programs, you won't be able to
+    take advantage of that fact. There are many freeware shells (such
+    as BASH, TCSH, and TOSWIN) that can let you multitask when used
+    with MiNT.
+
+OK, those are pretty slim instructions. Sorry. If you have trouble
+using MiNT, I'd suggest you get a pre-packaged version, e.g. MultiTOS,
+or the MiNTos distribution, or something like that.

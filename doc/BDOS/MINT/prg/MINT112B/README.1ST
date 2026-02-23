@@ -1,0 +1,32 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1990,1991,1992 Eric R. Smith.
+Copyright 1992,1993,1994 Atari Corporation
+All rights reserved.
+
+THE MiNT EXECUTABLE CODE IS PROVIDED FREE OF CHARGE, AS IS. ATARI
+CORPORATION AND ERIC R. SMITH MAKE NO REPRESENTATIONS OR
+WARRANTIES WITH RESPECT TO THIS CODE, AND IN PARTICULAR
+SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF
+MERCHANTIBILITY OR FITNESS FOR A PARTICULAR PURPOSE. USE THIS
+CODE AT YOUR OWN RISK.
+----------------------------------------------------------------------------
+
+MiNT is a multitasking kernel for the Atari ST/TT/Falcon. It runs on
+all Atari compatible hardware that I know of.
+
+Note that MiNT is *not* MultiTOS; it is only a small part of MultiTOS.
+MultiTOS is a commercial product which includes a new, multitasking
+version of GEM. If you do not have MultiTOS, MiNT will not allow
+you to multitask GEM programs. It will allow you to run any number
+of TOS/TTP programs, together with one (1) GEM program. The easiest
+way to do this is to use the TOSWIN desk accessory (available from
+many Atari archive sites) to launch the TOS/TTP programs.
+
+Note also that this version of MiNT is not officially supported by
+anyone. If you have problems with it, you *might* get help if you
+send a message to mint@atari.archive.umich.edu; then again, you
+might not. It all depends on the mood of the people on the MiNT
+mailing list. The Usenet newsgroup comp.sys.atari.st is also a
+good place to ask questions about MiNT.
+

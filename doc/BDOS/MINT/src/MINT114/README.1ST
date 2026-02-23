@@ -1,0 +1,81 @@
+This is FreeMiNT 1.14 BETA:
+
+FreeMiNT 1.14 has virtual memory which use a dedicated 
+swappartition. The swappartition is created by the doswap
+utility included in the distribution.
+
+MiNT now also have a new recognised "nameparameter". If you rename
+mint.prg into mntnm.prg or mintnm.prg and run it from the autofolder
+then both memory protection and virtual memory will be disabled.
+Virtual memory is only enabled if memory protection is disabled,
+you have a swappartion installed,you have enough memory in your 
+computer and have a true 68030 in your computer.
+Memory protection is turned off by for example renaming mint.prg
+into mintnp.prg and running it from the autofolder.
+
+VM will not work with 040,060 or 020 with 68851 coprocessor. It
+will only work with a true 030 with mmu. It will not work with a
+68EC030 or similar processor.
+
+WARNING: The specific type of 030 is not tested. The VM will try
+to run and will crash on a EC030. If you have such a processor
+you should always run MiNT with both memory protection and VM
+turned off!
+
+I strongly suggest you to make a backup of your harddisk before
+experimenting with VM. Bevare that this version is a beta and is
+not tested on all systems. It is tested on a plain 8 MHz 2.5 meg
+520ST and a TT clocked at 32 MHz with 4 meg ST-ram and 4 meg TT-ram
+using a Quantum 850 meg Trailblazer scsi harddisc fitted to the internal
+TT scsibus and using AHDI V5.00 as harddisc driver. It is not tested on
+any other machine and may perhaps not run on other machines. Although
+that is highly unlikely.
+
+VM larger than 64 meg is not supported and doswap will complain
+if you try to install a larger swappartition than 64 meg.
+
+By default all TT-ram and all ST-ram but 4 meg is used as page
+memory ie only 4 meg ST-ram will be left. This can be changed
+if the symbol ST_LEFT_AFTER_VM in mem.h are changed to the amount
+of ST-ram needed. On a TT you can set this as low as 1 or 2 megs if
+the program flags on your applications are properly set. On a Falcon
+you might want to have more ST-ram free.
+
+
+Version 1.14 (ie VM extension) was made by Sven 'il Profesore' Karlsson.
+Patches from 1.12.5 to MiNT 1.12.6 were collected by Charles 
+Briscoe-Smith <cpb4@ukc.ac.uk>.  Versions of FreeMiNT up to and 
+including 1.12.5 were collected by Michael Hohmuth 
+<hohmuth@inf.tu-dresden.de>
+
+21th of September 1996
+
+
+/*
+ * This file belongs to FreeMiNT.  It's not in the original MiNT 1.12
+ * distribution.
+ */
+
+This is an attempt in helping to re-synchronize the MiNT source tree
+between the MiNT Mailing List folks.  This effort has previously been
+known as "MH-MiNT".
+
+Please note that FreeMiNT is unsupported.  There is no warranty.  See
+the file COPYING for details.
+
+Please report bugs to the MiNT mailing list <mint@atari.archive.umich.edu>
+
+The supplied binary is compiled with gcc 2.3.3.
+
+WARNING: This is only a beta. There is a binary version in this distribution
+but it is only meant for people who are willing to risc their harddisc in the
+quest to find all bugs. The VM extension took 3 days to write. It has been
+tested only on the machines listed above during 2 weeks. There are probably
+configurations that will lead to problems. You should backup all your vital
+data before trying this piece of software. It is stable on my TT but I do not
+take any responsibility for any lost data or damaged media or hardware.
+
+NOTE: The reltime clock in my TT has stopped working. Since I have not fixed
+it yet a lot of files have strange timestamps.
+
+Regards Sven Karlsson, Istari Software
