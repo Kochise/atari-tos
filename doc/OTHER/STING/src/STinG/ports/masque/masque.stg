@@ -1,0 +1,564 @@
+##===========================================================================
+## File name:   MASQUE.STG                      Revised:        2000.08.01
+## Author:      Ulf Ronald Andersson            Created:        1997.08.10
+## Project:     Masque                          Version:        1.16
+##---------------------------------------------------------------------------
+## (c)1997 by:  Ulf Ronald Andersson            All rights reserved.
+## Feedback to: dlanor@ettnet.se                Released as FREEWARE
+##---------------------------------------------------------------------------
+## --- !!! ---  Please read the full text below at least once.  --- !!! ---
+## This will help you avoid some simple but otherwise inescapable problems.
+##===========================================================================
+@if VERSION >= 6
+@os Atari
+@charset atarist
+@inputenc atarist
+@lang en
+@endif
+@database "Masque STinG module documentation"
+@hostname MASQUE
+@options "-z +i"
+@author "Ulf Ronald Andersson"
+@define Version "1.16"
+@$VER: Masque.HYP @:Version  (@:"__DATE__")
+@subject "Documentation/System"
+@help "The Masque module"
+@width 78
+
+
+##---------------------------------------------------------------------------
+@node "Main" "The Masque module"
+@alias "The Masque module"
+##---------------------------------------------------------------------------
+The Masque module                                                      Masque
+@line 1 77 0 0 7
+
+ Documentation for Masque.Stx version @:Version
+ Created by Ulf Ronald Andersson
+
+ @{U}Contents@{u}
+
+ @{"Introduction to Masque" LINK "Introduction to Masque"}
+ @{"Installation of Masque" LINK "Installation of Masque"}
+ @{"Configuring Masque" LINK "Configuring Masque"}
+
+ @{"Masque tool programs" LINK "Masque tool programs"}
+ @{"Masque cntrl_port interface" LINK "Masque cntrl_port interface"}
+ @{"Masque Development History" LINK "Masque Development History"}
+ @{"Masque Feedback" LINK "Masque Feedback"}
+@endnode
+
+
+##---------------------------------------------------------------------------
+@node "Masque Feedback" "How to send reports, questions & suggestions"
+##---------------------------------------------------------------------------
+@next "Introduction to Masque"
+How to send reports, questions & suggestions                           Masque
+@line 1 77 0 0 7
+
+ To contact me for questions/reports etc,
+ the following means are available:
+
+ @{"Ordinary \"Snail-mail\"" LINK "Snail_Mail"}
+ @{"Ordinary phonecall" LINK "Phone_Number"}
+ @{"Internet E-mail" LINK "Internet_Email"}
+
+@endnode
+
+
+##---------------------------------------------------------------------------
+@pnode "Snail_Mail"
+##---------------------------------------------------------------------------
+ My "snail-mail" address is
+
+        Ulf Ronald Andersson
+        H”ders V„g 7
+        S-14570 Norsborg
+        Sweden
+
+NB: The letters '”' and '„' in the street address
+    are  swedish characters,  but may be replaced
+    by 'o' and 'a' or even 'oe' and 'ae' instead.
+@endnode
+
+
+##---------------------------------------------------------------------------
+@pnode "Phone_Number"
+##---------------------------------------------------------------------------
+ Since a dialog by mail is very slow,  some users
+ (at least those in Sweden) may prefer to call me
+ by phone, using the phone number below:
+
+        08 - 53184105
+
+ The first two digits are the area code for Stockholm,
+ so foreign callers must remove the leading zero.
+ (And of course start by dialling Sweden.)
+@endnode
+
+
+##---------------------------------------------------------------------------
+@pnode "Internet_Email"
+##---------------------------------------------------------------------------
+ I can also be reached on the Internet,
+ where I have the following addresses:
+ 
+        mailto:dlanor@@ettnet.se
+        http://www.ettnet.se/~dlanor/
+        http://dlanor.atari.org/
+
+The web pages include mail and ftp links,
+so you can stay in the browser for that.
+@endnode
+
+
+##---------------------------------------------------------------------------
+@node "Introduction to Masque"
+##---------------------------------------------------------------------------
+@prev "Masque Feedback"
+Introduction to Masque                                                 Masque
+@line 1 77 0 0 7
+
+Masque.Stx is a STinG module which implements IP masking, so that all of the
+computers on a local network can access internet through a single connection
+of one of them.  More than one of those computers may have Masque installed,
+but only linked to ports that are either passive, or connected to internet
+(or another intranet).
+
+For example:
+
+I only have one reasonably fast modem (and only one phoneline), and that is
+normally connected to my TT030.  I also have a Falcon030 and a Mega ST4, none
+of which have a modem.  These computers are connected as a STinG network and
+can all access Internet at the same time, thanks to Masque which is running on
+the TT030.  All normal STiK/STinG clients work well with this setup, including
+CAB, Newsie, PopWatch, etc...
+
+However:
+
+For technical reasons there are a few operations that can not work with the
+current Masquerade methods, but normally those operations can be replaced by
+other means, simply by reconfiguring the client programs.  For example, the
+FTP command "PORT" will not work, but all FTP clients can instead use the
+FTP command "PASV" instead, and some of them do that by default anyway.
+
+Incoming requests from clients on Internet to servers running in your local
+network can only be handled by one of the local machines.  Normally that is
+the machine with the modem, where Masque is active, but this can be changed.
+
+From version 1.15 of Masque it has the ability to treat any local machine
+as its 'master'.  A special tool program is included, which will send Masque
+a 'master switch' request.  When Masque receives that message it will switch
+to regarding the system it came from as the new 'master' machine, which will
+thus be able to service requests from Internet, as well as local requests.
+@endnode
+
+
+##---------------------------------------------------------------------------
+@node "Installation of Masque"
+##---------------------------------------------------------------------------
+Installation of Masque                                                 Masque
+@line 1 77 0 0 7
+
+1:  Copy MASQUE.STX to your STinG STX collection folder on the machine used
+    for connecting to the Internet (preferably one with a fast modem port).
+
+2:  Configure masquerading as described in the section  @{"Configuring Masque" LINK "Configuring Masque"}
+
+That's it...
+@endnode
+
+
+##---------------------------------------------------------------------------
+@node "Configuring Masque"
+##---------------------------------------------------------------------------
+Configuring Masque                                                     Masque
+@line 1 77 0 0 7
+
+Configuring Masque has recently become a lot easier,  because it is fully
+supported by the STinG Dialer.  This means that you do not need to change
+the ROUTE.TAB file to add a Masquerade entry any more. Instead the Dialer
+will edit the corresponding route tables in  memory,  as and when needed,
+including restoring the routes  after disconnecting.  Thus you can forget
+this aspect of Masque configuration from now on.
+
+Even so, to get any benefit from Masque you must have a functional local
+network with properly defined ROUTE.TAB files on each of its machines.
+
+Here are some examples and important rules concerning this:
+
+I use the Midi and Plip drivers for local networks and my subnet route
+(on a line above the default route) for Midi looks like this:
+1.1.2.0         255.255.255.0   Midi            0.0.0.0
+
+On each of the computers using this subnet I have set up the Midi ports
+to use the IP addresses 1.1.2.x, with 'x' standing for an arbitrary
+machine number unique to each computer in the subnet.
+
+The IP addresses will only be used locally, which is why you can choose
+arbitrarily,  but if you use any that correspond with real addresses on
+Internet you will  not be able to access those real addresses even when
+connected to Internet, since STinG's router will use the local ones.
+
+On a very simple network the machines not connected to the dial-up modem
+can manage with a single default route allowing them to reach the modem-
+connected machine, and such a route should then look like this:
+0.0.0.0         0.0.0.0         Midi            0.0.0.0 
+
+But the modem-connected machine _must_ have the local route defined as a
+subnet  (see further above)  since its default route after  dial-up will
+lead to Internet  (via Masquerade port and modem port).  If you only use
+a  default route on this machine too,  then contact with the other local
+machines will be lost during dial-up connections.
+
+And remember that default routes (with all those zeroes) must be placed
+after any  subnet route definitions,  because  routing is done from the
+top down in ROUTE.TAB,  so stuff below the default route is never used.
+
+Using a simple default route without other subnets,  like above,  means
+that all packets addressing ports on other computers  will be sent over
+Midi in the hope that whoever receives it will be able to pass it on to
+someone else etc, in such a way that it eventually does reach the final
+recipient through an unknown number of intermediaries.
+
+This routing is naturally done in the same way,  regardless of whether
+the packets originated on the local machine or arrived on some port...
+
+In case you didn't know it, this is what IP networking is all about.  ;-)
+
+(Don't laugh guys!  Many smart Internet users have no idea how it works.)
+
+
+Masque itself is implemented as a STinG port driver, and will therefore
+appear in the port list of STNGPORT.CPX, and is configurable from any
+modern version of this, or of the dialer.  Modern here means STinG
+release 1.08 from late 1997, but newer releases have been made since,
+so get those to make sure you have the latest and best drivers.
+
+Settings in the Dialer as usual override any CPX settings when Dialer
+establishes a connection, so normally the pseudo port 'Masquerade'
+should not be enabled 'manually' in STNGPORT.CPX .  Instead you should
+select masquerading in the 'Miscellaneous' section in the 'Configs'
+dialog of the Dialer.
+
+Having installed Masque.Stx properly,  you must of course still reboot
+the system so as to load the new module in order to configure it. This
+can not be done properly without having STinG load it first,  so do it
+before proceeding.
+
+Actually you do not need to alter any of the data of the  "Masquerade"
+port, because it is written so as to provide sensible defaults for its
+settings.  Even so, you should open the CPX and save the settings,  so
+they will be included in the STING.PRT file with data for other ports.
+
+The settings include 2 purely local IP addresses, that are used in the
+masking work.  Their defaults are  "10.0.255.0" and "10.0.255.1".  The
+former is used to mask the  physical port,  while the latter is the IP
+address of the Masquerade pseudo port itself. The defaults were chosen
+as suggested by  Peter  Rottengatter,  because they can't exist on the
+Internet.
+
+Another setting is the max MTU size, with a default of 1500,  which is
+a value that should work well with most providers.
+
+Finally there is the choice of port to be masked, which you can set
+to be the Modem port that you use.
+
+NB: Let me emphasize again that at dial-up the settings of the Dialer
+    will override any settings of the CPX, so you must also make sure
+    to save settings into the DIAL.SCR file after editing them in the
+    'Configs' dialog in the Dialer.
+
+
+Once the system has been rebooted with proper 'Masque' setup, and dialer
+has established an ISP connection, Masque will take partial control of
+the selected port, acting as a filter between it and the internal STinG
+functions.  Masque will also 'steal' the IP number of that port whenever
+it changes, so dynamic IPs of all kinds should work fine.
+
+Since Masque is a simulated port all data will pass through a physical
+port too before reaching the internet, and the MTU value of both ports
+should be identical for efficiency reasons and must of course _never_
+exceed the maximum MTU value your ISP allows.
+
+
+NB: An error simple to make is to use STNGPORT.CPX to manually activate
+    Masquerade or the  Modem port it should interact with.  This is not
+    the proper way to do it !!!  They should always be left passive, so
+    for that reason you should never save STING.PRT while connected.
+    The CPX  (and its STING.PRT file)  should only be used to  activate
+    ports that are intended for LAN usage, not ISP dial-up connections.
+    The dialer will activate those as needed when correctly configured.
+
+    Note that the above rule applies even without Masquerade.  It is at
+    all times the dialer that should activate any port used for dial-up
+    connection to an ISP.
+@endnode
+
+
+@node "Masque tool programs"
+Masque tool programs                                                   Masque
+@line 1 77 0 0 7
+
+Two extra tool programs are included in the Masque package, and they are:
+
+        MASQLOOK.APP    used to display the true IP a masked connection
+        M_MASTER.APP    used to switch 'master' machine in masquerade
+
+
+MASQLOOK is only useful on the machine where Masqe is active, and it will
+simply display an alert box stating whether the masquerade port is active
+or not, and if active also stating what the real IP address of the masked
+port was before it became masked.  In normal modem connections this means
+that it will show the true dynamic or static IP address with which you are
+logged on to the Internet, and which other users on Internet must use when
+they want to contact servers on your machine directly.  If Masque is not
+active, or not even present, then that will be displayed in the alert box
+instead.
+
+
+M_MASTER can be used on any machine in your local network, and it will
+then send a special 'Masquerade Master' request through the default
+route.  When such a route leads (as it eventually should) to the machine
+where Masque is active, then Masque will switch to regarding the sender
+as the machine that can interact directly with Internet. It is then that
+machine that will be able to receive incoming requests from the Internet,
+and which will be able to send certain commands to the Internet that the
+other local machines can not do (but they can still use normal commands).
+The program will display an alert box stating whether the attempt to set
+the new 'Master' succeeded or failed.  If it succeeded, then the true
+IP with which you are logged on to the Internet is also shown, just as
+for MASQLOOK above.
+
+Note that Masque.Stx will set up the modem machine as 'master' whenever
+a dialup connection is made.  To have another machine as 'master' it is
+necessary to run M_MASTER on that machine after each dialup.
+(ie: After successful completion of the IP link.)
+
+
+The reason for having both tools is that they use different methods of
+finding Masque.  MASQLOOK simply asks STinG to give it the data for the
+local copy of Masque (if any).  M_MASTER on the other hand just sends
+a packet, hoping that it will reach an active Masque on another machine
+which will then send a reply.  The difference is that if anything is
+wrong with the routing on any machine in the LAN, then the request or
+its reply may get lost, and if Masque is either inactive or missing
+then no specific reply will be sent anyway.
+@endnode
+
+
+##---------------------------------------------------------------------------
+@node "Masque cntrl_port interface"
+##---------------------------------------------------------------------------
+Masque cntrl_port interface                                            Masque
+@line 1 77 0 0 7
+
+STinG now has a new API function to access and control ports and as Masque
+is implemented as a port, its driver does support that new function.  The
+supported 'cntrl_port' opcodes are the following:
+
+CTL_GENERIC_SET_IP      =>      Set IP number of Masquerade port
+CTL_GENERIC_GET_IP      =>      Get IP number of Masquerade port
+CTL_GENERIC_SET_MTU     =>      Set MTU size of Masquerade port
+CTL_GENERIC_GET_MTU     =>      Get MTU size of Masquerade port
+CTL_GENERIC_GET_MMTU    =>      Get Max MTU size of Masquerade port
+CTL_GENERIC_GET_TYPE    =>      Get port link type of Masquerade port
+CTL_GENERIC_GET_STAT    =>      Get port transfer statistics
+CTL_GENERIC_CLR_STAT    =>      Clear port transfer statistics
+
+CTL_MASQUE_SET_PORT     =>      Set ptr to masked port struct
+CTL_MASQUE_GET_PORT     =>      Get ptr to masked port struct
+CTL_MASQUE_SET_MASKIP   =>      Set IP address to be used for masking
+CTL_MASQUE_GET_MASKIP   =>      Get IP address to be used for masking
+CTL_MASQUE_GET_REALIP   =>      Get IP address which is being masked
+
+These functions are very tolerant of input data, so they accept almost any
+values, even if these will not give functional results.  This means it is
+the responsibility of the calling program to avoid nonfunctional values !
+
+Error codes possible:
+
+E_PARAMETER will result if anyone calls the cntrl function in the driver
+without setting up the port pointer like the kernel does.  That will not
+happen if you call the 'cntrl_port' API function correctly, because then
+the kernel will find the port structure itself. (You use the port name.)
+
+E_PARAMETER will result if CTL_GENERIC_SET_MTU is called with an MTU value
+that is higher than the maximum allowed for the port (8192).
+
+E_UNREACHABLE will result if CTL_MASQUE_GET_REALIP is called when the port
+is not active.  Since no masking is done then, no masked IP can exist.
+
+E_FNAVAIL will result if any opcode other than those listed above are used.
+
+A small utilitily program named MASQLOOK.APP is supplied with the Masque
+driver, which uses the cntrl_port functions to see if Masque is active
+and which 'real IP' it is then masking.  This can be useful to know when
+you want someone on Internet to access local servers on your LAN machines.
+@endnode
+
+##---------------------------------------------------------------------------
+@node "Masque Development History"
+##---------------------------------------------------------------------------
+Masque Development History                                             Masque
+@line 1 77 0 0 7
+
+@{U} Version 1.16       2000.08.01 @{0}
+
+    This version fixes a bug that prevented ICMP (eg: PING) from
+    working correctly through a masqueraded port in recent versions.
+    The fix has been tested with Ping and Tracerout tools, both of
+    which rely on ICMP messages for success.
+    In addition to that bugfix ICMP operation is now improved such
+    that incoming ICMP requests (eg: Ping) and outgoing ICMP replies
+    (eg: Ping reply) will be serviced, but only for the current
+    'Master' machine in the local network.
+
+@{U} Version 1.15   1999.11.03 @{u} Public release: 2000.07.05
+
+    This version was released with the STinG 1.26 release package.
+    It contains some internal changes, mainly to allow TCP and UDP
+    servers to function better when serving clients on the Internet.
+    In most other respects it works the same way as older versions.
+
+
+@{U} Version 1.14   1998-1999 @{u}
+
+    I performed various experiments with this version(s), but none
+    that were released to the public.
+
+
+@{U} Version 1.13   1998 October 18 @{u}
+
+    Version 1.12 had a bug that prevented proper TCP operation over
+    masqueraded connections.  This was due to a mistranslation of
+    some constant definitions for TCP header structures and that in
+    turn was due to some differing syntax rules of DevPac VS Pasm.
+
+    This problem has now been fixed, so version 1.13 now works as
+    well as version 1.11 did. It is however suitable for use only
+    with the new STinG versions from 1.20 and on, whereas Masque
+    version 1.11 is suitable for use only with older STinG versions.
+
+
+@{U} Version 1.12   1998 September 8 @{u}
+
+    Added the new driver structure element 'cntrl' used by the kernel
+    to implement the new 'cntrl_port' API function.  A call dispatcher
+    was also added to support a number of 'cntrl_port' opcodes. This
+    is a big change, but an even bigger one is that the source has now
+    been converted to DevPac dialect, as has all the support libraries.
+    The actual masquerade methods remain unchanged from version 1.11 .
+
+
+@{U} Version 1.11   1998 March 2 @{u}
+
+    Added a new port structure element holding the masked IP, which is
+    normally the ISP dial-up IP needed by some clients for some special
+    transfer protocols.  This means it is now possible to find that
+    address by careful access of the port structure.  A tool program,
+    MasqLook.APP (renameable to ACC/TOS etc) is supplied that uses
+    this to present the IP address as text on screen, so that a user
+    can pass this to clients etc.  For frequent use I recommend using
+    it as an ACC, but for less frequent use I suggest keeping it an APP.
+
+
+@{U} Version 1.10   1998 January 13 @{u}
+
+    Masking methods modified to allow local servers to be contacted
+    by clients on the Internet.
+
+    Hypertext was amended to describe usage with latest STinG.
+
+
+@{U} Version 1.09   1997 October 25 @{u}
+
+    Added module basepage pointer to DRIVER structure.
+    This is a new standard defined to ease debugging.
+
+
+@{U} Version 1.08   1997 September 7 @{u}
+
+    Partial ICMP support added for 3 (of 6) message classes:
+
+        Incoming error messages for UDP and TCP connections
+        Outgoing ICMP requests (echo, timestamp, etc)
+        Incoming ICMP replies (echo, timestamp, etc)
+
+    The types now supported are sufficient for the normal PING
+    and TRACEROUTE implementations, and tests with those tools
+    as implemented both in the dialer and in separate programs
+    in the  STinG  release verify this.  All these now work in
+    the same way with Masquerade as they do without it.
+
+    The following three message classes are not yet supported,
+    and such packets will still merely be dropped and ignored:
+
+        Outgoing error messages for UDP and TCP connections
+        Incoming ICMP requests (echo, timestamp, etc)
+        Outgoing ICMP replies (echo, timestamp, etc)
+
+    Of those only the first is of any real interest, since the
+    others will never occur on a normal ISP connection.
+
+    Undefined/Future ICMP message types are also ignored, which
+    is the recommended treatment of such enhancements when they
+    can not be properly supported.
+
+    The hypertext was reworked a bit for improved readability,
+    and extended with some clues on how to set up a functional
+    LAN, for those who are not yet familiar with this aspect
+    of STinG.  (Suggested by beta tester Eabe Kuik.)
+
+
+@{U} Version 1.07   1997 August 21 @{u}
+
+    Port illegality test added, as suggested by Peter
+
+
+@{U} Version 1.06   1997 August 21 @{u}
+
+    Change of default IP numbers, as suggested by Peter
+
+
+@{U} Version 1.05   1997 August 20 @{u}
+
+    Bug correction of mislinked masquerade queues
+
+
+@{U} Version 1.04   1997 August 19 @{u}
+
+    Update for longer port name "Masquerade" requested by Peter
+
+
+@{U} Version 1.03   1997 August 18 @{u}
+
+    Update for new STinG port type implemented by Peter in
+    STNGPORT.CPX and Dialer.
+
+
+@{U} Version 1.02   1997 August 18 @{u}
+
+    Update for new configuration method suggested by Peter.
+    Documentation converted to hypertext.
+
+
+@{U} Version 1.01   1997 August 14 @{u}
+
+    Update for unblocking time limitation on mask/unmask work
+
+
+@{U} Version 1.00   1997 August 12 @{u}
+
+    First functional release (to me and Peter only)
+
+
+@{U} Version 0.xx   1997 August 10-12 @{u}
+
+    Project start and various pre-release experiments
+
+@endnode
+
+##===========================================================================
+##      End of file:    MASQUE.STG
+##===========================================================================
