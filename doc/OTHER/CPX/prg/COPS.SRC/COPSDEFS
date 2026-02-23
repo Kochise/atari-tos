@@ -1,0 +1,27 @@
+TARGET = ./cops.app
+
+ifeq ($(cops),000)
+CPU = 000
+endif
+
+ifeq ($(cops),02060)
+CPU = 020-60
+endif
+
+ifeq ($(cops),030)
+CPU = 030
+endif
+
+ifeq ($(cops),040)
+CPU = 040
+endif
+
+ifeq ($(cops),060)
+CPU = 060
+endif
+
+ifeq ($(cops),col)
+CPU = v4e
+endif
+
+copstargets = 000 02060 030 040 060 col

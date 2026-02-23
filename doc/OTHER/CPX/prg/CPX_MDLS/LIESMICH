@@ -1,0 +1,290 @@
+Die CPX-Module 'COOKIE', 'NVDICONF', 'FILEINFO' und 'SYSTEM' knnen in Ver-
+bindung mit den README's beliebig weitergegeben werden und mittels Mailboxen
+verbreitet werden.
+
+Sollten jemenden diese Module gefallen, so mge er bitte DM 10,-- an die
+folgende Anschrift schicken oder auf das angegebene Konto berweisen.
+Fr DM 25,-- schicke ich die neuesten Versionen der CPX-Module einschlielich
+der dokumentierten Sourcen zu.
+
+Eventuell gibt es schon neue Module !? Ich denke daran einen Kalendar mit ein
+gebautem Terminplaner zu schreiben. Fr weitere Anregungen bin ich dankbar.
+
+
+                Dieter Fiebelkorn
+                Grner Weg 29a
+                D(W)-4370 Marl 1
+                (West) Germany
+                ++49 2365 65952
+                
+                mail: fiebelko@petra.informatik.uni-dortmund.de
+                
+                PLZ:      42 661 008
+                Knt-Nr.: 607 984 800
+                
+Und nicht vergessen die komplette Anschrift anzugeben.
+
+
+Keep Hacking
+             Dieter
+
+
+=============================================================================
+
+
+COOKIE.CPX:
+"""""""""""
+                    +--------------------------------+
+                    |  +--------------------------+  |
+                    |  |       Show Cookies       |  |
+                    |  +--------------------------+  |
+                    | +------------------------+---+ |
+                    | |    _CPU   $0000001E    | ^ | |
+                    | |------------------------|   | |
+                    | |    _FPU   $00000002    |   | |
+                    | |------------------------|   | |
+                    | |    NVDI   $00029f22    |   | |
+                    | |------------------------|   | |
+                    | |    GMNI   $00000102    | v | |
+                    | +------------------------+---+ |
+                    |                    |   OK   |  |
+                    +--------------------------------+
+
+  Dies Modul dient ausschlielich zum Anzeigen der im System installierten
+  Cookies. Die Cookies knnen also nicht verndert werden.
+  Im obersten Feld auf der linken Seite wird die maximale Anzahl der Cookies
+  im derzeitigen Cookie-Jar angezeigt, die Zahl der installierten Cookies
+  und die resultierende freie Anzahl von Slots.
+  Mit den Pfeil-Buttons, dem Slider und dem grauen Bereich kann man wie ge-
+  wohnt scrollen. Bei Verwendung des Sliders werden die Eintrge der linken
+  Seite whrend des scrollens aktualisiert, genau wie es vom CPX-Hauptmen
+  bekannt ist.
+
+
+CONFNVDI.CPX: (ehemals NVDICONF.CPX, bittenur noch unter dem neuen Namen
+"""""""""""""  verwenden.)
+                    +---------------------------------+
+                    | +-----------------------------+ |
+                    | |     NVDI-Config   V1.04     | |
+                    | +-----------------------------+ |
+                    | |  NVDI V2.00   (??.??.1991)  | |
+                    | +-----------------------------+ |
+                    |  GDOS  :| EIN | Fehler:| AUS |  |
+                    |          -----          -----   |
+                    |  GEMDOS:| EIN | Maus  :| EIN |  |
+                    |          -----          -----   |
+                    |  LineA :| AUS |                 |
+                    |          -----                  |
+                    +---------------------------------+
+                    |  Sichern  |    OK      Abbruch  |
+                    +---------------------------------+
+
+  Dient der Konfiguration von NVDI ((c) BELA Computer).
+   - 'GDOS' schaltet das GDOS ein bzw. aus. 
+   - 'GEMDOS' aktiviert bzw. deaktiviert die Beschleunigung der GemDos Zeichen-
+     ausgabe.
+   - 'Error.' steht fr Fehlerkompatibilitt. Ist dieser Schalter aktiviert,
+     werden verschiedene fehlerhafte VDI-Aufrufe/Funktionen konform zum ATARI-
+     VDI behandelt.
+   - 'Mouse' schaltet den Mausbeschleuniger ein bzw. aus.
+  'SAVE' speichert die Konfiguration im CPX-Modul, 'OK' besttigt die einge-
+  stellte Konfiguration ohne sie zu speichern und 'Cancel' macht die Ein-
+  stellungen rckgngig. Das Schlieen des Fensters entspricht 'OK'. Das
+  Starten eines Programmes whrend des Dialogs enspricht einem 'Cancel'.
+  
+  NEU  SEIT VERSION 1.03: Alle Einstellungsmglichkeiten von NVDI 2.00.
+                          Deutsch/Englische Version je nach Betriebs-
+                          system.
+  NEU  SEIT VERSION 1.04: Deutsch/Englisch nach CPX-Version.
+                          Pop-up menus korrigiert.
+                          NAMENSAENDERUNG.
+                          Bugs: Wenn anderes GDOS oder anderer Screen-Driver
+                          installiert.
+
+
+FILEINFO.CPX:
+"""""""""""""
+                    +--------------------------------+
+                    |+------------------------------+|
+                    |+------------------------------+|
+                    |  File:________.___  __SIZE___  |
+                    |  ___DATE___ __TIME__  Actions  |
+                    |                                |
+                    |+--------------++--------------+|
+                    ||              ||              ||
+                    ||  File Flags  ||  Prgm Flags  ||
+                    ||              ||              ||
+                    |+--------------++--------------+|
+                    +--------------------------------+
+                    |   Save   |    OK      Cancel   |
+                    +--------------------------------+
+
+  Das FileInfo-Modul zeigt zu einer ausgewhlten Datei die Gre, das Datum
+  und die Uhrzeit an. Weiterhin werden die Datei-Flags (Read-Only, Hidden,
+  System und Archiv) angezeigt. Handelt es sich bei der Datei um ein Programm,
+  so werden zustzlich die Programm-Flags (Fastload, use TT-Mem for program
+  und use TT-Mem for allocated memory) ausgegeben.
+  Eine Datei wird mittels eines Klicks auf das Anzeigefeld des Dateinamens
+  ausgewhlt. Anschliessend werden die Informationen geladen und in den ent-
+  sprechenden Feldern angezeigt. Der Dateiname kann durch das editierbare
+  Feld gendert werden. Die Flags lassen sich durch einen einfachen Klick
+  auf die Boxen umschalten. Wobei ein Kreuz im Feld besagt, das dieses Flag
+  aktiviert ist bzw. werden soll.
+  Unter dem Button 'Actions' befindet sich ein Men. Dieses umfat Befehle
+  zu Erzeugen eines neuen Ordners, zum Kopieren, Verschieben, "Berhren" und
+  Lschen der ausgewhlten Datei.
+  Bei Kopieren wird man anschlieend gefragt, ob der neue Name der Datei fr
+  die weitere Bearbeitung verwendet werden soll. Wird dies verneint, so wird
+  der alte Name weiterverwendet. Bei Verschieben wird automatisch der neue
+  Dateiname weiterverwendet und beim "Berhren" wird nur die Dialogbox
+  aktualisiert. Soll eine Datei gelscht werden, so geschieht dies erst nach
+  einer nochmaligen Rckfrage, anschlieend wird die Dialogbox initialisiert.
+  Konnte die Datei nicht gelscht werden, so bleiben ihre Werte angezeigt.
+  Ist keine Datei ausgewhlt, so besteht das Men nur aus dem Eintrag
+  zum Anlegen eines Ordners.
+  ACHTUNG: Wird das Men geffnet, so werden alle nderungen, die seit dem
+  letzten speichern gemacht wurden rckgngig gemacht!
+  'SAVE' speichert die eingestellten Werte und bleibt in dem Modul, 'OK'
+  hingegen verlt nach Speicherung der Werte das Modul. 'Cancel' macht die
+  letzten nderungen rckgngig. Das Schlieen des Fensters entspricht 'OK'.
+  Das Starten eines Programmes whrend des Dialogs enspricht einem 'Cancel'.
+
+
+SYSTEM.CPX:
+"""""""""""
+                    +--------------------------------+
+                    |+------------------------------+|
+                    ||          Show System         ||
+                    |+------------------------------+|
+                    ||       | Inf-file-name        ||
+                    |+-------+----------------------+|
+                    |+----------------------------+-+|
+                    ||                            |^||
+                    ||        System infos        | ||
+                    ||       (name & memory)      | ||
+                    ||                            |v||
+                    |+----------------------------+-+|
+                    |+----------+        +----------+|
+                    ||   MENU   |        |    OK    ||
+                    +--------------------------------+
+
+  NEU: Neuer Typ BIT() integriert!
+
+  Mit diesem Modul kann man sich beliebige vohandene Speicherbereiche des
+  Rechners mit Adresse, einem Kommentar und dem Wert der dort steht anzeigen
+  lassen. Dabei richtet sich das Modul nach einer im folgenden beschriebenen
+  Datei. Mit einem Klick auf das Feld 'Inf-file-name' kann man die aktuelle
+  'SYSTEM.INF'-Datei auswhlen, die anschlieend dort angezeigt wird. Unter
+  'Menu' befindet sich ein Men, dessen Aufbau sich nach der Beschreibung in
+  dem '.INF'-File richtet. Diese Men wird bei jeder Auswahl neu aus den in
+  der Datei stehenden Informationen erzeugt, so da nderungen in der Datei
+  eine sofortige Auswirkung auf die Beschaffenheit des Mens haben. Wird
+  einer dieser Eintrge ausgewhlt, so werden die Informationen, die zu diesem
+  Menpunkt gehren aus der Datei geladen und die gewnschten Informationen
+  dargestellt.
+  Die Darstellung der Informationen wird ebenfalls in der Datei beschrieben
+  und kann folgende Formen haben:
+   - Anzeige als Bit                    [       %x]
+   - Anzeige als hexadezimales Byte     [      $xx]
+   - Anzeige als hexadezimales Word     [    $xxxx]
+   - Anzeige als hexadezimales Langwort [$xxxxxxxx]
+   - Anzeige als hexadezimale Adresse   [&xxxxxxxx]
+   - Anzeige als String mit 1-9 Zeichen [abcdefghi]
+  Ein als Adresse gekennzeichneter Eintag kann angewhlt werden und zeigt
+  eine eventuell vorhandene xBra-Kette mit den ID's und den Zieladressen an.
+  
+  Aufbau des .INF-Files
+  """""""""""""""""""""
+
+    --------------------------------------------------------------------
+    ;System_CPX.INF V1.00
+
+    #<menu-entry>, "informtion for entry"
+
+    <address>, "name"._<size>
+    <address>, "name"._<size>
+    :
+    :
+
+    #<menu-entry>, "informtion for entry"
+
+    <address>, "name"._<size>
+    <address>, "name"._<size>
+    :
+    :
+
+    :
+    --------------------------------------------------------------------
+
+  Die Datei enthlt als erstes (1. Zeile) einen Eintag, der das File als
+  gltig identifiziert.
+  Anschlieend wird ein Header eingetragen, der im Modul jeweils einem Men-
+  punkt entspricht. In 'menu-entry' wird das Krzel eingetragen, was im Men
+  zu sehen ist. Hiervon werden nur die ersten 10 Zeichen verwendet. Durch ein
+  Komma getrennt folgt eine genauere Beschreibung, die im als Header des
+  Scrollbereiches verwendet wird (max. 40 Zeichen).
+  Jedem Header folgen Basis-Adressberechnungen oder eine Reihe von Adressen
+  mit Namen (max. 14 Zeichen) und einer Grenangabe.
+  Eine Basis-Adressberechnung sieht folgendermaen aus:
+    --------------------------------------------------------------------
+    BASE= <address>
+    --------------------------------------------------------------------
+  Diese Basis-Adressberechnung kann an jeder beliebigen Stelle stehen und
+  das Ergebnis wird bei den folgenden Verwendungen benutzt. Zur Basis-
+  Adressberechnung kann ebenfalls eine vorher berechnete Basis-Adresse
+  verwendet werden.
+  Wird BASE nicht initialisiert, so wird $00000000 verwendet. Tritt bei der
+  Berechnung ein BusFehler auf so wird im weiteren BASE= $000000 angenommen
+  und damit weitergerechnet.
+  
+  <address> ist:
+   - Eine konstante Adresse in hexadezimaler Form $xxxxxxxx
+   - Eine indirekte Adresse mit einem konstanten Offset $yyyy($xxxxxxxx),
+     wobei auch negative Offsets $-zzzz($xxxxxxxx) zugelassen.
+       $yyyy($xxxxxxxx) bedeutet:
+       - hole ein Langwort aus dem Speicher an der Stelle $xxxxxxxx
+         -> $aaaaaaaa.
+       - Benutze $aaaaaaaa als Adresse und addiere $yyyy.
+       - Hole den Wert aus dem Speicher an der Stelle $aaaaaaaa + $yyyy.
+   - Eine indirekte Adressierung mit Offset unter Verwendung der Basisadresse
+     $yyyy(BASE), sowie $-zzzz(BASE).
+       Wie $yyyy($xxxxxxxx) mit BASE ist $xxxxxxxx.
+  
+  "name" ist ein beliebiger String, der mit '.' endet, hiervon werden nur die
+  ersten 14 Zeichen verwendet.
+  
+  <size> ist:
+   - BIT(x)  ~ Bit x = 0..7
+   - BYTE    ~ hexadezimales Byte
+   - WORD    ~ hexadezimales Wort
+   - LONG    ~ hexadezimales Langwort
+   - PNTR    ~ hexadezimale Adresse (whlbar mit xBra-Verfolgung)
+   - CHAR(x) ~ String der Lnge x = 1..9
+
+  ACHTUNG: Dieses Modul bentigt zum korrekten Arbeiten einen installierten
+  _CPU Cookie. Falls er nicht installiert ist wird ein MC68000 angenommen,
+  was unter Umstnden zu einer fehlerhaften Busfehlerbehandlung fhren kann.
+  Bei allen Prozessoren < MC68020 werden alle Adressen mit Wort- oder Adress-
+  und Langwort-Zugriffen begradigt. Bei CPUs >= MC68030 wird auch ein eine
+  ungerade Adresse bei solchen Zugriffen erlaubt.
+
+
+  Alle Zeilen, die einen anderen Aufbau haben werden irgnoriert.
+
+ 
+  Beispiel: siehe 'SYSTEM.INF'
+  """"""""""""""""""""""""""""
+
+
+==============================================================================
+
+DAS ARCHIV MU DIE FOLGENDEN DATEIEN ENHALTEN:
+""""""""""""""""""""""""""""""""""""""""""""""
+ - 'COOKIE.CPX'
+ - 'CONFNVDI.CPX'
+ - 'FILEINFO.CPX'
+ - 'SYSTEM.CPX'
+ - 'SYSTEM.INF'
+ - 'LIESMICH'
+ - 'README'
+

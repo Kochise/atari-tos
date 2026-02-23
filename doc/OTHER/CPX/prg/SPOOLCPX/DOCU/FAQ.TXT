@@ -1,0 +1,70 @@
+
+Nur ganz kurz, um langen Briefen vorzubeugen:
+
+Warum werden die Daten fÅr mein XYZ.PRG nicht gepuffert, obwohl es mit dem
+ABC.PRG funktioniert?
+
+Das XYZ.PRG spricht offenbar die Serielle Schnittstelle direkt an und 
+versperrt so dem Spooler den Zugriff auf die Daten.
+
+
+Kann man dem abhelfen?
+
+Im Prinzip ja! Ein Programm, das direkt auf die Hardware des ST zugreift
+_sollte_ die Mîglichkeit haben die Ausgabe Åber die TOS-Funktionen 
+umlenken zu lassen. (z.B. in CS-TeX durch die Angabe von -o=PRN:)
+
+
+Wie geht das in meinem XYZ.PRG?
+
+Leider kann man die Ausgabe nicht bei allen Programmen umlenken. Da ich
+Ihr XYZ.PRG nicht kenne kann ich ihnen da nicht weiter helfen. Schauen 
+Sie in der Anleitung zum XYZ Programm nach.
+
+
+Muû SPOOL.PRG an eine bestimmte Stelle im Autoordner?
+
+Je weiter hinten, desto besser. Auf jeden Fall nach OverScan und 
+(Reset festen) Ram-Disks.
+
+
+LÑuft der Spooler auch unter MiNT?
+
+Im Prinzip Nein! Da die Speicherverwaltung des Spoolers und die 
+Schnittstelle zwischen dem CPX-Modul und dem TSR-Programm an MiNT 
+angepaût werden mÅûen. Ohne die Memory-Protection und wenn man den
+Spooler nicht Umkonfiguriert funktioniert es aber.
+Eine Anpassung wird erst erfolgen, wenn die UnterstÅtzung der 
+Druckerschnittstelle von MiNT in der entgÅltigen Version vorliegt. 
+
+
+Gibt's bald was neues?
+
+Bald nicht gerade, aber es wird noch einiges hinzukommen. Wenn die
+,,Spendenlust'' der PD-User aber so zurÅckhaltend bleibt, dann 
+wird die neue Version Share-Ware (natÅrlich werden dann die bisherigen
+Spenden berÅcksichtigt).
+
+
+Wohin kann ich mich bei Problemen wenden?
+
+ZunÑchst an die Beiliegende Anleitung, und dann: an mich! 
+Andreas Mandel, Postfach 26, 7601 Ortenberg
+oder im Maus-Netz: Andreas Mandel @ OG 
+aber bitte nicht per Telefon!
+
+
+Warum bekomme ich keine Antwort auf meine Anfrage?
+
+Es kann schonmal vorkommen, daû die Antwort etwas dauert (ich tu so 
+nebenher noch was Anderes ;-)). Oder hatten Sie etwa vergessen das
+RÅckporto beizulegen? 
+
+
+Nochwas: 
+    Das CPX-Modul sollte _nicht_ resident geladen werden!
+    
+
+
+Andreas.
+

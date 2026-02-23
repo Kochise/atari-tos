@@ -1,0 +1,56 @@
+NVDICONF.CPX 1.01 von Karsten Isakovic, Berlin 28.02.91
+-------------------------------------------------------    
+
+Das  NVDICONF.CPX  benîtigt  das XCONTROL.ACC  von ATARI. Auûerdem
+muû der  Bildschirmbeschleuniger  NVDI  von BELA installiert sein.
+
+Das CPX-Modul funktioniert genauso, wie das von BELA mitgelieferte
+gelieferte  NVDICONF.ACC. Oben  wird die Versions-Nummer und Datum
+angezeigt.
+
+Beim  Aufruf  des  CPX-Moduls wird die aktuelle NVDI-Konfiguration
+angezeigt.  VerÑnderungen  der NVDI-Konfiguration werden erst nach
+DrÅcken des 'OK'-Knopfes von NVDI  Åbernommen.  Mit dem 'Sichern'-
+Knopf wird die aktuelle Einstellung gespeichert.  Die gespeicherte
+Einstellung  wird  beim Booten  oder erneutem Laden des CPX-Moduls
+als aktuelle NVDI-Konfiguration Åbernommen.
+
+Wo bekommt man XCONTROL.ACC
+---------------------------
+   - Zusammen mit dem ATARI TT oder MEGA STE 
+   - In der ATARI-Mailbox 
+   - Direkt bei ATARI-Raunheim
+   
+Wo bekommt man NVDI ?
+---------------------
+   BELA Conputer Layout- und Vertriebs GmbH
+   Unterortstr. 23-25
+   W-2325 Eschborn
+   Tel: 06196/481944
+   Fax: 06196/481930
+
+Versionen
+---------
+ 1.00  27.02.91  Erste Version
+ 1.01  28.02.91  Ein paar Boxen waren nicht pixelgenau angeordnet,
+                 dieser 'Fehler' ist behoben.
+ 
+******************************************************************
+*                                                                *
+*  Unter der Voraussetzung, daû die Dateien                      *
+*                                                                *
+*    NVDICONF.CPX und README.TXT                                 *
+*                                                                *
+* unverÑndert kopiert werden,  darf  'NVDICONF.CPX'  fÅr private *
+* Anwender frei kopiert und benutzt werden.  Die Nutzung ist nur *
+* Besitzern einer NVDI-Orginal-Diskette gestattet!               *
+*                                                                *
+* Alle Rechte (Copyright,Vertrieb...) fÅr 'NVDICONF.CPX'  liegen *
+* beim Autor (K.Isakovic).  Der  Firma BELA ist ein Vertrieb auf *
+* der NVDI-Orginaldiskette gestatte.                             *
+*                                                                *
+******************************************************************
+
+Mit freundlichen GrÅûen,
+
+   Karsten Isakovic

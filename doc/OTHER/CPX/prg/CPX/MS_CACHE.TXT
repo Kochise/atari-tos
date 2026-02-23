@@ -1,0 +1,87 @@
+MS_CACHE.CPX (Freeware)          Vers. 1.00               08.03.91
+
+von: Michael Schmidt
+     Kopenhagener Str. 145
+     2820 Bremen 77
+
+Mausnetz: Mick Schmidt @ HB
+Usenet  : Mick_Schmidt @ hb.maus.de
+BITNET  : G16M @ DHBRRZ41
+
+So, nachdem nun alle wissen, wohin Wnsche, Verbesserungsvorschl„ge 
+und Bug-Reports zu schicken sind nun zum restriktiven und zum 
+erl„uternden Teil. ;-)
+
+Also, wie oben schon geschrieben ist dieses Programm bzw. CPX-Modul 
+Freeware, d.h. (fr alle die es immer noch nicht wissen ;-)), da 
+dieses Programm von jedermann kopiert werden darf, jedoch darf es 
+nicht verkauft oder modifiziert werden.
+
+WAS MACHT DIESE CPX?
+
+Nun, es dient zum ein-und Ausschalten des Cahces von Hypercache 
+(o.„.), d.h. um genau zu sein kann man damit das Bit 6 bzw. 7 des 
+Port A, des Soundchips setzen oder l”schen, was halt z.B. von 
+Hypercache zum ein-/ausschalten des Caches benutzt wird (wenn ich 
+mich recht entsinne schaltet man bei der HD-Disk L”sung aus der St-
+Computer so auch zwischen HD und DD um).
+
+UND WIE GEHT DAS?
+
+Im rechten Bereich (ja, genau da, wo "Cache:" steht), ist auch eine 
+Box, die den aktuellen Zustand des Caches wiedergibt. Wenn man auf 
+diese Box klickt, dann erscheint, wie bei CPX-Modulen gewohnt, ein 
+PopUp-Men, wo man nun zwischen "An" und "Aus" w„hlen kann, 
+eigentlich ganz einfach, oder?
+
+Tja, dann haben wir da noch auf der linken Seite die M”glichkeit ein 
+paar Konfigurationen vorzunehmen. Dies wieder mit den bekannten 
+PopUps, alln's Chlor?
+
+Zum einen kann man hier einstellen, ob der Cache ber Bit 6 oder Bit 
+7 geschaltet wird (halt, halt, natrlich kann man hier nicht 
+ausw„hlen, ber welches Bit geschaltet wird, das wird doch eher 
+dadurch vorgegeben, an welchen Pin des Soundchip der Draht gel”tet 
+wurde ;-), um genau zu sein sagt man hiermit natrlich dem CPX eben 
+ber welches Bit geschaltet werden kann).
+Zum anderen kann man einstellen, wie sich das CPX bei der 
+Initialisierung (also im Zweifelsfall bei Booten) verhalten soll.
+Der Cache kann unbedingt "An"-geschaltet werden, oder aber auch "Aus"-
+geschaltet werden oder aber es ist "Egal", wobei letzteres natrlich 
+nicht heit, das es egal ist ob an- oder ausgeschaltet wird (so mit 
+Zufallgenerator, wie? ;-)), sondern es heit natrlich, da der 
+momentane Zustand beibehalten wird.
+
+Zu den Konfigurationen mu gesagt werden, da diese bei der Anwahl 
+von <OK> wohl verwendet werden, jedoch beim n„chsten anw„hlen des 
+"Cache-CPX", wenn dieses nicht resident ist, nicht mehr eingestellt 
+sind. Wenn man dieses unbedingt m”chte, so mu man die Konfiguration 
+mit <Sichern> sichern. ;-)
+
+Tja, der Knopf <Abbruch> drfte recht klar sein, oder, in diesem 
+Falle werden alle vorgenommenen nderungen verworfen (auch ein 
+Umschalten des Cache-Zustandes wird nicht bercksichtigt! Alle 
+nderungen werden immer erst beim Anklicken von <OK> wirksam.)
+
+Tja, schlielich kann man auch noch den Titel anklicken, aber das 
+bringt einem auch nicht viel neues. ;-)
+
+So, das w„r's erstmal.
+
+Ach ja, wenn jemand ein schickes Icon hat, her damit, ich 
+knstlerisch heftigst unbegabt. ;-)
+
+So, schlielich noch meine Bankverbindung, falls irgendjemand zu viel 
+Geld hat oder meint, dieses CPX w„re das, was er schon immer mal 
+haben wollte. 
+Ich nehme Spenden in jeder H”he dankend entgegen. ;-)
+
+Postgiroamt Hamburg
+BLZ 200 100 20
+Kto.-Nr. 57 41 84 - 203
+
+--------------------------- Versionenspiegel ----------------------
+
+Vers. 1.00:
+Sie l„uft, sie scheint zu funktionieren, also werfen wir sie unter's 
+Volk, auf da die Bugreports, etc. in Massen str”men m”gen. ;-)

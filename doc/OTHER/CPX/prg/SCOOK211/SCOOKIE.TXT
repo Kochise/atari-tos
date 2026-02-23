@@ -1,0 +1,181 @@
+
+
+    ####    ####    ####   ##  ##  ####  ######       ####   #####   ##  ##
+   ##  ##  ##  ##  ##  ##  ## ##    ##   ##          ##  ##  ##  ##  ##  ##
+   ##      ##  ##  ##  ##  ####     ##   ##          ##      ##  ##   ####
+   ##      ##  ##  ##  ##  ###      ##   #####       ##      #####     ##
+   ##      ##  ##  ##  ##  ####     ##   ##          ##      ##       ####
+   ##  ##  ##  ##  ##  ##  ## ##    ##   ##      ##  ##  ##  ##      ##  ##
+ S  ####    ####    ####   ##  ##  ####  ######  ##   ####   ##      ##  ##
+
+                               Copyrights by
+
+                             Andreas Mandel @ OG
+
+                                Version 2.10
+
+                                 07.02.93
+
+
+                              F R E E W A R E
+
+                   (Dokumentation z.T.:  Alexander GÅth @ Wö)
+
+                           Programmiert mit PURE C
+
+
+
+  EINLEITUNG / FUNKTIONSPRINZIP
+  ----------------------------------------------------------------------------
+
+  SCookie CPX, ist ein CPX-Modul, welches mit dem modularen Kontrollfeld von
+  ATARI (XCONTROL), benutzt werden kann. Mit SCOOKIE.CPX kann die vorhandenen
+  Cookies anzeigt und, falls vorhanden, Informationen dazu ausgibt.
+
+  Die Informationen werden hierbei aus der XBRA Liste von Julian Reschke
+  entnommen, deren aktuelle Version stÑndig in diversen Mausboxen zum
+  Download bereit liegt. NÑheres entnehmen sie bitte der Datei XBRALIST.TXT,
+  die diesem Archiv beiliegt.
+
+
+  LAUFFéHIGKEIT
+  ----------------------------------------------------------------------------
+
+  SCOOKIE.CPX sollte Dank des modularen Kontrollfeldes von ATARI auf allen
+  Rechnern/TOS-Version (>=1.04) und in allen Auflîsungen (ST-LOW bis TT-HIGH)
+  sowie Grafikkarten laufen.
+
+  SCOOKIE.CPX benîtigt im aktiven Betriebszustand, d.h. wenn es vom Kontrollfeld
+  aufgerufen wird oder auch resident geladen wird, ca. 12 KB Speicher.
+
+  Im passiven Betriebszustand, d.h. nicht resident im Kontrollfeld und nicht
+  gestartete CPX-Application, benîtigt SCOOKIE.CPX nur 512 Bytes (!!!), d.h.
+  nur der CPX-Header ist geladen :-).
+
+  LIEFERUMFANG
+  ----------------------------------------------------------------------------
+
+  Das Softwarepaket besteht aus folgenden Dateien:
+
+  SCOOKIE  .CPX :  CPX-Modul
+  SCOOKIE  .TXT :  Diese Anleitung
+  XBRALIST.TXT :  Die aktuelle XBRA-Liste von Julian Reschke
+
+  Eine Weitergabe des unvollstÑndigen Softwarepaketes ist untersagt !!!
+  Die bezieht sich natÅrlich nicht auf die Datei XBRALIST.TXT von Julian
+  Reschke. (SCOOKIE.CPX darf nicht ohne XBRALIST.TXT weitergegeben werden,
+  aber fÅr die Verbreitung von XBRALIST.TXT ohne die SCOOKIE.* Dateien gelten
+  natÅrlich die in der Datei festgelegten Bedingungen).
+
+  COPYRIGHT
+  ----------------------------------------------------------------------------
+
+  SCOOKIE.CPX ist FREEWARE, d.h.
+
+  * Sie dÅrfen SCOOKIE.CPX beliebig weitergeben, jedoch muû stets der Inhalt des
+    Archivs KOMPLETT und UNVERéNDERT kopiert werden. KÅrzungen und énderungen
+    verletzen die Copyright-Bestimmungen!
+
+  Eine Verbreitung Åber Mailboxen ist gestattet. Der Vertrieb in Verbindung
+  mit kommerzieller Software oder Åber PD/Shareware-Anbieter ist nur nach
+  vorheriger Absprache erlaubt. (Verstîûe werden geahndet !!!)
+
+  Fehlerberichte, Fragen und Registierungen sind mir willkommen.
+
+   Postanschrift:   Andreas Mandel
+                    Postfach 26
+                    7601 Ortenberg
+
+         MausNet:   Andreas Mandel @ OG
+                    Andreas_Mandel@og.maus.de
+                    (!! Keine Mails >16KB !!)
+
+  Bankverbindung:   Volksbank Offenburg
+                    Kto.Nr. 6478 4307
+                    BLZ     664 900 00
+
+  HAFTUNGSAUSSCHLUû
+  ----------------------------------------------------------------------------
+
+  NatÅrlich kann die FunktionsfÑhigkeit des CPX-Moduls nicht garantiert
+  werden und der Autor haftet auch nicht fÅr irgendwelche SchÑden, die sich
+  aus der Benutzung des Programmes oder der Dokumentation ergeben kînnen.
+
+  INSTALLATION
+  ----------------------------------------------------------------------------
+
+  - Kopieren Sie SCOOKIE.CPX und XBRALIST.TXT in den CPX-Ordner von
+    XCONTROL (ATARI)
+  - Aktivieren Sie das XCONTROLL.ACC, d.h. Endung = .ACC
+  - Booten Sie den Rechner neu oder laden Sie im XCONTROLL.ACC unter dem
+    MenÅpunkt "Voreinstellungen" die CPX-Module neu ein.
+  - Rufen Sie SCOOKIE.CPX auf (Doppelklick auf "Show Cookies" )
+  - Klicken Sie auf den Botton "Setup"
+  - Klicken Sie auf die Pfadzeile. Es îffenet sich nun eine Fileselectorbox,
+    in welcher Sie den Pfad zu der XBRALIST.TXT-Dateie festlegen/einstellen
+    kînnen. Wenn geschehen, klicken Sie "OK" in der Fileselectorbox.
+  - Und jetzt noch schnell Einstellungen sichern = Klick auf Button "Sichern"
+    es wird der aktuelle Pfad SCOOKIE.CPX gesichtert.
+  - Klicken Sie "OK" und sie kommen wieder ins HauptmenÅ
+
+  START / BEDIENUNG
+  ----------------------------------------------------------------------------
+
+  Nach îffenen des modularen Kontrollfeldes von ATARI, kommen Sie mit
+  Doppelklick auf den Eintrag "Show Cookies" in das HauptmenÅ von SCOOKIE.CPX.
+
+  HauptmenÅ
+  ---------
+  Im linken Teil sehen sie eine kleine Liste, in der die Cookie EintrÑge
+  und die eingetragenen Werte aufgefÅhrt sind. Reicht der Platz nicht fÅr
+  alle eingetragenen Cookies aus, so kînnen sie mit dem Slider an der rechten
+  Seite in der Liste scrollen.
+
+  Wenn sie mit der Maus auf einen Eintrag klicken und die Maustaste gedrÅckt
+  hallten bekommen sie, wenn der Cookie in der XBRALIST beschrieben ist (und
+  die Liste im Setup korrekt eingetragen ist), eine kleine Info-Box mit der
+  Beschreibung des Cookies.
+
+  Auf der rechten Seite finden Sie unter dem Eintrag "MaxCookies" die Anzahl
+  der derzeit bereitgestellten Cookie-EintrÑge. Darunter steht unter dem
+  Eintrag "Free" die Anzahl der davon noch freien Cookies.
+
+  Mit dem Button "Setup.." kommen Sie ins Setup-Menue.
+
+
+  kleine Info-Box
+  ---------------
+  In der kleinen Info-Box sehen sie zunÑchst noch einmal den Cookie Eintrag und
+  den zugewiesenen Wert. Darunter folgen 8 Zeilen in kleiner Schrift, die die
+  Bedeutung des Cookies genauer beschreiben. In der 1. Zeile steht dabei immer
+  der Autor bzw. die Firma die den Cookie eingefÅhrt hat (oder/und verwendet).
+
+  Bitte beachten sie, das die Beschreibung, falls sie nicht in die kleine
+  Info-Box paût abgeschnitten wird.
+
+
+  SetupmenÅ
+  ---------
+  Hier kînnen Sie durch Klick auf die dort angezeigte Pfadzeile, die aktuelle
+  XBRA-Liste einstellen, d.h. nach Klick auf die Pfadzeile bekommen Sie
+  die Fileselectorbox, mit welcher Sie den Pfad zur XBRA-Liste einstellen
+  kînnen/sollen.
+
+  Auûerdem kînnen Sie einstellen ob die Informationen aus der XBRA-Liste
+  auch verwendet werden, wenn das KÅrzel laut Liste nur als XBRA Kennung
+  verwendet wird.
+
+  Um die Einstellungen festzuhalten, klicken Sie noch auf "Sichern",
+  woraufhin diese in SCOOKIE.CPX selbst gesichert werden.
+
+  UPDATEs / NEUE VERSIONEN
+  ----------------------------------------------------------------------------
+
+06.02.93  V2.00   erste offizielle Version von COOKIE.CPX mit
+                  Dokumentation ;-).
+
+07.02.93  V2.10   Die Option eingefÅhrt, daû auch die Infos von XBRA
+                  Kennungen mitverwendet werden.
+                  Redraw bei der kleinen Info-Box verbessert.
+
+11.02.93  V2.11   Namen, in SCOOKIE geÑndert.

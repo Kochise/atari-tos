@@ -1,0 +1,6 @@
+zControl - The XControl-Clone (Version 0.23) by Ralf Zimmermann
+The program is a replacement for the XCONTROL.ACC from Atari.
+Several CPX modules can run at the same time in own windows. The 
+sequence of the modules can be changed (important for MagiCMac).
+Some trouble under SingleTOS. Some bugfixes. Now english program.
+.

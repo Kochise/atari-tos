@@ -1,0 +1,38 @@
+
+                           FOR IMMEDIATE RELEASE
+===========================================================================
+                       - THE NEWDESK ICON CPX V2.0 -
+
+Software Development Systems is proud to introduce THE NEWDESK ICON
+EDITOR CPX Version 2.0, the latest upgrade to this popular icon editor
+available for Atari computers with TOS 2.05 and above.
+
+NIC, which runs using Atari's Extensible Control Panel (available on GENIE
+or at your local dealer), uses only 1k of system memory when not in use and
+can be conveniently called from any GEM menu bar.  In addition users with a
+TOS version less than 2.05 can still utilize the 32x32 icon editing
+capabilities for use in HYPERLINK and any resource construction set.
+
+NIC can load and save GEM .RSC, .ICN, and .XIC files (our own icon format).
+Convenient functions such as flips, shifts, rotate, fill, and more are all
+readily available within our graphic toolbox.  In addition, icon color,
+character position, and title may be modified.  Version 2.0 completely
+supports the Atari Clipboard for interaction with other programs that
+support this standard. Preview mode is included to allow you to see your
+icon as it will appear on the desktop.  We've even added an expanded
+install feature that lets you assign one icon to many different file masks
+for the greatest flexibility.
+
+The Newdesk Icon Editor Version 2.0 is available now for the retail price
+of $29.95 + $2.50 S & H.  Owners of earlier versions can upgrade for
+$10.00 + $2.50 S & H.  Contact your local dealer for information or order
+direct from SDS:
+
+                         Software Development Systems
+                         996 Redondo Ave. #404
+                         Long Beach, CA 90804
+                         Orders: (800) 237-4SDS
+                         Info: (310) 595-9799
+
+                         (COD's accepted, but no credit cards.)
+

@@ -1,0 +1,238 @@
+****************************************
+The following article first appeared in
+the June-July 1991 ATARI.RSC newsletter.
+It is being included in this Archive
+with the permission of Atari Corp.
+****************************************
+
+Using the GEM AES Scrap Library, TAKE TWO
+By Mike Fulton, Atari Computer
+-----------------------------------------
+
+The GEM AES Scrap Library provides a standard method of allowing data
+interchange between applications via a clipboard mechanism.  At the user's
+request, the current application will place data from its own document onto
+the clipboard.  Later, from the same application or a completely different
+one, when the user requests the data from the clipboard, it can be read
+back into the current document.  There are two GEM AES scrap library
+functions, scrp_read() and scrp_write().
+
+The Clipboard Manager XCONTROL panel module allows the user to set the
+system's clipboard folder to whatever they want, so that this folder will
+be specified when the system is booted.  The Clipboard Manager CPX is
+documented separately from this article.
+
+
+Writing a Clipboard Item
+------------------------
+
+WORD sc_wreturn = scrp_write(sc_wpscrap);
+
+The scrp_write() call establishes the directory used to contain clipboard
+scrap files.  A normal sequence of events for an application to put
+something in the clipboard would be:
+
+1)  Do a scrp_read() call to determine the location of the system's
+    clipboard folder.  If no existing clipboard folder exists, then it is
+    recommended that your application create a folder named "CLIPBRD" in
+    the root directory of the system's boot drive, and then construct a
+    string containing this path specification.
+
+    As far as determining the system's boot drive is concerned, if the
+    system drive map returned by the BIOS call Drvmap() indicates that
+    drive C is available, then you should create the "CLIPBRD" folder on
+    that drive.  Otherwise, create the folder on drive A or ask the user
+    where to put it.
+
+
+2)  Do not make assumptions about the format of the string you get from
+    scrp_read().   Always examine the string and insure that you have a
+    valid path specification like "C:\CLIPBRD\", without a file name at the
+    end, and ending with a backslash.  Do whatever manipulations are
+    required to get the string into that format.  For example, if there is
+    a file specification at the end of the string like
+    "C:\CLIPBRD\SCRAP.TXT", then find the first character following the
+    last backslash in the string and change it to a NULL.  If you get a
+    string like "C:\CLIPBRD" without a trailing backslash, then do an
+    Fsfirst() call to check if "CLIPBRD" is a subdirectory, and then append
+    the backslash to the end.
+
+
+3)  An application should delete any existing scrap files in the clipboard
+    directory before writing its own.  This is done in order to prevent any
+    possibility of an old scrap file being grabbed by the next application.
+    A application may create its own scrp_clear() function for this
+    purpose.  A basic example of such a function might be:
+
+          void
+          scrp_clear( scrappath )
+          char *scrappath;
+          {
+          short err;
+          char scrapfile[200], delfile[200];
+          DTABUFFER *theDTA;
+
+              theDTA = (DTABUFFER *)Fgetdta();
+
+              strcpy( scrapfile, scrappath );
+              strcat( scrapfile, "SCRAP.*" );
+
+              err = Fsfirst( scrapfile, 2 );
+              while( ! err )
+              {
+                  strcpy( delfile, scrappath );
+                  strcat( delfile, theDTA->filename );
+                  Fdelete( delfile );
+                  err = Fsnext();
+              }
+          }
+
+    The DTABUFFER structure, or something similar, should be defined in
+    one of your C compiler's include files.  If you cannot find it, the
+    definition is given below:
+
+         typedef struct dtabuf{
+             char    reserved[21];
+             char    attribute;
+             short   time;
+             short   date;
+             long    filesize;
+             char    filename[14];
+         } DTABUFFER;
+
+
+    This function would be passed a pointer to a string which contains the
+    current clipboard folder specification, as specified and determined in
+    steps 1 & 2 above.
+
+
+4)  Create and write your clipboard file, using at least one of the
+    standard file formats given below.  Clipboard files should be of the
+    form "SCRAP.*" where the filename extension specifies the type of data
+    contained within the file.
+
+    The following filenames are reserved for the following file formats.
+    Additional file formats may be added to the list as they appear.
+
+    SCRAP.TXT -- ASCII only text, with a CR/LF at the end of each line
+
+    SCRAP.ASC -- ASCII only text, with a CR/LF at the end of each paragraph
+
+    SCRAP.RTF -- ASCII only text with formatting specified through the Rich
+                 Text Format defined by Microsoft
+
+    SCRAP.1WP -- First Word Plus formatted text
+
+    SCRAP.WP --- Word Perfect formatted text
+
+    SCRAP.GEM -- Standard GEM Metafile Graphics Image
+
+    SCRAP.IMG -- Standard GEM Bitmapped Graphics Image
+
+    SCRAP.TIF -- Tiff (Tagged Interchange File Format) Graphics Image
+
+    SCRAP.IFF -- Interchange File Format (Usually bit-image graphics, but
+                 not limited to that.  Locate IFF file format documentation.)
+
+    SCRAP.EPS -- Encapsulated Postscript File
+
+    SCRAP.CVG -- Calamus Vector Graphic
+
+    SCRAP.DIF -- Data Interchange Format - Spreadsheet/Database data
+
+    These are not the only types of clipboard files that may be written.
+    It is expected that many applications will want to write their own
+    specific file format.  In this case, it is hoped that the details of
+    the file format are made available so that it can be supported by other
+    applications.  In any case, please notify Atari regarding the file
+    format(s) and filename extension(s) used by your application.
+
+    At a bare minimum, a text-oriented program should always write
+    SCRAP.TXT.  A vector graphics-oriented program should always write
+    SCRAP.GEM.  And a bitmapped graphics-oriented program should always
+    write SCRAP.IMG.  However, where possible, your application should
+    write as many formats as it can.
+
+    For example, let's say you have a word processor named WRITEIT that
+    wants to create SCRAP.WIT clipboard files containing formatted text in
+    its own format.  Besides writing the SCRAP.WIT file for its own format,
+    it might also write SCRAP.TXT, SCRAP.ASC, SCRAP.RTF, SCRAP.1WP and any
+    other text formats that it understands.  It may even write clipboard
+    files in formats it knows how to write, but which it doesn't know how
+    to read.
+
+    Likewise, a graphics program would write clipboard files for all of the
+    graphics formats that it understands.  A vector graphics program might
+    even write out a bitmapped image for a non-vector graphics program to
+    read.
+
+    In some cases, depending on the context, it may be appropriate to write
+    both text and graphics formats.  For example, if you are in a graphics
+    program and the user has selected a text object to copy to the
+    clipboard, then the application may want to write a SCRAP.TXT file
+    containing the text from that text object.  Or if the user is currently
+    editing a text object, and chooses to paste from the clipboard, then it
+    would be valid for the graphics program to look for a text clipboard
+    file so that it can grab text to put into the text object.
+
+
+5)  If you got a valid clipboard directory from scrp_read() in step 1 and
+    no manipulations were necessary in step 2 in order to get the string
+    into the correct format, then you are done.
+
+
+6)  If you did not get a directory from scrp_read() and so created the
+    "CLIPBRD" folder yourself, or if you had to manipulate the string in
+    step 2, then you now need to do a scrp_write() call using the string
+    obtained at the end of step 2.
+
+
+
+
+
+Reading A Clipboard Item
+------------------------
+
+WORD sc_rreturn = scrp_read( sc_rpscrap );
+
+The scrp_read() function returns a string containing the clipboard
+directory specification.  The sequence of events for an application to read
+an item from the clipboard would be:
+
+1)  Do a scrp_read() call to get the clipboard directory.  If scrp_read()
+    returns zero, then the clipboard folder has not been set since the
+    computer was last reset.  If the return value is non-zero, then the
+    clipboard directory specification is returned to you.
+
+    Do not skip step 1 because you've already done it once.  All steps must
+    be done each time you want to grab something off the clipboard.  Do not
+    assume the clipboard directory will not change while your application
+    is running.
+
+    The scrp_read() function is defined as possibly returning an error code
+    of zero. However, this function currently always returns a value of 1.
+    Since this may change in future versions of GEM AES, applications
+    should handle the case of the error code even if the programmer does
+    not expect to see it.
+
+2)  If scrp_read() returns an error code of zero, then the application
+    should act as though nothing is available on the clipboard.
+
+3)  If you get a valid string from scrp_read() then you need to make sure
+    it is in the correct format as described above in Step 2 of "Writing a
+    Clipboard Item".
+
+4)  Now you should have a path specification like "C:\CLIPBRD\".  Now use
+    Fsfirst() and Fsnext() to search the clipboard directory for a
+    "SCRAP.xxx" file your application understands.  You should first look
+    for the formats that will provide the most information and then check
+    for more simple formats.  That is, a word processor would want to look
+    for SCRAP.1WP before looking for SCRAP.TXT, because the SCRAP.1WP file
+    would specify information about formatting and text styles that the
+    SCRAP.TXT file would not.
+
+5)  Assuming your application can find a scrap file that it can understand,
+    then it should open the scrap file, read in the information it
+    contains, insert the information in the the current document as
+    appropriate, and then close the scrap file.
+

@@ -1,0 +1,248 @@
+You can give these CPX-moduls ('COOKIE', 'NVDICONF', 'FILEINFO' and 'SYSTEM')
+with the README's to your friends or to any Mailboxen.
+
+Does anybody think that these moduls are nice you can send me DM 10,-- ($ 6,--)
+to me or to my bank account, please. For DM 25,-- ($ 15,--) i will send you
+the documented sources.
+
+There are maybe new moduls !? I think to write a calendar, which contains
+an appointment book. Thanks in advance for new ideas.
+
+
+                Dieter Fiebelkorn
+                Grner Weg 29a
+                D(W)-4370 Marl 1
+                (West) Germany
+                ++49 2365 65952
+                
+                mail: fiebelko@petra.informatik.uni-dortmund.de
+                
+                PLZ:      42 661 008
+                Knt-Nr.: 607 984 800
+
+Don't forget to send your complete Address to me.                
+
+
+Keep Hacking
+             Dieter
+
+
+=============================================================================
+
+
+COOKIE.CPX:
+"""""""""""
+                    +--------------------------------+
+                    |  +--------------------------+  |
+                    |  |       Show Cookies       |  |
+                    |  +--------------------------+  |
+                    | +------------------------+---+ |
+                    | |    _CPU   $0000001E    | ^ | |
+                    | |------------------------|   | |
+                    | |    _FPU   $00000002    |   | |
+                    | |------------------------|   | |
+                    | |    NVDI   $00029f22    |   | |
+                    | |------------------------|   | |
+                    | |    GMNI   $00000102    | v | |
+                    | +------------------------+---+ |
+                    |                    |   OK   |  |
+                    +--------------------------------+
+
+  With this modul you can show the cookies which are installed.
+  You can't change the cookies.
+  With the arrow button, the slider and the "grey" you can scroll the entries.
+  By using the slider the entries will redrawed if you move the slider like
+  the entries in the main menu of XControl.
+
+
+NVDICONF.CPX:
+"""""""""""""
+                    +---------------------------------+
+                    | +-----------------------------+ |
+                    | |     NVDI-Config   V1.03     | |
+                    | +-----------------------------+ |
+                    | |  NVDI V2.00   (??/??/1991)  | |
+                    | +-----------------------------+ |
+                    |  GDOS  :| ON  | Fehler:| OFF |  |
+                    |          -----          -----   |
+                    |  GEMDOS:| ON  | Maus  :| ON  |  |
+                    |          -----          -----   |
+                    |  LineA :| OFF |                 |
+                    |          -----                  |
+                    +---------------------------------+
+                    |   Save   |    OK       Cancel   |
+                    +---------------------------------+
+
+  With 'NVDICONF' you can change the configuration of NVDI ((c) BELA Computer).
+   - 'GDOS' switch GDOS on or off. 
+   - 'GEMDOS' switch the GemDos-character-output-accelerator on or off.
+   - 'Error.' meens Errorcompatibility.
+   - 'Mouse' switch the Mouse-accelerator on or off.
+  'SAVE' saves the configuration inside the CPX modul, 'OK' makes the changes
+  aktiv without saving and 'Cancel' disables the changes. Closing the window
+  is identical to 'OK'.
+  
+  NEW SINCE VERSION 1.03: Fully NVDI 2.00 Installs (Line-A-switcher).
+                          German/English version.
+  NEW SINCE VERSION 1.04: Deutsch/Englisch like CPX-Version.
+                          Pop-up menus corrected.
+                          CHANGED NAME.
+                          Bugs: other GDOS or other Screen-Driver is
+                          installed
+
+
+FILEINFO.CPX:
+"""""""""""""
+                    +--------------------------------+
+                    |+------------------------------+|
+                    |+------------------------------+|
+                    |  File:________.___  __SIZE___  |
+                    |  ___DATE___ __TIME__  Actions  |
+                    |                                |
+                    |+--------------++--------------+|
+                    ||              ||              ||
+                    ||  File Flags  ||  Prgm Flags  ||
+                    ||              ||              ||
+                    |+--------------++--------------+|
+                    +--------------------------------+
+                    |   Save   |    OK      Cancel   |
+                    +--------------------------------+
+
+  'FileInfo' showes size, date and time for a choosen file. Also the flags
+  Read-Only, Hidden, System and Archiv will displaied. If the file is a
+  program the flags Fastload, 'use TT-Mem for program' and 'use TT-Mem for
+  allocated' memory will showed.
+  You can choose a file by clicking the namefield. Then you can change the
+  name of the file or all flags. A crossed filed meens that this flag is
+  aktiv or should set by next saving.
+  Clicking the button 'Actions' you will see a menu. There you can create
+  a new folder, copy, move, touch or delete the file.
+  After deleting a file the dialog-box will initialize; if the file couldn't
+  be deleted the dialog-box contains the old values.
+  Is no file choosen, the menu contains only one entry for creating a
+  new folder.
+  BE CAREFUL: Opening the menu cancel the last changes (name and flags).
+  'SAVE' saves the values without leaving the modul, 'OK' saves the values
+  and leaves the modul. Closing the window is identical to 'OK'.
+
+
+SYSTEM.CPX:
+"""""""""""
+                    +--------------------------------+
+                    |+------------------------------+|
+                    ||          Show System         ||
+                    |+------------------------------+|
+                    ||       | Inf-file-name        ||
+                    |+-------+----------------------+|
+                    |+----------------------------+-+|
+                    ||                            |^||
+                    ||        System infos        | ||
+                    ||       (name & memory)      | ||
+                    ||                            |v||
+                    |+----------------------------+-+|
+                    |+----------+        +----------+|
+                    ||   MENU   |        |    OK    ||
+                    +--------------------------------+
+
+  NEW: New Typ BIT()!
+
+  With this modul you can look into the system memory. You will see the
+  address, a comment and the value, which stands at the address.
+  The modul use a file, that can choose by clicking the 'Inf-file-name'-field.
+  Behind the button menu is a menu, which created on each click using the
+  HEADERS of the given file.
+  After choosing a menu entry the infomations for this HEADER will loaded and
+  the system memory will showed, as
+   - BIT                        [       %x]
+   - hex BYTE                   [      $xx]
+   - hex WORD                   [    $xxxx]
+   - hex LANGWORT               [$xxxxxxxx]
+   - hex ADDRESSE               [&xxxxxxxx] or
+   - string with 1-9 characters [abcdefghi]
+  A address entry can selected and show the xBra's, if there are any.
+  
+  the .INF-Files
+  """"""""""""""
+
+    --------------------------------------------------------------------
+    ;System_CPX.INF V1.00
+
+    #<menu-entry>, "informtion for entry"
+
+    <address>, "name"._<size>
+    <address>, "name"._<size>
+    :
+    :
+
+    #<menu-entry>, "informtion for entry"
+
+    <address>, "name"._<size>
+    <address>, "name"._<size>
+    :
+    :
+
+    :
+    --------------------------------------------------------------------
+
+  The first line must contain ';System_CPX.INF V1.00' to identify the file.
+
+  After that a HEADER should stand in the file. 'menu-entry' is the name,
+  which are used for the menu (max. 10 characters). The "information for
+  entry" will showed at the top of the scrolling area (max. 40 characters).
+  After each HEADER a calculation of a BASE-address or some addresses with
+  name (max. 14 characters) and a size follows.
+  A calculation of a BASE-address:
+    --------------------------------------------------------------------
+    BASE= <address>
+    --------------------------------------------------------------------
+  An uninitialized BASE is set to $00000000. If a buserror are detected while
+  calculation, BASE is set to $00000000 an the calculation will continued.
+  
+  <address> is:
+   - A constant addresse in hex Format $xxxxxxxx
+   - A indirect addresse with a constant offset $yyyy($xxxxxxxx),
+     also negativ offsets are allowed: $-zzzz($xxxxxxxx).
+       $yyyy($xxxxxxxx) meens:
+       - take a longword from address $xxxxxxxx -> $aaaaaaaa.
+       - Used $aaaaaaaa as address and add $yyyy.
+       - Take the value from $aaaaaaaa + $yyyy.
+   - A indirect address with offset using BASE $yyyy(BASE) and $-zzzz(BASE).
+       Like $yyyy($xxxxxxxx) with BASE is $xxxxxxxx.
+  
+  "name" is a string ending with '.' (max. 14 characters).
+  
+  <size> is:
+   - BIT(x)  ~ BIT (x = 0..7)
+   - BYTE    ~ hex BYTE
+   - WORD    ~ hex WORD
+   - LONG    ~ hex LONGWORD
+   - PNTR    ~ hex ADDRESSE (selectable for xBra's)
+   - CHAR(x) ~ STRING (length x = 1..9)
+
+  BE CAREFUL: This modul needs a _CPU cookie for right work. If there is no
+  _CPU cookie or no cookie jar a MC68000 instructuion code will used.
+  That doesn't work right on a buserror-exeption!
+  The addresses aligned to two by access to a word or longword. On cpu greater
+  or equal MC68020 unaligned addresses are allowed.
+
+ 
+  All other line will ignored.
+
+
+  Example: see 'SYSTEM.INF'
+  """""""""""""""""""""""""
+
+
+==============================================================================
+
+
+THE ARCHIV MUST CONTAIN THE FOLLOWED FILES:
+"""""""""""""""""""""""""""""""""""""""""""
+ - 'COOKIE.CPX'
+ - 'NVDICONF.CPX'
+ - 'FILEINFO.CPX'
+ - 'SYSTEM.CPX'
+ - 'SYSTEM.INF'
+ - 'LIESMICH'
+ - 'README'
+

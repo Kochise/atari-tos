@@ -1,0 +1,55 @@
+                             ASCII-Tabelle
+                             =============
+
+                  Version 1.00 vom 24. Februar 1991
+                  ---------------------------------
+
+Nutzungsbedingungen:
+--------------------
+
+ASCII-Tabelle ist ein Sharewareprogramm, also weder Public Domain noch
+Freeware. Es darf folglich nach dem Sharewareprinzip weitergegeben
+werden. Die Weitergabe hat vollst„ndig zu erfolgen, wobei die Dateien
+nicht ver„ndert werden drfen. Das Kopieren bzw. die Weitergabe ist
+ausschlielich nicht-kommerziell erlaubt, womit insbesondere die Weiter-
+gabe ber kommerzielle PD-Versender, die fr das Kopieren eine Gebhr
+verlangen, nicht gestattet ist. Die Nutzung ist nur nicht-milit„risch
+erlaubt.
+
+Wer ASCII-Tabelle zu mehr als nur zu einem Test verwendet hat den Share-
+wareobolus in H”he von 10 DM an den Autor
+
+    Dietmar Rabich, D”velingsweg 2, D-W4408 Dlmen,
+    Konto-Nr. 48852800, Volksbank Dlmen, BLZ 40163638,
+
+zu entrichten. Bei šberweisungen geben Sie bitte immer Absender, Empf„n-
+ger und den Grund deutlich an!
+
+
+Beschreibung:
+-------------
+
+ASCII-Tabelle ist ein ein Modul fr das Atari-Kontrollfeld. Es tr„gt
+daher die Extension CPX. Der Betrieb ist einfach. Kopieren Sie die CPX-
+Datei einfach in den Ordner, den Sie fr die CPX-Dateien angelegt und
+eingestellt haben. Laden Sie unter "Voreinstellung" die CPX-Dateien neu
+oder starten Sie den Rechner neu (Reset). ASCII-Tabelle ist dann in der
+Auswahlliste des Kontrollfelds eingetragen.
+
+W„hlen Sie ASCII-Tabelle an. Im Kontrollfeldfenster sind dann die ASCII-
+Zeichen der erweiterten ASCII-Tabelle zu sehen. Sie sind ebenso als
+Hexadezimal-, Dezimal-, Oktal- und Bin„rzahl aufgefhrt. Die Steuerung
+der Anzeige erfolgt ber den am rechten Rand dargestellten Slider.
+
+Durch das Anklicken von "Info" bzw. "Hilfe" ist eine Programminformation
+bzw. eine kleine Hilfe abrufbar.
+
+Die Tastatur ist innerhalb von ASCII-Tabelle wie folgt belegt:
+
+       F1, Help: Hilfe
+             F2: Programminformation
+             F3: verlassen des Programms
+                 (auch von Information und Hilfe aus)
+          F7/F8: Bl„ttern in der Tabelle
+
+   

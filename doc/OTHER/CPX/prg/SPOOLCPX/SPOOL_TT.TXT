@@ -1,0 +1,9 @@
+
+Wichtig fr TT-User:
+
+	SPOOL.PRG hat noch Probleme mit dem Timing bei der Druckerausgabe,
+	die Korrektur w„re kein Problem, wenn ich die alten Quellen noch
+	h„tte :-(. Ausgabeumlenkungen in eine Datei etc. mten aber 
+	funktionieren!
+		
+      

@@ -1,0 +1,220 @@
+
+                         Atari Clipboard CPX
+                             Version 1.0
+                (c) 1991 Software Development Systems
+                         Released as Freeware
+                       Written by Scott Sanders
+===========================================================================
+
+IN THIS ARCHIVE
+---------------
+
+CLIPBORD.CPX - Place this in your CPX folder (Note the name change from
+               V0.9)
+ READ_ME.1ST - This document.
+  SCRAP2.TXT - ASCII reprint of the Atari Clipboard Standard.
+ NICPR20.TXT - Press Release of the Newdesk Icon Editor CPX Version 2.0
+ CPXICON.RSC - Resource file with icons to merge when using the Newdesk
+               Icon Editor CPX from SDS
+
+USERS UPGRADING FROM 0.9
+------------------------
+
+You can skip on to the section labeled 'OPERATION' since this is the major
+portion of this documentation that has changed.
+
+INTRODUCTION
+------------
+
+Ever since the first Atari computers rolled off the assembly line TOS was
+capable of information sharing between applications.  An example of this
+would be to say, highlight a block of text in your word processor, select
+cut from the menu bar, quit the word processor, load a desktop publisher,
+select paste into a text box and lo and behold your text would appear.  The
+sad truth is, however, that very few applications handle this well, if at
+all.
+
+To support the old saying, 'Better late than never', Atari recently firmly
+defined the protocal (method) for using the Atari clipboard.  Great, right?
+Well, the problem is that most applications out there on the market don't
+utilize the new standard correctly.  Basically, this means two things.
+First, hopefully, developers will see the benefits of inter-process
+communication and support the standard in new products and upgrades.
+Software Development Systems is including full clipboard support in our
+Newdesk Icon Editor and Printer Utilities Pak packages.  Second, some
+developers are going to require your nagging to make this work. I know how
+it is when you spend hours making something work the way you like it. If it
+ain't broke, why fix it, right?  Well, anyone who's seen the ease at which
+Macintosh computers exchange information between programs can tell you that
+making this standard uniform would be well worth the effort.
+
+OK, SO WHAT DOES IT DO?
+-----------------------
+
+The Atari Clipboard system is built around two system calls scrp_read() and
+scrp_write(). They don't actually read or write information to the
+clipboard, they just let you access the pathname where the clipboard is
+located.  Simply put, this CPX lets you better manage where your clipboard
+is located (what drive and path) and gives you some other options like
+clearing the directory on bootup and whenever else you choose. If your
+favorite application has written out an ASCII text file, a GEM .IMG
+graphic, or a .XIC extended icon file, you can also view the contents. I've
+also added an option which allows greater compatibility with those
+applications that haven't caught up to the standard yet. STalker and
+Aladdin, two wonderful programs, are both culprits of this.
+
+INSTALLATION
+------------
+
+Simply put the file CLIPBRD.CPX in your CPX directory and either reboot or
+reload your CPX's (consult the CPX documentation for details).  A few
+promotional text files accompany this file as well as a .RSC file.  The
+.RSC file DOES NOT have to be included in the same directory as the CPX. It
+is an unrelated file. It contains a icon to represent CPX's in .RSC format
+which can only be used by the Newdesk Icon Editor CPX. It is a benefit to
+those owners only.
+
+To start simply double-click on the CPX titled Atari Clipboard and you're
+ready to go.
+
+OPERATION
+---------
+
+On the screen your current clipboard directory is displayed. When first run
+this should say C:\CLIPBRD (or A:\CLIPBRD on a floppy system) unless
+another application has already changed it. To change the location of your
+clipboard simply click in the text box between the two arrows and a
+file-selector will appear. Go to the path where you want your clipboard
+files stored and select OK. If the pathname is longer than the space
+provided you can use the arrow keys to scroll through it.
+
+Selecting Save will save your current default clipboard directory, the
+default directory from where you view files, and the status of the 'Clear
+on boot?' button.  If that button is checked your default clipboard
+directory will be cleared on bootup automatically.
+
+Exiting with OK sets the default clipboard directory.  Cancel leaves it as
+before.
+
+By clicking on the button labeled >>Options<< you have access to four
+additional functions:
+
+Selecting 'Clear Clip' will, after verifying it with you, delete all
+SCRAP.* files from your clipboard directory.
+
+'Create Folder' will, if you confirm, create a \CLIPBRD\ directory on your
+boot drive.
+
+'Last scrp_write()' will tell you what the last application wrote as its
+clipboard directory. This is the item that will stay in effect unless you
+leave the CPX by clicking on OK or the close box. For specific notes on
+this, see the notes on STalker below.
+
+'View Clip' is the cornerstone feature of version 1.0. By choosing this
+option the CPX will search the directory specified on the main screen
+(either 'Atari Clipboard' or the root of an installed drive) for any
+SCRAP.* files. If SCRAP.ASC or SCRAP.TXT is found, the CPX will assume it
+is an ASCII (CRLF) document and display it. If it finds a SCRAP.IMG or
+SCRAP.XIC file it will display it. Slider bars can be used to view an image
+or text file that won't fit in the display area. Clicking on the question
+mark acts like a toggle and displays a directory of the view area (masked
+to SCRAP.*). To copy a scrap to a separate file, click on the file name on
+the view screen and you will be presented with a file selector to choose a
+path and filename for the copy.  Click OK to return.
+
+VIEW LIMITATIONS
+----------------
+
+ASCII Text files are trunctuated to 200 lines. .IMG graphics are limited to
+4096x4096. .XIC files must be 32x32 and only the first icon in a file will
+be displayed.
+
+WHAT'S COMING IN V1.??
+----------------------
+
+Essentially I'm planning to add .GEM metafile support and maybe others. I'd
+love to hear suggestions. In addition, I will add full .XIC support for all
+icon sizes and multiple icon viewing.
+
+DISTRIBUTION
+------------
+
+Software Development Systems grants conditional permission to distribute
+this file as long as no charge (except for maximum $5.00 distribution fee)
+is placed on its distribution, the file includes this document, and is not
+altered in any way.
+
+Developers, please feel free to put this archive on your distribution disk
+when your product supports the clipboard. Just drop me a line and let me
+know, that'll be all the pat in the back I'll need.
+
+SPECIAL NOTES FOR USE WITH STALKER AND ALADDIN
+----------------------------------------------
+
+STalker 3.00, now supported by Gribnif Software is one of the leading edge
+telecommunication programs available for the ST today. Its current
+implementation of the clipboard standard is incorrect though I've heard
+mention that this is being changed.  The problem is that it currently
+ignores what the clipboard might have been, writes a clipboard item, then
+sets the clipboard path to where it wants to be. This essentially ignores
+this CPX and will affect any applications you run afterwards before
+resetting your clipboard path with our CPX. After doing a Clipboard
+operation in STalker, enter our CPX and use the option 'Last scrp_write()'.
+You'll see that STalker changed the clipboard path and even wrote a
+filename. It should look like 'D:\SCRAP.TXT' (applications should only
+write a path, never a filename).  Simply click OK to rewrite the correct
+path or better yet, set your default clipboard path to the root of the
+drive you have STalker configured to write to. No more conflicts.
+
+Aladdin works slightly different in that it writes its scrap files to the
+root of the drive it resides on but doesn't bother to update the current
+scrap path.  Again, to force Aladdin and other programs to work well
+together you should set your default directory to the root of the drive
+Aladdin exists on.
+
+TECHNICAL NOTES
+---------------
+
+For those programmers professional and amateur out there, please consider
+using the Atari Clipboard standard. In a year or so, Atari users could be
+experiencing data exchange between applications without a second thought.
+As an added bonus, Atari has generously allowed me to include an ASCII copy
+of the article in ATARI.RSC, the official developer's newsletter which
+recently redefined the standard. This article, written by Mike Fulton at
+Atari, is now the standard by which all applications should use their
+clipboard. The file in this archive is entitled SCRAP2.TXT. Kudos to Bill
+Rehbock and Mike Fulton for their help and suggestions.
+
+DISCLAIMER
+----------
+
+Software Development Systems place no warranty whatsoever on this product.
+SDS will not be held responsible for any damages resulting from the use of
+this product either incidental or consequential. This includes loss of
+wages and data loss.
+
+Software Development Systems is also not associated in any way with Gribnif
+Software or General Electric Information Services, nor the makers of
+Stalker and Aladdin.
+
+BUG REPORTS & SUGGESTIONS
+-------------------------
+
+If you have any suggestions you'd like to contibute to this project, or you
+think you've found a bug, contact me by BBS, phone, or USPS, and I'll try
+to look into it ASAP.
+
+                      Software Development Systems
+                      996 Redondo Ave. #404
+                      Long Beach, CA 90804
+                      Orders: (800) 237-4SDS
+                Tech Support: (310) 595-9799
+
+                      GENIE: S.SANDERS2
+                 Compuserve: 71760,2140
+
+Thank you for supporting Atari Computers!
+
+-Scott Sanders
+ Member IAAD
+

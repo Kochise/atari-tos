@@ -1,0 +1,458 @@
+%makropackage =latexg 
+
+\documentstyle[german,din_a4]{article}
+\frenchspacing 
+ 
+\parindent 0pt 
+\parskip .5ex plus .25ex minus .35ex % Abs„tze etwas trennen 
+ 
+\title{Anleitung: SPOOL.CPX / SPOOL.PRG} 
+\author{Andreas Mandel $<$AsM$>$ \\ Postfach 26 \\ 7601 Ortenberg} 
+\pagestyle{myheadings} 
+\markboth{Anleitung: SPOOL.CPX / SPOOL.PRG}% 
+         {Anleitung: SPOOL.CPX / SPOOL.PRG} 
+ 
+\setcounter{tocdepth}{2} 
+
+\begin{document} 
+\sloppy 
+\maketitle 
+ 
+\hfill \parbox{140mm}{ 
+\begin{flushright} 
+ 
+In diesem Dokument wird die Bedienung und die Funktionsweise der 
+Programme {\sl SPOOL.CPX} (V1.10) und {\sl SPOOL.PRG} (V1.00b) 
+erl„utert. 
+ 
+Die Arbeit mit den Programmen {\sl SPOOL.PRG} und {\sl SPOOL.CPX} 
+erfolgt auf eigene Gefahr. Ich bernehme keine Haftung fr 
+eventuelle Sch„den 
+und Folgesch„den, die durch die Verwendung der Programme entstehen. 
+\end{flushright} 
+} 
+ 
+\tableofcontents 
+\newpage 
+\pagestyle{myfootings} 
+ 
+\section{Vorwort} 
+ 
+Es freut mich Ihnen eine v”llig berarbeitete Version des Spoolers 
+vorstellen zu k”nnen. Neben einigen Weiterentwicklungen sind die 
+bestehenden Funktionen fehlerbereinigt worden. Das Programm sollte 
+jetzt auch mit komplexen Systemkonfigurationen zurecht kommen. 
+ 
+Ich habe versucht, das Programm so zu schreiben, da es jetzt auch auf 
+68030 Prozessoren laufen sollte. Leider besitze ich keinen {\sc TT} 
+und kann daher die Funktion nicht testen. Ich w„re sehr erfreut, wenn 
+mir jemand dies best„tigen k”nnte oder eventuelle Probleme 
+detailliert schildert. Ein weiteres Problem, das eventll bei 
+h”heren Taktfrequenzen auftreten k”nnte ist, da das Strobe Signal 
+zum Drucker zu kurz gesendet wird (Drucker druckt entweder gar nicht 
+oder nur Mll). Ist das der Fall, bitte ich dringend um Rckmeldung. 
+ 
+Das Programm darf nur dann frei kopiert werden, wenn s„mtliche 
+Dateien die zum Programmpaket geh”ren unver„ndert mitkopiert werden. 
+Der Verkauf des Spoolers, auch als Teil eines professionellen 
+Programms ist nur mit meiner ausdrcklichen Genemigung erlaubt. Von 
+PD-Versender, die mein Programm in ihr Programm aufnehmen wollen, 
+erwarte ich eine schriftliche Benachrichtigung und eine 
+Belegdiskette. Der fr die Disk erhobene Betrag darf nicht ber das 
+bliche Ma hinausgehen. Falls private Benutzer mir keine Anerkennung 
+zukommen lassen, weil sie Ihrer Meinung nach schon genug fr dies 
+Programm bezahlt haben, schreiben Sie mit bitte, mit Angabe Ihrer 
+teuren Bezugsquelle und dem bezahlten Preis. Das Programm darf 
+natrlich auf Mailboxen zur Verfgung gestellt werden (ohne Erhebung 
+einer besonderen zus„tzlichen Gebhr). 
+ 
+Natrlich fehlt auch hier nicht die Bitte sich bei Fehlerberichten 
+oder Verbesserungswnschen an mich zu wenden. Falls jemand das 
+Programm regelm„ig benutzt, halte ich es fr mehr als fair, wenn er 
+mir eine Anerkennung zukommen l„t. Bei entsprechender Nachfrage 
+werde ich das Programm selbstverst„ndlich weiterentwickeln. 
+ 
+Es sei darauf hingewiesen, da ich keinerlei Haftung fr eventuelle 
+Sch„den die durch die Benutzung dieser Programme entstehen bernehme. 
+Ich lehne jegliche Ersatzansprche ab! 
+ 
+Hier noch meine Adresse: 
+\begin{center} 
+ 
+Andreas Mandel \\ 
+Postfach 26 \\ 
+7601 Ortenberg \\[1ex] 
+Volksbank Offenburg (Blz. 664 900 00) \\ 
+Kontonummer 64784307 
+ \end{center} 
+ 
+ 
+\section{Vergangenheit und Zukunft} 
+ 
+\subsection{SPOOL.CPX} 
+ 
+\begin{itemize} 
+\item[1.00] Erste offizielle Version des CPX--Moduls. 
+\item[1.01] Einige Kleinigkeiten wurden den allgemeinen Normen(?) 
+angepat. Der Mauszeiger wird jetzt z.B. zur flachen Hand, wenn ein 
+Slider verschoben wird. Speicherfressende libary Routinen wurden 
+durch krzere ersetzt. 
+ 
+Das Handling der Druckercodes wurde ge„ndert. Es gibt jetzt kein 
+endlos groes Popup-Men mehr, die Auswahl des zu sendenden Codes 
+wird jetzt im Code-Fenster vorgenommen. 
+ 
+Im Statistik Fenster sind einige Infos verschwunden, es war wohl doch 
+zuviel des guten. Sobald die Lauff„higkeit auf anderen Prozessoren 
+($680x0$ $x>0$) sichergestellt ist, wird der 
+{\tt StackDisplace} 
+Eintrag ebenfalls verschwinden. 
+ 
+\item[1.02] Fehler im Code-Fenster wurde beseitigt. 
+ 
+\item[1.10] Nochmals wurde das Aussehen ver„ndert und Platz fr  
+Erweiterungen geschaffen, die, sobald ich Zeit habe, 
+realisiert werden. 
+ 
+\end{itemize} 
+ 
+\subsection{SPOOL.PRG} 
+ 
+\begin{itemize} 
+\item[] Die erste offizielle Version des Programms tr„gt keine 
+Versionsnummer, irgendwer hat da gepennt\dots 
+\item[V1.0a]Ein kleiner Fehler wurde beseitigt. Der Fehler trat auf, 
+wenn ein {\tt Fwrite} Aufruf im falschen Moment einen Pufferberlauf 
+verursacht hatte. War das erstmal geschehen, so wurden s„mtliche 
+Druckerausgaben geschluckt. 
+\item[V1.0b]Die Erkennung des Programms erfolgt nun ber die  
+Cookie-Jar. Bei einigen Systemen gab's mit der alten Erkennung 
+Probleme.  
+\end{itemize} 
+ 
+\subsection{Diverses} 
+ 
+Da das {\sl XCONTROL.CPX} die zu sichernden Daten direkt ins 
+CPX Modul schreibt, ist es nicht m”glich, bei einem Update des 
+Moduls die Daten zu bernehmen. Das Programm {\sl SPOOLUPD.PRG} 
+macht jetzt eine šbernahme der Daten m”glich. (Das funktioniert 
+nur bei SPOOL.CPX, nicht bei anderen CPX-Modulen, da dort die 
+L„nge des Datensegments im allgemeinen anders ist.) 
+ 
+Ich warte immer noch auf einen Bericht eines {\sc TT} Users ber 
+die Vertr„glichkeit meines Programms. Eventll n”tige 
+nderungen werde ich durchfhren. 
+ 
+ 
+\section{Installation} 
+ 
+Um mit dem {\sl Spooler} sinnvoll arbeiten zu k”nnen, ist das Programm 
+{\sl XCONTROL.ACC} von {\sc Atari} erforderlich. Es ist z.B. 
+auf der {\sc ST Computer} Sonderdisk 69 erh„ltlich 
+Ich selbst habe natrlich keinerlei Rechte an dem 
+Programm {\sl XCONTROL.ACC}. 
+ 
+Zur Installation wird das Programm {\sl SPOOL.PRG} in den Autoordner 
+und das CPX-Modul {\sl SPOOL.CPX} in das fr die CPX-Module 
+vorgesehene Verzeichnis kopiert. Das CPX-Modul {\sl SPOOLNEC.CPX} 
+entspricht bis auf die auf {\sl NEC}-Drucker abgestimmte Druckercodes 
+dem {\sl SPOOL.CPX}. Nach einem Neustart des Rechners 
+steht ihnen das Programm nun zur Verfgung. 
+ 
+Das CPX-Modul wird grunds„tzlich nicht fr die Aufgaben des Spoolers 
+be"-n”"-tigt. Es hat lediglich die Aufgabe, die erforderlichen 
+Parameter einzustellen. Darber hinaus kann man damit die aktuellen 
+Einstellungen des Spoolers abfragen und Kommandocodes an den Drucker 
+schicken. 
+ 
+Falls ein Programm die Ausgabebausteine direkt anspricht, ist es 
+nicht m”glich, die Ausgaben zwischenzuspeichern oder umzulenken. Viele 
+Programme bieten jedoch die M”glichkeit, die Ausgabe anstelle des 
+direkten Hardwarezugriffs an andere Stellen weiterzuleiten. Wird 
+hier als Ausgabeger„t {\tt PRN:} eingestellt, kann der Spooler im 
+allgemeinen die Daten empfangen (z.B. DVI-Treiber von Ch. Strunk {\tt 
+-o=PRN:}). 
+ 
+Werden zwei verschiedene Spooler Programme installiert, so wird mit 
+ziemlicher Wahrscheinlichkeit alles m”gliche passieren, nur nicht 
+das, was erwartet wird. 
+ 
+\section{{\sl SPOOL.CPX} -- die Bedienung} 
+\subsection{Setup - Die Einstellung des Spoolers} 
+Dieses Fenster erreicht man durch Aufruf des CPX-Moduls oder, wenn 
+der Spooler aktiv ist, durch Anwahl des {\tt Setup}-Buttons im 
+Info-Fenster. 
+ 
+Einstellungen, die in diesem Fenster vorgenommen werden, werden nur 
+beim Verlassen des Fensters mit dem {\tt OK}-Button bernommen. 
+ 
+\subsubsection{Aktiv/Inaktiv} 
+In diesem Popupmenue kann der Spooler an- bzw. abgeschaltet werden. 
+ 
+\subsubsection{Ausgabeumlenkung} 
+In diesem Popupmenue kann das Ausgabeger„t, an das die Druckerdaten 
+geschickt werden sollen gew„hlt werden. Es stehen folgende 
+M”glichkeiten zur Verfgung: 
+\begin{itemize} 
+ 
+\item[{\tt Nichts}] S„mtliche Daten, die zum Drucker geschickt 
+werden, werden verworfen. Es folgt keine Ausgabe. 
+ 
+\item[{\tt Drucker}] Die Daten werden im Bufferspeicher 
+zwischengespeichert und zum Drucker geschickt. 
+ 
+\item[{\tt Datei}] Nach Anwahl von Datei gelangt man zun„chst in 
+einer Fileselector Box, in der die gewnschte Datei ausgew„hlt werden 
+kann. Existiert die gew„hlte Datei bereits, wird man in einer 
+Dialogbox gefragt, wie weiter verfahren werden soll. S„mtliche 
+Ausgaben an den Drucker werden nun im Buffer zwischengespeichert, und 
+in die angegebene Datei geschrieben. Man sollte darauf achten, da 
+gengend Platz fr die Daten vorhanden ist. Es ist nicht zu 
+empfehlen, die aktuelle Ausgabedatei bei aktivem Spooler 
+auszudrucken, da dies zu einer Endlosschleife fhren kann. 
+ 
+\item[{\tt Quick PRN}] In diesem Modus werden s„mtliche Druck-Daten 
+durch eine schnelle Routine zum Drucker geschickt. Es wird kein 
+Bufferspeicher verwendet, Trotzdem ist die verwendete Routine 
+wesentlich schneller, als die vom {\sl TOS} zur Verfgung gestellte. 
+\end{itemize} 
+ 
+\subsubsection{Buffergr”e} 
+Hier kann (falls n”tig) die gewnschte Gr”e des Bufferspeichers 
+eingestellt werden. 
+ 
+\subsubsection{Startzeit} 
+Hier kann (falls n”tig) die gewnschte Startzeit eingetragen werden. 
+Bei Dru"cker"-aus"-gabe, wird der Ausdruck sp„testens nach der unter 
+Startzeit eingestellten Zeit nach der Ausgabe des ersten Zeichens 
+gestartet. Bei Ausgabe an Disk wird der Buffer sp„testens nach 
+Verstreichen der Zeit nach Ausgabe des letzten Zeichens gespeichert. 
+ 
+\subsubsection{Startschwelle} 
+Hier kann (falls n”tig) die gewnschte Startschwelle eingestellt 
+werden. Die Ausgabe startet dann sp„testens, wenn der Bufferinhalt 
+die eingestellte Grenze erreicht hat. 
+ 
+Durch Anklicken der Zeile {\tt Startzeit} bzw. {\tt Startschwelle} 
+wird zwischen den 2 Slidern umgeschaltet. 
+ 
+\subsubsection{Info} 
+Durch Anklicken des {\tt Info} Buttons gelangt man in das 
+Statistik-Fenster. 
+ 
+\subsubsection{Sichern} 
+Hier kann man die aktuellen (sichtbaren) Einstellungen nach einer 
+Sicherheitsabfrage in {\sl SPOOL.PRG} sichern. Wird das Programm 
+nicht gefunden, so wird die Auswahl ber eine F-Sel Box erm”glicht. 
+Ist die Einstellung {\tt Aktiv} selektiert, so wird der Spooler beim 
+Start automatisch installiert. Bei der Ausgabeumlenkung an Disk ist 
+darauf zu achten, da die gew„hlte Datei nicht gel”scht wird. Neue 
+Daten werden dann an diese Datei angeh„ngt. 
+ 
+\subsubsection{OK} 
+Die aktuellen Einstellungen werden zum laufenden {\sl SPOOL.PRG} 
+bertragen. Dies ist nur bei leerem Bufferspeicher m”glich. 
+ 
+\subsubsection{Abbruch} 
+Das Fenster wird verlassen, die gemachten Einstellungen werden 
+verworfen. 
+ 
+ 
+\subsection{Info - Die aktuellen Werte} 
+Dieses Fenster erreicht man durch Anwahl des {\tt Info}-Buttons im 
+Setup-Fenster oder wenn der Spooler inaktiv ist durch Aufruf des 
+CPX-Moduls. 
+ 
+Im Gegensatz zum Setup-Fenster werden in diesem Fenster bet„tigte 
+Funktionen sofort ausgefhrt. 
+ 
+S„mtliche dargestellten Informationen entsprechen dem Zustand bei 
+Aufruf der letzten Funktion. Eine Aktualisierung der Daten kann auch 
+durch Anklicken des Copyright-Hinweises angefordert werden. 
+ 
+ 
+\subsubsection{Auslastung} 
+An diesem Balken kann man gut erkennen, wie stark der fr den Buffer 
+reservierte Speicher ausgelastet ist. 
+ 
+\subsubsection{L”schen} 
+Durch Anklicken dieses Buttons wird, nach einer Sicherheitsrckfrage, 
+der Gesamte Inhalt des Buffers gel”scht. 
+ 
+\subsubsection{Statistik} 
+In diesem abgetrennten Fensterteil k”nnen Informationen ber den 
+aktuellen Zustand des Spoolers abgefragt werden. Durch Bet„tigung des 
+Sliders werden weitere Informationen sichtbar. 
+ 
+Der Spooler z„hlt (so nebenbei) die Aufrufe der einzelnen 
+Druckfunktionen mit; dabei bedeutet z.B. {\tt Cprnout: 42b}, da durch 
+die Funktion Cprnout bereits 42\,Bytes an den Spooler geschickt 
+wurden. 
+ 
+\subsubsection{\fbox{c} Rcksetzen} 
+Mit diesem Button k”nnen die Z„hler der Funktionsaufrufe auf Null 
+zurckgesetzt werden. 
+ 
+\subsubsection{Setup} 
+Durch Anklicken des {\tt Setup}-Buttons gelangt man in das 
+Setup-Fenster, wenn das Info-Fenster nicht ber das Setup-Fenster 
+aufgerufen wurde (Buttonschrift ist dann grau). 
+ 
+\subsubsection{Codes} 
+Durch Anklicken dieses Buttons gelangt man in das Codes-Fenster. 
+ 
+\subsubsection{Ok} 
+Das Fenster wird durch Anklicken des {\tt OK}-Buttons verlassen. 
+ 
+\subsection{Codes - Liste der Druckerkommandos} 
+In dieses Fenster kommt man, wenn man im Statistik-Fenster 
+{\tt Codes} anklickt. 
+ 
+\subsubsection{Neu} 
+Durch diesen Button kommt man in das Fenster Neue Codes, man kann dort 
+neue Druckercodes eingeben. 
+ 
+\subsubsection{Das Auswahlfenster} 
+Klickt man hier auf einen Code, so wird der Button {\tt Neu} zum 
+Popupmenue. Unter dem Button {\tt Aktion} stehen dann die Menpunkte 
+{\tt L”schen}, {\tt ndern} und {\tt Senden} zur Verfgung. 
+ 
+\subsubsection{L”schen} 
+Der angew„hlte Code wir aus der Codeliste entfernt. 
+ 
+\subsubsection{ndern} 
+Hier kann ein existierender Code editiert werden. Man gelangt dazu 
+in das Fenster Neue Codes. Die aktuelle Belegung des Codes wird in 
+dieses Fenster eingetragen. 
+ 
+\subsubsection{Senden} 
+Der angew„hlte Code wird an den Drucker geschickt. Das Senden eines 
+Codes kann man auch durch Doppelklick auf den entsprechenden Eintrag 
+veranlassen. 
+Der Code wird mit {\sl Fwrite} ausgegeben. Er wird also vom Spooler 
+wie jede andere Ausgabe behandelt. 
+\subsubsection{Sichern} 
+Klickt man diesen Button an, so werden nach einer Sicherheitsabfrage 
+die eingegebenen Codes in das {\sl SPOOL.CPX} gesichert; sie stehen 
+in Zukunft immer unter Codes im Statistik-Fenster zur Verfgung. 
+ 
+\subsubsection{OK} 
+Durch {\tt OK} werden die eingegebene Codes bernommen. Sie werden 
+jedoch nicht gespeichert, und gehen daher beim Verlassen des 
+CPX-Moduls verloren. 
+ 
+\subsubsection{Abbruch} 
+Wird {\tt Abbruch} angew„hlt, so werden die gemachten nderungen 
+verworfen. Es stehen die gleichen Codes zur Verfgung wie vor dem 
+Aufruf des Codes-Fensters. 
+ 
+ 
+\subsection{Neue Codes - Ver„ndern und Erg„nzen der Druckerkommandos} 
+ 
+In dieses Fenster gelangt man durch Anwahl von {\tt Neu} oder {\tt 
+ndern} im Codes-Fenster. 
+ 
+\subsubsection{Eingabe Box} 
+Hier kann man den Namen des Codes und den Code String eingeben. Die 
+Code Zeichen mssen in hexadezimaler Form angegeben werden. Das Ende 
+des Code Strings wird durch ein mit nicht Hex-Zeichen geflltes Feld 
+erkannt. 
+ 
+\subsubsection{Ok} 
+Mit dem {\tt Ok} Button gelangt man wieder ins Codes-Fenster zurck, 
+wenn die Eingaben gltig sind. Bei fehlerhafter Eingabe ert”nt ein 
+Warnton. 
+ 
+\subsubsection{Abbruch} 
+Die gemachten nderungen werden verworfen (bei Neueingabe wird kein 
+neuer Code angefgt) und das Neue Codes-Fenster wird verlassen. 
+ 
+ 
+\section{{\sl SPOOL.CPX} -- die Funktionen} 
+ 
+Die Funktionen des CPX-Moduls beschr„nken sich nur auf die 
+Einstellung des {\sl SPOOL.PRG} und die Anzeige der vom {\sl 
+SPOOL.PRG} zur Verfgung gestellten Informationen. Ein konfigurierter 
+Spooler ist also auch ohne {\sl SPOOL.CPX} lauff„hig. 
+ 
+Die Code Ausgabe wird durch die Gemdos Funktion {\tt Fwrite} 
+durchgefhrt. Falls sich Daten im Spooler Buffer befinden, wird die 
+Codesequenz ans Ende des Buffers geh„ngt. 
+ 
+\section{{\sl SPOOL.PRG} -- die Funktionen} 
+ 
+\subsection{Beim Programmstart} 
+Beim Programmstart wird zun„chst getestet, ob das Programm eventll 
+schon im Speicher ist. Danach werden die Systemparameter getestet 
+und entsprechend verwertet (z.B. der Stack Offset). 
+ 
+Nun erfolgt eine šberprfung, ob der Spooler installiert werden soll, 
+falls nicht, wird das Programm verlassen. Die fr den Spooler 
+ben”tigten Programmteile bleiben resident. 
+ 
+Ist eine Installation des Spoolers erwnscht und die Buffergr”e 
+gleich null, so werden die Gemdos und Bios Vektoren zum Programm 
+gebogen und das Programm resident verlassen. 
+ 
+Ist fr die Installation des Buffers Speicher n”tig, dann wird 
+zun„chst nur der Gemdos Trap verbogen. Nun wird das Programm 
+verlassen. Beim n„chsten Gemdos Aufruf wird der Speicher installiert 
+und der Biops Trap verbogen. Das ist n”tig, damit das Programm den 
+reservierten Bufferspeicher nicht als resident ansieht, dann w„re 
+n„mlich eine Freigabe des Speichers nicht mehr m”glich. 
+ 
+ 
+\subsection{Im Spooler Betrieb} 
+Ist der Spooler inaktiv, dann werden lediglich die ben”tigten 
+Funktionen fr das {\sl SPOOL.CPX} zur Verfgung gestellt. 
+ 
+Bei aktivem Spooler werden die Gemdos und Bios Funktionen, die Daten 
+zum Drucker schicken, abgefangen und die Daten entsprechend dem 
+eingestelltem Ausgabeger„t verarbeitet. Bei Ausgabe an den Drucker 
+ist, soweit zumindest ein Zeichen im Speicher ist, entweder der 
+VBL-Interrupt oder der MPF-Interrupt aktiv. Die Daten werden so lange 
+im Buffer gesammelt, bis entweder die Startschwelle berschritten 
+wird oder die eingestellte Startzeit abgelaufen ist. Dann wird ein 
+MPF-Interrupt aktiviert, der immer dann ausgel”st wird, wenn der 
+Drucker bereit ist, ein Zeichen zu empfangen. Dadurch wird die 
+Geschwindigkeit des Druckers voll ausgenutzt, es ist nicht n”tig 
+anzugeben, Wieviele Zeichen der Drucker pro Sekunde verarbeiten kann. 
+ 
+Der ben”tigte Bufferspeicher wird grunds„tzlich am oberen 
+Speicherende reserviert, um einer Zerstckelung des Speichers 
+vorzubeugen. 
+ 
+Die ben”tigten Vektoren werden alle nach dem {\sl XBRA} Verfahren 
+installiert und entfernt. Nur wenn alle anderen 
+vektorverbiegende Programme ebenfalls das {\sl XBRA} Verfahren 
+verwenden, ist gew„hrleistet, da der Spooler im inaktiven Zustand 
+seine Vektoren ausklinkt. Ist das nicht m”glich, wird der 
+entsprechende Trap durch einen sofortigen Aufruf des n„chsten 
+Programms in der Vektorliste ersetzt. 
+ 
+Das Programm modifiziert sich an verschiedenen Stellen selbst. Das 
+ist in manchen F„llen unumg„nglich und in anderen F„llen zur 
+Optimierung des Programms n”tig gewesen. Falls ein Prozessor 
+damit Probleme hat, gebt mir bitte Infos, wie ich diese beseitigen 
+kann. 
+ 
+\section{{\sl SPOOLUPD.PRG} -- die Funktionen} 
+ 
+Dieses kleine Programm dient dazu, Druckercodes aus einem 
+{\sl SPOOL.CPX} herauszuholen und in einem anderen 
+{\sl SPOOL.CPX} zu speichern. Die Bedienung beschr„nkt sich auf die 
+Auswahl der alten und der neuen {\sl SPOOL.CPX}-Datei. So ist es 
+m”glich die eingegebenen Druckercodes bei einem Update des CPX Moduls 
+weiter zu verwenden. 
+ 
+%\bigskip 
+ 
+%\begin{center} 
+ 
+%So, das war's. Ich hoffe, da alles klar geworden ist. \\ Wenn nicht, 
+%Probieren geht ber Studieren\dots 
+ 
+ 
+%Andreas  $<$AsM$>$ 
+%\end{center} 
+\end{document} 

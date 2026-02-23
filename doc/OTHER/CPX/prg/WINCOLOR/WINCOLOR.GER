@@ -1,0 +1,113 @@
+NAME
+     WINCOLOR 1.3 [26.1.1993] - CPX-Modul zum Setzen der Fensterfarben
+
+SYNOPSIS
+     \CPX\WINCOLOR.CPX
+
+BESCHREIBUNG
+     Mit diesem CPX ist es m”glich die Fensterfarben einzustellen,
+     die beim ™ffnen eines neuen Fensters benutzt werden sollen.
+     
+     Der Fensterinhalt des ge”ffneten CPX l„t sich in vier Bereiche
+     gliedern:
+     
+     -    Links oben befindet sich ein Pseudofenster dessen Elemente
+          die Farben der aktuellen Farbauswahl zeigen. Klickt man ein
+          Element an, erscheint um das Element ein Selektionsrahmen
+          und im Innern des Fensters werden Bedienelemente zur Farb-
+          einstellung sichtbar.
+
+     -    Da man nicht alle m”glichen Fensterelemente auf einmal
+          darstellen kann, erlauben die drei Symbolen rechts oben
+          deren Umschaltung. Mit den zwei Fenstern kann man zwischen
+          den Farben eines vorderen und eines hinteren Fensters
+          umschalten. Der kleine Knopf erlaubt es die Kontrollelemente
+          auf dem Fensterrahmen auszuschalten um auch die dahinter
+          liegenden Elemente zu f„rben. Diese sind sichtbar, wenn
+          ein Fenster nicht alle Kontrollelemente besitzt (z.B. bei
+          fehlendem Slider).
+
+     -    Direkt unter den Symbolen befinden sich vier Kn”pfe mit
+          denen man eine komplett neue Farbauswahl anzeigen kann.
+          Ist ein Knopf nicht w„hlbar, ist die ihm zugeordnete
+          Farbauswahl sichtbar.
+          
+     -    Am unteren Rand schlielich befinden sich die Kn”pfe mit
+          denen man die Farbauswahl bernehmen bzw. beenden kann.
+
+     Den meisten Kn”pfen sind auch Tasten zugeordnet. Die Bedeutung
+     der Tasten und Kn”pfe kann man der folgenden Tabelle entnehmen.
+	
+     Taste   Knopf    Bedeutung
+     ------  -------  -----------------------------------------------
+     UNDO    Undo     Zeigt die Farbauswahl, die beim ™ffnen des CPX
+                      sichtbar war
+     ALT-R   CPX      Zeigt die im CPX gespeichert Farbauswahl
+     HOME    GEM      Zeigt die Farbauswahl, die der Voreinstellung
+                      des GEM entspricht
+     F1-F10  F1-10    Zeigt die Farbauswahl aus einem der vor-
+                      definierten Farbenspeicher 1 bis 10
+     SHIFT-           šbernimmt die Farbauswahl in den Farbenspeicher
+     F1-F10           1 bis 10 und sichert diesen im CPX
+             Sichern  šbernimmt die Farbauswahl ins GEM und sichert
+                      sie im CPX
+     ALT-S            šbernimmt die Farbauswahl ins GEM, sichert sie
+                      im CPX und schliet das CPX
+     RETURN  OK       šbernimmt die Farbauswahl ins GEM und schliet
+                      das CPX
+             Abbruch  Verwirft die Farbauswahl und schliet das CPX
+
+     Die Fensterfarben k”nnen fr drei verschiedene Aufl”sungen ein-
+     gestellt werden (fr 2, 4 bzw. >4 Farben). Auerdem wird noch
+     zwischen normaler und 3D-Darstellung unterschieden. Zur Einstellung
+     mu sich das GEM in der ensprechenden Aufl”sung befinden. Die ein-
+     stellbaren Fensterelemente sind abh„ngig von der GEM-Version.
+     3D-Darstellung wird ab GEM 3.4 angeboten.
+     
+     Bevor die Farben ins GEM bernommen werden, wird noch der Versuch
+     unternommen ungnstige Farbkombinationen zu korrigieren (z.B.
+     wenn man Farben eingestellt hat, die in der aktuellen Aufl”sung
+     nicht m”glich sind).
+     
+     Es gibt zwei M”glichkeiten die Farben eines Fensterelements in ein
+     anderes Element zu kopieren. Zum einen in dem man den Mausknopf
+     nach Auswahl des Elements gedrckt h„lt, die Farben auf ein
+     anderes Element zieht und dort den Knopf losl„t. Zum anderen 
+     kann man nach der Auswahl eines Elements dessen Farben mit einem
+     Doppelklick auf ein anderes Element kopieren.
+
+     Dieses CPX-Modul untersttzt auch in GEM-Versionen < 3.0 Fenster-
+     farben, falls das zugrundeliegende System diese M”glichkeit bietet
+     (z.B. wenn man das GEM-Patchprogramm WINX (ab v2.1) benutzt).
+     
+     WINCOLOR ist mehrsprachig. Erkannt werden die L„nderkennungen
+     USA, FRG, FRA, SPA, ITA, SWE. Die Texte wurden, genau wie die
+     Vorbelegung der Farbspeicher F1-10, dem CPX-Modul WCOLORS von
+     ATARI entnommen.
+
+NDERUNGEN
+     v1.1: Anpassung an 3D Fensterrahmen
+     v1.2: Zus„tzliche Farbspeicher fr 3D-Darstellung
+     v1.3: Umstellung auf neue 3D-Definition des GEM
+
+PROBLEME
+     Das CPX-Modul WINCOLOR sollte nicht gleichzeitig mit dem Modul
+     WCOLORS von ATARI installiert sein, da sich beide in ihrer
+     Funktionalit„t entsprechen aber eine unterschiedliche CPX-
+     Kennung besitzen.
+          
+COPYRIGHT
+     Autor:      (\/) Martin Osieka
+     Anschrift:  Martin Osieka, Erbacherstr. 2, 
+                 W-6100 Darmstadt, Bundesrepublik Deutschland
+     Internet:   Martin_Osieka@mtk.maus.de
+
+     Das CPX-Modul WINCOLOR darf auf beliebige Art und Weise weiter-
+     verbreitet werden, solange alle Dateien des Programmpakets
+     beiliegen. Dazu geh”ren:
+       WINCOLOR.CPX                CPX-Modul 
+       WINCOLOR.GER, WINCOLOR.UPL  Dokumentation und Upload-Text
+     Die Benutzung des Programms erfolgt auf eigene Gefahr.
+
+SIEHE AUCH
+     Dokumentation zu XCONTROL

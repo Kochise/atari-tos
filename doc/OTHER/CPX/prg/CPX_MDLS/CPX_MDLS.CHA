@@ -1,0 +1,17 @@
+New in the last version:
+""""""""""""""""""""""""
+ - NVDICONF.CPX supports now NVDI 2.0 (meens you can toogle the Line-A
+                    switcher).
+ - COOKIE.CPX, SYSTEM.CPX optimations in REDRAW.
+ - FILEINFO.CPX           some small changes and optimations.
+
+New in this version:
+""""""""""""""""""""
+ -FILEINFO.CPX  pop-up menus handling corrected. Press and holding mouse
+                button works now. Selection unpress mouse button.
+ -SYSTEM.CPX    pop-up menus handling corrected.
+                Extended discription and and data type (BIT).
+ -NVDICONF.CPX  Must be rename, because a offical version of NVDICONF
+                with the same CPX-ID is registered.
+                The new name is CONFNVDI.CPX, CPX-ID: 'nVdi'. Please don't
+                use the old version (NVDICONF.CPX, 'NVDI', (c) D.Fiebelkorn)

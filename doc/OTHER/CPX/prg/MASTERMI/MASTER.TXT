@@ -1,0 +1,47 @@
+
+Die Regeln drften bekannt sein... 
+
+Ein '-' in der Bewertung bedeutet, da ein Stein in der gesuchten 
+Kombination vorkommt, die Position jedoch nicht stimmt.
+
+Ein '+' in der Bewertung bedeutet, das ein Stein an der richtigen Stelle 
+ist.
+z.B.:
+gesucht:'ABCD' eingegeben: 'AAAA' gibt '+   '
+                           'DCBA' gibt '----'
+                           'CCAA' gibt '--  '
+
+Werden als Subset Zahlen gew„hlt, so werden auch Wiederholungen erzeugt. So 
+ist z.B. m”glich das '1111' der zu entdeckende Code ist.
+
+gesucht '1122' eingegeben: '1111' gibt '++  '
+                           '3331' gibt '-   '
+                           '2211' gibt '----'
+
+Wird der Code nach einer gewissen Anzahl von Zgen nicht gefunden, so nimmt 
+das Modul keine Eingaben mehr an, und die L”sung wird Ihnen fr immer 
+verborgen bleiben.
+
+Eine neue Kombination erh„lt man einfach durch Ausw„hlen eines neuen 
+Subsets.
+
+Also: Zun„chst das gewnschte Subset anw„hlen [ABCDEF]. Dann im linken Feld 
+den 1. Tip durch Anwahl im Stein-Feld (rechts/mitte) und danach Anwahl des 
+Feldes, wo der Stein hin soll (unterste Zeile linkes Feld) oder einfaches 
+Klicken auf das Zielfeld angeben. Ist der Tip komplet abgegeben (alle 4 
+Felder der unteren Zeile besetzt) kann der Computer durch Klicken auf 
+[Bewertung] oder auf die Bewertungs-Zeile veranlat werden eine Bewertung 
+abzugeben. Und dann heit's nachdenken...
+
+
+Wer irgendwelche Kommentare loswerden will, wende sich bitte an:
+
+ Andreas Mandel  <AsM>
+ Postfach 26
+ w-7601 Ortenberg
+
+(Wenn eine Antwort erwartet wird BITTE zumindest Rckporto beilegen!!)
+
+
+73+55 AsM
+

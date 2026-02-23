@@ -1,0 +1,219 @@
+
+      ##### #####  #     ##### ### #   # #   #     ####  ####  #   #
+        #   #      #     #      #  ##  #  # #     #      #   #  # #
+        #   ###    #     ###    #  # # #   #      #      ####    #
+        #   #      #     #      #  #  ##  # #     #      #      # #
+        #   #####  ##### ##### ### #   # #   #  #  ####  #     #   #
+
+
+
+                   Telefonnummern & Adressenverzeichnis
+
+                            Copyrights by
+
+                          Andreas Mandel @ OG
+
+                             Version 2.01
+
+                               11.02.93
+
+
+                            F R E E W A R E
+
+
+                         Programmiert mit PURE C
+
+
+
+                (Dokumentation z.T.:  Alexander Gth @ Wš)
+
+
+  EINLEITUNG / FUNKTIONSPRINZIP
+  ----------------------------------------------------------------------------
+
+  Code CPX, ist ein CPX-Modul, welches mit dem modularen Kontrollfeld von
+  ATARI (XCONTROL), benutzt werden kann. Mit TELIINX.CPX kann man Telefon-
+  nummern und Adressen auf einfache Art zum Abruf bereit stellen.
+
+  Die Telefonnummern k”nnen dazu in einer einfachen ASCII Datei gespeichert
+  oder z.B. aus einer bestehenden Datenbank exportiert werden.
+
+
+  LAUFFHIGKEIT
+  ----------------------------------------------------------------------------
+
+  TELIINX.CPX sollte dank des modularen Kontrollfeldes von ATARI auf allen
+  Rechnern/TOS-Version (>=1.04) und in allen Aufl”sungen (ST-LOW bis TT-HIGH)
+  sowie Grafikkarten laufen.
+
+  TELEINX.CPX ben”tigt im aktiven Betriebszustand, d.h. wenn es vom Kontroll-
+  feld aufgerufen wird oder auch resident geladen wird, ca. 12 KB Speicher und
+  je nach Einstellung der max. Eintr„ge ca. 1-20 KB zus„tzlichen Daten-
+  speicher.
+
+  Im passiven Betriebszustand, d.h. nicht resident im Kontrollfeld und nicht
+  gestartete CPX-Application, ben”tigt TELEINX.CPX nur 512 Bytes (!!!), d.h.
+  nur der CPX-Header ist geladen :-).
+
+  LIEFERUMFANG
+  ----------------------------------------------------------------------------
+
+  Das Softwarepaket besteht aus folgenden Dateien:
+
+  TELEINX .CPX :  CPX-Modul
+  TELEINX .TXT :  Diese Anleitung
+  TELEBSP .TXT :  Eine Beispielnummern Datei
+
+  Eine Weitergabe des unvollst„ndigen Softwarepaketes ist untersagt !!!
+
+  COPYRIGHT
+  ----------------------------------------------------------------------------
+
+  TELEINX.CPX ist FREEWARE, d.h.
+
+  * Sie drfen TELEINX.CPX beliebig weitergeben, jedoch mu stets der Inhalt
+    des Ordners TELEINX KOMPLETT und UNVERNDERT kopiert werden. Krzungen und
+    nderungen verletzen die Copyright-Bestimmungen!
+
+  Eine Verbreitung ber Mailboxen ist gestattet. Der Vertrieb in Verbindung
+  mit kommerzieller Software oder ber PD/Shareware-Anbieter ist nur nach
+  vorheriger Absprache erlaubt. (Verst”e werden geahndet !!!)
+
+  Fehlerberichte, Fragen und Unterstzungen sind mir immer willkommen.
+
+   Postanschrift:   Andreas Mandel
+                    Postfach 26
+                    7601 Ortenberg
+
+         MausNet:   Andreas Mandel @ OG
+
+  Bankverbindung:   Volksbank Offenburg
+                    Kto.Nr. 6478 4307
+                    BLZ     664 900 00
+
+  HAFTUNGSAUSSCHLU
+  ----------------------------------------------------------------------------
+
+  Natrlich kann die Funktionsf„higkeit des CPX-Moduls nicht garantiert
+  werden und der Autor haftet auch nicht fr irgendwelche Sch„den, die sich
+  aus der Benutzung des Programmes oder der Dokumentation ergeben k”nnen.
+
+  INSTALLATION
+  ----------------------------------------------------------------------------
+
+  - Kopieren Sie TELEINX.CPX in den CPX-Ordner von XCONTROL (ATARI)
+  - Aktivieren Sie das XCONTROLL.ACC, d.h. Endung = .ACC
+  - Booten Sie den Rechner neu oder laden Sie im XCONTROLL.ACC unter dem
+    Menpunkt "Voreinstellungen" die CPX-Module neu ein.
+  - Rufen Sie TELEINX.CPX auf (Doppelklick auf "Steuercodes" )
+  - Klicken Sie auf das PupUp-Men "Optionen" und w„hlen Sie den Eintrag
+    "SETUP" aus.
+  - Klicken Sie auf die Pfadzeile. Es ”ffenet sich nun eine Fileselectorbox,
+    in welcher Sie den Pfad zu der Nummern-Dateie (z.B. TELEBSP.TXT)
+    festlegen/einstellen k”nnen. Wenn geschehen, klicken Sie "OK" in der
+    Fileselectorbox.
+  - Und jetzt noch schnell Einstellungen sichern = Klick auf Button "Sichern"
+    es wird der Pfad und der Name der Nummern-Datei in TELEINX.CPX gesichtert.
+  - Klicken Sie "OK" und sie kommen wieder ins Hauptmen
+
+  START / BEDIENUNG
+  ----------------------------------------------------------------------------
+
+  Nach ”ffenen des modularen Kontrollfeldes von ATARI, kommen Sie mit
+  Doppelklick auf den Eintrag "Tel. Verzeichniss" in das Hauptmen von
+  TELEINX.CPX.
+
+  Hauptmen
+  ---------
+  In der Mitte des Fensters sehen sie die Buchstaben A-Z, '?' und '.'.
+  Um Telefonnummern abzurufen klicken sie einfach auf den Anfangsbuchstaben
+  des gesuchten Namens. F„ngt der Name mit einem Umlaut oder Sonderzeichen
+  an, so w„hlen sie '?'. Jetz gelangen sie, wenn unter dem gew„hlten
+  Buchstaben zumindest ein Eintrag gefunden wurde in die:
+
+  Nummern Anzeige
+  ---------------
+  Hier sehen sie die gefundenen Nummern, linksbndig wird der Name ausgegeben,
+  und direkt darunter, rechtsbndig die dazugeh”rige Telefonnummer. Sind mehr
+  als 4 Eintr„ge vorhanden so k”nnen Sie mit dem Slider auf der rechten Seite
+  durch die Eintr„ge bl„ttern.
+
+  Zurck zum Hauptmen kommen Sie indem sie die Close-Box links neben der
+  Titelzeile "Name/ Nummer" oder die Kopfzeile "Telefonindex V2.xx".
+
+  Klicken Sie auf einen Namen oder eine Telefonnummer, so erscheinten die
+  restlichen Daten des Eintrags (z.B. Adresse). Durch nochmaliges klicken
+  kommen Sie wieder zurck zur Anzeige der Telefonnummern.
+
+
+  Setupmen
+  ---------
+  Hier haben Sie im oberen Teil die M”glichkeit, die Default-Telefonnummern
+  Datei, und die max Anzahl der in der Nummern Anzeige zur Verfgung gestellte
+  Nummern festzulegen.
+
+  Unter dem Eintrag "Maximale Eintr„ge je Buchstaben" k”nnen sie einstellen
+  wieviel fr wieviele Eintr„ge das CPX fr die Nummern Anzeige bereitstellen
+  soll. Reicht der eingestellte Wert nicht aus, so werden nur die max.
+  m”gliche Anzahl an Nummern geladen und der letzte Eintrag in der Nummern
+  Anzeige wird mit "**" markiert.
+  Kann das CPX-Modul nicht gengent Speicher fr die geforderte Anzahl von
+  eintr„gen bekommen (wenn z.B. ein anderes Programm einfach allen Speicher
+  fr sich reserviert hat) so erscheint eine Allert-Box. Eine anzeige der
+  Nummer ist dann nicht m”glich.
+
+
+  Etwas weiter unten, k”nnen Sie durch Klick auf die dort angezeigte
+  Pfadzeile, die Telefonnummern Datei ausw„hlen.
+
+  Durch Anwahl von "Sichern" werden die vorgenommenen Einstellungen dauerhaft
+  in TELEINX.CPX gespeichert.
+
+  W„hlen Sie "Abbruch", so werden die ge„nderte Daten nicht benommen, Sie
+  arbeiten dann mit der Einstellung weiter, die Sie vor'm aufruf des Setup
+  Mens hatten.
+
+  Verlassen sie das Setup Men mit "OK" so werden die gemachten nderungen
+  ubernommen und bleiben bis zum Verlassen des CPX-Moduls aktiv.
+
+
+  DAS FORMAT DER TELEFONNUMMERN DATEI
+  ----------------------------------------------------------------------------
+
+  Die Telefonnummern Datei ist denkbar einfach aufgebaut, ein erstellen per
+  Editor oder als Export aus einem Datenbank-Programm sollte keine Probleme
+  bereiten.
+
+  Die einzelnen Datenfelder werden durch '|' getrennt, die Datens„tze durch
+  CR LF (Zeilenwechsel).
+
+  Z.B.:
+  Mandel Andreas|Fax:0781/38807|Postfach 26|7601 Ortenberg|<77799> Ortenberg
+
+  Das erste Feld sollte immer den Namen enthalten, im 2. Feld sollte die
+  Telefonnummer stehen. Den Inhalt der folgenden Felder k”nnen sie Frei
+  bestimmen.
+
+  Mehrfache Leerzeichen werden beim Einlesen der Datei zu einem Zusammen-
+  gefat.
+
+  Ein Datenfeld sollte nicht mehr als 28 Zeichen enthalten. L„ngere
+  Datenfelder werden entsprechend gekrzt.
+
+  Pro Datensatz sind max 8 Felder m”glich, folgen weitere, so werden sie
+  ignoriert.
+
+
+  BEKANNTE BESCHRNKUNGEN / BUGs
+  ----------------------------------------------------------------------------
+
+  Das Programm schickt keine Fehlermeldungen, falls also irgendwas nicht
+  l„uft, sollten Sie erstmal die eingestellten Parameter (insbesondere den
+  Pfad) und den Aufbau der Quelldatei berprfen.
+
+
+  UPDATEs / NEUE VERSIONEN
+  ----------------------------------------------------------------------------
+
+?????.92  V2.00   pro Datensatz sind jetzt 8 Felder m”glich.
+10.02.93  V2.01   Bug, der uU die RSC-Texte von Teleinx ,,krzte'' gefixt.

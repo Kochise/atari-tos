@@ -1,0 +1,313 @@
+;System_CPX.INF V1.00
+
+#OS-Vars, Operating-System Variables
+
+$00000424, memcntrl._WORD
+$0000042E, phystop._LONG
+$00000432, _membot._LONG
+$00000436, _memtop._LONG
+$0000043E, flock._WORD
+$00000440, seekrate._WORD
+$00000442, _timer_ms._WORD
+$00000444, _fverify._WORD
+$00000446, _bootdev._WORD
+$00000448, palmode._WORD
+$0000044A, defshiftmd._WORD
+$0000044C, sshiftmd._WORD
+$0000044E, _v_bas_ad._LONG
+$00000452, vblsem._WORD
+$00000454, nvbls._WORD
+$00000456, _vblqueue._LONG
+$0000045A, colorptr._LONG
+$0000045E, screenptr._LONG
+$00000462, _vbclock._LONG
+$00000466, _frclock._LONG
+$0000046E, swv_vec._LONG
+$000004BA, _hz_200._LONG
+$000004C2, _drvbits._LONG
+$000004CE, _vbl_#1._PNTR
+$000004D2, _vbl_#2._PNTR
+$000004D6, _vbl_#3._PNTR
+$000004DA, _vbl_#4._PNTR
+$000004DE, _vbl_#5._PNTR
+$000004E2, _vbl_#6._PNTR
+$000004E6, _vbl_#7._PNTR
+$000004EA, _vbl_#8._PNTR
+$000004F2, _sysbase._LONG
+$000004F6, _shell_p._PNTR
+$000004FA, end_os._LONG
+$000004FE, exec_os._LONG
+
+
+#DRVBITS, Drive Bits
+$000004C5, drv('A')._BIT(0)
+$000004C5, drv('B')._BIT(1)
+$000004C5, drv('C')._BIT(2)
+$000004C5, drv('D')._BIT(3)
+$000004C5, drv('E')._BIT(4)
+$000004C5, drv('F')._BIT(5)
+$000004C5, drv('G')._BIT(6)
+$000004C5, drv('H')._BIT(7)
+$000004C4, drv('I')._BIT(0)
+$000004C4, drv('J')._BIT(1)
+$000004C4, drv('K')._BIT(2)
+$000004C4, drv('L')._BIT(3)
+$000004C4, drv('M')._BIT(4)
+$000004C4, drv('N')._BIT(5)
+$000004C4, drv('O')._BIT(6)
+$000004C4, drv('P')._BIT(7)
+$000004C3, drv('Q')._BIT(0)
+$000004C3, drv('R')._BIT(1)
+$000004C3, drv('S')._BIT(2)
+$000004C3, drv('T')._BIT(3)
+$000004C3, drv('U')._BIT(4)
+$000004C3, drv('V')._BIT(5)
+$000004C3, drv('W')._BIT(6)
+$000004C3, drv('X')._BIT(7)
+$000004C2, drv('Y')._BIT(0)
+$000004C2, drv('Z')._BIT(1)
+$000004C2, drv('?')._BIT(2)
+$000004C2, drv('?')._BIT(3)
+$000004C2, drv('?')._BIT(4)
+$000004C2, drv('?')._BIT(5)
+$000004C2, drv('?')._BIT(6)
+$000004C2, drv('?')._BIT(7)
+
+
+
+#HARDWARE, Hardware Vectors
+
+$00000000, Shadow 1._LONG
+$00000004, Shadow 2._LONG
+$00000008, Bus Error._PNTR
+$0000000C, Address Error._PNTR
+$00000010, Illegal Instruction._PNTR
+$00000014, Division by Zero._PNTR
+$00000018, CHK-Exeption._PNTR
+$0000001C, TRAPV-Exeption._PNTR
+$00000020, Privileg Violation._PNTR
+$00000024, TRACE-Exeption._PNTR
+$00000028, LINE A._PNTR
+$0000002C, LINE F._PNTR
+
+
+#(SysBase), ROM at (SysBase)
+
+$00($4F2), os_entry(BRA)._WORD
+$02($4F2), os_version._WORD
+$04($4F2), os_start._LONG
+$08($4F2), os_base._LONG
+$0C($4F2), os_membot._LONG
+$10($4F2), os_reserved._LONG
+$14($4F2), os_magic._LONG
+$18($4F2), os_gendat._LONG
+$1C($4F2), os_palmode._WORD
+$1E($4F2), os_gendatg._WORD
+$20($4F2), _root._LONG
+$24($4F2), kbshift._LONG
+$28($4F2), _run._LONG
+$2C($4F2), p_reserved._LONG
+
+
+#runing PD, SYSHDR._run (runing process)
+
+BASE= $28($4F2)
+$00(BASE), runing PD._LONG
+BASE= $00(BASE)
+$00(BASE), p_lowtpa._LONG
+$04(BASE), p_hitpa._LONG
+$08(BASE), p_tbase._LONG
+$0C(BASE), p_tlen._LONG
+$10(BASE), p_dbase._LONG
+$14(BASE), p_dlen._LONG
+$18(BASE), p_bbase._LONG
+$1C(BASE), p_blen._LONG
+$20(BASE), p_dta._LONG
+$24(BASE), p_parent._LONG
+$2C(BASE), p_env._LONG
+$30(BASE), p_devx[0]._BYTE
+$31(BASE), p_devx[1]._BYTE
+$32(BASE), p_devx[2]._BYTE
+$33(BASE), p_devx[3]._BYTE
+$34(BASE), p_devx[4]._BYTE
+$35(BASE), p_devx[5]._BYTE
+$37(BASE), p_defdrv._BYTE
+
+
+#Com.line, Comand line
+
+BASE= $28($4F2)
+BASE= $00(BASE)
+$80(BASE), p_cmdlin._CHAR(8)
+$88(BASE), p_cmdlin._CHAR(8)
+$90(BASE), p_cmdlin._CHAR(8)
+$98(BASE), p_cmdlin._CHAR(8)
+$A0(BASE), p_cmdlin._CHAR(8)
+$A8(BASE), p_cmdlin._CHAR(8)
+$B0(BASE), p_cmdlin._CHAR(8)
+$B8(BASE), p_cmdlin._CHAR(8)
+$C0(BASE), p_cmdlin._CHAR(8)
+$C8(BASE), p_cmdlin._CHAR(8)
+$D0(BASE), p_cmdlin._CHAR(8)
+$C8(BASE), p_cmdlin._CHAR(8)
+$E0(BASE), p_cmdlin._CHAR(8)
+$E8(BASE), p_cmdlin._CHAR(8)
+$F0(BASE), p_cmdlin._CHAR(8)
+$F8(BASE), p_cmdlin._CHAR(8)
+
+
+#Env string, Environment string
+
+BASE= $28($4F2)
+BASE= $00(BASE)
+$2C(BASE), p_env._LONG
+BASE= $2C(BASE)
+$00(BASE), env._CHAR
+$08(BASE), env._CHAR
+$10(BASE), env._CHAR
+$18(BASE), env._CHAR
+$20(BASE), env._CHAR
+$28(BASE), env._CHAR
+$30(BASE), env._CHAR
+$38(BASE), env._CHAR
+$40(BASE), env._CHAR
+$48(BASE), env._CHAR
+$50(BASE), env._CHAR
+$58(BASE), env._CHAR
+$60(BASE), env._CHAR
+$68(BASE), env._CHAR
+$70(BASE), env._CHAR
+$78(BASE), env._CHAR
+$80(BASE), env._CHAR
+$88(BASE), env._CHAR
+$90(BASE), env._CHAR
+$98(BASE), env._CHAR
+$A0(BASE), env._CHAR
+$A8(BASE), env._CHAR
+$B0(BASE), env._CHAR
+$B8(BASE), env._CHAR
+$C0(BASE), env._CHAR
+$C8(BASE), env._CHAR
+$D0(BASE), env._CHAR
+$D8(BASE), env._CHAR
+$E0(BASE), env._CHAR
+$E8(BASE), env._CHAR
+$F0(BASE), env._CHAR
+$F8(BASE), env._CHAR
+
+
+#Interrupt, Autovector-Interrupt, Level
+
+$00000064, Interrupt, 1._PNTR
+$00000068, Interrupt, 2._PNTR
+$0000006C, Interrupt, 3._PNTR
+$00000070, Interrupt, 4._PNTR
+$00000074, Interrupt, 5._PNTR
+$00000078, Interrupt, 6._PNTR
+$0000007C, Interrupt, 7._PNTR
+
+
+#TRAP #, Trap exeptions
+
+$00000080, TRAP #$0._PNTR
+$00000084, (GemDos)._PNTR
+$00000088, (AES/VDI)._PNTR
+$0000008C, TRAP #$3._PNTR
+$00000090, TRAP #$4._PNTR
+$00000094, TRAP #$5._PNTR
+$00000098, TRAP #$6._PNTR
+$0000009C, TRAP #$7._PNTR
+$000000A0, TRAP #$8._PNTR
+$000000A4, TRAP #$9._PNTR
+$000000A8, TRAP #$A._PNTR
+$000000AC, TRAP #$B._PNTR
+$000000B0, TRAP #$C._PNTR
+$000000B4, (Bios)._PNTR
+$000000B8, (XBios)._PNTR
+$000000BC, TRAP #$F._PNTR
+
+
+#ETV, ETV vectors
+
+$00000400, etv_timer._PNTR
+$00000404, etv_critic._PNTR
+$00000408, etv_term._PNTR
+$0000040C, etv_xtra._PNTR
+
+
+#Harddisk, Harddisk vectors
+
+$0000046A, hdv_init._PNTR
+$00000472, hdv_bpb._PNTR
+$00000476, hdv_rw._PNTR
+$0000047A, hdv_boot._PNTR
+$0000047E, hdv_mediach._PNTR
+$00000516, pun_ptr._PNTR
+
+
+#PUNPTR, PunPtr structure
+
+$00($516), puns._WORD
+$02($516), _pun ( 1)'A'._BYTE
+$03($516), _pun ( 2)'B'._BYTE
+$04($516), _pun ( 3)'C'._BYTE
+$05($516), _pun ( 4)'D'._BYTE
+$06($516), _pun ( 5)'E'._BYTE
+$07($516), _pun ( 6)'F'._BYTE
+$08($516), _pun ( 7)'G'._BYTE
+$09($516), _pun ( 8)'H'._BYTE
+$0A($516), _pun ( 9)'I'._BYTE
+$0B($516), _pun (10)'J'._BYTE
+$0C($516), _pun (11)'K'._BYTE
+$0D($516), _pun (12)'L'._BYTE
+$0E($516), _pun (13)'M'._BYTE
+$0F($516), _pun (14)'N'._BYTE
+$10($516), _pun (15)'O'._BYTE
+$11($516), _pun (16)'P'._BYTE
+$12($516), pstart ( 1)'A'._LONG
+$16($516), pstart ( 2)'B'._LONG
+$1A($516), pstart ( 3)'C'._LONG
+$1E($516), pstart ( 4)'D'._LONG
+$22($516), pstart ( 5)'E'._LONG
+$26($516), pstart ( 6)'F'._LONG
+$2A($516), pstart ( 7)'G'._LONG
+$2E($516), pstart ( 8)'H'._LONG
+$32($516), pstart ( 9)'I'._LONG
+$36($516), pstart (10)'J'._LONG
+$3A($516), pstart (11)'K'._LONG
+$3E($516), pstart (12)'L'._LONG
+$42($516), pstart (13)'M'._LONG
+$46($516), pstart (14)'N'._LONG
+$4A($516), pstart (15)'O'._LONG
+$4E($516), pstart (16)'P'._LONG
+$52($516), p_cookie._LONG
+$56($516), p_ckptr._PNTR
+$5A($516), p_vers._WORD
+$5C($516), p_maxsec._WORD
+
+
+#P_CKPTR, PuntPtr.p_ckptr
+
+BASE= $516
+$56(BASE), p_ckptr._PNTR
+BASE= $56(BASE)
+$00(BASE), p_ckptr[0]._BYTE
+$01(BASE), p_ckptr[1]._BYTE
+$02(BASE), p_ckptr[2]._BYTE
+$03(BASE), p_ckptr[3]._BYTE
+$00(BASE), p_ckptr._CHAR(4)
+
+
+#BERR(XBra), testing negativ offset
+
+$00000008, BusErr______._LONG
+$-C($008), BusErr(XBRA)._CHAR(4)
+$-8($008), BusErr(Name)._CHAR(4)
+$-4($008), BusErr(Vect)._LONG
+$00($008), BusErr/Start._WORD
+
+
+#BUSERROR, Bus-Error-Exeption
+
+$00600000, Invalid Memory._LONG
+$00600000, Invalid Memory._PNTR

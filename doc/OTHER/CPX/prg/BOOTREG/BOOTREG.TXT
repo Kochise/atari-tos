@@ -1,0 +1,17 @@
+BOOTREG.CPX merkt sich Datum und Uhrzeit der letzten BootvorgÑnge (in 
+denen es mitgebootet wurde).
+
+
+
+Wer irgendwelche Kommentare loswerden will, wende sich bitte an:
+
+ Andreas Mandel  <AsM>
+ Postfach 26
+ w-7601 Ortenberg
+
+(Wenn eine Antwort erwartet wird BITTE zumindest RÅckporto beilegen!!)
+
+
+73+55 AsM
+
+ 

@@ -1,0 +1,44 @@
+SPOOL.CPX:
+
+1.10: Nochmals wurde das Aussehen ver„ndert, und Platz fr 
+      Erweiterungen geschaffen, die sobald ich Zeit habe
+      realisiert werden.
+
+
+1.01: Einige Kleinigkeiten wurden den allgemeinen Normen(?)
+      angepasst. Der Mauszeiger wird jetzt z.B. zur flachen Hand, 
+      wenn ein Slider verschoben wird. Speicherfressende libary 
+      Routinen wurden durch krzere ersetzt.
+
+      Das Handling, der Druckercodes wurde ge„ndert. Es gibt jetzt 
+      kein endlos groes Popup Men mehr, die Auswahl des zu sendenden 
+      Codes wird jetzt im Code-Fenster vorgenommen.
+
+      Im Statistik Fenster sind einige Infos verschwunden, es war wohl 
+      doch zuviel des Guten. Sobald die Lauff„higkeit auf anderen 
+      Prozessoren (680x0 x>0) sichergestellt ist wird noch der
+      StackDisplace Eintrag ebenfalls verschwinden.
+
+1.02: Fehler im Code-Fenster wurde beseitigt.
+
+1.00: Erste offizielle Version des CPX--Moduls.
+
+
+SPOOL.PRG:
+      
+      Die erste offizielle Version des Programms tr„gt keine
+      Versionsnummer, irgendwer hat da gepennt...
+
+V1.0a Ein kleiner Fehler wurde beseitigt. Der Fehler trat auf,
+      wenn ein Fwrite Aufruf im falschen Moment einen Pufferberlauf
+      verursacht hatte. War das erstmal geschehen, so wurden s„mtliche
+      Druckerausgaben geschluckt.
+
+V1.0b Die Erkennung des Programms erfolgt nun ber die 
+      Cookie-Jar. Bei einigen Systemen gab's mit der alten Erkennung
+      Probleme. 
+
+Ich warte immer noch auf einen Bericht, eines TT Users, ber
+die Vertr„glichkeit meines Programms. Eventuell n”tige
+nderungen werde ich durchfhren.
+
