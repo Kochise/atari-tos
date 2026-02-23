@@ -1,0 +1,25 @@
+#! mupfel
+#
+# (c) 2001 Dominique B‚r‚ziat
+#          Dominique.Bereziat@inria.fr
+#
+# Sends a request to ST-Guide. The pattern
+# is searched inside the reference files.
+
+# If you use MagiC 6.x, this scripts does not
+# work (even with magic 6.2) except if you put
+# the patch NOPEX200 in your AUTO folder
+
+VA_START=18193 
+
+# Adjust this variable to your system
+STGUIDE=C:\usr\bin\gem\st-guide.prg
+
+isstg=`applfind ST-GUIDE`
+if [ $isstg = -1 ] 
+then
+	avserver $STGUIDE
+fi
+
+applwrit ST-GUIDE $VA_START "*\\$1"
+

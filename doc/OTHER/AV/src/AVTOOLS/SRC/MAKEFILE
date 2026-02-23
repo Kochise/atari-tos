@@ -1,0 +1,20 @@
+CC = gcc
+CFLAGS = -O2
+LDFLAGS = -lmgem
+
+all: applwrit applfind
+
+applwrit: applwrit.o
+	$(CC) applwrit.o -o applwrit.ttp $(LDFLAGS)
+	
+applfind: applfind.o
+	$(CC) applfind.o -o applfind.ttp $(LDFLAGS)
+
+clean:
+	$(RM) -f *.o
+
+install:
+	cp applwrit.ttp C:\usr\bin\applwrite.ttp
+	cp applfind.ttp C:\usr\bin
+	cp *.mup C:\usr\scripts
+

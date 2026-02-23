@@ -1,0 +1,9 @@
+Name : AVtools release 01
+Author : Dominique B‚r‚ziat
+Date : August 2001
+
+Some commands and scripts to support AV-protocol for
+Mupfel. It can be easily adapted for other shel as tcsh.
+
+Just copy bin, scripts and man folders in your usr hierarchy.
+For feedback, send a mail to Dominique.Bereziat@inria.fr

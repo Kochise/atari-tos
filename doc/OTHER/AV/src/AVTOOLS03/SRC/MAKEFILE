@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -O2
+LDFLAGS = -lmgem
+
+all: ../bin/applwrit ../bin/applfind
+
+../bin/applwrit: applwrit.o
+	$(CC) applwrit.o -o ../bin/applwrit.ttp $(LDFLAGS)
+	
+../bin/applfind: applfind.o
+	$(CC) applfind.o -o ../bin/applfind.ttp $(LDFLAGS)
+
+client: client.o
+	$(CC) client.o -o client.prg $(LDFLAGS)
+
+clean:
+	$(RM) -f *.o

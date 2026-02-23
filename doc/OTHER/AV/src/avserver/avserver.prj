@@ -1,0 +1,19 @@
+avserver.app
+.C [-2- -8-]
+
+.C [-A- -H- -K]
+.C [-C- -M -P -G- -Z- -S-]
+.L [-S=32768]
+=
+pcvstart.s
+avserver.c
+
+aestrap.s
+setter.c
+wdialog.s
+
+cookie.c
+
+pcgemlib.lib
+pctoslib.lib
+pcstdlib.lib

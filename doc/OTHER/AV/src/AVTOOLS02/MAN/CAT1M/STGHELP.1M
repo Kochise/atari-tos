@@ -1,0 +1,29 @@
+STGHELP(1m)                  USER COMMAND               STGHELP(1m)
+
+NAME
+    stghelp - open an reference in ST-Guide.
+
+SYNOPSIS
+    stghelp <pattern>
+
+    <pattern> name of a node in ST-Guide references.
+        
+DESCRIPTION
+    This Mupfel script sends a VA_START message to ST-Guide in a
+    correct format. If ST-Guide is not loaded, the script uses the
+    variable STGUIDE to launch ST-Guide. ST-Guide finds in its 
+    reference files an entry matching to the specified pattern and 
+    display a list of possible nodes to display.
+    
+DRAWBACKS
+	With Magic 6.xx, the script does not work due to the 'evaluation
+	and substitution' instruction used in the script. This problem is
+	due to the bad support of Pexec(200) by MagiC. To set up this
+	trouble, use the patch NOPEX200.
+
+SEE ALSO
+    applwrit, applfind, avserver, open.
+
+
+STGHELP(1m)                  USER COMMAND               STGHELP(1m)
+

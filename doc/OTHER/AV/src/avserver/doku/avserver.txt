@@ -1,0 +1,301 @@
+                           Dokumentation zu
+
+                              AV-Server
+
+                             Version 1.3
+                           29. Januar 1999
+
+                                 von
+
+                           Alexander Barton
+
+
+
+
+Inhaltsverzeichnis
+------------------
+
+1  EinfÅhrung
+   1.1  Funktionsbeschreibung
+   1.2  Zukunft
+   1.3  Rechtliches
+   1.4  Autor
+   1.5  Danksagungen
+
+2  Installation
+
+3  Konfiguration
+
+4  Technisches
+
+5  History
+
+
+
+1 EinfÅhrung
+------------
+
+Der Desktop MagXDesk von MagiC unterstÅtzte bis zur Version 4 von
+MagiC kein AV-Protokoll und in Version 5 nur einige wenige Funktio-
+nen. Daher war es unter MagiC bis einschlieûlich Version 5 mit MagX-
+Desk als Desktop nicht mîglich, bestimmte Programme und/oder Funk-
+tionen sinvoll einzusetzen. Einige Funktionen konnten auch Åberhaupt
+nicht ausgefÅhrt werden.
+
+Mein Ziel war es daher, einen externen AV-Server fÅr MagiC und MagX-
+Desk zu schreiben, der es auch unter dieser Konfiguration erlaubt,
+das AV-Protokoll zu benutzen.
+
+Ich denke, daû ich dieses Ziel verwirklichen konnte. Allerdings kann
+der AV-Server nicht das komplette Protokoll nachbauen, da AV-Server
+MagXDesk so weit nicht beeinflussen kann: so ist zum Beispiel kein
+globaler Fensterwechsel mit den Fenstern von MagXDesk mîglich.
+
+
+
+1.1 Funktionsbeschreibung
+-------------------------
+
+AV-Server ist ein externer AV-Server, der zusammen (und nur zusammen)
+mit MagiC und MagXDesk eingesetzt werden kann und die fehlenden Funk-
+tionen des AV-Protokolls auch unter dieser Konfiguration verfÅgbar
+macht.
+
+Folgende Funktionen, die Åber das AV-Protokoll abgewickelt werden,
+sind mit installiertem AV-Server unter MagiC mit MagXDesk (wieder)
+mîglich:
+
+- Dateien kînnen aus MagXDesk auf Fenster von angemeldeten AV-
+  Clients gezogen werden. Dies ist z.B. mit AppLine, PacShell und
+  ST-Guide sinnvoll.
+- Programme kînnen z.B. aus ParaFin oder Finder wieder nachgestartet
+  werden.
+- Dateien kînnen mit Drag&Drop zwischen angemeldeten AV-Clients aus-
+  getauscht werden. Dies ist z.B. mit ParaFin, PacShell und AppLine
+  sinnvoll.
+- Verzeichnisfenster von MagXDesk lassen sich z.B. von Finder oder
+  ParaFin îffnen.
+- Lîschen von Dateien aus den Fenstern von z.B. ParaFin oder Finder
+  ist mîglich, indem die Dateien auf den Papierkorb von MagXDesk
+  gezogen werden. Es wird dann genau so verfahren, wie wenn die Da-
+  teien direkt aus MagXDesk gelîscht wÅrden: MG-Copy wird gestartet
+  (ein Betrieb mit Kobold ist zur Zeit [noch] nicht implementiert).
+- Dateien kînnen z.B. aus ParaFin kopiert werden, indem Sie auf
+  Laufwerksfenster oder Laufwerksicons von MagXDesk gezogen werden;
+  es wird dann MG-Copy gestartet.
+  ACHTUNG: Im gegensatz zu MagXDesk wird eine Datei immer in das Ver-
+  zeichnis des Fensters kopiert, auch wenn ein Ordnerobjekt das Ziel
+  war!
+- Dateien kînnen aus z.B. ParaFin oder Finder auf Programmicons auf dem
+  Desktop von MagXDesk gezogen werden. Das entsprechende Programm wird
+  dann mit dieser Datei als Parameter gestartet bzw. die datei wird mit
+  VA_START an das Programm Åbergeben.
+- Unter angemeldeten AV-Clients (z.B. ST-Guide, Finder, ParaFin etc.)
+  ist globales Window-Cycling mit CTRL+W mîglich.
+
+Dieses ist nur eine beispielhafte AufzÑhlung von mîglichen EinsÑtzen
+von AV-Server. Eigentlich alle Programme, welche das AV-Protokoll
+nÅtzen - und das sind einige - kînnen wieder mit vollem Funktionsum-
+fang unter MagiC zusammen mit MagXDesk eingesetzt werden.
+
+AV-Server hat aber noch eine weitere Funktion: er kann als Server
+fÅr das Font-Protokoll eingesetzt werden und bietet dafÅr den in
+MagiC fest integrierten Fontselektor an. Mit dieser Funktion kann
+z.B. in ST-Guide ohne zusÑtzlich installierten externen Fontselektor
+unter MagiC ein Zeichensatz ausgewÑhlt werden. Von dieser Funktion
+profitieren alle Programme, welche das Font-Protokoll unterstÅtzen.
+
+
+1.2 Zukunft
+-----------
+
+Generell wÑre es wÅnschenswert, wenn MagXDesk selber den vollen Funk-
+tionsumfang des AV-Protokolls unterstÅtzen wÅrde - dann wÑre der AV-
+Server ÅberflÅssig.
+
+Da dieses in absehbarer Zeit aber wohl nicht in MagXDesk implemen-
+tiert wird, wird AV-Server weiterhin nîtig sein. Ich werde daher AV-
+Server an alle weitern Versionen von MagiC und MagXDesk anpassen und
+evtl. den Funktionsumfang so anpassen, daû immer nur die benîtigten
+Funktionen noch von AV-Server ergÑnzt werden. Dies wird bereits zur
+Zeit so gemacht.
+
+Da mir zur Zeit MagiC 5 noch nicht vorliegt, wÑre also der nÑchste
+Schritt, AV-Server an diese Version von MagiC anzupassen, um den AV-
+Server mîglichst klein zu halten.
+
+
+1.3 Rechtliches
+---------------
+
+AV-Server ist Freeware. Das bedeutet, daû Sie das komplette Programm-
+archiv beliebig lang und kostenlos benutzen dÅrfen. Der Autor freut
+sich aber dennoch Åber kleine Spenden und sonstige (nette?) RÅckmel-
+dungen... ;-)
+
+Sie dÅrfen AV-Server unverÑndert und als komplettes Archiv (bitte
+nicht umpacken!) kostenlos beliebig oft kopieren, weitergeben und in
+Mailboxen sowie auf FTP-Server uploaden.
+
+Folgende Dateien gehîren zum AV-Server-Programmpaket:
+
+AVSERVER.APP       Das eigentliche Programm, welches die Funktionen
+                   nachrÅstet.
+AV-TEST.APP        Ein Testprogramm fÅr das AV-Protokoll
+AV-TEST.RSC        Die Resource-Datei von AV-Test
+A_MAN.LZH          Das original A-MAN-Archiv von Sven Kopacz. A-Man
+                   wird von AV-Server benîtigt.
+DOKU\AVSERVER.HYP  Dokumentation zu AV-Server im ST-Guide-Format.
+DOKU\AVSERVER.TXT  Dokumentation zu AV-Server im ASCII-Format.
+DOKU\AV-TEST.TXT   Dokumentation zu AV-Test im ASCII-Format.
+
+
+Ein kommerzieller Vertrieb von AV-Server ist nur mit ausdrÅcklicher
+schriftlicher Genehmigung des Autors gestattet! Der Vertrieb in PD-
+Serien ist nur dann gestattet, wenn der Diskettenpreis nicht mehr als
+DM 10.- betrÑgt.
+
+Alle Rechte an AV-Server und dieser Dokumentation liegen beim Autor.
+
+
+
+1.4 Autor
+---------
+
+Autor:
+
+ Alexander Barton
+ Eichbergstraûe 46
+ 79117 Freiburg
+ Deutschland
+
+Wer von mir eine Antwort erwartet, der sollte einen ausreichend fran-
+kierten RÅckumschlag beilegen!
+
+öber eMail erreicht man mich unter:
+
+ Alexander Barton @ FR (MausNet)
+ alex@barton.de (Internet)
+
+Die jeweils aktuelle Version von AV-Server und andere von mir 
+verîffentlichte Software findet man auf meiner Homepage
+
+ http://www.barton.de
+
+und in der MAUS Freiburg.
+
+
+
+1.5 Danksagungen
+----------------
+
+Mein Dank geht an:
+
+- Holger Weets (Holger Weets @ OL) fÅr gute Tips, neue Ideen, aus-
+  fÅhrliche Tests und einige Assembler-Funktionen.
+- Holger Dietrich (MausNet: Holger Dietrich @ FR) fÅr ausfÅhrliche
+  Beta-Tests
+- Sven Kopacz (Sven Kopacz @ LB) fÅr A-MAN.
+
+
+
+2 Installation
+--------------
+
+Der AV-Server arbeitet sowohl als Accessory als auch als "normale"
+Applikation und muû daher entweder als AVSERVER.ACC ins Accessory-
+Verzeichnis (vgl. #_ACC in MAGX.INF) oder als AVSERVER.APP in das
+START-Verzeichnis (vgl. #_APP in MAGX.INF) von MagiC kopiert werden.
+Nach Mîglichkeit sollte AV-Server als Applikation und nicht als
+Accessory installiert werden.
+
+Um AV-Server zu aktivieren, muû in MAGX.INF noch folgende Zeile ein-
+getragen werden: #_ENV AVSERVER=AVSERVER
+
+Wenn diese Zeile nicht vorhanden ist, also die Environmentvariable
+AVSERVER nicht oder nicht auf AVSERVER gesetzt ist, so installiert
+sich AV-Server nicht.
+
+ACHTUNG: Es sollte immer nur eine Zeile in MAGX.INF geben, die mit
+'#_ENV AVSERVER=' beginnt, da immer nur die Zuweisung beachtet wird,
+welche in MAGX.INF zuletzt erscheint. In MAGX.INF kînnen Zeilen mit
+';' auskommentiert werden.
+
+Wenn AV-Server auch als Server fÅr das FONT-Protokoll verwendet werden 
+soll, so muû zusÑtzlich folgende Zeile in MAGX.INF hinzugefÅgt werden:
+#_ENV FONTSELECT=AVSERVER
+
+ACHTUNG: AV-Server benîtigt, um Drag&Drop-Aktionen mit MagXDesk aus-
+fÅhren zu kînnen, zwingend das Programm A-MAN von Sven Kopacz! Ist
+dieses Programm nicht installiert, so sind diese Funktionen von AV-
+Server nicht verfÅgbar. A-MAN liegt diesem Programmpaket bei, be-
+achten Sie bitte den zu A-MAN gehîrenden Text.
+
+Nach diesen Schritten ist AV-Server auf Ihrem System installiert und
+wird nach dem nÑchsten Neustart aktiv.
+
+ACHTUNG: AV-Server ist nur fÅr den Betrieb zusammen mit MagXDesk aus-
+gelegt und benîtigt diesen Desktop fÅr einige Funktionen zwingend. Es
+kann daher ohne MagXDesk als Desktop zu Fehlfunktionen kommen!
+
+
+3 Konfiguration
+---------------
+
+HINWEIS: Zur Konfiguration von AV-Server wird das Programm Setter
+(als SETTER.PRG oder SETTER.TTP) von Harun Scheutzow (bzw. Markus
+Kohm, GEM-Version) benîtigt.
+
+Die genaue Bedienung von Setter entnehme man bitte den jeweiligen
+Texten zu diesem Programm.
+
+AV-Server kann zur Zeit nur in einem einzigen Punkt konfiguriert wer-
+den: Dateinamen kînnen bei AV_STARTPROG wahlweise in Groûbuchstaben
+gewandelt werden, da ansonsten einige alten Programme zusammen mit
+MagXDesk Schwierigkeiten haben.
+
+Diese Einstellung (AV_STARTPROG: Convert filename to upper-case)
+kann in Setter ein- und ausgeschaltet werden. Als Default ist diese
+Option eingeschaltet.
+
+Weitere Konfigurationsmîglichkeiten existieren zur Zeit (noch) nicht.
+
+
+
+4  Technisches
+--------------
+
+AV-Server hÑngt sich in den AES- bzw. VDI-Trap (Trap #2), um Drag-
+And-Drop-Aktionen abfangen zu kînnen. Da AV-Server etv_term jedoch
+verwendet, ist ein Entfernen von AV-Server im Task Manager von MagiC
+bzw. ein Lîschen in U:\PROC\ auch im laufenden Betrieb mîglich.
+
+AV-Server unterstÅtzt ShutDown und AP_TERM.
+
+
+
+5  History
+----------
+
+Version 1.0
+
+- erste îffentliche Version
+
+Version 1.1
+
+- Fehlermeldung bei keiner MAGX.INF
+- Anpassung an MagXDesk 3.1x (MagiC 5)
+- Interne Anpassungen am D&D-Handler.
+- AV_PATH_UPDATE sicherer gemacht.
+- AV_COPYFILE und AV_DELFILE werden unterstÅtzt
+- Kommandozeile fÅr MG-Copy modifiziert: Option -f (freien Speicher
+  testen) wird verwendet. Somit funktioniert auch die Anzeige "kBytes"
+  in MG-Copy wieder.
+
+Version 1.2
+
+- Diverse Bugfixe
+
+Version 1.3
+
+- Bug bei AV_VIEW beseitigt.

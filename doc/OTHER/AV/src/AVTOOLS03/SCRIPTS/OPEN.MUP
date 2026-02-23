@@ -1,0 +1,55 @@
+#! mupfel
+#
+# (c) 2001 Dominique B‚r‚ziat
+#          Dominique.Bereziat@inria.fr
+#
+# Open a directory a new desktop window via 
+# Av Server. Usage is : open [dir][mask]
+#
+# version 1.1 : absolute pathname are used now supported
+# version 1.2 : 
+
+AV_OPENWIND=18208
+
+# Analyse des entr‚es
+
+case $# in
+0)
+	dir=$PWD\
+	mask="*"
+	;;
+1|2)
+	case $1 in
+	# Chemins absolus
+	?:*)
+		dir=$1
+		;;
+	# Chemins absolus sans unit‚ de disque
+	\*)
+		# comment connaitre l'unit‚ courante ?
+		dir="C:$1"
+		;;
+	# Chemin courant
+	.)	dir=$PWD\; ;;
+	# Le reste (chemins relatifs)
+	*)
+		dir=$PWD\$1
+		;;
+	esac
+	
+	if [ $# = 1 ]
+	then
+		mask="*"
+	else
+		mask=$2
+	fi
+	;;
+*)
+	echo Usage is : open [dir][mask]
+	exit
+	;;
+esac
+
+applwrit $AVSERVER $AV_OPENWIND "$dir" "$mask"
+
+

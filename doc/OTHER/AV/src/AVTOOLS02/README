@@ -1,0 +1,15 @@
+Name   : AVtools release 02
+Author : Dominique B‚r‚ziat
+Date   : November 2001
+Email  : Dominique.Bereziat@inria.fr
+
+This package provides some commands and scripts to support 
+AV-protocol in the Mupfel shell. It can be easily adapted 
+for other shell as tcsh.
+
+Just copy bin, scripts and man folders in your usr hierarchy.
+For feedback, send a mail to Dominique.Bereziat@inria.fr
+
+R01 : first public release
+R02 : adding "apterm" and "stghelp" scripts, improving "open" script.
+

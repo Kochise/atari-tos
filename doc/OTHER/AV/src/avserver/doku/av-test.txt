@@ -1,0 +1,38 @@
+
+	AV-Test
+	----------------------------------
+	Ein Testprogramm fr den AV-Server
+	----------------------------------
+	Copyright (c)1996 by A. Barton
+	Version 1.1
+
+
+
+
+1. Was ist denn das?
+
+Das Programm AV-Test sucht den aktiven AV-Server im System und gibt dessen 
+F„higkeiten und die AES-ID aus. Wenn kein Server gefunden wurde, so wird 
+eine Fehlermeldung ausgegeben und AV-Test beendet.
+
+
+2. Bedienung
+
+Nunja, es gibt eigentlich nichts zu bedienen. Man klickt einfach auf den 
+OK-Button und das Programm wird beendet. Innovativ, oder? ;-)
+
+
+3. Rechtliches
+
+AV-Test ist Freeware, d.h. darf das Programm und dieser Text beliebig 
+verbreitet und kopiert werden, sofern nur dieses Archiv in unver„nderter 
+Form weitergegeben wird. Alle Rechte verbleiben beim mir. Ich kann 
+keinerlei Haftung fr irgendwlche Sch„den bernehmen, die auf die 
+Benutzung dieses Programms zurckzufhren sind.
+
+
+Autor:
+
+Alexander Barton	alex@barton.de (Internet)
+Eichbergstrae 46	Alexander Barton @ FR (MausNetz)
+79117 Freiburg		http://www.barton.de

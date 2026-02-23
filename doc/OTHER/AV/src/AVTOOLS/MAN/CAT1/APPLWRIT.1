@@ -1,0 +1,45 @@
+APPLWRIT(1)                  USER COMMAND               APPLWRIT(1)
+
+NAME
+    applwrit - sends a message to a GEM application.
+
+SYNOPSIS
+    applwrit <GEMAPP> <MSG> [ARGS...] 
+
+    <GEMAPP> name of GEM application targetted. This name must
+             respect the GEM convention (max 8 chars without 
+             filename extension).
+    <MSG>    message number (integer value).
+    <ARGS>   possible arguments 
+    
+DESCRIPTION
+    This command sends a message to a GEM application using the
+    GEM pipe. It is just an interface to the appl_write AES 
+    function. <MSG> parameter matches to word 0 in the AES message
+    buffer and <ARGS> parameters matche to word 3-7 in the AES
+    message buffer. The rule is (see EXAMPLES):
+
+       one integer value - one word
+       one string value - two words
+    
+    This command could be very usefull to communicate with 
+    applications supporting usual GEM protocol as AV-protocol
+    or GEMscript protocol.
+    
+    applfind command can be used to know is an GEM application is
+    loaded in memory and ready to receive a message.
+
+
+EXAMPLES
+    request 'QED' to open a document
+    % applwrite QED 18193 file.txt
+    
+    request desktop to open a document
+    % applwrite $AVSERVER image.gif
+
+SEE ALSO
+    applfind, vastart, avserver, open.
+
+
+APPLWRIT(1)                  USER COMMAND               APPLWRIT(1)
+

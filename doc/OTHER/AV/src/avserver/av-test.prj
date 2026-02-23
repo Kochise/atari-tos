@@ -1,0 +1,13 @@
+av-test.app
+.C [-2- -8-]
+
+.C [-A- -H- -K-]
+.C [-C- -M -P -G- -Z- -S]
+.L [-S=4096]
+=
+pcstart.s
+av-test.c
+
+pcgemlib.lib
+pcstdlib.lib
+pctoslib.lib

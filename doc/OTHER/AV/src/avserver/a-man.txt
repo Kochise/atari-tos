@@ -1,0 +1,163 @@
+
+
+                           A-MAN 1.4
+                        Programmier-Doku
+
+                          Sven Kopacz
+
+
+1. A-MAN ist ein Programm, das unter allen TOS-Systemen neue 
+AES-Funktionen zur Verfgung stellt. A-MAN ist Freeware und darf 
+eigenen Programmen ohne weiteres beigelegt werden. A-MAN existiert in 
+einer speziellen Version, die auer dem eigenen Cookie ('AmAN') noch 
+einen weiteren Cookie ('WICO') anlegt. Diese Version liegt dem 
+WinCom-Archiv bei. Die Funktionalit„t der im jeweils aktuellen 
+WinCom-Archiv enthaltenen A-MAN-Version stimmt mit der jeweils 
+aktuellen A-MAN 'standalone'-Version berein.
+
+2. A-MAN
+Die Existenz von A-MAN erf„hrt man durch Suche nach dem Cookie 'AmAN',
+dessen Wert ein Zeiger auf folgende Struktur ist:
+
+typedef struct
+{
+ long date;
+
+ short *dcolor_a;
+ short *dcolor_b;
+
+ short *currxywh;
+ short *kind;
+ short *owner;
+ char **name;
+ char **info;
+
+ signed char *menu_id;
+ OBJECT **menu_tree;
+ short  *flags;
+}A_MAN;
+
+'date' ist BCD kodiert und stellt Versionsnummer und -Datum wie folgt
+dar:
+ aabbccdd
+ aa-Versionsnummer a.a
+ bb-Tag
+ cc-Monat
+ dd-Jahr
+ 14030195 bedeutet also Version 1.4 vom 3.1.1995
+
+Ist die Versionsnummer mindestens 1.4, so stehen folgende Funktionen
+zur Verfgung:
+(Die Versionsnummer 1.4 mu nicht explizit geprft werden, da ohnehin
+ erst ab dieser Version der Cookie 'AmAN' angelegt wird)
+
+(Fr die im folgenden erw„hnten wind_get()-Funktionen gilt: Die
+ AES.LIB von PureC liefert bei den meisten Funktionen fehlerhafte
+ Werte! Verwenden sie stattdessen eine eigene wind_get()-Funktion.
+ Wenn ihr PureC-Programm "#include <aes.h>" enth„lt, so k”nne sie
+ wind_get auch durch die untenstehende wnd_get Routine ersetzen.
+ Diese Routine bercksichtigt alle Rckgabewerte.)
+
+ACHTUNG! Fr die Fenster des im TOS integrierten Desktop sind 
+keinerlei Informationen ber A-MAN verfgbar!
+
+'dcolor_a' ist ein ber die Fensterelementnummer indiziertes Feld und
+gibt die Farbe dieses Elements fr ein aktives Fenster an.
+Diese Werte k”nnen auch ber wind_get(WF_DCOLOR) erfragt werden. Die
+entsprechende AES-Funktion wird von A-MAN zur Verfgung gestellt.
+
+'dcolor_b' wie dcolor_a fr inaktive Fenster
+Diese Werte k”nnen auch ber wind_get(WF_DCOLOR) erfragt werden. Die
+entsprechende AES-Funktion wird von A-MAN zur Verfgung gestellt.
+
+'currxywh' ist ein ber 4*Fensterhandle indiziertes Feld. Jeweils vier
+aufeinanderfolgende Eintr„ge geben die momentanen Ausmae des Fensters
+an. Eintr„ge fr nicht vorhandene Fenster sind undefiniert!
+Will man also die Ausmae des Fensters mit Handle 'wid' auslesen,
+lauten die Abfragen:
+ x=currxywh[4*wid];
+ y=currxywh[4*wid+1];
+ w=currxywh[4*wid+2];
+ h=currxywh[4*wid+3];
+Der Vorteil gegenber der herk”mmlichen wind_get-Abfrage ist der, da
+dieses Feld auch problemlos in Interrupts etc. ausgelesen werden kann.
+
+'kind' ist ein ber das Fensterhandle indiziertes Feld. Es gibt die
+bei 'wind_create' angemeldeten Fensterelemente wieder. Eintr„ge fr
+nicht vorhandene Fenster sind nicht definiert!
+Diese Werte k”nnen auch ber wind_get(wid, WF_KIND, &kind...) erfragt
+werden. Die entsprechende AES-Funktion wird von A-MAN zur Verfgung
+gestellt.
+
+'owner' ist ein ber das Fensterhandle indiziertes Feld. Es gibt den
+Eigner des Fensters an. Eintr„ge fr nicht vorhandene Fenster sind
+nicht definiert!
+Die owner-Werte werden von A-MAN NICHT ber wind_get zur Verfgung
+gestellt!
+
+'name' ist ein ber das Fensterhandle indiziertes Feld. Es gibt die
+Zeiger auf die NAME-Texte der Fenster an. Eintr„ge fr nicht
+vorhandene Fenster sind nicht definiert!
+Die Zeiger k”nnen auch ber wind_get(wid, WF_NAME, &hi, &lo..) erfragt
+werden. Die entsprechende AES-Funktion wird von A-MAN zur Verfgung
+gestellt.
+
+'info' ist ein ber das Fensterhandle indiziertes Feld. Es gibt die
+Zeiger auf die INFO-Texte der Fenster an. Eintr„ge fr nicht
+vorhandene Fenster sind nicht definiert!
+Die Zeiger k”nnen auch ber wind_get(wid, WF_INFO, &hi, &lo..) erfragt
+werden. Die entsprechende AES-Funktion wird von A-MAN zur Verfgung
+gestellt.
+
+'menu_id' ist ein ber die AES-ID indiziertes Feld und gibt die
+menu_id eines installierten Accessories an. Fr AES-IDs, die keinem
+installierten Accessory zuzuordnen sind, wird -1 geliefert. Die Werte
+k”nnen auch ber menu_register(-1,"?\0\n") erfragt werden, wobei n die
+AES-ID des fraglichen Accessories angibt. Der Rckgabewert stellt dann
+die menu_id (oder -1) dar.
+
+'menu_tree' ist ein ber die AES-ID indiziertes Feld und gibt die
+Zeiger auf die Menb„ume der Applikationen an. Fr Applikationen, die
+kein Men angemeldet haben, wird NULL geliefert. Die Zeiger k”nnen
+auch ber
+hi=menu_bar((OBJECT*)n, -2);
+lo=menu_bar((OBJECT*)n, -3);
+erfragt werden, wobei n die AES-ID des fraglichen Programms angibt.
+
+'flags' ist ein ber das Fensterhandle indiziertes Feld, wobei die
+einzelnen Bits folgende Bedeutung haben:
+Bit 0: gesetzt=Fenster ist ge”ffnet
+Bit 1: gesetzt=Fenster ist ikonifiziert
+Eintr„ge fr nicht vorhandene Fenster sind nicht definiert!
+
+
+Sonstiges:
+Alternative wind_get-Routine fr PureC:
+
+int wnd_get(int w_hnd, int func, int *p1, int *p2, int *p3, int *p4)
+{
+
+ AESPB	c;
+ c.contrl=_GemParBlk.contrl;
+ c.global=_GemParBlk.global;
+ c.intin=_GemParBlk.intin;
+ c.intout=_GemParBlk.intout;
+
+ _GemParBlk.contrl[0]=104;
+ _GemParBlk.contrl[1]=2;
+ _GemParBlk.contrl[2]=5;
+ _GemParBlk.contrl[3]=0;
+ _GemParBlk.contrl[4]=0;
+
+ _GemParBlk.intin[0]=w_hnd;
+ _GemParBlk.intin[1]=func;
+
+ _crystal(&c);
+
+ *p1=_GemParBlk.intout[1];
+ *p2=_GemParBlk.intout[2];
+ *p3=_GemParBlk.intout[3];
+ *p4=_GemParBlk.intout[4];
+
+ return(_GemParBlk.intout[0]);
+}

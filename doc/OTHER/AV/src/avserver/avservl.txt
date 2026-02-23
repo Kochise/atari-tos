@@ -1,0 +1,36 @@
+AV-Server 1.3-L                                        Freiburg, 1999/09/13
+
+
+        Copyright (c)1999 by Alexander Barton, all rights reserved.
+          E-Mail: alex@barton.de; Homepage: http://www.barton.de/
+
+
+                             --- IMPORTANT ---
+       This is an extension for AV-Server v1.3 that can be found in
+   the package 'avserv04.lzh'. For installation instructions and further
+    information refere to the original documentation that can be found
+                      in the package mentioned above ...
+
+
+AVSRV04L.LZH contains AV-Server 1.3-L. This "L" version is identical to the
+"regular" release version 1.3 of AV-Server (avserv04.lzh) except that it
+has a bigger internal memory pool and therefore can deal with up to 64 AV
+clients and 127 client windows (the "L" stands for "large").
+
+If you do not need this high limits, I recomend to use the regular release
+Version 1.3 of AV-Server or newer.
+
+Installation: replace the binary 'avserver.app' (after making a back up!)
+with the one included in this L-package and restart. That's all, enjoy!
+
+
+Confused by the two different binary files named 'avserver.app'? Version
+1.3 "regular" is 21.282 Bytes, the 1.3-L "large" is 21.286 Bytes. (You can
+also use the UN*X-Tool 'what' to identify the two versions).
+
+
+AV-Server 1.3 (complete package including documentation):
+http://www.barton.de/atari/avserv04.lzh
+
+AV-Server 1.3-L (only binary file an this readme):
+http://www.barton.de/atari/avsrv04l.lzh
