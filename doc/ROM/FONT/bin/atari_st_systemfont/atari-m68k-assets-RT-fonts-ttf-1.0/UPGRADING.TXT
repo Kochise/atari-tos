@@ -1,0 +1,9 @@
+ABOUT UPDATING OLDER VERSIONS OF FONTS
+
+If you have other Atari-flavoured fonts installed:
+
+    You should be able to use the fonts in this collection together with other
+    Atari-style fonts if needed. If you want to use these to replace other
+    fonts you're using, first check the encoding and font sizing before
+    committing, as some fonts from other sources do things a little
+    differently.
