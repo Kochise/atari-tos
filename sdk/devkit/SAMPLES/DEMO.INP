@@ -1,0 +1,13 @@
+demo.rel=tcs,
+prostart,
+gemasm,
+demo,
+fardraw,
+gembind,
+dosbind,
+dosasm,
+tcrtl,
+tcrtlasm,
+longasm,
+vdiasm,
+vdibind

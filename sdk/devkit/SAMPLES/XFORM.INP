@@ -1,0 +1,12 @@
+xform.rel=tcs,
+prostart,
+gemasm,
+xform,
+xlib,
+gembind,
+longasm,
+tcrtl,
+tcrtlasm,
+crmuldiv,
+vdiasm,
+vdibind

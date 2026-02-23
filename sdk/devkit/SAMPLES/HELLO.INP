@@ -1,0 +1,9 @@
+hello.rel=tcs,
+prostart,
+gemasm,
+hello,
+tgembind,
+tcrtlasm,
+longasm,
+vdiasm,
+vdibind

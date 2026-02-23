@@ -1,0 +1,144 @@
+
+                              README.DOC
+                               11-21-85
+===============================================================================
+
+NOTES ON THE GDOS
+
+The following is a list of additions that need to go into the release notes
+for GEMDOS ver 1.0.
+
+   1: BDOS function 57: Get/Set Date & Time Stamp specification in 
+      the GEM DOS Programmers Guide page 4-49 is incorrectly specified.  
+      It should be:
+
+         VOID f_datime (buf, h, set)
+
+   2: BDOS function 43: Get/Set File Attributes specification in the GEM DOS
+      Programmers Guide page 4-37 is incorrectly specified.  It should be:
+
+         LONG f_attrib (p, wrt, mod)
+            BYTE *p, mod;
+            WORD wrt;
+         {
+         }
+
+                  Parameter Block
+            +--------------------------------+ Low Memory (Parameter
+            |    Function Code 43H           |             block addr)
+            +--------------------------------+
+            |    Pointer to string           |
+            +                                + Long
+            |   containing pathname          |
+            +--------------------------------+
+            | GET-SET File Attributes        | Word
+            +--------------------------------+
+            |       ptr to byte buffer       |
+            +                                +
+            |    containing attributes       |
+            +--------------------------------+ High memory
+
+   3: There have been a number of bug fixes to the cli, COMMAND.PRG, as well
+      as a number of enhancements in version 0.42.  
+      The bug fixes are as follows:
+
+         1: The cli now correctly handles the following command
+            copy \foo \foo1 where foo and foo1 are both directories.
+
+         2: The cli (and the system) no longer goes away when a batch file has
+            been invoked with output redirected and a program within the batch
+            file returns an error condition.  The cli now returns to the {A} 
+            prompt.
+
+      The enhancements to the cli are as follows:
+         1: The COMMAND.PRG can be invoked with parameters.  These parameters 
+            are processed as they would be if they had been typed in at the 
+            {A} prompt. The major difference being that when the command has 
+            been executed an exit command is executed returning the system to 
+            the state it was before COMMAND.PRG was invoked.  This allows .BAT 
+            files to be executed from the desktop by assigning a document type 
+            of BAT to COMMAND.PRG with INSTALL APPLICATION.
+
+         2: DIR now has a -w option that allows a horizontal terse directory 
+            display.
+
+         3: REN and ERA will warn you if you are about to do a wild carded 
+            operation showing you exactly what it thinks you meant by the 
+            command you typed in.
+
+         4: REN now tells you that it failed if you try to rename a file to an
+            exsisting file name.
+
+
+===============================================================================
+
+NOTES ON KERMIT
+
+The following files make up the GEMDOS version of kermit
+
+     KERMIT.C - The device independent KERMIT code
+
+     KIOLGEM.C - C specific code for the Lisa 2/5
+     KASMLGEM.S - Assembly specific codee for the Lisa 2/5
+     LISAGEM.BAT - Batch file to link KERMIT for the Lisa 2/5
+
+     KIOVGEM.C - C specific code for the VME/10
+     RS2.C - RS232 initialization code for the VME/10
+     RS2.H - H file for above
+     KASMVGEM.S - Assembly specific code for the VME/10
+     VGEM.BAT - Batch file to link KERMIT for the VME/10
+
+     KIOAST.C - C specific code for the Atari ST
+     KASMAST.S - Assembly specific code for the Atari ST
+     AST.BAT - Batch file to link KERMIT for the Atari ST
+
+Pleasenote that Lisa is a trademark of APPLE, Atari ST is a trademark
+of ATARI Corp., VME/10 is a trademark of Motorolla, and KERMIT is a
+trademark of Jim Henson Associates.
+
+Permission for use of KERMIT (file transfer protocol) has been
+granted by Colombia University Center for Computer Activities.
+Please contact Columbia University for information about
+redistribution restrictions.
+
+
+===============================================================================
+
+NOTES ON AES & VDI DOC
+
+1.  There is a known bug in the drop-down menu-handling of the Retail GEM
+AES v1.1.  The symptoms are that you sometimes have to move into the
+menu area twice in order to get the drop-down menu to be displayed.
+These symptoms are most noticeable when your application is waiting for
+single clicks in its main event_multi().  The work-around is to wait for
+double clicks even if your application doesn't care about double clicks.
+The problem is still there even with double click waiting, but it turns
+into a race condition that won't happen very often in real use.  The
+problem was  fixed completely in Version 1.2 GEM AES, but you will
+want to use the work-around so that you can work on the copies of 
+GEM that have already been sold.
+
+2.  The sample Assembly Language Program included in the VDI Programmer's
+Guide (page 2-3) does not work properly. 
+
+3.  In the VDI manual, Inquire Text Extent (page 8-15) where control(3) is
+described, change "number of words in text" to "number of characters in text".
+ 
+4.  In the VDI manual, Inquire Cell Array (pages 8-23, 8-24) change Output 
+Arguments (8-24) from colarray[n] = intin[n] to colorray[n] = intout[n].
+
+5.  In the AES manual where AC_OPEN is described, it should say word 0 = 40.
+
+6.   In the AES manual where AC_CLOSE is described, it should say word 0 = 41.
+
+7.  In the FORM LIBRARY under form_do, where fo_dostartob is described, change
+the application "can pass in a value of -1" to "can pass in a value of 0".
+
+8.  Passing a handle of 0 to any VDI function may result in unpredictable 
+results.  Workaround:  NEVER PASS A HANDLE OF 0 TO ANY VDI CALL.
+
+9.  There is no checking performed to assure that your menus are no larger 
+than 1/4 of your screen size.  If you do create a menu larger than 1/4 screen 
+size you will overwrite memory causing unpredictable results.
+
+

@@ -1,0 +1,3365 @@
+   
+               Introduction to GEM(TM) Programming 
+                           for GEM DOS
+
+                       (revised 11/21/85)
+
+
+
+Copyright   (C)   1985  Digital  Research   Inc.     All   rights 
+reserved.    Digital  Research  and  its  logo   are   registered  
+trademarks  of  Digital  Research  Inc. DRI,  GEM,  GEM  Desktop,  
+Graphics   Environment   Manager,   LINK68,   and   SID-68K   are 
+trademarks    of   Digital   Research  Inc.    CompuServe  is   a 
+registered trademark of CompuServe,  Inc.  ATARI, TOS,  520ST and 
+ST are trademarks of ATARI Corporation.  ALCYON is a trademark of 
+Alcyon.  IBM PC is a registered trademark of IBM Corporation.
+
+
+
+    PLEASE  REVIEW  THIS DOCUMENT BEFORE PROCEEDING WITH THE  
+                 GEM(TM) DOS 68K Developer Kit.  
+
+
+
+INTRODUCTION
+
+Welcome  to "Introduction to GEM Programming."    We  hope   this  
+document   will  answer  many of your initial  questions.   Check 
+your disks for a README.DOC file which contains more information.  
+There  may   be   future  changes  in  both   the  software   and  
+documentation.     You  can  find  notice of these changes on the 
+DRI(TM)   SIG   that  the  DRI  Support   Center   maintains   on 
+CompuServe(R).
+
+This document contains three sections:
+
+   - Part 1: GETTING STARTED
+
+   - Part 2: GEM RESOURCE CONSTRUCTION SET
+
+   - Part 3: ADDITIONAL REFERENCE MATERIAL  
+
+
+
+                     Part 1: GETTING STARTED
+
+
+
+INTRODUCTION
+
+This part of "Introduction to GEM Programming for GEM DOS"  gives 
+an   overview   of   the   GEM software  and refers  you  to  the 
+appropriate areas of the documentation provided with the GEM  DOS 
+68K  Developer Kit.   It also tells you how  to  use  the  sample 
+programs,  tools, and utilities.  In addition, it suggests how to 
+optimize your code and prepare for other environments.  At DRI we 
+are  very  excited  about  the  power  GEM  software  gives   the  
+applications programmer  and we want to provide the most complete 
+set of tools and support available.  
+
+
+Section 1:
+
+GEM DOS 68K Developer Kit
+
+
+
+GEM DOS 68K Developer Kit COMPONENTS
+
+The  GEM  DOS 68K Developer Kit is the set  of  Digital  Research 
+tools and utilities that enables an application program developer 
+to use  the  GEM  Virtual  Device Interface  (VDI)  and  the  GEM  
+Application    Environment  Services  (AES).    This  toolkit  is 
+designed  for use under TOS(TM),  version 1.1 or higher   on   an  
+ATARI  ST(TM)  with  a  1/2MB  or  more  of  memory(see "Hardware 
+Requirements"), but any applications written with it may be moved 
+from environment to environment with a minimal amount of effort.
+
+
+
+
+GEM DOS 68K Developers Kit DOCUMENTATION
+
+
+Documents  provided with the GEM DOS Developer Kit,  DRI  product  
+code  number 1063, include the following:
+
+   - GEM Programmer's Guide, Volume 1: VDI
+
+   - GEM Programmer's Guide, Volume 1 Release Notes
+
+   - GEM Programmer's Guide, Volume 2: AES
+
+   - GEM DOS Programmer's Reference Guide
+
+   - GEM DOS User's Guide
+
+   - KERMIT User's Guide
+
+   - GEM DOS Supplement to the KERMIT User's Guide
+
+   - C Language Programming Guide for CP/M-68K
+
+   - C Language Programming Guide for GEM DOS
+
+   - End User Program License Agreement
+
+   - cover letter and supplemental notices
+
+   - several  documentation files on disk including "Introduction 
+          to GEM Programming for GEM DOS"(this document) 
+
+
+
+SOFTWARE INSTALLATION PROCEDURE
+
+The   software  provided as a part of the Developer Kit  consists  
+of  six  disks,  including  source  code  for  DEMO,  the  sample 
+application,  HELLO,  the sample accessory, and XFORM, an example 
+of transform form.
+
+
+
+To install the software on your ATARI ST,  perform the  following 
+operations:
+
+   1. Load  TOS  into your computer if you are not using a  ROMed       
+      version.
+
+   2. Place disk labeled TOOLS #2 into drive  A,  close the drive 
+      door and double-click on the DRIVE A icon. 
+
+   3. Install  A:COMMAND.PRG  as TOS  takes  parameters,  with  a 
+      document type of BAT.
+
+   4. Double-click on A:INSTALL.BAT.  At this time the files from 
+      this  disk will be copied to your hard disk  automatically.  
+      When finished, you will be prompted to insert another disk.  
+      You  may  insert ANY of the remaining disks until you  have 
+      copied  each of the six disks.   BE SURE TO INSERT EACH  OF 
+      THE  SIX DISKS.   The INSTALL program will not know if  you 
+      insert  one of the disks a second time and will assume that 
+      all is correct after the sixth disk.
+
+
+
+                               End of Section 1
+
+Section 2:
+
+DEVELOPMENT ENVIRONMENT
+
+
+
+HARDWARE REQUIREMENTS
+
+The  recommended  hardware  for the GEM  DOS  68K  Developer  Kit  
+(1063)   is   an  ATARI ST with 1/2MB or more of  RAM,  a  floppy 
+disk drive, an ATARI hard disk drive, monitor and a mouse.
+     
+
+
+
+SOFTWARE REQUIREMENTS
+
+In  addition  to  the GEM DOS Developer Kit,  you need  only  the 
+following software:
+
+   - TOS version 1.1 or higher
+
+
+
+OVERVIEW OF GEM SYSTEM SOFTWARE
+
+On  the  ATARI,  GEM  is an integral part of  the  TOS  operating 
+system. In loading TOS the AES and VDI become resident in memory.
+On  ROM based ATARI machines portions of the VDI,  including  the 
+device drivers and fonts, are loaded into RAM.  
+
+GEM   software   provides   a  unique  graphics  environment  for 
+personal  computers,  allowing users to work more effectively  by 
+manipulating graphic images such  as icons,  drop-down menus, and 
+windows.
+
+The  GEM VDI supports graphics call portability  across  physical 
+hardware  such  as graphics screens,  and peripheral  input   and  
+output   devices.     The   GEM  AES supplements  the   GEM   VDI  
+graphics   I/O   calls  with  functions  that   manage  graphics-
+based  user input to application  environment  metaphors.   These  
+include  icons,  drop-down  menus,  forms,  and  user-manipulated 
+menus.
+
+
+GEM VIRTUAL DEVICE INTERFACE (VDI)
+
+The   GEM   VDI  creates graphics on an output device such  as  a 
+screen or printer.   It consists of two main  components:     the  
+Graphics   Device   Operating   System (GDOS)  and   the   device  
+driver  (including  font information).   If you are working on  a 
+system  where  TOS  is not in ROM then TOS  itself  will  require 
+approximately 192K of ROM including the Desktop.   Any "loadable" 
+device drivers or fonts will require additional memory.  A device 
+driver is approximately 35-40K,  a font for the monochrome screen 
+varies  from  less than 10K to more than 20K depending  upon  the 
+size of the font.   With a ROMed version of TOS the only overhead 
+will  be  for the device driver and  fonts.   
+
+The  device driver contains much of the output functionality  and 
+the size can  vary  from  device  to  device  depending  on  what  
+functions  have  been implemented.    Because  the  functionality  
+is   located  in a loadable piece of  executable  code,  programs 
+written  to  GEM are portable.   The programmer merely talks   to  
+all   devices  as though  they were one and the same and data  is 
+returned from these devices that will indicate to the  programmer 
+the   limitations  of  that  particular  device.     It  is   the  
+responsiblity  of the application to interpret  this  data.   For 
+example,  one  of these limitations is the aspect ratio  returned 
+when a  program  performs an  "Open  Workstation".     (See  your 
+GEM Programmers Guide,  Volume 1: VDI for information on the Open 
+Workstation call.)   After  the  aspect  ratio  of  the device is 
+returned,  the programmer must use this information to modify the 
+data  sent to the device so that it looks the same on any  device 
+regardless  of aspect ratio.     Through   careful,  non-machine-
+specific programming, you can write one program that you can port 
+to other systems quite easily.
+
+
+
+NDC VS. RC COORDINATE SYSTEM
+
+The   GEM   VDI  supports  two  coordinate  systems    for    the  
+description  of  graphic space:  the Normalized Device Coordinate 
+(NDC)  system  and the Raster Coordinate (RC)  system.   The  NDC 
+system  addresses the graphics display independent of  the device  
+coordinate   size  while  the  RC  system addresses the device in 
+actual  device  units.   These systems are descibed in detail  in 
+Section  1  of  the  GEM Programmer's Guide, Volume 1: VDI.
+
+NOTE:    In  order to make full use of the raster type operations 
+available, WE SUGGEST THAT YOU USE THE RASTER COORDINATE SYSTEM.
+
+
+
+RASTER TEXT FONTS
+
+When loaded, the device driver contains one or more system fonts.    
+Additional   fonts    are   loaded   when   requested    by   the 
+application,  using  the "Load Fonts" call.   The fonts that  are 
+loaded  are  associated  with  the  device  driver  as  specified  
+in  the ASSIGN.SYS file.   See Appendix G of the GEM Programmer's 
+Guide, Volume 1: VDI for more information on fonts.
+
+When  using fonts,  you can choose one of two  different   modes:  
+Point  mode  and Absolute  mode.     Point  mode supports text of 
+two sizes,  1x and 2x.  Absolute mode provides for the scaling of 
+text  at  any  value between 0  and  2x.     These  modes  are  a 
+function  of the device driver.   We have placed the capabilities 
+for  both  modes into our screen drivers.   The  printer  drivers  
+supplied  by  Digital Research support both modes but round  down 
+to the nearest size.
+
+One   special  consideration when displaying text within the work 
+area of a window is that it may be necessary for your application 
+to   determine  how  much  text will  fit  into  your  window  if 
+you  are  going to allow the length of character  strings  to  be 
+changed.  (For example, you can send an English  language  string 
+to  a window for one version of a product and switch to a  French 
+language  string  for  another,  but  the length  of  the  string 
+required  to  convey the same  idea  in French  is   longer   and 
+requires  the  placement  of text into a different  area  of  the 
+window.)  In order to facilitate these types of requirements  DRI 
+has included a  set of VDI calls specifically for inquiring about 
+the  text  attributes.   (See Section 8 of the  GEM  Programmer's 
+Guide, Volume 1:  VDI.)    To  determine  the amount of text that 
+will fit within a window,  you perform an "Inquire Character Cell 
+Width" and use that value in conjunction with  the  size  of  the  
+window,  returned   by performing a WIND_GET on the work area  of 
+the  window.   This  is  also the way that you can  control  text 
+spacing in your application.   This is not a problem with   alert  
+boxes    or   dialog   boxes   since   the   string   length   is 
+determined when they are designed with the Resource  Construction 
+Set.
+
+For   complete  information on TEXT functionality,  consult  your 
+GEM Programmer's Guide, Volume 1: VDI.
+
+
+
+GEM METAFILE
+
+The  GEM  metafile is a standard format file used by GEM to  send 
+information to other applications and peripheral devices.  It  is 
+constructed of object-oriented inscriptions of pictures from  GEM  
+applications   or   bit-image  files  from  paint  programs   and 
+digitizers.   When  constructing a GEM metafile,  be sure you  do 
+both of the following:
+
+   1. Define the physical page size of the area to be output.
+
+   2. Define the coordinate system you are using.
+
+Additional  information  on  the GEM metafile  can  be  found  in 
+Appendix  C  of  the GEM Programmer's Guide,  Volume 1:  VDI,  in 
+the "Additional Documentation" section (3) of this document or in 
+the additional files available in the DR FORUM on CompuServe.
+
+
+
+GEM APPLICATION ENVIRONMENT SERVICES (AES)
+
+The  Application  Environment Services (AES) consists of  several 
+primary  elements including the Subroutine libraries,  the Screen 
+Manager,   and  the  Dispatcher.     The  Subroutine    libraries  
+provides   for   windowing,    management   of   objects,   mouse 
+movement,  and  more.    This includes the Object  Library,  Form 
+Library,  Event Library and more.   (For  more  information,  see  
+Section  1.5  of  the  GEM Programmer's Guide, Volume 2: AES.)
+
+The   Screen  Manager is responsible for the mouse whenever it is 
+outside of the application window.  It also sends messages to the  
+application such as a "redraw" message.
+
+The   Dispatcher   is   the  core of  the  limited  multi-tasking 
+capabilities  of  GEM software.   It sets up a  "ready  list"  to 
+rotate  processor   time  among   multiple  processes,   rotating  
+control  only when the application is making a system call to the 
+AES.
+
+Although  the  present  development system  is  a  single-tasking 
+system,  if your application can function properly alongside  the 
+desk  accessories  then you are ready for a future  multi-tasking 
+environment.
+
+
+
+
+MEMORY MANAGEMENT
+
+
+For effective memory management a programmer need concern himself 
+with only two procedures:
+
+   1. You   must   link   one  of  the  three  memory  management 
+      routines  to your  application at link time.   This routine 
+      determines    the    amount   of   memory     that     your  
+      application  requires,  shrinking  the  memory allocated at 
+      execution time to that amount.
+      
+      Note:   The three routines are APPSTART.C, ACCSTART.C, and 
+      PROSTART.C.   The  file that you use for memory  management 
+      depends  upon whether you are writing an application or  an 
+      accessory.
+
+   2. If you need temporary memory, you should use  the  standard  
+      calls for memory allocation and memory release.
+
+
+
+
+                               End of Section 2
+
+
+
+Section 3:
+
+
+SAMPLE GEM APPLICATIONS AND GEM DESK ACCESSORY
+
+
+
+DEMO: A SAMPLE GEM APPLICATION
+
+The  sample  application,  DEMO,  provided  with  the   GEM   DOS 
+Developer Kit serves  as  an  example  way  of  how  you  program 
+to   the   GEM  environment.    It  demonstrates  the   following 
+functionality and more:
+
+   - opening and closing of windows
+
+   - moving of windows
+
+   - use of alert boxes and dialog boxes
+
+   - drop-down menus
+
+   - error handling
+
+   - transforming forms
+
+   - user-defined objects
+
+   - scrolling selector
+
+
+There are BATch files for each sample containing the compile  and 
+link   options   to   simplify   your   understanding   of    the 
+techniques involved in developing a GEM application or accessory. 
+For   moreinformation  on  which BAT file you might want to  use, 
+see  the  list of files contained in FILES.DOC in your  Developer 
+Kit.
+
+
+
+HELLO: A SAMPLE GEM DESK ACCESSORY
+
+Since  you  cannot  execute an accessory,  you must compile it as 
+an  application for debugging purposes.   In the sample accessory 
+we show  you  a  technique  to use.     On  the  sample  programs  
+disk  there  are  two  files, DESKACC0.H and DESKACC1.H, that you 
+use  for  this  purpose.   Copy DESKAPP0.H   to   DESKACC.H   and 
+compile  to  create an application.   When you are finished  with 
+the development and debugging of your accessory,  copy DESKAPP1.H 
+to  DESKACC.H  and  recompile, creating an accessory.
+
+To  load  an accessory,  it must have a filetype of .ACC  and  be 
+loacated in the AUTO subdirectory of our BOOT disk. 
+
+
+
+Note:     There  are  two  files  on  the  disk,  TGEMBIND.C  and 
+TVDIBIND.C,  used by the accessory.  They demonstrate a technique 
+for reducing the  amount  of  code  in your  accessory.  They are 
+used in the HELLOMAC.BAT file.  They demonstrate how the code for 
+the  calls  that the accessory is not using can be stripped   out  
+to  reduce  overhead.     You  can  do  the  same  by creating  a 
+library  file  of the bindings using the librarian supplied  with 
+the Developer Kit. 
+
+
+
+LIST OF FILES ON GEM SAMPLE APPLICATION SOURCE DISK 
+
+For  a complete description of the disks and the files that  they 
+contain see the file FILES.DOC on the documentation disk.
+
+
+
+
+                               End of Section 3
+
+
+
+Section 4:
+
+
+PORTING TO OTHER ENVIRONMENTS
+
+
+A  program  written  to GEM system software is  portable  to  any  
+machine   with  the same  processor that can run GEM without  any 
+modification.   It is also possible to move an application to  an 
+environment  with  a different processor running GEM  with  minor 
+modifications.
+
+With  our sample application we have included all of the machine- 
+and  operating system-specific calls into several include  files.  
+Most of the work  in  moving an  application to another processor 
+requires  merely replacing these files with the ones required for 
+your  new  environment,   then  recompiling  and  linking.     An 
+exception   to   this is that the icons must be remade  for  each 
+system  that  has  resolution with a different  height  to  width 
+ratio.
+
+As GEM becomes available on other systems,  Digital Research will 
+make available the necessary files for making the changeover.  We 
+strongly  advise  you  to write machine-independent  code  or  to 
+include  all  machine-dependent  code  into   modules  that   are  
+simply  identified  and replaced.   We have already moved many of 
+our  applications to a new environment with a minimum  of  effort 
+and expect that  you will be able to do likewise.
+
+
+
+NOTES ON CONVERSION FROM INTEL GEM to 68K GEM
+
+The  following  cautionary  notes  are based  on  my  experiences 
+porting  the Resource Construction Set and Doodle to the GEM  68K 
+environment from the IBM PC.   While these hints are in many ways 
+a  confession of my own bad C habits,  they may save you some  of 
+the hours of frustration which I went through.   They are loosely 
+organized by category,  but it would be a good idea to read  them 
+all before beginning - they are easier to prevent than fix.  
+
+One  note:  if you have a Unix development system  available,  it 
+would  be profitable to establish a set of source files on it  so 
+that you can use lint and grep to assist in tracking down problem 
+areas.
+
+
+I.  Portable C conventions
+
+
+1.    The  best  medicine  is  prevention:    Read  and  use  the 
+portability conventions in PORTAB.H and MACHINE.H.
+
+2.   Be careful to use NULLPTR when you are clearing a pointer or 
+passing a pointer argument, it is not the same as NULL!
+
+3.   Never make assumptions about the size of pointers!   This is 
+especially  insidious if you create some general usage UWORDs and 
+coerce pointers into them.   Lint will not flag this if you  type 
+cast correctly, and you will pay dearly later.
+
+4.   Be  especially  careful of parameter mismatches  flagged  by 
+lint.   An easy habit to fall into is to pass UWORDs for pointers 
+and vice-versa.  As in #3, you will pay for this!
+
+5.   Do  not make assumptions on the order of bytes within words, 
+or words within longs.  Use the portability macros when accessing 
+subfields.
+
+6.   Make sure the last entry in a switch statement is not empty.  
+Lattice  will accept this omission (interpreting it as a  break), 
+but it confuses lint tremendously.
+
+7.  If you are being tricky with stack manipulations, e.g., using 
+variable  parameter  procedures,  be  very  careful  to  use  the 
+sizeof() conventions as you increment your pointers!
+
+
+
+II.  Problems with Alcyon C for 68K
+
+
+1.   Alcyon labels have only seven significant characters,  while 
+Lattice processes eight.  Beware of collisions!
+
+2.  Unsigned bytes are not supported by Alcyon.
+
+3.   When casting a BYTE to a WORD,  or a WORD to a LONG,  Alcyon 
+will sign extend.   If this is not what you want, follow the cast 
+with  a  mask if the circumstances may cause the high-bit  to  be 
+set.
+
+4.   Arrays of UWORDs will erroneously generate alignment errors.  
+While unsightly, these may be safely ignored.
+
+5.   Alcyon  will not process #include correctly when it  appears 
+after  data  is defined.   An immediate implication is  that  the 
+resource header information in RSCREATE must be manually inserted 
+into  the  C  image of the  resource.   Note  that  the  variable 
+beg_file  must be typed LONG in the 68K version,  or offsets will 
+be incorrectly computed.
+
+6.   Do not assume that static and automatic variables which  are 
+declared together will be loaded together!   In general, they are 
+loaded  in the order in which they are >referenced<.   This  will 
+cause  problems  if you have assumed (for example)  that  certain 
+buffers  are contiguous,  or that a declaration of WORD  x,y,w,h; 
+may be used as a GRECT structure.
+
+7.   Alcyon  stores all string data (the actual ASCII) at the end 
+of  a  data segment,  while Lattice does this as soon  as  it  is 
+defined.
+
+8.   Field  names within structures collide between structures!!!  
+This is different from K&R standard C.   For example, if you have 
+a structure 'foo' with field BYTE *name; and later on a different 
+structure 'bar' with field LONG name;  the second definition will 
+replace the first, >without warning<!!!
+
+9.  Alcyon generates references for all EXTERNs declared, whether 
+you  actually use them or not.   And no,  the linker isn't  smart 
+enough to skip them; so don't do that.
+
+10.   For  those of you using floating point,  be aware that  the 
+Alcyon run-time differs from Lattice.   Lattice supports both 32-
+bit and 64-bit IEEE standard formats; Alcyon supports 32-bit IEEE 
+or Motorola formats.  (All of Alcyon's floating point I/O is done 
+in Motorola, so you don't really gain any precision with the IEEE 
+package.)
+
+
+
+III.  And a 68K hardware concern
+
+
+1.   Remember  that  LONGs have to be word aligned  in  68K-land.  
+This  could  cause  some  grief if you have  a  piece  of  memory 
+management code which you are moving from the Intel.
+
+
+IV.  Gem Dos Glitches
+
+
+There  are  a few things that you should be aware of  when  using 
+COMMAND.PRG including:
+
+     -  There is no support for conditional commands!
+     -  You may not use device names in place of file names!
+    
+Note:   See the additional notes on COMMAND.PRG in the README.DOC 
+        file.
+
+
+
+V.  Binding issues and bugs
+
+
+1.   Be  aware  that the include files vary from  environment  to 
+environment.    If   you  are  moving  an  application  from  one 
+environment to another be sure to update all .H files.
+
+2.   Error codes are not correctly posted in the GEM DOS binding.  
+So,  for  example,  you may open a non-existent file and  not  be 
+warned.    Attempting a read on the invalid file handle will then 
+crash the system.
+
+3.  The _UMUL_DIV entry is not correctly defined in vdibind.a
+
+
+
+
+
+
+                               End of Section 4
+
+
+
+
+Section 5:
+
+
+CONSTRUCTING A GEM APPLICATION
+
+
+
+When  designing a GEM application program,  you first create  the 
+menus  and dialog boxes using the GEM Resource Construction  Set.  
+(See Part 2 of this  document.)  If you will be using ICONS  then 
+you  must  move them over from the INTEL world since there is  no 
+68K  ICON  editor at this time.   After you have  completed  this 
+step, you can develop the code that will use  the resource file.
+
+When  developing  ICONS  on the IBM personal  computer  that  you 
+intend  to  move to the ATARI ST be sure to use the correct  ICON 
+SIZE.
+
+
+The following table lists common screen resolutions for the ATARI 
+and  the  recommended  icon size for each.
+
+
+
+                  Common Screen Resolutions and
+                     Recommended Icon Sizes
+
+        --------------------------------------------------
+                 Resolution        Recommended Icon Size
+        --------------------------------------------------
+                 320 x 200               32 x 32
+                 640 x 200               48 x 24
+                 640 x 400               32 x 32
+        --------------------------------------------------
+
+
+You may need to use the SIZE ICON command to change your ICON  to 
+the proper resolution.   See the documentation provided with your 
+GEM 8086 Developer Kit.
+
+
+ 
+To  write  a  GEM  application program,  we recommend you  create 
+the  source  code with any word processor in non-document   mode,  
+then  compile  your  code  with ALCYON  C.   It  is  possible  to  
+write   code  in  any  language,   but  we are distributing  only 
+the bindings for ALCYON C at this time.   Additional bindings are 
+available  on  CompuServe.   You can  write your  own   bindings, 
+although   you will have to adjust the include file  produced  by 
+the Resource Construction Set.
+
+After  successfully compiling your code,  you may can use SID  to 
+debug it.   
+
+
+
+                           End of Section 5
+
+
+
+
+
+
+
+              Part 2: GEM RESOURCE CONSTRUCTION SET v1.0
+
+
+
+
+INTRODUCTION
+
+The   Resource Construction Set (RCS) is the tool you use to make 
+resource  files containing drop-down  menus,  dialog  boxes,  and 
+alert  boxes.   The RCS also  takes the  icons  and  bit   images  
+you  draw  with IconEdit and makes them usable as resources.  You 
+save resources  in  files,   which  contain  object  trees   with 
+objects such as text strings, icons, and exit buttons.
+
+
+This document is divided into three sections as follows:
+
+   - Section  1:   a short tutorial with minimum explanation that 
+     takes you through the construction of a dialog box.
+
+   - Section  2:  an explanation  of  the  RCS  for  the   casual  
+     user.     A  non-programmer  might  use  the  RCS  to design 
+     mock-up  dialogs for a proposed application,  or perhaps  to 
+     translate the text in a menu  for use in a foreign country.
+
+   - Section  3:   technical  details  of  the  RCS,  of use  and 
+     interest to programmers.
+
+Note:  In this document, "tree" means tree icon;  "object"  means  
+one   of   the  things you add to a tree once you open  the  tree 
+icon.
+
+Additional    Note:    Though  the  acronym  for   the   Resource 
+Construction  Set is RCS,  resource files take the file extension 
+".RSC".
+
+
+
+Section 1:
+
+
+GETTING STARTED WITH THE GEM RESOURCE CONSTRUCTION SET
+
+
+
+This  walk-through  shows you how to make a simple  Dialog  tree.   
+The  steps  you take here apply generally to all the trees in the 
+RCS.
+
+
+
+STARTING UP
+
+To   begin  work,  double-click  on the  RCS.PRG  icon  from  the 
+desktop.   
+
+
+CHOOSING THE DIALOG TREE OPTION
+
+Inside  the  RCS,  you notice five icons in the Partbox window at 
+the top of the screen.   Click on the fourth,  which contains the 
+word "Dialog".   This  is  the Dialog Tree icon.
+
+Holding the mouse button down, drag the Dialog icon to the center 
+of  the window labeled "Resource Construction Set".   This is the 
+View  window.    Release  the mouse button.
+
+
+
+NAMING THE DIALOG TREE
+
+When  you  release  the  mouse  button,  a  notice appears in the 
+center of the screen,  informing you that you can change the name  
+and  type  of  your  Dialog tree.
+
+Backspace over the default name, TREE1, and type "FOO".
+
+Next click on the OK button.   The Dialog Tree icon labeled "FOO" 
+appears in the upper left corner of the View window.
+
+
+
+OPENING THE DIALOG TREE
+
+Select the View window by clicking inside it,  then  double-click 
+on FOO to  open it.    When  FOO is open, its name appears in the 
+title bar of the View window.   The View window now shows a blank 
+Dialog tree, FOO.
+
+
+ASSEMBLING THE OBJECTS
+
+Above  the  View window,  the Dialog Partbox window contains  the 
+objects  you  use to make your Dialog tree.
+
+Click  once  in  the  Dialog  Partbox window to select  it,  then 
+drag the object labeled "BUTTON" to the FOO tree.  Drop it in the 
+middle  of   the  View  window.   Go back for another button  and 
+drop it below the first.
+
+Now   get some text by dragging down a STRING object in the  same 
+way you dragged the buttons.  Drop it to the left of the buttons.
+
+
+
+CUSTOMIZING THE OBJECTS
+
+Click  within the View window to "top" it (that is,  bring it  to 
+the top and make it  active).     Then double-click on the  first 
+button to open it.   An Attribute dialog appears, consisting of a 
+list  of   object  characteristics.     Note  that SELECTABLE  is 
+already chosen by default.  Click on EXIT to set its attribute.
+
+At  the bottom of the dialog,  backspace over BUTTON and type  in 
+"YES".  When you are finished, click on OK.
+
+Open  the  second button and make it a  selectable  exit   button  
+like   the   first.   This will be the default button;  click  on 
+DEFAULT.   Over BUTTON,  type "CANCEL".   When you are  finished, 
+click on OK.
+
+Now  open the STRING object by double-clicking on it.   The  same 
+Attribute  dialog appears.     Backspace over the word STRING and 
+type "Do you want to continue?".   When you are through, click on 
+OK.
+
+
+
+NAMING AN OBJECT
+
+Next,  give  the buttons names so that you can refer to  them  in 
+your code.   Click on  the  first  button to select it.   Then go 
+up to the Options Menu and select Name....   When the Object Name 
+dialog  appears,  type in "FOOBUTN1".   Click on OK when   you're  
+finished.    The button is now associated with the name FOOBUTN1.  
+Select  the  second button and repeat the  process,  naming  this 
+button FOOBUTN2.
+
+
+
+REARRANGING OBJECTS
+
+When you close the string object,  you might find that the string  
+overlaps   the  buttons   or   that  the  layout  of  string  and 
+buttons looks untidy.  To move the string, press in the middle of 
+it and drag.   To move the buttons, press  inside them  and drag.  
+Move the three objects around until they look like the example
+below:
+
+
+                                           ------------
+                                           |   YES    |
+                                           ------------
+      Do you want to continue?
+                                           ------------
+                                           |  CANCEL  |
+                                           ------------
+
+
+
+CLOSING THE DIALOG TREE
+
+Now you are ready to close FOO.   Click on the close  box,  which 
+appears  at  the far left of FOO's title bar.
+
+
+
+SAVING THE DIALOG TREE IN A FILE
+
+Trees  are saved in .RSC files.   Go to the File Menu and  choose 
+Save As....   The Item Selector dialog appears.  After Selection: 
+on the right side of the  menu, type "FOOFILE.RSC".  When you are 
+finished,  click  on  the OK button.   FOO is now saved  in  file 
+FOOFILE.RSC.  In the process of saving your file,  a  .DEF  file, 
+containing   naming  and  typing  information  on  your   objects  
+and trees, was automatically created.
+
+
+
+CLOSING AND EXITING
+
+To close FOOFILE.RSC, click on the close box.
+
+To  exit the RCS,  select Quit from the File Menu.   You are  now 
+back at  the  GEM Desktop.
+
+
+
+                               End of Section 1
+
+Section 2:
+
+DESCRIPTION OF THE RESOURCE CONSTRUCTION SET
+
+
+
+This section gives you the information you need to make resources 
+with  the RCS.   For  further  technical  details,   see  Section  
+3, "Technical Matter for Programmers."
+
+
+
+
+THE GEM RCS SCREEN
+
+
+The RCS v1.0 screen has three parts:
+
+   - the View window, in which editing takes place
+
+   - the Partbox window, containing prototype trees or objects
+
+   - the GEM Desktop, containing the clipboard and trash can
+
+You   can  select  only one window at a time.   You  can  perform 
+operations  in  the View or Partbox windows only after  selecting 
+them.   To select a  window,   click within it.  When a window is 
+currently selected, the title bar is striped.
+
+If one window is atop another, the topmost is currently selected.  
+To bring the bottom window to the top,  click anywhere within it.  
+This operation  is  called "topping."
+
+You  can  size and move the Partbox and View windows (but not the 
+GEM  Desktop).   To size the Partbox or View window,  first  make 
+sure it is selected.  Touch  the mouse  pointer  to  the size box 
+in its lower right corner and drag.   To move a window, touch the 
+pointer  to the title bar,  hold the  mouse  button   down,   and 
+drag.     When you size the Partbox,  its contents are rearranged 
+so  that  you  can see them despite the  new  dimensions  of  the 
+window.  The same  is  true  of  the View window when it contains 
+prototype trees.
+
+You   can   rearrange   most trees and objects  within  the  View 
+window  by  selecting  and dragging.   You cannot  rearrange  the 
+contents  of the Partbox window.   On the GEM  Desktop,  you  can 
+rearrange  the  trash  can  and clipboard by moving  them  to  an 
+exposed piece of the desktop.
+
+You  can size objects in the View window when you are  editing  a 
+tree.    Objects contain  an  invisible  size box, or "handle" in 
+the  lower right corner,  in the same place as in  windows.   You 
+size them as you size windows: by dragging. 
+
+Note  that  certain  trees  and  objects  carry  restrictions  on 
+movement and  sizing. These will be discussed later.
+
+
+
+MOUSE TECHNIQUES
+
+Most   of  the mouse techniques used in the RCS are described  in 
+your GEM Desktop manual.  Many of these operations, however, have 
+special meanings in the RCS as follows:
+
+   - A click always selects a tree or object.
+
+   - A double-click always opens a tree or object for editing.
+
+   - The effect of a drag depends on where you drag it.
+
+        * Drag  a tree or object from the Partbox window to  make 
+          a copy in the View window.
+
+        * Drag  within  the  View window to move a tree  icon  or 
+          object.
+
+        * Drag  a  tree  or object from the View  window  to  the  
+          clipboard   to  cut  it  from  the   View   window  and 
+          store it temporarily in the clipboard.   If you  cut  a  
+          tree,   a   small  T  appears  in  the  clipboard;   if  
+          you   cut   an   object,   a  small   O  appears.   The 
+          clipboard  can  contain only one tree or  object  at  a 
+          time.  If you cut  two  items,  the first is lost.  The 
+          clipboard  clears  every time you save or load a  file.  
+          Duplicate trees and objects  lose all name information.
+
+        * Drag  from  the  clipboard to the View window to  paste 
+          a  tree  or object.   When you paste a tree,  the  Name 
+          dialog appears  so  you can change its name or type.
+
+        * To  delete  a  tree or object in the View window,  drag 
+          it to the trash can.  Deleted items are irretrievable.
+
+   - Shift-drag modifies a drag by making nondestructive  copies.  
+     Drag  the  object  you want to copy while holding  down  the 
+     Shift  key.   Duplicates of objects and trees lose the  name 
+     information  associated  with  the original.
+
+        * Shift-drag in the View window to make duplicates of  an 
+          object or tree.
+
+        * Shift-drag  from the View window to  the  clipboard  to  
+          place  a duplicate object or tree in the clipboard.
+
+        * Shift-drag   from  the  clipboard  to  the View  window 
+          to  paste  a  duplicate  item  in   the   View   window  
+          without   clearing   the clipboard.
+
+   - To  size  an object in the View window, place the pointer on 
+     its  size handle (its lower right corner)  and  drag.   This 
+     operation  only   works while you are editing  a  tree;  you 
+     can't size tree icons.
+
+   - The  Ctrl  (Control)  key modifies the operations  above  by 
+     taking you up one level in the "visual  hierarchy"  of  your  
+     object   tree.      (See  "Visual  Hierarchy:  Relationships 
+     Between  Trees  and Object" in Section 2.)   This  operation 
+     applies only while you are editing a tree.
+
+        * Ctrl-click  selects  the parent of the  object  clicked 
+          upon.
+
+        * Ctrl-drag  moves or sizes the  parent  of  the   object  
+          selected.  Moving a parent always moves its progeny  as 
+          well.
+
+        * Ctrl-Shift-drag   duplicates  the parent of a  selected 
+          object and all the progeny of that parent.
+
+   - All  copy,  move,  and delete operations affect the selected 
+     object and its progeny.
+
+
+
+GEM RCS MENUS
+
+The   RCS  includes  four menus at the top of the  screen:   Desk 
+Menu, File Menu, Options Menu, and Global Menu.
+
+
+
+DESK MENU
+
+In  the entry "About the R.C.S." is the version  number,  author, 
+and  copyright  date  of the RCS.   The other  entries  that  you 
+normally see on your Desktop appear as usual.
+
+
+
+FILE MENU
+
+The File Menu contains the following commands:
+
+New             Clears  the View window of trees and objects.   A 
+                warning  message  appears to remind you  to  save 
+                your workspace.
+
+Open...         Opens   a  file,  bringing up the  Item  Selector 
+                dialog  so  you  can enter  a  filename.  If  the 
+                workspace  is already in use,   you  are  warned.   
+                If  a tree or object is currently selected,  Open 
+                opens that instead.
+
+Merge...        Merges  a  second file with  the  file  currently 
+                open.    Brings  up the  Item Selector dialog for 
+                you to enter the second filename.  Check for name 
+                conflicts  among trees and objects when you merge 
+                files.   If  you  merge a file  containing  names 
+                already defined in the  current  file,   the  RCS  
+                makes   up   new  names   for    the  duplicates.    
+                (Printing  out the .H or .I file is a good way to 
+                check  for duplicates--see the   Output   command  
+                in the Global Menu.)
+
+Close           Closes   the  most recently opened file or  tree.  
+                Closing  a file saves it to disk.   You can  also 
+                close  by clicking on the  close box in the title 
+                bar of the View window.
+
+Save            Saves  the  current  resource file  on  disk  and 
+                continues  the  edit.  You must  have  previously 
+                named  the  file  by means of an  Open   or  Save  
+                As...  command.  The names and types of trees and 
+                objects are saved in a .DEF file.  You can create 
+                other types of files,  depending  on the  current 
+                output  setting (see the Global Menu).   A memory 
+                compress occurs when the file is saved.
+
+Save As...      Saves the workspace under a new filename.  Brings 
+                up  the  Item Selector  dialog.  If  you  type in 
+                a new filename, include the filetype .RSC.  There 
+                are  no  required  naming  conventions   for  the  
+                RCS,   but generally you name your resource  file 
+                after  your  program (for  example,  FOO.PRG  and  
+                FOO.RSC).     Trees  and  the resource files they 
+                reside in are named separately.
+
+Abandon         Reverts   to   the  last-saved  version  of  your 
+                file.  If you are dissatisfied with  changes  you  
+                made  to  a  particular  file, Abandon clears the 
+                changes and gives you a fresh copy.
+
+Quit            Takes  you  back  to the  GEM  Desktop.   If  the 
+                workspace is in use, you are warned.
+
+
+
+
+OPTIONS MENU
+
+The Options Menu contains advanced commands,  technical in nature  
+and   intended  for   programmers.     Therefore,  beginners  are 
+advised  to  stay  clear of it.   The Options Menu  contains  the 
+following commands:
+
+Info...         Gives  information about  the  file,   tree,   or  
+                object   currently  selected:     the  number  of 
+                bytes used,  bytes remaining, trees, objects, and 
+                other structures.
+
+Name...         Names or renames a tree or object.  You may  also  
+                be able to change the type of the tree or object.
+
+Hide            Makes an object and any progeny disappear.
+
+Unhide          Makes    the   hidden   progeny  of   an   object 
+                reappear.   To expose a hidden object, select its 
+                parent and choose Unhide.
+
+Sort...         Sorts an object's progeny by X and Y coordinates.  
+                This  command is  useful  for  achieving  a  tidy 
+                appearance and ensuring that objects are drawn in 
+                the  order  in  which  you arrange  them  on  the 
+                screen.     Selecting  Sort  brings up  the  Sort 
+                dialog,  which asks you how you want your objects 
+                sorted.  You can sort as follows:
+
+                   - X only
+
+                   - X, then Y
+
+                   - Y only
+
+                   - Y, then X
+
+                Your  choice depends on how the objects are  laid 
+                out.   Note  that an  X  sort  is  done  left  to 
+                right and a Y sort is done top to bottom.
+
+Flatten         Removes      the     tree     level     selected,  
+                "flattening"   the   tree.   Suppose   a   three-
+                level  tree of parent, child, and grandchild.  If 
+                the  child  is  selected,   Flatten  removes  the  
+                child   and  promotes   the   grandchild   to   a  
+                direct   relationship  with the parent.   Only  a 
+                box-type object can be flattened.
+
+Snap            Makes the position and size of an object  in  the  
+                View  window automatically align with the nearest 
+                coordinate on an invisible character grid.   Used 
+                only  with  Free  trees,   which  do   not   have 
+                automatic  snap.    Without snap, it is difficult 
+                to get objects lined up exactly.
+
+Load...         Loads a bit image or icon.  If  you  are  loading  
+                an  icon,   a dialog appears,  asking whether you 
+                want to load the data image, mask image, or both.
+
+
+
+
+GLOBAL MENU
+
+
+The Global Menu contains the following commands:
+
+Output...       Selects  output  files to be created by the  RCS.    
+                These   output  files  are   created   when   you  
+                close   or  save a resource.   The  Output  Files 
+                dialog appears, offering the following choices:
+
+              Application Binding Files|Source Files for Resource
+                  C         (*.H)                   *.C
+                  Pascal    (*.I)
+
+                The .H  option  generates  a  #define  that   you  
+                include    when   compiling   your   C   language 
+                application.   It  contains the numeric values of 
+                the names you give trees and  objects.   Remember  
+                that when  you  duplicate  a  tree or object, the 
+                new  copy  loses all name  information.   The  .I 
+                options   works  like  .H,   but  the  output  is  
+                formatted for Pascal.   The .C option generates a 
+                C language source of your resource, which you can 
+                hand-edit and regenerate with RSCREATE.
+
+Safety...       Sets   the   level   of   protection   on    your  
+                files,  from  heavily guarded to unwatched.  When  
+                you  select  Safety,  the  Resource Editing  Mode  
+                dialog  appears.   It offers you three levels of
+                protection:    locked,   normal,  and  expert  as 
+                follows:
+
+                   - Locked allows editing and sizing but forbids  
+                     changes in   tree    structure.       Locked  
+                     is   intended  for post-release changes such 
+                     as    translation     of     strings     and 
+                     internationalization   of   icons.    Values 
+                     associated  with  tree and object names  are  
+                     preserved;   you   need  not  recompile  the 
+                     application after editing.
+
+                   - Normal,    the    default    level,    warns  
+                     you   before  rearranging   trees.    Normal 
+                     permits  all  operations but warns  you   of  
+                     impending    changes   in    hierarchy   and 
+                     workspace clearance.
+
+                   - In expert mode,  anything goes.   You get no 
+                     warnings.
+
+
+
+PARTBOX WINDOW CONTENTS
+
+The  Partbox  window contains the object trees,  in the  form  of 
+icons,   from   which  you   build  your  resources.    (The  GEM 
+Programmer's Guide, Volume 2: AES explains object trees and their 
+function in the GEM system.)  There are  five  kinds  of trees as 
+follows:
+
+Unknown         Serves  as  a  place  marker for trees of unknown 
+                type.   If  the  .DEF  file of the tree  you  are 
+                working on was somehow  lost  (or never  existed:  
+                for example,  you created it with RSCREATE),  the 
+                RCS  uses  Unknown.   If you build  a   hand-made  
+                tree    containing  non-standard   objects,   use 
+                Unknown as a placeholder.
+
+Free            The   most  general  and flexible kind  of  tree. 
+                Other   tree   types  have  their   own   editing 
+                constraints.   The   only  rule  for  Free  trees  
+                is that visual hierarchy prevails. Free trees are 
+                useful mainly for building system-specific trees; 
+                generally, they are not portable because they are 
+                pixel-aligned.
+
+Menu            Specifically  intended for drop-down menus in  an 
+                application,  as  described in Section  5,  "Menu 
+                Library,"  in the GEM Programmer's Guide,  Volume 
+                2: AES.
+
+Dialog          Creates   dialog   boxes  for  user   input.    A 
+                stricter  form of Free tree  in  that   character  
+                snap is enforced,  resulting in portability among 
+                machines.  See "Dialog Boxes" in Section 7 in the 
+                GEM Programmer's Guide, Volume 2: AES.
+
+Alert           Warns  the user of impending consequences or that  
+                something  is not  right.     A  more  restricted  
+                form  of  Dialog tree.   See "Alerts" in  Section 
+                7,  "Form  Library,"  in  the  GEM   Programmer's 
+                Guide, Volume 2: AES.
+
+
+
+TREE OPERATIONS
+
+This  section describes the various things you can do with  whole 
+trees.
+
+
+
+Starting a New Tree
+
+To begin work on a new tree,  select the Partbox window.   In the 
+Partbox window,  select the kind of tree you want and drag a copy 
+of  it  to  the  View  window.   Drop the copy within the window.  
+The new tree opens into the Name dialog.
+
+
+
+The Name Dialog
+
+The   Name   dialog   appears   when  you create a  new  tree  by 
+dragging it from the Partbox window,  pasting from the clipboard, 
+or  duplicating a tree in  the  View window  by   Shift-dragging.  
+In   the  Name dialog you can name your new tree and  change  its 
+type.
+
+After  you exit the Name dialog,  the dialog closes and the  tree 
+retreats to  its place in the View window.   To continue work  on 
+the new tree, you must open it.
+
+Naming   a  Tree:     Trees must have names so that you can refer 
+to  them  in  your code.  When you drag a new tree  to  the  View 
+window,   it   automatically  takes  a default  name   based   on  
+its   order  among  the trees that already exist:   for  example, 
+TREE1,  TREE2,  etc.  You  can  have up to 55 trees in  the  View 
+window.
+
+Changing  a  Tree's Type:   The Name dialog   also   accommodates  
+changes  in  tree type.     The current tree type is highlighted.  
+Select the new type by clicking on it.  Be careful about changing 
+the type of a tree to Menu  or  Alert  if  you aren't  absolutely  
+sure of its nature.   Change it to a Dialog first so you can open 
+and   look  at  it  without  undesirable   consequences.   (Trees  
+mistakenly   typed  as menus are especially prone to hanging  the 
+system.)
+
+
+
+Rearranging Trees
+
+You can rearrange trees in the View window as follows:
+
+   - To   move   a   tree  to a new position  between  two  other 
+     trees, drag it between them and let go.  The two trees part, 
+     allowing  the  newcomer to slip in.
+
+   - To   move   a  tree  to the end of a list of trees  in  your 
+     View window,  drag it down to a clear area of the window and 
+     let go.
+
+   - To  move  a tree to the front of the list,  drag it  so   it  
+     touches   the first  tree  and  let go.   The  former  first 
+     tree shifts right and the new tree takes its place.
+
+
+
+Opening a Tree
+
+Use either of the following operations to open a tree:
+
+   - Double-click on the tree.
+
+   - Select it and choose Open from the File Menu.
+
+When you open a tree,  its name (either the name you gave it or a 
+default  name) appears  in  the title bar of the View window.  In 
+the Partbox window,  prototype objects appear where the prototype 
+trees formerly were.
+
+
+
+Closing a Tree
+
+To close a tree after editing, use one of the following methods:
+
+   - Click  on  the close box at the far left of the View  window 
+     title bar.
+
+   - Choose Close from the File Menu.
+
+Closing a tree is not the same as saving it to disk.   To save  a  
+tree,  choose Save or Save As... from the File Menu.  This stores 
+the tree in a .RSC file.
+
+OBJECTS
+
+The objects that flesh out your tree appear in the Partbox window 
+when you open the tree.  These available objects differ according 
+to what kind  of  tree  you are  working on.  Objects are dragged 
+into the View window.  The surface of the View window, when a new 
+tree is opened, constitutes the highest  level  of  the
+tree (the root object).
+
+
+
+Partbox Window Contents and Tree Type
+
+For  Free and Dialog trees,  the objects available in the Partbox 
+window are the same.   Menu trees and Alert trees have their  own 
+individual   Partbox   contents.   Unknown  trees do not  have  a 
+corresponding Partbox.   If you want to add objects to an Unknown 
+tree, you have to change its type first.
+
+The kind of tree you have open is reflected in the title  bar  of  
+the   Partbox  window.     If   the  tree  is   a   Dialog,   for  
+example, the title reads "Dialog Partbox".
+
+
+
+Free Trees and Dialog Trees:  Objects Available
+
+The  following  objects are available in Free Tree   and   Dialog  
+Tree  Partboxes.   The drawings below are intended to suggest the 
+way  the prototype objects appear in the Partbox.   The names  in 
+parentheses  are  the names these objects assume  in  Section  6, 
+"Object Library," in the GEM Programmer's Guide, Volume 2: AES.
+    ________
+o  | BUTTON |    --(G_BUTTON)  Boxed string that the end user
+   |________|      selects to indicate his choice among
+                   alternatives.
+
+o  STRING        --(G_STRING)  Boxless character string,
+                   generally consisting of explanatory text
+                   for the user.
+
+o  EDIT:_____    --(G_FTEXT)  Editable, formatted text
+                   field.
+
+    ___________
+o  | EDIT:____ | --(G_FBOXTEXT)  Editable, formatted text
+   |___________|   field with box.
+
+    ___________
+o  |  _______  | --(G_IBOX)  Hollow box through which you
+   | |_______| |   can see the dither pattern or text
+   |___________|   beneath.  (See class 2 Attribute dialogs
+                   later in this section for more information
+                   on dither patterns.)
+
+    ___________
+o  |           | --(G_BOX)  Opaque box.
+   |___________|
+
+
+o  TEXT          --(G_TEXT)  Formatted text, for which you
+                   can specify sizes, colors, fonts, and
+                   masking.
+
+   _______
+o  |  C  |       --(G_BOXCHAR)  Single character in an opaque
+   |_____|         box.
+
+   ____________
+o  | BOXTEXT  |  --(G_BOXTEXT)  Same as TEXT, but with a box.
+   |__________|
+
+   _________
+   |       |
+o  |       |     --(G_ICON)  Displays an icon (data plus
+   | ICON  |       mask) made with IconEdit.
+   |_______|
+
+   _________
+   |       |
+o  |       |     --(G_IMAGE)  Displays a bit image
+   | IMAGE |       (data field only) made with IconEdit.
+   |_______|
+
+
+Menu Trees:  Objects Available
+
+The   objects   in  the  Menu  Partbox  window  are  limited   to 
+those components practical in menus.  They are the following:
+
+o  TITLE         --Prototype title for your menu bar.
+
+o  ENTRY         --Prototype entry to be placed in a
+                   drop-down menu.
+
+o  ---------     --Separator line.  Divides entries in a
+                   drop-down menu into logical groups for
+                   user's convenience.
+
+   _________
+o  |       |     --Hollow box.  Used as placeholders in drop-
+   |_______|       down menus for elements such as dither
+                   patterns and colors that you add at run-
+                   time.  
+
+
+Alert Trees: Objects Available
+
+Alerts generally employ the standard GEM system warning icons,  a 
+message,  and a way for the user to get out of the  alert.   They 
+use the following components:
+
+   __________
+o  | BUTTON |    --Exit button, with characteristic heavy
+   |________|      border.
+
+o  Message Line  --Nonformattable.
+
+o  NOTE icon     --Depicts a hand with upraised forefinger.  A
+                   prototype NOTE icon is already in place
+                   tree, because NOTEs are the most commonly
+                   used alerts.
+
+o  WAIT icon     --Depicts a question mark.
+
+o  STOP icon     --Depicts a hand with palm exposed.
+
+
+OBJECT OPERATIONS
+
+The   following  descriptions  apply  specifically to objects  in 
+Free  and  Dialog  trees and generally to Menu and  Alert  trees.   
+Exceptions  in  Menu  and  Alert trees are noted.
+
+
+
+Adding Objects to Trees
+
+To  move  an  object  from the Partbox window to your tree, first 
+make  sure the Partbox window is selected.   Drag a copy  of  the 
+object into the View window and drop  it.   Note that this is the 
+same  procedure  you  use  to copy trees into  the  View  window.  
+Remember that a Shift-drag makes additional  copies  of  objects.  
+If   you  want  to add three buttons to your tree,  for  example, 
+you  can  drag  one down from the Partbox and   copy   it   twice  
+rather  than  dragging  down  three separate buttons.
+
+Exceptions   for  Menu  Trees:   You  can  drag objects  only  to 
+their  appropriate places.   Titles,  for example,  belong in the 
+menu title bar  after  the  default entries  "Desk"  and  "File".   
+You can drag down Entries,  Separator Lines,  and Boxes only when 
+you have somewhere to put them (that is,  after you  select   the 
+title   of   the  menu  you want,  and the white box,  that  will 
+contain your menu, drops down).
+
+You  cannot drag objects to or from the Desk Menu;  nor  can  you 
+edit the contents of the Desk Menu, except for the first line.
+
+Exceptions   for   Alert  Trees:  You cannot have more  than  one 
+warning icon in an Alert tree.   To replace the default NOTE icon 
+with another kind of  icon,  drag the  other icon anywhere within 
+the Alert tree.   (If you do not want an icon at all,  drag it to 
+the  trash  can.)  You are limited to three or fewer buttons  and 
+five or fewer message lines.
+
+
+
+Moving and Sizing Objects in the View Window
+
+To   move  an  object  around in the View  window,  drag  it.  To 
+discard an object,  drag it to the trash can.  To cut it, drag it  
+to   the   clipboard.   To   make   a duplicate   of  it  on  the 
+clipboard, Shift-drag it to the clipboard. To duplicate it within 
+the View window, use Shift-drag.
+
+You  can size any object by dragging the lower right corner  away 
+from  or  toward the  center  of  the  object.   Objects  without 
+visual extents, or boxes, around them (such as strings, formatted 
+text,  editable  text  fields,   bit  images,   and icons)   size 
+automatically  when you alter the length of the text or  size  of 
+the  bit  image.   Objects with visual extents   require   manual  
+sizing.     Note  that sizing  is  limited:   the RCS "clamps" an 
+object, preventing you from violating visual hierachy.  You can't 
+size  an   object   so  that  it  extends  beyond   its  parent's  
+boundaries,   nor   can  you  size  down  a parent so that it  no 
+longer contains its progeny.
+
+Exceptions for Menu Trees:  The default first entry in  the  Desk  
+Menu,   "Your  message here",  is the exception to the rule  that 
+objects without visual extents size automatically:   its size  is 
+fixed.   This  entry  is  obligatory.     You  can (and   should)  
+change the text;  you cannot, however, move it or throw the entry 
+away and have no text there at all.   Neither can you move, edit, 
+or  throw  away the  remaining  default  objects,  the  Separator 
+Line,  and desk accessories 1-6.  Think of desk accessory entries 
+as placeholders.  They fill in appropriately at run-time  if  you  
+have   desk   accessories  (such  as  a   clock  or  calculator).  
+Otherwise, the unused slots disappear at run-time.
+
+The prototype File Menu provides a first entry,  Quit,  for  your  
+convenience.   Before  adding other entries,  size the  drop-down 
+menu  by Ctrl-dragging the lower corner.   The RCS does not allow 
+drop-down menus larger than one-fourth of the screen area.
+
+Exceptions  for  Alert  Trees:    You  cannot size objects.  They 
+automatically expand or contract to contain your text.   You  can 
+drag Alert tree  contents  to the trash can or clipboard only.
+
+
+
+Opening an Object
+
+To  open  an  object,  double-click on it or select it and choose 
+Open  from the File Menu.   The object expands into an  Attribute 
+dialog, in which you  set  its characteristics.
+
+Exception   for  Menu  Trees:   In the Desk Menu,  only the first 
+entry opens.  It does not auto-size.
+
+Exception for Alert Trees:  The icon object does not open.
+
+
+
+ATTRIBUTE DIALOGS
+
+Certain  objects  are compatible,  sharing  like  attributes  and 
+identical  Attribute dialogs.   There are five classes among  the 
+objects:
+
+Class 1         Unformatted text (Buttons, Strings, and Titles).
+
+Class 2         Boxes (Boxes, Hollow Boxes, and Boxchars).
+
+Class 3         Formatted      text     (Text,     Text-in-a-Box,  
+                Editable  Text,  and Editable Text-in-a-Box).
+
+Class 4         Bit images.
+
+Class 5         Icons.
+
+Note:   Bit  images and icons are compatible with   nothing   and  
+form  their  own one-member classes.
+
+
+
+Class 1 Attribute Dialogs
+
+For   Buttons and Strings,  the Attribute dialog consists of  two 
+parts:  a set of object flags, summarized below (and described in 
+your  GEM  Programmer's  Guide,  Volume  2:   AES  under  "Object 
+Library")  and  a field for text entry.   The flags are  toggles.  
+Select them to turn  them  on  or  off.  At  the  bottom  of  the 
+Attribute   dialog,  the current text,  namely STRING or  BUTTON, 
+occupies the text field.  Backspace over it and type the text you 
+want.  (Instead of backspacing, you  can  use  <Esc> to clear the 
+whole string at once.)  Note that auto-sizing applies to  strings 
+and titles.
+
+
+
+Object Flags
+
+
+Selectable      Can  be  selected (thrown into reverse video)  at 
+                run-time if user clicks on it.
+
+Default         Selected  automatically  when the user  enters  a 
+                <CR> at run-time.   On a button, DEFAULT causes a 
+                triple-weight  border.   If you have  more   than 
+                one  default set in a particular tree,  you  will 
+                not get an error at run-time, but neither can you  
+                predict the results.
+
+Exit            Returns   the  user  from the dialog in which  it 
+                appeared to the application at hand when the user 
+                clicks  on  it  at  run-time.   The  most  common 
+                methods of exit are by OK and CANCEL buttons.  On 
+                a button, EXIT causes a double-weight border.
+
+Radio Button    (abbreviated   as   RBUTTON   in  the   GEM   AES 
+                Programmer's  Guide) Object  is  a  member  of  a 
+                set   of  radio  buttons.    Radio  buttons   are 
+                analogous to the buttons on a car radio--pressing 
+                a   second button makes the first pop out.   This 
+                means you can select only one member of a set  of 
+                radio  buttons  at a time.   Members of a set  of 
+                radio  buttons must be nested at the  same  level 
+                within a common parent object.
+
+Checked         Draws  a check mark inside the left margin of the 
+                object.
+
+Shadowed        Draws   a   drop   shadow   around   the   object  
+                (usually  a  box).  Conflicts with outlining.
+
+Outlined        Draws   an   outline  around  a   boxed   object.    
+                Conflicts with shadowing;  has no effect on boxes 
+                with outward borders.
+
+Crossed         Draws   an  X  through  the  object   in   system 
+                background color.  Used with boxed objects only.
+
+Editable        Can be edited by the user at run-time.  Used with 
+                editable text objects.
+
+Touch Exit      Allows  the  user to exit by pressing  the  mouse 
+                button  over the object.   Differs from an  exit, 
+                which requires a press and release.
+
+Disabled        Draws the object at half-intensity (gray).    The  
+                user  cannot select disabled objects.
+
+
+
+Class 2 Attribute Dialogs
+
+
+For   Boxes,   Hollow Boxes,  and Boxchars,  the Attribute dialog 
+contains the same object flags as in class 1.   In addition,  the 
+Attribute dialog contains options as follows:
+
+
+dither pattern  
+                Eight available.
+
+background color
+                Offers 16 VDI color indices in hexadecimal.
+
+border color    Same as for background color.
+
+border width    Seven  variations available:   no border,   three  
+                inward  widths, and three outward widths.
+
+enter           Enter any character.
+
+character color 
+                Similar to background color.  Offers same colors.
+
+masking rules   Select   replacement  mode  or  transparent  mode 
+                for characters.   You can stamp characters on top 
+                of the  background  or  replace the background.
+
+A  dither  pattern  is  a background fill pattern.   To choose  a 
+dither  pattern,  color,  or  border width,  click on one of  the 
+choices  or  click  on   the   left-  or  right-arrow  to  expose 
+additional  choices.    The  current  selection  appears  in  the 
+"Selected" box.  Note that background effects will not be seen in 
+hollow   boxes  and  that characters are only  significant  in  a 
+Boxchar type.
+
+
+
+Class 3 Attribute Dialogs
+
+For  Text,  Boxtext,  Editable  Text, and Editable Text-in-a-Box, 
+the  Attribute  dialog  includes all the features  of   class   2  
+with   the   following   additions pertaining to  text  size  and 
+format:
+
+font            Choice of large or small fonts for text.
+
+justify         Justifies text left, center, or right.
+
+PTMPLT>         Template for text entry.
+
+PVALID>         Validation field for text entry.
+
+PTEXT>          Text entry field.
+
+If  the  object you are working with is Text or Boxtext, you need 
+to enter only the contents of the PTEXT field.   If the object is 
+Editable   Text   or  Editable Text-in-a-Box,  you must  use  all 
+three fields.
+
+Note  auto-sizing's  effect on class 3 objects:   The new size of 
+a  TEXT  type is determined by the length of the   PTEXT   field.    
+The   new  size  of  an  FTEXT (editable  text  field)  type   is 
+determined by the length of its PTMPLT field.   There is no auto-
+sizing for boxed text objects because they have visual extents.
+
+The  template,  validation field, and text entry field (P fields) 
+are  explained in your GEM Programmer's Guide,  Volume 2:  AES in 
+Section  6,   "Object  Library" under "TEDINFO Structure."   Note 
+that  in  the RCS,  PTMPLT fields use a tilde (~) in place of  an 
+underline (_) to avoid confusion between the field itself and the 
+placeholders  for  editable  characters.  The  following  example 
+illustrates the use of the  template,   validation   field,   and  
+the   text  entry  fields.   It constructs an editable text field 
+in which the end user types the date.
+
+PTMPLT>Today's Date:  ~~/~~/~~_________________
+PVALID>~~~~~~~~~~~~~~~99~99~99_________________
+ PTEXT>~~~~~~~~~~~~~~~01~01~85_________________
+
+
+Explanation  of  template:  Change the template to "Today's Date:  
+" instead of the default,  "EDIT:", backspace over EDIT, and type 
+in  the   new   string.      The  tildes   in  the  template  are 
+placeholders for characters that will change later.  They are the 
+only  part  of  the template that the end user will  be  able  to  
+edit.   The slashes, as non-tildes, are permanent features of the 
+template.
+
+Explanation    of  validation  field:    The   validation   field 
+determines  what  kind of characters the end user can  enter;  it 
+determines  what constitutes valid  input.   Tildes appear  under 
+"Today's Date:  " and the slashes, indicating that "Today's Date:  
+"  and  the slashes are literal strings and will appear  as  they 
+are;   they require  no  validation.   The nines under the tildes 
+in the template mean that the end user must type in digits  where 
+the nines occur.
+
+Explanation  of text entry field:   The digits you type under the  
+nines  in  the validation field will appear as the default entry.  
+The end user must type over them to change the date.
+
+
+
+Icon Attribute Dialogs
+
+Icon Attribute dialogs contain object flags as for other  classes  
+and   special attributes for coloring icons and mixing  text  and 
+icons as follows:
+
+foreground color
+                Determines  color of one-bits in icon data  (one-
+                bits are usually black).
+
+background color
+                Determines  color  of  zero-bits  in  icon   data  
+                (zero-bits  are usually white).
+
+text            To   insert  text   within,   above,   or   below  
+                icon.  Useful for labeling.
+
+character       To   insert  a  single  character  within   icon.    
+                Example:    floppy disk icons.
+
+The   Icon  Attribute  dialog contains two Locate boxes:  a  Text 
+Locate box under the Text field, and a Character Locate box under  
+the  Character  field.     For positioning text within your icon, 
+click  on  any of the three levels in the Text  Locate  box.   To 
+position  a character within your  icon,   click  on  any  square 
+within the grid.
+
+The  note at the bottom of the menu indicates that you must  load 
+a  data  or mask file to change an icon in the RCS.   Select  the 
+icon object in the View  window,  go to the Option Menu, and pick 
+Load to load a data or mask file, or both.
+
+Note  on auto-sizing of icons:   The RCS generates new sizes  for 
+bit objects when you load them.   To change the automatic sizing, 
+drag the size handle.
+
+
+
+Bit Image Attribute Dialogs
+
+Bit  Image Attribute dialogs contain the standard  object   flags  
+and  an  Image Color  attribute.     Like  the color selectors in 
+other Attribute dialogs,  this offers 16 VDI-index colors.   Note 
+that  you must load new  data  with  the  Load command  from  the 
+Options Menu.
+
+See   the  note  concerning  auto-sizing  under  "Icon  Attribute 
+Dialogs."
+
+
+
+Exiting an Attribute Dialog
+
+Press  <RETURN> or select OK to assign the attributes  and  close 
+the object.
+
+
+
+Naming and Retyping Objects
+
+You  can  name and retype objects the same way you can  name  and 
+retype  trees.   To  name or rename an object,  click on  it  and 
+choose  the  Name  command  from  the Options  Menu.    The  Name  
+dialog  appears,  allowing  you to enter the object's  name.   To 
+delete  a pre-existing name,  backspace over it and  enter  blank 
+spaces.
+
+The  Name dialog also provides an opportunity to retype  objects.  
+You can retype objects  within  their classes only.  For example, 
+you  can retype a Button as a String because Buttons and  Strings 
+are  members  of  the  same  class,   but  you cannot  retype   a 
+Button  as a Boxchar,  as their types are incompatible.   If  the 
+object  selected  is incompatible with other  objects,  the  Name  
+dialog  does  not provide a means of retyping.
+
+
+
+TIPS AND CONCEPTS
+
+
+
+Visual Hierarchy:  Relationships between Trees and Objects
+
+The  highest  level of a tree is the surface of the  View  window 
+when  you  open the tree.   Any solitary object you drag  to  the 
+surface  is a  direct  child  of  the View  window  surface.   An 
+object within another object--a Button within a Box,  say--is the 
+child  of  the  containing object.   Because  this  hierarchy  is 
+apparent at a glance, it is called "visual hierarchy."
+
+Note   that   according  to  the  rules of  visual  hierarchy,  a 
+parent object must completely contain its progeny;  objects  that  
+jut  out  from  an  object  that otherwise  contains them are not 
+related  to that object.   With objects that are supposed  to  be 
+nested at the same level,  such as radio buttons, you  must  take 
+care  that  the visual hierarchy of the tree accurately  reflects 
+your intentions.
+
+Remember  that  a  mouse  operation modified by Ctrl takes you up 
+a  step  in  the hierarchy and that Flatten,  a  command  in  the 
+Options Menu,  removes a  level  in the  hierarchy.   Recall  too 
+that any delete,  move,  or copy affecting an object also affects 
+its progeny.
+
+
+
+Notes on Making Icons and Bit Images
+
+Icons  and  bit images are drawn with IconEdit and are  saved  in 
+.ICN files.     An icon consists of data and a mask.  A bit image 
+consists of data only.   You must load .ICN files into the RCS to 
+turn  them  into  resources.   As bit  images  are  but   simpler 
+versions  of  icons (in that they contain data only),  the  notes 
+that  follow  focus mainly on icons,  with  bit-image  exceptions 
+indicated.
+
+IMPORTANT  NOTE:   AT  THE  TIME OF THE INITIAL RELEASE  OF  THIS 
+          DEVELOPER  KIT ICONEDIT WAS NOT READY FOR  RELEASE.   A 
+          facility for creating Icons in the 68K environment will 
+          be  provided  in  a  future revision the  GEM  DOS  68K 
+          Developer Kit.   If you have the GEM 8088 Developer Kit 
+          then you may create your Icons in that environment  and 
+          move them to the 68K environment. 
+
+
+To load a .ICN file,  drag an icon object from the Free or Dialog 
+Partbox window and  drop it in the View window.   Select the icon 
+object.   Go  up to the Options Menu and select Load.   The  Icon 
+Load dialog appears, and you can choose to load the data or mask, 
+or both.
+
+Exception for bit images:  No Load dialog appears.
+
+When   you   load  the data or mask,  the  Item  Selector  dialog 
+appears so that you can click on the .ICN file you want.   If you 
+choose  both  mask  and  data,   the Item Selector appears twice, 
+once for the data and once for the mask.   Exit the Item Selector 
+dialog.   The data or mask you selected (or both) now appears  in 
+the View window.
+
+If   you   loaded   just the data,  click on the icon  again  and 
+choose  Load  to  load its mask.   When both data  and  mask  are 
+loaded, the files merge.  Open the  icon by  double-clicking  and  
+set  its  attributes.    When you save the object tree containing 
+your icon, it becomes a resource just like any other.
+
+Remember  that if you want to redraw the icon image  itself,  you 
+have to go  back to IconEdit.
+
+
+
+Memory Limits
+
+You  can have a maximum of 60 trees (on certain machines you  can 
+see only 55 of these) occupying a total of 30K bytes. These trees  
+can   contain  a  cumulative maximum  of 1,250 objects,  of which 
+500  can have names.   As names are stored in a  separate  index, 
+they  do  not count against your  30K  bytes.   When  in   doubt, 
+display   the   Options  Menu  and choose  Info...  to  see  your 
+storage  usage.   You will be warned if you reach the end of  the 
+memory buffer or name index.
+
+
+
+
+
+
+
+
+                               End of Section 2
+
+
+
+Section 3:
+
+
+TECHNICAL MATTER FOR PROGRAMMERS
+
+
+
+This section is for programmers who need to incorporate resources 
+in their code and understand how the RCS works with the GEM AES.
+
+
+
+FURTHER EXPLANATION OF MENU AND ALERT TREES
+
+An  Alert  tree  is like a free string after it is interpreted by 
+form_alert at run-time.   The rules for alerts are those enforced 
+by  form_alert:   no  more  than one  image  (from   a   set   of 
+three),  up  to  five  message  lines  (of  no  more  than  forty 
+characters each), and one to three buttons.
+
+Menu trees are characterized by parallel structure of  title  bar  
+entries   and  drop-down   menus  and  critical   sizing  of  bar 
+objects.  The RCS enforces these constraints.
+
+
+
+RESPECT FOR TREE TYPING
+
+You  can freely retype trees from a more-restricted to  a   less-
+restricted   type  (for   example,   from Menu or Alert  tree  to 
+Dialog or Free tree).   Do not try to go the other way unless you 
+clearly understand the  required  format;   you  can make the RCS 
+crash.
+
+If  you  load  an  existing  resource that lacks a .DEF file (and 
+therefore  you don't know what kinds of trees you  have),  retype 
+the trees as frees or  dialogs to examine them.
+
+Be  careful when pasting objects from other trees into  menus  or 
+alerts.   The RCS rejects most incompatible objects,  but you may 
+find an exception--and  the  RCS may hang.
+
+Remember  to type non-standard trees as unknowns.  A tree is non-
+standard  if  it  contains  user-defined  objects  or  unresolved 
+indirects  or  pointers.    (You  must still   obey  inter-object 
+linkage  conventions,  or the RCS will hang when writing out your 
+resource.)
+
+
+
+DETAILS ON OBJECT TYPES
+
+Unformatted Text
+                These   objects   are always written  in  single-
+                spaced,  full-sized  system  font,  using  system 
+                foreground  and  background  colors   in  replace  
+                mode.    The  obspec (object specification field) 
+                is  a  long pointer to  a  zero-terminated  ASCII 
+                string.
+
+Box             The   obspec   contains   packed    bit    fields  
+                defining  the  object attributes.
+
+Formatted Text  
+                The   obspec   is   a long pointer to  a  TEDINFO 
+                structure  (see  the  GEM  Programmer's    Guide,  
+                Volume   2:   AES   for  information  on  TEDINFO  
+                structures).   The TEDINFO contains long pointers 
+                to text,  template,  and validation strings  (the 
+                latter  two are only used  in  editable  fields).  
+                In  addition,  the  TEDINFO  contains  the   same  
+                information   as  types,   as   well   as    font   
+                and  justification  designators.   If you want  a 
+                default character to appear in the formatted text 
+                field at run-time,  enter it in the corresponding  
+                position in PTEXT.   If you don't want a default, 
+                enter blanks or a null string.   Be careful:  The  
+                PTEXT   string  must  be as long  as  the  PVALID 
+                string,  or  you must allocate and link a scratch 
+                PTEXT before activating the dialog at   run-time.  
+                Failure   to do so will damage the resource  when 
+                the  user starts typing.   See the example in the 
+                GEM Sample Application.
+
+Bit Images      A  bit image is a maskless rectangular bit  image 
+                in   transparent  mode.   The obspec  is  a  long 
+                pointer  to  a  BITBLK  structure.    The  BITBLK  
+                contains    horizontal    and    vertical    size  
+                fields,  the writing color, and a long pointer to 
+                the actual data.
+
+Icons           An   icon   consists   of  the   combination   of  
+                data   and  mask  bit   images,   with   optional 
+                associated text  string  and  characters.   These  
+                images  are  made  in  IconEdit and saved in .ICN 
+                files,  which  contain an ASCII representation of 
+                the binary image.   The obspec  of  an  icon is a 
+                long  pointer  to  an  ICONBLK  structure.    The 
+                ICONBLK contains long pointers to the  data   and  
+                mask   bit images  and  the  text   strings,   as  
+                well    as   X   and  Y  sizes,   foreground  and 
+                background colors, an optional character, and the 
+                relative positions of text, character, and image.
+
+User-defined Objects
+                User-defined objects constitute a sixth class  of 
+                objects.  This type is  handled  at  run-time  by  
+                application-specific code.   User-defined objects 
+                are not supported by the RCS and rs_load; you set  
+                them  up  at run-time.   See sections  6.3.5  and 
+                6.3.6  in the GEM Programmer's Guide,  Volume  2: 
+                AES.
+
+
+
+A NOTE ON OBJECT FLAGS
+
+Besides  the  object flags mentioned under  "Attribute   Dialogs"  
+in  Section  2,  there are three other flags you can set for your 
+resources:
+
+Hidetree        Makes  an object and its progeny invisible.   The 
+                Object   Library  neither  finds  nor  draws  the 
+                object.    Hide  and  Unhide,   which affect this 
+                flag, are options in the RCS File Menu.
+
+Lastob          Flag   set   for  the  last   object   in   every  
+                tree.   Generated automatically by the RCS.  This 
+                flag  must be set or,   when  you tab   off   the  
+                last editable field of a dialog at run-time,  GEM 
+                may hang.
+
+Indirect        The obspec is a long pointer to the actual obspec 
+                value.  The indirect  flag  is  not  supported by 
+                the RCS.   You build it at run-time.  See the GEM 
+                Programmer's Guide, Volume 2: AES.
+
+
+
+HIERARCHY OF STRUCTURES WITHIN A RESOURCE
+
+Internal  linkage  of resource and trees and how  offspring   are  
+organized   into  trees  are described in  the  GEM  Programmer's 
+Guide, Volume 2: AES.
+
+
+
+MORE ON MEMORY
+
+The  RCS  uses  memory  from  its  workspace  as you edit.  There 
+is no garbage collector.   You recover space by saving the  file; 
+Save writes out  and  reloads the resource.   (It's good practice 
+to save your work frequently anyway.)
+
+Use Info... to check on the size of your resource, which can grow 
+quickly.   Info...  gives  the working byte  total.   This  total  
+differs  somewhat  from  the  actual output  because  alerts take 
+less  space when emitted as strings and because the RCS does  not 
+duplicate  strings  and   images   from   Shift-dragged   objects  
+until  required.    These duplicate objects are resolved when you 
+save the file and may add to the size of the resource.
+
+If  you must create a larger resource,  generate it in two  parts 
+and combine them by  hand using RSCREATE.   There is an  absolute 
+limit  of 64K in a resource.   You can chain resources,  but only 
+after  clearing any references to the old one (such as  menu  and 
+desktop definitions) in the AES and making an rs_free call to the 
+AES.
+
+
+
+SECONDARY UPDATES: USING RSCREATE
+
+You   make   secondary  updates  when  you   need    to    create  
+specialized  objects  or include  "free"  strings or images.   To 
+begin  the  secondary  update,  create a .C file  from  the  RCS, 
+containing  a C language source of your resource,  and  hand-edit 
+it.
+
+To  regenerate  the  resource,   include  it  in  the  .C file in 
+RSCREATE.C and compile,  link, and run RSCREATE.  This produces a 
+regular .RSC file, which  you an edit normally in the RCS.
+
+The .C file created by the RCS contains some mnemonics for object 
+types as well as base numbers for each object tree.   When adding 
+any new  object,  TEDINFO,   etc.,   insert  it at the end of the 
+current entries.   Update the tree base definitions if you insert 
+new objects into existing trees.
+
+You must use the secondary update process to insert free  strings  
+(other   than alerts) and free bitblks.   Do this early on in the 
+creation  of  your  resource to minimize the  amount  of  editing 
+involved.   You  must  put  all  non-alert  free strings ahead of 
+alert strings or the RCS will alter their order at output.
+
+If   you  know  you will alter the object structure by  hand,  do 
+not enter object names until your editing is  complete.   Changes  
+in   object  numbers  caused  by RSCREATE  will  not be known  to 
+the RCS, and you may have to re-enter your .DEF file.
+
+The  RCS  always emits object trees in  pre-order:   root  first,  
+followed   by   its children,   left  to  right,   with the  rule 
+applied recursively.   Any hand-built trees that pass through the 
+RCS  will  be  changed to this  order.  Don't   build  code  that 
+depends on some other ordering.
+Be   aware   that   some   C  compilers  fold  duplicate  strings 
+together when you compile RSCREATE.  This can present problems at 
+run-time  if  the strings are to be  edited.   Run  the  resource 
+through the RCS to resolve the duplicate strings.
+
+For  more  information  on RSCREATE,  see Section  4,  "Notes  on 
+RSCREATE."
+
+
+
+TIPS FOR SAVING TIME
+
+When  you are laying out a dialog,  put related text items  in  a 
+box.    That  way,  you  can move and center them as a unit; when 
+you're satisfied, flatten the box to save memory.
+
+When  possible,  drag one of each of the part types you need into 
+the View window and  use  Shift-drag  for  copies.    This  saves 
+you the tedium of topping the Partbox window every time you  need 
+a new object.
+
+If  you  have several similar objects (such as   radio   buttons)  
+within   a   tree,  define   one  of them and then  make  copies, 
+editing only what differs among them instead of setting them  all 
+individually.
+
+Often  entire  subtrees  are nearly duplicated within a  tree  or  
+among  a set of trees.    Create a prototype of the  subtree  and 
+copy it, using Shift-drag or the clipboard, or both.
+
+For  frequently  used icons,  subtrees,  and the like,  create  a 
+"library"   resource  file   or  files.    Use Merge  to  copy  a 
+library into your working resource,  make copies of the parts you 
+want using the clipboard, then delete  unneeded  trees.  You  can  
+use  a  library  as  a  means of standardizing the appearance  of 
+your  applications  if you include prototype dialogs of your  own 
+design.     An  aside:  the merge/delete process uses  workspace.  
+Save your work to get the space back.
+
+Take  advantage  of  the quirks of the Menu and Alert trees.   To 
+make more menu bar entries, point at an existing entry, hold down 
+the  Shift  key,   and  do  a "drag-in-place" by holding down the 
+mouse  button a short while.   The copies zip down the bar.   You 
+can  do the same thing with message strings and buttons in  Alert 
+trees.
+
+
+
+HINTS ON FORMAT
+
+For  the Resource File:  Arranging your trees as follows can make 
+things easier for you.  Put your Menu trees first.   Group Dialog 
+trees  next,  then any Free trees.  Non-standard  trees  go  last  
+so that you can hand-edit them easily.   Establish your own tree- 
+and  object-naming  conventions so as to avoid naming  conflicts.  
+Print your .H and .I files occasionally to check for errors.
+
+In Menus:   Make sure your entries totally cover each  drop-down.  
+If  they  don't,  they'll look sloppy when selected and  reverse-
+highlighted  at run-time.   Use the disabled  dashes  object   to  
+separate   unrelated  menu  entries and to set off  entries  that 
+could  cause  problems if  selected   accidentally.     Inserting  
+two leading  spaces  before your entries yields a  neat,  uniform 
+look.  If the entry leads to a dialog (such as Save As...) follow 
+it  with three dots.    After  your entries  are  complete,  sort 
+them  by  Y  axis,  using  the Sort command  in  the  File  Menu; 
+otherwise,  they'll be drawn in the order  in  which  they   were  
+created, which usually looks slap-dash.
+
+Leave   about  a  third  of  the  menu  bar clear.   You'll  need 
+the   space  if  you  internationalize  your  program,   and   an 
+uncluttered  menu  bar  is  easier  to   read  and   use.   Avoid 
+clutter  in general.   Make sure menu entries don't look  cramped 
+and that menu titles aren't too long.   Remember to name the menu 
+titles as well as the entries.
+
+In  Dialogs:     Use  the  standard  frame:    a two-pixel inward 
+border with an outline.   Sort any radio buttons by Y first, then 
+X.  Sort  the  whole dialog  the same   way.     The  result:   a 
+smooth,  natural-looking drawing order.   Place exit buttons near 
+the   right  edge  of  your  dialogs,   and  standardize    their  
+appearance  and  placement by creating your own prototype  dialog 
+and  putting it in a library resource.   Selectable  objects  are 
+easier  to  point  at  if  they  are  large  and  maintain  ample 
+space around their borders.
+
+In   Alerts:    Keep   alerts   simple.    Avoid   harsh-sounding 
+"computerese" and jargon. Try to limit alerts to two exit buttons 
+to  avoid  confusion and  clutter.  You can   avoid  some  alerts 
+altogether with a little creative thought.  For example, you  can  
+disable inappropriate menu entries and simply forbid certain ill-
+conceived actions.
+
+
+
+MORE ON THE VISUAL HIERARCHY RULE
+
+Every  object  owns a screen rectangle determined by its X, Y, W, 
+and  H fields.   All of an object's offspring must be within that 
+rectangle;   the   offspring   do  not  need   to   be  disjoint.  
+Object X,  Y fields are positive displacements from the  parent's 
+X,  Y coordinates.   This rule applies recursively.   In the case  
+of  non-disjoint  siblings,   the  rightmost  (last added) is the 
+last  drawn,  and is located by an objc_find with coordinates  in 
+the overlapping area.
+
+
+
+Circumventing Visual Hierarchy
+
+Flouting the rules of visual hierarchy is not recommended, but it 
+can  be  useful  for visual  effects  or  creating  sophisticated 
+selector subtrees.   To "cheat," be sure to insert the object you 
+want  to establish as the  top  object  after  you have  inserted 
+the bottom object.   Size the top object so it cannot fit totally 
+into the bottom object and thus be considered the bottom object's 
+child.    Move the  top  object,  placing  its  upper left corner 
+where  you want it inside the bottom object,  then size  the  top 
+object down to the size  you  want. If you later decide to adjust  
+the  position of the top object, you must restore it first to its 
+previous  size.   Never  turn  off  the  Tree   Rearrange   alert  
+when working with trees of this sort.
+
+
+
+HINTS ON EXTENDING form_do
+
+You can extend form_do to handle complex selector objects such as 
+the  scrolling selectors in the RCS.   Use the upper byte of  the 
+object   type  word  to  create extended  object   types.     The  
+GEM  AES  ignores this byte;  the RCS ignores and  preserves  it.  
+(Note:   You'll  have to do  this  with  RSCREATE.   Once  you've 
+created  such  an  object,   put it into your library so you  can 
+copy  it  easily.   You  can attempt this  modification  using  a 
+debugger directly on the resource.  Use the .C file,  output from 
+the  RCS,  to figure out the internal structure and make a backup 
+before proceeding.)  Use TOUCHEXIT to return control from form_do 
+as soon as the  user clicks  on  your  special  objects.    Write 
+a  shell routine that processes the special  object,  redraws  as 
+necessary,   and  re-enters  form_do.  Remember  to  restore  the 
+resource to a known state at the end of your routine.
+
+Use the user-defined object type to draw non-standard objects.
+
+Make   use   of the Hidetree flag to make variable parts  of  the 
+dialog appear and disappear.  Use  Hidetree  sparingly,  however,  
+as  it  encourages  cumbersome dialogs and ill-structured  driver 
+code.
+
+To set up pointers to data areas, use the Indirect option.
+
+Make   the most of your effort by putting your code and the  most 
+general form of the associated subtree into libraries.
+
+
+
+WHAT THE RCS v1.0 DOES NOT DO
+
+The RCS does have certain limitations.  It can't do the following 
+things:
+
+   - handle free strings other than alerts
+
+   - handle free bit images
+
+   - create or edit user-defined objects or indirects
+
+   - scroll the View window or Partbox contents
+     
+   - it cannot create a RSC file larger than 64K.  You may "hand-
+     build" a RSC file larger than 64K and compile it in RSCREATE
+
+   - In  the  current release there is a limitation in  that  you 
+     cannot load DEF files produced in the 8088 world.  To create 
+     a DEF file that will load you must use RSCREATE after moving 
+     the resource file (RSC) over to the 68K environment 
+
+
+
+
+
+
+
+
+                               End of Section 2
+
+
+
+
+Section 3:
+
+
+
+NOTES ON RSCREATE
+
+
+
+
+FILES
+
+The following files are included in this distribution:
+
+RSCREATE.C      C source code for the mini-resource compiler.
+
+RSRCLIB.H       Necessary to compile RSCREATE.C
+
+RSCREATE.INP    Sample loading sequence for RSCREATE.
+
+RSCREATE.BAT    The batch file for compiling RSCREATE.
+
+EXAMPLE.C       Sample resource C file for use with RSCREATE.
+
+EXAMPLE.RSC     The  Resource  Construction  Set  used  these  to 
+                create EXAMPLE.C
+
+
+
+SUMMARY OF OPERATION
+
+NOTE:     Be  sure  to  read Section  3,  "Technical  Matter  for 
+          Programmers,"   part  2  in   this   document,   before 
+          proceeding with RSCREATE.
+
+
+
+
+
+
+Execution
+
+Insert  the filename into RSCREATE.C and execute RSCREATE.BAT  by 
+typing  RSCREATE.  A binary resource file will be created in  the 
+current  directory.  Remember  to  run  this file through RCS  at 
+least once to resolve folded strings.
+
+
+
+MODIFYING EXAMPLE.C
+
+EXAMPLE.C  was  generated from a one-tree resource with at  least 
+one  example  of each type of structure.  You should preserve the 
+order of the structures within the file;  in particular the dummy 
+image index rs_imdope MUST occur at the  end,  just  before   the  
+filename.     If  you make additions to the structures,  do it at 
+the  end  of  each array or you will have to  redo  any  affected 
+pointers.   If  this practice causes data for different trees  to  
+be intermixed,  compile and run RSCREATE,  then use the  Resource 
+Construction Set to generate a new .C file.   It will reorder the 
+data for you.
+
+
+
+ADDING FREE STRINGS AND IMAGES
+
+This  will  be  the  most common use of RSCREATE  for  those  who  
+cannot  afford  the overhead  of  a  dummy  resource tree to hold 
+these  strings/images.    Make  these  additions  early  in  your 
+resource creation process if possible.
+
+To add a free bitblk (image) you must do the following:
+
+   1. Increment NUM_IMAGES.
+
+   2. Add the new binary image, and add a pointer to  it  at  the  
+      end  of rs_imdope.
+
+   3. Increment NUM_BB.
+
+   4. Add  the  new  bitblk  definition at the end of  rs_bitblk.  
+      Its  data pointer must be a LONG index to the new rs_imdope 
+      entry from above.
+
+   5. Increment NUM_FRIMG.   Add an entry to rs_frimg, which must 
+      be a LONG index to the new entry in rs_bitblk.
+
+To add a new free string you must do the following:
+
+   1. Increment NUM_STRINGS.
+
+   2. Add the new string to rs_strings.
+
+   3. Increment NUM_FRSTR.
+
+   4. Add a LONG index to the new string in rs_frstr.
+
+IMPORTANT  NOTE:   Always  put indices of non-alert free  strings 
+before  those  of alert free strings in rs_frstr.   This is   the  
+order  in  which  they  will  be emitted  by the output phase  of 
+RCS (you can use RCS to reorder them,  in fact).  If you don't do 
+this,  you  will  not be able to use RCS in LOCK mode  to  field-
+modify the resource because it will change your order.
+
+
+
+                               End of Section 3
+
+
+             Part 3:  ADDITIONAL REFERENCE MATERIAL
+
+
+
+INTRODUCTION
+
+This  part  of "Introduction To GEM Programming" is  an  informal 
+collection  of reference material that has been published by  the 
+GEM  PROGRAMMER'S SUPPORT (GPS) program in a private area of  the 
+DR FORUM on CompuServe (TM).   This information is being provided 
+as  a  supplement  to  the documentation  to  help  you  in  your 
+understanding  of GEM the implimentation of your own application.  
+If  you choose to subscribe to the GPS program,  a large base  of 
+additional information and sample code will be available for  you 
+to include in your application.  
+
+The  GEM Programer's Support engineers wish you GOOD LUCK in your 
+programming endeavors!
+
+
+
+Section 1:
+
+
+UPDATED FUNCTIONALITY IN GEM 
+
+
+WARNING  NOTICE:    If,  while  calling one of  these  additional      
+     functions,  an Alert Box is displayed notifying you that GEM 
+     has  received  a  "BAD FUNCTION #",  AND YOU ARE  PASSING  A 
+     NUMBER DOCUMENTED AS VALID, then  you  are probably using an
+     outdated  version of the system software.  If using an ATARI 
+     machine,  contact ATARI directly for information on updating 
+     to the most recent version of TOS.
+
+
+
+
+GEM v1.2 ENHANCEMENTS 
+
+
+Overview:
+
+     VDI
+	
+          - VDI has added a SOUND function for playing tones  for 
+          specified durations.
+
+
+
+     AES
+
+          - The overall performance has been improved  especially 
+          in the event system ( evnt_msg,  evnt_multi) and in the 
+          AES call overhead.
+
+          - The  mouse form will automatically be converted  from 
+          your application's mouse form to an arrow during a menu 
+          drop-down, form fill-in, or critical error alert.  When 
+          the alert is finished it will be converted back.
+
+          - Pushing and holding down on the window control points 
+          will   send  continous  WM_ARROWED  messages   to   the 
+          application.  This allows the application to scroll his 
+          window  as long as the user has the mouse  button  down 
+          and the messages are being serviced.
+
+
+
+
+SPECIFIC ENHANCEMENTS TO THE AES
+
+
+appl_init()
+
+	After a call to the appl_init() routine, the global array 
+        will be set as follows:
+
+	global[0]	0x0120	for version 1.20
+	global[1]	0x0001  for one primary application supported
+	global[2]	?	for your application id (probably 0)
+	global[3]	0x1144	lo word of desktop surface's ob_spec
+	global[4]	0x0000	hi word of ...
+	global[5]	?	offset of tree base in resource
+	global[6]	?	segment of ...
+	global[7]	?	offset of resource memory alloc
+	global[8]	?	segment of ...
+	global[9]	?	length of resource memory alloc
+	global[10]	?	number of planes of color (1-4)
+	global[11]	?	offset of internal AES data structure
+	global[12]	?	segment of ...
+	global[13]	?	bit vector of desktop disk drives installed
+					bit 15 ON means desktop has drive A
+					bit 14 ON means desktop has drive B
+					etc...
+				not valid if application invoked from prompt
+	global[14]	?	bit vector of desktop HARD disk drives
+					bit 15 OFF means A: is floppy
+					bit 14 OFF means B: is floppy
+					bit 13 ON means C: is hard
+					etc...
+				not valid if application invoked from prompt
+
+
+
+appl_find()
+
+	Desk   accessories   no   longer   have   to   be   named 
+        DESK(1,2,3).ACC  in order to be loaded.   Now,  the first 
+        three  *.ACC  files  found in the \AUTO directory will be 
+        loaded  as desk accessories,  so long as memory  permits.  
+        The  space-padded,  8  character filename of  these  desk 
+        accessories   are   what  is  searched  for   using   the 
+        appl_find() routine.
+
+
+
+appl_play()
+
+	- A   bug  was  fixed  that  prevented  recordings  which 
+        contained SHIFT clicks from being properly played back.
+
+
+
+evnt_mesag()
+
+        - Message handling was optimized for the common condition	
+        of reading a 16 byte message.
+
+        - A  new standard message format has been  developed  for 
+        application-defined  messages  that contain  an  address.  
+        This  is so that in future protected-memory environments, 
+        the  system  will be able to copy out  the  "pointed  to" 
+        memory  area  from the sender'sapplication space  to  the 
+        receiver's.   This  copying  is not performed  today  for 
+        space considerations.  The new format is as follows:
+
+  		word[0]	- message identifier
+		word[1]	- sender's application id
+		word[2]	- 0xFFFF (to flag as containing pointer)
+		word[3] - length of memory buffer pointed at
+ 		word[4] - offset of memory buffer
+		word[5]	- segment of memory buffer
+		word[6]	- application specific
+		word[7]	- application specific
+
+	The  range of message identifiers that should be used  by 
+        applications   is   1024-32000.    By  first   doing   an 
+        appl_find()  and  verifying  the  sender's  identity,  we 
+        should  be  able  to  avoid  message  collision  amoungst 
+        various ISV's.
+
+
+
+evnt_multi()
+
+	This  function has been optimized for  performance,  such 
+        that  the  following  types of  events  are  signifcantly 
+        faster in turn-around time:
+
+	  - keybd waits when you have a keystroke waiting
+
+	  - mouse waits when the condition is already TRUE
+
+	  - button waits when the condition is already TRUE
+
+	  - timer waits of 0x0L milli-seconds
+
+          - Dispatching to another ready to run application  will 
+          only  occur every 10th AES call instead of every single 
+          AES  call,  this  significantly  improves  evnt_multi() 
+          throughput for the currently running  application.   As 
+          usual, if an application makes a call that blocks, then 
+          a dispatch will occur immediately.
+
+	  - A  bug was fixed that allowed mouse and button events 
+          to be satisfied when your application's window was  not 
+          on top.
+
+          - A  bug  was fixed in the timer delay code that  could 
+          have caused the system to behave incorrectly in certain 
+          race conditions.
+
+
+
+form_alert()
+
+	- The  spacing within an alert was reduced  to  guarantee 
+        that  even  a  worst case alert (icons,  5  long  message 
+        lines,  3  buttons) would not take up more than a 1/4  of 
+        the screen.  In Version1.1, with certain alerts that were 
+        larger than 1/4 of the screen, the system would crash.
+
+
+
+form_do()
+
+	- The  source  to  form_do()  is provided  to  allow  for 
+        simpler  application tailoring of the  AES's  generalized 
+        form fill-in capability.   This source code refers to two 
+        new calls:
+
+		form_keybd()
+
+		form_button()
+
+
+     NOTE:  Use this code only if the normal form_do code doesn't suit 
+            your needs.  (AND AT YOUR OWN RISK)
+
+
+
+        form_do() is as follows:
+
+
+	WORD
+find_obj(tree, start_obj, which)       /* routine to find the next editable */
+	REG LONG	tree;          /* text field, or a field that is as */
+	WORD		start_obj;     /* marked as a default return field. */
+	WORD		which;
+{
+	REG WORD	obj, flag, theflag, inc;
+
+	obj = 0;
+	flag = EDITABLE;
+	inc = 1;
+	switch(which)
+	{
+	  case FMD_BACKWARD:
+		inc = -1;
+						/* fall thru		*/
+	  case FMD_FORWARD:
+		obj = start_obj + inc;
+		break;
+	  case FMD_DEFLT:
+		flag = DEFAULT;
+		break;
+	}
+
+	while ( obj >= 0 )
+	{
+	  theflag = LWGET(OB_FLAGS(obj));
+	  if (theflag & flag)
+	    return(obj);
+	  if (theflag & LASTOB)
+	    obj = -1;
+	  else
+	    obj += inc;
+	}
+	return(start_obj);
+}
+
+
+	WORD
+fm_inifld(tree, start_fld)
+	LONG		tree;
+	WORD		start_fld;
+{
+						/* position cursor on	*/
+						/*   the starting field	*/
+	if (start_fld == 0)
+	  start_fld = find_obj(tree, 0, FMD_FORWARD);
+	return( start_fld );
+}
+
+
+	WORD
+form_do(tree, start_fld)
+	REG LONG	tree;
+	WORD		start_fld;
+{
+	REG WORD	edit_obj;
+	WORD		next_obj;
+	WORD		which, cont;
+	WORD		idx;
+	WORD		mx, my, mb, ks, kr, br;
+
+	wind_update(1);
+	wind_update(3);
+						/* set starting field	*/
+						/*   to edit, if want	*/
+						/*   first editing field*/
+						/*   then walk tree	*/
+	next_obj = fm_inifld(tree, start_fld);
+	edit_obj = 0;
+						/* interact with user	*/
+	cont = TRUE;
+	while(cont)
+	{
+						/* position cursor on	*/
+						/*   the selected 	*/
+						/*   editting field	*/
+	  if ( (next_obj != 0) &&
+	       (edit_obj != next_obj) )
+	  {
+	    edit_obj = next_obj;
+	    next_obj = 0;
+	    objc_edit(tree, edit_obj, 0, &idx, EDINIT);
+	  }
+						/* wait for mouse or key */
+	  which = evnt_multi(MU_KEYBD | MU_BUTTON, 
+			0x02, 0x01, 0x01, 
+			0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0,
+			0x0L,
+			0, 0,
+			&mx, &my, &mb, &ks, &kr, &br);
+						/* handle keyboard event*/
+	  if (which & MU_KEYBD)
+	  {
+	    cont = form_keybd(tree, edit_obj, next_obj, kr, &next_obj, &kr);
+	    if (kr)
+	      objc_edit(tree, edit_obj, kr, &idx, EDCHAR);
+	  }
+						/* handle button event	*/
+	  if (which & MU_BUTTON)
+	  {
+	    next_obj = objc_find(tree, ROOT, MAX_DEPTH, mx, my);
+ 	    if (next_obj == NIL)
+	    {
+	      /* sound(TRUE, 440, 2); */
+	      next_obj = 0;
+	    }
+	    else
+	      cont = form_button(tree, next_obj, br, &next_obj);
+	  }
+						/* handle end of field	*/
+						/*   clean up		*/
+	  if ( (!cont) ||
+	       ((next_obj != 0) && 
+		(next_obj != edit_obj)) )
+
+	  {
+	    objc_edit(tree, edit_obj, 0, &idx, EDEND);
+	  }
+	}
+
+	wind_update(2);
+	wind_update(0);
+						/* return exit object	*/
+						/*   hi bit may be set	*/
+						/*   if exit obj. was	*/
+						/*   double-clicked	*/
+	return(next_obj);
+}
+
+
+
+NOTE:   This is the end of the source code for form_do.  Remember 
+        this  code  was provided for you to use or modify in  the 
+        writing  of your own code to perform  similar  functions.  
+        BEWARE, check your code carefully.
+
+	By   choosing   different   evnt_multi()   condtions   an 
+        application-defined form_do() can wait for a time out, be 
+        used  in a window or other conditions where messages need 
+        to still be active, can support forms with hot spots, and 
+        do more specialized validation or keyboard control.
+
+
+
+form_keybd()
+
+/* define FM_OCHAR int_out[2]*/	/* value of character after initial    */
+				/*  processing                         */                 
+				/*  if TAB, BACKTAB, UP, DOWN,         */
+				/*  LEFT, RIGHT, and RETURN then it    */
+				/*  will be a 0, indicating no further */
+				/*  processing is needed               */
+
+	WORD
+form_keybd(form, obj, nxt_obj, thechar, pnxt_obj, pchar)
+	LONG		form;
+	WORD		obj;
+	WORD		nxt_obj;
+	WORD		thechar;
+	WORD		*pnxt_obj;
+	WORD		*pchar;
+{
+	FM_FORM = form;
+	FM_OBJ = obj;
+	FM_INXTOB = nxt_obj;
+	FM_ICHAR = thechar;
+	gem_if( FORM_KEYBD );
+	*pnxt_obj = FM_ONXTOB;
+	*pchar = FM_OCHAR;
+	return( (WORD) RET_CODE );
+}
+
+form_button()
+                                   
+
+	WORD                       
+form_button(form, obj, clks, pnxt_obj)
+	LONG		form;      
+	WORD		obj;       
+	WORD		clks;   
+	WORD		*pnxt_obj;
+{
+	FM_FORM = form;
+	FM_OBJ = obj;
+	FM_CLKS = clks;
+	gem_if( FORM_BUTTON );
+	*pnxt_obj = FM_ONXTOB;
+	return( (WORD) RET_CODE );
+}
+
+
+
+fsel_input()
+
+	- A  bug was fixed that caused an extra long filename  at 
+        the  end  of the directory specification to screw up  the 
+        file selector display
+
+	- The file selector now supports a directory with several 
+        comma-separated, wildcard specifications, such as:
+
+		A:\*.TXT,*.DOC,*.BAK
+		C:\PICTURES\*.IMG,*.GEM
+
+
+
+menu_ienable()
+
+	- A  special calling convention has been established  for 
+        and  disabling menu titles.   If the item number the high 
+        bit set,  then it will be enabled/disabled and the result 
+        will  be drawn on the screen.   This only works for  menu 
+        titles  since they are guarenteed to be displayed on  the 
+        screen.
+
+	- This  function has also been optimized for  the  normal 
+        case  of  enabling and disabling menu sub-items that  are 
+        not visible.
+
+
+
+menu_register()
+
+	- Six  additional desk accessory menu slots  were  added, 
+        bringing  the  total  to 12 slots.   The number  of  desk 
+        accessory  processes  is still limited to  3,  so  anyone 
+        implementing  a set of desk accessories should  group  as 
+        many  desk  accessory menu items/functions into a  single 
+        desk accessory file as possible.
+
+        - Desk accessories can have menus!  Only one per process.  
+        The menu bar is automatically changed whenever one of the 
+        desk accessory's windows is brought to the top.
+
+        - Desk Accessories should top their windows when they get 
+        an AC_OPEN message if they are already opened, but not on 
+        top.
+
+        - A Print Spooler desk accessory menu item has been added 
+        to CALCLOCK.ACC.  This print spooler spools a file out to 
+        the printer in BACKGROUND!!!  Any application can send it 
+        a special message that specifies the file to  spool,  the 
+        number  of copies,  and whether or not to delete the file 
+        when finished spooling.  Do an appl_find() for "CALCLOCK" 
+        to  get the ap_id of the print spooler.   The  format  of 
+        this message is as follows:
+
+  		word[0]	- 100
+		word[1]	- (sender's ap_id )
+		word[2] - 0xFFFF
+		word[3]	- length of file specification
+ 		word[4]	- offset to file specification
+		word[5]	- segment of ...
+		word[6] - number of copies to spool
+		word[7]	- 0 ==> don't delete file when finished
+			  1 ==> delete file when finished
+
+	Once  the  message has been received by the  spooler,  an 
+        acknowledge   message  is  sent  back  to   the   sending 
+        application.   This  allows  the  sender to free  up  the 
+        string  space pointed at in the message.   The format  of 
+        this message is as follows:
+
+  		word[0]	- 101
+		word[1]	- (print spooler's ap_id)
+		word[2]	- 0
+		word[3]	- 0
+ 		word[4]	- 0
+		word[5]	- 0
+		word[6]	- 0
+		word[7]	- 0
+
+
+
+objc_draw()
+
+	- All  system text drawn by the AES will be moved to  the 
+        nearest   byte  boundary  to  improve  performance  after 
+        justification  has been performed.   This will only  take 
+        place  when there is a minimum of 16 pixels  between  the 
+        text string extent and its bounding object's extent.
+
+                                                       
+
+objc_edit
+
+          This is the binding for the OBJC_EDIT routine.  
+          It  doesn't appear to match the binding in the 
+          manual  because this has 5 parameters and  the 
+          manual binding has 6.   The reason for this is 
+          that  the  variable "idx" serves as  both  the 
+          "ob_edidx"   and   "ob_ednewidx"   that    are 
+          described in the manual.   As you can see from 
+          the  code,  prior  to the call the value  that 
+          "*idx"  points at is stored in the  "ob_edidx" 
+          variable (OB_IDX).   After the call, the value 
+          returned   in   the   "ob_ednewidx"   variable 
+          (OB_ODX) is written into the location  pointed 
+          at by "*idx".
+
+
+
+	WORD
+objc_edit(tree, obj, inchar, idx, kind)
+	LONG		tree;
+	WORD		obj;
+	WORD		inchar, *idx, kind;
+{
+	OB_TREE = tree;
+	OB_OBJ = obj;
+	OB_CHAR = inchar;
+	OB_IDX = *idx;
+	OB_KIND = kind;
+	gem_if( OBJC_EDIT );
+	*idx = OB_ODX;
+	return((WORD) RET_CODE );
+}
+
+
+
+wind_create()
+
+	- A  bug  was fixed that caused windows with scroll  bars 
+        but  not sizer to be drawn without a white square in  the 
+        sizer position.
+
+	- Make sure your application supports the condition  when 
+        there  are no windows available.   This is important  for 
+        when   multiple  applications  will  share  the   desktop 
+        together.   It can be tested now by renaming DESK1.ACC to 
+        DESK2.ACC to DESK3.ACC and running your application.  The 
+        DESK   menu  will  have  several  duplicated  clock   and 
+        calculator items.  Open all of these and then try to open 
+        your applications window.  Your application should put up 
+        an alert, suggesting that the user close some windows and
+	try again.
+
+
+
+wind_set()
+
+	- When  setting slider position and size,  if the  change 
+        does not require a redraw, none will be issued.
+
+
+
+
+
+
+
+
+
+
+
+SPECIFIC ENHANCEMENTS TO THE VDI
+
+
+
+Escape 61: Generate	This escape generates a tone at a specified              
+                Tone		frequency for a specified time interval.   
+                                                                           
+        			Tone generation may be suppressed by muting
+        			tone generation using Escape function 62.  
+_____________________________________________________________________      
+                                                                           
+Input:	contrl(0) -- Opcode = 5                                            
+        	contrl(1) -- Number of input vertices = 0                  
+        	contrl(3) -- Length of intin array = 2                     
+        	contrl(5) -- Function id = 61                              
+        	contrl(6) -- Device handle                                 
+                                                                           
+        	intin(0)  -- Frequency in Hertz of the tone to generate    
+        	intin(1)  -- Duration of tone specified in timer ticks     
+        		     (for the IBM PC there are 18.2 ticks/sec).    
+                                                                           
+Output:	contrl(2) -- Number of output vertices = 0                         
+        	contrl(4) -- Length of intout array = 0                    
+                                                                           
+_________________________________________________________________________  
+                                                                           
+C BINDING                                                                  
+                                                                           
+Procedure Name	v_sound(handle, frequency, duration)                       
+                                                                           
+Data Types		WORD v_sound();                                    
+			WORD handle;                                       
+        		WORD frequency;                                    
+        		WORD duration;                                     
+                                                                           
+Input Arguments	handle = contrl[6]                                         
+			frequency = intin[0]                               
+        		duration = intin[1]                                
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+Escape 62: Set/Clear    This escape allows tone generation to be           
+           Muting Flag  Enabled or Disabled by setting or clearing         
+           		     the muting flag, or allows inquiry on the     
+        		     present state of the muting flag.             
+_________________________________________________________________________  
+Input:	contrl(0) -- Opcode = 5                                            
+        	contrl(1) -- Number of input vertices = 0                  
+        	contrl(3) -- Length of intin array = 1                     
+        	contrl(5) -- Function id = 62                              
+        	contrl(6) -- Device handle                                 
+                                                                           
+        	intin(0)  -- Action:                                       
+        			-1 - Inquire state of muting flag          
+        			 0 - Allow tone generation                 
+        		         1 - Mute tone generation                  
+                                                                           
+Output:	contrl(2) -- Number of output vertices = 0                         
+        	contrl(4) -- Length of intout array                        
+        		     0 for set muting flag operations              
+        		     1 for inquire state                           
+                                                                           
+        	intout(0) -- For inquiry calls, the present state of       
+        		     the muting flag                               
+        		     0 - Tone generation is allowed                
+        		     non-zero - Tone generation is muted           
+                                                                           
+_________________________________________________________________________  
+                                                                           
+C BINDING                                                                  
+                                                                           
+Procedure Name	    status = vs_mute(handle, action)                       
+                                                                           
+Data Types		    WORD vs_mute();                                
+			    WORD handle;                                   
+        		    WORD action;                                   
+                                                                           
+Input Arguments	    handle = contrl[6]                                     
+			    action = intin[0]                              
+                                                                          
+Output Arguments    status = intout[0] (status is undefined if setting     
+				        or clearing the muting flag)       
+
+
+                        End of Section 1
+
+
+
+
+
+Section 2:
+
+
+Notes on obj_offset
+     by Tim Oren  
+     11/04/85
+
+Jim N.  has asked me to write a few words regarding the  problems 
+people are having with objc_offset.   First, at this time neither 
+Jim  nor  I have been able to isolate ANY error  which  indicates 
+failure within the AES.   The most common problem is supplying an 
+incorrect  object number to the routine.   This has happened as a 
+result of:
+
+     1) Using a TREE name instead of a object name  in  the call,  
+     2) Using the wrong object name or 
+     3) blowing it some other way.   
+
+Let me explain the type of symptoms you will see if you make this 
+kind  of error.   First,  you could get lucky.   The  number  you 
+supply  may be wrong,  but within the legal range of objects  for 
+the tree.   In this case,  you just get the wrong rectangle - and 
+presumably  fix  it.   Secondly,  (and  this is what  causes  the 
+problems)  you  may give objc_offset an object  number  which  is 
+greater than the number defined in the tree.  This will cause the 
+AES to overindex the tree, and attempt to interpret the following
+area of memory as objects.
+
+If there are no following trees in the resource, it will probably 
+read in part of the tree index, try to interpret it as an object, 
+and  go straight into the bag following links  to  nowhere.   You 
+will end up rebooting or doing a cold restart.
+
+If  there are trees following the one you over-indexed,  you will 
+get  an object,  BUT the pointers in it will be relative  to  the 
+WRONG tree.   Depending on how lucky you are,  the system may end 
+up in a tight loop (see above),  or the operation may return with 
+a  ridiculously large x,y value.   Needless to say,  when you use 
+that overrange x,y in an AES or VDI call, you are in big trouble.
+
+So,  the  moral  of  the story is:  If you suspect  trouble  with 
+objc_offset, be SURE you are pointing at the correct object.  The 
+sanity you save may be your own! 
+
+
+More:
+
+The  most common usages of objc_offset,  and how to do them  (and 
+how NOT):
+
+
+When getting the offset of the root of a tree:
+
+     rsrc_gaddr(R_TREE, MYTREE, &tree);
+     objc_offset(tree, ROOT, &x, &y); 
+
+DON'T use the name of the tree instead of ROOT!   Also,  remember 
+that the root x,y of a dialog is undefined until you have  called 
+form_center on the dialog.
+
+
+When getting the offset of a menu title item:
+
+     rsrc_gaddr(R_TREE, MYMENU, &menu_tree);
+     objc_offset(menu_tree, TITLEOBJ, &x, &y); 
+
+DON'T use the address of a dialog tree instead of the  menu_tree. 
+DON'T use the name of the menu tree,  dialog tree, or some dialog 
+object instead of the TITLEOBJ.  (Note: this operation is usually 
+done to define the "zoom box" going to a dialog.) 
+
+
+                        End of Section 2
+
+
+
+
+
+
+Section 3:
+
+
+Beneath the Menu Tree
+     (Technical Notes on Internal and External Formats)
+     by Tim Oren
+
+
+Introduction
+
+There  are  two  illustrations that  accompany  this  file.  They 
+contain  the  figures  referred to in  the  text  below.They  are 
+distributed  with  the Technical Support Information Packet  that 
+came with the GEM DOS 68K Developer Kit.  They are also available 
+as GEM files in the DR FORUM on CompuServe.
+ 
+
+Menu structure - Linkage
+
+The  standard  menu tree structure is shown  in  Figure  1.   The 
+"skeleton"  nodes labelled ROOT,  THE SCREEN,  THE BAR,  and  THE 
+ACTIVE  must be included.   The subtrees below THE ACTIVE and THE 
+SCREEN  are parallel structures,  the former containing the  menu 
+bar  entries,  and the latter the drop-down  definitions.   These 
+sub-trees are also in one-to-one correspondence,  i.e., the first 
+bar  entry in the subtree goes with the first drop-down entry  in 
+the other subtree, and so on.  (Obviously, there must be the same 
+number of each.)  The initial DESK bar entry and drop-down with 8 
+entries  are REQUIRED as a location for desk accessory titles  to 
+be shown at run-time. 
+
+The bar entries are usuallly objects of type G_TITLE,  the  drop-
+downs  are always of type G_BOX.   The subtree of each  drop-down 
+defines  the  entries  appearing within  the  box;  usually  this 
+structure  is  "flat" and composed of G_STRING objects,  but  see 
+below for exceptions.
+
+The  best  way to gain a feel for this structure is to  create  a 
+"blank" menu using the Resource Construction Set,  generate a  .C 
+file  of the resource,  and examine the linkage within the  tree.  
+The  "blank"  menu  will  contain all of  the  required  objects, 
+including  the DESK bar entry and drop-down.   Remember that  the 
+RCS always outputs trees in pre-order.  If you hand-modify a menu 
+tree,  you should preserve the pre-order,  or run it through  the 
+RCS to perform a conversion.
+
+Note  that  changing a menu's internal structure "on the fly"  at 
+run-time  is  not recommended.   If you feel you  must  use  this 
+technique,   be   sure   to  maintain  the  linkage  and   screen 
+requirements given in this document,  and surround the  modifying 
+code  with menu_bar calls to erase and redisplay the menu.   This 
+will  guarantee compatibility with future multi-tasking  versions 
+of GEM which may copy menu trees to a system buffer.
+
+
+Menu Structure - Screen Ownership
+
+Like  all  object trees,  menus must follow the rules  of  visual 
+hierarchy.  Figure 2 shows the standard rectangle organization of 
+menus.  The ROOT object of the menu extends throughout the entire 
+screen.  The X size of the ROOT must be 80.  THE BAR includes the 
+top-most  line of the display for its entire width.   THE  SCREEN 
+comprises the remainder of the display,  in which the  drop-downs 
+will  appear.   THE  ACTIVE is that portion of THE BAR  which  is 
+covered by menu bar entries.
+
+Due  to  details  of the GEM  object  drawing  routines,  certain 
+empirical  object sizing rules must be followed in order that the 
+menu bar be drawn correctly at run-time.  These are: 
+
+      1 THE  BAR  must  have a height of one character  plus  two 
+        pixels (coded as 0x201 in the OB_HEIGHT field).   Its X,Y 
+        displacement is 0,0.
+
+      2 The height of THE ACTIVE must be precisely one  character 
+        plus   three  pixels.    Its  X,Y  displacement  is   2,0 
+        (characters).
+
+      3 The  menu  bar  entries must also have a  height  of  one 
+        character plus three pixels,  with a zero Y displacement.  
+        They  must  completely  cover  THE ACTIVE  area  with  no 
+        overlaps.
+
+      4 THE  SCREEN  must have a Y displacement  of  exactly  one 
+        character plus three pixels.
+
+      5 The entries within each drop-down should completely cover 
+        it.   Overlaps MAY occur.   (If you fail to do this,  the 
+        entire  drop-down  will invert when the cursor touches  a 
+        non-covered  area.)   Each drop-down has a  Y  offset  of 
+        zero,   and  an  X  offset  which  places  it  under  the 
+        corresponding  bar  entry (this will be the  bar  entry's 
+        offset PLUS TWO, because THE ACTIVE is itself offset).	
+
+Again,  the  best reference for these rules is a C source  of  an 
+existing menu tree.  
+
+
+
+Summary of menu run-time
+
+The application is responsible for declaring its menu to GEM with 
+a  menu-bar call.  At this time GEM will adjust the X size of the 
+ROOT,  THE  BAR,  and THE SCREEN if the display is other than  80 
+characters wide.  The desk accessory titles are also installed in 
+the DESK drop-down at this time.  DESK entries which are unneeded 
+are unlinked.   A menu action begins when the GEM screen  manager 
+detects a movement of the mouse into the area of THE ACTIVE.  GEM 
+determines which bar entry was touched, inverts it, and draws the 
+corresponding  drop-down  after  bltting  away  the  screen  area 
+beneath.   GEM  then waits for the mouse to exit the bar  entry's 
+rectangle.   If  the  user moves the mouse to another bar  entry, 
+then the old entry is reinverted,  its drop-down is replaced with 
+the bltted screen contents,  and the new entry and drop-down  are 
+processed as above.   If the mouse moves off THE ACTIVE, then its 
+button state is recorded.
+
+If  the  mouse moves into THE SCREEN or onto non-active parts  of 
+THE BAR, then GEM just waits for it to re-enter the THE ACTIVE or 
+the drop-down.  
+
+Whenever  the  mouse  enters the active  drop-down  GEM  does  an 
+objc_find on the subtree of that drop-down.   Whichever object is 
+found is inverted (if it is not disabled),  and GEM waits for the 
+mouse  to exit that object's rectangle (when this entire sequence 
+is repeated),  or for the mouse button to toggle, which generates 
+a menu-event message and terminates the menu sequence.  Note that 
+the two parameters returned with a menu-event refer to the object 
+number of the selected menu bar object,  and the object number of 
+the selected object within the drop-down.
+
+Figure 3 is a schematic of GEM's mouse/menu handling.
+
+
+
+Making fancy menus  (The School of French Cooking)
+
+Most  unusual  menus  are created with  a  combination  of  three 
+techniques: Using non-text objects in the bar or pull-down, using
+user-defined objects in the drop-down,  and violating the  visual 
+hierarchy rules in the drop-down.   Each of these methods will be 
+discussed in turn, followed by an example of their usage.
+
+You may use bar entry objects which are not typed G_TITLE so long 
+as  you keep all of THE ACTIVE covered with bar entry rectangles.  
+There  are two reasons for caution.  First,  the G_TITLE type  is 
+highly  optimized  for drawing speed.   Use of other  types  will 
+inevitably  degrade GEM's response to mouse motions in  the  bar.  
+Second,  the  G_TITLE type and the empirical bar formatting rules 
+given  above guarantee that the lines at the bottom of  the  menu 
+bar  will  be redraw automatically when the drop-down is  "pulled 
+up".   You  will have to experiment to obtain equivalent  results 
+with any other object type.
+
+You may use non-string objects in a drop-down if you are  willing 
+to accept slower drawing.  Be sure to keep all parts of the drop-
+down  box  covered.   Remember  that some objects  (such  as  bit 
+images)  may look odd when inverted by themselves.   In this case 
+you may wish to employ non-standard hierarchy as explained  below 
+in order to improve the appearence of your menu.
+
+User defined objects may be used in drop-downs.  Since these must 
+be linked to drawing code at run-time, you should insert a place-
+holder  box object which will be modified by your  initialization 
+routines.  Your drawing code will be called by GEM when the drop-
+down  is first drawn,  and again when the object changes state as 
+the mouse moves.   This lets you create unique selection  effects 
+such  as outlines or check-marks.   We strongly suggest that  you 
+avoid  user-defined  objects  in  the  menu  bar:   they  degrade 
+performance unacceptably.
+
+Non-standard visual hierarchy is useful in the drop-downs because 
+the  standard objc_draw and objc_find routines are used by GEM to 
+show and find objects within the box.  This means that the  trick 
+of  overdrawing  an  object with a later sibling (which  will  be 
+found by objc_find) will work here as well as in dialogs. 
+
+Figure 4 shows a sample drop-down which one might wish to  create 
+as  part  of a game program.   Bit images are used to  supplement 
+text  as  a cue to non-reading users.   It is  desired  that  the 
+entire area containing image and text be inverted by GEM when the 
+mouse  points  at  either.   The effect is achieved (in  RCS)  by 
+placing the text and images into the drop-down box  first.   They 
+are  then covered over with G_IBOX objects with extents equal  to 
+the  dashed boxes.   Since G_IBOXs are transparent,  the text and 
+images show through.   Because the boxes were placed  last,  they 
+follow the text and image objects in the tree,  and will be found 
+and  inverted by GEM at run-time.   Since the other objects  show 
+through, they get inverted also!  (NB: NEVER use RCS to SORT this 
+type of drop-down once it has been created!)
+
+
+                        End of Section 3
+
+

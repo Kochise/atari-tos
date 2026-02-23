@@ -1,0 +1,8 @@
+rscreate.rel=tcs,
+rscreate,
+dosbind,
+tcrtl,
+tcrtlasm,
+dosasm,
+longasm
+
