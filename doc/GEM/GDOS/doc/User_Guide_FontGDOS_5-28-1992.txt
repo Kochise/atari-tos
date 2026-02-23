@@ -1,0 +1,500 @@
+FontGDOS Release - May 28, 1992
+
+Legal Statement:
+FONTGDOS.PRG and its associated Drivers, Control Panel Extensions, Desk
+Accessories, and Installation Program ("FontGDOS") are Copyright
+1989-1992 Atari Corporation. FontGDOS may not be uploaded to any
+bulletin board systems, included in any PD or user group libraries,
+sold, or distributed in any way without the express written approval
+of Atari Corp.
+
+In no event will Atari Corp. be liable to you for any incidental
+damages of any kind, including loss of profits or data, even if Atari
+Corp. is aware of the possibility of such damages arising from the
+use of this software.
+
+Atari is pleased to release FontGDOS, the latest version of the
+Graphic Device Operating System for Atari TOS-based computers.
+FontGDOS is a direct replacement for all existing versions of
+GDOS.PRG. It provides many benefits over the existing version of
+GDOS, as well as the "GDOS-clones" that are on the market:
+
+1) Bitmap Caching for more efficient use of RAM; fonts are loaded
+   into RAM on an as-needed basis instead of being resident constantly.
+2) GEM/3 Bezier Curve VDI routines become instantly available to
+   correctly written GEM applications.
+3) More printer drivers are available than ever before, including
+   Deskjet, Paintjet, Okidata Color, Epson Compatible 24-pin BW and
+   Color.
+4) Desk Accessories or Control Panel Extensions now allow you to
+   easily change printer drivers on-the-fly. (Results will vary
+   depending on how well-behaved the application is. Some
+   applications will require that you select the driver before
+   running it; well-behaved applications will allow you to select the
+   driver anytime before actually printing.)
+5) Desk Accessories or Control Panel Extensions now allow you to
+   easily select or install other GDOS drivers and configure and
+   install fonts.
+
+FontGDOS product support is provided in GEnie's Atari Roundtable, 
+Category 14, Topic __. You may also send e-mail to me (B.REHBOCK) or
+Mike Fulton (MIKE-FULTON) if you have technical difficulties. 
+
+Developers that are interested in correctly providing application
+printer output should contact Gail Bacani on 408-745-2022 to obtain
+the latest GDOS application information. It is available to
+registered commercial developers for free. United States and Canadian
+residents that are interested in GDOS programming can order the "GEM
+Programming Guide" from Atari Developer Relations for only $40.00
+(US). The kit contains:
+
+1) GEM Programming Guide,
+     Volume 1 -- VDI (Third Edition:  January 1989)
+     Volume 2 -- AES (Third Edition:  January 1989)
+2) GDOS/FSM GDOS Developer Guide (10/91)
+3) GEM Resource Construction Set (undated)
+
+4) TOS Developer's Kit Disk #2:  MicroEMACS / Source Code Examples / RCS
+
+Simply send a check or money order for $40.00 and a note indicating
+you would like to receive the "GEM Programming Guide" to:
+
+Atari Corp.
+1196 Borregas Ave.
+Sunnyvale, CA 94089
+Attn: Developer Relations/Material Order
+
+Residents outside U.S. and Canada must contact their local Atari
+Subsidiary for the kit.
+
+Enjoy this latest operating system upgrade from Atari.
+
+
+Bill Rehbock
+Director of Applications Software, Atari Corp.
+
+
+
+
+
+
+
+                        A User's Guide to FontGDOS
+                   Copyright ½ 1992 by Atari Corporation
+
+
+
+Introduction:
+-------------
+We should begin with a quick review of what GDOS is and what it allows you
+to do.  GDOS is actually an extension of your operating system.  It allows
+the programs that you run to output text and graphics to printers and other
+devices besides the screen.  GDOS also enables you to print text in many
+different font faces.  Instead of typing characters in the standard system
+font, you now have access to Swiss, Times, Typewriter, and a multitude of
+other fonts.
+
+GDOS is run when you first turn on your machine.  For now, don't worry
+about where to put it or what it needs to run.  Our install program will
+set your system up so that everything will be placed in the correct
+location.
+
+
+Basic Concepts:
+---------------
+FontGDOS replaces the original GDOS.  If you already have the original GDOS
+installed on your system, then your first question is probably, "What's the
+difference between the GDOS that I have now and FontGDOS"?  The main thing
+is that FontGDOS uses memory much more efficiently than earlier versions of
+GDOS.
+
+For example, with the original GDOS v1.1, if you had 18 fonts installed for
+your printer, taking up 1.5 megabytes of disk space, then when your program
+tried to load printer fonts, GDOS would load all 18 fonts and use up 1.5
+megabytes of your free memory (unless you didn't have that much memory
+available).  This would be the case even if the document you were printing
+only used 3 or 4 of the 18 total fonts.
+
+One of the main new features in FontGDOS is "font caching".  With font
+caching, you tell FontGDOS how much memory that you wish to devote to
+storing your bitmap fonts.  This memory is called a cache.  FontGDOS will
+wait to load in a font from disk until when it's actually needed, and then
+store it in the cache for quick access.  When there is no longer any room
+in the cache for the next font, FontGDOS will remove something from the
+cache to make room.  As long as the memory that you allocate for the cache
+is bigger than the largest font, FontGDOS will be able to use as many
+bitmap fonts as you wish in a limited amount of memory.
+
+An even more enhanced version of GDOS known as FSMGDOS is available
+separately for an additional charge.  FSMGDOS uses special outline fonts
+which can be scaled to any size or rotated at any angle without a loss of
+quality (unlike bitmapped fonts).  FSMGDOS also works with bitmapped fonts
+like FontGDOS, but FontGDOS does not work with FSMGDOS outline fonts.
+Contact your Atari dealer for information on obtaining FSMGDOS.
+
+
+
+Getting Started
+---------------
+Installing FontGDOS onto your system is a simple task.  Insert FontGDOS
+disk #1 into your floppy drive.  Run INSTALL.PRG on this disk to install
+FontGDOS onto your system.  The install program will walk you through the
+steps needed to install FontGDOS.  When the installation is completed, you
+will have all of  the necessary files on your system to begin.  (The
+install program is the same for both FontGDOS and FSMGDOS.  Make sure you
+select FontGDOS for installation unless you have FSMGDOS.)
+
+After the installation is completed, you must reboot your machine to enable
+FontGDOS.  If you've installed it correctly, you'll get the new FontGDOS
+sign-on message while you boot up.  If all went well, FontGDOS was
+installed and you should be seeing a normal desktop.  If FontGDOS gives you
+an error message while booting up,  run the install program again, paying
+close attention to any installation error messages which may come up.  Note
+that the installation program will install brand new device drivers, and
+that old drivers for the original GDOS will not work correctly with either
+FSMGDOS or FONTGDOS.  (However, Atari supplies drivers for most popular
+printers with FontGDOS and FSMGDOS.)
+
+FontGDOS should be compatible with all programs that use the original GDOS.
+Try running some of these programs to see how they work with FontGDOS.
+Note that the installation program will set up your system so that you can
+use all of your newly installed fonts immediately.  To change the setup
+(e.g. if you want to use older GDOS fonts from an earlier GDOS
+installation), read the section below on how to use the FontGDOS Printer
+Selector accessory.
+
+Note: The remainder of the document will refer to accessories only, but in
+      all cases the same thing applies to both the Desk Accessory the
+      corresponding CPX modules as well.  Refer to the documentation for
+      the eXtensible CONTROL Panel (XCONTROL) for more information on
+      installing CPX modules.
+
+In addition to the FontGDOS program, three accessories have been provided:
+
+Printer Config:    This accessory is used to change your printer driver
+                   configuration;  you can change the print quality, page
+                   size, number of colors, etc.
+
+Printer Selector:  This accessory is used to select the type of printer
+                   that you are currently using and to control the
+                   installation of bitmap fonts and other GEM device
+                   drivers.
+
+FSM Font Manager:  This accessory is used to set the size of the FontGDOS
+                   memory cache (and for several other purposes when
+                   FSMGDOS is installed.).
+
+
+You should not need to use these accessories very often, since the install
+program should set up your system to be ready to use.  For more information
+on these accessories, please refer the sections below.
+
+
+The ASSIGN.SYS & EXTEND.SYS files
+---------------------------------
+The ASSIGN.SYS file and EXTEND.SYS file contain the information for your
+FontGDOS setup.  The ASSIGN.SYS file is used in exactly the same way with
+FontGDOS or FSMGDOS as with the original GDOS.  All of the new information
+required by FontGDOS or FSMGDOS is controlled by the EXTEND.SYS file.
+
+If you use the accessories to create or modify your FontGDOS setup, they
+will manipulate the ASSIGN.SYS and EXTEND.SYS files for you, and you won't
+have to worry about doing anything with these files.  Even if you have
+experience manipulating the ASSIGN.SYS file for the original GDOS, you will
+find using the accessories much easier.
+
+
+Setting Your Cache Size
+-----------------------
+As mentioned before, FontGDOS does memory caching of bitmap fonts.  It is a
+good idea to make the bitmap cache larger than the file size of the biggest
+bitmap font that you have installed.  If the cache is too small for a font,
+the font cannot be loaded into the system.  If the cache is too small to
+hold any bitmap fonts, then FontGDOS will ignore them altogether.
+
+To set the amount of memory used for the bitmap font cache, go to the
+"Options Menu" of the FSM Font Manager accessory and click on the "Outline
+Font Setup".  From there, click on "Set Font Cache."  The top two values,
+labeled "Character" and "Miscellaneous", are used by FSMGDOS for keeping
+track of outline font information.  With FontGDOS, set both of these to
+zero.
+
+The last cache is the "Bitmap Font" cache used for bitmap fonts.  To set
+the size for this cache, find out which bitmap fonts you use and what their
+file sizes are.  To set the very minimal cache size, just set the cache to
+slightly bigger than the biggest bitmap font file.  From there, if you want
+to improve speed and reduce disk accesses, you can increase the size of the
+cache as memory permits.
+
+   Note: The accessory asks you to set the size of the cache in Kbytes.
+         One Kbyte is equal to 1024 bytes, or characters, of memory.  If
+         your biggest font has a file size of 124,867, then you need a
+         minimum cache size of approximately 125 Kbytes to accommodate it.
+
+After setting the desired cache size, select the "OK" button to return to
+the OUTLINE FONT SETUP menu.  The Bitmap cache is the only setting in the
+FSM Font Manager accessory which is important to FontGDOS, so you don't
+need to change anything else.  Select "OK" again.  Now you should be back
+at the main menu of the accessory.  Select "Save" to write the changed
+cache size back to the EXTEND.SYS file.
+
+
+FOR EXPERTS ONLY:   The size of the cache used for bitmapped fonts is
+                    controlled by the:
+
+                    BITCACHE=??????
+
+                    line in your EXTEND.SYS file.  (Where ?????? means how
+                    many bytes of memory you want FontGDOS to use for the
+                    cache.)
+
+
+
+Using the Printer Selector Accessory
+------------------------------------
+For best results, step through these instructions while viewing the
+accessory on your computer.
+
+The main function of the Printer Selector is to allow you to choose which
+printer you wish to use with GDOS.  This is particularly useful when you
+physically want to change printers (e.g.  You switch from a dot-matrix
+printer for printing labels to a laser printer for word processing.).
+
+You can also select final or draft mode from this accessory.  Selecting
+draft mode reduces the quality of output while speeding up printing time
+(Note that some printers do not support draft mode.).
+
+In addition, the Printer Selector is an accessory that manipulates the
+configuration file called the ASSIGN.SYS.  This file contains the
+information on where FontGDOS locates its drivers and bitmap fonts and
+which of those GDOS should use.
+
+The installation program should have set up your ASSIGN.SYS file so that
+you don't really need to change anything.  The accessory will be most
+useful to you when you need to change printers or add new bitmap fonts.
+Novice users should limit the changes made with this accessory although
+users familiar with the ASSIGN.SYS format will find it easy to configure
+their systems.
+
+When you run the accessory, it should come up displaying the current
+printer.  If you wish to use a different printer, just click on the printer
+name, and select from the list that pops down.  Notice the two buttons
+labeled "Quality:"  which allow you to choose final or draft mode.
+
+To make other changes, such as changing other drivers, or the active bitmap
+fonts, or the pathname of the directory where the fonts and drivers are
+located, click on the "Options" button to enter a box labeled "MAIN MENU"
+which contains three buttons.
+
+Clicking on "Set Font/Driver Path" will come up a box showing the current
+path where FontGDOS expects to find bitmap fonts, printer drivers, and
+other device drivers.  If you want to change this path, clicking on the
+pathname shown will bring up the standard file selector and allow you to
+select the drive and directory where the fonts and drivers are found.
+
+If you click on "Driver Installation", the top half should display the
+active devices (i.e. the drivers that applications can use).  Use the up
+and down arrows to look at the different device numbers and their
+corresponding drivers.
+
+Note that you cannot delete devices 1 to 10 (they should always use
+"SCREEN.SYS" unless you have an add-on video card that uses a different
+screen device driver), but you can change the other entries.  Device 21
+corresponds to the "Current Printer" of the previous menu.  You can change
+the printer driver from either menu, but the current menu allows you to
+change other devices as well.  The list below shows the numbers for the
+basic device driver installation:
+
+Common Device Driver Numbers
+----------------------------
+ 1 = Default Screen Device                  (Devices 1-10 are normally
+ 2 = ST Low Resolution                       set to use SCREEN.SYS unless
+ 3 = ST Medium Resolution                    an add-on video card is used.)
+ 4 = ST High Resolution
+ 5 = reserved
+ 6 = TT Medium Resolution
+ 7 = reserved
+ 8 = TT High Resolution
+ 9 = TT Low Resolution
+10 = reserved
+
+21 = Main Printer driver
+
+31 = GEM Metafile driver (META.SYS)
+
+The bottom half of this menu is used to add more devices to the active
+list.  Novice users should not worry about this section.  To add devices,
+simply use the arrows to move to the device number you wish to add.  The
+title above the arrows will change to indicate the type of driver that is
+expected (devices 1-10 are for the screen; 11-20 are for plotters; 21-30
+are for printers; etc.)  Once you have found the device number you want to
+add, then click on the box that says "None".  A pop-up menu will appear and
+allow you to select the name of the device from the available drivers.  (If
+the device driver you want is not shown, then it is not present in the
+font/driver directory recognized by FontGDOS.  You must copy the driver to
+this folder before it can be installed.)
+
+To delete a device, use the arrows under "Active Devices" to find the
+device, then click the "Delete" button at the bottom of the menu box.
+
+To return to the previous menu, click on the "Menu" button.
+
+If you click on the "Font Installation" button, you can add or delete GEM
+bitmap fonts for different devices.
+
+As you step through the different devices (by clicking the arrows), notice
+how each device has a set of fonts listed.  These are the available bitmap
+fonts an application will see if it uses that device.  (Some devices may
+not have any fonts installed.)
+
+Devices 1 through 10 represent the different screen modes.  Device 21 is
+the main printer device, the one that your applications are most likely to
+use.
+
+If you wish to add fonts for a particular application, add them to the
+devices that will be used by that application.  (Typically, this will mean
+the screen devices and printer device #21).
+
+To actually add fonts, move to the desired device number, then click on the
+drop-down menu called "Active Fonts" and click on "Show Inactive Fonts".
+Now click on the fonts that you want (hold the shift key to select multiple
+fonts) and click on "Append".
+
+You can return to the list of active fonts by clicking on the drop-down
+menu called "Inactive Fonts" and selecting "Show Active Fonts".
+
+To remove fonts from a device, move to the desired device number.  Now
+click on the fonts that you want (hold the shift key to select multiple
+fonts) and click on "Remove".
+
+Note: To install a font, it must be located in the directory specified
+      earlier in the Font/Driver path setting.
+
+      Also, the different screen modes can share the same fonts to a
+      certain degree.  Most modes use square pixels.  These modes can use
+      the same bitmap fonts.  But ST Medium Resolution and TT Low
+      Resolution have rectangular pixels, and cannot use the same fonts as
+      the other screen modes (or the same as each other).
+
+When you are done changing the font installation, select "Menu" to return
+to the MAIN MENU box.
+
+Return to the top menu of the accessory by clicking on the "TOP MENU"
+button.
+
+If you have made changes and want to save them so that they will become
+active, select the "Save" button.  An alert will ask if you want to save
+the ASSIGN.SYS file.  Select "OK" to save your changes, or "Cancel" if you
+change your mind.
+
+To exit the accessory, select the "Exit" button.  If you have made changes
+and haven't saved them, then you will see an alert telling you that the
+options have changed, and asking if you want to save the ASSIGN.SYS file.
+Select "OK" to save your changes, or "Cancel" if you want to exit without
+saving them.
+
+Any changes made will be used the next time a device is opened by an
+application.  If a device is already in use, then you will not see your
+changes happen until the device is closed and reopened.
+
+
+
+Using the Printer Config Accessory
+----------------------------------
+For best results, step through these instructions while viewing the
+accessory on your computer.
+
+The Printer Config accessory is used to change settings in the drivers for
+items such as the page size, print quality, or number of colors.
+
+Configuring drivers should be done before running an application.  If a
+driver is already in use, you will not see the changes happen until the
+next time the driver is opened.
+
+If you click on "Select Drivers", a standard file selector will appear
+showing you the available device drivers.   (All device drivers will be
+shown, not just printer drivers.  Also, drivers will be shown even if they
+are not currently active.)  Select the printer whose driver you wish
+to change.
+
+You should now see a display of the driver specifications.  If a box is
+shadowed, you may change the value by clicking on it.  If the particular
+printer driver you have chosen supports a particular feature (e.g.
+different page sizes or color palettes), use the pop-up menu to look at the
+available selections.  All you need to do is click on the appropriate
+selection.
+
+Note that some drivers do not have any configurable features, and that the
+accessory will modify the actual driver file on your floppy or hard disk
+when a modification is made.  Do not modify your only copy of a driver
+file.
+
+
+
+Using the FSM Font Manager Accessory
+------------------------------------
+For FontGDOS, the only portion of the FSM Font Manager Accessory that is
+important is the part that lets you set the cache size for bitmap fonts.
+See the section above labeled "Setting Your Cache Size" for information on
+using this part of the accessory.
+
+
+
+
+                           QUICK REFERENCE GUIDE
+                           ---------------------
+
+
+
+To Set Cache Sizes:
+-------------------
+
+1) Run the FSM Font Manager accessory.
+
+2) Use Options Menu to select "Outline Font Setup" and select "Set Font
+   Cache".
+
+3) Set "Character" and "Miscellaneous" to 0 if using FontGDOS.  Set "Bitmap
+   Font" to the amount of memory (in Kbytes) that you want to use for the
+   cache.  (This should be at least as large as your biggest font.)
+
+4) Select "OK".  Select "OK" again.  Select "Save" to save your changes.
+   You must reboot for the new cache size to be used.
+
+
+
+
+To Change Printer Drivers:
+--------------------------
+
+1) Run the Printer Selector accessory.
+
+2) Click on pop-up below "Current Printer".  It will currently show the
+   active printer.
+
+3) Select the name of the desired new printer driver.
+
+4) Select "Save".  Your new printer driver will be used the next time an
+   application opens the printer device.
+
+
+
+To Change Bitmap Fonts:
+-----------------------
+
+1) Run Printer Selector accessory.
+
+2) Click on "Options" then on "Font Installation".
+
+3) Select the desired device number with up/down arrows.
+
+4) To add fonts, click on "Active Fonts" menu, and choose the "Show
+   Inactive Fonts" option.  Click on the desired fonts and use "Append"
+   button to activate.
+
+5) To remove fonts,  With "Active Fonts" menu shown, click on the desired
+   desired font names and use the "Remove" button to deactivate.  (If the
+   "Inactive Fonts" menu is shown, then click on it and choose the "Show
+   Active Fonts" option to change the menu.)
+
+
