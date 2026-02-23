@@ -1,0 +1,4250 @@
+head	1.32;
+access;
+symbols
+	TOS0400:1.32
+	OKSPARROW:1.30
+	STPAD43:1.29
+	SPRW_DAL:1.29
+	FINAL206:1.26
+	TOS306:1.22
+	VERS06h:1.18
+	VERSX06c:1.12
+	VERSX06b:1.12
+	XDOT06:1.12
+	TT304:1.10
+	TTFINAL:1.8
+	BLUE:1.7
+	GREEN:1.7
+	ORANGE:1.7
+	MAR011990:1.6
+	FIRST_MAS:1.4
+	LAST_AS68:1.3;
+locks;
+comment	@* @;
+
+
+1.32
+date	92.08.11.00.34.42;	author kbad;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	92.07.27.20.12.04;	author kbad;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	92.05.18.23.07.56;	author unknown;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	92.02.28.08.25.22;	author apratt;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	92.02.12.01.32.14;	author apratt;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	91.11.06.22.42.16;	author apratt;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	91.10.15.15.04.18;	author apratt;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	91.10.11.17.27.30;	author apratt;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	91.09.30.18.04.38;	author apratt;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	91.09.30.16.45.06;	author apratt;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	91.09.13.17.45.58;	author apratt;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	91.09.13.00.46.52;	author apratt;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	91.09.12.19.56.18;	author apratt;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	91.09.06.14.50.56;	author apratt;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	91.08.21.11.18.56;	author apratt;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	91.08.20.13.22.25;	author minna;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	91.08.15.16.18.07;	author apratt;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	91.08.02.16.21.23;	author minna;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	91.08.02.15.07.10;	author minna;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	91.07.29.12.37.45;	author minna;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	91.03.27.12.36.36;	author apratt;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	91.02.26.17.58.37;	author minna;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	90.10.29.15.52.12;	author minna;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	90.10.19.16.05.22;	author minna;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	90.08.03.13.22.48;	author apratt;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	90.03.06.16.09.16;	author apratt;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	90.03.02.17.46.34;	author apratt;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	90.03.01.17.27.00;	author apratt;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	89.09.22.16.42.55;	author apratt;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	89.09.07.16.30.02;	author apratt;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	89.08.25.16.49.18;	author apratt;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	89.08.25.16.45.32;	author apratt;	state Exp;
+branches;
+next	;
+
+
+desc
+@This file contains the dmaread XBIOS call and the resetscsi procedure.
+@
+
+
+1.32
+log
+@TOS 4.00 Falcon030 first production version
+@
+text
+@.super
+******************* Revision Control System *****************************
+*
+* $Author: kbad $
+* =======================================================================
+*
+* $Date: 1992/07/27 20:12:04 $
+* =======================================================================
+*
+* $Locker:  $
+* =======================================================================
+*
+* $Log: dmaread.s,v $
+* Revision 1.31  1992/07/27  20:12:04  kbad
+* Nearly last Sparrow test BIOS
+*
+* Revision 1.30  1992/05/18  23:07:56  unknown
+* Sparrow and TT are M68030 - no longer read from a file
+*
+* Revision 1.29  1992/02/28  08:25:22  apratt
+* Changed cache handling to be .if M68030 rather than .if SCSI.  This lets
+* us make ROMs for Sparrow.
+*
+* Revision 1.28  1992/02/12  01:32:14  apratt
+* Much Sparrow stuff. Also fixed a bug in slow ACSI devices.
+*
+* Revision 1.27  1991/11/06  22:42:16  apratt
+* Fixed a BIG OOPS: at qd0 the label 'sdelay' was wrong so that
+* the add of _hz_200 to d0 was INSIDE the loop.  Oops.  Fixed.
+*
+* Revision 1.26  1991/10/15  15:04:18  apratt
+* Fixed a bug in the caller of strcmp.
+*
+* Revision 1.24  1991/09/30  18:04:38  apratt
+* Previous version worked very badly.  One theory: Conner says that
+* you need a delay between Identify and Init Parameters.  When Minna
+* took out the Init Parameters call, she also took out the delay.
+* Well, hmm, maybe the delay is required between Identify and
+* ANYTHING ELSE.  So it's back.
+*
+* Revision 1.23  1991/09/30  16:45:06  apratt
+* New from Minna: checks both READY and BUSY waiting for the right values.
+* Seems some drives set READY before clearing BUSY.  Sigh.
+*
+* Revision 1.22  1991/09/13  17:45:58  apratt
+* Oops - the delay was supposed to be 500us, not 500ms.  Made it
+* two ticks, which is btw 5 and 10 ms.
+*
+* Revision 1.21  1991/09/13  00:46:52  apratt
+* Minna added yet another delay: Conner wants 0.5sec between
+* power up and the Identify command.
+*
+* Revision 1.20  1991/09/12  19:56:18  apratt
+* Changed to assemble IDE_AT for ALL MACHINES, now that there's no
+* distinction at assembly time between ST and STPLUS.
+*
+* Revision 1.19  1991/09/06  14:50:56  apratt
+* Changed all "ifne" to "if" and "ifeq" to "if !" and "endc" to "endif."
+*
+* Revision 1.18  91/08/21  11:18:56  apratt
+* Fixed two oopses: iderdy is now consistently _iderdy,
+* and undev is outside IDEAT conditionals.
+* 
+* Revision 1.17  91/08/20  13:22:25  minna
+* Added iderdy() to test if IDE drive is ready before 
+* it's being talked to.  If the drive does not become
+* ready in 5 sec., it's considered as an unknown device.
+* 
+* Revision 1.16  91/08/15  16:18:07  apratt
+* Added code for IDE to wait until ATASR shows READY before
+* doing anything else.  Also changed so IDE_AT is assembled for
+* all STPLUS versions; the bus error detection will take care
+* of failing out quick on those machines that don't really have
+* an IDE bus.
+* 
+* Revision 1.15  91/08/02  16:21:23  minna
+* Added delay between identify() and initparm(),
+* and reversed changes made earlier today.
+* 
+* Revision 1.14  91/08/02  15:07:10  minna
+* Added handling of final interrupt after data transfer
+* on IDE drive.
+* 
+* Revision 1.13  91/07/29  12:37:45  minna
+* _atread() and _atwrite modified to not use the
+* ATSC (sector count register) to count down on
+* multiple sectors read or write.  Some vendors
+* decrement the register too early.
+* 
+* To test if the IDE interface exists, instead of
+* reading from bAT (the data register), read from
+* ATASR (the alternate status register.)
+* 
+* Revision 1.12  91/03/27  12:36:36  apratt
+* Base address of IDE has moved to $F00000.  This code assumes that the base
+* address is on a longword boundary.  Added guards against missing IDE bus,
+* and against missing ACSI (bus error when accessing DMA chip).  This is
+* for prototype PADs only, and may go away soon.
+* 
+* Changed switches to SCSI and IDE_AT, which are set based on TT and STPAD at
+* the top of the file.
+* 
+* Revision 1.11  91/02/26  17:58:37  minna
+* Base address of IDE bus has been moved to $F00000.  Note that this code
+* relies on the base address of the IDE bus being on a longword boundary.
+* 
+* Revision 1.10  90/10/29  15:52:12  minna
+* Base address of IDE bus has been moved to $C00040 (long word boundary).
+* 
+* Revision 1.9  90/10/19  16:05:22  minna
+* Added code to handle drives on the IDE-AT bus.
+* 
+* Revision 1.8  90/08/03  13:22:48  apratt
+* TTOS FINAL RELEASE
+* 
+* Revision 1.7  90/03/06  16:09:16  apratt
+* Moved .globl _resetscsi into the TT conditional; otherwise
+* MAS thinks it's external, even though it's never used!
+* 
+* Revision 1.6  90/03/02  17:46:34  apratt
+* This rev is the source for the 3/1/90 ROM.
+* 
+* Revision 1.5  90/03/01  17:27:00  apratt
+* Checkin of Minna's changes, including adding better spin-up delays
+* and the dmawrite call.
+* 
+* Revision 1.4  89/09/22  16:42:55  apratt
+* THIS VERSION REQUIRES TURBO C'S "MAS" ASSEMBLER
+* No functional changes from previous revision, which is the last to
+* require Alcyon's AS68 assembler.
+* 
+* Revision 1.3  89/09/07  16:30:02  apratt
+* Added delay after (potentially) resetting ACSI DMA chip; see SLOWACSI
+* code in flop.b.
+* 
+* Revision 1.2  89/08/25  16:49:18  apratt
+* Moved lastacstm from text seg to bss.
+* 
+* Revision 1.1  89/08/25  16:45:32  apratt
+* Initial revision
+* 
+*
+* =======================================================================
+*
+* $Revision: 1.31 $
+* =======================================================================
+*
+* $Source: d:/tos/bios\rcs\dmaread.s,v $
+* =======================================================================
+*
+*************************************************************************
+
+* TT and STPAD equates must be specified on the command line
+
+* The code you get in assembling this file depends on the switches SCSI and
+* IDE_AT.  For now (2/91), only TT has SCSI and all STPLUSes have IDE.
+*
+* Those STPLUS machines which use these ROMs but don't actually have an IDE
+* bus will still get the IDE code, but using it will fail right away
+* because it always probes for the IDE bus and returns if it doesn't exist.
+*
+* As of 9/91 we want One Rom To Rule Them All, so ALL machines have IDE_AT.
+*
+
+* SPARROW and TT are both M68030.
+
+M68030		equ	(SPARROW | TT)
+
+SCSI		=	TT
+IDE_AT		=	1	; Always! (AKP 9/91)
+
+SPSCSI		=	SPARROW	; 1: Sparrow SCSI
+
+;+
+; DMAREAD(), DMAWRITE() - 
+;	New XBIOS calls to read from or write to hard disk on the
+; ACSI, SCSI or IDE-AT bus.  This is a low-level read/write which 
+; does not do a lot of checking.  Amount of data requested on each 
+; ACSI read or write MUST be smaller than or equal to 255 physical
+; (512-byte) sectors.  On SCSI, all I/O are done by handshaking.  
+; Amount of data requested on each IDE-AT read or write MUST be 
+; smaller than or equal to 256 physical (512-byte) sectors.
+;
+; Jul-24-1989	ml.	Started this from AHDI 3.50 of Jul 24 1989.
+; Aug-23-1989	ml.	Added in code to do hand-shake I/O, instead of
+;			DMA.
+; Dec-11-1989	ml.	Adjusted time-outs.
+; Feb-08-1990	ml.	Updated according to corrections made to the
+;			TT driver (DRIVER.PRG v3.63)
+;			Renamed as dmarw() after adding code to handle
+;			writes also.
+; Feb-28-1990	ml.	Split dmarw() to become dmaread() and dmawrite()
+;			as requested by AKP.  Modified time-out handling.
+;			If system was up for less than UPTIME clicks, use
+;			UPTIME as time-out counter rather than the regular
+;			SC?TMOUT value.
+; Mar-02-1990	ml.	Undid (again?!!) modifications made since Feb 28.
+;			Will use regular SC?TMOUT values.  BIOS will keep
+;			calling _dmaread() at boot time until the drive
+;			responses, BIOS' time-out count expires, or when 
+;			Bios receive a quit message from the user.
+; Oct-16-1990	ml.	Added in code to handle drives on the IDE-AT bus
+;			also.  The code comes from DRIVER.PRG v4.50 (dated
+;			Oct 16 1990), and is slightly modified.
+; Oct-29-1990	ml.	Base address of the IDE bus has been moved to
+;			$C00040 (long word boundary).
+; Feb-22-1991	ml.	Base address of the IDE bus has been moved to
+;			$F00000 (long word boundary).
+; Jul-29-1991	ml.	Do not use the IDE Sector Count Register 
+;			to count down mulitiple sectors read or
+;			write.  Some vendors (e.g. Conner and 
+;			Seagate) seem to update this register 
+;			too early, and every now and then, the
+;			last sector of data would remain in the
+;			internal sector buffer.  
+;			
+;			Code in ideread() and idewrite() are modified
+;			not to use the IDE Sector Count Register.
+;
+;			To check if the IDE bus is there, read from
+;			the alternate status register instead of the
+;			data register.
+;
+; Aug-02-1991	ml.	Added handling of final interrupt from the
+;			IDE drive after data transfer. (Routines that 
+;			call readbuf() and wrtbuf() are modified).
+;
+; Aug-02-1991	ml.	Change again!  Conner now says there is no
+;			final interrupt after data transfer, but need
+;			a delay between the identify() and initparm().
+;
+; Aug-15-1991	ml.	Added a check to see if IDE drive is ready before
+;			sending it the identify() command, by testing the
+;			DRDY (driver ready) bit in the Alternate Status
+;			Register.
+;
+; Aug-20-1991	ml.	Added iderdy() to check if an IDE drive is ready
+;			or not, this includes the check for the existence 
+;			of the slave drive (IDE unit 1.)
+;
+; Sep-12-1991	ml.	Added in yet another delay for IDE drive.  Conner
+;			requires a 500us delay before calling identify()
+;			after power on.
+;
+; Sep-24-1991	ml.	In order to accomodate the Conner CP-2024 (2.5"
+;			IDE drive,) the readbuf() and wrtbuf() routines
+;			need to do move.w instead of move.l to transfer
+;			data.  A tower of 8 move.w is used to speed up
+;			the transfer.
+;
+; Sep-25-1991	ml.	Extended time-out (>= 1.5s) for data hand-shake 
+;			to account for slow SCSI devices (e.g. CDAR-505 
+;			CD-ROM.)  The extended time-out is only needed 
+;			between the end of command phase to the beginning 
+;			of data	phase.  The code has the extended time-out 
+;			for every byte of data to be hand-shaken, but this
+;			should not affect performance because it should
+;			not time-out between data bytes.
+;
+;			Modified _resetscsi() to clear the SCSI reset 
+;			interrupt request (should anyone ever want to
+;			use interrupts for watching the 5380) by reading 
+;			from the 5380's reset error/interrupt register.
+;
+; Sep-26-1991	ml.	If a time-out occurs BEYOND the selection phase,
+;			a SCSI RESET is done to clear the SCSI bus from
+;			any odd state.
+;
+;			Deleted code which initializes IDE drive parameters.
+;			Just use parameters returned by _identify().  So,
+;			delay added between _identify() and _initparm() was
+;			also deleted.
+;
+;			To take care of the bigger sector size (2K) of the
+;			CD-ROM, the ACSI DMA counter is always set at the 
+;			maximum of 255 512-byte blocks.  This basically 
+;			disables the DMA counter and let the counter on 
+;			the device determines when the transfer is finished.
+;			This implies the maximum number of sectors that can
+;			be transferred to or from the CD-ROM is 63.  This
+;			limit should be enforced by the caller of _dmaread()
+;			and _dmawrite().
+;
+; Sep-27-1991	ml.	Instead of just checking the ready bit in the IDEASR
+;			in _iderdy(), check the entire byte for the value
+;			0x50 (the ready status.)
+;
+; Sep-30-1991	ml.	Added delay in _fdone() and _qdone() to take care of
+;			slow ACSI devices, for example the laser printer, to
+;			guard against applications which call dmaread() or
+;			dmawrite() on such devices.
+;
+;			Delay that was taken out with the _initparm() is
+;			put back.  Conner drives probably needs that delay
+;			between _identify() and any command!
+;
+; Oct-11-1991	ml.	Special-cased Conner CP2024 when getting current 
+;			drive parameters.  Conner CP2024's current drive
+;			parameters are not stored in the _identify() data.
+;			
+; Nov-06-1991	ml.	Big OOPS!!!  When delay was added in to take care of
+;			slow ACSI devices, the label "sdelay" for the branch
+;			accidentally includes the "add" instruction.  So, it
+;			takes a long time before we exit the loop.
+;-
+
+.globl	_dmaread
+.globl	_dmawrite
+
+
+; System variables
+flock	    equ	    $43e    ; FIFO lock variable
+_hz_200	    equ	    $4ba    ; system 200hz timer
+
+; For ACSI and SCSI drives
+READ	    equ	    $08	    ; opcode for Read sectors
+WRITE	    equ	    $0a	    ; opcode for Write sectors
+NCMD	    equ	    6	    ; normal command length (6 bytes)
+MAXACSI	    equ	    7	    ; highest ACSI unit#
+MAXSCSI	    equ	    15	    ; highest SCSI unit#
+
+; For IDE-AT drives
+IDEREAD	    equ	    $20	    ; opcode for Read sectors
+IDEWRITE    equ	    $30	    ; opcode for Write sectors
+IDENTIFY    equ	    $ec	    ; opcode for Identify Drive
+D_IDENTIFY  equ	    2	    ; delay between power on and identify() (500us)
+D_WORST	    equ	    2000    ; worst case delay (10s)
+IDERDY	    equ	    1000    ; delay to wait for IDE drive to be ready
+MAXIDE	    equ	    16	    ; highest IDE-AT unit# (unit 0 ONLY)
+
+; Error codes to return to BIOS
+EUNDEV	    equ	    (-15)   ; UNknown DEVice
+EREADF	    equ	    (-11)   ; READ Fault
+EWRITF	    equ	    (-10)   ; WRITe Fault
+
+; Offsets for registers addressing on data bus
+REGBASE	    equ	    1	    ; most are on odd part of data bus
+REGSTEP	    equ	    2	    ; for regs that are on word boundaries
+REGLSTEP    equ	    4	    ; for regs that are on long word boundaries
+
+
+;+
+; Declarations
+;-
+.bss
+lastacstm:	ds.l	1	; controller last accessed time
+_cmdblk:	ds.b	10	; command block
+rwflag:		ds.b	1	; 0: read   1: write
+.even
+
+.if IDE_AT
+sbuf:		ds.l	129	; scratch buffer (must be on long word
+				;	boundary)
+.even
+
+.endif
+
+.text
+
+;+
+; dmaread() - read from a DMA device.
+; dmawrite() - write to a DMA device.
+;
+; LONG	sectnum		$4(sp).l
+; WORD	count		$8(sp).w
+; BYTE	*buf;		$a(sp).l	$b(sp)=high $c(sp)=mid $d(sp)=low
+; WORD	pdev;		$e(sp).w
+;
+; Returns 0 if successful.
+; Returns a negative number if failure: 
+;	EUNDEV (-15L) if unknown device (bad dev number)
+;	EREADF (-11L) if read failure
+;	EWRITF (-10L) if write failure
+;	       (-1L)  if timed-out
+;
+; Comments:
+;	ACSI, SCSI and IDE-AT drives are supported.
+;-
+	.globl	_dmaread
+_dmaread:
+	move.b	#0,rwflag		; rwflag = 0 => a read
+	move.w	#READ,d1		; d1 = opcode for READ
+	bra.b	dmarw
+	
+	.globl	_dmawrite
+_dmawrite:
+	move.b	#1,rwflag		; rwflag = 1 => a write
+	move.w	#WRITE,d1		; d1 = opcode for WRITE
+	
+dmarw:
+.if IDE_AT
+	cmpi.w	#MAXIDE,$e(sp)		; unit# > IDE-AT unit# 16?
+.else
+.if SCSI|SPSCSI
+	cmpi.w	#MAXSCSI,$e(sp)		; unit# > SCSI unit# 8-15?
+.else
+	cmpi.w	#MAXACSI,$e(sp)		; unit# > ACSI unit# 0-7?
+.endif
+.endif
+	bhi	undev			; if so, return unknow device
+
+.if IDE_AT
+	cmp.w	#MAXSCSI,$e(sp)		; an IDE-AT unit?
+	bhi	ide0			; if so, talk IDE-AT
+.endif
+					; else talk ACSI or SCSI
+	lea	_cmdblk,a0		; a0 -> beginning of command block
+	move.b	d1,(a0)+		; byte 0 = opcode
+	move.b	5(sp),(a0)+		; byte 1 = msb of logical block addr
+	move.b	6(sp),(a0)+		; byte 2 = logical block addr
+	move.b	7(sp),(a0)+		; byte 3 = lsb of logical block addr
+	move.b	9(sp),(a0)+		; byte 4 = transfer length (in blocks)
+	clr.b	(a0)			; byte 5 = control byte
+	move.w	$e(sp),d0		; d0 = physical unit number
+	moveq	#NCMD,d2		; d2 = length of command
+	movea.l	$a(sp),a0		; a0 = buffer
+	tst.b	rwflag			; read or write?
+	bne.b	rw0			; it's a write
+	bsr	_dorcmd			; send a receive data command
+	bra	rw1
+rw0:	bsr	_dowcmd			; send a write data command
+
+.if IDE_AT
+	bra	rw1			; branch will take place for 
+					;	non-IDE drives
+*
+* Before doing anything with the IDE bus, make sure it's there.
+* (The label noide is before at just because it fits better.)
+*
+
+noide:	move.l	a1,sp			; got the bus error on IDEASR;
+	move.l	a0,$8			; restore vector & sp, return EUNDEV
+	bra	undev
+
+ide0:	move.l	$8,a0
+	move.l	sp,a1
+	move.l	#noide,$8
+	tst.b	IDEASR			; read a register to probe for IDE bus
+	move.l	a1,sp			; hey! no bus error!
+	move.l	a0,$8			; restore vector & sp and continue.
+
+	move.b	$f(sp),d0		; IDE unit#
+	bsr	_iderdy			; wait for drive to be ready
+	beq	undev			; if drive never gets ready, return
+					;   with unknown device
+					; else
+	move.l	#D_IDENTIFY,d0		; delay required by Conner drives
+	add.l	_hz_200,d0		;  between power on and identify()
+ide1:	cmp.l	_hz_200,d0
+	bcc.b	ide1
+
+	pea	sbuf			; scratch buffer for drive parameters
+	move.w	$12(sp),-(sp)		; IDE unit#
+	bsr	_identify		; identify()
+	addq.w	#6,sp			; clean up stack
+	tst.w	d0			; successful?
+	bmi	rwend			; if timed-out, return
+	bne	rw2			; if error, return with error code
+					; else can do read or write
+	move.l	#D_IDENTIFY,d0		; delay required by Conner drives
+	add.l	_hz_200,d0		;  between identify() and r/w
+ide4:	cmp.l	_hz_200,d0
+	bcc.b	ide4
+
+	pea	sbuf			; beginning of _identify() data
+	bsr	_gcparm			; get drive current parameters
+	addq	#4,sp			; clean up stack
+
+	move.w	$e(sp),-(sp)		; physical unit #
+	move.l	$c(sp),-(sp)		; buffer
+	move.w	$e(sp),-(sp)		; count
+	move.l	$c(sp),-(sp)		; logical block address
+	move.w	d2,-(sp)		; # sectors per track
+	move.w	d1,-(sp)		; # data heads
+	tst.b	rwflag			; read or write?
+	bne.b	ide2			; (write)
+	bsr	_ideread		; read sectors
+	bra.b	ide3
+ide2:	bsr	_idewrite		; write sectors
+ide3:	adda	#16,sp			; clean up stack
+.endif	
+rw1:	
+.if	M68030
+	move.w	sr,-(sp)		; go to IPL 7
+	ori	#$700,sr		; no interrupts right now please
+	movec	cacr,d1			; d1 = (cache control register)
+	ori.w	#$0808,d1		; dump both the I and D cache
+	movec	d1,cacr			; update cache control register
+	move.w	(sp)+,sr		; restore interrupt state
+.endif
+	tst.w	d0			; successful?
+	ble.b	rwend			; if no error or timed-out, return
+					; else
+rw2:	moveq	#EREADF,d0		; assume it's a read error
+	tst.b	rwflag			; read or write?
+	beq.b	rwend			; if read, done
+	moveq	#EWRITF,d0		; else, it's a write error
+rwend:	rts
+
+undev:	moveq	#EUNDEV,d0
+	bra.b	rwend
+
+;+++++++++++++++++++++++++++++++;
+;				;
+;    ACSI and SCSI specific	;
+;				;
+;+++++++++++++++++++++++++++++++;
+
+;+
+; dorcmd() - send a command which will receive data from the target
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+_dorcmd:
+.if SCSI
+	cmp.w	#MAXACSI,d0		; unit# > ACSI unit# 0 - 7?
+	bls.b	rcacsi			; if not, it's an ACSI device
+	bsr	_rcvscsi		; else, it's a SCSI device
+	rts
+.else
+.if SPSCSI
+	bsr	_rcvspscsi
+	rts
+.endif
+.endif
+
+rcacsi:	bsr	_rcvacsi		; it's an ACSI device
+	rts
+
+
+;+
+; dowcmd() - send a command which will write data to the target
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+_dowcmd:
+.if	SCSI
+	cmp.w	#MAXACSI,d0		; unit# > ACSI unit# 0 - 7?
+	bls.b	wracsi			; if not, it's an ACSI device
+	bsr	_wrtscsi		; else, it's a SCSI device
+	rts
+.else
+.if SPSCSI
+	bsr	_wrtspscsi
+	rts
+.endif
+.endif
+wracsi:	bsr	_wrtacsi		; it's an ACSI device
+	rts
+
+	
+
+;+++++++++++++++++++++++++++++++;
+;				;
+;	ACSI specific		;
+;				;
+;+++++++++++++++++++++++++++++++;
+
+;+
+;  Hardware definitions for ACSI
+;-
+WDC		equ	$ffff8604
+WDL		equ	$ffff8606
+WDCWDL		equ	WDC		; used for long writes
+XWDL		equ	WDL-WDC		; offset from wdc to wdl
+
+DMAHI		equ	$ffff8609
+DMAMID		equ	DMAHI+2
+DMALOW		equ	DMAMID+2
+GPIP		equ	$fffffa01
+
+
+;+
+;  Tunable (delay) values for ACSI
+;-
+ACLTMOUT	equ	600		; long time-out (3 s)
+ACSTMOUT	equ	20		; short time-out (100 ms)
+
+
+;+
+; LONG _qdone() - Wait for command byte handshake
+; LONG _fdone() - Wait for operation complete
+; Passed:	nothing
+;
+; Returns:	EQ: no time-out
+;		MI: time-out condition
+;
+; Uses:		D0
+;
+;-
+_fdone:	move.l	#ACLTMOUT,d0
+	bra.b	qd0
+
+_qdone:	move.l	#ACSTMOUT,d0
+
+qd0:	move.l	d0,-(sp)		; save timeout value
+	moveq	#2,d0			; busy-wait delay for slow ACSI
+	add.l	_hz_200,d0		; minimum 20 microsec.
+sdelay:	cmp.l	_hz_200,d0
+	bge.b	sdelay
+	move.l	(sp)+,d0		; restore timeout value
+
+	add.l	_hz_200,d0
+qd1:	cmp.l	_hz_200,d0		; time-out?
+	bcs.b	qdq			; (i give up, return NE)
+	btst	#5,GPIP			; interrupt?
+	bne.b	qd1			; (not yet)
+
+	moveq	#0,d0			; return EQ (no time-out)
+	rts
+
+qdq:	moveq	#-1,d0
+	rts
+
+
+;+
+; Wait for end of SASI command
+;
+; Passed:	d1 value to be written to wdl
+;
+; Returns:	EQ: success (error code in D0.W)
+;		MI: time-out (-1 in D0.W)
+;		NE: failure (SASI error code in D0.W)
+;
+; Uses:		d0
+;-
+_endcmd:
+	bsr	_fdone			; wait for operation complete
+	bmi.b	endce			; (timed-out, so complain)
+
+.if	M68030				; dump D cache
+	move.w	sr,-(sp)		; go to IPL 7
+	ori.w	#$700,sr		; no interrupts right now kudasai
+	movec	cacr,d0			; d0 = (cache control register)
+	ori.w	#$800,d0		; dump the D cache
+	movec	d0,cacr			; update cache control register
+	move.w	(sp)+,sr		; restore interrupt state
+.endif
+
+	move.w	d1,WDL
+	move.w	WDC,d0			; get the result
+	and.w	#$00ff,d0		; (clean it up) if non-0 should do a
+					; RequestSense command to learn more
+endce:	move.l	_hz_200,lastacstm	; update controller last accessed time
+	addq.l	#2,lastacstm		; lastacstm = _hz_200 + 2;
+	rts				
+
+
+;+
+;  Handle command time-out;
+;  Unlock DMA chip and return completion status;
+;-
+_hdone:	move.w	#$80,WDL	; Landon's code seems to presume we put 
+				;  $80 there
+	sf	flock		; NOW, signal that we are done
+	rts
+
+
+;+
+; delay()
+;	5 - 10ms kludge delay for message byte sent back by controller.
+;-
+_delay:	move.l	d0,-(sp)		; preserve d0
+	move.l	lastacstm,d0		; d0 = controller last accessed time
+wait:	cmp.l	_hz_200,d0		; while (_hz_200 <= lastacstm)
+	bcc.b	wait			;	wait()
+	move.l	(sp)+,d0		; restore d0
+	rts
+
+
+;+
+; rcvacsi() - send a ACSI command which receives data from target.
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+_rcvacsi:
+
+* check to see if the ACSI bus actually exists! Needed for prototype PADs
+	move.l	$8,a1
+	move.l	sp,a2
+	move.l	#noacsi,$8
+	tst.w	WDL			; harmless or bus erorr
+	move.l	a1,$8			; no bus error - restore & continue
+	move.l	a2,sp
+
+	st	flock			; lock FIFO
+	bsr	_delay			; delay if necessary
+	movea.l	#WDC,a1			; a1 = pointer to DMA chip
+
+	bsr	setadma			; set DMA pointer
+	move.w	#$190,XWDL(a1)	;WDL	; toggle DMA chip to direction
+	bsr	rstdelay		; delay
+	move.w	#$090,XWDL(a1)	;WDL	;  for receiving data
+	bsr	rstdelay		; delay
+	bsr	setacnt			; set DMA count
+
+	lea	_cmdblk,a0		; a0 = address of command block
+	moveq	#0,d1			; direction of DMA is IN
+	bsr	sblkacsi		; send the command block
+raend:	bra	_hdone			; cleanup after IRQ
+
+
+;+
+; wrtacsi() - send an ACSI command which will write data to the target
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+_wrtacsi:
+
+* check to see if the ACSI bus actually exists! Needed for prototype PADs
+	move.l	$8,a1
+	move.l	sp,a2
+	move.l	#noacsi,$8
+	tst.w	WDC			; harmless or bus erorr
+	move.l	a1,$8			; no bus error - restore & continue
+	move.l	a2,sp
+
+	st	flock			; lock FIFO
+	bsr	_delay
+	movea.l	#WDC,a1			; a1 = pointer to DMA chip
+
+	bsr	setadma			; set DMA pointer
+	move.w	#$90,XWDL(a1)	;WDL	; toggle DMA chip for "send"
+	bsr	rstdelay		; delay 
+	move.w	#$190,XWDL(a1)	;WDL
+	bsr	rstdelay		; delay
+	bsr	setacnt			; set DMA count
+	
+	move.l	#$0100,d1		; d1 = direction of DMA is OUT
+	bsr	sblkacsi		; send the command block
+
+waend:	bra	_hdone			; cleanup after IRQ
+
+* You get to this label if there is a bus error when probing for
+* the ACSI bus: it's meant for prototype PADs, which don't
+* have an ACSI DMA chip.
+
+noacsi:	moveq.l	#-15,d0			; return EUNDEV
+	move.l	a2,sp
+	move.l	a1,$8
+	rts
+
+;+
+; sblkacsi() - send command block
+;
+; Passed:
+;	d0.w = physical unit number
+;	d1.l = direction of DMA ($0000 for IN or $0100 for OUT)
+;	d2.w = command length (NCMD or LCMD)
+;	a1.l = pointer to DMA chip
+;
+; Returns:
+;	d0.l =  0 if successful
+;	d0.l = -1 if time-out
+;
+; Trashes:
+;	d0, d1, d2, a2
+;-
+sblkacsi:
+	move.b	#$88,d1			; next byte is the opcode
+	move.w	d1,XWDL(a1)	;WDL
+
+	move.b	#$8a,d1			; following bytes are operands
+	lea	_cmdblk,a2		; a2 = address of command block
+					; integrate unit # into cmd blk
+	lsl.b	#5,d0			; shift unit number into place
+	or.b	d0,(a2)			; first command byte = unit # | opcode
+					; control byte is sent seperately
+	subq.w	#2,d2			; and dbra likes one less 
+sa1:	swap	d1			; d1.hw = operand
+	move.b	(a2)+,d1		; d1.lw = tells controller next byte
+	swap	d1			;	  is an operand
+	move.l	d1,(a1)		;WDCWDL
+	bsr	_qdone
+	bmi.b	sbaend			; if time-out, returns
+	dbra	d2,sa1			; else send rest of command block
+
+	move.w	d1,XWDL(a1)	;WDL	; get ready to send control byte
+	move.b	#0,d1			; signal sending control byte
+	swap	d1			; d1.hw = control byte
+	move.b	(a2),d1			; d1.lw = tells controller it's end
+	swap	d1			;	  of command
+	move.l	d1,(a1)			; send it
+
+	move.b	#$8a,d1			; d1 = wdl value
+	bsr	_endcmd			; wait for command completion
+sbaend: rts				; heading home
+
+
+;+
+; setadma() - set the ACSI DMA pointer
+;
+; Passed:
+;	a0.l = buffer address
+;-
+setadma:
+	move.l	a0,-(sp)		; move it on stack
+	move.b	3(sp),DMALOW		; set low-byte of address
+	move.b	2(sp),DMAMID		; set mid-byte of address
+	move.b	1(sp),DMAHI		; set high-byte of address
+	addq.l	#4,sp			; clean up stack
+	rts
+
+
+;+
+; setacnt() - set the ACSI DMA counter
+;
+; Comments:
+;	26-Sep-1991 ml	DMA counter is always set at the maximum 
+; (255 sectors) to force the use of the device counter.
+;
+; Passed:
+;	a1.l = pointer to DMA chip
+;-
+setacnt:
+	move.w	#$ff,(a1)		;WDC	; set DMA count
+	rts
+
+
+;+
+; Rstdelay()
+;	After talking to the DMA chip in a way that may reset it, 
+; we need a 8 8Mhz clocks (ie. 1 microsec) delay, before we can
+; talk to the chip again.
+;-
+rstdelay:
+	tst.b	GPIP			; delay for 1 microsec
+	tst.b	GPIP			; this amounts to 16 16Mhz clocks
+	tst.b	GPIP
+	tst.b	GPIP
+	rts
+
+
+.if	SCSI
+
+;+++++++++++++++++++++++++++++++;
+;				;
+;	SCSI specific		;
+;				;
+;+++++++++++++++++++++++++++++++;
+
+.globl	_resetscsi
+
+; SCSI Interface (NCR 5380) for READ operations
+bSCSI	equ	$FFFF8780+REGBASE
+SCSIDB	equ	bSCSI+($00*REGSTEP)	; current SCSI data bus
+SCSIICR	equ	bSCSI+($01*REGSTEP)	; initiator command register
+SCSIMR	equ	bSCSI+($02*REGSTEP)	; mode register
+SCSITCR	equ	bSCSI+($03*REGSTEP)	; target command register
+SCSICR	equ	bSCSI+($04*REGSTEP)	; current SCSI control register
+SCSIDSR	equ	bSCSI+($05*REGSTEP)	; DMA status register
+SCSIIDR	equ	bSCSI+($06*REGSTEP)	; input data register
+SCSIREI	equ	bSCSI+($07*REGSTEP)	; reset error / interrupt
+
+; SCSI Interface (NCR 5380) for WRITE operations
+SCSIODR	equ	bSCSI+($00*REGSTEP)	; output data register
+;SCSIICR	bSCSI+($01*REGSTEP)	; initiator command register
+;SCSIMR		bSCSI+($02*REGSTEP)	; mode register
+;SCSITCR	bSCSI+($03*REGSTEP)	; target command register
+SCSIISR	equ	bSCSI+($04*REGSTEP)	; ID select register
+SCSIDS	equ	bSCSI+($05*REGSTEP)	; start DMA send
+SCSIDTR	equ	bSCSI+($06*REGSTEP)	; start DMS target receive
+SCSIDIR	equ	bSCSI+($07*REGSTEP)	; start DMA initiator receive
+
+; SCSI DMA Controller
+SDMACTL		equ	$FFFF8714	; WORD
+
+;+
+; Tunable (delay) values (in number of _hz_200 ticks) for SCSI
+;-
+SCLTMOUT	equ	301		; long time-out (at least 1.5 s)
+SCSTMOUT	equ	51		; short time-out (at least 250 ms)
+
+;+
+; rcvscsi() - send a SCSI command which receives data back.
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+_rcvscsi:
+	move.l	a0,-(sp)		; save buffer address
+	andi.w	#7,d0			; mask off the flags to get unit num
+	bsr	sblkscsi		; send command block
+	movea.l	(sp)+,a0		; restore buffer address
+	tst.w	d0			; successful?
+	bmi.b	rsend			; if not successful, return
+
+	movea.l	a0,a1			; a1 -> buffer to read into
+	movea.l	#bSCSI,a2		; a2 -> 5380
+	move.b	#1,SCSITCR		; set data in phase
+	move.b	SCSIREI,d0		; clear potential interrupt
+
+	;+
+	; 25-Sep-91 ml.	The long time-out is used instead of the short
+	;		time-out to accomodate slow SCSI devices.
+	;-
+rs0:	bsr	setscltmout		; set up time-out
+	bsr	w4req			; wait for REQ to come
+	bmi.b	rsend			; if timed out, returns
+	btst	#3,5*REGSTEP(a2)	; still in data in phase?
+	beq	w4stat			; no, go get status
+	move.b	(a2),(a1)+		; read the data byte
+	bsr	doack
+	bra.b	rs0			; do next byte
+rsend:	bsr	_resetscsi		; timed-out, reset SCSI bus
+	rts
+
+
+;+
+; wrtscsi() - send a SCSI command which will write data to the target
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+_wrtscsi:
+	andi.w	#7,d0			; mask off the flags to get unit num
+	move.l	a0,-(sp)		; save beginning buffer address
+	move.w	d2,-(sp)		; save command length
+	bsr	sblkscsi		; send command block
+	move.w	(sp)+,d2		; restore command length
+	move.l	(sp)+,a0		; a0 = where DMA ends
+	tst.w	d0			; successful?
+	bmi.b	wsend			; if failure, return
+
+	movea.l	a0,a1			; a1 -> buffer to write from
+	movea.l	#bSCSI,a2		; a2 -> 5380
+	move.b	#0,SCSITCR		; set data out phase
+	move.b	SCSIREI,d0		; clear potential interrupt
+
+	;+
+	; 25-Sep-91 ml.	The long time-out is used instead of the short
+	;		time-out to accomodate slow SCSI devices.
+	;-
+ws0:	bsr	setscltmout
+	bsr	w4req			; wait for REQ to come
+	bmi.b	wsend			; if timed out, returns
+	btst	#3,5*REGSTEP(a2)	; still in data out phase?
+	beq	w4stat			; no, go get status
+	move.b	(a1)+,(a2)		; write the data byte
+	bsr	doack
+	bra.b	ws0			; do next byte
+wsend:	bsr	_resetscsi		; timed-out, reset SCSI bus
+	rts
+
+
+
+;+
+; sblkscsi() - send command block
+;
+; Passed:
+;	d0.w = physical unit number
+;	d2.w = command length (NCMD or LCMD)
+;
+; Returns:
+;	d0.l =  0 if successful
+;	d0.l = -1 if time-out
+;-
+sblkscsi:
+	move.l	d2,-(sp)		; save command length
+	move.w	d0,-(sp)		; physical unit #
+	bsr	selscsi			; select the unit
+	addq	#2,sp			; clean up stack
+	move.l	(sp)+,d2		; restore command length
+	tst.w	d0			; selection successful?
+	bmi.b	sbsend			; if timed out, return
+					; else proceed
+	move.b	#2,SCSITCR		; assert C/D
+	move.b	#1,SCSIICR		; assert data bus
+
+	lea	_cmdblk,a1		; a1 -> command block
+	subq.w	#1,d2			; dbra likes one less
+
+	bsr	setscstmout		; set a short time-out
+ss1:	move.b	(a1)+,d0		; d0.b = byte to be sent
+	bsr	hshake			; write that byte
+	tst.w	d0
+	bmi.b	sbsend			; if timed-out, returns
+	dbra	d2,ss1			; until whole command block is sent
+	moveq	#0,d0			; all operations successful
+sbsend: rts				; heading home
+
+
+;+
+; BOOLEAN selscsi(SCSIUnit) 
+; WORD SCSIUnit;
+;-
+selscsi:
+	bsr	setscstmout		; set up a short time-out
+sels0:	btst	#6,SCSICR		; STILL busy from last time?
+	beq.b	sels1			; if not, it's available
+	cmp.l	(a0),d1			; time-out?
+	bhi.b	sels0			; not yet, wait some more
+	bra.b	sels4			; else, return error
+
+sels1:	move.b	#0,SCSITCR		; data out phase
+	move.b	#0,SCSIISR		; no interrupt from selection
+	move.b	#$0c,SCSIICR		; assert BSY and SEL
+; set dest SCSI IDs
+	clr.w	d0
+	move.w	4(sp),d1		; get the SCSI unit desired
+	bset	d1,d0			; set the appropriate bit
+	move.b	d0,SCSIODR		; (real code would set ours too)
+
+	move.b	#$0d,SCSIICR		; assert BUSY, SEL and data bus
+	andi.b	#$FE,SCSIMR		; clear arbitrate bit
+	andi.b	#$F7,SCSIICR		; clear BUSY
+
+* there must be two "deskew delays" here, but that's only 100ns total...
+* the following computations take at least that long before we read
+* SCSICR again.
+
+	bsr	setscstmout		; use short time-out
+sels3:	btst	#6,SCSICR		; wait for bus to be busy
+	bne.b	sels5
+	cmp.l	(a0),d1
+	bhi.b	sels3
+
+sels4:	moveq	#-1,d0			; time out
+	bra.b	sels6
+	
+sels5:	clr.w	d0			; selection successful
+sels6:	move.b	#$0,SCSIICR		; clear SEL and data bus assertion
+	rts
+
+
+;+
+; w4stat - wait for status byte and message byte.
+;
+; Returns:
+;	d0.l = returned status or time-out error
+;-
+w4stat:	bsr	setscstmout		; set up time-out for REQ and ACK
+	move.b	#3,SCSITCR		; status in phase
+	move.b	SCSIREI,d0		; clear potential interrupt
+
+	bsr	w4req			; wait for status byte
+	bmi.b	wstto			; if timed-out, handle it
+	moveq	#0,d0			; clear d0
+	move.b	SCSIDB,d0		; get the status byte
+	bsr	setscstmout		; set up time-out for REQ and ACK
+	move.l	d0,-(sp)		; save the status byte
+	bsr	doack			; signal that status byte is here
+	tst.w	d0			; timed-out?
+	beq.b	wst4			; if not, wait for message byte
+
+wst3:	addq.l	#4,sp			; else clean up stack
+wstto:	bsr	_resetscsi		; timed-out, reset SCSI bus
+	bra.b	wstend			; and return
+
+wst4:	bsr	setscstmout		; set up time-out for REQ and ACK
+	bsr	w4req			; wait for message byte
+	bmi.b	wst3			; if timed-out, returns
+
+	move.b	SCSIDB,d0		; get and ignore message byte
+	bsr	doack			; signal that message byte is here
+	tst.w	d0			; timed-out?
+	bmi.b	wst3			; if so, return time-out
+	move.l	(sp)+,d0		; recall the status byte
+wstend:	rts
+
+
+;+
+; w4req() - wait for REQ to come
+;
+; Passed:
+;	d1.l = expiration time
+;	a0.l = address of _hz_200
+;
+; Returns:
+;	 0 - if successful
+;	-1 - times out
+;-
+w4req:
+wr0:	btst	#5,SCSICR		; waiting for REQ to come
+	bne.b	wr1			; if REQ comes, done
+	cmp.l	(a0),d1			; time's up?
+	bhi.b	wr0			; if not, wait some more
+	moveq	#-1,d0			; else, returns timed out
+	bra.b	wrend
+wr1:	moveq	#0,d0			; returns successful
+wrend:	rts
+
+
+;+
+; doack() - assert ACK
+;
+; Passed:
+;	d1.l = expiration time
+;	a0.l = address of _hz_200
+;
+; Returns:
+;	 0 - if successful
+;	-1 - times out
+;-
+doack:	ori.b	#$11,SCSIICR		; assert ACK (and data bus)
+da0:	btst	#5,SCSICR		; wait for REQ to go away
+	beq.b	da1			; if REQ goes away, done
+	cmp.l	(a0),d1			; time's up?
+	bhi.b	da0			; if not, wait some more
+	moveq	#-1,d0			; else returns timed out
+	bra.b	daend
+da1:	moveq	#0,d0			; returns successful
+daend:	andi.b	#$ef,SCSIICR		; clear ACK
+	rts
+
+
+;+
+; hshake() - hand shake a byte over to the controller
+;
+; Passed:
+;	d0.b = byte to be handed over
+;	d1.l = expiration time
+;	a0.l = address of _hz_200
+;
+; Returns:
+;	Whatever w4req() or doack() returns, which is:
+;		 0 - if successful
+;		-1 - times out
+;-
+hshake:	move.w	d0,-(sp)		; preserve d0.w
+	bsr	w4req			; wait for REQ to come
+	bmi.b	hsend			; if timed out, returns
+	move.b	1(sp),SCSIDB		; write a byte out to data bus
+	bsr	doack			; assert ACK
+hsend:	addq.l	#2,sp			; clean up stack
+	rts
+
+
+*+
+* VOID resetscsi();
+*-
+
+_resetscsi:
+	move.b	#$80,SCSIICR	; assert RST
+	bsr	setscstmout	; wait (at least) 250 ms
+rst0:	cmp.l	(a0),d1
+	bhi.b	rst0
+	move.b	#$00,SCSIICR
+	bsr	setscltmout	; wait (at least) 1000 ms
+rst1:	cmp.l	(a0),d1
+	bhi.b	rst1
+	move.b	SCSIREI,d1	; clear potential interrupt
+	rts
+
+
+;+
+; setscstmout - set up a time-out count for the SCSI for SCSTMOUT ticks
+;
+; Returns:
+;	a0.l = address of _hz_200 clock
+;	d1.l = expiration time
+;-
+setscstmout:
+	movea.l	#_hz_200,a0	; a0 -> 200 hz clock
+	move.l	#SCSTMOUT,d1	; d0 = SCSTMOUT _hz_200 clicks
+	add.l	(a0),d1		; d0 = curr time + # clicks to wait
+	rts
+
+
+;+
+; setscltmout - set up a time-out count for the SCSI for SCLTMOUT long
+;
+; Returns:
+;	a0.l = address of _hz_200 clock
+;	d1.l = expiration time
+;-
+setscltmout:
+	movea.l	#_hz_200,a0	; a0 -> 200 hz clock
+	move.l	#SCLTMOUT,d1	; d0 = SCLTMOUT _hz_200 clicks
+	add.l	(a0),d1		; d0 = curr time + # clicks to wait
+	rts
+
+.endif
+
+
+
+.if	SPSCSI
+
+;+++++++++++++++++++++++++++++++;
+;				;
+;	SPARROW specific	;
+;				;
+;+++++++++++++++++++++++++++++++;
+
+.globl	_resetspscsi
+
+bSPSCSI		equ	$88	; base of SCSI bus
+
+; SCSI Interface (NCR 5380) for READ operations
+SPSCSIDB	equ	bSPSCSI+0	; SCSI data bus
+SPSCSIICR	equ	bSPSCSI+1	; initiator command register
+SPSCSIMR	equ	bSPSCSI+2	; mode register
+SPSCSITCR	equ	bSPSCSI+3	; target command register
+SPSCSICR	equ	bSPSCSI+4	; current SCSI control register
+SPSCSIDSR	equ	bSPSCSI+5	; DMA status register
+SPSCSIIDR	equ	bSPSCSI+6	; input data register
+SPSCSIREI	equ	bSPSCSI+7	; reset error / interrupt
+
+
+; SCSI Interface (NCR 5380) for WRITE operations
+SPSCSIODR	equ	bSPSCSI+0	; output data register
+;SPSCSIICR	equ	bSPSCSI+1	; initiator command register
+;SPSCSIMR	equ	bSPSCSI+2	; mode register
+;SPSCSITCR	equ	bSPSCSI+3	; target command register
+SPSCSIISR	equ	bSPSCSI+4	; ID select register
+SPSCSIDS	equ	bSPSCSI+5	; start DMA send
+SPSCSIDTR	equ	bSPSCSI+6	; start DMA target receive
+SPSCSIDIR	equ	bSPSCSI+7	; start DMA initiator receive
+
+
+; Macros to talk to the NCR5380 through the ACSI DMA chip
+
+.macro	RSCSI	srcreg,dst	; read from specified register
+	move.w	srcreg,WDL
+	move.w	WDC,dst
+.endm
+
+.macro	WSCSI	val,dstreg	; write to specified register
+	move.w	dstreg,WDL
+	move.w	val,WDC
+.endm
+
+;+
+; Tunable (delay) values (in number of _hz_200 ticks) for SCSI
+;-
+SCLTMOUT	equ	301		; long time-out (at least 1.5 s)
+SCSTMOUT	equ	51		; short time-out (at least 250 ms)
+
+;+
+; rcvspscsi() - send a SCSI command which receives data back.
+;
+; Passed:
+;	d0.w = physical unit number
+;	d1.l = transfer length (in bytes)
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;-
+	.globl	_rcvspscsi
+_rcvspscsi:
+	st	flock			; lock FIFO
+	andi.w	#7,d0			; mask off the flags to get unit num
+	movem.l	d1-d2/a0,-(sp)		; save buffer address and cmd length
+	bsr	sblkspscsi		; send command block
+	movem.l	(sp)+,d1-d2/a0		; restore buffer address and cmd len
+	tst.w	d0			; successful?
+	bmi	rspend			; if not successful, return
+
+	WSCSI	#0,#SPSCSIICR		; deassert the data bus
+	WSCSI	#1,#SPSCSITCR		; set data in phase
+	RSCSI	#SPSCSIREI,d0		; clear potential interrupt
+
+rpio:	movea.l	a0,a1			; a1 -> buffer to read into
+rnxtb:	bsr	setscstmout
+	bsr	w4spreq			; wait for REQ for data to come
+	bmi	rspend			; if timed out, returns
+	RSCSI	#SPSCSIDSR,d0		; still in data in phase?
+	btst	#3,d0			
+	beq	rstat			; if not, go get status
+	RSCSI	#bSPSCSI,d0		; else read the next data byte
+	move.b	d0,(a1)+	
+	bsr	dospack
+	bra	rnxtb			; do next byte
+rstat:	bsr	w4spstat		; go get status byte
+rspend:	RSCSI	#SPSCSIREI,d1		; clear potential interrupt
+	bra	_hdone			; go clean up
+
+
+
+;+
+; wrtspscsi() - send a SCSI command which will write data to the target
+;
+; Passed:
+;	d0.w = physical unit number
+;	d1.l = transfer length (in bytes)
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;
+; Comments: 
+; 12/04/89 ml
+;	Bus error occurs when doing a write to the disk that ends at top
+; of memory.  The DMA counter is decremented when the bytes are written 
+; from the ping pong buffers to the device, not when bytes are grapped 
+; from RAM to the ping pong buffers.  Well, AFTER the last 8 bytes are 
+; read into the ping pong buffers and BEFORE they are written to the 
+; device, the chip will attempt to read the NEXT 8 bytes into the ping 
+; pong buffers which results in a bus error because it will be reading 
+; pass top of memory.  To get around this HARDWARE BUG, the code will 
+; ALWAYS handshake the last 8 bytes over instead of DMAing them.
+;
+; 01/23/90 ml
+;	A. Pratt said he's willing to move the screen down and sacrifice
+; 16 bytes of memory.  So, code added on 12/04/89 is commented out.
+;-
+	.globl	_wrtspscsi
+_wrtspscsi:
+	st	flock			; lock FIFO
+	andi.w	#7,d0			; mask off the flags to get unit num
+
+	movem.l	d1-d2/a0,-(sp)		; save beginning buffer address
+	bsr	sblkspscsi		; send command block
+	movem.l	(sp)+,d1-d2/a0		; a0 = where DMA ends
+	tst.w	d0			; successful?
+	bmi	wspend			; if not, go clean up
+
+	WSCSI	#0,#SPSCSITCR		; set data out phase
+	RSCSI	#SPSCSIREI,d0		; clear potential interrupt
+					; hand shake data over the bus
+wpio:	movea.l	a0,a1			; a1 -> buffer to write from
+wnxtb:	bsr	setscstmout
+	bsr	w4spreq			; wait for REQ for data to come
+	bmi	wspend			; if timed out, returns
+	RSCSI	#SPSCSIDSR,d0
+	btst	#3,d0			; still in data out phase?
+	beq	wstat			; if not, go get status
+	moveq	#0,d0
+	move.b	(a1)+,d0		; write the next data byte
+	WSCSI	d0,#bSPSCSI
+	bsr	dospack
+	bra	wnxtb			; do next byte
+wstat:	bsr	w4spstat		; get status byte
+wspend:	RSCSI	#SPSCSIREI,d1		; clear potential interrupt
+	bra	_hdone			; go clean up
+
+
+
+;+
+; sblkspscsi() - set DMA pointer and count and send command block
+;
+; Passed:
+;	d0.w = physical unit number
+;	d1.l = transfer length (in bytes)
+;	d2.w = command length (NCMD or LCMD)
+;	a0.l = buffer address
+;
+; Returns:
+;	d0.l =  0 if successful
+;	d0.l = -1 if timeout
+;-
+sblkspscsi:
+	movem.l	d1-d2/a0,-(sp)		; preserve d1, d2 and a0
+	move.w	d0,-(sp)		; physical unit #
+	bsr	selspscsi		; select the unit
+	addq.l	#2,sp			; clean up stack
+	movem.l	(sp)+,d1-d2/a0		; restore d1, d2 and a0
+	tst.w	d0			; selection successful?
+	bmi	sbspend			; if timed out, return
+					; else proceed
+	WSCSI	#2,#SPSCSITCR		; assert C/D
+	WSCSI	#1,#SPSCSIICR		; assert data bus
+
+	bsr	setscltmout		; set up timeout for sending cmdblk
+	lea	_cmdblk,a1		; a1 -> command block
+	subq.w	#1,d2			; dbra likes one less
+sbsp0:	move.b	(a1)+,d0		; d0.b = byte to be sent
+	bsr	sphshake		; write that byte
+	tst.w	d0
+	bmi	sbspend			; if timed-out, returns
+	dbra	d2,sbsp0		; until whole command block is sent
+	moveq	#0,d0			; all operations successful
+sbspend: rts				; heading home
+
+
+;+
+; BOOLEAN selspscsi(SCSIUnit) 
+; WORD SCSIUnit;
+;-
+selspscsi:
+	bsr	setscstmout		; set up a short timeout
+selsp0:	RSCSI	#SPSCSICR,d0
+	btst	#6,d0			; STILL busy from last time?
+	beq	selsp1			; if not, it's available
+	cmp.l	(a0),d1			; timeout?
+	bhi	selsp0			; not yet, wait some more
+	bra	selsp3			; else, return error
+
+selsp1:	WSCSI	#0,#SPSCSITCR		; data out phase
+	WSCSI	#0,#SPSCSIISR		; no interrupt from selection
+	WSCSI	#$0c,#SPSCSIICR		; assert BSY and SEL
+; set dest SCSI IDs
+	clr.w	d0
+	move.w	4(sp),d1		; get the SCSI unit desired
+	bset	d1,d0			; set the appropriate bit
+	WSCSI	d0,#SPSCSIODR		; (real code would set ours too)
+
+;	WSCSI	#$0d,#SPSCSIICR		; assert BUSY, SEL and data bus
+	WSCSI	#$05,#SPSCSIICR		; assert SEL and data bus
+	RSCSI	#SPSCSIMR,d0		; read Mode Register
+	andi.b	#$FE,d0			; clear arbitrate bit
+	WSCSI	d0,#SPSCSIMR
+	RSCSI	#SPSCSIICR,d0		; read Initiator Command Register
+	andi.b	#$F7,d0			; clear BUSY
+	WSCSI	d0,#SPSCSIICR
+	nop				; 2 deskew delays
+	nop
+
+	bsr	setscstmout		; set up for timeout
+selsp2:	RSCSI	#SPSCSICR,d0		; wait for bus to be busy
+	btst	#6,d0
+	bne	selsp4
+	cmp.l	(a0),d1
+	bhi	selsp2
+
+selsp3:	moveq	#-1,d0			; time out
+	bra	selsp5
+	
+selsp4:	clr.w	d0			; selection successful
+selsp5:	WSCSI	#0,#SPSCSIICR		; clear SEL and data bus assertion
+	rts
+
+
+*+
+* VOID resetspscsi();
+*-
+	.globl	_resetspscsi
+_resetspscsi:
+	WSCSI	#$80,#SPSCSIICR	; assert RST
+	bsr	setscstmout	; wait (at least) 250 ms
+rstsp0:	cmp.l	(a0),d1
+	bhi	rstsp0
+	WSCSI	#0,#SPSCSIICR
+	bsr	setscltmout	; wait (at least) 1000 ms
+rstsp1:	cmp.l	(a0),d1
+	bhi	rstsp1
+	RSCSI	#SPSCSIREI,d0		; clear potential interrupt
+	rts
+
+
+;+
+; w4spstat - wait for status byte and message byte.
+;
+; Returns:
+;	d0.l = returned status or timeout error
+;-
+w4spstat:
+	bsr	setscstmout		; set up time-out for REQ and ACK
+	WSCSI	#3,#SPSCSITCR		; status in phase
+	RSCSI	#SPSCSIREI,d0		; clear potential interrupt
+
+	bsr	w4spreq			; wait for status byte
+	bmi	w4spend			; if timed-out, returns
+gspstat:
+	RSCSI	#SPSCSIDB,d0		; get the status byte
+	andi.w	#$ff,d0
+	move.l	d0,-(sp)		; save the status byte
+	bsr	setscstmout		; set up time-out for REQ and ACK
+	bsr	dospack			; signal that status byte is here
+	tst.w	d0			; timed-out?
+	beq	gsp1			; if not, wait for message byte
+
+gsp0:	addq.l	#4,sp			; else clean up stack
+	bra	w4spend			; and return
+
+gsp1:	bsr	setscstmout		; set up timeout for REQ and ACK
+	bsr	w4spreq			; wait for message byte
+	bmi	gsp0			; if timed-out, returns
+
+	RSCSI	#SPSCSIDB,d0		; get and ignore message byte
+	bsr	dospack			; signal that message byte is here
+	tst.w	d0			; timed-out?
+	bmi	gsp0			; if so, return timeout
+	move.l	(sp)+,d0		; recall the status byte
+w4spend:
+	rts				; return
+
+
+;+
+; w4spreq() - wait for REQ to come during hand shake of non-data bytes
+;
+; Passed:
+;	d1.l = expiration time
+;	a0.l = address of _hz_200
+;
+; Returns:
+;	 0 - if successful
+;	-1 - times out
+;-
+w4spreq:
+w4sp0:	RSCSI	#SPSCSICR,d0		; read Control Register
+	btst	#5,d0			; waiting for REQ to come
+	bne	w4sp1			; if REQ comes, done
+	cmp.l	(a0),d1			; time's up?
+	bhi	w4sp0			; if not, wait some more
+	moveq	#-1,d0			; else, returns timed out
+	bra	w4sprend
+w4sp1:	moveq	#0,d0			; returns successful
+w4sprend:
+	rts
+
+
+;+
+; dospack() - assert ACK
+;
+; Passed:
+;	d1.l = expiration time
+;	a0.l = address of _hz_200
+;
+; Returns:
+;	 0 - if successful
+;	-1 - times out
+;-
+dospack:	
+	RSCSI	#SPSCSIICR,d0		; read Initiator Command Register
+	ori.b	#$11,d0			; assert ACK (and data bus)
+	WSCSI	d0,#SPSCSIICR
+	andi.b	#$ef,d0			; clear ACK
+	WSCSI	d0,#SPSCSIICR
+	moveq	#0,d0
+	rts
+
+
+;+
+; sphshake() - hand shake a byte over to the controller
+;
+; Passed:
+;	d0.b = byte to be handed over
+;	d1.l = expiration time
+;	a0.l = address of _hz_200
+;
+; Returns:
+;	Whatever w4spreq() or dospack() returns, which is:
+;		 0 - if successful
+;		-1 - times out
+;-
+sphshake:
+	move.w	d0,-(sp)		; preserve d0.w
+	bsr	w4spreq			; wait for REQ to come
+	bmi	hspend			; if timed out, returns
+	move.w	0(sp),d0
+	WSCSI	d0,#SPSCSIDB		; write a byte out to data bus
+	bsr	dospack			; assert ACK
+hspend:	addq.l	#2,sp			; clean up stack
+	rts
+
+
+;+
+; setscstmout - set up a time-out count for the SCSI for SCSTMOUT ticks
+;
+; Returns:
+;	a0.l = address of _hz_200 clock
+;	d1.l = expiration time
+;-
+setscstmout:
+	movea.l	#_hz_200,a0	; a0 -> 200 hz clock
+	move.l	#SCSTMOUT,d1	; d0 = SCSTMOUT _hz_200 clicks
+	add.l	(a0),d1		; d0 = curr time + # clicks to wait
+	rts
+
+
+;+
+; setscltmout - set up a time-out count for the SCSI for SCLTMOUT long
+;
+; Returns:
+;	a0.l = address of _hz_200 clock
+;	d1.l = expiration time
+;-
+setscltmout:
+	movea.l	#_hz_200,a0	; a0 -> 200 hz clock
+	move.l	#SCLTMOUT,d1	; d0 = SCLTMOUT _hz_200 clicks
+	add.l	(a0),d1		; d0 = curr time + # clicks to wait
+	rts
+
+.endif
+
+
+
+.if IDE_AT
+
+;+++++++++++++++++++++++++++++++;
+;				;
+;	IDE-AT specific		;
+;				;
+;+++++++++++++++++++++++++++++++;
+
+; IDE disk interface I/O locations for Read functions
+
+bIDE	equ	$FFF00000+REGBASE	; base address
+
+IDEDR	equ	bIDE-REGBASE+($00*REGLSTEP); Data Register (16-bit reg)
+IDEER	equ	bIDE+($01*REGLSTEP)	; Error Register
+IDESC	equ	bIDE+($02*REGLSTEP)	; Sector Count
+IDESN	equ	bIDE+($03*REGLSTEP)	; Sector Number
+IDECL	equ	bIDE+($04*REGLSTEP)	; Cylinder Low
+IDECH	equ	bIDE+($05*REGLSTEP)	; Cylinder High (2 bits)
+IDESDH	equ	bIDE+($06*REGLSTEP)	; SDH register
+IDESR	equ	bIDE+($07*REGLSTEP)	; Status Register
+IDEASR	equ	bIDE+($0E*REGLSTEP)	; Alternate Status Register
+IDEDAR	equ	bIDE+($0F*REGLSTEP)	; Drive Address Register
+
+
+
+; IDE disk interface I/O locations for Write functions
+
+;IDEDR	equ	bIDE-REGBASE+($00*REGLSTEP); Data Register (16-bit reg)
+IDEWPR	equ	bIDE+($01*REGLSTEP)	; Write Precomp Register (not used)
+;IDESC	equ	bIDE+($02*REGLSTEP)	; Sector Count
+;IDESN	equ	bIDE+($03*REGLSTEP)	; Sector Number
+;IDECL	equ	bIDE+($04*REGLSTEP)	; Cylinder Low
+;IDECH	equ	bIDE+($05*REGLSTEP)	; Cylinder High (2 bits)
+;IDESDH	equ	bIDE+($06*REGLSTEP)	; SDH register
+IDECR	equ	bIDE+($07*REGLSTEP)	; Command Register
+IDEDOR	equ	bIDE+($0E*REGLSTEP)	; Digital Output Register
+
+
+; Byte indices into buffer return by the Identify command
+
+NCYL	equ	2		; offset to # of fixed cylinders
+NHEAD	equ	6		; offset to number of heads
+NSPT	equ	12		; offset to number of sectors/track
+MDLNUM	equ	54		; offset to model number of drive
+CONMDL	equ	MDLNUM+26	; offset to Conner's model number
+
+
+; Default drive parameters of Conner Peripherals - CP2024
+CP20NCYL	equ	615	; # of cylinders
+CP20NHEAD	equ	4	; # of heads
+CP20NSPT	equ	17	; # of sectors/track
+
+
+;+
+; Wait for status to come back
+;-
+w4int:	move.l	#D_WORST,d0	; d0 = time-out limit
+	add.l	_hz_200,d0	; d0 = expiration time
+wi0:	btst.b	#5,GPIP		; interrupt?
+	beq.b	wi1		; if so, out of the loop
+	cmp.l	_hz_200,d0	; time-out?
+	bhi.b	wi0		; if not, wait some more
+	moveq	#-1,d0		; else, return time-out
+	bra.b	wi3
+wi1:	moveq	#0,d0		; clear d0
+	move.b	IDESR,d0	; d0.b = status returned
+	btst	#0,d0		; any error?
+	bne.b	wi2		; if yes, return error code
+	btst	#3,d0		; else DRQ?
+	bne.b	wi3		; if so, just return
+	moveq	#0,d0		; else return OK
+	bra.b	wi3
+wi2:	move.b	IDEER,d0	; else d0.b = error bits
+wi3:	rts			; return status or error code
+
+
+
+;+
+; ideread() - reads from 1 to 256 sectors as specified in the Task File,
+;		beginning at the specified sector.
+;	   - sector count equal to 0 requests 256 sectors.
+;
+; ideread(nhd, nspt, sectnum, count, buf, pdev)
+; WORD	nhd;		4(sp).w		; # of data heads on pdev
+; WORD	nspt;		6(sp).w		; # of physical sectors per track
+; LONG	sectnum;	8(sp).l		; logical block address
+; WORD	count;		$c(sp).w	; # of sectors to read
+; BYTE	*buf;		$e(sp).l	; $f(sp)=high $10(sp)=mid $11(sp)=low
+; WORD	pdev;		$12(sp).w	; physical device number
+;-
+	.globl	_ideread
+_ideread:
+	bsr	set_dhcs	; set physical address
+	move.l	$e(sp),a0	; a0 -> buffer to read into
+	move.b	$d(sp),IDESC	; set sector count
+
+	move.w	$c(sp),d1	; d1.w = # of sectors to read
+	subq	#1,d1		; dbra likes one less
+
+	move.b	#0,IDEDOR	; enable interrupt
+	move.b	#IDEREAD,IDECR	; set command code
+ider0:	bsr	w4int		; wait for interrupt
+	tst.w	d0		; successful?
+	bmi.b	ider1		; if timed-out, return
+
+	btst	#3,d0		; DRQ?
+	beq.b	ider1		; if not, return
+
+	bsr	readbuf		; fill sector buffer
+	dbra	d1,ider0	; more to read?
+	moveq	#0,d0		; everything's fine
+ider1:	rts
+
+
+;+
+; idewrite() - writes from 1 to 256 sectors as specified in the Task File,
+;		beginning at the specified sector.
+;	    - sector count equal to 0 requests 256 sectors.
+;
+; idewrite(nhd, nspt, sectnum, count, buf, pdev)
+; WORD	nhd;		4(sp).w		; # of data heads on pdev
+; WORD	nspt;		6(sp).w		; # of physical sectors per track
+; LONG	sectnum;	8(sp).l		; logical block address
+; WORD	count;		$c(sp).w	; # sectors to read
+; BYTE	*buf;		$e(sp).l	; $f(sp)=high $10(sp)=mid $11(sp)=low
+; WORD	pdev;		$12(sp).w	; physical device number
+;-
+	.globl	_idewrite
+_idewrite:	
+	bsr	set_dhcs	; set physical address
+	move.l	$e(sp),a0	; a0 -> buffer to write from
+	move.b	$d(sp),IDESC	; set sector count
+
+	move.w	$c(sp),d1	; d1.w = # of sectors to read
+	subq	#1,d1		; dbra likes one less
+
+	move.b	#0,IDEDOR	; enable interrupt
+	move.b	#IDEWRITE,IDECR	; set command code
+idew0:	btst.b	#3,IDEASR	; DRQ?
+	beq.b	idew0		; if not, wait longer
+idew1:	bsr	wrtbuf		; fill sector buffer
+	bsr	w4int		; wait for interrupt
+	tst.w	d0		; successful?
+	bmi.b	idew2		; if timed-out, return
+	btst	#3,d0		; DRQ?
+	beq.b	idew2		; if not, return
+	dbra	d1,idew1	; else go transfer data
+	moveq	#0,d0		; everything's fine
+idew2:	rts
+
+
+;+
+; set_dhcs() - convert a logical block address into a physical address.
+;	     - set drive #, head #, cylinder # and sector # in task file.
+;
+; Passed:
+;	8(sp).w = nhd = # of data heads
+;	$a(sp).w = nspt = # of physical sectors per track
+;	$c(sp).l = logical block address
+;	$16(sp).w = physical unit #
+;-
+set_dhcs:
+	move.l	$c(sp),d1	; d1.l = logical block address
+	move.w	8(sp),d2	; d2.w = # of data heads
+	move.w	$a(sp),d0	; d0.w = # of physical sectors per track
+	mulu	d0,d2		; d2.l = # of sectors per cylinder
+				;      = # heads * # of sectors per track
+	divu.w	d2,d1		; d1.w = cylinder #
+				;      = log block addr / #spc
+	move.b	d1,IDECL	; set cylinder low
+	lsr.l	#8,d1		; d1.b = cylinder high
+	move.b	d1,IDECH	; set cylinder high
+	lsr.l	#8,d1		; d1.l = sector # within the cyl
+	divu.w	d0,d1		; d1.w = head #
+				;      = sector # within cyl / #spt
+	move.w	$16(sp),d0	; d0.w = physical unit #
+	andi.b	#7,d0		; mask off flags from physical unit #
+	lsl.b	#4,d0		; shift unit # to place
+	or.b	d0,d1		; or in drive #
+	move.b	d1,IDESDH	; set drive and head #
+	swap	d1		; d1.w = sector # (base 0)
+	addq.w	#1,d1		;      = sector # + 1 (base 1)
+	move.b	d1,IDESN	; set sector #
+	rts
+
+;+
+; identify() - allows the Host to receive parameter information from
+;	       the drive.
+;
+; identify(pdev, buf)
+; WORD	pdev;	4(sp).w		; physical unit #
+; BYTE	*buf;	6(sp).l		; buffer to put data
+;-
+	.globl	_identify
+_identify:
+	move.w	4(sp),d0	; d0 = physical unit #
+	andi.b	#7,d0		; mask off flags (if any)
+	lsl.b	#4,d0		; shift unit # to place
+	move.b	d0,IDESDH	; set drive #
+	move.l	6(sp),a0	; a0 -> buffer
+
+	move.b	#0,IDEDOR	; enable interrupt
+	move.b	#IDENTIFY,IDECR	; set command code
+	bsr	w4int		; wait for interrupt
+	tst.w	d0		; successful?
+	bmi.b	id0		; if timed-out, return
+	btst	#3,d0		; DRQ?
+	beq.b	id0		; if not, return with error
+
+	bsr	readbuf		; read data
+	moveq	#0,d0		; everything's fine
+
+id0:	rts 
+
+
+;+
+; readbuf() - reads 512 bytes (128 longs) of data into sector buffer.
+;
+; Passed:
+;	a0.l = buffer to store data read from sector buffer
+;-
+readbuf:
+	moveq	#31,d0		; d0 = (# of words of data to read / 8) - 1
+	lea	IDEDR,a1	; a1 -> data bus
+rb0:	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	move.w	(a1),(a0)+	; read data from bus
+	dbra	d0,rb0		; repeat until all done
+	rts
+
+
+;+
+; wrtbuf() - writes 512 bytes (128 longs) of data to sector buffer.
+;
+; Passed:
+;	a0.l = buffer with data to write to sector buffer
+;-
+wrtbuf:
+	moveq	#31,d0		; d0 = (# of words of data to read / 8) - 1
+	lea	IDEDR,a1	; a1 -> data bus
+wb0:	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	move.w	(a0)+,(a1)	; write data to bus
+	dbra	d0,wb0		; repeat until all done
+	rts
+
+
+;+
+; _iderdy() - test if the IDE drive is ready
+;
+; Passed:
+;	d0.b = IDE drive unit #
+;
+; Returns: 0 - if drive is NOT ready
+;	   1 - if drive is ready
+;-
+	.globl	_iderdy
+_iderdy:
+	andi.b	#7,d0		; mask off flags (if any)
+	lsl.b	#4,d0		; shift unit # to place
+	move.b	d0,IDESDH	; set drive #
+	move.b	#$50,d1		; ready status
+	move.l	#IDERDY,d0	; set up timer
+	add.l	_hz_200,d0
+ir0:	cmp.b	IDEASR,d1	; is drive ready and not busy?
+	beq.b	ir1		; if so, return with drive ready
+	cmp.l	_hz_200,d0	; time-out yet?
+	bcc.b	ir0		; if not, wait longer
+	moveq	#0,d0		; else return drive NOT ready
+	rts
+ir1:	moveq	#1,d0		; else, drive is ready
+	rts
+
+;+
+; gcparm() - get current drive parameters
+;
+; gcparm(buf)
+; char	*buf;	$4(sp).l    /* -> data returned by identify() */
+;
+; Returns:
+;	d0.w = # of default cylinders
+;	d1.w = # of default heads
+;	d2.w = # of default sectors per track
+;-
+	.globl	_gcparm
+_gcparm:
+	move.l	4(sp),a0	; a0 -> data buffer
+	add.l	#CONMDL,a0	; a0 -> where Conner model number is
+	move.l	a0,-(sp)
+	pea	cp2024
+	move.w	#6,-(sp)
+	bsr	strcmp		; compare model# with "CP2024"
+	adda	#10,sp		; clean up stack
+	tst.w	d0		; is unit the CP2024 (Kato 20Mb)?
+	bne.b	gcp0		; if not, handle the normal way
+				; else return default values of CP2024
+	move.w	#CP20NCYL,d0	; d0.w = # of cylinders
+	move.w	#CP20NHEAD,d1	; d1.w = # of heads
+	move.w	#CP20NSPT,d2	; d2.w = # of spt
+	bra.b	gcpend
+
+gcp0:	move.l	4(sp),a0
+	move.w	NCYL(a0),d0	; d0.w = # of cylinders
+	move.w	NHEAD(a0),d1	; d1.w = # of heads
+	move.w	NSPT(a0),d2	; d2.w = # of sectors per track
+
+gcpend:	rts
+
+
+
+conner:	dc.b	"Conner",0
+.even
+cp2024:	dc.b	"CP2024",0
+.even
+
+
+;+
+; strcmp() - compare two strings
+;
+; Passed:
+;	4(sp).w  = n (# of bytes to compare)
+;	6(sp).l  = address of first string
+;	10(sp).l = address of second string
+;
+; Returns:
+;	d0.w = 0	if first n bytes of the 2 strings are the same
+;	     = non-0    otherwise
+;-
+strcmp:	movem.l	d1/a0-a1,-(sp)	; save registers d1, a0 and a1
+	move.w	16(sp),d1	; d1 = byte count
+	subq.w	#1,d1		; dbra likes one less
+	move.l	18(sp),a0	; a0 -> string 1
+	move.l	22(sp),a1	; a1 -> string 2
+	moveq	#1,d0		; assume strings are not the same
+str0:	cmpm.b	(a0)+,(a1)+	; characters the same?
+	bne.b	str1		; if not, return
+	dbra	d1,str0		; else compare next character
+	moveq	#0,d0		; the strings are the same
+str1:	movem.l	(sp)+,d1/a0-a1	; restore registers d1, a0 and a1
+	rts
+
+
+.endif
+
+
+@
+
+
+1.31
+log
+@Nearly last Sparrow test BIOS
+@
+text
+@d1 1936
+@
+
+
+1.30
+log
+@Sparrow and TT are M68030 - no longer read from a file
+@
+text
+@d4 1
+a4 1
+* $Author: apratt $
+d7 1
+a7 1
+* $Date: 1992/02/28 08:25:22 $
+d14 3
+d142 1
+a142 1
+* $Revision: 1.29 $
+d150 1
+a150 3
+* TT and STPAD equates are in switches.s
+
+.include "switches.s"
+@
+
+
+1.29
+log
+@Changed cache handling to be .if M68030 rather than .if SCSI.  This lets
+us make ROMs for Sparrow.
+@
+text
+@d7 1
+a7 1
+* $Date: 1992/02/12 01:32:14 $
+d14 4
+d139 1
+a139 1
+* $Revision: 1.28 $
+d163 1
+a163 2
+*M68030		equ	(SPARROW | TT)	; normallly, but see below:
+.include "m68030.s"
+@
+
+
+1.28
+log
+@Much Sparrow stuff. Also fixed a bug in slow ACSI devices.
+@
+text
+@d1 1929
+@
+
+
+1.27
+log
+@Fixed a BIG OOPS: at qd0 the label 'sdelay' was wrong so that
+the add of _hz_200 to d0 was INSIDE the loop.  Oops.  Fixed.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/10/15 15:04:18 $
+d14 4
+d132 1
+a132 1
+* $Revision: 1.26 $
+d157 2
+d286 4
+d379 1
+a379 1
+.if SCSI
+d508 5
+d514 1
+d533 4
+d538 1
+d1144 389
+@
+
+
+1.26
+log
+@Fixed a bug in the caller of strcmp.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/30 18:04:38 $
+d14 3
+d128 1
+a128 1
+* $Revision: 1.24 $
+d568 2
+a569 2
+sdelay:	add.l	_hz_200,d0		; minimum 20 microsec.
+	cmp.l	_hz_200,d0
+@
+
+
+1.25
+log
+@Special case for Conner's IDE drives.  Turned out to be a big drag
+getting them to change their firmware.  Sigh.
+@
+text
+@d1 1508
+@
+
+
+1.24
+log
+@Previous version worked very badly.  One theory: Conner says that
+you need a delay between Identify and Init Parameters.  When Minna
+took out the Init Parameters call, she also took out the delay.
+Well, hmm, maybe the delay is required between Identify and
+ANYTHING ELSE.  So it's back.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/30 16:45:06 $
+d14 7
+d125 1
+a125 1
+* $Revision: 1.23 $
+d218 1
+a218 1
+;			requires a 500ms delay before calling identify()
+d268 9
+d437 4
+a440 1
+	lea	sbuf,a0			; a0 -> drive parameters
+d445 2
+a446 2
+	move.w	NSPT(a0),-(sp)		; # sectors per track
+	move.w	NHEAD(a0),-(sp)		; # data heads
+d1194 5
+a1198 2
+NHEAD	equ	6		; Number of heads
+NSPT	equ	12		; Number of sectors/track
+d1201 6
+d1436 67
+@
+
+
+1.23
+log
+@New from Minna: checks both READY and BUSY waiting for the right values.
+Seems some drives set READY before clearing BUSY.  Sigh.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/13 17:45:58 $
+d14 4
+d118 1
+a118 1
+* $Revision: 1.22 $
+d416 5
+@
+
+
+1.22
+log
+@Oops - the delay was supposed to be 500us, not 500ms.  Made it
+two ticks, which is btw 5 and 10 ms.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/13 00:46:52 $
+d14 4
+d114 1
+a114 1
+* $Revision: 1.21 $
+d144 1
+a144 1
+; ACSI read or write MUST be smaller than or equal to 254 physical
+d152 1
+a152 1
+; Dec-11-1989	ml.	Adjusted timeouts.
+d158 1
+a158 1
+;			as requested by AKP.  Modified timeout handling.
+d160 1
+a160 1
+;			UPTIME as timeout counter rather than the regular
+d165 1
+a165 1
+;			responses, BIOS' timeout count expires, or when 
+d174 1
+a174 1
+; Jul-29-91	ml.	Do not use the IDE Sector Count Register 
+d182 1
+a182 1
+;			Code in atread() and atwrite() are modified
+d189 1
+a189 1
+; Aug-02-91	ml.	Added handling of final interrupt from the
+d193 1
+a193 1
+; Aug-02-91	ml.	Change again!  Conner now says there is no
+d197 1
+a197 1
+; Aug-15-91	ml.	Added a check to see if IDE drive is ready before
+d202 1
+a202 1
+; Aug-20-91	ml.	Added iderdy() to check if an IDE drive is ready
+d206 1
+a206 1
+; Sep-12-91	ml.	Added in yet another delay for IDE drive.  Conner
+d209 48
+d275 2
+a276 3
+ATREAD	    equ	    $20	    ; opcode for Read sectors
+ATWRITE	    equ	    $30	    ; opcode for Write sectors
+INITPARM    equ	    $91	    ; opcode for Initialize Drive Parameters
+d280 2
+a281 2
+ATRDY	    equ	    1000    ; delay to wait for IDE drive to be ready
+MAXIDE	    equ	    16	    ; highest IDE-AT unit# 
+d300 1
+a300 1
+rwflag:		ds.b	1	; 0: read	1: write
+d306 2
+a309 2
+.even
+
+d325 1
+a325 1
+;	EWRITF (-10L) if  write failure
+d344 1
+a344 1
+	cmpi.w	#MAXIDE,$e(sp)		; unit# > IDE-AT unit# 16-17?
+d356 1
+a356 1
+	bhi	at			; if so, talk IDE-AT
+a366 4
+	moveq	#0,d1			; clear d1
+	move.w	8(sp),d1		; d1 = transfer length (in bytes)
+	lsl.l	#8,d1			;    = # blocks * 512
+	add.l	d1,d1
+d368 1
+a368 1
+	movea.l	$a(sp),a0		; a0 = read buffer
+d376 2
+a377 2
+	bra	rw1			; branch will take place for non-IDE
+					;	drives
+d383 1
+a383 1
+noide:	move.l	a1,sp			; got the bus error on ATASR;
+d387 1
+a387 1
+at:	move.l	$8,a0
+d390 1
+a390 1
+	tst.b	ATASR			; read a register to probe for IDE bus
+d399 4
+a402 4
+	move.l	#D_IDENTIFY,d0		; Delay required by Conner drives
+	add.l	_hz_200,d0		;  between identify() and power on
+at00:	cmp.l	_hz_200,d0
+	bcc	at00
+d411 2
+a412 17
+					; else init drive with these params
+	moveq	#2,d0			; Delay required by Conner drives
+	add.l	_hz_200,d0		;  between identify() and initparm()
+at0:	cmp.l	_hz_200,d0
+	bcc	at0
+
+	lea	sbuf,a0			; a0 -> beginning of scratch buffer
+	move.w	NSPT(a0),-(sp)		; sectors per track
+	move.w	NHEAD(a0),-(sp)		; number of heads
+	move.w	$12(sp),-(sp)		; physical unit #
+	bsr	_initparm		; initialize drive parameters
+	addq.w	#6,sp			; clean up stack
+	tst.w	d0			; successful?
+	bmi	rwend			; if timed-out, return
+	bne	rw2			; if error, return with error code
+					; else can r/w
+atrw:	lea	sbuf,a0			; a0 -> drive parameters
+d420 5
+a424 5
+	bne.b	at1			; (write)
+	bsr	_atread			; read sectors
+	bra.b	at2
+at1:	bsr	_atwrite		; write sectors
+at2:	adda	#16,sp			; clean up stack
+d445 1
+a445 1
+	bra	rwend
+a457 1
+;	d1.l = transfer length (in bytes)
+a476 1
+;	d1.l = transfer length (in bytes)
+d515 2
+a516 2
+ACLTMOUT	equ	600		; long-timeout (3 s)
+ACSTMOUT	equ	20		; short-timeout (100 ms)
+d524 2
+a525 2
+; Returns:	EQ: no timeout
+;		MI: timeout condition
+d531 1
+a531 1
+	bra	qd0
+d535 10
+a544 3
+qd0:	add.l	_hz_200,d0
+qd1:	cmp.l	_hz_200,d0		; timeout?
+	bcs	qdq			; (i give up, return NE)
+d546 1
+a546 1
+	bne	qd1			; (not yet)
+d548 1
+a548 1
+	moveq	#0,d0			; return EQ (no timeout)
+d561 1
+a561 1
+;		MI: timeout (-1 in D0.W)
+d568 1
+a568 1
+	bmi	endce			; (timed-out, so complain)
+d589 1
+a589 1
+;  Handle command timeout;
+d594 1
+a594 1
+	clr	flock		; NOW, signal that we are done
+d605 1
+a605 1
+	bcc	wait			;	wait()
+a614 1
+;	d1.l = transfer length (in bytes)
+a616 4
+;
+; Comments:
+;	This routine assumes that if you are transferring more than 16
+; bytes, and a multiple of 16 bytes.
+a649 1
+;	d1.l = transfer length (in bytes)
+d699 1
+a699 1
+;	d0.l = -1 if timeout
+d720 1
+a720 1
+	bmi	sbaend			; if timeout, returns
+d753 4
+a757 1
+;	d1.l = count (in bytes)
+d761 2
+a762 6
+	move.l	d1,-(sp)		; save transfer length (in bytes)
+	lsr.l	#8,d1			; find transfer length (in blocks)
+	add.l	d1,d1			; d1 >>= 9 = transfer len (in blocks)
+	move.w	d1,(a1)		;WDC	; set DMA count
+	move.l	(sp)+,d1		; restore transfer length (in bytes)
+sacend:	rts
+d816 2
+a817 2
+SCLTMOUT	equ	201		; long-timeout (at least 1000 ms)
+SCSTMOUT	equ	51		; short-timeout (at least 250 ms)
+a823 1
+;	d1.l = transfer length (in bytes)
+d840 5
+a844 1
+rs0:	bsr	setscstmout		; set up short timeout
+d852 2
+a853 1
+rsend:	rts
+a860 1
+;	d1.l = transfer length (in bytes)
+d879 5
+a883 1
+ws0:	bsr	setscstmout
+d891 2
+a892 1
+wsend:	rts
+d905 1
+a905 1
+;	d0.l = -1 if timeout
+d922 1
+a922 1
+	bsr	setscstmout		; set a short timeout
+d937 1
+a937 1
+	bsr	setscstmout		; set up a short timeout
+d940 1
+a940 1
+	cmp.l	(a0),d1			; timeout?
+d961 1
+a961 1
+	bsr	setscstmout		; use short timeout
+d979 1
+a979 1
+;	d0.l = returned status or timeout error
+d986 1
+a986 1
+	bmi.b	w4iend			; if timed-out, returns
+d996 2
+a997 1
+	bra.b	w4iend			; and return
+d999 1
+a999 1
+wst4:	bsr	setscstmout		; set up timeout for REQ and ACK
+d1006 3
+a1008 3
+	bmi.b	wst3			; if so, return timeout
+w4i5:	move.l	(sp)+,d0		; recall the status byte
+w4iend:	rts
+d1028 1
+a1028 1
+	bra.b	w4rend
+d1030 1
+a1030 1
+w4rend:	rts
+d1050 1
+a1050 1
+	bra.b	doaend
+d1052 1
+a1052 1
+doaend:	andi.b	#$ef,SCSIICR		; clear ACK
+d1091 1
+d1096 1
+a1096 1
+; setscstmout - set up a timeout count for the SCSI for SCSTMOUT ticks
+d1110 1
+a1110 1
+; setscltmout - set up a timeout count for the SCSI for SCLTMOUT long
+d1134 1
+a1134 1
+; AT disk interface I/O locations for Read functions
+d1136 1
+a1136 1
+bAT	equ	$FFF00000+REGBASE	; base address
+d1138 10
+a1147 10
+ATDR	equ	bAT-REGBASE+($00*REGLSTEP); Data Register (16-bit reg)
+ATER	equ	bAT+($01*REGLSTEP)	; Error Register
+ATSC	equ	bAT+($02*REGLSTEP)	; Sector Count
+ATSN	equ	bAT+($03*REGLSTEP)	; Sector Number
+ATCL	equ	bAT+($04*REGLSTEP)	; Cylinder Low
+ATCH	equ	bAT+($05*REGLSTEP)	; Cylinder High (2 bits)
+ATSDH	equ	bAT+($06*REGLSTEP)	; SDH register
+ATSR	equ	bAT+($07*REGLSTEP)	; Status Register
+ATASR	equ	bAT+($0E*REGLSTEP)	; Alternate Status Register
+ATDAR	equ	bAT+($0F*REGLSTEP)	; Drive Address Register
+d1151 11
+a1161 11
+; AT disk interface I/O locations for Write functions
+
+;ATDR	equ	bAT-REGBASE+($00*REGLSTEP); Data Register (16-bit reg)
+ATWPR	equ	bAT+($01*REGLSTEP)	; Write Precomp Register (not used)
+;ATSC	equ	bAT+($02*REGLSTEP)	; Sector Count
+;ATSN	equ	bAT+($03*REGLSTEP)	; Sector Number
+;ATCL	equ	bAT+($04*REGLSTEP)	; Cylinder Low
+;ATCH	equ	bAT+($05*REGLSTEP)	; Cylinder High (2 bits)
+;ATSDH	equ	bAT+($06*REGLSTEP)	; SDH register
+ATCR	equ	bAT+($07*REGLSTEP)	; Command Register
+ATDOR	equ	bAT+($0E*REGLSTEP)	; Digital Output Register
+d1173 1
+a1173 1
+w4int:	move.l	#D_WORST,d0	; d0 = timeout limit
+d1177 1
+a1177 1
+	cmp.l	_hz_200,d0	; timeout?
+d1179 1
+a1179 1
+	moveq	#-1,d0		; else, return timeout
+d1182 1
+a1182 1
+	move.b	ATSR,d0		; d0.b = status returned
+d1189 1
+a1189 1
+wi2:	move.b	ATER,d0		; else d0.b = error bits
+d1195 1
+a1195 1
+; atread() - reads from 1 to 256 sectors as specified in the Task File,
+d1199 1
+a1199 5
+; Comments:
+;	The unit is assumed to be in native mode when conversion from
+; logical block address to physical address is done.
+;
+; atread(nhd, nspt, sectnum, count, buf, pdev)
+d1207 2
+a1208 2
+	.globl	_atread
+_atread:
+d1211 1
+a1211 1
+	move.b	$d(sp),ATSC	; set sector count
+d1216 3
+a1218 3
+	move.b	#0,ATDOR	; enable interrupt
+	move.b	#ATREAD,ATCR	; set command code
+atr0:	bsr	w4int		; wait for interrupt
+d1220 1
+a1220 1
+	bmi.b	atr1		; if timed-out, return
+d1223 1
+a1223 1
+	beq.b	atr1		; if not, return
+d1226 1
+a1226 1
+	dbra	d1,atr0		; more to read?
+d1228 1
+a1228 1
+atr1:	rts
+d1232 1
+a1232 1
+; atwrite() - writes from 1 to 256 sectors as specified in the Task File,
+d1236 1
+a1236 5
+; Comments:
+;	The unit is assumed to be in native mode when conversion from
+; logical block address to physical address is done.
+;
+; atwrite(nhd, nspt, sectnum, count, buf, pdev)
+d1244 2
+a1245 2
+	.globl	_atwrite
+_atwrite:	
+d1248 1
+a1248 1
+	move.b	$d(sp),ATSC	; set sector count
+d1253 5
+a1257 5
+	move.b	#0,ATDOR	; enable interrupt
+	move.b	#ATWRITE,ATCR	; set command code
+atw0:	btst.b	#3,ATASR	; DRQ?
+	beq.b	atw0		; if not, wait longer
+atw1:	bsr	wrtbuf		; fill sector buffer
+d1260 1
+a1260 1
+	bmi.b	atw2		; if timed-out, return
+d1262 2
+a1263 2
+	beq.b	atw2		; if not, return
+	dbra	d1,atw1		; else go transfer data
+d1265 1
+a1265 1
+atw2:	rts
+d1286 1
+a1286 1
+	move.b	d1,ATCL		; set cylinder low
+d1288 1
+a1288 1
+	move.b	d1,ATCH		; set cylinder high
+d1296 1
+a1296 1
+	move.b	d1,ATSDH	; set drive and head #
+d1299 1
+a1299 1
+	move.b	d1,ATSN		; set sector #
+a1302 24
+; initparm() - enables the host to set the head switch and cylinder
+;	       increment points for multiple sector operations.
+;
+; initparm(pdev, head, spt)
+; WORD 	pdev;	4(sp).w
+; WORD	head;	6(sp).w
+; WORD	spt;	8(sp).w
+;-
+	.globl	_initparm
+_initparm:
+	move.w	4(sp),d0	; d0 = physical unit #
+	andi.b	#7,d0		; mask off flags
+	lsl.w	#4,d0		; shift it into place
+	move.b	d0,ATSDH	; set physical unit #
+	move.w	6(sp),d0	; d0 = # of heads
+	subq.b	#1,d0		; maximum head #
+	or.b	d0,ATSDH	; set head #
+	move.b	9(sp),ATSC	; set sectors per track
+	move.b	#0,ATDOR	; enable interrupt
+	move.b	#INITPARM,ATCR	; set command code
+	bra	w4int		; go wait for interrupt
+
+
+;+
+d1315 1
+a1315 1
+	move.b	d0,ATSDH	; set drive #
+d1318 2
+a1319 2
+	move.b	#0,ATDOR	; enable interrupt
+	move.b	#IDENTIFY,ATCR	; set command code
+d1339 11
+a1349 4
+	moveq	#127,d0		; d0 = # of longs of data to read - 1
+	lea	ATDR,a1		; a1 -> data bus
+rb0:	move.l	(a1),(a0)+	; read data from bus
+	dbra	d0,rb0		;  repeat until all done
+d1360 11
+a1370 4
+	moveq	#127,d0		; d0 = # of longs of data to read - 1
+	lea	ATDR,a1		; a1 -> data bus
+wb0:	move.l	(a0)+,(a1)	; write data to bus
+	dbra	d0,wb0		;  repeat until all done
+d1387 3
+a1389 2
+	move.b	d0,ATSDH	; set drive #
+	move.l	#ATRDY,d0	; set up timer
+d1391 2
+a1392 2
+ir0:	btst.b	#6,ATASR	; is drive ready?
+	bne.b	ir1		; if so, return with drive ready
+d1401 2
+@
+
+
+1.21
+log
+@Minna added yet another delay: Conner wants 0.5sec between
+power up and the Identify command.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/12 19:56:18 $
+d14 4
+d110 1
+a110 1
+* $Revision: 1.20 $
+d227 1
+a227 1
+D_IDENTIFY  equ	    101	    ; delay between power on and identify() (500ms)
+@
+
+
+1.20
+log
+@Changed to assemble IDE_AT for ALL MACHINES, now that there's no
+distinction at assembly time between ST and STPLUS.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/06 14:50:56 $
+d14 4
+d106 1
+a106 1
+* $Revision: 1.19 $
+d197 4
+d208 2
+a209 2
+flock		equ	$43e	; FIFO lock variable
+_hz_200		equ	$4ba	; system 200hz timer
+d212 5
+a216 5
+READ		equ	$08	; opcode for Read sectors
+WRITE		equ	$0a	; opcode for Write sectors
+NCMD		equ	6	; normal command length (6 bytes)
+MAXACSI		equ	7	; highest ACSI unit#
+MAXSCSI		equ	15	; highest SCSI unit#
+d219 8
+a226 7
+ATREAD		equ	$20	; opcode for Read sectors
+ATWRITE		equ	$30	; opcode for Write sectors
+INITPARM	equ	$91	; opcode for Initialize Drive Parameters
+IDENTIFY	equ	$ec	; opcode for Identify Drive
+D_WORST		equ	2000	; worst case delay (10s)
+ATRDY		equ	1000	; delay to wait for IDE drive to be ready
+MAXAT		equ	17	; highest IDE-AT unit#
+d229 3
+a231 3
+EUNDEV	equ	(-15)		; UNknown DEVice
+EREADF	equ	(-11)		; READ Fault
+EWRITF	equ	(-10)		; WRITe Fault
+d234 3
+a236 3
+REGBASE		equ	1	; most are on odd part of data bus
+REGSTEP		equ	2	; for regs that are on word boundaries
+REGLSTEP	equ	4	; for regs that are on long word boundaries
+d289 1
+a289 1
+	cmpi.w	#MAXAT,$e(sp)		; unit# > IDE-AT unit# 16-17?
+d348 5
+d361 2
+a362 2
+	moveq	#2,d0			; FOR DEBUGGING - Conner drives
+	add.l	_hz_200,d0
+@
+
+
+1.19
+log
+@Changed all "ifne" to "if" and "ifeq" to "if !" and "endc" to "endif."
+@
+text
+@d7 1
+a7 1
+* $Date: 91/08/21 11:18:56 $
+d13 4
+a16 1
+* $Log:	dmaread.s,v $
+d102 1
+a102 1
+* $Revision: 1.18 $
+d105 1
+a105 1
+* $Source: /u2/MRS/osrevisions/bios/dmaread.s,v $
+d120 3
+d125 1
+a125 1
+IDE_AT		=	STPLUS
+@
+
+
+1.18
+log
+@Fixed two oopses: iderdy is now consistently _iderdy,
+and undev is outside IDEAT conditionals.
+@
+text
+@d4 1
+a4 1
+* $Author: minna $
+d7 1
+a7 1
+* $Date: 91/08/20 13:22:25 $
+d14 4
+d99 1
+a99 1
+* $Revision: 1.17 $
+d233 1
+a233 1
+.ifne IDE_AT
+d236 1
+a236 1
+.endc
+d273 1
+a273 1
+.ifne IDE_AT
+d276 1
+a276 1
+.ifne SCSI
+d280 2
+a281 2
+.endc
+.endc
+d284 1
+a284 1
+.ifne IDE_AT
+d287 1
+a287 1
+.endc
+d309 1
+a309 1
+.ifne IDE_AT
+d369 1
+a369 1
+.endc	
+d371 1
+a371 1
+.ifne	SCSI
+d378 1
+a378 1
+.endc
+d407 1
+a407 1
+.ifne SCSI
+d412 1
+a412 1
+.endc
+d427 1
+a427 1
+.ifne	SCSI
+d432 1
+a432 1
+.endc
+d509 1
+a509 1
+.ifne	SCSI				; dump D cache
+d516 1
+a516 1
+.endc
+d725 1
+a725 1
+.ifne	SCSI
+d1058 1
+a1058 1
+.endc
+d1062 1
+a1062 1
+.ifne IDE_AT
+d1353 1
+a1353 1
+.endc
+@
+
+
+1.17
+log
+@Added iderdy() to test if IDE drive is ready before 
+it's being talked to.  If the drive does not become
+ready in 5 sec., it's considered as an unknown device.
+@
+text
+@d4 1
+a4 1
+* $Author: apratt $
+d7 1
+a7 1
+* $Date: 91/08/15 16:18:07 $
+d10 1
+a10 1
+* $Locker: minna $
+d14 5
+d95 1
+a95 1
+* $Revision: 1.16 $
+d315 1
+a315 2
+undev:	moveq.l	#EUNDEV,d0
+	bra	rwend			; branch to rts
+d325 1
+a325 1
+	bsr	iderdy			; wait for drive to be ready
+d384 2
+d1325 1
+a1325 1
+; iderdy() - test if the IDE drive is ready
+@
+
+
+1.16
+log
+@Added code for IDE to wait until ATASR shows READY before
+doing anything else.  Also changed so IDE_AT is assembled for
+all STPLUS versions; the bus error detection will take care
+of failing out quick on those machines that don't really have
+an IDE bus.
+@
+text
+@d4 1
+a4 1
+* $Author: minna $
+d7 1
+a7 1
+* $Date: 91/08/02 16:21:23 $
+d10 1
+a10 1
+* $Locker:  $
+d14 7
+d90 1
+a90 1
+* $Revision: 1.15 $
+d174 4
+d201 1
+d263 1
+a263 2
+dmarw:	moveq	#EUNDEV,d0		; assume it's an unknown device
+
+d273 1
+a273 1
+	bhi	rwend			; if so, return with error
+d310 1
+a310 1
+	moveq.l	#EUNDEV,d0
+d320 5
+a324 3
+at3:	btst.b	#6,ATASR		; is drive ready yet?
+	beq.b	at3			; if not, wait longer
+
+d326 1
+a326 1
+	move.w	$12(sp),-(sp)		; AT unit#
+d1315 26
+@
+
+
+1.15
+log
+@Added delay between identify() and initparm(),
+and reversed changes made earlier today.
+@
+text
+@d7 1
+a7 1
+* $Date: 91/08/02 15:07:10 $
+d10 1
+a10 1
+* $Locker: minna $
+d14 4
+d83 1
+a83 1
+* $Revision: 1.14 $
+d95 6
+a100 2
+* The code you get in assembling this file depends on the switches SCSI
+* and IDE_AT.  For now (2/91), only TT has SCSI and only STPAD has IDE.
+d103 1
+a103 1
+IDE_AT		=	STPAD
+d162 5
+d308 3
+@
+
+
+1.14
+log
+@Added handling of final interrupt after data transfer
+@
+text
+@d7 1
+a7 1
+* $Date: 91/07/29 12:37:45 $
+d14 4
+d79 1
+a79 1
+* $Revision: 1.13 $
+d146 1
+d150 4
+d303 6
+a308 1
+					; else init drive with these parameters
+d1128 1
+a1128 1
+	bra	w4int
+d1169 1
+a1169 1
+	bra	w4int
+d1256 1
+a1256 1
+	bra	w4int
+@
+
+
+1.13
+log
+@_atread() and _atwrite modified to not use the
+ATSC (sector count register) to count down on
+multiple sectors read or write.  Some vendors
+decrement the register too early.
+
+To test if the IDE interface exists, instead of
+reading from bAT (the data register), read from
+ATASR (the alternate status register.)
+@
+text
+@d4 1
+a4 1
+* $Author: apratt $
+d7 1
+a7 1
+* $Date: 91/03/27 12:36:36 $
+d14 10
+d75 1
+a75 1
+* $Revision: 1.12 $
+d142 3
+d1108 1
+d1114 1
+a1114 1
+	moveq	#0,d0		; everything's fine
+d1155 1
+a1155 1
+	moveq	#0,d0		; everything's fine
+d1242 2
+a1243 1
+	moveq	#0,d0		; return successful
+@
+
+
+1.12
+log
+@Base address of IDE has moved to $F00000.  This code assumes that the base
+address is on a longword boundary.  Added guards against missing IDE bus,
+and against missing ACSI (bus error when accessing DMA chip).  This is
+for prototype PADs only, and may go away soon.
+
+Changed switches to SCSI and IDE_AT, which are set based on TT and STPAD at
+the top of the file.
+@
+text
+@d4 1
+a4 1
+* $Author: minna $
+d7 1
+a7 1
+* $Date: 91/02/26 17:58:37 $
+d10 1
+a10 1
+* $Locker:  $
+d14 9
+d65 1
+a65 1
+* $Revision: 1.11 $
+d118 14
+d178 1
+a178 1
+sbuf:		ds.l	128	; scratch buffer (must be on long word
+d262 1
+a262 1
+noide:	move.l	a1,sp			; got the bus error on bAT;
+d270 1
+a270 1
+	tst.b	bAT			; read a register to probe for IDE bus
+d1085 1
+a1085 2
+	lea	ATSC,a2		; a2 -> sector count register
+	move.b	$d(sp),(a2)	; set sector count
+d1087 3
+d1099 1
+a1099 2
+	tst.b	(a2)		; more to read?
+	bne.b	atr0		; if so, continue
+d1125 1
+a1125 2
+	lea	ATSC,a2		; a2 -> sector count register
+	move.b	$d(sp),(a2)	; set sector count
+d1127 3
+d1140 1
+a1140 2
+	tst.b	(a2)		; more to write?
+	bne.b	atw1		; if so, continue
+@
+
+
+1.11
+log
+@Base address of IDE bus has been moved to $F00000.
+@
+text
+@d7 1
+a7 1
+* $Date: 90/10/29 15:52:12 $
+d10 1
+a10 1
+* $Locker: minna $
+d14 4
+d56 1
+a56 1
+* $Revision: 1.10 $
+d64 1
+a64 1
+* TT equate is in switches.s
+d68 2
+a69 4
+;+ Temporary equ's
+;TT	equ	0
+;IDE_AT	equ	1
+;-
+d71 3
+d198 1
+a198 1
+.ifne TT
+d234 18
+a251 1
+at:	pea	sbuf			; scratch buffer for drive parameters
+d284 1
+a284 1
+.ifne	TT
+d318 1
+a318 1
+.ifne TT
+d338 1
+a338 1
+.ifne	TT
+d420 1
+a420 1
+.ifne	TT				; dump D cache
+d474 9
+d510 9
+d535 3
+d539 5
+d636 1
+a636 1
+.ifne	TT
+@
+
+
+1.10
+log
+@Base address of IDE bus has been moved to $C00040 (long word boundary).
+@
+text
+@d7 1
+a7 1
+* $Date: 90/10/19 16:05:22 $
+d14 3
+d52 1
+a52 1
+* $Revision: 1.9 $
+d102 2
+d122 4
+a125 4
+ATREAD		equ	$20	; opcode Read sectors
+ATWRITE		equ	$30	; opcode Write sectors
+INITPARM	equ	$91	; Initialize Drive Parameters
+IDENTIFY	equ	$ec	; Identify Drive
+a127 2
+ATDPLEN		equ	4	; length of structure to store drive
+				;  parameters of each AT unit
+d147 1
+d150 2
+a151 4
+init:		ds.b	1	; bit 0 set - AT unit 0 initialized already
+				; bit 1 set - AT unit 1 initialized already
+sbuf:		ds.b	16	; scratch buffer
+atdp:		ds.b	2*ATDPLEN  ; structure to store drive parameters
+d227 4
+a230 17
+	bra	rw1
+
+at:	lea	atdp,a1			; a1 -> beginning of atdp struct
+	btst.b	#0,$f(sp)		; IDE-AT unit 0 or 1?
+	beq.b	at0			; if unit 0, go check unit 0
+	addq	#ATDPLEN,a1		; else index to structure for unit 1
+	btst.b	#1,init			; and check if unit 1 has been init'ed
+	bne	atrw			; if init'ed, can go r/w
+	bset.b	#1,init			; else go init unit now
+	bra.b	at1
+at0:	btst.b	#0,init			; check if unit 0 has been init'ed
+	bne	atrw			; if init'ed, can go r/w
+	bset.b	#0,init			; else init unit now
+at1:	move.l	a1,-(sp)		; save -> drive parameters
+	move.l	#sbuf,-(sp)		; scratch buffer for drive parameters
+	move.w	#8,-(sp)		; only want 1st 8 words of data
+	move.w	$18(sp),-(sp)		; AT unit#
+d232 1
+a232 2
+	addq	#8,sp			; clean up stack
+	move.l	(sp)+,a1		; restore -> drive parameters
+d236 1
+a236 1
+					; else, get phys parameters of unit
+a237 4
+	move.w	NHEAD(a0),(a1)		; store # of heads
+	move.w	NSPT(a0),2(a1)		; store # of physical sectors/track
+					; switch unit to native mode
+	move.l	a1,-(sp)		; save -> drive parameters
+d240 1
+a240 1
+	move.w	$16(sp),-(sp)		; physical unit #
+d242 1
+a242 2
+	addq	#6,sp			; clean up stack
+	move.l	(sp)+,a1		; restore -> drive parameters
+d247 2
+a248 1
+atrw:	move.w	$e(sp),-(sp)		; physical unit #
+d252 2
+a253 2
+	move.w	2(a1),-(sp)		; # physical sectors per track
+	move.w	(a1),-(sp)		; # data heads
+d255 1
+a255 1
+	bne.b	at2			; (write)
+d257 3
+a259 3
+	bra.b	at3
+at2:	bsr	_atwrite		; write sectors
+at3:	adda	#16,sp			; clean up stack
+d271 2
+a272 3
+	beq.b	rwend			; if no error, return
+	bmi.b	rwend			; if timed-out, return
+					; else, there's an error
+d935 1
+a935 1
+bAT	equ	$FFC00040+REGBASE	; base address
+d966 1
+a966 1
+NSPT	equ	12		; Number of physical sectors/track
+d980 2
+a981 1
+wi1:	move.b	ATSR,d0		; d0.b = status returned
+d1006 3
+a1008 3
+; WORD	count;		$c(sp).w
+; BYTE	*buf;		$e(sp).l	$f(sp)=high $10(sp)=mid $11(sp)=low
+; WORD	pdev;		$12(sp).w
+a1013 1
+	move.w	#256,d1		; d1 = word count
+d1016 1
+d1020 2
+d1024 1
+a1024 1
+	move.w	d1,d0		; initialize word count
+d1045 3
+a1047 3
+; WORD	count;		$c(sp).w
+; BYTE	*buf;		$e(sp).l	$f(sp)=high $10(sp)=mid $11(sp)=low
+; WORD	pdev;		$12(sp).w
+a1052 1
+	move.w	#256,d1		; d1 = word count
+d1055 1
+d1060 1
+a1060 2
+atw1:	move.w	d1,d0		; initialize word count
+	bsr	wrtbuf		; fill sector buffer
+d1062 2
+d1134 1
+a1134 1
+; identify(pdev, len, buf)
+d1136 1
+a1136 2
+; WORD	len;	6(sp).w		; number of words of data requested
+; BYTE	*buf;	8(sp).l		; buffer to put data
+d1144 2
+d1149 2
+d1153 1
+a1153 2
+	move.l	8(sp),a0	; else a0 -> buffer
+	move.w	6(sp),d0
+d1160 1
+a1160 2
+; readbuf() - reads given number of words of data from the sector
+;		buffer.
+d1163 1
+a1163 2
+;	d0.w = number of words of data to read
+;	a0.l = buffer to hold data read from sector buffer
+d1166 1
+a1166 2
+	lsr.w	#1,d0		; d0 = # of longs of data to read
+	subq.w	#1,d0		; dbra likes one less
+d1174 1
+a1174 1
+; wrtbuf() - writes 512 bytes (255 words) of data to sector buffer.
+a1176 1
+;	d0.w = number of words of data to write
+d1180 1
+a1180 2
+	lsr.w	#1,d0		; d0 = # of longs of data to write
+	subq.w	#1,d0		; dbra likes one less
+@
+
+
+1.9
+log
+@Added code to handle drives on the IDE-AT bus.
+@
+text
+@d4 1
+a4 1
+* $Author: apratt $
+d7 1
+a7 1
+* $Date: 90/08/03 13:22:48 $
+d13 4
+a16 1
+* $Log:	dmaread.b,v $
+d49 1
+a49 1
+* $Revision: 1.8 $
+d52 1
+a52 1
+* $Source: /u2/MRS/osrevisions/bios/dmaread.b,v $
+d97 2
+d132 3
+a134 2
+REGBASE	equ	1		; most are on odd part of data bus
+REGSTEP	equ	2		; most registers are on word boundaries
+d952 1
+a952 1
+bAT	equ	$FFFFFC20+REGBASE	; base address
+d954 10
+a963 10
+ATDR	equ	bAT-REGBASE+($00*REGSTEP); Data Register (16-bit reg)
+ATER	equ	bAT+($01*REGSTEP)	; Error Register
+ATSC	equ	bAT+($02*REGSTEP)	; Sector Count
+ATSN	equ	bAT+($03*REGSTEP)	; Sector Number
+ATCL	equ	bAT+($04*REGSTEP)	; Cylinder Low
+ATCH	equ	bAT+($05*REGSTEP)	; Cylinder High (2 bits)
+ATSDH	equ	bAT+($06*REGSTEP)	; SDH register
+ATSR	equ	bAT+($07*REGSTEP)	; Status Register
+ATASR	equ	bAT+($0E*REGSTEP)	; Alternate Status Register
+ATDAR	equ	bAT+($0F*REGSTEP)	; Drive Address Register
+d969 9
+a977 9
+;ATDR	equ	bAT-REGBASE+($00*REGSTEP); Data Register (16-bit reg)
+ATWPR	equ	bAT+($01*REGSTEP)	; Write Precomp Register (not used)
+;ATSC	equ	bAT+($02*REGSTEP)	; Sector Count
+;ATSN	equ	bAT+($03*REGSTEP)	; Sector Number
+;ATCL	equ	bAT+($04*REGSTEP)	; Cylinder Low
+;ATCH	equ	bAT+($05*REGSTEP)	; Cylinder High (2 bits)
+;ATSDH	equ	bAT+($06*REGSTEP)	; SDH register
+ATCR	equ	bAT+($07*REGSTEP)	; Command Register
+ATDOR	equ	bAT+($0E*REGSTEP)	; Digital Output Register
+d1179 1
+d1182 1
+a1182 1
+rb0:	move.w	(a1),(a0)+	; read data from bus
+d1195 1
+d1198 1
+a1198 1
+wb0:	move.w	(a0)+,(a1)	; write data to bus
+@
+
+
+1.8
+log
+@TTOS FINAL RELEASE
+@
+text
+@d7 1
+a7 1
+* $Date: 90/03/06 16:09:16 $
+d10 1
+a10 1
+* $Locker:  $
+d13 4
+a16 1
+* $Log:	dmaread.s,v $
+d35 1
+a35 1
+* code in flop.s.
+d46 1
+a46 1
+* $Revision: 1.7 $
+d49 1
+a49 1
+* $Source: /u2/MRS/osrevisions/bios/dmaread.s,v $
+d58 5
+d66 6
+a71 4
+; ACSI or SCSI bus.  This is a low-level read/write which does not
+; do a lot of checking.  Amount of data requested on each ACSI read
+; or write _must_ be smaller than or equal to 254 sectors.  On SCSI,
+; all I/O are done by handshaking.
+d87 1
+a87 1
+;			Will use regular SC?TMOUT values.  Bios will keep
+d89 1
+a89 1
+;			responses, Bios' timeout count expires, or when 
+d91 3
+a93 1
+;
+d100 3
+a102 10
+flock	equ	$43e		; FIFO lock variable
+_hz_200	equ	$4ba		; system 200hz timer
+READ	equ	$08		; opcode for Read
+WRITE	equ	$0a		; opcode for Write
+NCMD	equ	6		; normal command length (6 bytes)
+MAXSCSI	equ	15		; highest SCSI unit#
+MAXACSI	equ	7		; highest ACSI unit#
+EUNDEV	equ	(-15)		; error code for unknown device
+EREADF	equ	(-11)		; error code for read fault
+EWRITF	equ	(-10)		; error code for write fault
+d104 6
+d111 20
+d135 1
+a136 2
+lastacstm:	ds.l	1	; controller last accessed time
+cachexst:	ds.b	1	; 0: no cache	1: cache exists
+d138 8
+d159 6
+a164 6
+; Returns 0 for success.
+; Returns a negative number for failure: 
+;	EUNDEV (-15L) for unknown device (bad dev number)
+;	EREADF (-11L) for read failure
+;	EWRITF (-10L) for write failure
+;	-1L for timed-out
+d167 1
+a167 1
+;	Right now, only ACSI and SCSI devices are supported.
+d182 2
+a183 2
+.ifeq TT
+	cmpi.w	#MAXACSI,$e(sp)		; unit# > ACSI unit# 0-7?
+d185 1
+d187 2
+d190 2
+a191 1
+	bhi.b	rwend			; if so, return with error
+d193 5
+d215 1
+a215 1
+	bra.b	rw1
+d218 53
+d284 1
+a284 1
+	moveq	#EREADF,d0		; assume it's a read error
+d291 6
+d420 2
+a421 2
+	and.w	#$00ff,d0		; (clean it up), if non-zero should
+					; do a ReadSense command to learn more
+a608 5
+; Definitions
+REGBASE	equ	1	; most are on odd part of data bus
+REGSTEP	equ	2	; most registers are on word boundaries
+
+
+d930 262
+@
+
+
+1.7
+log
+@Moved .globl _resetscsi into the TT conditional; otherwise
+MAS thinks it's external, even though it's never used!
+@
+text
+@d7 1
+a7 1
+* $Date: 90/03/02 17:46:34 $
+d14 4
+d43 1
+a43 1
+* $Revision: 1.6 $
+@
+
+
+1.6
+log
+@This rev is the source for the 3/1/90 ROM.
+@
+text
+@d7 1
+a7 1
+* $Date: 90/03/01 17:27:00 $
+d10 1
+a10 1
+* $Locker: minna $
+d14 3
+d39 1
+a39 1
+* $Revision: 1.5 $
+a81 1
+.globl	_resetscsi
+d496 2
+@
+
+
+1.5
+log
+@Checkin of Minna's changes, including adding better spin-up delays
+and the dmawrite call.
+@
+text
+@d7 1
+a7 1
+* $Date: 89/09/22 16:42:55 $
+d14 4
+d36 1
+a36 1
+* $Revision: 1.4 $
+a47 2
+UPTIME	equ	12000	; 60 sec
+
+d65 9
+a73 1
+;			as requested by AKP.
+d120 1
+a174 1
+
+d176 2
+d418 4
+a421 19
+	swap	d1			; d1.hw = wdl value
+	move.w	d0,d1			; d1.lw = unit #
+	lsl.w	#5,d1			; shift unit number into place
+	or.b	(a2)+,d1		; d1.b = unit number | OPCODE
+	swap	d1
+	move.l	d1,(a1)		;WDCWDL
+
+; end time for ack of 1st command byte is the LATER of
+; (UPTIME ticks from power up) and (ACSTMOUT ticks from now)
+	move.l	#UPTIME,d0		; d0 = minimum system up time
+	sub.l	_hz_200,d0		; if d0 > #ACSTMOUT, use d0
+	cmpi.l	#ACSTMOUT,d0
+	bgt	sa0
+	move.l	#ACSTMOUT,d0
+sa0:	add.l	_hz_200,d0		; d0.l = expiration time
+	bsr	qd1
+	bmi	sbaend			; if timed-out, returns
+					; 1st and control byte are sent
+	subq.w	#3,d2			; seperately and dbra likes one less 
+d552 2
+a553 12
+; end time for ack of 1st data byte is the LATER of 
+; (UPTIME ticks after power up) and (SCSTMOUT ticks from now).
+
+	lea	_hz_200,a0		; a0 -> 200hz clock
+	cmpi.l	#UPTIME,(a0)		; power has been up long enough?
+	bgt.b	rs2			; if yes - use short timeout
+	move.l	#UPTIME,d1		; else use minimum system uptime
+	add.l	(a0),d1			; d1 = timeout value
+	bra.b	rs3			; go wait for REQ
+	
+rs2:	bsr	setscstmout		; set up short timeout
+rs3:	bsr	w4req			; wait for REQ to come
+d559 1
+a559 1
+	bra.b	rs2			; do next byte
+d580 1
+a580 2
+	bpl.b	ws1			; if successful, go on
+	rts				; else return
+d582 1
+a582 1
+ws1:	movea.l	a0,a1			; a1 -> buffer to write from
+d587 2
+a588 12
+; end time for ack of 1st data byte is the LATER of 
+; (UPTIME ticks after power up) and (SCSTMOUT ticks from now).
+
+	lea	_hz_200,a0		; a0 -> 200hz clock
+	cmpi.l	#UPTIME,(a0)		; power has been up long enough?
+	bgt.b	ws2			; if yes - use short timeout
+	move.l	#UPTIME,d1		; else use minimum system uptime
+	add.l	(a0),d1			; d1 = timeout value
+	bra.b	ws3			; go wait for REQ
+					; hand shake over the bus
+ws2:	bsr	setscstmout
+ws3:	bsr	w4req			; wait for REQ to come
+d594 1
+a594 1
+	bra.b	ws2			; do next byte
+d625 1
+a625 11
+; end time for ack of 1st data byte is the LATER of 
+; (UPTIME ticks after power up) and (SCSTMOUT ticks from now).
+
+	lea	_hz_200,a0		; a0 -> 200hz clock
+	cmpi.l	#UPTIME,(a0)		; power has been up long enough?
+	bgt.b	ss0			; if yes - use short timeout
+	move.l	#UPTIME,d1		; else use minimum system uptime
+	add.l	(a0),d1			; d1 = timeout value
+	bra.b	ss1			; go wait for REQ
+	
+ss0:	bsr	setscstmout		; set a short timeout
+d642 1
+a642 1
+	beq	sels1			; if not, it's available
+d644 2
+a645 2
+	bhi	sels0			; not yet, wait some more
+	bra	sels4			; else, return error
+d664 1
+a664 11
+; amout of time to wait for bus to get busy is the LATER of 
+; (UPTIME ticks after power up) and (SCSTMOUT ticks from now).
+
+	lea	_hz_200,a0		; a0 -> 200hz clock
+	cmpi.l	#UPTIME,(a0)		; power has been up long enough?
+	bgt.b	sels2			; if yes - use short timeout
+	move.l	#UPTIME,d1		; else use minimum system uptime
+	add.l	(a0),d1			; d1 = timeout value
+	bra.b	sels3			; go wait for REQ
+	
+sels2:	bsr	setscstmout		; use short timeout
+@
+
+
+1.4
+log
+@THIS VERSION REQUIRES TURBO C'S "MAS" ASSEMBLER
+No functional changes from previous revision, which is the last to
+require Alcyon's AS68 assembler.
+@
+text
+@d7 1
+a7 1
+* $Date: 89/09/07 16:30:02 $
+d10 1
+a10 1
+* $Locker: apratt $
+d14 5
+d32 1
+a32 1
+* $Revision: 1.3 $
+d44 2
+d47 6
+a52 5
+; DMAREAD() - an XBIOS call to read from hard disk on the ACSI or SCSI
+;		bus.  This is a low-level read which does not do a lot
+;		of checking.  Amount of data requested on each ACSI read 
+;		_must_ be smaller than or equal to 254 sectors.  On SCSI,
+;		all I/O are done by handshaking.
+d57 7
+d68 1
+a71 10
+.macro	movecacrd0
+	dc.w	$4E7A
+	dc.w	$0002
+.endm
+
+.macro	moved0cacr
+	dc.w	$4E7B
+	dc.w	$0002
+.endm
+
+d75 1
+d77 1
+a77 1
+MAXSCSI	equ	14		; highest SCSI unit#
+d80 2
+a81 1
+EREADF	equ	(-11)		; error code for read error
+d88 5
+a92 2
+_cmdblk:	ds.b	10		; command block
+lastacstm:	ds.l	1		; controller last accessed time
+a93 1
+
+d98 1
+a98 1
+;	    - right now, only ACSI and SCSI devices are supported.
+d100 2
+a101 3
+; dmaread(sectnum, count, buf, pdev)
+; LONG	sectnum		4(sp).l
+; WORD	count		8(sp).w
+d105 8
+a112 2
+; Returns 0 for success, a negative number for failure: EREADF (-11L)
+; for read failure or EUNDEV (-15L) for unknown device (bad dev number).
+d114 1
+d116 11
+a126 1
+	moveq	#EUNDEV,d0		; assume it's an unknown device
+d128 3
+a130 1
+	cmp.w	#MAXACSI,$e(sp)
+d132 1
+a132 4
+.ifne TT
+	cmpi.w	#MAXSCSI,$e(sp)		; unit# > SCSI unit# 8 - 14?
+.endc
+	bhi	rdend			; if so, return with error
+d135 1
+a135 1
+	move.b	#READ,(a0)+		; byte 0 = READ opcode
+d148 5
+a152 1
+	bsr	_dorcmd			; send the command
+d154 2
+a155 1
+	move.l	d0,-(sp)		; save the status
+d158 3
+a160 3
+	movecacrd0			; d0 = (cache control register)
+	ori.w	#$0808,d0		; dump both the I and D cache
+	moved0cacr			; update cache control register
+d162 2
+a163 4
+	move.l	(sp)+,d0		; restore the return value
+	beq	rdend			; if no error, return
+	moveq	#EREADF,d0		; else put in read error code
+rdend:	rts
+d165 6
+d172 1
+d185 1
+a185 1
+	bls	rcacsi			; if not, it's an ACSI device
+d193 21
+d252 2
+a253 3
+_fdone:	move.l	_hz_200,d0
+	add.l	#ACLTMOUT,d0
+	bra	qd1
+d255 1
+a255 2
+_qdone:	move.l	_hz_200,d0
+	add.l	#ACSTMOUT,d0
+d257 1
+d285 9
+d326 1
+a326 1
+; rcvacsi() - send a ACSI command which receives data back.
+d343 1
+d345 3
+a347 10
+	tst.b	GPIP
+	tst.b	GPIP
+	tst.b	GPIP
+	tst.b	GPIP
+	move.w	#$90,XWDL(a1)	;WDL	;  for receiving data
+	tst.b	GPIP
+	tst.b	GPIP
+	tst.b	GPIP
+	tst.b	GPIP
+	bsr	setadma			; set DMA pointer
+d349 1
+d357 27
+d414 2
+a415 3
+; (10 sec from power up) and (100ms from now)
+	move.l	d1,-(sp)		; save d1
+	move.l	#2000,d0		; 2000 ticks is 10 sec
+d417 1
+a417 2
+	move.l	#ACSTMOUT,d1
+	cmp.l	d1,d0
+d419 2
+a420 3
+	move.l	d1,d0
+sa0:	move.l	(sp)+,d1		; restore d1
+	add.l	_hz_200,d0		; d0.l = expiration time
+d422 1
+a422 1
+	bmi	sbaend			; if timedout, returns
+d470 1
+a470 1
+	lsr.l	#1,d1			; d1 >>= 9 = transfer len (in blocks)
+d476 12
+d489 3
+d548 1
+a548 1
+	bmi	rsend			; if not successful, return
+d556 1
+a556 1
+; (40 sec after power up) and (2 sec from now).
+d558 6
+a563 9
+	lea	_hz_200,a0		; a0 -> 200 hz clock
+	move.l	#8000,d1		; 8000 is 40 sec
+	sub.l	(a0),d1			; d1 = (2000 - _hz_200)
+	move.l	#400,d0
+	cmp.l	d0,d1
+	bgt	ra0			; if d1 > 400 use d1 (signed compare!)
+	move.l	d0,d1
+ra0:	add.l	(a0),d1			; d1 = expiration time
+	bra	ra3			; go wait for REQ
+d565 3
+a567 3
+ra2:	bsr	setscstmout		; set up short timeout
+ra3:	bsr	w4req			; wait for REQ to come
+	bmi	rsend			; if timed out, returns
+d572 1
+a572 1
+	bra	ra2			; do next byte
+d577 47
+a632 5
+;
+; Comments:
+;	Aug-11-89 ml.  An extra 8 bytes are added to the count
+; because the hardware has a bug.  For detail, see comments in
+; driver.
+d638 1
+a638 1
+	addq.l	#2,sp			; clean up stack
+d641 1
+a641 1
+	bmi	sbsend			; if timed out, return
+d647 1
+d649 2
+a650 2
+; end time for ack of 1st command byte is the LATER of 
+; (10 sec after power up) and (10 ticks from now).
+d652 8
+a659 15
+	lea	_hz_200,a0		; a0 -> 200 hz clock
+	move.l	#2000,d1		; 2000 is 10 sec
+	sub.l	(a0),d1			; d1 = (2000 - _hz_200)
+	moveq	#10,d0
+	cmp.l	d0,d1
+	bgt	ss0
+	move.l	d0,d1
+ss0:	add.l	(a0),d1			; d1 = expiration time
+	move.b	(a1)+,d0		; d0.b = 1st command byte
+	bsr	hshake			; write that byte
+	tst.w	d0
+	bmi	sbsend			; if timed-out, returns
+					; else send rest of command
+	bsr	setscstmout		; set a short timeout
+	subq.w	#2,d2			; dbra likes one less & (- 1st byte)
+d663 1
+a663 1
+	bmi	sbsend			; if timed-out, returns
+d698 11
+a708 10
+; end time for ack of controller of unit is the LATER of 
+; (3 sec after power up) and (250ms from now).
+	lea	_hz_200,a0		; a0 -> _hz_200 clock
+	move.l	#601,d1			; 600 ticks is 3 sec
+	sub.l	(a0),d1			; d1 = (2000 - _hz_200)
+	moveq	#51,d2			; 51 ticks is 250ms
+	cmp.l	d2,d1
+	bgt	sels2
+	move.l	d2,d1
+sels2:	add.l	(a0),d1			; d1 = expiration time
+d710 1
+a710 1
+	bne	sels5
+d712 1
+a712 1
+	bhi	sels3
+d715 1
+a715 1
+	bra	sels6
+d733 1
+a733 1
+	bmi	w4iend			; if timed-out, returns
+d736 1
+d740 1
+a740 1
+	beq	ws4			; if not, wait for message byte
+d742 2
+a743 2
+ws3:	addq.l	#4,sp			; else clean up stack
+	bra	w4iend			; and return
+d745 1
+a745 1
+ws4:	bsr	setscstmout		; set up timeout for REQ and ACK
+d747 1
+a747 1
+	bmi	ws3			; if timed-out, returns
+d752 1
+a752 1
+	bmi	ws3			; if so, return timeout
+d770 1
+a770 1
+	bne	wr1			; if REQ comes, done
+d772 1
+a772 1
+	bhi	wr0			; if not, wait some more
+d774 1
+a774 1
+	bra	w4rend
+d792 1
+a792 1
+	beq	da1			; if REQ goes away, done
+d794 1
+a794 1
+	bhi	da0			; if not, wait some more
+d796 1
+a796 1
+	bra	doaend
+d817 1
+a817 1
+	bmi	hsend			; if timed out, returns
+d831 2
+a832 2
+rs0:	cmp.l	(a0),d1
+	bhi	rs0
+d835 2
+a836 2
+rs1:	cmp.l	(a0),d1
+	bhi	rs1
+d848 3
+a850 3
+	movea.l	#_hz_200,a0		; a0 -> 200 hz clock
+	move.l	#SCSTMOUT,d1		; d0 = SCSTMOUT _hz_200 clicks
+	add.l	(a0),d1			; d0 = curr time + # clicks to wait
+d862 3
+a864 3
+	movea.l	#_hz_200,a0		; a0 -> 200 hz clock
+	move.l	#SCLTMOUT,d1		; d0 = SCLTMOUT _hz_200 clicks
+	add.l	(a0),d1			; d0 = curr time + # clicks to wait
+d867 1
+@
+
+
+1.3
+log
+@Added delay after (potentially) resetting ACSI DMA chip; see SLOWACSI
+code in flop.s.
+@
+text
+@d1 1
+d7 1
+a7 1
+* $Date: 89/08/25 16:49:18 $
+d10 1
+a10 1
+* $Locker:  $
+d14 4
+d27 1
+a27 1
+* $Revision: 1.2 $
+d35 4
+d101 4
+d106 2
+a107 1
+	bhi.s	.0			; if so, return with error
+d133 1
+a133 1
+	beq.s	.0			; if no error, return
+d135 1
+a135 1
+.0:	rts
+d148 1
+d150 1
+a150 1
+	bls.s	.1			; if not, it's an ACSI device
+d153 2
+a154 2
+
+.1:	bsr	_rcvacsi		; it's an ACSI device
+d198 1
+a198 1
+	bra.s	qd1
+d204 1
+a204 1
+	bcs.s	qdq			; (i give up, return NE)
+d206 1
+a206 1
+	bne.s	qd1			; (not yet)
+d228 1
+a228 1
+	bmi.s	endce			; (timed-out, so complain)
+d256 1
+a256 1
+	bcc.s	wait			;	wait()
+d334 1
+a334 1
+	bgt.s	.0
+d336 1
+a336 1
+.0:	move.l	(sp)+,d1		; restore d1
+d342 1
+a342 1
+.1:	swap	d1			; d1.hw = operand
+d347 2
+a348 2
+	bmi.s	sbaend			; if timeout, returns
+	dbra	d2,.1			; else send rest of command block
+d357 1
+a357 1
+.2:	move.b	#$8a,d1			; d1 = wdl value
+d450 1
+a450 1
+	bmi.s	rsend			; if not successful, return
+d465 1
+a465 1
+	bgt.s	.0			; if d1 > 400 use d1 (signed compare!)
+d467 2
+a468 2
+.0:	add.l	(a0),d1			; d1 = expiration time
+	bra.s	.3			; go wait for REQ
+d470 3
+a472 3
+.2:	bsr	setscstmout		; set up short timeout
+.3:	bsr	w4req			; wait for REQ to come
+	bmi.s	rsend			; if timed out, returns
+d477 1
+a477 1
+	bra.s	.2			; do next byte
+d504 1
+a504 1
+	bmi.s	sbsend			; if timed out, return
+d519 1
+a519 1
+	bgt.s	.0
+d521 1
+a521 1
+.0:	add.l	(a0),d1			; d1 = expiration time
+d525 1
+a525 1
+	bmi.s	sbsend			; if timed-out, returns
+d529 1
+a529 1
+.1:	move.b	(a1)+,d0		; d0.b = byte to be sent
+d532 2
+a533 2
+	bmi.s	sbsend			; if timed-out, returns
+	dbra	d2,.1			; until whole command block is sent
+d544 2
+a545 2
+.0:	btst	#6,SCSICR		; STILL busy from last time?
+	beq.s	.1			; if not, it's available
+d547 2
+a548 2
+	bhi.s	.0			; not yet, wait some more
+	bra.s	.4			; else, return error
+d550 1
+a550 1
+.1:	move.b	#0,SCSITCR		; data out phase
+a561 2
+	nop				; 2 deskew delays
+	nop
+d563 4
+d574 1
+a574 1
+	bgt.s	.2
+d576 3
+a578 3
+.2:	add.l	(a0),d1			; d1 = expiration time
+.3:	btst	#6,SCSICR		; wait for bus to be busy
+	bne.s	.5
+d580 1
+a580 1
+	bhi.s	.3
+d582 2
+a583 2
+.4:	moveq	#-1,d0			; time out
+	bra.s	.6
+d585 2
+a586 2
+.5:	clr.w	d0			; selection successful
+.6:	move.b	#$0,SCSIICR		; clear SEL and data bus assertion
+d601 1
+a601 1
+	bmi.s	w4iend			; if timed-out, returns
+d607 1
+a607 1
+	beq.s	.4			; if not, wait for message byte
+d609 2
+a610 2
+.3:	addq.l	#4,sp			; else clean up stack
+	bra.s	w4iend			; and return
+d612 1
+a612 1
+.4:	bsr	setscstmout		; set up timeout for REQ and ACK
+d614 1
+a614 1
+	bmi.s	.3			; if timed-out, returns
+d619 1
+a619 1
+	bmi.s	.3			; if so, return timeout
+d636 2
+a637 2
+.0:	btst	#5,SCSICR		; waiting for REQ to come
+	bne.s	.1			; if REQ comes, done
+d639 1
+a639 1
+	bhi.s	.0			; if not, wait some more
+d641 2
+a642 2
+	bra.s	w4rend
+.1:	moveq	#0,d0			; returns successful
+d658 2
+a659 2
+.0:	btst	#5,SCSICR		; wait for REQ to go away
+	beq.s	.1			; if REQ goes away, done
+d661 1
+a661 1
+	bhi.s	.0			; if not, wait some more
+d663 2
+a664 2
+	bra.s	doaend
+.1:	moveq	#0,d0			; returns successful
+d684 1
+a684 1
+	bmi.s	hsend			; if timed out, returns
+d698 2
+a699 2
+.0:	cmp.l	(a0),d1
+	bhi.s	.0
+d702 2
+a703 2
+.1:	cmp.l	(a0),d1
+	bhi.s	.1
+a732 4
+
+
+
+
+@
+
+
+1.2
+log
+@Moved lastacstm from text seg to bss.
+@
+text
+@d6 1
+a6 1
+* $Date: 89/08/25 16:45:32 $
+d9 1
+a9 1
+* $Locker: apratt $
+d13 3
+d22 1
+a22 1
+* $Revision: 1.1 $
+d265 4
+d270 4
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+* $Author$
+d6 1
+a6 1
+* $Date$
+d9 1
+a9 1
+* $Locker$
+d12 4
+a15 1
+* $Log$
+d19 1
+a19 1
+* $Revision$
+d22 1
+a22 1
+* $Source$
+d64 3
+d68 2
+a69 1
+_cmdblk:	ds.b	10	; command block
+d71 1
+a164 6
+
+
+;+
+; Declarations
+;-
+lastacstm:	dc.l	0		; controller last accessed time
+@

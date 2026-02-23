@@ -1,0 +1,1476 @@
+head	2.18;
+access;
+symbols
+	TOS0400:2.18
+	OKSPARROW:2.16
+	STPAD43:2.15
+	SPRW_DAL:2.14
+	FINAL206:2.13
+	TOS306:2.13
+	VERS06h:2.12
+	VERSX06c:2.11
+	VERSX06b:2.11
+	XDOT06:2.10
+	TT304:2.7
+	TTFINAL:2.6
+	BLUE:2.4
+	GREEN:2.4
+	ORANGE:2.4
+	MAR011990:2.4
+	FIRST_MAS:2.4
+	LAST_AS68:2.3
+	TOS16:2.2
+	TOS14:2.2;
+locks;
+comment	@# @;
+
+
+2.18
+date	92.08.11.00.34.42;	author kbad;	state Exp;
+branches;
+next	2.17;
+
+2.17
+date	92.07.27.20.12.04;	author kbad;	state Exp;
+branches;
+next	2.16;
+
+2.16
+date	92.05.18.23.08.24;	author unknown;	state Exp;
+branches;
+next	2.15;
+
+2.15
+date	92.02.29.21.24.14;	author apratt;	state Exp;
+branches;
+next	2.14;
+
+2.14
+date	91.12.05.00.43.20;	author apratt;	state Exp;
+branches;
+next	2.13;
+
+2.13
+date	91.09.25.19.35.36;	author apratt;	state Exp;
+branches;
+next	2.12;
+
+2.12
+date	91.08.05.15.29.10;	author apratt;	state Exp;
+branches;
+next	2.11;
+
+2.11
+date	91.05.21.16.54.35;	author apratt;	state Exp;
+branches;
+next	2.10;
+
+2.10
+date	91.04.11.12.13.43;	author apratt;	state Exp;
+branches;
+next	2.9;
+
+2.9
+date	91.03.27.14.00.26;	author apratt;	state Exp;
+branches;
+next	2.8;
+
+2.8
+date	91.03.27.12.37.31;	author apratt;	state Exp;
+branches;
+next	2.7;
+
+2.7
+date	90.11.26.13.16.28;	author apratt;	state Exp;
+branches;
+next	2.6;
+
+2.6
+date	90.08.03.13.23.19;	author apratt;	state Exp;
+branches;
+next	2.5;
+
+2.5
+date	90.08.03.11.28.25;	author apratt;	state Exp;
+branches;
+next	2.4;
+
+2.4
+date	89.09.22.16.54.54;	author apratt;	state Exp;
+branches;
+next	2.3;
+
+2.3
+date	89.08.25.16.45.58;	author apratt;	state Exp;
+branches;
+next	2.2;
+
+2.2
+date	89.06.19.15.46.12;	author kbad;	state Exp;
+branches;
+next	2.1;
+
+2.1
+date	89.02.22.20.45.37;	author kbad;	state Rel;
+branches;
+next	1.4;
+
+1.4
+date	89.01.23.12.18.41;	author kbad;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	88.10.12.14.44.51;	author kbad;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	88.10.03.15.07.07;	author kbad;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	88.09.19.14.00.58;	author kbad;	state Exp;
+branches;
+next	;
+
+
+desc
+@makefile for allbios.o
+@
+
+
+2.18
+log
+@TOS 4.00 Falcon030 first production version
+@
+text
+@# Makefile for all BIOS - requires Lattice or GNU make
+# =======================================================================
+# 920702 kbad  New!  Improved!  Cleaner, whiter builds!
+
+
+# The allbios extender is based on the switches set:
+# ROM/RAM is the first letter: a for RAM, o for ROM.
+# Machine is the second letter: t(TT) e(STe) p(STbook) f(Falcon/040)
+# Country is the third letter: u=usa, g=germany, ... (see below)
+
+# bios is affected by machine and country.
+# flop, dmaread and clock are affected by the machine switch only.
+# rwabs.c is affected by machine, too: for SPARROW it gets USE_DISK_CHANGE.
+# startup is affected by machine and systype.
+
+# Look at the `default:' target, or type 'make' for usage information.
+
+
+# Country codes
+# -----------------------------------------------------------------------
+# used: abcd fg i k  n    stu w
+# free:     e  h j lm opqr   v xyz0123456789
+
+# These numbers must match the values in switches.s
+USA=0
+UK=1
+GERMANY=2
+FRANCE=3
+SPAIN=4
+SWEDEN=5
+ITALY=6
+SWISSFRA=7
+SWISSGER=8
+TURKEY=9
+FINLAND=10
+NORWAY=11
+DENMARK=12
+
+ifndef C
+C=u		    # default: usa
+endif
+
+ifeq '$C' 'a'
+CNUM = $(SWISSFRA)
+endif
+ifeq '$C' 'b'
+CNUM = $(SWISSGER)
+endif
+ifeq '$C' 'c'
+CNUM = $(FINLAND)
+endif
+ifeq '$C' 'd'
+CNUM = $(DENMARK)
+endif
+ifeq '$C' 'f'
+CNUM = $(FRANCE)
+endif
+ifeq '$C' 'g'
+CNUM = $(GERMANY)
+endif
+ifeq '$C' 'i'
+CNUM = $(ITALY)
+endif
+ifeq '$C' 'k'
+CNUM = $(UK)
+endif
+ifeq '$C' 'n'
+CNUM = $(NORWAY)
+endif
+ifeq '$C' 's'
+CNUM = $(SPAIN)
+endif
+ifeq '$C' 't'
+CNUM = $(TURKEY)
+endif
+ifeq '$C' 'u'
+CNUM = $(USA)
+endif
+ifeq '$C' 'w'
+CNUM = $(SWEDEN)
+endif
+
+
+# Machine switches, set TT, SPARROW, STPAD, USE_DISK_CHANGE
+# -----------------------------------------------------------------------
+
+ifndef M
+M=w		    # default: sparrow
+endif
+
+# Set values for ST/STe/MegaSTe
+MTT = 0		    # TT machine flag
+MSP = 0		    # SPARROW machine flag
+MPD = 0		    # STPAD machine flag
+DCHANGE = 0	    # USE_DISK_CHANGE value for rwabs.c
+
+ifeq '$M' 'p'	    # STBOOK
+MPD = 1
+endif
+
+ifeq '$M' 't'	    # TT
+MTT = 1
+endif
+
+ifeq '$M' 'w'	    # Sparrow
+MSP = 1
+DCHANGE = 1
+endif
+
+
+# ROM/RAM flag, sets `systype' (switches.s: rom=0, ram=1)
+# -----------------------------------------------------------------------
+
+ifndef RAM
+RAM=1		    # default: RAM build
+endif
+
+# set extender for startup & allbios
+ifeq '$(RAM)' '0'
+R=o
+else
+R=a
+endif
+
+# Finally, set assembler and compiler flags from the above
+# -----------------------------------------------------------------------
+ASFLAGS = -S38 -D=country=$(CNUM) -D=systype=$(RAM) \
+	-D=TT=$(MTT) -D=SPARROW=$(MSP) -D=STPAD=$(MPD)
+
+CDEF = -DUSE_DISK_CHANGE=$(DCHANGE)
+CERR = -cw -j100i
+COPT = -d2 -O -hd3 -ha3 -z2 -v
+CMOD = -w -b0 -bn
+CFLAGS = $(CDEF) #$(CERR) $(COPT) $(CMOD)
+
+
+# Rules
+# =======================================================================
+
+.SUFFIXES:
+.SUFFIXES: .o$M$C .a$M .o$M .o .s .c
+
+.s.o .s.o$M .s.a$M .s.o$M$C:
+	mas $(ASFLAGS) $*.s -O=$@@
+.c.o .c.o$M:
+	ocp68 $(CFLAGS) $< $*.i
+	oc068 $*.i $*.1 $*.2 $*.3 -f
+	oc168 $*.1 $*.2 $*.s
+	mas -U $*.s -O=$@@
+	rm $*.i $*.1 $*.2 $*.s
+#	oas68 -l -u -s c:\c\alcyon\lib\oas68sym.dat $<
+
+#	lcc -c $(CFLAGS) -o$@@ $<
+
+
+# Targets
+# =======================================================================
+
+default:
+	@@echo	'use: make [C=[abcdfgiknstuw]] [M=[efptw]] [RAM=[01]] allbios"
+	@@echo	'C sets "country" (default $C):'
+	@@echo	'	a swf	f fra	k uk	t tur'
+	@@echo	'	b swg	g ger	n nor	u usa'
+	@@echo	'	c fin	i ita	s spa	w swe'
+	@@echo	'	d den'
+	@@echo	'M sets machine flags (default $M):'
+	@@echo	'	e ST/STe/Mega STe'
+	@@echo	'	f Falcon/040'
+	@@echo	'	p STpad (STBOOK)'
+	@@echo	'	t TT'
+	@@echo	'	w Sparrow (Falcon/030)'
+	@@echo	'RAM sets "systype": 0 rom, 1 ram (default $(RAM))'
+
+# Objects not affected by country or machine switches
+OBJ = dsp\dsp.o spsound\spsound.o prtblk.o xinout.o memtest.o vtg.o version.o
+
+allbios: allbios.$R$M$C
+allbios.$R$M$C:	startup.$R$M dmaread.o$M clock.o$M \
+		bios.o$M$C flop.o$M rwabs.o$M $(OBJ)
+	aln -u -u -p -w -l -o $@@ $<
+	@@echo $@@ linked.
+# The build makefile now gets allbios from here
+#	cp $@@ ..\build
+
+# Compiler dependent objects
+vtg.o: vtg.c
+	lcc -c -D_BIOS=1 -DSPARROW=$(MSP) -r0 -m3 $(COPT) $(CMOD) -o $@@ $<
+vdivtg.o: vtg.c
+	lcc -c -DSPARROW=$(MSP) -r0 -m3 $(COPT) $(CMOD) -o $@@ $<
+
+#
+# Independent objects
+#
+version.s: version	# always make version
+version:
+	biosvers version.s
+prtblk.o: prtblk.c prtblkc.h
+xinout.o: xinout.s
+memtest.o: memtest.s
+
+#
+# Machine-dependent objects
+#
+startup.$R$M: startup.s
+dmaread.o$M: dmaread.s
+clock.o$M: clock.s
+flop.o$M: flop.s
+
+rwabs.o$M: rwabs.c
+
+#
+# Machine- and country-dependent objects
+#
+bios.o$M$C: bios.s
+@
+
+
+2.17
+log
+@Nearly last Sparrow test BIOS
+@
+text
+@d1 214
+@
+
+
+2.16
+log
+@Made rwabs.c machine-dependent, because of disk change.
+Took "optimize" out because it doesn't work under MiNT.
+Took out m68030.s - it was a temporary hack while Sparrows had both CPUs.
+@
+text
+@d1 1
+a1 3
+########################### BIOS MAKEFILE  ##############################
+#
+#  $Revision: 2.15 $	$Source: d:/tos/bios\RCS\makefile.,v $
+d3 6
+a8 75
+#  $Author: apratt $	$Date: 1992/02/29 21:24:14 $     $Locker:  $
+# =======================================================================
+#
+#  $Log: makefile.,v $
+# Revision 2.15  1992/02/29  21:24:14  apratt
+# Added dependency on m68030.s
+#
+# Revision 2.14  1991/12/05  00:43:20  apratt
+# Added machine type 'w' for Sparrow.
+#
+# Revision 2.13  1991/09/25  19:35:36  apratt
+# Removed clear.o -- absorbed into startup.s or something.
+#
+# Revision 2.12  91/08/05  15:29:10  apratt
+# Added calls to biosvers to create version.s which exports date and dosdate
+# to startup.  Added the memtest target.
+# 
+# Revision 2.11  91/05/21  16:54:35  apratt
+# Fixed so 'rm' doesn't rely on wildcards or globbing, and
+# no pushd/popd, and no temp directories.
+# 
+# Revision 2.10  91/04/11  12:13:43  apratt
+# Removed pushd and popd -- they're not reliable.
+# 
+# Revision 2.9  91/03/27  14:00:26  apratt
+# Changed so switches files are in a subdirectory.
+# 
+# Revision 2.8  91/03/27  12:37:31  apratt
+# Changed to add the "pad" machine.  Took out TSXMACHINE; dmaread and clock
+# are the only files for which multiple machines are really the same binary,
+# and that's just not enough to worry about.
+# 
+# Revision 2.7  90/11/26  13:16:28  apratt
+# Flop now has .sx, .e, and .t extensions, though .e and .t
+# are really the same thing.  (Both TT and MSTE have high-density
+# floppy capability.)
+# 
+# Revision 2.6  90/08/03  13:23:19  apratt
+# TTOS FINAL RELEASE
+# 
+# Revision 2.5  90/08/03  11:28:25  apratt
+# This version has variables set for machine and country, to tell it
+# what switches and object files to use.
+# 
+# Revision 2.4  89/09/22  16:54:54  apratt
+# THIS VERSION REQUIRES TURBO C'S "MAS" ASSEMBLER
+# No functional changes from previous revision, which is the last to
+# require Alcyon's AS68 assembler.
+# 
+# Revision 2.3  89/08/25  16:45:58  apratt
+# Added dmaread.o and dmaread.s (needs mac, not as68).
+# 
+# Revision 2.2  89/06/19  15:46:12  kbad
+# Fixed pushd/popd lines.
+# 
+# Revision 2.1  89/02/22  20:45:37  kbad
+# *** TOS 1.4  FINAL RELEASE VERSION ***
+# 
+#
+#########################################################################
+# Author Slavik Lozben
+# This makefile builds the bios object files
+#
+# 890123 kbad	changed `alnnew' refs to `aln' (new aln is now "OK")
+# 880922 kbad	changed makefile for new build method (now uses alnnew)
+# 880824 kbad	added actions to makefile
+# 880701 kbad	Modified to rely on Mark Williams make control files:
+#
+
+#
+# The switches files have names based on the switches they set:
+# machine switches: first letter t for TT, e for STe, p for pad (STbook)
+# New machine 12/91: w for Sparrow.  Probably f for Falcon one day.
+#
+# Systype is the middle letter: a for RAM, o for ROM.
+d10 1
+a10 1
+#
+d12 1
+a12 3
+#
+# flop, dmaread and clock are affected the machine switch only.
+#
+d15 127
+a141 44
+#
+# Set these switches with no spaces.  MACHINE is s, e, p, or t.
+#
+# These are the one-letter country codes used in file names for building TOS:
+# 
+# 	u	usa
+# 	g	germany
+# 	f	france
+# 	k	uk
+# 	s	spain
+# 	i	italy
+# 	w	sweden
+# 	a	swissfra
+# 	b	swissger
+# 	t	turkey
+# 	c	finland
+# 	n	norway
+# 	d	denmark
+# 
+# ccode letters used: abcd fg i k  n    stu w
+# ccode letters free:     e  h j lm opqr   v xyz0123456789
+#
+# Machine letters:
+#	e	ST/STe/Mega STe
+#	t	TT
+#	w	Sparrow
+#	p	STPad (STBOOK)
+#
+
+CCODE=u
+MACHINE=w
+
+# that's all you need to set for different machines or countries.
+############
+
+CFLAGS = 
+
+TMPDIR	=	m:
+
+ASM = mas -3 -8 -S $*.s -O=$@@
+
+# You can add "-s c:\alcyon\lib\oas68sym.dat" or whatever to the as68 line.
+# You can also add "optimize $*.s" before oas68, except that it doesn't
+# work with memory protection on.
+d143 4
+a146 2
+.c.o:
+	ocp68 $(CFLAGS) $*.c $*.i
+d149 1
+a149 1
+	oas68 -l -u -s c:\alcyon\lib\oas68sym.dat $*.s
+d151 3
+a154 2
+#
+################################################################
+d156 2
+a157 1
+# SFILES are those not affected by country or machine switches
+d159 49
+a207 1
+SFILES	=	xinout.o memtest.o
+d209 1
+a209 2
+# CFILES are those which come from .c sources, also not affected
+# by country or machine switches.
+d211 4
+a214 103
+CFILES	=	prtblk.o 
+
+allbios.$(MACHINE)o$(CCODE):	startup.$(MACHINE)o \
+			dmaread.$(MACHINE) clock.$(MACHINE) \
+			bios.$(MACHINE)$(CCODE) flop.$(MACHINE) \
+			rwabs.$(MACHINE) $(CFILES) $(SFILES)
+		biosvers version.s
+		mac version.s
+		aln -u -u -p -w -l -o $@@ $< version.o
+		cp $@@ ..\build
+		@@echo $@@ linked.
+
+allbios.$(MACHINE)a$(CCODE):	startup.$(MACHINE)a \
+			dmaread.$(MACHINE) clock.$(MACHINE) \
+			bios.$(MACHINE)$(CCODE) flop.$(MACHINE) \
+			rwabs.$(MACHINE) $(CFILES) $(SFILES)
+		biosvers version.s
+		mac version.s
+		aln -u -u -p -w -l -o $@@ $< version.o
+		cp $@@ ..\build
+		@@echo $@@ linked.
+
+prtblk.o:	prtblkc.h prtblk.c
+
+xinout.o:	xinout.s
+		$(ASM)
+
+memtest.o:	memtest.s
+		$(ASM)
+
+############
+
+# any switches.x?? will do, where x is machine
+
+flop.$(MACHINE): flop.s
+		cp switches\switches.$(MACHINE)ou switches.s
+		$(ASM)
+
+dmaread.$(MACHINE): dmaread.s
+		cp switches\switches.$(MACHINE)ou switches.s
+		$(ASM)
+
+clock.$(MACHINE): clock.s
+		cp switches\switches.$(MACHINE)ou switches.s
+		$(ASM)
+
+############
+#
+# rwabs is produced with -DUSE_DISK_CHANGE=1 for sparrow and falcon,
+# and =0 for all others.
+#
+
+rwabs.w:	portab.h rwabs.c
+		ocp68 $(CFLAGS) -DUSE_DISK_CHANGE=1 rwabs.c rwabs.i
+		oc068 rwabs.i rwabs.1 rwabs.2 rwabs.3 -f
+		oc168 rwabs.1 rwabs.2 rwabs.s
+		oas68 -l -u -s c:\alcyon\lib\oas68sym.dat rwabs.s
+		rm rwabs.i rwabs.1 rwabs.2 rwabs.s
+		mv rwabs.o rwabs.w
+
+rwabs.p:	portab.h rwabs.c
+		ocp68 $(CFLAGS) -DUSE_DISK_CHANGE=0 rwabs.c rwabs.i
+		oc068 rwabs.i rwabs.1 rwabs.2 rwabs.3 -f
+		oc168 rwabs.1 rwabs.2 rwabs.s
+		oas68 -l -u -s c:\alcyon\lib\oas68sym.dat rwabs.s
+		rm rwabs.i rwabs.1 rwabs.2 rwabs.s
+		mv rwabs.o rwabs.p
+
+rwabs.t:	portab.h rwabs.c
+		ocp68 $(CFLAGS) -DUSE_DISK_CHANGE=0 rwabs.c rwabs.i
+		oc068 rwabs.i rwabs.1 rwabs.2 rwabs.3 -f
+		oc168 rwabs.1 rwabs.2 rwabs.s
+		oas68 -l -u -s c:\alcyon\lib\oas68sym.dat rwabs.s
+		rm rwabs.i rwabs.1 rwabs.2 rwabs.s
+		mv rwabs.o rwabs.t
+
+rwabs.e:	portab.h rwabs.c
+		ocp68 $(CFLAGS) -DUSE_DISK_CHANGE=0 rwabs.c rwabs.i
+		oc068 rwabs.i rwabs.1 rwabs.2 rwabs.3 -f
+		oc168 rwabs.1 rwabs.2 rwabs.s
+		oas68 -l -u -s c:\alcyon\lib\oas68sym.dat rwabs.s
+		rm rwabs.i rwabs.1 rwabs.2 rwabs.s
+		mv rwabs.o rwabs.e
+
+############
+
+# any switches.xy? will do, where x is machine and y is systype
+
+startup.$(MACHINE)a:	startup.s
+		cp switches\switches.$(MACHINE)au switches.s
+		$(ASM)
+
+startup.$(MACHINE)o:	startup.s
+		cp switches\switches.$(MACHINE)ou switches.s
+		$(ASM)
+
+############
+
+# any switches.x?y will do for BIOS (x is machine, y is country)
+
+bios.$(MACHINE)$(CCODE):	bios.s
+		cp switches\switches.$(MACHINE)o$(CCODE) switches.s
+		$(ASM)
+@
+
+
+2.15
+log
+@Added dependency on m68030.s
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.14 $	$Source: e:/tos/bios\RCS\makefile.,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 1991/12/05 00:43:20 $     $Locker:  $
+d9 3
+d86 1
+d107 9
+a115 2
+# letters used: abcd fg i k  n    stu w
+# letters free:     e  h j lm opqr   v xyz0123456789
+d130 2
+a136 1
+	optimize $*.s
+d150 1
+a150 1
+CFILES	=	prtblk.o rwabs.o
+d155 1
+a155 1
+			$(CFILES) $(SFILES)
+d165 1
+a165 1
+			$(CFILES) $(SFILES)
+a173 2
+rwabs.o:	portab.h rwabs.c
+
+d184 1
+a184 1
+flop.$(MACHINE): flop.s m68030.s
+d188 1
+a188 1
+dmaread.$(MACHINE): dmaread.s m68030.s
+d197 38
+d238 1
+a238 1
+startup.$(MACHINE)a:	startup.s m68030.s
+d242 1
+a242 1
+startup.$(MACHINE)o:	startup.s m68030.s
+d250 1
+a250 1
+bios.$(MACHINE)$(CCODE):	bios.s m68030.s
+@
+
+
+2.14
+log
+@Added machine type 'w' for Sparrow.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.13 $	$Source: e:/tos/bios\RCS\makefile.,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 1991/09/25 19:35:36 $     $Locker:  $
+d9 3
+d174 1
+a174 1
+flop.$(MACHINE): flop.s
+d178 1
+a178 1
+dmaread.$(MACHINE): dmaread.s
+d190 1
+a190 1
+startup.$(MACHINE)a:	startup.s
+d194 1
+a194 1
+startup.$(MACHINE)o:	startup.s
+d202 1
+a202 1
+bios.$(MACHINE)$(CCODE):	bios.s
+@
+
+
+2.13
+log
+@Removed clear.o -- absorbed into startup.s or something.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.12 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 91/08/05 15:29:10 $     $Locker:  $
+d8 4
+a11 1
+#  $Log:	makefile,v $
+d70 3
+a72 1
+# machine switches: first letter t for TT, e for STe, s for ST, p for pad.
+d104 1
+a104 1
+MACHINE=e
+@
+
+
+2.12
+log
+@Added calls to biosvers to create version.s which exports date and dosdate
+to startup.  Added the memtest target.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.11 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 91/05/21 16:54:35 $     $Locker:  $
+d9 4
+d99 1
+a99 1
+MACHINE=p
+d125 1
+a125 1
+SFILES	=	xinout.o clear.o memtest.o
+a141 2
+# add fsstub.o to this list if you define USEDB as 1 in startup.s
+
+a158 3
+clear.o:	clear.s
+		$(ASM)
+
+d167 1
+a167 1
+		cp switches\switches.$(MACHINE)au switches.s
+d171 1
+a171 1
+		cp switches\switches.$(MACHINE)au switches.s
+d175 1
+a175 1
+		cp switches\switches.$(MACHINE)au switches.s
+d195 1
+a195 1
+		cp switches\switches.$(MACHINE)a$(CCODE) switches.s
+@
+
+
+2.11
+log
+@Fixed so 'rm' doesn't rely on wildcards or globbing, and
+no pushd/popd, and no temp directories.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.10 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 91/04/11 12:13:43 $     $Locker:  $
+d9 4
+d95 1
+a95 1
+MACHINE=t
+d100 2
+d109 1
+a109 1
+	ocp68 $*.c $*.i
+d121 1
+a121 1
+SFILES	=	xinout.o clear.o
+d132 3
+a134 1
+		aln -u -u -p -w -l -o $@@ $<
+d144 3
+a146 1
+		aln -u -u -p -w -l -o $@@ $<
+d158 3
+@
+
+
+2.10
+log
+@Removed pushd and popd -- they're not reliable.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.9 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 91/03/27 14:00:26 $     $Locker:  $
+d9 3
+d91 1
+a91 1
+MACHINE=e
+d108 1
+a108 1
+	rm $*.[ci123s]
+@
+
+
+2.9
+log
+@Changed so switches files are in a subdirectory.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.8 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 91/03/27 12:37:31 $     $Locker:  $
+d9 3
+d88 1
+a88 1
+MACHINE=p
+a99 2
+	cp $*.c $(TMPDIR)
+	pushd $(TMPDIR)
+d105 2
+a106 3
+	popd
+	mv $(TMPDIR)\$*.o .
+	rm $(TMPDIR)\$*.[c|i|1|2|3|s]
+@
+
+
+2.8
+log
+@Changed to add the "pad" machine.  Took out TSXMACHINE; dmaread and clock
+are the only files for which multiple machines are really the same binary,
+and that's just not enough to worry about.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.7 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 90/11/26 13:16:28 $     $Locker:  $
+d9 5
+d71 1
+a71 1
+# 	s	spain (must also set PAL to 0 or 1)
+d149 2
+d152 1
+a152 1
+		cp switches.$(MACHINE)au switches.s
+d156 1
+a156 1
+		cp switches.$(MACHINE)au switches.s
+d160 1
+a160 1
+		cp switches.$(MACHINE)au switches.s
+d165 2
+d168 1
+a168 1
+		cp switches.$(MACHINE)au switches.s
+d172 1
+a172 1
+		cp switches.$(MACHINE)ou switches.s
+d180 1
+a180 1
+		cp switches.$(MACHINE)a$(CCODE) switches.s
+@
+
+
+2.7
+log
+@Flop now has .sx, .e, and .t extensions, though .e and .t
+are really the same thing.  (Both TT and MSTE have high-density
+floppy capability.)
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.6 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 90/08/03 13:23:19 $     $Locker:  $
+d9 5
+d47 4
+a50 4
+# startup is affected by country, systype, and machine switches:
+# first letter t for TT, e for STe, s for ST.  Systype is the
+# middle letter: a for RAM, o for ROM.  Country is the third
+# letter: u=usa, g=germany, ...
+d52 1
+a52 2
+# dmaread and clock are affected only by machine switches,
+# and then only by TSXMACHINE: t for TT and sx for others.
+d54 1
+a54 1
+# flop is affected by MACHINE, though t and e are actually the same.
+d56 1
+a56 1
+# bios is affected by machine and country.
+d58 2
+a59 2
+# Set these switches with no spaces.  MACHINE is s, e, or t;
+# TSXMACHINE is sx or t (for dmaread, and clock).
+d77 1
+a77 1
+# letters free:     e  h j lm opqr   v xyz
+d80 1
+a80 2
+MACHINE=t
+TSXMACHINE=t
+d115 1
+a115 1
+			dmaread.$(TSXMACHINE) clock.$(TSXMACHINE) \
+d125 1
+a125 1
+			dmaread.$(TSXMACHINE) clock.$(TSXMACHINE) \
+d144 2
+a145 4
+# any switches.t* will do for these three
+
+dmaread.t:	dmaread.s
+		cp switches.tau switches.s
+d148 2
+a149 2
+flop.t:		flop.s
+		cp switches.tau switches.s
+d152 2
+a153 2
+flop.e:		flop.s
+		cp switches.eau switches.s
+a154 17
+
+flop.sx:	flop.s
+		cp switches.sau switches.s
+		$(ASM)
+
+dmaread.sx:	dmaread.s
+		cp switches.sau switches.s
+		$(ASM)
+
+clock.sx:	clock.s
+		cp switches.sau switches.s
+		$(ASM)
+
+clock.t:	clock.s
+		cp switches.tau switches.s
+		$(ASM)
+
+@
+
+
+2.6
+log
+@TTOS FINAL RELEASE
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.5 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 90/08/03 11:28:25 $     $Locker:  $
+d9 3
+d47 2
+a48 2
+# dmaread, flop, and clock are affected only by machine switches,
+# and even then there are only two: t for TT and sx for others.
+d50 2
+d55 19
+a73 1
+# TSXMACHINE is sx or t (for dmaread, flop, and clock).
+d84 1
+a84 1
+ASM = mas -3 -S $*.s -O=$@@
+d91 3
+a93 3
+	cp68 $*.c $*.i
+	c068 $*.i $*.1 $*.2 $*.3 -f
+	c168 $*.1 $*.2 $*.s
+d95 1
+a95 1
+	as68 -l -u $*.s
+d111 3
+a113 3
+allbios.$(MACHINE)a$(CCODE):	startup.$(MACHINE)a$(CCODE) \
+			dmaread.$(TSXMACHINE) flop.$(TSXMACHINE) \
+			clock.$(TSXMACHINE) bios.$(MACHINE)$(CCODE) \
+d115 1
+a115 1
+		aln -u -p -w -l -o $@@ $<
+d119 5
+a123 3
+allbios.$(MACHINE)o$(CCODE):	startup.$(MACHINE)o$(CCODE) \
+			dmaread.$(TSXMACHINE) flop.$(TSXMACHINE) \
+			clock.$(TSXMACHINE) bios.$(MACHINE)$(CCODE) \
+d125 1
+a125 1
+		aln -u -p -w -l -o $@@ $<
+d151 2
+a152 2
+clock.t:	clock.s
+		cp switches.tau switches.s
+d155 1
+a155 4
+
+# any switches.s* file will do for these three
+
+dmaread.sx:	dmaread.s
+d159 1
+a159 1
+flop.sx:	flop.s
+d167 5
+d174 2
+a175 2
+startup.$(MACHINE)a$(CCODE):	startup.s
+		cp switches.$(MACHINE)a$(CCODE) switches.s
+d178 2
+a179 2
+startup.$(MACHINE)o$(CCODE):	startup.s
+		cp switches.$(MACHINE)o$(CCODE) switches.s
+@
+
+
+2.5
+log
+@This version has variables set for machine and country, to tell it
+what switches and object files to use.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.4 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 89/09/22 16:54:54 $     $Locker:  $
+d9 4
+@
+
+
+2.4
+log
+@THIS VERSION REQUIRES TURBO C'S "MAS" ASSEMBLER
+No functional changes from previous revision, which is the last to
+require Alcyon's AS68 assembler.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.3 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: apratt $	$Date: 89/08/25 16:45:58 $     $Locker: apratt $
+d9 5
+d33 22
+a55 2
+.SUFFIXES: .o .c .s
+ASM = mas -3 -S -U $*.s
+d57 4
+d84 3
+a86 1
+allbios.tau:	startup.tau dmaread.tau flop.tau clock.tau bios.tau \
+d88 1
+a88 1
+		aln -u -q -w -l -o $@@ $<
+d92 3
+a94 1
+allbios.tou:	startup.tou dmaread.tou flop.tou clock.tou bios.tou \
+d96 1
+a96 1
+		aln -u -q -w -l -o $@@ $<
+a99 24
+allbios.eau:	startup.eau dmaread.eau flop.eau clock.eau bios.eau \
+			$(CFILES) $(SFILES)
+		aln -u -q -w -l -o $@@ $<
+		cp $@@ ..\build
+		@@echo $@@ linked.
+
+allbios.eou:	startup.eou dmaread.eou flop.eou clock.eou bios.eou \
+			$(CFILES) $(SFILES)
+		aln -u -q -w -l -o $@@ $<
+		cp $@@ ..\build
+		@@echo $@@ linked.
+
+allbios.sau:	startup.sau dmaread.sau flop.sau clock.sau bios.sau \
+			$(CFILES) $(SFILES)
+		aln -u -q -w -l -o $@@ $<
+		cp $@@ ..\build
+		@@echo $@@ linked.
+
+allbios.sou:	startup.sou dmaread.sou flop.sou clock.sou bios.sou \
+			$(CFILES) $(SFILES)
+		aln -u -q -w -l -o $@@ $<
+		cp $@@ ..\build
+		@@echo $@@ linked.
+
+d105 1
+a105 1
+		mas -S -U xinout.s
+d108 1
+a108 1
+		mas -S -U clear.s
+d110 1
+a110 1
+########
+d112 1
+a112 3
+startup.tau:	startup.s
+		cp switches.tau switches.s
+		mas -S -U startup.s -O=startup.tau
+d114 1
+a114 1
+dmaread.tau:	dmaread.s
+d116 1
+a116 1
+		mas -S -U dmaread.s -O=dmaread.tau
+d118 1
+a118 1
+flop.tau:	flop.s
+d120 1
+a120 1
+		mas -S -U flop.s -O=flop.tau
+d122 1
+a122 1
+clock.tau:	clock.s
+d124 1
+a124 1
+		mas -S -U clock.s -O=clock.tau
+a125 3
+bios.tau:	bios.s
+		cp switches.tau switches.s
+		mas -S -U bios.s -O=bios.tau
+d127 1
+a127 1
+########
+d129 1
+a129 67
+startup.tou:	startup.s
+		cp switches.tou switches.s
+		mas -S -U startup.s -O=startup.tou
+
+dmaread.tou:	dmaread.s
+		cp switches.tou switches.s
+		mas -S -U dmaread.s -O=dmaread.tou
+
+flop.tou:	flop.s
+		cp switches.tou switches.s
+		mas -S -U flop.s -O=flop.tou
+
+clock.tou:	clock.s
+		cp switches.tou switches.s
+		mas -S -U clock.s -O=clock.tou
+
+bios.tou:	bios.s
+		cp switches.tou switches.s
+		mas -S -U bios.s -O=bios.tou
+
+########
+
+startup.eau:	startup.s
+		cp switches.eau switches.s
+		mas -S -U startup.s -O=startup.eau
+
+dmaread.eau:	dmaread.s
+		cp switches.eau switches.s
+		mas -S -U dmaread.s -O=dmaread.eau
+
+flop.eau:	flop.s
+		cp switches.eau switches.s
+		mas -S -U flop.s -O=flop.eau
+
+clock.eau:	clock.s
+		cp switches.eau switches.s
+		mas -S -U clock.s -O=clock.eau
+
+bios.eau:	bios.s
+		cp switches.eau switches.s
+		mas -S -U bios.s -O=bios.eau
+
+########
+
+startup.eou:	startup.s
+		cp switches.eou switches.s
+		mas -S -U startup.s -O=startup.eou
+
+dmaread.eou:	dmaread.s
+		cp switches.eou switches.s
+		mas -S -U dmaread.s -O=dmaread.eou
+
+flop.eou:	flop.s
+		cp switches.eou switches.s
+		mas -S -U flop.s -O=flop.eou
+
+clock.eou:	clock.s
+		cp switches.eou switches.s
+		mas -S -U clock.s -O=clock.eou
+
+bios.eou:	bios.s
+		cp switches.eou switches.s
+		mas -S -U bios.s -O=bios.eou
+
+########
+
+startup.sau:	startup.s
+d131 1
+a131 1
+		mas -S -U startup.s -O=startup.sau
+d133 1
+a133 1
+dmaread.sau:	dmaread.s
+d135 1
+a135 1
+		mas -S -U dmaread.s -O=dmaread.sau
+d137 1
+a137 1
+flop.sau:	flop.s
+d139 1
+a139 1
+		mas -S -U flop.s -O=flop.sau
+d141 1
+a141 3
+clock.sau:	clock.s
+		cp switches.sau switches.s
+		mas -S -U clock.s -O=clock.sau
+d143 3
+a145 3
+bios.sau:	bios.s
+		cp switches.sau switches.s
+		mas -S -U bios.s -O=bios.sau
+d147 3
+a149 1
+########
+d151 1
+a151 3
+startup.sou:	startup.s
+		cp switches.sou switches.s
+		mas -S -U startup.s -O=startup.sou
+d153 1
+a153 3
+dmaread.sou:	dmaread.s
+		cp switches.sou switches.s
+		mas -S -U dmaread.s -O=dmaread.sou
+d155 3
+a157 14
+flop.sou:	flop.s
+		cp switches.sou switches.s
+		mas -S -U flop.s -O=flop.sou
+
+clock.sou:	clock.s
+		cp switches.sou switches.s
+		mas -S -U clock.s -O=clock.sou
+
+bios.sou:	bios.s
+		cp switches.sou switches.s
+		mas -S -U bios.s -O=bios.sou
+
+########
+
+@
+
+
+2.3
+log
+@Added dmaread.o and dmaread.s (needs mac, not as68).
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.2 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: kbad $	$Date: 89/06/19 15:46:12 $     $Locker: apratt $
+d9 3
+d30 1
+a30 7
+.s.o:
+	cp $*.s $(TMPDIR)\$*.s
+	pushd $(TMPDIR)
+	as68 -l -u $*.s
+	popd
+	mv $(TMPDIR)\$*.o .
+	rm $(TMPDIR)\$*.s
+d46 1
+a46 1
+STARTUP	=	startup.o
+d48 1
+a48 1
+SFILES	=	dmaread.o flop.o xinout.o clear.o clock.o bios.o 
+d50 3
+d55 3
+a57 2
+allbios.o:	$(STARTUP) $(SFILES) $(CFILES) allbios.aln
+		aln -c allbios.aln
+d61 5
+a65 2
+dmaread.o:	dmaread.s
+		mac dmaread.s
+d67 5
+a71 1
+prtblk.o:	prtblkc.h
+d73 161
+a233 1
+rwabs.o:	portab.h
+@
+
+
+2.2
+log
+@Fixed pushd/popd lines.
+@
+text
+@d3 1
+a3 1
+#  $Revision: 2.1 $	$Source: /u2/MRS/osrevisions/bios/makefile,v $
+d5 1
+a5 1
+#  $Author: kbad $	$Date: 89/02/22 20:45:37 $     $Locker: kbad $
+d9 3
+d51 1
+a51 1
+SFILES	=	flop.o xinout.o clear.o clock.o bios.o 
+d59 3
+@
+
+
+2.1
+log
+@*** TOS 1.4  FINAL RELEASE VERSION ***
+@
+text
+@d3 1
+a3 1
+#  $Revision: 1.1$	$Source: /u2/MRS/osrevisions/aes/foo,v $
+d5 1
+a5 1
+#  $Author: 01234567$	$Date: 89/02/22 02:44:04 $     $Locker: 01234567$
+d8 4
+a11 1
+#  $Log:$
+d26 1
+a26 2
+	pushd .
+	cd $(TMPDIR)
+d34 1
+a34 2
+	pushd .
+	cd $(TMPDIR)
+@
+
+
+1.4
+log
+@Changed `alnnew' reference to 
+`aln' (new aln is now production model)
+@
+text
+@d1 1
+d3 4
+a6 1
+# $Header: makefile,v 1.3 88/10/12 14:44:51 kbad Exp $
+d8 3
+d22 8
+a29 1
+	as68 -s $(TMPDIR)\ -f $(TMPDIR)\ -l -u $*.s
+d31 6
+a36 4
+	cp68 $*.c $(TMPDIR)\$*.i
+	c068 $(TMPDIR)\$*.i $(TMPDIR)\$*.1 $(TMPDIR)\$*.2 $(TMPDIR)$*.3 -f
+	c168 $(TMPDIR)\$*.1 $(TMPDIR)\$*.2 $*.s
+	rm $(TMPDIR)\$*.*
+d38 4
+a41 2
+	as68 -s $(TMPDIR)\ -f $(TMPDIR)\ -l -u $*.s
+	rm $*.s
+@
+
+
+1.3
+log
+@fix up file copying
+@
+text
+@d2 1
+a2 1
+# $Header: makefile,v 1.2 88/10/03 15:07:07 kbad Exp $
+d7 4
+a10 2
+# 880701 kbad
+# Modified to rely on Mark Williams make control files:
+a11 6
+# 880824 kbad
+# added actions to makefile
+#
+# 880922 kbad
+# changed makefile for new build method (now uses alnnew)
+#
+d34 1
+a34 1
+		alnnew -c allbios.aln
+@
+
+
+1.2
+log
+@Added new build parameters (now uses ``alnnew'')
+@
+text
+@d2 1
+a2 1
+# $Header$
+d45 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d13 3
+d31 1
+a31 1
+SFILES	=	flop.o xinout.o startup.o clear.o clock.o bios.o 
+d33 2
+d37 3
+a39 8
+allbios.o:	$(SFILES) $(CFILES) allbios.aln
+		aln -c allbios.aln
+		mv $@@ ..\build
+		@@echo $@@ linked.
+
+rallbios.o:	$(SFILES) $(CFILES) rallbios.aln
+		aln -c rallbios.aln
+		mv $@@ ..\build
+@

@@ -1,0 +1,2509 @@
+head	2.24;
+access;
+symbols
+	TOS0400:2.23
+	OKSPARROW:2.21
+	STPAD43:2.20
+	SPRW_DAL:2.20
+	FINAL206:2.19
+	TOS306:2.14
+	VERS06h:2.11
+	VERSX06c:2.9
+	VERSX06b:2.9
+	XDOT06:2.9
+	TT304:2.9
+	TTFINAL:2.9
+	BLUE:2.7
+	GREEN:2.7
+	ORANGE:2.7
+	MAR011990:2.6
+	FIRST_MAS:2.4
+	LAST_AS68:2.3
+	TOS16:2.1
+	TOS14:2.1;
+locks
+	ersmith:2.24;
+comment	@* @;
+
+
+2.24
+date	93.02.25.00.39.44;	author ersmith;	state Exp;
+branches;
+next	2.23;
+
+2.23
+date	92.08.11.00.34.42;	author kbad;	state Exp;
+branches;
+next	2.22;
+
+2.22
+date	92.07.27.20.12.04;	author kbad;	state Exp;
+branches;
+next	2.21;
+
+2.21
+date	92.05.18.23.07.48;	author unknown;	state Exp;
+branches;
+next	2.20;
+
+2.20
+date	92.02.28.01.21.56;	author apratt;	state Exp;
+branches;
+next	2.19;
+
+2.19
+date	91.10.04.17.58.30;	author apratt;	state Exp;
+branches;
+next	2.18;
+
+2.18
+date	91.10.03.17.53.24;	author apratt;	state Exp;
+branches;
+next	2.17;
+
+2.17
+date	91.10.01.20.12.52;	author apratt;	state Exp;
+branches;
+next	2.16;
+
+2.16
+date	91.09.30.16.45.58;	author apratt;	state Exp;
+branches;
+next	2.15;
+
+2.15
+date	91.09.29.23.59.46;	author apratt;	state Exp;
+branches;
+next	2.14;
+
+2.14
+date	91.09.17.21.48.52;	author apratt;	state Exp;
+branches;
+next	2.13;
+
+2.13
+date	91.09.12.19.41.34;	author apratt;	state Exp;
+branches;
+next	2.12;
+
+2.12
+date	91.09.06.14.50.56;	author apratt;	state Exp;
+branches;
+next	2.11;
+
+2.11
+date	91.08.15.15.31.13;	author apratt;	state Exp;
+branches;
+next	2.10;
+
+2.10
+date	91.08.05.15.13.11;	author apratt;	state Exp;
+branches;
+next	2.9;
+
+2.9
+date	90.08.03.13.21.39;	author apratt;	state Exp;
+branches;
+next	2.8;
+
+2.8
+date	90.08.01.13.10.44;	author apratt;	state Exp;
+branches;
+next	2.7;
+
+2.7
+date	90.04.30.18.43.38;	author apratt;	state Exp;
+branches;
+next	2.6;
+
+2.6
+date	90.02.22.12.23.28;	author apratt;	state Exp;
+branches;
+next	2.5;
+
+2.5
+date	89.12.08.15.40.49;	author apratt;	state Exp;
+branches;
+next	2.4;
+
+2.4
+date	89.09.22.16.42.45;	author apratt;	state Exp;
+branches;
+next	2.3;
+
+2.3
+date	89.08.29.15.13.19;	author apratt;	state Exp;
+branches;
+next	2.2;
+
+2.2
+date	89.08.18.14.28.59;	author apratt;	state Exp;
+branches;
+next	2.1;
+
+2.1
+date	89.02.27.12.36.29;	author apratt;	state Rel;
+branches;
+next	1.4;
+
+1.4
+date	89.02.27.12.35.02;	author apratt;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	89.02.17.11.55.46;	author apratt;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	89.02.06.13.45.40;	author apratt;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	87.11.20.14.23.42;	author lozben;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+2.24
+log
+@Changed NVRAM re-initialize to reset to default values, instead of all
+zeros.
+@
+text
+@.super
+******************* Revision Control System *****************************
+*
+* $Author: kbad $
+* =======================================================================
+*
+* $Date: 1992/08/11 00:34:42 $
+* =======================================================================
+*
+* $Locker:  $
+* =======================================================================
+*
+* $Log: clock.s,v $
+* Revision 2.23  1992/08/11  00:34:42  kbad
+* TOS 4.00 Falcon030 first production version
+*
+* Revision 2.22  1992/07/27  20:12:04  kbad
+* Nearly last Sparrow test BIOS
+*
+* Revision 2.21  1992/05/18  23:07:48  unknown
+* SPARROW now uses motorola clock chip; added stub waketime
+*
+* Revision 2.20  1992/02/28  01:21:56  apratt
+* Oops. When STPAD boots we *do* want to disable off the alarm.
+*
+* Revision 2.19  1991/10/04  17:58:30  apratt
+* This version folds in those things which are new since I put most of clock.s
+* into power.prg for quick-turnaround testing.  The key difference is that
+* calling Waketime(1) less than 14 seconds into the minute the alarm is set
+* for causes a return of -1.  See other comments for discussion of this.
+*
+* Revision 2.18  1991/10/03  17:53:24  apratt
+* More revs; this is the last rev before putting Waketime in power.prg
+* for testing.  It'll get folded back into here soon... :-)
+*
+* Revision 2.17  1991/10/01  20:12:52  apratt
+* When you try to set the alarm (Waketime(1)), we now return
+* zero for success (i.e. no time to set, or time is in the past,
+* or successfully set), and -1 for the special case where you
+* are trying to set the alarm for the same minute you're already in.
+*
+* Revision 2.16  1991/09/30  16:45:58  apratt
+* Another rev for STBOOK alarm stuff; see comments above waketime.
+*
+* Revision 2.15  1991/09/29  23:59:46  apratt
+* Added the Waketime() XBIOS call, number 47 ($2f).  See the code
+* for documentation of it.  It's meant for STPAD but works for all
+* ST's and STe's but not TT (because TT has a different RTC).
+* Note that this code now computes and sets day-of-week, but
+* never reads it.  DOW participates in the alarm match, so it has
+* to be computed when you set the time, and when you set the alarm.
+*
+* Revision 2.14  1991/09/17  21:48:52  apratt
+* For TT TOS, we have stored "year since 1970" in the RTC.
+* This is wrong: if you do that then leap years are off by two years.
+* We did this originally for the UNIX group's sake, so they could
+* represent 1970.  To preserve that (no skin off my nose) the RTC
+* for TT now holds "year since 1968."
+*
+* Revision 2.13  1991/09/12  19:41:34  apratt
+* Changed conditionals: ! is bitwise in MAS, so !TT is $FFFFFFFE when TT is 1.
+* So we use (TT == 0) instead.  Sigh.
+*
+* Revision 2.12  1991/09/06  14:50:56  apratt
+* Changed all "ifne" to "if" and "ifeq" to "if !" and "endc" to "endif."
+*
+* Revision 2.11  91/08/15  15:31:13  apratt
+* Added code to write GEMDOS' idea of _date and _time every time _getclock is
+* called (for either clock chip).  This lets you update those variables
+* without doing Settime(Gettime()), which would cause the RTC to lose between
+* zero and two seconds each time.
+* 
+* Fixed the STPAD case where the reset register and test register weren't
+* being initialized properly.
+* 
+* 
+* Revision 2.10  91/08/05  15:13:11  apratt
+* Added support for STPAD: took out the test (the Ricoh chip is ALWAYS
+* there), disabled the 1Hz and 16Hz wave outputs, and changed other code to
+* avoid clobbering alarm registers.
+* 
+* Revision 2.9  90/08/03  13:21:39  apratt
+* TTOS FINAL RELEASE
+* 
+* Revision 2.8  90/08/01  13:10:44  apratt
+* Fixed a bug: check didn't leave regs right when checksum was wrong,
+* even though the read operation expected to be able to do the read
+* anyway.
+* 
+* Revision 2.7  90/04/30  18:43:38  apratt
+* Added NVMaccess call: see comments for details.
+* 
+* Revision 2.6  90/02/22  12:23:28  apratt
+* Removed ".w" from _time and _date.
+* 
+* Revision 2.5  89/12/08  15:40:49  apratt
+* Changed TT clock code to use bitfield instructions.
+* Also fixes a bug: the minutes were set to half the correct value.
+* 
+* Revision 2.4  89/09/22  16:42:45  apratt
+* THIS VERSION REQUIRES TURBO C'S "MAS" ASSEMBLER
+* No functional changes from previous revision, which is the last to
+* require Alcyon's AS68 assembler.
+* 
+* Revision 2.3  89/08/29  15:13:19  apratt
+* Fixed TT clock code (I hope).
+* 
+* Revision 2.2  89/08/18  14:28:59  apratt
+* Added TT clock code. Not extensively tested. Includes switch for TT,
+* set to zero for not TT.
+* 
+* Revision 2.1  89/02/27  12:36:29  apratt
+* *** TOS 1.4  FINAL RELEASE VERSION ***
+* 
+* Revision 1.4  89/02/27  12:35:02  apratt
+* Blasted fatfinger again, in the no-bus-error case in clktest. Fixed.
+* 
+* Revision 1.3  89/02/17  11:55:46  apratt
+* Fixed my fat fingers in clktest.  Also shortened by a few bytes.
+* 
+* Revision 1.2  89/02/06  13:45:40  apratt
+* Added handling for bus error when accessing RTC (because TT has none).
+* The handling is harmless for non-TT, so it's not conditional.
+* 
+* Revision 1.1  87/11/20  14:23:42  lozben
+* Initial revision
+* 
+*
+* =======================================================================
+*
+* $Revision: 2.23 $
+* =======================================================================
+*
+* $Source: d:/tos/bios\rcs\clock.s,v $
+* =======================================================================
+*
+*************************************************************************
+
+*------------------------------------------------------------------------
+*									:
+*	RICOH RP5C15 Clock Chip Support					:
+*	Copyright 1986 Atari Corp.					:
+*	All Rights Reserved						:
+*									:
+*----									:
+*  6-Jan-1987 lmd	Removed check for bus error in 'clktest'.	:
+* 23-Dec-1986 lmd	Set '_date' and '_time' directly (without	:
+*			calling GEMDOS).				:
+* 11-Dec-1986 lmd	Hacked it some more.				:
+* 28-Jan-1986 jwt	Hacked it up.					:
+*									:
+*------------------------------------------------------------------------
+
+* TT equate moved to command line
+
+*
+* This file switches on the symbols RICOH and MOTO; here is the formula for
+* what machines have what parts:
+*
+
+RICOH	equ	((TT + SPARROW) == 0)
+MOTO	equ	(TT + SPARROW)
+
+	.globl	clktest		; test for clock chip (returns CC/CS)
+	.globl	_iclock		; clock setup
+	.globl	_setclock	; setclock() BIOS call
+	.globl	_getclock	; getclock() BIOS call
+	.globl	_date,_time	; GEMDOS date and time variables
+	.globl	nv_defs		; default NVM configuration
+
+.if RICOH
+
+*
+* STPAD doesn't really probe for the clock chip: there is always one. The
+* test clobbers the alarm registers, and this is A Bad Thing.  Also, there
+* are bits in both the reset register and the mode register which need
+* better handling than was here: 1Hz and 16Hz must be disabled, the alarm
+* reset bit must never be set, and the alarm enable bit must be preserved.
+* Sigh.
+*
+
+RTCBASE	equ	$fffffc20	; base address of RTC chip
+
+*
+*  Clock chip registers
+*
+RT01SEC	equ	$1		; 1-second counter
+RT10SEC	equ	$3		; 10-second counter
+RT01MIN	equ	$5		; 1-minute counter
+RT10MIN	equ	$7		; 10-minute counter
+RT01HR	equ	$9		; 1-hour counter
+RT10HR	equ	$B		; 10-hour counter
+RTDOW	equ	$D		; day of week
+RT01DAY	equ	$F		; 1-day counter
+RT10DAY	equ	$11		; 10-day counter
+RT01MON	equ	$13		; 1-month counter
+RT10MON	equ	$15		; 10-month counter
+RT01YR	equ	$17		; 1-year counter
+RT10YR	equ	$19		; 10-year counter
+RTMODE	equ	$1B		; mode bits
+RTTEST	equ	$1D		; test register (must be 0)
+RTRES	equ	$1F		; reset register
+
+READS	equ	13		; number of reads to do (up to RT10YR)
+
+
+*
+*  Offsets into read buffer;
+*  They are in "reverse order" in a misguided
+*  attempt to save bytes.  Sue me.
+*
+RD01SEC	equ	$c
+RD10SEC	equ	$b
+RD01MIN	equ	$a
+RD10MIN	equ	$9
+RD01HR	equ	$8
+RD10HR	equ	$7
+RDDOW	equ	$6		; day of week
+RD01DAY	equ	$5
+RD10DAY	equ	$4
+RD01MON	equ	$3
+RD10MON	equ	$2
+RD01YR	equ	$1
+RD10YR	equ	$0
+
+
+    .text
+*----------------
+*
+*  Initialize clock (at startup):
+*    o  probe for clock chip
+*    o  if no chip, return CS;
+*    o  reset TEST register, set 16.384Khz CKOUT mode;
+*    o  get date/time from chip;
+*    o  if invalid date/time, return CS;
+*    o  set GEMDOS date/time, return CC.
+*
+
+_iclock:
+	bsr	clktest			; test for clock chip
+	bcs	iclfai			; (not around)
+
+*
+*  Get clock chip's time
+*  and set GEMDOS time from it.
+*
+	bsr	_getclock		; get chip's idea of the time
+	cmp.l	#-1,d0			; bad time?
+	beq	iclfai			; yes --- return -1
+	moveq	#0,d0			; return 0 for "Ok fine"
+iclfai:	rts
+
+*----------------
+*
+*  Quick "memory" test on useless timer registers will
+*  tell us if the chip is alive or not.  A bus error
+*  is also a good indication that the chip isn't around....
+*
+*    Returns:	a0 -> clock hardware base
+*		RTC in time bank, not alarm bank
+*		RTC test register zeroed
+*		(on STPAD: both periodic interrupts off)
+*		CC: clock exists
+*		CS: clock doesn't exist (bad RAM test)
+* 
+*    Uses:	d0-d2/a0-a2
+*
+* Originally, this code didn't have the bus error handling; that
+* was added 2/6/89 by AKP.  Don't know why the above comment
+* refers to bus errors but doesn't implement them.
+*
+* Feb 92: for STPAD we do NOT need to preserve the alarm registers or the
+* alarm enable.  In fact we want to turn OFF the alarm enable. The alarm
+* will be made pending during shutdown.  If your system is on then you
+* don't need the alarm output, and in fact you don't want it.  STPADs
+* with old ROMs need an AUTO folder program to write %1000 to RTMODE.
+*
+
+clktest:
+.if STPAD
+	move.w	#RTCBASE,a0		; fulfill return requirement
+	move.b	#0,RTTEST(a0)		; clobber test register
+	move.b	#%1100,RTRES(a0)	; and turn off periodic outputs
+	move.b	#%1000,RTMODE(a0)	; select time bank, timer enable
+					; this disables alarm! See above.
+	moveq.l	#0,d0			; clear the carry bit - clock exists.
+	rts
+.else
+	move.w	#RTCBASE,a0		; a0 -> base of clock chip
+	move.l	$8.w,d2			; save bus error vector
+	move.l	sp,a2			; save stack pointer for cleaning up
+	move.l	#clkerr,$8.w		; write bus error vector
+*	move.b	#%1001,RTMODE(a0)	; set "alarm" bank
+	bset	#0,RTMODE(a0)		; set "alarm" bank (leave ENs alone)
+	move.l	d2,8.w			; no bus error - restore vector
+	move.w	#$0a05,d0		; d0 = test pattern
+	movep.w	d0,RT01MIN(a0)		; write two registers
+	movep.w	RT01MIN(a0),d1		;   and read them back
+	and.w	#$0f0f,d1		; clobber crufty bits
+	cmp.w	d0,d1			; compare?
+	bne	clkfai			; (no --- fail)
+	move.b	#%0001,RT01SEC(a0)	; set 16.384Khz CKOUT mode
+*	move.b	#%1000,RTMODE(a0)	; set "normal" bank
+	bclr.b	#0,RTMODE(a0)		; set "normal" bank (leave ENs alone)
+	move.b	#0,RTTEST(a0)		; clobber test register
+	rts				; return OK
+
+clkerr:	move.l	a2,sp			; clean off the stack
+	move.l	d2,$8.w			; restore the bus error vector
+clkfai:	or	#1,ccr			; set carry
+	rts				; return "failure"
+.endif
+
+*----------------
+*
+*  Get clock chip date/time
+*
+*    Synopsis:	getclock()
+*
+*	Returns:	d0 = date in high word,
+*			     time in low word,
+*			     -1L if invalid date
+*
+*	Uses:		C registers
+*
+*  The clock must read the same twice in a row to be sure
+*  that it didn't roll over during the read.  The date must
+*  be checked to see if it's valid.  And so on...
+*
+* When this succeeds, it also writes GEMDOS' idea of date & time
+* so they're in synch.  Thus, calling Gettime() has the effect of
+* synchronizing the RTC and GEMDOS. (new as of 8/91)
+*
+_getclock:
+	bsr	clktest			; test for clock-there
+	bcs	gclfai			; punt on failure
+	lea	read1.w,a1		; a1 -> clock data buffer
+	lea	read2.w,a2		; a2 -> alternate clock data buffer
+	bsr	readclk			; read clock into &a1
+
+rdagn:	exg	a1,a2			; swap buffer pointers
+	bsr	readclk			; read clock into &a1
+
+	moveq	#READS-1,d0		; d0 = DBRA #bytes to compare
+cmplup:	move.b	(a1,d0.w),d1		; get first byte
+	cmp.b	(a2,d0.w),d1		; ... compare
+	bne	rdagn			; re-read clock on mismatch
+	dbra	d0,cmplup		; (compare all bytes)
+
+*
+*  Convert time to GEMDOS format
+*
+	moveq	#0,d0			; d0 = (RD10SEC*10 + RD1SEC) / 2
+	move.b	RD10SEC(a1),d0
+	mulu	#10,d0
+	add.b	RD01SEC(a1),d0
+	asr.w	#1,d0			; (DOS has stupid 2-second resolution)
+	move.w	d0,d1
+
+	moveq	#0,d0			; d0 = RD10MIN*10 + RD1MIN
+	move.b	RD10MIN(a1),d0
+	mulu	#10,d0
+	add.b	RD01MIN(a1),d0
+	asl.w	#5,d0			; time += d0 << 5
+	add.w	d0,d1
+
+	moveq	#0,d0			; d0 = RD10HDR*10 + RD1HR
+	move.b	RD10HR(a1),d0
+	mulu	#10,d0
+	add.b	RD01HR(a1),d0
+	asl.w	#8,d0
+	asl.w	#3,d0
+	add.w	d0,d1			; time += d0 << 11
+	swap	d1			; swap time to high word (for now)
+
+*
+*  Convert date to GEMDOS format
+*
+	moveq	#0,d0			; d0 = RD10DAY*10 + RD01DAY
+	move.b	RD10DAY(a1),d0
+	mulu	#10,d0
+	add.b	RD01DAY(a1),d0
+	move	d0,d1			; date = d0
+
+	moveq	#0,d0			; d0 = RD10MON*10 + RD01MON
+	move.b	RD10MON(a1),d0
+	mulu	#10,d0
+	add.b	RD01MON(a1),d0
+	asl.w	#5,d0
+	add.w	d0,d1			; date += d0 << 5
+
+	moveq	#0,d0			; d0 = RD10YR*10 + RD01YR
+	move.b	RD10YR(a1),d0
+	mulu	#10,d0
+	add.b	RD01YR(a1),d0
+	asl.w	#8,d0
+	asl.w	#1,d0
+	add.w	d0,d1			; date += d0 << 9
+
+	move.w	sr,d2
+	or.w	#$0700,sr		; no ints while writing date & time
+	move.w	d1,_date		; set GEMDOS' idea of date & time
+	swap	d1			; date into high word, time in lower
+	move.w	d1,_time
+	move.w	d2,sr			; restore ints
+	move.l	d1,d0			; move to output register
+	rts				; ... and return it
+
+
+*----------------
+*
+*  readclk -- read READS bytes from clock
+*
+*    Passed:	a0 - RTCBASE
+*		a1 - destination
+*
+*    Returns:	buffer at 'a1' filled-in with clock
+*		    chip register values.
+*
+*    Uses:	d0-d2
+*
+readclk:
+	moveq	#READS-1,d0		; d0 = count
+	moveq	#RT01SEC,d1		; d1 = starting offset
+rdlup:	move.b	0(a0,d1.w),d2		; get byte
+	and.b	#%00001111,d2		; keep lower nibble
+	move.b	d2,(a1,d0.w)		; shove into buffer
+	addq	#2,d1			; bump offset
+	dbra	d0,rdlup		; loop for more bytes
+	rts
+
+gclfai:	moveq	#-1,d0			; return -1L on failure
+	rts
+
+
+*----------------
+*
+*  Set clock date and time
+*
+*    _setclock(datetime)
+*
+*    Passed:	date in high word, time in low word
+*
+*    Returns:	0, success
+*		-1, failure
+*
+*    Uses:	C registers
+*
+* Note: as of TOS 2.06 of 9/29/91, this code computes and sets the
+* day-of-week register in the clock chip.  This accomodates the STPAD,
+* which uses the alarm feature of the RTC, because the day of week
+* participates in the alarm match.  Note that the day of week is never
+* read, only set.
+*
+
+_setclock:
+	bsr	clktest			; test for clock chip
+	bcs	sclerr			; punt if chip doesn't exist
+	lea	read1.w,a1		; a1 -> buffer for clock data to write
+
+	move.w	4(sp),a2		; get the date part of the arg
+	bsr	week_day		; compute day-of-week
+	move.b	d0,RDDOW(a1)		; write day-of-week in the buffer
+
+*
+*  Convert time to chip format
+*
+	move.w	6(sp),d1		; d1 = GEMDOS format time
+	move.w	d1,d0			; d0 = time & $1f
+	and.l	#$1f,d0			;    = second (0..59) / 2
+	add.w	d0,d0			; d0 = second 0..59
+	divu	#10,d0			; get seconds/10, seconds
+	move.b	d0,RD10SEC(a1)		; install seconds/10
+	swap	d0
+	move.b	d0,RD01SEC(a1)		; install seconds/1
+
+	move.w	d1,d0			; d1 = (time >> 5) & $3f
+	lsr.w	#5,d0			;    = minutes 0..59
+	and.l	#$3f,d0
+	divu	#10,d0			; get minutes/10, minutes
+	move.b	d0,RD10MIN(a1)		; install minutes/10
+	swap	d0
+	move.b	d0,RD01MIN(a1)		; install minutes/1
+
+	lsr.w	#8,d1			; d1 >>= 11
+	lsr.w	#3,d1			;    = hours 0..23
+	ext.l	d1			; clobber upper word
+	divu	#10,d1			; get hours/10, hours
+	move.b	d1,RD10HR(a1)		; install hours/10
+	swap	d1
+	move.b	d1,RD01HR(a1)		; install hours/1
+
+*
+*  Convert date to chip format
+*
+	move.w	4(sp),d1		; d1 = GEMDOS format date
+	move.w	d1,d0			; d0 = date & $1f
+	and.l	#$1f,d0			;    = day 1..31
+	divu	#10,d0			; get days, days/10
+	move.b	d0,RD10DAY(a1)		; install days/10
+	swap	d0
+	move.b	d0,RD01DAY(a1)		; install days/1
+
+	move.w	d1,d0			; d0 = (date >> 5) & $0f
+	lsr.w	#5,d0
+	and.l	#$0f,d0			;    = month 1..12
+	divu	#10,d0			; get months, months/10
+	move.b	d0,RD10MON(a1)		; install months/10
+	swap	d0
+	move.b	d0,RD01MON(a1)		; install months/1
+
+	lsr.w	#1,d1			; d1 >>= 9
+	lsr.w	#8,d1			;    = years 80..99/00..79
+	ext.l	d1			; clobber upper word
+	move.l  d1,d2			; (d2 = years)
+	divu	#10,d1			; get years, years/10
+	move.b	d1,RD10YR(a1)		; install years/10
+	swap	d1
+	move.b	d1,RD01YR(a1)		; install years/1
+
+	divu	#4,d2			; d2 = years/4
+	swap	d2			; remainder is the leap-year count
+
+*
+*  Write the clock data;
+*    o  zero day-of-week counter (we don't use it) (we do now (AKP))
+*    o  clobber 15-stage internal divider to give
+*	us one second to work with;
+*    o  write 24-hour mode;
+*    o  write leap year count (already in D2 at this point);
+*    o  write new clock data.
+*
+	move.b	#%1110,RTRES(a0)	; clobber 15-stage divider and 1Hz/16Hz
+					; (but don't touch alarm reset)
+	bset.b	#0,RTMODE(a0)		; set "alarm" bank (leave EN's alone)
+	move.b	#%0001,RT10MON(a0)	; set 24-hour mode
+	move.b	d2,RT01YR(a0)		; write leap-year count
+	bclr.b	#0,RTMODE(a0)		; set "normal" bank (leave EN's alone)
+	bclr.b	#3,RTMODE(a0)		; disable timer while we're setting it
+
+	moveq	#READS-1,d0		; d0 = count
+	moveq	#RT01SEC,d1		; d1 = index to hardware registers
+sclp:	move.b	(a1,d0.w),(a0,d1.w)	; copy byte to clock chip
+	addq.w	#2,d1			; bump register index
+	dbra	d0,sclp
+
+	bset.b	#3,RTMODE(a0)		; enable timer after setting it
+	moveq	#0,d0			; return 0 = OK
+	rts
+
+sclerr:	moveq	#-1,d0			; return -1L = bad
+	rts
+
+
+    .bss
+*
+*  Two buffers (for comparing clock reads/stuffing clock values)
+*
+read1:	.ds.b	READS
+read2:	.ds.b	READS
+	.even
+	.text
+
+*
+* Given a GEMDOS date in a2.w, return day-of-week, zero-based
+*
+
+week_day:
+	moveq	#2,d2		; d2 accumulates leap years. 1/1/80 was Tue
+	move.w	a2,d0
+	lsr.w	#8,d0
+	lsr.w	#1,d0		; d0 is year
+
+	add.w	d0,d2		; d2 += year (1/1 advances 1 wday/year)
+
+	move.w	d0,d1
+	lsr.w	#2,d1
+	add.w	d1,d2		; d2 += (year/4): add 1 for each leap year
+*	addq.w	#1,d2		; add another because 0 was a leap year
+* but don't really because this balances the -1 later on
+
+	move.w	a2,d1
+	lsr.w	#5,d1
+	and.w	#$f,d1		; d1 is month
+
+	and.w	#3,d0		; d0 is year % 4: is this a leap year?
+	bne	nosub1		; no.
+	cmp.w	#2,d1		; are we in Jan or Feb?
+	bhi	nosub1		; no.
+	subq	#1,d2		; yes: subtract off leap year counted too soon
+nosub1:	
+	subq	#1,d1		; make d1 a zero-based month
+	add.w	d1,d1		; make d1 an offset into the days-so-far tbl
+	add.w	dytbl(PC,d1.w),d2	; add days-so-far to weekday
+
+	move.w	a2,d1
+	and.w	#$1f,d1		; d1 is day of month
+	add.w	d1,d2		; add days so far this month to d2
+*	subq.w	#1,d2		; subtract one off (days are zero-based)
+* This is the -1 that is balanced by commenting out the +1 above.
+
+	; now return (d2 % 7)
+
+	divu	#7,d2
+	swap	d2
+	moveq	#0,d0
+	move.w	d2,d0
+	rts
+
+dytbl:	dc.w	0					; Jan 1
+	dc.w	0+31					; Feb 1
+	dc.w	0+31+28					; Mar 1
+	dc.w	0+31+28+31				; Apr 1
+	dc.w	0+31+28+31+30				; May 1
+	dc.w	0+31+28+31+30+31			; Jun 1
+	dc.w	0+31+28+31+30+31+30			; Jul 1
+	dc.w	0+31+28+31+30+31+30+31			; Aug 1
+	dc.w	0+31+28+31+30+31+30+31+31		; Sep 1
+	dc.w	0+31+28+31+30+31+30+31+31+30		; Oct 1
+	dc.w	0+31+28+31+30+31+30+31+31+30+31		; Nov 1
+	dc.w	0+31+28+31+30+31+30+31+31+30+31+30	; Dec 1
+
+*
+* New BIOS call "Waketime" (decimal 47, $2f): takes a longword.
+*
+* Mostly, if that longword (as datime) is in the future, it's written
+* to the variable "waketime."  However, some values are special:
+*
+*      -1: return the current value of the waketime variable.
+*	0: clear out waketime, un-set the alarm.
+*	1: set the alarm based on waketime.
+*
+* Returns:
+*	0: you won: your time is valid, in the future, and
+* sooner than the current value of waketime.
+*	1: your time is in the past.
+*	2: your time is in the future, but later than waketime.
+*	3: you requested that waketime be zeroed and unset, so it was.
+*	4: had to set the alarm for the first of that month (see below).
+*	5: had to set the alarm for this time tomorrow (see below).
+*
+* If you call this with "1" as the arg (to set the alarm), the returns are:
+*	 0: Success.  Either waketime was zero and no alarm is set,
+*	   or the RTC failed (not likely), or the alarm was set.
+*	-1: Failure.  You have asked me to set the alarm to "right now."
+*	   This return is treated specially in power.prg, the only
+*	   legitimate caller of Waketime(1).
+*
+* Screw cases:
+* 
+* If you try to set the alarm for THIS MINUTE, on THIS DATE, but in some
+* other month, you get in trouble.  Since the alarm only knows
+* date/hour/minute, you'd be setting the alarm for RIGHT NOW. (OK, the day of
+* week participates, but we haven't computed that yet.)  So we hack this: if
+* it's the first of the month, we set the alarm for this time tomorrow (the
+* second).  Otherwise we set the alarm for this time on the first of the
+* month you're actually trying to set the alarm for.
+* 
+* We could do this in Waketime(1), so we never end up waking you up when it
+* isn't necessary, and in fact we should, but for now it's in
+* Waketime(datime).
+* 
+* If you call Waketime(1) and you are actually in the first 14 seconds of the
+* minute it's set for, then we can't turn you off: some program that's
+* waiting for this minute might want to run, and besides, setting the alarm
+* for "now" makes it fire right away.  So instead we clear waketime and
+* return -1, signalling this event.  The code is expected NOT to shut down,
+* and instead to crank the event loop so the things that are waiting for this
+* minute will see that it's time and do their things, and the ones that are
+* waiting for later times will call Waktime(datime).  If none do, then no
+* alarm is set (because we cleared waketime).  The user mashes the power
+* button again and we really shut down.
+* 
+* If you're more than 14 seconds into the minute, it's OK to shut down. This
+* is because those programs that wanted to know the time have run, and those
+* that wanted to set waketime have also run.  In that case, the only way
+* waketime could still be "this minute" is if nobody called waketime at all,
+* in which case there just isn't any alarm to set.
+* 
+
+.bss
+waketime: ds.l	1
+.text
+
+.globl _waketime
+_waketime:
+	move.l	4(sp),d0
+	beq	clralarm	; Waketime(0): clear the alarm
+	cmp.l	#-1,d0
+	beq	readalarm	; Waketime(-1): read the current value
+	cmp.l	#1,d0
+	beq	setalarm	; Waketime(1): set the alarm
+
+*
+* OK, it's really a time & date.  Compare with the real time from the RTC
+* to see if it's really in the future.  If it is, then check to see if this
+* time "wins."   This time "wins" if (A) waketime is currently zero, or (B)
+* waketime is in the past (has already happened), or (C) the new time is
+* sooner than the current value of waketime.  If the new time wins,
+* set waketime to that value.
+*
+* The new time can only win if it is actually IN THE FUTURE, as opposed to
+* being NOT IN THE PAST.  If you try to set the alarm for THIS MINUTE, you
+* will fail.  This gets us out of some problems that happen when you try to
+* shut down in the same minute that the alarm is set for.
+*
+
+	bsr	_getclock
+	cmp.l	#-1,d0
+	beq	noalarm		; a handy RTS: really "can't happen"
+
+	move.l	4(sp),d1	; get your desired alarm time back
+	and.b	#%11100000,d0	; round "now" down to a minute boundary
+	and.b	#%11100000,d1	; round your desired time down, too
+	cmp.l	d1,d0
+	bhs	inpast		; now >= ask: don't do it.
+
+* OK, it's in the future.  But is it sooner than waketime?
+
+	move.l	waketime,d2
+	beq	youwin		; no waketime: you win.
+	cmp.l	d2,d0		; is waketime in the past?
+	bhi	youwin		; yes: you win.
+	cmp.l	d2,d1		; is the new time same or sooner than waketime?
+	bhs	islater		; no: you lose.
+
+* You win!  There's a hitch: if you're setting the time for THIS MINUTE, on
+* THIS DAY, but in some other month or year, we have to be tricky. What we
+* do is set the alarm for (A) this time tomorrow or (B) the first day of
+* the month you're trying to set the alarm in.  Either will happen before
+* the alarm you're asking for.  We pick (A) if you ask for the first
+* day of the month you're worried about.  This gets us out of rollover
+* computations.
+
+youwin:
+	move.l	d0,a0		; temp storage for "now"
+	move.l	d1,d2		; get your time to d2
+	and.l	#$1fffff,d2	; get rid of year & month
+	and.l	#$1fffff,d0	; ditto for "now"
+	cmp.l	d2,d0		; same?
+	beq	wkspecial	; yes - do special stuff
+
+	move.l	d1,waketime	; set waketime to your request
+	moveq.l	#0,d0		; return 0: you won.
+	rts
+
+wkspecial:
+	and.l	#$1f0000,d2	; d2 is now just date you want
+	cmp.l	#$010000,d2	; first of the month?
+	beq	wkfirst		; yes.
+
+* You are setting the alarm for THIS MINUTE, THIS DATE, but not the first.
+* Set the alarm for "the first of that month."
+
+	and.l	#$ffe0ffff,d1	; mask out date field of your request
+	or.l	#$00010000,d1	; set date to "the first"
+	move.l	d1,waketime	; set waketime to this value
+	moveq.l	#4,d0		; signal success
+	rts
+
+* wkfirst: you are setting the alarm for THIS MINUTE, THIS DATE, in a
+* different month, and it's the first of that month. Set the alarm for
+* "this time tomorrow" which is guaranteed possible just by incrementing
+* the date field of "now."
+
+wkfirst:
+	move.l	a0,d0		; get "now" back to d0
+	add.l	#$00010000,d0	; add one to the date.
+	move.l	d0,waketime
+	moveq.l	#5,d0		; set to "this time tomorrow"
+	rts
+
+inpast:
+	moveq.l	#1,d0		; return 1: your request is in the past
+	rts
+
+islater:
+	moveq.l	#2,d0		; return 2: your request is later
+	rts
+
+readalarm:
+	move.l	waketime,d0	; Waketime(-1): return the current value
+	rts
+
+clralarm:
+	bsr	clktest			; probe, load a0 with base address
+	bcs	sclerr			; punt if chip doesn't exist
+	bclr	#2,RTMODE(a0)		; clear Alarm EN
+	move.b	#%1101,RTRES(a0)	; reset alarm
+	clr.l	waketime
+	moveq.l	#3,d0			; return 3: time zeroed.
+	rts
+
+*
+* Waketime(1L): Write the clock chip alarm registers and enable the clock
+* chip alarm out.  Sets the alarm for "waketime".  This calls week_day to
+* compute the day of week it will be and write that, too.
+*
+* Note that the date and day of week participate, but the month doesn't.
+* You're setting the alarm for a Monday which is the 12th, you'll get it
+* the next time there's any Monday the 12th, not necessarily the particular
+* one you want.
+*
+* If waketime is set in the past, we set no alarm and return zero.  If
+* waketime is set for "right now" (within the first 14 seconds of this same
+* minute) this code does not set the alarm and it returns -1.  If waketime
+* is set for this minute and you're more than 14 seconds into the minute,
+* waketime is cleared, no alarm is set, and we return zero. Otherwise we
+* set the alarm and return zero.  power.prg uses this return for special
+* things.
+*
+
+setalarm:
+	bsr	_getclock		; get RTC date & time into d0
+	cmp.l	#-1,d0			; did it fail?
+	beq	noalarm			; can't set the alarm. Sorry!
+
+	move.l	waketime,d1
+	beq	noalarm			; no waketime to set! Bye!
+	and.b	#%11100000,d1		; round down to minute boundary
+	move.l	d1,d2			; save true time away
+	and.b	#%11100000,d0		; round "now" down to minute boundary
+	cmp.l	d1,d0			; is waketime in the past?
+	bhi	noalarm			; yes: set no alarm and return.
+	bne	alok			; not the same minute at all: fine.
+* waketime is set for "this minute" -- compare seconds
+	and.b	#$1f,d2			; mask only seconds from "now"
+	cmp.b	#7,d2			; seconds < 14?
+	blo	badnews			; yes: flag the special case
+alok:
+
+*
+*  Convert time to chip format
+*
+	move.l	#RTCBASE,a0		; a0 -> base of registers
+	bset.b	#0,RTMODE(a0)		; select alarm bank (preserve EN's)
+
+	move.l	waketime,d1		; d1 = GEMDOS format time
+
+	move.w	d1,d0			; d1 = (time >> 5) & $3f
+	lsr.w	#5,d0			;    = minutes 0..59
+	and.l	#$3f,d0
+	divu	#10,d0			; get minutes/10, minutes
+	move.b	d0,RT10MIN(a0)		; install minutes/10
+	swap	d0
+	move.b	d0,RT01MIN(a0)		; install minutes/1
+
+	move.w	d1,d0
+	lsr.w	#8,d0			; d0 >>= 11
+	lsr.w	#3,d0			;    = hours 0..23
+	ext.l	d0			; clobber upper word
+	divu	#10,d0			; get hours/10, hours
+	move.b	d0,RT10HR(a0)		; install hours/10
+	swap	d0
+	move.b	d0,RT01HR(a0)		; install hours/1
+
+	move.l	d1,d0
+	swap	d0			; get date to d0.w
+	and.w	#$1f,d0			; (just the date, ma'am)
+	ext.l	d0
+	divu	#10,d0
+	move.b	d0,RT10DAY(a0)		; install days/10
+	swap	d0
+	move.b	d0,RT01DAY(a0)		; install days/1
+
+	move.w	waketime,a2		; put date part into a2.w
+	bsr	week_day
+	move.b	d0,RTDOW(a0)		; write day of week
+
+	bset.b	#2,RTMODE(a0)		; set alarm enable
+	bclr.b	#0,RTMODE(a0)		; go back to "time" bank
+noalarm:
+	moveq.l	#0,d0			; return 0 "I set the alarm."
+	rts
+
+*
+* Bad News: You are trying to set the alarm, but the alarm would be set for
+* the very minute you're in.  We clear waketime and return a flag saying
+* this happened.  (We clear waketime because that way, if nobody calls
+* Waketime and you shut down, you don't fall into this case again.)
+*
+
+badnews:
+	clr.l	waketime
+	moveq.l	#-1,d0			; Return -1: you tried to set alarm
+	rts				; for "this minute" and I won't.
+
+.endif
+
+.if MOTO
+*
+* This code is for the TT and Sparrow; the clock chip in the TT is the
+* Motorola MC146818A; in Sparrow it's a "compatible" Dallas Semiconductor
+* DS1287 (not 1287A).
+*
+
+RTCA	equ	$ffff8961
+RTCD	equ	$ffff8963
+
+* registers
+
+SEC	equ	0
+MIN	equ	2
+HOUR	equ	4
+WKDAY	equ	6
+DAY	equ	7
+MONTH	equ	8
+YEAR	equ	9
+REGA	equ	$a
+REGB	equ	$b
+REGC	equ	$c
+REGD	equ	$d
+
+*--------------
+*
+* Initialize clock at startup:
+*   probe for clock chip
+*   if missing, return CS
+*   else if not VRT (valid RAM and TIME)
+*	perform the SET operation with some sane time and date
+*   endif
+*   Set GEMDOS's time to RTC time
+*   return CC.
+*
+
+_iclock:
+	bsr	clktest		; chip present?
+	bcs.b	iclkfail	; missing; give up.
+
+* chip is present; test VRT bit (Valid RAM and Time)
+
+	move.b	#REGD,RTCA
+	move.b	RTCD,d0
+	btst	#7,d0		; VRT bit set?
+	bne	timeok		; yes - it's fine
+
+* VRT is clear - set a sane time & date & initialize the chip
+*
+*		  YYYYYYYMMMMDDDDDHHHHHMMMMMMSSSSS 6/16/1989
+	move.l	#%00010010110010000000000000000000,-(sp)
+	bsr	_setclock
+	addq	#4,sp
+
+timeok:
+	bsr	_getclock
+	cmp.l	#-1,d0
+	beq	iclkfail	; failed: return -1
+	moveq.l	#0,d0		; success: return 0
+iclkfail:
+	rts
+
+*
+* Get GEMDOS format of the date and time.  Returns D0.L with date in hi word.
+*
+*	HHHH HMMM MMMS SSSS
+*	YYYY YYYM MMMD DDDD
+* 
+* Does not validate what it gets from the clock chip, except that if
+* the chip test fails or the VRT bit is clear, returns -1L.
+*
+* When this succeeds, it also writes GEMDOS' idea of date & time
+* so they're in synch.  Thus, calling Gettime() has the effect of
+* synchronizing the RTC and GEMDOS. (new as of 8/91)
+*
+
+_getclock:
+	bsr	clktest
+	bcs	iclkfail	; use a handy error return (above)
+	move.b	#REGD,RTCA
+	btst.b	#7,RTCD
+	beq	gclfail
+
+* You have to reload REGA every time, even if you're reading the same
+* register over and over.
+
+	move.w	sr,d2
+	move.w	d2,d0
+	or.w	#$0700,d0	; d0 is IPL 7 sr, d2 is old sr.
+
+gwait:*	move.w	d2,sr		; allow interrupts
+*	nop			; (BRIEFLY!)
+*	move.w	d0,sr		; now IPL 7
+	move.b	#REGA,RTCA
+	btst.b	#7,RTCD	; test UIP bit
+	bne	gwait		; wait until it's clear
+
+	moveq.l	#0,d0
+	move.l	d0,d1
+	move.b	#SEC,RTCA
+	move.b	RTCD,d0
+	asr.w	#1,d0		; GEMDOS tells times in pairs of seconds
+	move.b	#MIN,RTCA
+	move.b	RTCD,d1
+	bfins	d1,d0{21:6}	; hooray for BF instructions!
+	move.b	#HOUR,RTCA
+	move.b	RTCD,d1
+	bfins	d1,d0{16:5}
+
+	move.b	#DAY,RTCA
+	move.b	RTCD,d1
+	bfins	d1,d0{11:5}
+	move.b	#MONTH,RTCA
+	move.b	RTCD,d1
+	bfins	d1,d0{7:4}
+	move.b	#YEAR,RTCA
+	move.b	RTCD,d1
+	sub.b	#12,d1		; subtract 12 for yr since 1980, not 1968
+	bfins	d1,d0{0:7}
+	move.w	d2,sr		; restore original IPL
+
+	move.w	sr,d2		; no ints while writing date & time
+	or.w	#$0700,sr
+	move.w	d0,_time	; set GEMDOS' idea of date & time
+	swap	d0
+	move.w	d0,_date
+	swap	d0
+	move.w	d2,sr		; restore ints
+	rts
+
+gclfail:
+	move.l	#-1,d0
+	rts
+
+*
+* _setclock(newtime)
+*
+* newtime is a longword with the date in the upper half; date and
+* time are GEMDOS format.
+*
+* SET operation:
+*	set SET bit
+*	set 32KHz input, 64Hz periodic interrupt (register A)
+*	set SET bit again, no interrupt enables, binary data, 24-hr mode,
+*		and no DST (silicon can't keep up with Congress).
+*		(register B)
+*	set the time and date (1970 base year; warranty expires 12/31/2069)
+*	set the VRT bit, clear the SET bit
+*
+
+_setclock:
+	bsr	clktest
+	bcs	iclkfail	; use a handy error return (above)
+	move.l	4(sp),d0
+
+	move.b	#REGB,RTCA
+	move.b	#$80,RTCD	; set the SET bit and clear all else
+	move.b	#REGA,RTCA
+	move.b	#$2a,RTCD	; set 32KHz input, 64Hz periodic
+	move.b	#REGB,RTCA
+	move.b	#%10001110,RTCD	; SET, enable SQWE, DM=binary, 24hr
+
+	move.b	#SEC,RTCA
+	bfextu	d0{27:5},d1
+	add.b	d1,d1
+	move.b	d1,RTCD
+
+	move.b	#MIN,RTCA
+	bfextu	d0{21:6},d1
+	move.b	d1,RTCD
+
+	move.b	#HOUR,RTCA
+	bfextu	d0{16:5},d1
+	move.b	d1,RTCD
+
+	move.b	#DAY,RTCA
+	bfextu	d0{11:5},d1
+	move.b	d1,RTCD
+
+	move.b	#MONTH,RTCA
+	bfextu	d0{7:4},d1
+	move.b	d1,RTCD
+
+	move.b	#YEAR,RTCA
+	bfextu	d0{0:7},d1
+	add.b	#12,d1		; add 12 for years since 1968, not 1980
+	move.b	d1,RTCD
+
+	move.b	#REGB,RTCA
+	move.b	#%00001110,RTCD	; clear SET, leave others
+	rts
+
+*
+* probe for the clock chip.  Returns CS if the chip is missing, cc if found.
+*
+
+clktest:
+	move.l	sp,a0
+	move.l	$8,a1
+	move.l	#berr,$8
+
+	move.b	#0,RTCA
+	move.b	RTCD,d0		; read seconds register
+
+	move.l	a1,$8		; restore bus error vector
+	and	#$fe,ccr	; clear carry bit
+	rts			; and return
+
+berr:	move.l	a0,sp		; restore SP after bus error
+	move.l	a1,$8		; restore bus error vector
+	or	#1,ccr		; set carry bit
+	rts			; and return
+
+*
+* stub out waketime
+*
+
+.globl _waketime
+_waketime:
+	move.l	4(sp),d0
+	beq	wake_clr
+	addq.l	#1,d0
+	beq	wake_get
+	subq.l	#2,d0
+	beq	wake_set
+	addq.l	#1,d0
+wake_clr:
+	move.l	d0,waketime
+	moveq.l	#0,d0
+	rts
+
+wake_get:
+	move.l	waketime,d0
+	rts
+
+wake_set:
+	move.l	d0,waketime
+	moveq.l	#0,d0
+	rts
+
+.bss
+waketime: ds.l	1
+.text
+
+**********************************************************************
+*
+* XBIOS call $2e: NVMaccess: read, write, or initialize the non-volatile 
+* memory in the RTC chip.
+* 
+* 	WORD NVMaccess(op,start,count,buffer)
+* 	WORD op, start, count;
+* 	BYTE *buffer;
+* 
+* Returns 0 for success, EBADRQ (-5) for range error on args, and 
+* EGENRL (-12) if the NVM checksum isn't consistent before a read
+* or write.  In the case of a read the data is transferred anyway.
+* 
+* If the checksum is consistent before a WRITE operation,  the call
+* writes the new data,  then recomputes the checksum and writes the
+* checksum and its inverse in the appropriate places.
+* 
+* 	OPCODE	MEANING
+* 	   0	READ: copy data from NVM to buffer.
+* 	   1	WRITE: copy data from buffer to NVM.
+* 	   2	INIT: zero the NVM and initialize the checksum.
+* 
+**********************************************************************
+
+.globl NVMaccess
+
+NVMaccess:
+	moveq	#-5,d0		; pre-load EBADRQ return code
+	move.w	4(sp),d1	; get opcode
+	beq	nvmread		; 0 is read
+	cmp.w	#2,d1
+	beq	nvminit		; 2 is init
+	bhi	nvmdone		; >2 is illegal
+
+; else opcode is 1, meaning write
+
+	bsr	nvmcheck	; (sets d1=start+e,d2=count,a1=RTCA)
+	tst.w	d0
+	bne	nvmdone		; bail out on errors
+	move.l	$a(sp),a0	; get buffer address
+	bra	nvmwe		; bra to end of dbra loop
+
+nvmwl:	move.b	d1,(a1)		; write register number
+	move.b	(a0)+,(a2)	; write data
+	addq	#1,d1		; incr register number
+nvmwe:	dbra	d2,nvmwl
+
+	bsr	nvmgetchk	; write succeeded; get & write checksum
+	move.b	#49+$e,(a1)
+	move.b	d0,(a2)
+	not.b	d0
+	move.b	#48+$e,(a1)
+	move.b	d0,(a2)
+	moveq	#0,d0		; return no error
+nvmdone:
+	rts
+
+nvmread:
+	bsr	nvmcheck	; (sets d1=start+e,d2=count,a1=RTCA,a2=RTCD)
+	cmp.w	#-5,d0		; if EBADRQ return now
+	beq	nvmdone
+
+	move.l	$a(sp),a0	; else proceed with read & return this d0
+	bra	nvmre
+
+nvmrl:	move.b	d1,(a1)
+	move.b	(a2),(a0)+
+	addq	#1,d1
+nvmre:	dbra	d2,nvmrl
+
+	rts
+
+nvminit:
+	lea.l	RTCA,a1
+	lea.l	RTCD,a2
+	moveq	#0,d0
+	moveq	#$e,d1
+	moveq	#50-1,d2
+nvmil:	move.b	d1,(a1)		; clear all 50 RAM locations
+	move.b	d0,(a2)
+	addq	#1,d1
+	dbra	d2,nvmil
+
+	move.b	#48+$e,(a1)	; write FF to location 48
+	move.b	#$ff,(a2)
+
+* FIX: added 2/22/93: set up USA factory configuration
+
+	pea	nv_defs		; use our defaults
+	move.w	#16,-(sp)	; write 16 bytes
+	move.w	#0,-(sp)	; start at value 0
+	move.w	#1,-(sp)	; write NVRAM opcode
+	jsr	NVMaccess
+	add.l	#10,sp
+* end of FIX
+
+	rts			; return no error (d0 is still 0)
+
+*
+* nvmcheck: subroutine common to nvmread and nvmwrite.
+* Checks consistency of the NVM, returns EGENRL (-12) if bad.
+* Loads start & count off stack & checks range, returns EBADRQ (-5)
+* if bad. 
+*
+* Leaves d1=start+$e, d2=count, a1=RTCA, a2=RTCD, unless returning EBADRQ.
+*
+
+nvmcheck:
+	bsr	nvmgetchk	; get RTCA to a0, checksum to d0
+	move.b	d0,d1
+	moveq	#-12,d0		; preload EGENRL return code
+	move.b	#49+$e,(a1)
+	cmp.b	(a2),d1		; match?
+	bne	nvmckdone	; no - return EGENRL
+	not.b	d1
+	move.b	#48+$e,(a1)
+	cmp.b	(a2),d1		; inverse match?
+	bne	nvmckdone	; no - return EGENRL
+
+; checksum matches, now check args
+
+	moveq	#-5,d0		; preload EBADRQ return code
+	move.w	$a(sp),d1	; get start reg number
+	cmp.w	#48,d1
+	bhs	nvmckdone	; start >= 48: EBADRQ
+	move.w	$c(sp),d2	; get count
+	bmi	nvmckdone	; count < 0: EBADRQ
+	add.w	d1,d2		; add start
+	cmp.w	#48,d2
+	bhi	nvmckdone	; (start+count) > 48: EBADRQ
+	moveq	#0,d0		; and return zero
+
+; nvmcheck returns through here always; d0 has a return code, and
+; the other registers are loaded here for returning.
+
+nvmckdone:
+	move.w	$c(sp),d2	; get count back
+	move.w	$a(sp),d1	; and start
+	add.w	#$e,d1		; add $e to start for true reg num
+	rts
+
+nvmgetchk:
+	lea	RTCA,a1
+	lea	RTCD,a2
+	moveq	#0,d0		; pre-clear checksum
+	moveq	#$e,d1		; starting reg num is $e
+	moveq	#48-1,d2	; count is 48
+
+nvmcl:	move.b	d1,(a1)
+	add.b	(a2),d0
+	addq	#1,d1
+	dbra	d2,nvmcl
+	rts			; return checksum in d0
+
+.endif
+
+@
+
+
+2.23
+log
+@TOS 4.00 Falcon030 first production version
+@
+text
+@d7 1
+a7 1
+* $Date: 1992/07/27 20:12:04 $
+d14 3
+d131 1
+a131 1
+* $Revision: 2.22 $
+d169 1
+d1219 11
+@
+
+
+2.22
+log
+@Nearly last Sparrow test BIOS
+@
+text
+@d1 1274
+@
+
+
+2.21
+log
+@SPARROW now uses motorola clock chip; added stub waketime
+@
+text
+@d4 1
+a4 1
+* $Author: apratt $
+d7 1
+a7 1
+* $Date: 1992/02/28 01:21:56 $
+d14 3
+d125 1
+a125 1
+* $Revision: 2.20 $
+d148 1
+a148 3
+* TT equate moved to switches.s
+
+.include "switches.s"
+@
+
+
+2.20
+log
+@Oops. When STPAD boots we *do* want to disable off the alarm.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/10/04 17:58:30 $
+d14 3
+d122 1
+a122 1
+* $Revision: 2.19 $
+d125 1
+a125 1
+* $Source: e:/tos/bios\RCS\clock.s,v $
+d149 8
+d163 1
+a163 1
+.if (TT == 0)
+d880 1
+a880 1
+.else
+d882 1
+d884 3
+a886 1
+* This is the TT branch of the main "if" in this file.
+a887 2
+* Clock chip in the TT is the Motorola MC146818A
+*
+d1094 31
+@
+
+
+2.19
+log
+@This version folds in those things which are new since I put most of clock.s
+into power.prg for quick-turnaround testing.  The key difference is that
+calling Waketime(1) less than 14 seconds into the minute the alarm is set
+for causes a return of -1.  See other comments for discussion of this.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/10/03 17:53:24 $
+d14 6
+d119 1
+a119 1
+* $Revision: 2.18 $
+d253 6
+d265 2
+a266 1
+	bclr	#0,RTMODE(a0)		; select time bank, not alarm
+@
+
+
+2.18
+log
+@More revs; this is the last rev before putting Waketime in power.prg
+for testing.  It'll get folded back into here soon... :-)
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/10/01 20:12:52 $
+d14 4
+d113 1
+a113 1
+* $Revision: 2.17 $
+d607 2
+d617 31
+d657 1
+a657 2
+	moveq.l	#-1,d1
+	cmp.l	d0,d1
+d659 1
+a659 2
+	addq.l	#2,d1
+	cmp.l	d0,d1
+d663 1
+a663 1
+* OK, it's really a time & date.  Compare with the globals _date and _time
+d695 8
+a702 1
+* You win!
+d704 7
+d715 26
+d767 1
+a767 1
+* Note that the day and day of week participate, but the month doesn't.
+d769 1
+a769 1
+* the next time there's a Monday the 12th, not necessarily the particular
+d772 7
+a778 3
+* If you set the alarm for "right now" (within the same minute) this code
+* does not set the alarm and it returns -1.  Otherwise it returns zero.
+* power.prg uses this return for special things.
+d782 1
+a782 1
+	bsr	_getclock		; get RTC date & time into _date & _time
+a785 3
+	move.l	#RTCBASE,a0		; a0 -> base of registers
+	bset.b	#0,RTMODE(a0)		; select alarm bank (preserve EN's)
+
+d789 10
+a798 3
+	and.b	#%11100000,d0		; round "now" (from _getclock) down
+	cmp.l	d0,d1
+	beq	badnews			; you're trying to set alarm to "now"
+d803 3
+d844 1
+d849 1
+@
+
+
+2.17
+log
+@When you try to set the alarm (Waketime(1)), we now return
+zero for success (i.e. no time to set, or time is in the past,
+or successfully set), and -1 for the special case where you
+are trying to set the alarm for the same minute you're already in.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/30 16:45:58 $
+d14 6
+d109 1
+a109 1
+* $Revision: 2.16 $
+d635 5
+d641 7
+a647 3
+	move.w	_date,d1
+	swap	d1
+	move.w	_time,d1
+d649 1
+a649 1
+	blo	inpast		; (d0 => now): it's in the future
+d655 1
+a655 1
+	cmp.l	d2,d1		; is waketime in the past?
+d657 1
+a657 1
+	cmp.l	d2,d0		; is the new time same or sooner than waketime?
+d662 1
+a662 1
+	move.l	d0,waketime
+d716 1
+a716 1
+	
+d758 5
+d764 1
+@
+
+
+2.16
+log
+@Another rev for STBOOK alarm stuff; see comments above waketime.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/29 23:59:46 $
+d14 3
+d103 1
+a103 1
+* $Revision: 2.15 $
+a596 3
+*	4: you asked that I set the alarm and I did.
+*	5: you asked that I set the alarm but waketime is zero.
+*
+d598 6
+a603 6
+* I am not sure of the hardware in the book, but there are some
+* strangenesses here: when I tried it on a Mega STe, I didn't seem to have
+* to clear the Alarm Enable to make the alarm signal go away: the bit in
+* the reset register was enough.  In the book I seem to have to clear the
+* EN as well.  BUT: when I do that, I get another interrupt!  I guess it's
+* triggered on both edges(?).
+d682 4
+d688 4
+a691 2
+	bsr	clktest			; test for clock chip
+	bcs	sclerr			; punt if chip doesn't exist
+d695 7
+a705 1
+	beq	noalarm
+a738 2
+	moveq.l	#4,d0			; return 4 "I set the alarm."
+	rts
+d740 1
+a740 1
+	moveq.l	#5,d0			; return 5 "didn't set alarm"
+d742 4
+@
+
+
+2.15
+log
+@Added the Waketime() XBIOS call, number 47 ($2f).  See the code
+for documentation of it.  It's meant for STPAD but works for all
+ST's and STe's but not TT (because TT has a different RTC).
+Note that this code now computes and sets day-of-week, but
+never reads it.  DOW participates in the alarm match, so it has
+to be computed when you set the time, and when you set the alarm.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/17 21:48:52 $
+d14 8
+d100 1
+a100 1
+* $Revision: 2.14 $
+d222 3
+d227 1
+a227 1
+*
+d240 1
+d248 2
+a249 1
+	move.b	#%1001,RTMODE(a0)	; set "alarm" bank
+d258 2
+a259 1
+	move.b	#%1000,RTMODE(a0)	; set "normal" bank
+d494 1
+d502 1
+d597 8
+d613 1
+a613 1
+	beq	clralarm
+d616 1
+a616 1
+	beq	readalarm
+d619 10
+a628 1
+	beq	setalarm
+d630 5
+a634 11
+* OK, it's really a time & date.  Compare with the globals _date
+* and _time to see if it's really in the future.  If it is, set
+* the waketime variable to this value.
+
+	swap	d0		; get date into low word
+	cmp.w	_date,d0
+	bhi	infuture	; d0 > _date: it's in the future
+	blo	inpast		; d0 < _date: in the past
+	move.w	6(sp),d1	; else it's today: get time argument
+	cmp.w	_time,d1
+	blo	inpast		; d1 < _time: in the past
+d638 6
+a643 6
+infuture:
+	swap	d0
+	tst.l	waketime
+	beq	youwin		; zero (unset) waketime: you win.
+	cmp.l	waketime,d0
+	bhs	islater
+d660 1
+a660 1
+	move.l	waketime,d0	; Waketime(1): return the current value
+d664 3
+a666 2
+	bsr	clktest		; probe, load a0 with base address
+	bcs	sclerr		; punt if chip doesn't exist
+d669 1
+a669 1
+	moveq.l	#3,d0		; return 3: time zeroed.
+@
+
+
+2.14
+log
+@For TT TOS, we have stored "year since 1970" in the RTC.
+This is wrong: if you do that then leap years are off by two years.
+We did this originally for the UNIX group's sake, so they could
+represent 1970.  To preserve that (no skin off my nose) the RTC
+for TT now holds "year since 1968."
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/12 19:41:34 $
+d14 7
+d92 1
+a92 1
+* $Revision: 2.13 $
+a254 2
+
+
+d390 7
+d402 4
+d467 1
+a467 1
+*    o  zero day-of-week counter (we don't use it)
+a473 1
+	clr.b	RDDOW(a1)		; clobber day-of-week in buffer
+d501 203
+@
+
+
+2.13
+log
+@Changed conditionals: ! is bitwise in MAS, so !TT is $FFFFFFFE when TT is 1.
+So we use (TT == 0) instead.  Sigh.
+@
+text
+@d7 1
+a7 1
+* $Date: 1991/09/06 14:50:56 $
+d14 4
+d85 1
+a85 1
+* $Revision: 2.12 $
+d605 1
+a605 1
+	sub.b	#10,d1		; subtract 10 for yr since 1980, not 1970
+d673 1
+a673 1
+	add.b	#10,d1		; add 10 for years since 1970, not 1980
+@
+
+
+2.12
+log
+@Changed all "ifne" to "if" and "ifeq" to "if !" and "endc" to "endif."
+@
+text
+@d7 1
+a7 1
+* $Date: 91/08/15 15:31:13 $
+d13 4
+a16 1
+* $Log:	clock.s,v $
+d81 1
+a81 1
+* $Revision: 2.11 $
+d84 1
+a84 1
+* $Source: /u2/MRS/osrevisions/bios/clock.s,v $
+d114 1
+a114 1
+.if !TT
+@
+
+
+2.11
+log
+@Added code to write GEMDOS' idea of _date and _time every time _getclock is
+called (for either clock chip).  This lets you update those variables
+without doing Settime(Gettime()), which would cause the RTC to lose between
+zero and two seconds each time.
+
+Fixed the STPAD case where the reset register and test register weren't
+being initialized properly.
+@
+text
+@d7 1
+a7 1
+* $Date: 91/08/05 15:13:11 $
+d14 10
+d78 1
+a78 1
+* $Revision: 2.10 $
+d111 1
+a111 1
+.ifeq TT
+d211 1
+a211 1
+.ifne STPAD
+d483 2
+d837 1
+a837 1
+.endc
+@
+
+
+2.10
+log
+@Added support for STPAD: took out the test (the Ricoh chip is ALWAYS
+there), disabled the 1Hz and 16Hz wave outputs, and changed other code to
+avoid clobbering alarm registers.
+@
+text
+@d7 1
+a7 1
+* $Date: 90/08/03 13:21:39 $
+d14 5
+d68 1
+a68 1
+* $Revision: 2.9 $
+d110 1
+d179 3
+a181 1
+	beq	iclfai			; yes --- punt
+a182 11
+	move.w	d0,_time		; set GEMDOS time
+	swap	d0
+	move.w	d0,_date		; set GEMDOS date
+
+	moveq	#0,d0			; return "Ok fine"
+	rts
+
+iclfai:	moveq	#-1,d0			; return -1L (error)
+	rts
+
+
+d203 2
+d249 4
+d319 3
+d323 2
+d526 2
+a527 8
+	beq	iclkfail
+	move.w	d0,_time
+	swap	d0
+	move.w	d0,_date
+
+	moveq.l	#0,d0
+	rts
+
+a528 1
+	moveq.l	#-1,d0
+d540 4
+d589 8
+@
+
+
+2.9
+log
+@TTOS FINAL RELEASE
+@
+text
+@d7 1
+a7 1
+* $Date: 90/08/01 13:10:44 $
+d14 3
+d63 1
+a63 1
+* $Revision: 2.8 $
+d98 8
+d162 1
+d202 1
+d204 5
+a208 1
+	clr.l	a1
+d210 1
+a210 1
+	move.l	8(a1),d2		; save bus error vector
+d212 1
+a212 1
+	move.l	#clkerr,8(a1)		; write bus error vector
+d214 1
+a214 1
+	move.l	d2,8(a1)		; no bus error - restore vector
+d227 1
+a227 1
+	move.l	d2,8(a1)		; restore the bus error vector
+d230 1
+a233 1
+
+d434 3
+a436 2
+	move.b	#%0010,RTRES(a0)	; clobber 15-stage divider
+	move.b	#%1001,RTMODE(a0)	; set "alarm" bank
+d439 1
+a439 1
+	move.b	#%1000,RTMODE(a0)	; set "normal" bank
+@
+
+
+2.8
+log
+@Fixed a bug: check didn't leave regs right when checksum was wrong,
+even though the read operation expected to be able to do the read
+anyway.
+@
+text
+@d7 1
+a7 1
+* $Date: 90/04/30 18:43:38 $
+d14 5
+d60 1
+a60 1
+* $Revision: 2.7 $
+@
+
+
+2.7
+log
+@Added NVMaccess call: see comments for details.
+@
+text
+@d7 1
+a7 1
+* $Date: 90/02/22 12:23:28 $
+d14 3
+d55 1
+a55 1
+* $Revision: 2.6 $
+d739 1
+a739 1
+* Else leaves d1=start+$e, d2=count, a1=RTCA, a2=RTCD
+d748 1
+a748 1
+	bne	nvmdone		; no - return EGENRL
+d752 1
+a752 1
+	bne	nvmdone		; no - return EGENRL
+d759 1
+a759 1
+	bhs	nvmdone		; start >= 48: EBADRQ
+d761 1
+a761 1
+	bmi	nvmdone		; count < 0: EBADRQ
+d764 7
+a770 1
+	bhi	nvmdone		; (start+count) > 48: EBADRQ
+d772 1
+a773 1
+	moveq	#0,d0		; and return zero
+@
+
+
+2.6
+log
+@Removed ".w" from _time and _date.
+@
+text
+@d7 1
+a7 1
+* $Date: 89/12/08 15:40:49 $
+d14 3
+d52 1
+a52 1
+* $Revision: 2.5 $
+d436 1
+a436 1
+.endc
+a437 2
+.ifne TT
+
+d642 138
+@
+
+
+2.5
+log
+@Changed TT clock code to use bitfield instructions.
+Also fixes a bug: the minutes were set to half the correct value.
+@
+text
+@d7 1
+a7 1
+* $Date: 89/09/22 16:42:45 $
+d14 4
+d49 1
+a49 1
+* $Revision: 2.4 $
+d152 1
+a152 1
+	move.w	d0,_time.w		; set GEMDOS time
+d154 1
+a154 1
+	move.w	d0,_date.w		; set GEMDOS date
+d492 1
+a492 1
+	move.w	d0,_time.w
+d494 1
+a494 1
+	move.w	d0,_date.w
+@
+
+
+2.4
+log
+@THIS VERSION REQUIRES TURBO C'S "MAS" ASSEMBLER
+No functional changes from previous revision, which is the last to
+require Alcyon's AS68 assembler.
+@
+text
+@d7 1
+a7 1
+* $Date: 89/08/29 15:13:19 $
+d10 1
+a10 1
+* $Locker: apratt $
+d14 5
+d45 1
+a45 1
+* $Revision: 2.3 $
+d516 2
+a517 1
+* I don't know if you have to reload RTCA each time or not. Can't hurt.
+d519 8
+a526 1
+gwait:	move.b	#REGA,RTCA
+d537 1
+a537 2
+	asl.w	#4,d1
+	or.w	d1,d0
+a538 1
+	moveq.l	#0,d1
+d540 1
+a540 4
+	asl.w	#8,d1
+	asl.w	#3,d1
+	or.w	d1,d0		; d0 is now complete GEMDOS time
+	swap	d0
+a541 2
+	moveq.l	#0,d1
+
+d543 2
+a544 1
+	move.b	RTCD,d0
+d547 1
+a547 3
+	asl.w	#5,d1
+	or.w	d1,d0
+	moveq.l	#0,d1
+d550 3
+a552 5
+	sub.w	#$a,d1		; subtract 10 for years since 1980
+	asl.w	#8,d1
+	asl.w	#1,d1
+	or.w	d1,d0		; d0 is now complete GEMDOS date
+	swap	d0
+a578 24
+	subq.l	#6,sp		; get some stack space
+	move.w	d0,d1
+	and.w	#%11111,d1
+	asl.w	#1,d1
+	move.b	d1,5(sp)	; write seconds
+	lsr.l	#5,d0
+	move.w	d0,d1
+	and.w	#%111111,d1
+	move.b	d1,4(sp)	; write minutes
+	lsr.l	#6,d0
+	move.w	d0,d1
+	and.w	#%11111,d1
+	move.b	d1,3(sp)	; write hours
+	lsr.l	#5,d0
+	move.w	d0,d1
+	and.w	#%11111,d1
+	move.b	d1,2(sp)	; write day
+	lsr.w	#5,d0
+	move.w	d0,d1
+	and.w	#%1111,d1
+	move.b	d1,1(sp)	; write month
+	lsr.w	#4,d0
+	add.w	#10,d0		; add 10 to get year since 1970
+	move.b	d0,(sp)		; write year
+d588 4
+a591 1
+	move.b	5(sp),RTCD	; set seconds
+d593 3
+a595 1
+	move.b	4(sp),RTCD
+d597 3
+a599 1
+	move.b	3(sp),RTCD
+d601 3
+a603 1
+	move.b	2(sp),RTCD
+d605 3
+a607 1
+	move.b	1(sp),RTCD
+d609 3
+a611 1
+	move.b	(sp),RTCD
+a614 1
+	add.w	#6,sp		; clean off stack space
+@
+
+
+2.3
+log
+@Fixed TT clock code (I hope).
+@
+text
+@d1 1
+d7 1
+a7 1
+* $Date: 89/08/18 14:28:59 $
+d10 1
+a10 1
+* $Locker:  $
+d14 3
+d40 1
+a40 1
+* $Revision: 2.2 $
+d63 1
+a63 1
+TT	equ	1
+d65 2
+d133 1
+a133 1
+	bcs.s	iclfai			; (not around)
+d141 1
+a141 1
+	beq.s	iclfai			; yes --- punt
+d143 1
+a143 1
+	move.w	d0,_time		; set GEMDOS time
+d145 1
+a145 1
+	move.w	d0,_date		; set GEMDOS date
+d183 1
+a183 1
+	bne.s	clkfai			; (no --- fail)
+d216 2
+a217 2
+	lea	read1,a1		; a1 -> clock data buffer
+	lea	read2,a2		; a2 -> alternate clock data buffer
+d226 1
+a226 1
+	bne.s	rdagn			; re-read clock on mismatch
+d326 1
+a326 1
+	lea	read1,a1		; a1 -> buffer for clock data to write
+d462 1
+a462 1
+	bsr	clktest		; chip present? (this clears a2 for zeropage)
+d467 2
+a468 2
+	move.b	#REGD,RTCA(a2)
+	move.b	RTCD(a2),d0
+d470 1
+a470 1
+	bne.s	timeok		; yes - it's fine
+d482 2
+a483 2
+	beq.s	iclkfail
+	move.w	d0,_time
+d485 1
+a485 1
+	move.w	d0,_date
+d505 1
+a505 1
+	bsr	clktest		; (this also clears a2 for zeropage)
+d507 3
+a509 3
+	move.b	#REGD,RTCA(a2)
+	btst.b	#7,RTCD(a2)
+	beq.s	gclfail
+d513 2
+a514 2
+gwait:	move.b	#REGA,RTCA(a2)
+	btst.b	#7,RTCD(a2)	; test UIP bit
+d519 2
+a520 2
+	move.b	#SEC,RTCA(a2)
+	move.b	RTCD(a2),d0
+d522 2
+a523 2
+	move.b	#MIN,RTCA(a2)
+	move.b	RTCD(a2),d1
+d526 1
+a526 1
+	move.b	#HOUR,RTCA(a2)
+d528 1
+a528 1
+	move.b	RTCD(a2),d1
+d536 4
+a539 4
+	move.b	#DAY,RTCA(a2)
+	move.b	RTCD(a2),d0
+	move.b	#MONTH,RTCA(a2)
+	move.b	RTCD(a2),d1
+d543 2
+a544 2
+	move.b	#YEAR,RTCA(a2)
+	move.b	RTCD(a2),d1
+d573 1
+a573 1
+	bsr	clktest		; (this also clears a2 for zeropage)
+d601 6
+a606 6
+	move.b	#REGB,RTCA(a2)
+	move.b	#$80,RTCD(a2)	; set the SET bit and clear all else
+	move.b	#REGA,RTCA(a2)
+	move.b	#$2a,RTCD(a2)	; set 32KHz input, 64Hz periodic
+	move.b	#REGB,RTCA(a2)
+	move.b	#%10001110,RTCD(a2)	; SET, enable SQWE, DM=binary, 24hr
+d608 12
+a619 12
+	move.b	#SEC,RTCA(a2)
+	move.b	5(sp),RTCD(a2)	; set seconds
+	move.b	#MIN,RTCA(a2)
+	move.b	4(sp),RTCD(a2)
+	move.b	#HOUR,RTCA(a2)
+	move.b	3(sp),RTCD(a2)
+	move.b	#DAY,RTCA(a2)
+	move.b	2(sp),RTCD(a2)
+	move.b	#MONTH,RTCA(a2)
+	move.b	1(sp),RTCD(a2)
+	move.b	#YEAR,RTCA(a2)
+	move.b	(sp),RTCD(a2)
+d621 2
+a622 2
+	move.b	#REGB,RTCA(a2)
+	move.b	#%00001110,RTCD(a2)	; clear SET, leave others
+a630 1
+	clr.l	a2		; handy zeropage (don't use a5!)
+d635 2
+a636 2
+	move.b	#0,RTCA(a2)
+	move.b	RTCD(a2),d0	; read seconds register
+d639 1
+a639 1
+	and.w	#$fe,ccr	; clear carry bit
+@
+
+
+2.2
+log
+@Added TT clock code. Not extensively tested. Includes switch for TT,
+set to zero for not TT.
+@
+text
+@d6 1
+a6 1
+* $Date: 89/02/27 12:36:29 $
+d13 4
+d36 1
+a36 1
+* $Revision: 2.1 $
+d539 1
+d592 1
+a592 1
+	sub.w	#10,d0		; subtract 10 to get year since 1970
+@
+
+
+2.1
+log
+@*** TOS 1.4  FINAL RELEASE VERSION ***
+@
+text
+@d6 1
+a6 1
+* $Date: 89/02/27 12:35:02 $
+d13 3
+d32 1
+a32 1
+* $Revision: 1.4 $
+d55 2
+d63 1
+a63 1
+RTCBASE	=	$fffffc20	; base address of RTC chip
+d65 2
+d70 16
+a85 16
+RT01SEC	=	$1		; 1-second counter
+RT10SEC	=	$3		; 10-second counter
+RT01MIN	=	$5		; 1-minute counter
+RT10MIN	=	$7		; 10-minute counter
+RT01HR	=	$9		; 1-hour counter
+RT10HR	=	$B		; 10-hour counter
+RTDOW	=	$D		; day of week
+RT01DAY	=	$F		; 1-day counter
+RT10DAY	=	$11		; 10-day counter
+RT01MON	=	$13		; 1-month counter
+RT10MON	=	$15		; 10-month counter
+RT01YR	=	$17		; 1-year counter
+RT10YR	=	$19		; 10-year counter
+RTMODE	=	$1B		; mode bits
+RTTEST	=	$1D		; test register (must be 0)
+RTRES	=	$1F		; reset register
+d87 1
+a87 1
+READS	=	13		; number of reads to do (up to RT10YR)
+d95 13
+a107 13
+RD01SEC	=	$c
+RD10SEC	=	$b
+RD01MIN	=	$a
+RD10MIN	=	$9
+RD01HR	=	$8
+RD10HR	=	$7
+RDDOW	=	$6		; day of week
+RD01DAY	=	$5
+RD10DAY	=	$4
+RD01MON	=	$3
+RD10MON	=	$2
+RD01YR	=	$1
+RD10YR	=	$0
+d413 225
+@
+
+
+1.4
+log
+@Blasted fatfinger again, in the no-bus-error case in clktest. Fixed.
+@
+text
+@d6 1
+a6 1
+* $Date: 89/02/17 11:55:46 $
+d13 3
+d29 1
+a29 1
+* $Revision: 1.3 $
+@
+
+
+1.3
+log
+@Fixed my fat fingers in clktest.  Also shortened by a few bytes.
+@
+text
+@d6 1
+a6 1
+* $Date: 89/02/06 13:45:40 $
+d13 3
+d26 1
+a26 1
+* $Revision: 1.2 $
+d157 1
+a157 1
+	move.l	a1,8(a1)		; no bus error - restore vector
+@
+
+
+1.2
+log
+@Added handling for bus error when accessing RTC (because TT has none).
+The handling is harmless for non-TT, so it's not conditional.
+@
+text
+@d3 1
+a3 1
+* $Author: lozben $
+d6 1
+a6 1
+* $Date: 87/11/20 14:23:42 $
+d9 1
+a9 1
+* $Locker: apratt $
+d13 4
+d23 1
+a23 1
+* $Revision: 1.1 $
+d148 1
+d150 1
+a150 1
+	move.l	8,a1			; save bus error vector
+d152 1
+a152 1
+	move.l	clkerr,8		; write bus error vector
+d154 1
+a154 1
+	move.l	a1,8			; no bus error - restore vector
+d167 1
+a167 1
+	move.l	a1,8			; restore the bus error vector
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+* $Author$
+d6 1
+a6 1
+* $Date$
+d9 1
+a9 1
+* $Locker$
+d12 4
+a15 1
+* $Log$
+d19 1
+a19 1
+* $Revision$
+d22 1
+a22 1
+* $Source$
+d139 4
+d145 3
+d149 1
+d161 2
+d165 1
+@
