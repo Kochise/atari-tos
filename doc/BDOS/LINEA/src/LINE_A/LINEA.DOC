@@ -1,0 +1,91 @@
+
+
+*******************************************************************************
+*                                                                             *
+*                 R D S - Software Raunheim                                   *
+*                                                                             *
+*******************************************************************************
+
+   Nun sind auch Sie glÅcklicher Besitzer Des Line"A" -Bindings geworden.
+   Dieses Hilfsprogramm ermîglicht es Ihnen auf sehr einfache Weise Grafik-
+   funktionen in Ihr Programm einzubinden. Diese Grafikfunktionen werden
+   direkt im Betriebssystem Ihres Computers angesprochen, so daû Sie nicht
+   das GEM benîtigen, das sehr viel Platz verbraucht. Auûerdem sind diese
+   Grafiken durch das direkte Ansprechen um einiges schneller. Eine
+   Demonstration befindet sich auf dieser Diskette in den Beispielprogrammen.
+   Diese sollen Ihnen auch ein Beispiel dafÅr sein, wie man Line_a in
+   eigene Programme einbindet.
+
+   Wie verwende man Line_a ?
+
+   Dies ist ganz einfach !!
+
+   Schauen wir uns dazu das erste Beispielprogramm an:
+
+
+#include <syntax.h>
+#include <osbind.h>
+#include <line_a.c>          <=
+#include "B:SINCOS.C"
+
+main()
+{
+   WORD i;
+
+   la_init();
+   for(i = 0; i < 640; i += 5)
+      la_draw(0, 200, i, 200 + isin(i) / 164);
+   Cconin();
+}
+
+
+   Man bindet in sein eigenes Programm die Datei "line_a.c" ein.
+   Nun kann man die Grafikfunktionen benutzen. Eine öbersicht und eine
+   ErklÑrung der Befehle befindet sich in der gut dokumentierten Datei
+   "line_a.c".
+   Achtung: Bevor man die Grafikfunktionen verwendet, muû man (wie man
+            in dem Beispiel auch sieht) Line_A mit dem Befehl la_init();
+            initialisieren.
+
+   Wenn Sie Ihr Programm geschrieben haben, kînnen sie Ihr Programm com-
+   pilieren. Dazu muû auf dieser Diskette die Datei "line_a.c" natÅrlich
+   vorhanden sein. Nun compilieren Sie Ihr Programm von dem BATCH-Programm
+   aus:
+        c <Name des Programmes ohne die Namenserweiterung>
+
+   Beispiel: Programmname: la2.c
+
+             Befehl: c la2
+
+   Nun wird das Programm compiliert und assembliert!
+
+   Jetzt muû das Programm noch geLINKt werden:
+
+   Dazu wird das mitgelieferte Batch-Programm zum Linken auf die Linker-Disk
+   kopiert. Auûerdem kopieren sie noch die Datei "linea.o" auf diese Disk.
+   Dann linken Sie Ihr Programm von dem Batch-Programm aus:
+
+      ltla <Name des Programmes ohne die Namenserweiterung>
+
+   Beispiel: Programmname la2.o  (Dieses ist schon compilierte und
+                                  assemblierte Programm.)
+
+   Nun wird ihr Programm geLINKt und befindet sich danach unter dem Namen
+   Programmname.TOS auf Ihrer Disk.
+
+   Als besonderen Service befindet sich auf der Diskette das Programm
+   SINCOS.c. Dies sind die Sinus- und Cosinusfunktionen; diese werden hier
+   auf Integerbasis abgewickelt. Wie man dies benutzt kann man an den Beispiel-
+   programmen erkennen.
+
+
+
+           Wir wÅnschen Ihnen viel Freude mit diesem Programm.....
+
+
+   RDS-Software             Raunheim, den 30.09.1985
+
+
+
+
+
