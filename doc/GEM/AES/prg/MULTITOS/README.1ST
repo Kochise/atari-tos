@@ -1,0 +1,9 @@
+GEM.SYS is the lastest multitasking GEM from Atari Corp. It was
+released as beta version with the MultiTOS 1.08beta altogether.
+
+ATTENTION: You have to know and realize that this AES works, but is slow. 
+If you want the maximum compatibility and a way faster AES get N_AES.
+Commercial, but it really rocks and worths the money. 
+
+2) you will have to edit the file GEM.CNF in order to use TOS.TTP 
+programms correctly with this aes. 

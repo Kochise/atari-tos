@@ -1,0 +1,15 @@
+# gem.cnf
+;TIME
+#======================================================
+;PATH
+setenv ACCPATH=C:\
+setenv ACCEXT=ACC,ACX
+setenv GEMEXT=PRG,APP,GTP
+setenv TOSEXT=TOS,TTP
+;SHSHOW
+;SHPRINT
+;TOSRUN
+
+
+
+
