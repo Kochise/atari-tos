@@ -1,0 +1,264 @@
+
+
+
+
+
+
+README.DOC
+==========
+
+
+
+     Please note that the correct sequence of the test  pro-
+     cedure is :
+
+             CONTROLLER TEST --> DAISY-CHAIN TEST --> FORMAT
+             --> INPUT DEFECT LIST --> BURN_IN TEST --> SHIP
+
+     as displayed on the menu bar.  But, each  function  can
+     also be run independently in no specific order.
+
+
+     WARNING!!
+     ALL functions, EXCEPT Daisy-Chain Test  and  Ship,  are
+     destructive.   Please be sure to back up everything (if
+     possible) that you may want before you proceed.
+
+
+
+
+Interleave factor:
+------------------
+
+(1)  MFM - 1 to 1 with 17 sectors per track.
+
+(2)  RLL - 1 to 1 with 26 sectors per track.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     September 14, 1988
+
+
+
+
+
+                           - 2 -
+
+
+Functional description of each program:
+---------------------------------------
+
+(1)  CONTROLLER TEST --
+
+     This program tests if the controller  interacting  with
+     the  drive  is  functioning  correctly.  It will try to
+     format the drive as a 2-head,  20-cylinder  device  (to
+     make  it  efficient).   The  format parameters for this
+     test are specified in the WINCAP file  under  the  'ct'
+     entry.
+
+
+
+
+(2)  DAISY-CHAIN TEST --
+
+     This program tests if the daisy-chain port  works.   It
+     will  do a non- destructive markbad on unit 1 (for only
+     2 cylinders and 2 heads, to be efficient).  The parame-
+     ters  for  this  test  are specified in the WINCAP file
+     under the 'dc' entry.
+
+
+
+
+
+(3)  FORMAT --
+
+     This program formats the entire surface  of  the  drive
+     and  creates  a  default partition when format is done.
+     The default partition schemes for the different  drives
+     are  specified  in the WINCAP file.  There is no FORMAT
+     track command available.  This FORMAT program will  NOT
+     delete  existing defective sector information logged on
+     the drive earlier  (those  entered  manually  and  also
+     those found during the burn-in test).  The program will
+     save the defective sector information from  the  begin-
+     ning  of  the  drive, format it, partition it, and then
+     write the defective sector information  back  onto  the
+     drive.  The FORMAT program and the PARTITION program in
+     HDX 2.0 will also save the  existing  defective  sector
+     information logged on the drive by FHDX.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     September 14, 1988
+
+
+
+
+
+                           - 3 -
+
+
+(4)  INPUT DEFECT LIST --
+
+     This program logs at the beginning of  the  drive,  the
+     defects entered manually from the defect list generated
+     by the vendors.  These defects  inputted  will  NOT  be
+     deleted by the FORMAT program or the BURN-IN program in
+     FHDX, and will NOT be deleted by the FORMAT program  or
+     the PARTITION program in HDX 2.0.
+
+
+
+
+
+(5)  BURN-IN TEST --
+
+     This program  tests  all  sectors  of  the  drive,  one
+     cylinder at a time, in the following order -
+
+
+         0, (N/4), 1, (N/4)+1, ... (N/4)-1, (N/2),
+         (N/2), (3N/4), (N/2)+1, (3N/4)+1, ... (3N/4)-1, N.
+
+
+     where N is the number of cylinders on the drive.   This
+     order is much faster than the 0, N, 1, (N-1), 2, (N-2),
+     ... order.
+
+
+     The program was designed to test the cylinders  in  the
+     order  specified above, so as to do seek tests combined
+     with  write/read/verify  tests.   When   testing   each
+     cylinder, the program will SEEK to that cylinder, WRITE
+     a worst case test pattern (the pattern  is  0x6cdb  for
+     MFM  drives  and 0x6333 for RLL drives) to every sector
+     on that cylinder, READ data back  from  that  cylinder,
+     and  VERIFY that the data read back is exactly the same
+     as what was written to it.  A sector will be logged  on
+     the  drive  as  bad  if  there is a write error, a read
+     error or a data error on that sector.  The program also
+     does  a  4-bit  rotation  on  the test pattern for each
+     cycle of the burn-in test (e.g. For  RLL  drives,  test
+     pattern for cycle 1 is 0x6333, test pattern for cycle 2
+     is 0x3633, etc...).
+
+
+     All bad sectors found on a  drive  during  the  burn-in
+     test will be logged at the beginning of the drive.  The
+     logged defective sector information will  be  preserved
+     by the FORMAT program and the INPUT DEFECT LIST program
+     in FHDX, and also by the FORMAT program and the  PARTI-
+     TION program in HDX 2.0.
+
+
+
+
+
+
+                     September 14, 1988
+
+
+
+
+
+                           - 4 -
+
+
+(6)  SHIP --
+
+     This program parks the heads  of  a  drive.   You  MUST
+     switch  off  the power of the drive once its heads have
+     been parked.
+
+
+
+
+
+
+
+
+     The ONLY way to erase the defect  list  logged  on  the
+     drive  is  to choose not to keep the existing list when
+     the INPUT DEFECT LIST program prompts you.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     September 14, 1988
+
+

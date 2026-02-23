@@ -1,0 +1,68 @@
+Das Programm AHDICONF erlaubt die Konfigurierung aller bisherigen AHDI-
+Versionen ab AHDI V5.00. Nach dem Programmstart erscheint der File Selector,
+in dem die zu konfigurierende Treiberdatei (AHDI.PRG bzw. SHDRIVER.SYS)
+ausgew„hlt werden kann. Der Treiber befindet sich normalerweise im
+Hauptverzeichnis von Partition C:.
+
+Fr alle 8 SCSI- bzw. ACSI-Einheiten sowie eine IDE-Platte kann eingestellt
+werden, welches dieser Ger„te beim Booten berprft, also ins System
+eingebunden werden soll. Ist ein Ger„t nicht eingestellt, wird es vom Treiber
+ignoriert. Der Bootvorgang l„žt sich somit dadurch beschleunigen, daž nur
+die Ger„teadressen eingestellt werden, hinter denen sich tats„chlich Platten
+verbergen.
+
+>Maximale Sektorgr”že< ist lediglich fr Besitzer von Wechselplatten von
+Bedeutung und gibt die maximale logische Sektorgr”že an, die auf irgendeiner
+Cartridge auftreten kann. Es k”nnen maximal 8192 Bytes pro Sektor verwaltet
+werden, ab TOS 4.0 offenbar auch 16384 Bytes pro Sektor.
+Wie grož die Sektoren auf den einzelnen Partitionen sind, wird beim
+Partitionieren gem„ž folgender Tabelle entschieden:
+
+Kapazit„t       Sektorgr”že
+
+<   16 MByte    512 Bytes
+<   32 MByte   1024 Bytes
+<   64 MByte   2048 Bytes
+<  128 MByte   4096 Bytes
+<  256 MByte   8192 Bytes
+<= 512 MByte  16384 Bytes
+
+Diese Angaben sind nur Richtwerte, deren Gltigkeit davon abh„ngt, mit
+welcher Software partitioniert wurde.
+
+Hierbei handelt es sich um die logische Sektorgr”žen, physikalisch liegen
+stets 512 Bytes pro Sektor vor.
+Wann muž man nun die Einstellung fr die Sektorgr”že ver„ndern? W„hrend des
+Bootens ermittelt AHDI die maximale Sektorgr”že der in diesem Moment ansprech-
+baren Partitionen. Wird sp„ter einmal die Cartridge gewechselt, kann dieser
+Wert berschritten werden. Da aber bereits w„hrend des Bootens ausreichend
+Speicher fr grože Partitionen reserviert werden muž, k”nnen Partitionen mit
+gr”žeren Sektoren nicht mehr eingebunden werden. Um dies zu verhindern l„žt
+sich die maximale zu erwartende Sektorgr”že mit AHDICONF einstellen.
+
+Unter >Zus„tzliche Ordner< kann angegeben werden, um wieviele Eintr„ge der
+OS-Pool erweitert werden soll. Dieser Wert wird von AHDI leider nur fr
+TOS 1.00 verwendet, so daž fr neuere Systemversionen weiterhin das
+FOLDRxxx.PRG ben”tigt wird.
+
+Fr Wechselplatten kann unter >Default-Partitionen< eingestellt werden, wie
+viele Laufwerkskennungen beim Booten reserviert werden sollen. Hierzu ein
+Beispiel:
+ACSI Einheit 0 sei eine Wechselplatte mit nur einer Partition, Einheit 1 eine
+Festplatte. Nach dem Booten liegt Partition C: auf der Wechselplatte, die
+Partitionen der Festplatte beginnen bei D:. Wird nun eine Cartridge mit mehr
+als einer Partition eingelegt, kann nur die erste Partition unter der Kennung
+C: angesprochen werden, da die Kennungen ab D: ja bereits fr die Festplatte
+vergeben sind.
+Hier muž man dafr sorgen, daž AHDI bereits beim Booten entsprechend viele
+Kennungen fr die Wechselplatte reserviert. Wie viele dies sein sollen, kann
+im linken Bereich der Dialogbox von AHDICONF eingetragen werden. Wird fr das
+obige Beispiel fr die ACSI-Einheit 0 eine 3 eingetragen, so beginnen die
+Partitionen der Festplatte erst bei Laufwerk F:, denn C: bis E: sind fr
+Ger„t 0 reserviert. Natrlich lassen sich von diesen Laufwerken nicht alle
+ansprechen, falls die eingelegte Cartridge weniger als 3 Partitionen enth„lt.
+
+
+Soweit eine kurze Beschreibung zu AHDICONF. Weitere Informationen zur 
+Konfigurierung von AHDI finden sich in "AHDI pažt sich an" in der ST-Computer
+12/91 sowie in den "AHDI 3.00 Release Notes".
