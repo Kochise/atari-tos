@@ -10,10 +10,10 @@ Functions below are sorted by name.
 
 | Name								| Number		| Fingerprint	| Function											|
 | :---								| :---			| :---			| :---												|
-| [Appl_Exit](#appl_exit)			| 19 (0x13)		| $13000100		| Deregister the application with the AES			|
+| [Appl_Exit](#appl_exit)			| 19 (0x13)		| $13000100		| Deregister the application with the **AES**		|
 | [Appl_Find](#appl_find)			| 13 (0x0D)		| $0D000101		| Find application `ap_id` from its filename		|
 | [Appl_GetInfo](#appl_getinfo)		| 130 (0x82)	| $82010500		| Doing this.					|
-| [Appl_Init](#appl_init)			| 10 (0x0A)		| $0A000100		| Register the application with the AES				|
+| [Appl_Init](#appl_init)			| 10 (0x0A)		| $0A000100		| Register the application with the **AES**			|
 | [Appl_Read](#appl_read)			| 11 (0x0B)		| $0B020101		| Read a message from event buffer					|
 | [Appl_Search](#appl_search)		| 18 (0x12)		| $12010301		| Find application `ap_id` from its filename 		|
 | [Appl_TPlay](#appl_tplay)			| 14 (0x0E)		| $0E020101		| Playback users mouse and keyboard input			|
@@ -235,9 +235,12 @@ Functions below are sorted by number.
 * $0A000100
 * **TOS** 1.00
 
-Register the application with the AES.
+Register the application with the **AES**.
 
-Should be one of the first call after GEMDOS initialization.
+Should be one of the first call after **GEMDOS** initialization.
+
+> [!WARNING]
+> Call it only once.
 
 ```mermaid
 %%{ init: { 'flowchart': { 'padding': 5, 'nodeSpacing': 5, 'rankSpacing': 20, 'diagramPadding': 1 }}}%%
@@ -268,6 +271,9 @@ flowchart TD
 > [!NOTE]
 > You may have to "sanitize" `Global` before calling the function to ensure the output is modified accordingly.
 
+> [!IMPORTANT]
+> While standard `ROM` **TOS** leaves `Global[3-12]` largely undefined, modern multitasking kernels utilize these slots for process-specific metadata and hardware state (like bit-depth in `Global[10]`).
+
 | Name		| Cell				| Meaning																|
 | :---		| :---				| :---																	|
 | Input		| `Control[0]`		| 10: function number													|
@@ -276,22 +282,38 @@ flowchart TD
 | 			| `Control[3]`		| 0: `Addr_In`															|
 | 			| `Control[4]`		| 0: `Addr_Out`															|
 | Call		| 					| 																		|
-| Result	| `Int_Out[0]`		| 0+: `ap_id` of the application<br>-1: error							|
-| 			| `Global[0]`		| **AESversion**<br>0: **AES** not available (ie. during boot)<br>BCD: **AES** version ($0340 = 3.40)	|
-| 			| `Global[1]`		| **AESnumapps**<br>1+: number of concurrent application possible<br>-1: Multitasking **AES** (when `Global[0]` != 0)	|
-| 			| `Global[2]`		| **AESapid**<br>`ap_id` (same as `Int_Out[0]`)							|
+| Result	| `Int_Out[0]`		| 0+: `ap_id` of the application<br>-1: error (i.e. max number of apps)	|
+| 			| `Global[0]`		| **ap_version**<br>0: **AES** not available (ie. during boot)<br>BCD: **AES** version ($0340 = 3.40)	|
+| 			| `Global[1]`		| **ap_count**<br>1+: number of concurrent application possible<br>-1: Multitasking **AES** (when `Global[0]` != 0)	|
+| 			| `Global[2]`		| **ap_id**<br>`ap_id` (same as `Int_Out[0]`)							|
 | 			| 					| 																		|
-| 			| `Global[3-4]`		| **AESappglobal**: user available										|
-| 			| `Global[5-6]`		| **AESrscfile**: pointer to root of resource tree<br>(see [Rsrc_Load](#rsrc_load))	|
+| 			| `Global[3-4]`		| **ap_private**: pointer to private **AES** data structures (implementation dependent)	|
+| 			| `Global[5-9]`		| **ap_resv**: reserved (PC-GEM compatibility)							|
+| 			| `Global[10]`		| **ap_planes**: number of planes of the **VDI** workstation opened by the **AES**<br>Used for handle icon transformation (trans_gxs) and transparent blitting<br>Usually one of 1, 2, 4, 8, 16, 24, 32	|
+| 			| `Global[11-12]`	| **ap_resv**: reserved (PC-GEM compatibility)							|
+| 			| `Global[13]`		| **ap_minchar**: minimum character height used for [vst_height](#vst_height) (**AES** 4.0+)	|
+| 			| `Global[14]`		| **ap_maxchar**: maximum character height used for [vst_height](#vst_height) (**AES** 4.0+)	|
+
+| 			| `Global[5-6]`		| **ap_ptree**: pointer to root of resource tree<br>(see [Rsrc_Load](#rsrc_load))	|
 | 			| `Global[7-8]`		| pointer to resource buffer<br>(see [Rsrc_Load](#rsrc_load))			|
 | 			| `Global[9]`		| size of loaded resource (64k max)<br>(see [Rsrc_Load](#rsrc_load))	|
-| 			| `Global[10]`		| number of planes of the **VDI** workstation opened by the **AES**		|
-| 			| `Global[11-12]`	| reserved																|
-| 			| `Global[13]`		| **AESmaxchar**: maximum character used for [vst_height](#vst_height) (**AES** 4.0+)	|
-| 			| `Global[14]`		| **AESminchar**: minimum character used for [vst_height](#vst_height) (**AES** 4.0+)	|
 
 <details>
 <summary>Use in C (click to expand)</summary>
+
+TODO:
+```c
+struct AES_GLOBAL {
+		short ap_version;	// 0
+		short ap_count;		// 1
+		short ap_id;		// 2
+		long  ap_private;	// 3,4
+		long  ap_ptree;		// 5,6
+		long  ap_resv[3];	// 7-12
+		short ap_minchar;	// 13
+		short ap_maxchar;	// 14
+};
+```
 
 ```c
 short Appl_Init(void)
@@ -347,6 +369,7 @@ short Appl_Init(void)
 			...
 
 Appl_Init_ERROR:
+			...
 ```
 
 </details>
@@ -366,10 +389,16 @@ Appl_Init_ERROR:
 Read a message from event buffer.
 
 > [!NOTE]
-> It is recommended that message length be in multiples of 16 bytes.
+> It is recommended that message length be in multiples of 16 bytes (**AES** message length).
 
-> [!NOTE]
-> Control is given to other applications while waiting until the number of bytes are received. Use it only when a message is known incoming.
+> [!WARNING]
+> **Blocking**: control is given to other applications while waiting until the number of bytes are received. Use it only when a message is known incoming.
+
+> [!IMPORTANT]
+> From **AES** 4.0+ this function can be non blocking in case of multitasking environment. To check if a message was truly received, clear the first **WORD** of the buffer (usually contains the message ID) prior to calling the function. If after the call it is still 0, then no message has been received.
+
+> [!CAUTION]
+> Don't call this function with **rwid** other that the application's own `ap_id` when **AES** is not 4.0+ (i.e. -1). Don't read **AES** (`ap_id`=0) message queue.
 
 > [!TIP]
 > See also [Evnt_Multi](#evnt_multi) and [Evnt_Mesag](#evnt_mesag).
@@ -402,11 +431,11 @@ flowchart TD
 | 			| `Control[2]`	| 1: `Int_Out`				|
 | 			| `Control[3]`	| 1: `Addr_In`				|
 | 			| `Control[4]`	| 0: `Addr_Out`				|
-| 			| `Int_In[0]`	| `ap_id` of current application<br>-1: read available message (**AES** 4.0+)	|
-| 			| `Int_In[1]`	| bytes to read (32767 max)	|
-| 			| `Addr_In[0]`	| pointer to receive buffer	|
+| 			| `Int_In[0]`	| **rwid**: `ap_id` of current application (**not** others)<br>-1 (APR_NOWAIT): read available message (**AES** 4.0+)	|
+| 			| `Int_In[1]`	| **length**: bytes to read (32767 max)<br>Typically 16 for a standard **AES** message<br>-1: number of waiting messages (**AES** 4.0+)	|
+| 			| `Addr_In[0]`	| **pbuff**: pointer to receive buffer<br>Must be WORD aligned	|
 | Call		| 				| 							|
-| Result	| `Int_Out[0]`	| 0: error<br>1+: no error	|
+| Result	| `Int_Out[0]`	| 0: error (or no message read)<br>1+: no error (message read, number of pending messages, ...)	|
 
 <details>
 <summary>Use in C (click to expand)</summary>
@@ -494,11 +523,20 @@ Write a message to an application.
 > [!NOTE]
 > It is recommended that message length be in multiples of 16 bytes.
 
+> [!WARNING]
+> **Blocking**: control is given to other applications while waiting until the number of bytes are sent. Can hang if the target message queue is full and the application isn't reading it.
+
 > [!IMPORTANT]
 > As of **AES** 1.4 (**TOS** 1.04), accessories can sent MN_SELECTED (10) messages to the desktop.
 
+> [!CAUTION]
+> Can send "Window closed" (WM_CLOSED) or "Quit" (AP_TERM) message to any other app.
+
 > [!IMPORTANT]
 > As of **AES** 4.0 (MultiTOS), [Shel_Write](#shel_write) can be used to broadcast messages (minus the sending application, the **AES** and desktop).
+
+> [!CAUTION]
+> Ensure the pointer passed through `Addr_In[0]` is in a valid memory region.
 
 ```mermaid
 %%{ init: { 'flowchart': { 'padding': 5, 'nodeSpacing': 5, 'rankSpacing': 20, 'diagramPadding': 1 }}}%%
@@ -528,11 +566,14 @@ flowchart TD
 | 			| `Control[2]`	| 1: `Int_Out`						|
 | 			| `Control[3]`	| 1: `Addr_In`						|
 | 			| `Control[4]`	| 0: `Addr_Out`						|
-| 			| `Int_In[0]`	| `ap_id` of the target application	|
-| 			| `Int_In[1]`	| bytes to write (32767 max)		|
-| 			| `Addr_In[0]`	| pointer to send buffer			|
+| 			| `Int_In[0]`	| **rwid**: `ap_id` of the target application<br>-1: broadcast to all applications (**AES** 4.0+)	|
+| 			| `Int_In[1]`	| **length**: bytes to write (32767 max)<br>Typically 16 for a standard **AES** message	|
+| 			| `Addr_In[0]`	| **pbuff**: pointer to send buffer	|
 | Call		| 				| 									|
-| Result	| `Int_Out[0]`	| 0: error<br>1+: no error			|
+| Result	| `Int_Out[0]`	| 0: error (bad `ap_id`, queue full, etc)<br>1+: no error	|
+
+> [!IMPORTANT]
+> `msg[1]` in the sent message is replaced by the sending application's own `ap_id` to prevent spoofing.
 
 <details>
 <summary>Use in C (click to expand)</summary>
@@ -613,6 +654,12 @@ Appl_Write_ERROR:
 
 Find application `ap_id` from its filename (8 characters).
 
+> [!NOTE]
+> Can only find other applications that register to the **AES** using `Appl_Init`.
+
+> [!NOTE]
+> That includes accessories (.ACC) as well. Yet as the extension isn't taken into account, it's the first one registered that is returned.
+
 | Name		| Cell			| Meaning										|
 | :---		| :---			| :---											|
 | Input		| `Control[0]`	| 13: function number							|
@@ -624,16 +671,47 @@ Find application `ap_id` from its filename (8 characters).
 | Call		| 				| 												|
 | Result	| `Int_Out[0]`	| `ap_id` of the application<br>-1: not found	|
 
+> [!TIP]
+> Usual internal process name:
+> `"AES     "`: usually `ap_id`=0
+> `"DESKTOP "`: system shell (i.e. to request opening a file with known extension)
+> `"        "`: (8 spaces) alias to the alternative system shell (i.e. **TeraDesk**, **Thing**, etc)
+> `"PRNTSPL "`: Printer Spooler
+> `"SCREEMGR"`: Screen Manager in **MultiTOS** environments
+
+> [!IMPORTANT]
+> Don't forget to pad with spaces to 8 characters long. There is no long name support here.
+
+> [!WARNING]
+> On **TOS** the case is always UPPER, yet the function is case sensitive.
+
 * **AES** 4.0
 
-| `Addr_In[0]`			| `Int_Out[0]`						|
-| :---					| :---								|
-| [0xFFFF][`mint_id`]	| `aes_id`							|
-| [0xFFFE][`aes_id`]	| `mint_id`							|
-| [0x0000][0x0000]		| `ap_id` of current application	|
+| `Addr_In[0]`			| Name			| `Int_Out[0]`							|
+| :---					| :---			| :---									|
+| [0xFFFF][`mint_id`]	| APL_MINT2AES	| `ap_id`								|
+| [0xFFFE][`ap_id`]		| APL_AES2MINT	| `mint_id`								|
+| [0xFFFD][0x0000]		| APL_FRONTMOST	| `ap_id` of the front-most application	|
+| [0xFFFD][0x0000]		| APL_NEXT		| next `ap_id` (until getting -1)		|
+| [0x0000][0x0000]		| APL_FIRST		| `ap_id` of first application			|
 
 > [!NOTE]
-> 0xFFFF = -1 and 0xFFFE = -2 on a WORD/short/int16_t.
+> This is a way to bridge the **AES** to the **MiNT** kernel. `ap_id` is **NOT** a process ID per se, `mint_id` is.
+
+> [!TIP]
+> 0xFFFF = -1, 0xFFFE = -2 and 0xFFFD = -3 on a WORD/short/int16_t.
+
+
+TODO:
+```c
+					struct PROCESS_ENTRY {
+						short ap_id;	// The AES Handle
+						short mint_pid;	// The Kernel PID
+						char  name[8];	// The space-padded name
+						short state;	// Active, Waiting, Zombie, etc.
+					};
+```
+
 
 <details>
 <summary>Use in C (click to expand)</summary>
@@ -656,6 +734,16 @@ short Appl_Find(void)
 	aes(AES_Params);	// Inlined assembly to call the TRAP
 
 	return Int_Out[0];
+}
+```
+
+TODO:
+```c
+short desk_id;
+// Note: "DESKTOP " is 8 chars + null
+desk_id = appl_find("DESKTOP ");
+if (desk_id >= 0) {
+    // Found it!
 }
 ```
 
@@ -690,6 +778,11 @@ short Appl_Find(void)
 			...
 
 Appl_Find_ERROR:
+			...
+
+AppName_Buffer:
+			dc.b	"DESKTOP ",0
+			EVEN
 ```
 
 </details>
@@ -710,6 +803,9 @@ Playback users mouse and keyboard input.
 
 > [!WARNING]
 > Replay speed is dependant from the **TOS** version having recorded the events.
+
+> [!WARNING]
+> **Blocking**: function doesn't return until the desired number of events are played.
 
 ```mermaid
 %%{ init: { 'flowchart': { 'padding': 5, 'nodeSpacing': 5, 'rankSpacing': 20, 'diagramPadding': 1 }}}%%
@@ -745,7 +841,19 @@ flowchart TD
 | Call		| 				| 							|
 | Result	| `Int_Out[0]`	| 1							|
 
-* EVNTREC timer events
+* `EVNTREC` event format (6 bytes)
+
+| `ap_event` (WORD)	| `ap_value` (LONG)								|
+| :---				| :---											|
+| 0: timer			| time elapsed in 200Hz timer or milliseconds	|
+| 1: mouse button	| high: number of clicks<br>low: button state	|
+| 2: mouse movement	| high: X position<br>low: Y position			|
+| 3: keyboard		| high: shift key status<br>low: char			|
+
+> [!IMPORTANT]
+> `ap_event`=1 (mouse button) only covers the LEFT mouse button. State of 0 = released, 1 = pressed.
+
+* `EVNTREC` timer events
 
 | TOS			| Source		| Playback speed	|
 | :---			| :---			| :---				|
@@ -865,17 +973,8 @@ flowchart TD
 | Call		| 				| 								|
 | Result	| `Int_Out[0]`	| number of events recorded		|
 
-* EVNTREC event format (6 bytes)
-
-| Event (WORD)		| Data (LONG)									|
-| :---				| :---											|
-| 0: timer			| time elapsed in 200Hz timer or milliseconds	|
-| 1: mouse button	| high: number of clicks<br>low: button state	|
-| 2: mouse movement	| high: X position<br>low: Y position			|
-| 3: keyboard		| high: shift key status<br>low: char			|
-
-> [!WARNING]
-> Look at [Appl_TPlay](#appl_tplay) for the details about the timer event time base.
+> [!NOTE]
+> `EVNTREC` event format is detailed in the [Appl_TPlay](#appl_tplay) documentation.
 
 <details>
 <summary>Use in C (click to expand)</summary>
@@ -1486,23 +1585,27 @@ Wait for a specific event.
 
 An **AES** message (8 WORD) is as follow:
 
-| Cell				| Meaning					|
-| :---				| :---						|
-| `msg[0]`			| **type** of the message (see table below) 	|
-| `msg[1]`			| sender's `ap_id` 			|
-| `msg[2]`			| excess of **AES** message length<br>Larger messages than 8 WORD are to be read with [Appl_Read](#appl_read)	|
-| `msg[3-7]`		| depend on **type**		|
+| Cell			| Name			| Meaning					|
+| :---			| :---			| :---						|
+| `msg[0]`		| msg_type	 	| type of the message (see table below)	|
+| `msg[1]`		| msg_sender	| sender's `ap_id`			|
+| `msg[2]`		| msg_len		| excess of **AES** message length<br>Larger messages than 8 WORD are to be read with [Appl_Read](#appl_read)	|
+| `msg[3]`		| msg_handle	| handle (e.g., Window ID or Menu ID)	|
+| `msg[4-7]`	| msg_data1-4	| depend on **type**		|
 
-Here is the list of available **AES** messages (including third parties');
+> [!WARNING]
+> Some kernels use `msg[2-3]` as a LONG pointer to a memory block containing more data.
 
-Messages below are sorted by **type**.
+Here is the list of available **AES** messages (including third parties'):
+
+Messages below are sorted by **type** number.
 
 | Type		| Name				| Meaning					|
 | :---		| :---				| :---						|
-| 10		| MN_SELECTED		| 							|
-| 20		| WM_REDRAW			| 							|
-| 21		| WM_TOPPED			| 							|
-| 22		| WM_CLOSED			| 							|
+| 10		| MN_SELECTED		| Menu item clicked			|
+| 20		| WM_REDRAW			| Redraw a rectangle area	|
+| 21		| WM_TOPPED			| 								|
+| 22		| WM_CLOSED			| Window to be closed		|
 | 23		| WM_FULLED			| 							|
 | 24		| WM_ARROWED		| 							|
 | 25		| WM_HSLID			| 							|
@@ -1520,10 +1623,10 @@ Messages below are sorted by **type**.
 | 38		| WM_REPOSED		| 							|
 | 40		| AC_OPEN			| 							|
 | 41		| AC_CLOSE			| 							|
-| 50		| AP_TERM			| 							|
+| 50		| AP_TERM			| Terminate application		|
 | 51		| AP_TFAIL			| 							|
 | 53		| CT_KEY			| 							|
-| 57		| AP_RESCHG			| 							|
+| 57		| AP_RESCHG			| Resolution changed		|
 | 60		| SHUT_COMPLETED	| 							|
 | 61		| RESCHG_COMPLETED	| 							|
 | 63		| AP_DRAGDROP		| 							|
@@ -2236,8 +2339,8 @@ Wait for a specified amount of time (in milliseconds) to pass.
 > [!IMPORTANT]
 > This function is not time accurate, don't use for clocking things.
 
-> [!WARNING]
-> There is a bug in **TOS** 1.00: when used from an accessory and an **interval** of 0 millisecond could hang the system.
+> [!CAUTION]
+> There is a bug in **TOS** 1.00: when used from an accessory, an **interval** of 0 millisecond could hang the system.
 
 | Name		| Cell			| Meaning					|
 | :---		| :---			| :---						|
@@ -2319,8 +2422,8 @@ short Evnt_Timer(int interval)
 
 Wait for multiple events.
 
-> [!WARNING]
-> There is a bug in **TOS** 1.00: when used from an accessory and an **interval** of 0 millisecond could hang the system.
+> [!CAUTION]
+> There is a bug in **TOS** 1.00: when used from an accessory, an **interval** of 0 millisecond could hang the system.
 
 > [!TIP]
 > It is not necessary to fill everything, only the requested cells depending on the events to look for.
@@ -2493,7 +2596,7 @@ short Evnt_Multi(void)
 
 Set or read speed of mouse button double-click.
 
-> [!IMPORTANT]
+> [!WARNING]
 > This function modifies a system-wide setting, all applications will behave accordingly. Use it only in a system setup PRG or CPX.
 
 | Name		| Cell			| Meaning				|
