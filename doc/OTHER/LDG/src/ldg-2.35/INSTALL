@@ -1,0 +1,39 @@
+LDG installation
+
+this file has two parts :
+1/ How to install LDG on your system
+------------- How to instal LDG --------
+
+a) Installing LDG kernel
+From cpu folder (68k or coldfire) copy
+
+   - auto/ldg.prg in your auto folder (this is absolutely need for GFA application using LDG)
+   - cpx/ldg.cpx in your CPX folder  (work fine with zcontrol or cops but not with xcontrol!!!)
+     notice no coldfire version is available at this you should use 68K version under coldfire,
+     the CPX is not fully need until you not want change default ldg folder path as define as C:/gemsys/ldg/
+   - daemon/ldgd.app anywhere you want : it contains LDGD.APP that
+     should be launch automatically by AES on multitask system. It is
+     not required on single-TOS
+   - gemsys/ldg anywhere you want (probably C:/gemsys this is destination by default). mem.ldg is not native 
+   for coldfire at this time.
+
+copy guides/*.hyp and guides/*.ref in your ST-Guide folder
+
+b) Configuring LDG kernel
+execute from your desktop auto/ldg.prg
+execute cpx/ldg.cpx from Zcontrol or cops and set the correct path
+of LDG-libraries : it should be C:/gemsys/ldg but any location is
+possible.
+
+c) Installing devel libraries (optional, only for developper)
+depending on your compiler, copy the right LDG library in your
+compiler libraries folder:
+  - with gcc 2.9.5 or higher (MiNT and ext2 filesystem) : copy lib/gcc/*.a in /usr/lib
+  - with pure c : copy lib/purec/*.a in your Pure C lib folder
+Copy LDG header files include/* in your compiler include folder
+
+If your use an shell command line, you can copy manual file (folder man)
+and some utility (folder bin).
+
+
+

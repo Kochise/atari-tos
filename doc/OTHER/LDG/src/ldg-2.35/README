@@ -1,0 +1,15 @@
+This is LDG version 2.35
+(c) 2015 by Vincent Riviere, Mikro, A.Bercegeay, D.Bereziat and O.Landemarre
+
+2.35 version :
+Fix ldg lib path in ldg_load()
+
+New March 2015 (2.34):
+Replacement of TSR to fix crash under Magic 6
+This classical version with several fixs and Coldfire version, it not take into account the work from Mikro for share client LIBC
+
+CPX is in version 2.33 and 
+
+This software is distributed under the conditions 
+specified by the Lesser Gnu Public Licence (see
+COPYRIGHT file).

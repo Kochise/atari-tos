@@ -1,0 +1,1 @@
+For mem.ldg use 68K version for the moment
