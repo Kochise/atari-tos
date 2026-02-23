@@ -1,0 +1,121 @@
+!iflang [english]
+
+!begin_node Colour table functions
+!html_name vdi_colortable
+
+!begin_xlist !compressed [x v_ctab_idx2value]
+!item [(!bullet) v_color2nearest]
+Inquires nearest colour value
+!item [(!bullet) v_color2value]
+Translates colour value to pixel value
+!item [(!bullet) v_create_ctab]
+Creates colour table
+!item [(!bullet) v_create_itab]
+Creates inverse colour table reference
+!item [(!bullet) v_ctab_idx2value]
+Inquires colour table value
+!item [(!bullet) v_ctab_idx2vdi]
+Translates colour table index to (!nolink [VDI]) index
+!item [(!bullet) v_ctab_vdi2idx]
+Translates (!nolink [VDI]) colour index to colour table index
+!item [(!bullet) v_delete_ctab]
+Deletes colour table
+!item [(!bullet) v_delete_itab]
+Deletes inverse colour table reference
+!item [(!bullet) v_get_ctab_id]
+Gets unique ID for a new colour table
+!item [(!bullet) v_value2color]
+Translates pixel value to colour entry
+!item [(!bullet) vq_ctab]
+Inquires current colour table
+!item [(!bullet) vq_ctab_entry]
+Inquires colour table entry
+!item [(!bullet) vq_ctab_id]
+Inquires current colour table ID
+!item [(!bullet) vq_dflt_ctab]
+Inquires default (system) colour table
+!item [(!bullet) vq_px_format]
+Inquires pixel format and colour space
+!item [(!bullet) vs_ctab]
+Sets colour table
+!item [(!bullet) vs_ctab_entry]
+Sets colour value in the colour table
+!item [(!bullet) vs_dflt_ctab]
+Sets defaut (system) colour table
+!end_xlist
+
+See also:
+VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Farbtabellenfunktionen
+!html_name vdi_colortable
+
+!begin_xlist !compressed [x v_ctab_idx2value]
+!item [(!bullet) v_color2nearest]
+(!Aumlaut)hnlichsten Farbwert suchen
+!item [(!bullet) v_color2value]
+Farbwert in Pixelwert wandeln
+!item [(!bullet) v_create_ctab]
+Farbtabelle erzeugen
+!item [(!bullet) v_create_itab]
+Referenz auf inverse Farbtabelle erzeugen
+!item [(!bullet) v_ctab_idx2value]
+Pixelwert zur(!uumlaut)ckliefern
+!item [(!bullet) v_ctab_idx2vdi]
+Farbtabellenindex in (!nolink [VDI])-Index wandeln
+!item [(!bullet) v_ctab_vdi2idx]
+(!nolink [VDI])-Index in Farbtabellenindex wandeln
+!item [(!bullet) v_delete_ctab]
+Farbtabelle l(!oumlaut)schen
+!item [(!bullet) v_delete_itab]
+Referenz auf inverse Farbtabelle l(!oumlaut)schen
+!item [(!bullet) v_get_ctab_id]
+eindeutige Kennung f(!uumlaut)r neue Farbtabelle liefern
+!item [(!bullet) v_value2color]
+Pixelwert in Farbwert wandeln
+!item [(!bullet) vq_ctab]
+Farbtabelle erfragen
+!item [(!bullet) vq_ctab_entry]
+Farbeintrag erfragen
+!item [(!bullet) vq_ctab_id]
+Kennung der Farbtabelle erfragen
+!item [(!bullet) vq_dflt_ctab]
+Systemfarbtabelle zur(!uumlaut)ckliefern
+!item [(!bullet) vq_px_format]
+Eingestellte Pixelformat und Farbraum ermitteln
+!item [(!bullet) vs_ctab]
+Setzen einer Farbtabelle
+!item [(!bullet) vs_ctab_entry]
+Farbwert in der Farbtabelle setzen
+!item [(!bullet) vs_dflt_ctab]
+Systemfarbtabelle setzen
+!end_xlist
+
+Querverweis:
+Workstations des VDI ~ Style-Guidelines
+
+!endif
+
+!include gem/vdi/colortable/v_color2nearest.ui
+!include gem/vdi/colortable/v_color2value.ui
+!include gem/vdi/colortable/v_create_ctab.ui
+!include gem/vdi/colortable/v_create_itab.ui
+!include gem/vdi/colortable/v_ctab_idx2value.ui
+!include gem/vdi/colortable/v_ctab_idx2vdi.ui
+!include gem/vdi/colortable/v_ctab_vdi2idx.ui
+!include gem/vdi/colortable/v_delete_ctab.ui
+!include gem/vdi/colortable/v_delete_itab.ui
+!include gem/vdi/colortable/v_get_ctab_id.ui
+!include gem/vdi/colortable/v_value2color.ui
+!include gem/vdi/colortable/vq_ctab.ui
+!include gem/vdi/colortable/vq_ctab_entry.ui
+!include gem/vdi/colortable/vq_ctab_id.ui
+!include gem/vdi/colortable/vq_dflt_ctab.ui
+!include gem/vdi/colortable/vq_px_format.ui
+!include gem/vdi/colortable/vs_ctab.ui
+!include gem/vdi/colortable/vs_ctab_entry.ui
+!include gem/vdi/colortable/vs_dflt_ctab.ui
+
+!end_node

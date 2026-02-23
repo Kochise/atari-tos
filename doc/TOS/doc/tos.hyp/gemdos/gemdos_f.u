@@ -1,0 +1,701 @@
+!iflang [english]
+
+
+!begin_node GEMDOS function list
+!html_name gemdos_functions
+
+The following list is a synopsis of the (!nolink [GEMDOS]) routines, sorted
+by function numbers:
+
+!define reserved reserved
+
+!begin_table [|r|r|l|l|] !hline
+dez !! hex !! Function !! present
+!hline
+  0 !! 0x00 !! Pterm0       !! (!nolink [TOS])
+  1 !! 0x01 !! Cconin       !! (!nolink [TOS])
+  2 !! 0x02 !! Cconout      !! (!nolink [TOS])
+  3 !! 0x03 !! Cauxin       !! (!nolink [TOS])
+  4 !! 0x04 !! Cauxout      !! (!nolink [TOS])
+  5 !! 0x05 !! Cprnout      !! (!nolink [TOS])
+  6 !! 0x06 !! Crawio       !! (!nolink [TOS])
+  7 !! 0x07 !! Crawcin      !! (!nolink [TOS])
+  8 !! 0x08 !! Cnecin       !! (!nolink [TOS])
+  9 !! 0x09 !! Cconws       !! (!nolink [TOS])
+ 10 !! 0x0A !! Cconrs       !! (!nolink [TOS])
+ 11 !! 0x0B !! Cconis       !! (!nolink [TOS])
+ 14 !! 0x0E !! Dsetdrv      !! (!nolink [TOS])
+ 16 !! 0x10 !! Cconos       !! (!nolink [TOS])
+ 17 !! 0x11 !! Cprnos       !! (!nolink [TOS])
+ 18 !! 0x12 !! Cauxis       !! (!nolink [TOS])
+ 19 !! 0x13 !! Cauxos       !! (!nolink [TOS])
+ 20 !! 0x14 !! Maddalt      !! (!nolink [TOS])
+ 21 !! 0x15 !! Srealloc     !! (!nolink [TOS]) 4
+ 22 !! 0x16 !! Slbopen      !! MagiC
+ 23 !! 0x17 !! Slbclose     !! (!nolink [MagiC])
+ 25 !! 0x19 !! Dgetdrv      !! (!nolink [TOS])
+ 26 !! 0x1A !! Fsetdta      !! (!nolink [TOS])
+ 32 !! 0x20 !! Super        !! (!nolink [TOS])
+ 42 !! 0x2A !! Tgetdate     !! (!nolink [TOS])
+ 43 !! 0x2B !! Tsetdate     !! (!nolink [TOS])
+ 44 !! 0x2C !! Tgettime     !! (!nolink [TOS])
+ 45 !! 0x2D !! Tsettime     !! (!nolink [TOS])
+ 47 !! 0x2F !! Fgetdta      !! (!nolink [TOS])
+ 48 !! 0x30 !! Sversion     !! (!nolink [TOS])
+ 49 !! 0x31 !! Ptermres     !! (!nolink [TOS])
+ 51 !! 0x33 !! Sconfig      !! (!nolink [MagiC])
+ 54 !! 0x36 !! Dfree        !! (!nolink [TOS])
+ 57 !! 0x39 !! Dcreate      !! (!nolink [TOS])
+ 58 !! 0x3A !! Ddelete      !! (!nolink [TOS])
+ 59 !! 0x3B !! Dsetpath     !! (!nolink [TOS])
+ 60 !! 0x3C !! Fcreate      !! (!nolink [TOS])
+ 61 !! 0x3D !! Fopen        !! (!nolink [TOS])
+ 62 !! 0x3E !! Fclose       !! (!nolink [TOS])
+ 63 !! 0x3F !! Fread        !! (!nolink [TOS])
+ 64 !! 0x40 !! Fwrite       !! (!nolink [TOS])
+ 65 !! 0x41 !! Fdelete      !! (!nolink [TOS])
+ 66 !! 0x42 !! Fseek        !! (!nolink [TOS])
+ 67 !! 0x43 !! Fattrib      !! (!nolink [TOS])
+ 68 !! 0x44 !! Mxalloc      !! (!nolink [TOS])
+ 69 !! 0x45 !! Fdup         !! (!nolink [TOS])
+ 70 !! 0x46 !! Fforce       !! (!nolink [TOS])
+ 71 !! 0x47 !! Dgetpath     !! (!nolink [TOS])
+ 72 !! 0x48 !! Malloc       !! (!nolink [TOS])
+ 73 !! 0x49 !! Mfree        !! (!nolink [TOS])
+ 74 !! 0x4A !! Mshrink      !! (!nolink [TOS])
+ 75 !! 0x4B !! Pexec        !! (!nolink [TOS])
+ 76 !! 0x4C !! Pterm        !! (!nolink [TOS])
+ 78 !! 0x4E !! Fsfirst      !! (!nolink [TOS])
+ 79 !! 0x4F !! Fsnext       !! (!nolink [TOS])
+ 86 !! 0x56 !! Frename      !! (!nolink [TOS])
+ 87 !! 0x57 !! Fdatime      !! (!nolink [TOS])
+ 91 !! 0x5B !! nap_io       !! NAP BioNet100
+ 92 !! 0x5C !! Flock        !! 
+!hline
+ 96 !! 0x60 !! Nversion     !! 
+ 96 !! 0x60 !! Init_Process !! C'Task Royal
+ 97 !! 0x61 !! Load_Process !! (!nolink [C'Task Royal])
+ 98 !! 0x62 !! Frlock       !! 
+ 99 !! 0x62 !! End_Process  !! (!nolink [C'Task Royal])
+ 99 !! 0x63 !! Frunlock     !! 
+ 99 !! 0x63 !! Stop_Process !! (!nolink [C'Task Royal])
+100 !! 0x64 !! (!link [Flock][F_lock])       !! 
+100 !! 0x64 !! Cont_Process !! (!nolink [C'Task Royal])
+100 !! 0x64 !! SetLinkAdr   !! TekBios
+101 !! 0x65 !! Funlock      !! 
+101 !! 0x65 !! Find_Process !! (!nolink [C'Task Royal])
+101 !! 0x65 !! ByteToLink   !! (!nolink [TekBios])
+102 !! 0x66 !! Fflush       !! 
+102 !! 0x66 !! Stop_All     !! (!nolink [C'Task Royal])
+102 !! 0x66 !! ByteFromLink !! (!nolink [TekBios])
+!hline
+103 !! 0x67 !! Cont_All         !! (!nolink [C'Task Royal])
+103 !! 0x67 !! LongWordToLink   !! (!nolink [TekBios])
+103 !! 0x68 !! Creat_Queue      !! (!nolink [C'Task Royal])
+104 !! 0x68 !! LongWordFromLink !! (!nolink [TekBios])
+105 !! 0x69 !! Delete_Queue     !! (!nolink [C'Task Royal])
+105 !! 0x69 !! SliceToLink      !! (!nolink [TekBios])
+106 !! 0x6A !! Write_Queue      !! (!nolink [C'Task Royal])
+106 !! 0x6A !! SliceFromLink    !! (!nolink [TekBios])
+107 !! 0x6B !! Read_Queue       !! (!nolink [C'Task Royal])
+107 !! 0x6B !! (!reserved)      !! (!nolink [TekBios])
+108 !! 0x6C !! Queue_Info       !! (!nolink [C'Task Royal])
+108 !! 0x6C !! (!reserved)      !! (!nolink [TekBios])
+109 !! 0x6D !! Find_Queue       !! (!nolink [C'Task Royal])
+109 !! 0x6D !! (!reserved)      !! (!nolink [TekBios])
+110 !! 0x6E !! Evnt_Signal      !! (!nolink [C'Task Royal])
+110 !! 0x6E !! (!reserved)      !! (!nolink [TekBios])
+111 !! 0x6F !! Evnt_Wait        !! (!nolink [C'Task Royal])
+111 !! 0x6F !! TestError        !! (!nolink [TekBios])
+111 !! 0x6F !! trap111          !! MIDI_COM, since version 3.7
+112 !! 0x70 !! Attach           !! (!nolink [C'Task Royal])
+112 !! 0x70 !! SetReset         !! (!nolink [TekBios])
+112 !! 0x70 !! Mfork            !! MultiGEM
+113 !! 0x71 !! Pr_Assign        !! (!nolink [C'Task Royal])
+113 !! 0x71 !! SetAnalyse       !! (!nolink [TekBios])
+114 !! 0x72 !! Creat_Screen     !! (!nolink [C'Task Royal])
+114 !! 0x72 !! BootRoot         !! (!nolink [TekBios])
+!hline
+115 !! 0x73 !! Nenable      !! PAMs Net
+115 !! 0x73 !! Del_Screen   !! (!nolink [C'Task Royal])
+116 !! 0x74 !! Ndisable     !! PAMs Net
+116 !! 0x74 !! Install      !! (!nolink [C'Task Royal])
+117 !! 0x75 !! Nremote      !! PAMs Net
+117 !! 0x75 !! Mvars        !! (!nolink [C'Task Royal])
+118 !! 0x76 !! Nmsg         !! PAMs Net
+118 !! 0x76 !! Alloc        !! (!nolink [C'Task Royal])
+119 !! 0x77 !! Nrecord      !! PAMs Net
+119 !! 0x77 !! Free         !! (!nolink [C'Task Royal])
+120 !! 0x78 !! Nreset       !! PAMs Net
+121 !! 0x79 !! Nprinter     !! PAMs Net
+122 !! 0x7A !! Nlocked      !! PAMs Net
+123 !! 0x7B !! Nunlock      !! PAMs Net
+124 !! 0x7C !! Nlock        !! PAMs Net
+125 !! 0x7D !! Nlogged      !! PAMs Net
+126 !! 0x7E !! Nnodeid      !! PAMs Net
+127 !! 0x7F !! Nactive      !! PAMs Net
+!hline
+128 !! 0x80 !! Puserid        !! PowerDOS
+129 !! 0x81 !! Ppriority      !! (!nolink [PowerDOS])
+130 !! 0x82 !! (!link [Pgetpid][P_getpid])        !! (!nolink [PowerDOS])
+130 !! 0x82 !! nap_in_s       !! (!nolink [NAP BioNet100])
+131 !! 0x83 !! (!link [Pgetppid][P_getppid])       !! (!nolink [PowerDOS])
+131 !! 0x83 !! nap_out_s      !! (!nolink [NAP BioNet100])
+132 !! 0x84 !! Pgetpd         !! (!nolink [PowerDOS])
+133 !! 0x85 !! Pfindpid       !! (!nolink [PowerDOS])
+134 !! 0x86 !! Pprocinf       !! (!nolink [PowerDOS])
+135 !! 0x87 !! (!link [Pnice][P_nice])          !! (!nolink [PowerDOS])
+136 !! 0x88 !! Smalloc        !! (!nolink [PowerDOS])
+137 !! 0x89 !! Massign        !! (!nolink [PowerDOS])
+139 !! 0x8B !! Fstatus        !! (!nolink [PowerDOS])
+140 !! 0x8C !! Fsfirstidx     !! (!nolink [PowerDOS])
+141 !! 0x8D !! Wake_parent    !! (!nolink [PowerDOS])
+142 !! 0x8E !! Wait           !! (!nolink [PowerDOS])
+143 !! 0x8F !! Sleep          !! (!nolink [PowerDOS])
+144 !! 0x90 !! Ioqueue        !! (!nolink [PowerDOS])
+145 !! 0x91 !! Wait_dt        !! (!nolink [PowerDOS])
+146 !! 0x92 !! Dev_create     !! (!nolink [PowerDOS])
+147 !! 0x93 !! Fm_add         !! (!nolink [PowerDOS])
+148 !! 0x94 !! Drv_add        !! (!nolink [PowerDOS])
+149 !! 0x95 !! Devinfo        !! (!nolink [PowerDOS])
+150 !! 0x96 !! Send           !! (!nolink [PowerDOS])
+151 !! 0x97 !! Sig_intercept  !! (!nolink [PowerDOS])
+152 !! 0x98 !! Suspend        !! (!nolink [PowerDOS])
+153 !! 0x99 !! Q_message      !! (!nolink [PowerDOS])
+154 !! 0x9A !! Semaphore      !! (!nolink [PowerDOS])
+155 !! 0x9B !! Mem_share      !! (!nolink [PowerDOS])
+158 !! 0x9E !! Chgvector      !! (!nolink [PowerDOS])
+159 !! 0x9F !! Chgsysvar      !! (!nolink [PowerDOS])
+160 !! 0xA0 !! Pname          !! (!nolink [PowerDOS])
+161 !! 0xA1 !! Pvector        !! (!nolink [PowerDOS])
+162 !! 0xA2 !! Pattrib        !! (!nolink [PowerDOS])
+163 !! 0xA3 !! Pmaxmem        !! (!nolink [PowerDOS])
+!hline
+255 !!  0xFF !! Syield         !! MiNT
+256 !! 0x100 !! Fpipe          !! MiNT
+257 !! 0x101 !! Ffchown        !! MiNT
+258 !! 0x102 !! Ffchmod        !! MiNT
+259 !! 0x103 !! Fsync          !! MiNT
+260 !! 0x104 !! Fcntl          !! MiNT
+261 !! 0x105 !! Finstat        !! MiNT
+262 !! 0x106 !! Foutstat       !! MiNT
+263 !! 0x107 !! Fgetchar       !! MiNT
+264 !! 0x108 !! Fputchar       !! MiNT
+265 !! 0x109 !! Pwait          !! MiNT
+266 !! 0x10A !! Pnice          !! MiNT
+267 !! 0x10B !! Pgetpid        !! MiNT
+268 !! 0x10C !! Pgetppid       !! MiNT
+269 !! 0x10D !! Pgetpgrp       !! MiNT
+270 !! 0x10E !! Psetpgrp       !! MiNT
+271 !! 0x10F !! Pgetuid        !! MiNT
+272 !! 0x110 !! Psetuid        !! MiNT
+273 !! 0x111 !! Pkill          !! MiNT
+274 !! 0x112 !! Psignal        !! MiNT
+275 !! 0x113 !! Pvfork         !! MiNT
+276 !! 0x114 !! Pgetgid        !! MiNT
+277 !! 0x115 !! Psetgid        !! MiNT
+278 !! 0x116 !! Psigblock      !! MiNT
+279 !! 0x117 !! Psigsetmask    !! MiNT
+280 !! 0x118 !! Pusrval        !! MiNT
+281 !! 0x119 !! Pdomain        !! MiNT
+282 !! 0x11A !! Psigreturn     !! MiNT
+283 !! 0x11B !! Pfork          !! MiNT
+284 !! 0x11C !! Pwait3         !! MiNT
+285 !! 0x11D !! Fselect        !! MiNT
+286 !! 0x11E !! Prusage        !! MiNT
+287 !! 0x11F !! Psetlimit      !! MiNT
+288 !! 0x120 !! Talarm         !! MiNT
+289 !! 0x121 !! Pause          !! MiNT
+290 !! 0x122 !! Sysconf        !! MiNT
+291 !! 0x123 !! Psigpending    !! MiNT
+292 !! 0x124 !! Dpathconf      !! MiNT
+293 !! 0x125 !! Pmsg           !! MiNT
+294 !! 0x126 !! Fmidipipe      !! MiNT
+295 !! 0x127 !! Prenice        !! MiNT
+296 !! 0x128 !! Dopendir       !! MiNT
+297 !! 0x129 !! Dreaddir       !! MiNT
+298 !! 0x12A !! Drewinddir     !! MiNT
+299 !! 0x12B !! Dclosedir      !! MiNT
+300 !! 0x12C !! Fxattr         !! MiNT
+301 !! 0x12D !! Flink          !! MiNT
+302 !! 0x12E !! Fsymlink       !! MiNT
+303 !! 0x12F !! Freadlink      !! MiNT
+304 !! 0x130 !! Dcntl          !! MiNT
+305 !! 0x131 !! Fchown         !! MiNT
+306 !! 0x132 !! Fchmod         !! MiNT
+307 !! 0x133 !! Pumask         !! MiNT
+308 !! 0x134 !! Psemaphore     !! MiNT
+309 !! 0x135 !! Dlock          !! MiNT
+310 !! 0x136 !! Psigpause      !! MiNT
+311 !! 0x137 !! Psigaction     !! MiNT
+312 !! 0x138 !! Pgeteuid       !! MiNT
+313 !! 0x139 !! Pgetegid       !! MiNT
+314 !! 0x13A !! Pwaitpid       !! MiNT
+315 !! 0x13B !! Dgetcwd        !! MiNT
+316 !! 0x13C !! Salert         !! MiNT
+317 !! 0x13D !! Tmalarm        !! MiNT 1.10
+318 !! 0x13E !! Psigintr       !! MiNT 1.11 until FreeMiNT 1.15.12 inclusive
+319 !! 0x13F !! Suptime        !! MiNT 1.11
+320 !! 0x140 !! Ptrace         !! MiNT
+321 !! 0x141 !! Mvalidate      !! FreeMiNT 1.15.12
+322 !! 0x142 !! Dxreaddir      !! MiNT 1.11
+323 !! 0x143 !! Pseteuid       !! MiNT 1.11
+324 !! 0x144 !! Psetegid       !! MiNT 1.11
+325 !! 0x145 !! Pgetauid       !! MiNT 1.11
+326 !! 0x146 !! Psetauid       !! MiNT 1.11
+327 !! 0x147 !! Pgetgroups     !! MiNT 1.11
+328 !! 0x148 !! Psetgroups     !! MiNT 1.11
+329 !! 0x149 !! Tsetitimer     !! MiNT 1.11
+330 !! 0x14A !! Scookie        !! MiNT (obsolete)
+330 !! 0x14A !! Dchroot        !! MiNT ^^^^
+331 !! 0x14B !! Fstat64        !! MiNT 1.15.4
+332 !! 0x14C !! Fseek64        !! MiNT
+333 !! 0x14D !! Dsetkey        !! MiNT
+334 !! 0x14E !! Psetreuid      !! MiNT 1.12
+335 !! 0x14F !! Psetregid      !! MiNT 1.12
+336 !! 0x150 !! Sync           !! MiNT, MagiC
+337 !! 0x151 !! Shutdown       !! MiNT
+338 !! 0x152 !! Dreadlabel     !! MiNT 1.12
+339 !! 0x153 !! Dwritelabel    !! MiNT 1.12
+340 !! 0x154 !! Ssystem        !! MiNT 1.15.0
+341 !! 0x155 !! Tgettimeofday  !! MiNT 1.15.0
+342 !! 0x156 !! Tsettimeofday  !! MiNT 1.15.0
+343 !! 0x157 !! Tadjtime       !! MiNT 1.16
+344 !! 0x158 !! Pgetpriority   !! MiNT 1.15.0
+345 !! 0x159 !! Psetpriority   !! MiNT 1.15.0
+!hline
+346 !! 0x15a !! Fpoll          !! FreeMiNT 1.15.12
+347 !! 0x15B !! Fwritev        !! MiNTNet
+348 !! 0x15C !! Freadv         !! MiNTNet
+349 !! 0x15D !! Ffstat64       !! FreeMint 1.16
+350 !! 0x15E !! Psysctl        !! MiNT
+351 !! 0x15F !! Pemulation     !! MiNT
+352 !! 0x160 !! Fsocket        !! MiNTNet
+353 !! 0x161 !! Fsocketpair    !! MiNTNet
+354 !! 0x162 !! Faccept        !! MiNTNet
+355 !! 0x163 !! Fconnect       !! MiNTNet
+356 !! 0x164 !! Fbind          !! MiNTNet
+357 !! 0x165 !! Flisten        !! MiNTNet
+358 !! 0x166 !! Frecvmsg       !! MiNTNet
+359 !! 0x167 !! Fsendmsg       !! MiNTNet
+360 !! 0x168 !! Frecvfrom      !! MiNTNet
+361 !! 0x169 !! Fsendto        !! MiNTNet
+362 !! 0x16A !! Fsetsockopt    !! MiNTNet
+363 !! 0x16B !! Fgetsockopt    !! MiNTNet
+364 !! 0x16C !! Fgetpeername   !! MiNTNet
+365 !! 0x16D !! Fgetsockname   !! MiNTNet
+366 !! 0x16E !! Fshutdown      !! MiNTNet
+!hline
+368 !! 0x170 !! Pshmget        !! MiNT
+369 !! 0x171 !! Pshmctl        !! MiNT
+370 !! 0x172 !! Pshmat         !! MiNT
+371 !! 0x173 !! Pshmdt         !! MiNT
+372 !! 0x174 !! Psemget        !! MiNT
+373 !! 0x175 !! Psemctl        !! MiNT
+374 !! 0x176 !! Psemop         !! MiNT
+375 !! 0x177 !! Psemconfig     !! MiNT
+376 !! 0x178 !! Pmsgget        !! MiNT
+377 !! 0x179 !! Pmsgctl        !! MiNT
+378 !! 0x17A !! Pmsgsnd        !! MiNT
+379 !! 0x17B !! Pmsgrcv        !! MiNT
+381 !! 0x17D !! Maccess        !! MiNT
+382 !! 0x17E !! Mmap           !! Reserved for FreeMiNT
+383 !! 0x17F !! Munmap         !! Reserved for FreeMiNT
+384 !! 0x180 !! Fchown16       !! FreeMiNT 1.16.0
+385 !! 0x181 !! Fchdir         !! FreeMiNT 1.17
+386 !! 0x182 !! Ffdopendir     !! FreeMiNT 1.17
+387 !! 0x183 !! Fdirfd         !! FreeMiNT 1.17
+!hline
+503 !! 0x1F7 !! getprt         !! Atari Network Service
+504 !! 0x1F8 !! dflush         !! Atari Network Service
+505 !! 0x1F9 !! chpw           !! Atari Network Service
+601 !! 0x259 !! Disable        !! Atari Network Service
+602 !! 0x25A !! Enable         !! Atari Network Service
+603 !! 0x25B !! GetTask        !! Atari Network Service
+604 !! 0x25C !! OpenPort       !! Atari Network Service
+605 !! 0x25D !! GetMsg         !! Atari Network Service
+606 !! 0x25E !! AskMsg         !! Atari Network Service
+607 !! 0x25F !! AskPort        !! Atari Network Service
+608 !! 0x260 !! SendMsg        !! Atari Network Service
+609 !! 0x261 !! ReplyMsg       !! Atari Network Service
+610 !! 0x262 !! ClosePort      !! Atari Network Service
+612 !! 0x264 !! GetIPAddr      !! Atari Network Service
+613 !! 0x265 !! PGetMsg        !! Atari Network Service
+614 !! 0x266 !! mytime         !! Atari Network Service
+615 !! 0x267 !! IamBack        !! Atari Network Service
+620 !! 0x26C !! udp_open       !! Atari Network Service
+621 !! 0x26C !! udp_close      !! Atari Network Service
+622 !! 0x26C !! udp_read       !! Atari Network Service
+623 !! 0x26D !! udp_write      !! Atari Network Service
+630 !! 0x276 !! tcp_open       !! Atari Network Service
+631 !! 0x277 !! tcp_write      !! Atari Network Service
+632 !! 0x278 !! tcp_read       !! Atari Network Service
+633 !! 0x279 !! tcp_close      !! Atari Network Service
+634 !! 0x27A !! tcp_abort      !! Atari Network Service
+635 !! 0x27B !! tcp_stat       !! Atari Network Service
+!hline
+1296 !! 0x510 !! Dxopendir     !! Dir_Lwr
+!hline
+4200 !! 0x1068 !! Sys_Break     !! SysMon
+4201 !! 0x1069 !! Sys_Printf    !! SysMon
+!hline
+24000 !! 0x5DC0 !! STEFcntrl   !! STEmulator
+!hline
+!end_table
+
+See also: GEMDOS ~  (!link [BIOS function list][BIOS function list]) ~
+XBIOS function list
+!end_node
+
+
+!else
+
+
+!begin_node GEMDOS-Funktionsliste
+!html_name gemdos_functions
+
+Die folgende Liste ist eine (!Uumlaut)bersicht der GEMDOS-Routinen, geordnet
+nach Funktionsnummern:
+
+!define reserved reserviert
+
+!begin_table [|r|r|l|l|] !hline
+dez !! hex !! Funktionsname !! vorhanden
+!hline
+  0 !! 0x00 !! Pterm0       !! (!nolink [TOS])
+  1 !! 0x01 !! Cconin       !! (!nolink [TOS])
+  2 !! 0x02 !! Cconout      !! (!nolink [TOS])
+  3 !! 0x03 !! Cauxin       !! (!nolink [TOS])
+  4 !! 0x04 !! Cauxout      !! (!nolink [TOS])
+  5 !! 0x05 !! Cprnout      !! (!nolink [TOS])
+  6 !! 0x06 !! Crawio       !! (!nolink [TOS])
+  7 !! 0x07 !! Crawcin      !! (!nolink [TOS])
+  8 !! 0x08 !! Cnecin       !! (!nolink [TOS])
+  9 !! 0x09 !! Cconws       !! (!nolink [TOS])
+ 10 !! 0x0A !! Cconrs       !! (!nolink [TOS])
+ 11 !! 0x0B !! Cconis       !! (!nolink [TOS])
+ 14 !! 0x0E !! Dsetdrv      !! (!nolink [TOS])
+ 16 !! 0x10 !! Cconos       !! (!nolink [TOS])
+ 17 !! 0x11 !! Cprnos       !! (!nolink [TOS])
+ 18 !! 0x12 !! Cauxis       !! (!nolink [TOS])
+ 19 !! 0x13 !! Cauxos       !! (!nolink [TOS])
+ 20 !! 0x14 !! Maddalt      !! (!nolink [TOS])
+ 21 !! 0x15 !! Srealloc     !! (!nolink [TOS]) 4
+ 22 !! 0x16 !! Slbopen      !! MagiC
+ 23 !! 0x17 !! Slbclose     !! (!nolink [MagiC])
+ 25 !! 0x19 !! Dgetdrv      !! (!nolink [TOS])
+ 26 !! 0x1A !! Fsetdta      !! (!nolink [TOS])
+ 32 !! 0x20 !! Super        !! (!nolink [TOS])
+ 42 !! 0x2A !! Tgetdate     !! (!nolink [TOS])
+ 43 !! 0x2B !! Tsetdate     !! (!nolink [TOS])
+ 44 !! 0x2C !! Tgettime     !! (!nolink [TOS])
+ 45 !! 0x2D !! Tsettime     !! (!nolink [TOS])
+ 47 !! 0x2F !! Fgetdta      !! (!nolink [TOS])
+ 48 !! 0x30 !! Sversion     !! (!nolink [TOS])
+ 49 !! 0x31 !! Ptermres     !! (!nolink [TOS])
+ 51 !! 0x33 !! Sconfig      !! (!nolink [MagiC])
+ 54 !! 0x36 !! Dfree        !! (!nolink [TOS])
+ 57 !! 0x39 !! Dcreate      !! (!nolink [TOS])
+ 58 !! 0x3A !! Ddelete      !! (!nolink [TOS])
+ 59 !! 0x3B !! Dsetpath     !! (!nolink [TOS])
+ 60 !! 0x3C !! Fcreate      !! (!nolink [TOS])
+ 61 !! 0x3D !! Fopen        !! (!nolink [TOS])
+ 62 !! 0x3E !! Fclose       !! (!nolink [TOS])
+ 63 !! 0x3F !! Fread        !! (!nolink [TOS])
+ 64 !! 0x40 !! Fwrite       !! (!nolink [TOS])
+ 65 !! 0x41 !! Fdelete      !! (!nolink [TOS])
+ 66 !! 0x42 !! Fseek        !! (!nolink [TOS])
+ 67 !! 0x43 !! Fattrib      !! (!nolink [TOS])
+ 68 !! 0x44 !! Mxalloc      !! (!nolink [TOS])
+ 69 !! 0x45 !! Fdup         !! (!nolink [TOS])
+ 70 !! 0x46 !! Fforce       !! (!nolink [TOS])
+ 71 !! 0x47 !! Dgetpath     !! (!nolink [TOS])
+ 72 !! 0x48 !! Malloc       !! (!nolink [TOS])
+ 73 !! 0x49 !! Mfree        !! (!nolink [TOS])
+ 74 !! 0x4A !! Mshrink      !! (!nolink [TOS])
+ 75 !! 0x4B !! Pexec        !! (!nolink [TOS])
+ 76 !! 0x4C !! Pterm        !! (!nolink [TOS])
+ 78 !! 0x4E !! Fsfirst      !! (!nolink [TOS])
+ 79 !! 0x4F !! Fsnext       !! (!nolink [TOS])
+ 86 !! 0x56 !! Frename      !! (!nolink [TOS])
+ 87 !! 0x57 !! Fdatime      !! (!nolink [TOS])
+ 91 !! 0x5B !! nap_io       !! NAP BioNet100
+ 92 !! 0x5C !! Flock        !! 
+!hline
+ 96 !! 0x60 !! Nversion     !! 
+ 96 !! 0x60 !! Init_Process !! C'Task Royal
+ 97 !! 0x61 !! Load_Process !! (!nolink [C'Task Royal])
+ 98 !! 0x62 !! Frlock       !! 
+ 99 !! 0x62 !! End_Process  !! (!nolink [C'Task Royal])
+ 99 !! 0x63 !! Frunlock     !! 
+ 99 !! 0x63 !! Stop_Process !! (!nolink [C'Task Royal])
+100 !! 0x64 !! (!link [Flock][F_lock])       !! 
+100 !! 0x64 !! Cont_Process !! (!nolink [C'Task Royal])
+100 !! 0x64 !! SetLinkAdr   !! TekBios
+101 !! 0x65 !! Funlock      !! 
+101 !! 0x65 !! Find_Process !! (!nolink [C'Task Royal])
+101 !! 0x65 !! ByteToLink   !! (!nolink [TekBios])
+102 !! 0x66 !! Fflush       !! 
+102 !! 0x66 !! Stop_All     !! (!nolink [C'Task Royal])
+102 !! 0x66 !! ByteFromLink !! (!nolink [TekBios])
+!hline
+103 !! 0x67 !! Cont_All         !! (!nolink [C'Task Royal])
+103 !! 0x67 !! LongWordToLink   !! (!nolink [TekBios])
+103 !! 0x68 !! Creat_Queue      !! (!nolink [C'Task Royal])
+104 !! 0x68 !! LongWordFromLink !! (!nolink [TekBios])
+105 !! 0x69 !! Delete_Queue     !! (!nolink [C'Task Royal])
+105 !! 0x69 !! SliceToLink      !! (!nolink [TekBios])
+106 !! 0x6A !! Write_Queue      !! (!nolink [C'Task Royal])
+106 !! 0x6A !! SliceFromLink    !! (!nolink [TekBios])
+107 !! 0x6B !! Read_Queue       !! (!nolink [C'Task Royal])
+107 !! 0x6B !! (!reserved)      !! (!nolink [TekBios])
+108 !! 0x6C !! Queue_Info       !! (!nolink [C'Task Royal])
+108 !! 0x6C !! (!reserved)      !! (!nolink [TekBios])
+109 !! 0x6D !! Find_Queue       !! (!nolink [C'Task Royal])
+109 !! 0x6D !! (!reserved)      !! (!nolink [TekBios])
+110 !! 0x6E !! Evnt_Signal      !! (!nolink [C'Task Royal])
+110 !! 0x6E !! (!reserved)      !! (!nolink [TekBios])
+111 !! 0x6F !! Evnt_Wait        !! (!nolink [C'Task Royal])
+111 !! 0x6F !! TestError        !! (!nolink [TekBios])
+111 !! 0x6F !! trap111          !! MIDI_COM, seit Version 3.7
+112 !! 0x70 !! Attach           !! (!nolink [C'Task Royal])
+112 !! 0x70 !! SetReset         !! (!nolink [TekBios])
+112 !! 0x70 !! Mfork            !! MultiGEM
+113 !! 0x71 !! Pr_Assign        !! (!nolink [C'Task Royal])
+113 !! 0x71 !! SetAnalyse       !! (!nolink [TekBios])
+114 !! 0x72 !! Creat_Screen     !! (!nolink [C'Task Royal])
+114 !! 0x72 !! BootRoot         !! (!nolink [TekBios])
+!hline
+115 !! 0x73 !! Nenable      !! PAMs Net
+115 !! 0x73 !! Del_Screen   !! (!nolink [C'Task Royal])
+116 !! 0x74 !! Ndisable     !! PAMs Net
+116 !! 0x74 !! Install      !! (!nolink [C'Task Royal])
+117 !! 0x75 !! Nremote      !! PAMs Net
+117 !! 0x75 !! Mvars        !! (!nolink [C'Task Royal])
+118 !! 0x76 !! Nmsg         !! PAMs Net
+118 !! 0x76 !! Alloc        !! (!nolink [C'Task Royal])
+119 !! 0x77 !! Nrecord      !! PAMs Net
+119 !! 0x77 !! Free         !! (!nolink [C'Task Royal])
+120 !! 0x78 !! Nreset       !! PAMs Net
+121 !! 0x79 !! Nprinter     !! PAMs Net
+122 !! 0x7A !! Nlocked      !! PAMs Net
+123 !! 0x7B !! Nunlock      !! PAMs Net
+124 !! 0x7C !! Nlock        !! PAMs Net
+125 !! 0x7D !! Nlogged      !! PAMs Net
+126 !! 0x7E !! Nnodeid      !! PAMs Net
+127 !! 0x7F !! Nactive      !! PAMs Net
+!hline
+128 !! 0x80 !! Puserid        !! PowerDOS
+129 !! 0x81 !! Ppriority      !! (!nolink [PowerDOS])
+130 !! 0x82 !! (!link [Pgetpid][P_getpid])        !! (!nolink [PowerDOS])
+130 !! 0x82 !! nap_in_s       !! (!nolink [NAP BioNet100])
+131 !! 0x83 !! (!link [Pgetppid][P_getppid])       !! (!nolink [PowerDOS])
+131 !! 0x83 !! nap_out_s      !! (!nolink [NAP BioNet100])
+132 !! 0x84 !! Pgetpd         !! (!nolink [PowerDOS])
+133 !! 0x85 !! Pfindpid       !! (!nolink [PowerDOS])
+134 !! 0x86 !! Pprocinf       !! (!nolink [PowerDOS])
+135 !! 0x87 !! (!link [Pnice][P_nice])          !! (!nolink [PowerDOS])
+136 !! 0x88 !! Smalloc        !! (!nolink [PowerDOS])
+137 !! 0x89 !! Massign        !! (!nolink [PowerDOS])
+139 !! 0x8B !! Fstatus        !! (!nolink [PowerDOS])
+140 !! 0x8C !! Fsfirstidx     !! (!nolink [PowerDOS])
+141 !! 0x8D !! Wake_parent    !! (!nolink [PowerDOS])
+142 !! 0x8E !! Wait           !! (!nolink [PowerDOS])
+143 !! 0x8F !! Sleep          !! (!nolink [PowerDOS])
+144 !! 0x90 !! Ioqueue        !! (!nolink [PowerDOS])
+145 !! 0x91 !! Wait_dt        !! (!nolink [PowerDOS])
+146 !! 0x92 !! Dev_create     !! (!nolink [PowerDOS])
+147 !! 0x93 !! Fm_add         !! (!nolink [PowerDOS])
+148 !! 0x94 !! Drv_add        !! (!nolink [PowerDOS])
+149 !! 0x95 !! Devinfo        !! (!nolink [PowerDOS])
+150 !! 0x96 !! Send           !! (!nolink [PowerDOS])
+151 !! 0x97 !! Sig_intercept  !! (!nolink [PowerDOS])
+152 !! 0x98 !! Suspend        !! (!nolink [PowerDOS])
+153 !! 0x99 !! Q_message      !! (!nolink [PowerDOS])
+154 !! 0x9A !! Semaphore      !! (!nolink [PowerDOS])
+155 !! 0x9B !! Mem_share      !! (!nolink [PowerDOS])
+158 !! 0x9E !! Chgvector      !! (!nolink [PowerDOS])
+159 !! 0x9F !! Chgsysvar      !! (!nolink [PowerDOS])
+160 !! 0xA0 !! Pname          !! (!nolink [PowerDOS])
+161 !! 0xA1 !! Pvector        !! (!nolink [PowerDOS])
+162 !! 0xA2 !! Pattrib        !! (!nolink [PowerDOS])
+163 !! 0xA3 !! Pmaxmem        !! (!nolink [PowerDOS])
+!hline
+255 !!  0xFF !! Syield         !! MiNT
+256 !! 0x100 !! Fpipe          !! MiNT
+257 !! 0x101 !! Ffchown        !! MiNT
+258 !! 0x102 !! Ffchmod        !! MiNT
+259 !! 0x103 !! Fsync          !! MiNT
+260 !! 0x104 !! Fcntl          !! MiNT
+261 !! 0x105 !! Finstat        !! MiNT
+262 !! 0x106 !! Foutstat       !! MiNT
+263 !! 0x107 !! Fgetchar       !! MiNT
+264 !! 0x108 !! Fputchar       !! MiNT
+265 !! 0x109 !! Pwait          !! MiNT
+266 !! 0x10A !! Pnice          !! MiNT
+267 !! 0x10B !! Pgetpid        !! MiNT
+268 !! 0x10C !! Pgetppid       !! MiNT
+269 !! 0x10D !! Pgetpgrp       !! MiNT
+270 !! 0x10E !! Psetpgrp       !! MiNT
+271 !! 0x10F !! Pgetuid        !! MiNT
+272 !! 0x110 !! Psetuid        !! MiNT
+273 !! 0x111 !! Pkill          !! MiNT
+274 !! 0x112 !! Psignal        !! MiNT
+275 !! 0x113 !! Pvfork         !! MiNT
+276 !! 0x114 !! Pgetgid        !! MiNT
+277 !! 0x115 !! Psetgid        !! MiNT
+278 !! 0x116 !! Psigblock      !! MiNT
+279 !! 0x117 !! Psigsetmask    !! MiNT
+280 !! 0x118 !! Pusrval        !! MiNT
+281 !! 0x119 !! Pdomain        !! MiNT
+282 !! 0x11A !! Psigreturn     !! MiNT
+283 !! 0x11B !! Pfork          !! MiNT
+284 !! 0x11C !! Pwait3         !! MiNT
+285 !! 0x11D !! Fselect        !! MiNT
+286 !! 0x11E !! Prusage        !! MiNT
+287 !! 0x11F !! Psetlimit      !! MiNT
+288 !! 0x120 !! Talarm         !! MiNT
+289 !! 0x121 !! Pause          !! MiNT
+290 !! 0x122 !! Sysconf        !! MiNT
+291 !! 0x123 !! Psigpending    !! MiNT
+292 !! 0x124 !! Dpathconf      !! MiNT
+293 !! 0x125 !! Pmsg           !! MiNT
+294 !! 0x126 !! Fmidipipe      !! MiNT
+295 !! 0x127 !! Prenice        !! MiNT
+296 !! 0x128 !! Dopendir       !! MiNT
+297 !! 0x129 !! Dreaddir       !! MiNT
+298 !! 0x12A !! Drewinddir     !! MiNT
+299 !! 0x12B !! Dclosedir      !! MiNT
+300 !! 0x12C !! Fxattr         !! MiNT
+301 !! 0x12D !! Flink          !! MiNT
+302 !! 0x12E !! Fsymlink       !! MiNT
+303 !! 0x12F !! Freadlink      !! MiNT
+304 !! 0x130 !! Dcntl          !! MiNT
+305 !! 0x131 !! Fchown         !! MiNT
+306 !! 0x132 !! Fchmod         !! MiNT
+307 !! 0x133 !! Pumask         !! MiNT
+308 !! 0x134 !! Psemaphore     !! MiNT
+309 !! 0x135 !! Dlock          !! MiNT
+310 !! 0x136 !! Psigpause      !! MiNT
+311 !! 0x137 !! Psigaction     !! MiNT
+312 !! 0x138 !! Pgeteuid       !! MiNT
+313 !! 0x139 !! Pgetegid       !! MiNT
+314 !! 0x13A !! Pwaitpid       !! MiNT
+315 !! 0x13B !! Dgetcwd        !! MiNT
+316 !! 0x13C !! Salert         !! MiNT
+317 !! 0x13D !! Tmalarm        !! MiNT 1.10
+318 !! 0x13E !! Psigintr       !! MiNT 1.11 bis einschlie(!sharps)lich FreeMiNT 1.15.12
+319 !! 0x13F !! Suptime        !! MiNT 1.11
+320 !! 0x140 !! Ptrace         !! MiNT
+321 !! 0x141 !! Mvalidate      !! FreeMiNT 1.15.12
+322 !! 0x142 !! Dxreaddir      !! MiNT 1.11
+323 !! 0x143 !! Pseteuid       !! MiNT 1.11
+324 !! 0x144 !! Psetegid       !! MiNT 1.11
+325 !! 0x145 !! Pgetauid       !! MiNT 1.11
+326 !! 0x146 !! Psetauid       !! MiNT 1.11
+327 !! 0x147 !! Pgetgroups     !! MiNT 1.11
+328 !! 0x148 !! Psetgroups     !! MiNT 1.11
+329 !! 0x149 !! Tsetitimer     !! MiNT 1.11
+330 !! 0x14A !! Scookie        !! MiNT (obsolete)
+330 !! 0x14A !! Dchroot        !! MiNT ^^^^
+331 !! 0x14B !! Fstat64        !! MiNT 1.15.4
+332 !! 0x14C !! Fseek64        !! MiNT
+333 !! 0x14D !! Dsetkey        !! MiNT
+334 !! 0x14E !! Psetreuid      !! MiNT 1.12
+335 !! 0x14F !! Psetregid      !! MiNT 1.12
+336 !! 0x150 !! Sync           !! MiNT, MagiC
+337 !! 0x151 !! Shutdown       !! MiNT
+338 !! 0x152 !! Dreadlabel     !! MiNT 1.12
+339 !! 0x153 !! Dwritelabel    !! MiNT 1.12
+340 !! 0x154 !! Ssystem        !! MiNT 1.15.0
+341 !! 0x155 !! Tgettimeofday  !! MiNT 1.15.0
+342 !! 0x156 !! Tsettimeofday  !! MiNT 1.15.0
+343 !! 0x157 !! Tadjtime       !! MiNT 1.16
+344 !! 0x158 !! Pgetpriority   !! MiNT 1.15.0
+345 !! 0x159 !! Psetpriority   !! MiNT 1.15.0
+!hline
+346 !! 0x15a !! Fpoll          !! FreeMiNT 1.15.12
+347 !! 0x15B !! Fwritev        !! MiNTNet
+348 !! 0x15C !! Freadv         !! MiNTNet
+349 !! 0x15D !! Ffstat64       !! FreeMint 1.16
+350 !! 0x15E !! Psysctl        !! MiNT
+351 !! 0x15F !! Pemulation     !! MiNT
+352 !! 0x160 !! Fsocket        !! MiNTNet
+353 !! 0x161 !! Fsocketpair    !! MiNTNet
+354 !! 0x162 !! Faccept        !! MiNTNet
+355 !! 0x163 !! Fconnect       !! MiNTNet
+356 !! 0x164 !! Fbind          !! MiNTNet
+357 !! 0x165 !! Flisten        !! MiNTNet
+358 !! 0x166 !! Frecvmsg       !! MiNTNet
+359 !! 0x167 !! Fsendmsg       !! MiNTNet
+360 !! 0x168 !! Frecvfrom      !! MiNTNet
+361 !! 0x169 !! Fsendto        !! MiNTNet
+362 !! 0x16A !! Fsetsockopt    !! MiNTNet
+363 !! 0x16B !! Fgetsockopt    !! MiNTNet
+364 !! 0x16C !! Fgetpeername   !! MiNTNet
+365 !! 0x16D !! Fgetsockname   !! MiNTNet
+366 !! 0x16E !! Fshutdown      !! MiNTNet
+!hline
+368 !! 0x170 !! Pshmget        !! MiNT
+369 !! 0x171 !! Pshmctl        !! MiNT
+370 !! 0x172 !! Pshmat         !! MiNT
+371 !! 0x173 !! Pshmdt         !! MiNT
+372 !! 0x174 !! Psemget        !! MiNT
+373 !! 0x175 !! Psemctl        !! MiNT
+374 !! 0x176 !! Psemop         !! MiNT
+375 !! 0x177 !! Psemconfig     !! MiNT
+376 !! 0x178 !! Pmsgget        !! MiNT
+377 !! 0x179 !! Pmsgctl        !! MiNT
+378 !! 0x17A !! Pmsgsnd        !! MiNT
+379 !! 0x17B !! Pmsgrcv        !! MiNT
+381 !! 0x17D !! Maccess        !! MiNT
+382 !! 0x17E !! Mmap           !! Reserviert f(!uumlaut)r FreeMiNT
+383 !! 0x17F !! Munmap         !! Reserviert f(!uumlaut)r FreeMiNT
+384 !! 0x180 !! Fchown16       !! FreeMiNT 1.16.0
+385 !! 0x181 !! Fchdir         !! FreeMiNT 1.17
+386 !! 0x182 !! Ffdopendir     !! FreeMiNT 1.17
+387 !! 0x183 !! Fdirfd         !! FreeMiNT 1.17
+!hline
+503 !! 0x1F7 !! getprt         !! Atari Network Service
+504 !! 0x1F8 !! dflush         !! Atari Network Service
+505 !! 0x1F9 !! chpw           !! Atari Network Service
+601 !! 0x259 !! Disable        !! Atari Network Service
+602 !! 0x25A !! Enable         !! Atari Network Service
+603 !! 0x25B !! GetTask        !! Atari Network Service
+604 !! 0x25C !! OpenPort       !! Atari Network Service
+605 !! 0x25D !! GetMsg         !! Atari Network Service
+606 !! 0x25E !! AskMsg         !! Atari Network Service
+607 !! 0x25F !! AskPort        !! Atari Network Service
+608 !! 0x260 !! SendMsg        !! Atari Network Service
+609 !! 0x261 !! ReplyMsg       !! Atari Network Service
+610 !! 0x262 !! ClosePort      !! Atari Network Service
+612 !! 0x264 !! GetIPAddr      !! Atari Network Service
+613 !! 0x265 !! PGetMsg        !! Atari Network Service
+614 !! 0x266 !! mytime         !! Atari Network Service
+615 !! 0x267 !! IamBack        !! Atari Network Service
+620 !! 0x26C !! udp_open       !! Atari Network Service
+621 !! 0x26C !! udp_close      !! Atari Network Service
+622 !! 0x26C !! udp_read       !! Atari Network Service
+623 !! 0x26D !! udp_write      !! Atari Network Service
+630 !! 0x276 !! tcp_open       !! Atari Network Service
+631 !! 0x277 !! tcp_write      !! Atari Network Service
+632 !! 0x278 !! tcp_read       !! Atari Network Service
+633 !! 0x279 !! tcp_close      !! Atari Network Service
+634 !! 0x27A !! tcp_abort      !! Atari Network Service
+635 !! 0x27B !! tcp_stat       !! Atari Network Service
+!hline
+1296 !! 0x510 !! Dxopendir     !! Dir_Lwr
+!hline
+4200 !! 0x1068 !! Sys_Break     !! SysMon
+4201 !! 0x1069 !! Sys_Printf    !! SysMon
+!hline
+24000 !! 0x5DC0 !! STEFcntrl   !! STEmulator
+!hline
+!end_table
+
+Querverweis: GEMDOS ~  (!link [BIOS-Funktionsliste][BIOS-Funktionsliste]) ~
+XBIOS-Funktionsliste
+!end_node
+
+
+!endif

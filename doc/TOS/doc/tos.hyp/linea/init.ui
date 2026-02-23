@@ -1,0 +1,129 @@
+!iflang [english]
+
+
+!begin_node Initialization
+!html_name linea_init
+(!begin_liste) [Availability]
+
+!item [Name:]
+¯(!nolink [Line-A]) initialization®
+
+!item [(!nolink [Line-A]) number:]
+$A000
+
+!item [Syntax:]
+(!link [See 'Bindings for linea_init'] [Bindings for linea_init])
+
+!item [Description:]
+This (!nolink [Line-A]) function serves to inquire the address of 
+the (!nolink [Line-A]) parameter block.
+
+!item [(!nolink [Return]) value:]
+The function returns in d0 and a0 a pointer to the parameter block. In a1
+a pointer to a field with 3 addresses of the system fonts will be returned,
+and in a2 a pointer to the start addresses of the (!nolink [Line-A]) 
+routines.
+
+(!B)Note:(!b) Some bindings, as that from TC, for instance, do not return
+the addresses to the caller, but set the parameters for the call of the
+(!nolink [Line-A]) functions themselves internally.
+
+!item [Availability:]
+All (!nolink [TOS]) versions.
+
+!item [See also:]
+(!link [Binding] [Bindings for linea_init]) ~ (!link [LINEA][LINEA])
+
+(!ende_liste)
+
+
+!begin_node Bindings for linea_init
+!ignore_index
+(!begin_liste) [Assembler]
+!item [Pure-C:]
+void linea_init( void );
+!item [Assembler:]
+!begin_verbatim
+; Save registers
+movem.l   D0-D2/A0-A2,-(A7)
+; Line-A opcode
+dc.w      $A000
+; Pointer parameter block LINEA
+move.l    A0,pParamblk
+; Pointer system fonts
+move.l    A1,pFnthdr
+; Pointer start addr. Line-A routines
+move.l    a2,pFktadr
+; Restore registers
+movem.l   (a7)+,d0-d2/a0-a2
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!else
+
+
+!begin_node Initialization
+!html_name linea_init
+(!begin_liste) [Beschreibung:]
+
+!item [Name:]
+¯Line-A Initialization®
+
+!item [(!nolink [Line-A]) Nummer:]
+$A000
+
+!item [Binding:]
+(!link [Bindings fr linea_init] [Bindings fr linea_init])
+
+!item [Beschreibung:]
+Diese Line-A Funktion dient dazu, die Adresses des Line-A Parameterblock
+abzufragen.
+
+!item [Ergebnis:]
+Die Funktion liefert in D0 und A0 einen Zeiger auf den Parameterblock
+zurck. In A1 wird einen Zeiger auf ein Feld mit den 3 Adressen der
+Systemzeichens„tze zurckgeliefert. In A2 wird ein Zeiger auf die
+Anfangsadressen der Line-A Routinen zurckgeliefert.
+
+(!B)Hinweis:(!b) Einige Bindings, wie z.B. das von TC, liefern die Adressen
+nicht an den Aufrufer zurck, sondern setzen selbst intern die Parameter fr
+den Aufruf der Line-A Funktionen.
+
+!item [Verfgbar:]
+Alle TOS-Versionen.
+
+!item [Querverweis:]
+(!link [Binding] [Bindings fr linea_init]) ~ (!link [LINEA][LINEA])
+
+(!ende_liste)
+
+
+!begin_node Bindings fr linea_init
+!ignore_index
+(!begin_liste) [Assembler]
+!item [Pure-C:]
+void linea_init( void );
+!item [Assembler:]
+!begin_verbatim
+; Register retten
+movem.l   D0-D2/A0-A2,-(A7)
+; Line-A Opcode
+dc.w      $A000
+; Zeiger Parameterblock LINEA
+move.l    A0,pParamblk
+; Zeiger Systemzeichens„tze
+move.l    A1,pFnthdr
+; Zeiger Anfangsadr. Line-A Routinen
+move.l    A2,pFktadr
+; Register restaurieren
+movem.l   (A7)+,D0-D2/A0-A2
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!endif

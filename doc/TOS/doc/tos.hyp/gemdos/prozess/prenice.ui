@@ -1,0 +1,140 @@
+!iflang [english]
+
+
+!begin_node Prenice
+(!begin_liste) [Availability]
+!item [Name:]
+¯Prenice® - Adjust priority of a specified process.
+
+!item [Opcode:]
+295
+
+!item [Syntax:]
+int32_t Prenice ( int16_t pid, int16_t delta );
+
+!item [Description:]
+The function Prenice alters the priority of the process with the ID
+(!I)pid(!i) by the value (!I)delta(!i). A higher priority means that the
+process receives a larger time-slice, i.e. it is not switched over so often.
+In the same way, a lower priority means that the time-slice of the process
+is reduced, and so it must yield time to the CPU more often.
+
+For the parameter (!I)delta(!i) the following must apply: (!nl)
+- 20 <= delta <= 20.
+
+!item [(!nolink [Return]) value:]
+The function returns the current process switching priority. This is set to
+0 by default. Higher or lower values mean that the process is allocated
+respectively a larger or smaller time-slice.
+
+In case of error the function returns:
+
+!begin_xlist !compressed [EFILNF:]
+!item [EFILNF:]
+The specified process does not exist
+!item [EACCDN:]
+The specified process has a different user ID than the calling process
+!end_xlist
+
+!item [Availability:]
+Available when a 'MiNT' cookie with a version of at least 0.90 exists and
+MagiC since version 6.20 (2000-01-02).
+
+!item [Group:]
+Process functions
+
+!item [See also:]
+(!link [Bindings for Prenice] [Bindings for Prenice]) ~ Pnice
+(!ende_liste)
+
+
+!begin_node Bindings for Prenice
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+int32_t Prenice ( int16_t pid, int16_t delta );
+
+!item [Assembler:]
+!begin_verbatim
+move.w    delta,-(sp)  ; Offset 4
+move.w    pid,-(sp)    ; Offset 2
+move.w    #295,-(sp)   ; Offset 0
+trap      #1           ; GEMDOS
+addq.l    #6,sp        ; Correct stack
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!else
+
+
+!begin_node Prenice
+(!begin_liste) [Beschreibung]
+!item [Name:]
+¯Prenice® - Priorit„t eines Prozesses ver„ndern.
+
+!item [Gemdosnummer:]
+295
+
+!item [Deklaration:]
+int32_t Prenice ( int16_t pid, int16_t delta );
+
+!item [Beschreibung:]
+Die Funktion „ndert die Priorit„t des Prozesses mit der Kennung (!I)pid(!i)
+um den Wert (!I)delta(!i). Eine h”here Priorit„t bedeutet, daž der Prozess
+eine gr”žere Zeitscheibe erh„lt, also nicht so oft umgeschaltet wird. Analog
+bedeutet eine niedrige Priorit„t, daž die Zeitscheibe des Prozesses
+verkleinert wird, und er daher ”fter die CPU abgeben muž.
+
+Fr den Parameter (!I)delta(!i) muž gelten: (!nl)
+- 20 <= delta <= 20.
+
+!item [Ergebnis:]
+Die Funktion liefert die aktuelle Prozež Umschalt-Priorit„t zurck. Diese
+ist per Default auf 0 eingestellt. Gr”žere bzw. kleinere Werte bedeuten, daž
+der Prozess eine gr”žere bzw. kleinere Zeitscheibe besitzt.
+
+Im Fehlerfall liefert die Funktion:
+
+!begin_xlist !compressed [EFILNF:]
+!item [EFILNF:]
+der angegebene Prozess existiert nicht.
+!item [EACCDN:]
+der angegebene Prozess besitzt eine andere User-ID als der aufrufende
+Prozess.
+!end_xlist
+
+!item [Verfgbar:]
+Verfgbar, wenn ein 'MiNT' Cookie mit einer Versionsnummer von mindestens
+0.90 existiert und MagiC ab Version 6.20 (2000-01-02).
+
+!item [Gruppe:]
+Prozessfunktionen
+
+!item [Querverweis:]
+(!link [Bindings fr Prenice] [Bindings fr Prenice]) ~ Pnice
+(!ende_liste)
+
+
+!begin_node Bindings fr Prenice
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+int32_t Prenice ( int16_t pid, int16_t delta );
+
+!item [Assembler:]
+!begin_verbatim
+move.w    delta,-(sp)  ; Offset 4
+move.w    pid,-(sp)    ; Offset 2
+move.w    #295,-(sp)   ; Offset 0
+trap      #1           ; GEMDOS aufrufen
+addq.l    #6,sp        ; Stack korrigieren
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!endif

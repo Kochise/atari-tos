@@ -1,0 +1,12 @@
+editobjc.slb
+.C[-I..\..\pc\include]
+.L[-S=256]	; minimaler Stack
+=
+edithead.s      ; startup code for SLBs
+edit_slb.c (editob.h)
+editob.c (editob.h)
+memchar2.s
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcgemlib.lib

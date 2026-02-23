@@ -1,0 +1,85 @@
+History: énderungen am Hades 
+***************************************************************************************************
+9.10.1997
+Aktuelle Configuration: XILINX: IRMAIN 11
+                                PCIMAIN 5
+                                RAMROM 7/9 fÅr FPM RAM oder 8/10 fÅr EDO RAM 
+                                LBUS I 
+				TOS x8
+---------------------------------------------------------------------------------------------------
+TOS énderung
+===================================================================================================                                
+Datum 	Sourcefile	Brennfile	Text
+---------------------------------------------------------------------------------------------------
+09.10.97:TOS447.S      	TOS_x8.IMG	Beide Cache aus beim Hochfahren (kein Cache aus mehr nîtig)
+					Neue Floppy Routinen
+					Neue SCSI Routinen (SCSI 3)
+					Neue Speicherconfiguration
+###################################################################################################					
+29.10.97:   HADES_B3.ACC
+Neues Hades ACC fÅr alle Grafikkarten. Bei ET4000 und ET6000 mit 
+Mîglichkeit das Screen RAM auf Cache Mode write trough zu setzen, was 
+deutlich mehr Geschwindigkeit bringt. Dies funktioniert allerdings 
+nur mit den NOVA-Treibern nicht mit NVDI ET4000. 
+Zudem wurde der Fehler beim SCSI-Transfer beseitigt der beim 
+HADES_B2.ACC mit ET6000 auftrat. 
+Siehe auch die neuen Einstellmîglichkeiten im HADES.INF File.
+###################################################################################################	
+13.11.1997: XILINX RAMROM 12 EDO
+Korrektur am RAMROM XILINX fÅr EDO-RAM, da es Probleme mit mehr als 2 
+Modulen gab. MA0 und MA1 waren etwas spÑt.
+###################################################################################################	
+7.12.97:  TOS. XILINX RAMROM 16 EDO
+Neues serialisiertes TOS. Seriennummer ist im Destop Info sichtbar.
+XILINX RAMROM 16: Jetzt auch fÅr byt wide SIMMs. ZusÑtzlich neuer 
+refresh Algorytmus. 4/8MB-Module sowie byt wide 65MB-Module max. 
+4 Stck. (bei EDO!). Der Zwischenzeitlich ausgelieferte XILINX RAMROM 
+14 hat einen Fehler bei Erkennung des 2.Paar -> nicht mehr verwenden.
+###################################################################################################
+17.3.98 
+TOS Nr.54:
+----------
+-Neues TOS mit verbesserter Floppyroutine fÅr Atari-DD Diketten.
+-Kein Bootsector-Read von der Diskette -> schnellerer Startup, vorallem wenn      
+                                          keine HD-Diskette im Laufwerk ist.
+			               -> keine Gefahr von Bootsectorviren.
+-Schnelle Erkennung wenn keine IDE-Platte angeschlossen ist.
+-Maschine startet auch ohne RAM auf und gibt Fehlercode aus
+-Maschine fÅhrt beim Start kurzen Hardwaretest durch und gibt allfÑlligen 
+ Fehlercode aus. Bei geringfÅgigen Fehlern wird probiert den Hades trotzdem 
+ Aufzustarten.
+-Noch vor der Initisierung der Grafikkarte (ET4000, ET6000, Mach64) werden die 
+ ROMs der PCI-Karten durchgecheckt. Wird an Adresse 0 der Wert "$ABCEDF42" 
+ gefunden wird auf die Adresse +4 eingesprungen. Folgende Register sind dabei frei:
+ A2-A4, D2-D3. RÅcksprungadresse ist a5. In A0 muss die Bildschirmbasisadresse 
+ zurÅckgegeben werden, wenn eine Grafikkarte initialisiert wurde. Ansonsten muss 
+ in diesem Register eine 0 stehen. Ist D4 kleiner $400000 so steht kein Speicher 
+ zur VerfÅgung ansonsten ist es die Speichergrîsse.
+-UnterstÅtzung von ET6000 Karten Version 96. Vorbesetzung der Clockregister.
+ 
+XILINX PCIMAIN 14,RAMROM F1 und F2 (Aufpreis):
+----------------------------------------------
+-Burst Modus bei DMA vom PCI-Bus bei SCSI-Karten usw. Der Burst muss 4 Longwords 
+ lang sein (=1 Line =16 Byts) und muss bei Line-Grenze beginn (A2=0, A3=0) und  
+ linear (0,4,8,12) incrementieren.
+-Schnellers RAM-Timing fÅr Fast-Page-Mode-(F1) und EDO (F2)-RAM mit Lesezyklus
+ 3-1-1-1 statt 4-1-1-1. Dadurch wird der Hades um ca. 20% schneller.
+
+öbriges:
+--------
+-Treiber von NCR und Symbios basierenden SCSI-Controllern auf dem PCI-Bus 
+ verfÅgbar mit Transferraten Åber 10MB/sec. Ultra und Wide wird unterstÅtzt.
+-Neuer Bootlader der Programme noch vor dem Harddisk-Treiber lÑdt. Weiter 
+ Informationen dazu stehen im "BOOT.INF".
+#####################################################################################################
+8.4.98
+Xilinx RAMROM F3 und F4: Zu kurze Zugriffszeit beim DMA vom PCI behoben.
+Achtung: Bei allen RAMROM XILINX Versionen kînnen maximal nur(!) 96 Speicherchips
+angesprochen werden.
+Der Hades 040 kann nur normalen FPM-Mode.
+Noch Fehler im TOS: Write protect bei Disketten wird nicht richtig angezeigt. Es wird nur
+ein allgemeiner Fehler gemeldet.
+#####################################################################################################
+14.4.98
+TOS 55: write protect fehler bei disketten behoben.
+#####################################################################################################

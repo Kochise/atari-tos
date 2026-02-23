@@ -1,0 +1,76 @@
+;*******************************************************************************
+;* MRF: (angepasst von MH)
+;* Harddisk-Waiter (zum gleichzeitigen Anschalten von Rechner und Platte).
+;* Leider ist mir unbekannt, von wem diese Routine stammt, ich habe sie in
+;* einem Bootsektor gefunden. Zudem kann man das Warten mit [ALTERNATE]
+;* abbrechen (wenn z.B. keine Platte vorhanden ist).
+;* [ALL]
+;*
+;* >>> Achtung: Der Harddisk-Waiter funktioniert nur mit einer Platte. Zudem
+;*              bin ich nur sicher, daû er mit meiner Megafile 60 funktioniert.
+
+.HD_WAIT1 = 0       ;1: Patch einbinden, 0: Patch nicht einbinden
+.HD_WAITTIME = .10  ;Wartezeit in s
+
+_IF .HD_WAIT1
+ .HD_WAIT:      +hdwait1.fil                 ;LÑnge 224 Bytes
+ !.HD_WAIT+A .. ~                            ;in diesem Patch nicht relozieren
+
+ 70C            |$4E,B9,.HD_WAIT+.BASE.L     ;JSR zum Harddisk-Waiter
+ 712            |$4E,71,4E,71                ;NOP's
+_ENDIF
+
+;*******************************************************************************
+;* MRF: (angepasst von MH)
+;* Alternativer Hardisk-Waiter. Wartet .HD_WAITTIME Sekunden bei einem
+;* Kaltstart auf die Platte. Dies funktioniert mit allen Platten!
+;* Mit Tastendruck kann das Warten abgebrochen werden.
+;* Fast gleichwertig zu diesem Patch ist, wenn man in den Patch, der die
+;* Zeitspanne festlegt, ab der Systemstart noch die Tests ausgefÅhrt
+;* werden, die entsprechende Zeit eintrÑgt.
+;* [ALL]
+
+.HD_WAIT2 = 0       ;1: Patch  einbinden, 0: Patch nicht einbinden
+.HD_WAITTIME = .12  ;Wartezeit in s
+
+_IF .HD_WAIT2
+ .HD_WAIT:      +hdwait2.fil                 ;LÑnge 58 Bytes
+ !.HD_WAIT+A .. ~                            ;in diesem Patch nicht relozieren
+
+ 70C            |$4E,B9,.HD_WAIT+.BASE.L     ;JSR zum Harddisk-Waiter
+ 712            |$4E,71,4E,71                ;NOP's
+_ENDIF
+
+;*******************************************************************************
+;* MH:
+;* Hardisk-Waiter von EWK.
+;* [ALL]
+
+.HD_WAIT3 = 0       ;1: Patch  einbinden, 0: Patch nicht einbinden
+.HD_WAITTIME = .30  ;max. Wartezeit in s (max. 99s !!!)
+.HD_WAITDEVICE = 0  ;DMA-Device, auf das gewartet werden soll (0-7)
+
+_IF .HD_WAIT3
+ .HD_WAIT:      +hdwait3.fil                 ;LÑnge 334 Bytes
+ !.HD_WAIT+A .. ~                            ;in diesem Patch nicht relozieren
+
+ ;.HD_WAIT+10    |$4E,71                      ;Nur fÅr RAM-TOS und >=2 Harddisks
+
+ 70C            |$4E,B9,.HD_WAIT+.BASE.L     ;Jsr zum Harddisk-Waiter
+ 712            |$4E,71,4E,71                ;Rest mit NOP's auffÅllen
+_ENDIF
+
+;*******************************************************************************
+;* SE: (28.01.94)
+;* Plattenwarter, nach RAM-Test, statt Wartebalken.
+;* [ALL]
+
+.HD_WAIT4 = 0       ;1: Patch  einbinden, 0: Patch nicht einbinden
+
+_IF .HD_WAIT4
+ .HD_WAIT:    +hdwait4.fil    ;LÑnge 174 Bytes
+ !.HD_WAIT .. ~               ;In diesem Patch nicht relozieren
+
+ 9C8 |$4E,B9,.HD_WAIT+.BASE.L ;JSR zum Harddisk-Waiter
+ 9CE |$4E,F9,00,E0,0B,0C      ;Wartebalkenroutine Åberspringen
+_ENDIF

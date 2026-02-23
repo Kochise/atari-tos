@@ -1,0 +1,6 @@
+cmprom
+newglue
+findrsc
+mkbininc
+mkasminc
+mkrom

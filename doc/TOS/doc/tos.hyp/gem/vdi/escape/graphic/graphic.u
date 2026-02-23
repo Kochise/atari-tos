@@ -1,0 +1,182 @@
+!iflang [english]
+
+!begin_node Special graphic functions
+
+This library contains functions to output data on a printer, for
+controlling the colour calibration, and many others. In all, the
+following routines are available:
+
+!begin_xlist !compressed [x v_clear_disp_list]
+!item [(!bullet) v_bit_image]
+Outputs image data on a printer
+!item [(!bullet) v_clear_disp_list]
+Clears printer buffer
+!item [(!bullet) v_copies]
+Sets number of copies
+!item [(!bullet) v_dspcur]
+Displays graphic cursor at given position
+!item [(!bullet) v_form_adv]
+Executes form-feed on a printer
+!item [(!bullet) v_hardcopy]
+Outputs hardcopy on a printer
+!item [(!bullet) v_orient]
+Sets output format
+!item [(!bullet) v_output_window]
+Outputs part of screen area on a printer
+!item [(!bullet) v_page_size]
+Sets page format
+!item [(!bullet) v_rmcur]
+Clears last graphic cursor
+!item [(!bullet) v_tray]
+Selects tray for paper feed-in/out
+!item [(!bullet) v_xbit_image]
+Outputs image data on a printer
+!item [(!bullet) vq_bit_image]
+Gets information about v_bit_image
+!item [(!bullet) vq_calibrate]
+Tests colour calibration
+!item [(!bullet) vq_driver_info]
+Gets information about a printer driver
+!item [(!bullet) vq_driver_name]
+Gets name of a driver
+!item [(!bullet) vq_image_type]
+Gets type of a bitmap file
+!item [(!bullet) vq_margins]
+Inquires printer margins
+!item [(!bullet) vq_page_name]
+Gets name and size of a page format
+!item [(!bullet) vq_prn_scaling]
+Gets scaling of the printer driver
+!item [(!bullet) vq_scan]
+Gets printer parameters
+!item [(!bullet) vq_tabstatus]
+Inquires availability of graphics tablet, mouse...
+!item [(!bullet) vq_tray_names]
+Gets name of paper tray/output slot
+!item [(!bullet) vs_calibrate]
+Tests colour calibration
+!item [(!bullet) vs_crop]
+Sets cropping rectangle on a document
+!item [(!bullet) vs_document_info]
+Sets document specifications for print (!nolink [monitor])
+!item [(!bullet) vs_load_disp_list]
+Loads printer buffer
+!item [(!bullet) vs_page_info]
+Sets document specifications for print (!nolink [monitor])
+!item [(!bullet) vs_palette]
+Selects the colour palette
+!item [(!bullet) vs_save_disp_list]
+Saves printer buffer
+!end_xlist
+
+See also:
+VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Grafikspezial-Funktionen
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen um Informationen auf einem Drucker
+auszugeben, zur Steuerung der Farbkalibration uvm. Insgesamt stehen die
+folgenden Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [x v_clear_disp_list]
+!item [(!bullet) v_bit_image]
+Bildinformationen auf Drucker ausgeben.
+!item [(!bullet) v_clear_disp_list]
+Druckpuffer l(!oumlaut)schen.
+!item [(!bullet) v_copies]
+Anzahl der Kopien festlegen.
+!item [(!bullet) v_dspcur]
+Grafikcursor versetzen.
+!item [(!bullet) v_form_adv]
+Seitenvorschub auf Drucker durchf(!uumlaut)hren.
+!item [(!bullet) v_hardcopy]
+Hardcopy auf Drucker ausgeben.
+!item [(!bullet) v_orient]
+Ausgabeformat einstellen.
+!item [(!bullet) v_output_window]
+Bildschirmbereich auf Drucker ausgeben.
+!item [(!bullet) v_page_size]
+Seitenformat festlegen.
+!item [(!bullet) v_rmcur]
+Letzten Grafikcursor l(!oumlaut)schen.
+!item [(!bullet) v_tray]
+Schacht f(!uumlaut)r Papiereinzug/ausgabe w(!aumlaut)hlen.
+!item [(!bullet) v_xbit_image]
+Bildinformationen auf Drucker ausgeben.
+!item [(!bullet) vq_bit_image]
+Informationen (!uumlaut)ber v_bit_image ermitteln.
+!item [(!bullet) vq_calibrate]
+Farbkalibrierung testen.
+!item [(!bullet) vq_driver_info]
+Informationen (!uumlaut)ber einen Druckertreiber ermitteln.
+!item [(!bullet) vq_driver_name]
+Gets name of a driver.
+!item [(!bullet) vq_image_type]
+Typ einer Bitmap-Datei ermitteln.
+!item [(!bullet) vq_margins]
+Druckerr(!aumlaut)nder erfragen.
+!item [(!bullet) vq_page_name]
+Name und Gr(!oumlaut)(!sharps)e eines Seitenformats ermitteln.
+!item [(!bullet) vq_prn_scaling]
+Skalierung des Druckertreibers ermitteln
+!item [(!bullet) vq_scan]
+Druckerparameter ermitteln.
+!item [(!bullet) vq_tabstatus]
+Verf(!uumlaut)gbarkeit eines Grafiktabletts, Maus, usw. abfragen.
+!item [(!bullet) vq_tray_names]
+Namen von Papiereinzug/auswurf ermitteln.
+!item [(!bullet) vs_calibrate]
+Farbkalibration setzen.
+!item [(!bullet) vs_crop]
+Sets cropping rectangle on a document.
+!item [(!bullet) vs_document_info]
+Dokumentangaben f(!uumlaut)r Druckmonitor setzen
+!item [(!bullet) vs_load_disp_list]
+Druckpuffer laden.
+!item [(!bullet) vs_page_info]
+Sets document specifications for print (!nolink [monitor])
+!item [(!bullet) vs_palette]
+Auswahl der Farbpalette.
+!item [(!bullet) vs_save_disp_list]
+Druckpuffer speichern.
+!end_xlist
+
+Querverweis:
+Workstations des VDI ~ Style-Guidelines
+
+!endif
+
+!include gem/vdi/escape/graphic/vq_bit_image.ui
+!include gem/vdi/escape/graphic/vq_calibrate.ui
+!include gem/vdi/escape/graphic/vq_driver_info.ui
+!include gem/vdi/escape/graphic/vq_driver_name.ui
+!include gem/vdi/escape/graphic/vq_image_type.ui
+!include gem/vdi/escape/graphic/vq_margins.ui
+!include gem/vdi/escape/graphic/vq_page_name.ui
+!include gem/vdi/escape/graphic/vq_prn_scaling.ui
+!include gem/vdi/escape/graphic/vq_scan.ui
+!include gem/vdi/escape/graphic/vq_tabstatus.ui
+!include gem/vdi/escape/graphic/vq_tray_names.ui
+!include gem/vdi/escape/graphic/vs_calibrate.ui
+!include gem/vdi/escape/graphic/vs_crop.ui
+!include gem/vdi/escape/graphic/vs_document_info.ui
+!include gem/vdi/escape/graphic/vs_load_disp_list.ui
+!include gem/vdi/escape/graphic/vs_page_info.ui
+!include gem/vdi/escape/graphic/vs_palette.ui
+!include gem/vdi/escape/graphic/vs_save_disp_list.ui
+!include gem/vdi/escape/graphic/v_bit_image.ui
+!include gem/vdi/escape/graphic/v_clear_disp_list.ui
+!include gem/vdi/escape/graphic/v_copies.ui
+!include gem/vdi/escape/graphic/v_dspcur.ui
+!include gem/vdi/escape/graphic/v_form_adv.ui
+!include gem/vdi/escape/graphic/v_hardcopy.ui
+!include gem/vdi/escape/graphic/v_orient.ui
+!include gem/vdi/escape/graphic/v_output_window.ui
+!include gem/vdi/escape/graphic/v_page_size.ui
+!include gem/vdi/escape/graphic/v_rmcur.ui
+!include gem/vdi/escape/graphic/v_tray.ui
+!include gem/vdi/escape/graphic/v_xbit_image.ui
+
+!end_node

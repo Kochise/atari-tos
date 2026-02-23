@@ -1,0 +1,37 @@
+ScreenRAM WT         * Immer Gross- und Kleinschreibung beachten!!!
+CALAMUS 0,CB         ****************************************************************************************
+STDPHOTO 4           *	Zeilenaufbau: Programmname [Zahl],[Argument 1],[Argument 2] etc.                    *
+WORDPLUS 4           *		-> Werte in eckigen Klammern sind optional                                  *
+GEMAR.APP 3          *		-> Zahl und Argumente mit einem Komma trennen                               *
+ST_ARC.PRG 2         * 		-> FÅr jedes Programm eine Zeile verwenden                                  *
+MGP_V2_0 G2	     *		-> Der Rest der Zeile nach dem 2.Leerzeichen wird ingnoriert                *
+TBCAD2TT  CB         *          -> Der Programmname darf maximal 7 Zeichen lang sein.                       *
+LAYOUTTC 4,CB        *             Ist der Name lÑnger so werden nur die ersten 7 Buchstaben verwendet.     *
+DHRYSTO 0,CB         *   Argumente:                                                                         *
+BUGABOO 3,MA         *   ----------                                                                         *
+SCSITOOL 2	     *	1 = Daten Cache aus. 2 = Instruction Cache aus. 3 = beide Cache aus                 *
+KOBOLD_2 3	     * 	0 = Cache beim Programmstart nicht aus                                              *
+KOBOLD_3 3	     * 	4 = Cache beim Programmstart fÅr 4 sec aus, 5 = 10 sec aus 6 = 15 sec aus           *
+VMG.PRG 3            * 	CB = Cache mode = copy back (10% schneller wenn's das Programm vertrÑgt)            *
+CL_DEMO 4            * 	G2 = Getrez immer 2 (ST-Hoch)                                                       *
+VMG_PCI 3            *	UM = Screen Umlenkung ein (change screenadresse wird umgelenkt)                     *
+METADOS 3            *	MA = MMU aus                                                                        *
+TFRAKTAL CB          * 	ST = Machine Cookie auf ST                                                          *
+TEMPUS.PRG 1         *  A  = ROM-PORT A     B = ROM-PORT B        C = ROM-PORT C
+QSORTN.TOS CB        ****************************************************************************************
+CUBASE 4,B           <- Donggle steckt in ROM-PORT B, beim aufstarten 10 sec cache aus (als Beispiel)
+START.TOS 5,CB       ----------------------------------------------------------------------------------------
+ASP256TP 5,CB        - SelbstÑndige Zeilen:                                                                 -
+NOVA_COL 3           -----------------------                                                                -
+BOOTSTRA MA          -   cachemode CB                = cachemode copy back nach reset                       -
+PD40.PRG 3           -   ROM-PORT A (oder B oder C)  = aktiviere ROM-PORT A,B oder C Umlenkung nach reset   -
+PD60.PRG 3           -   ScreenRAM WT                = Screen RAM write trough modus (ETx000)                                                                                   -
+GFA_BCOM 3,MA        -                                                                                      -
+GL.PRG 3,MA          ----------------------------------------------------------------------------------------
+CAF_206 6,ST,B
+CUBASE_A ST,B 
+LOOK2_D.PRG 4,ST	Diese Zeile nur wenn Scanner am Paralellport	
+ <-Weil hier an 1.Stelle der Zeile kein Buchstabe steht wird der Rest des Files ingnoriert.
+
+*->Diese File wird nach jedem "OK" im Accessory, neu eingelesen.
+

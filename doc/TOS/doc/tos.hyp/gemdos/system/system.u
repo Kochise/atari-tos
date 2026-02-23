@@ -1,0 +1,76 @@
+!iflang [english]
+
+
+!begin_node System functions
+!html_name gemdos_system
+
+!begin_xlist [x Shutdown~] !compressed
+!item [(!bullet) Salert~~~] Outputs alerts or error-messages.
+!item [(!bullet) Sconfig~~] Obtains/Sets operating system configuration.
+!item [(!bullet) Scookie~~] Controls cookie jar.
+!item [(!bullet) Shutdown~] Kills all processes, syncs file-systems then halts or reboots the system.
+!item [(!bullet) Slbclose~] Closes a (!link [shared library][Shared libraries])
+!item [(!bullet) Slbopen~~] Opens a shared library.
+!item [(!bullet) Srealloc~] Allocates screen memory.
+!item [(!bullet) Ssystem~~] Controls cookie jar, memory access and various system settings.
+!item [(!bullet) STEFcntrl] STEmulator (!nolink [control functions]).
+!item [(!bullet) Super~~~~] Obtains or alters supervisor-mode.
+!item [(!bullet) Suptime~~] Obtains the current uptime and load averages for the system.
+!item [(!bullet) Sversion~] Obtains the version number of (!nolink [GEMDOS]).
+!item [(!bullet) Syield~~~] Releases CPU for other processes.
+!item [(!bullet) Sync~~~~~] Synchronises all mounted file-systems.
+!item [(!bullet) Sysconf~~] Checks operating system configuration.
+!end_xlist
+
+See also:
+File functions ~ Process functions
+
+
+!else
+
+
+!begin_node Systemfunktionen
+!html_name gemdos_system
+
+!begin_xlist [x Shutdown~] !compressed
+!item [(!bullet) Salert~~~] Warnung bzw. Fehlermeldung ausgeben.
+!item [(!bullet) Sconfig~~] Betriebssystem-Konfiguration ermitteln/setzen.
+!item [(!bullet) Scookie~~] Controlling Cookie Jar.
+!item [(!bullet) Shutdown~] Kills all processes, syncs filesystems then halts or reboots the system.
+!item [(!bullet) Slbclose~] Schlie(!sharps)t eine (!link [Shared Library][Shared Libraries])
+!item [(!bullet) Slbopen~~] (!Oumlaut)ffnet eine Shared Library
+!item [(!bullet) Srealloc~] Bildschirmspeicher reservieren.
+!item [(!bullet) Ssystem~~] Controlling Cookie Jar, memory access and various system settings.
+!item [(!bullet) STEFcntrl] STEmulator (!nolink [Kontrollfunktionen])
+!item [(!bullet) Super~~~~] Supervisor-Modus ermitteln oder (!aumlaut)ndern.
+!item [(!bullet) Suptime~~] Returns the current uptime and load averages from the system.
+!item [(!bullet) Sversion~] Versionsnummer von (!nolink [GEMDOS]) ermitteln.
+!item [(!bullet) Syield~~~] CPU f(!uumlaut)r andere Prozesse freigeben.
+!item [(!bullet) Sync~~~~~] Synchronisation der gemounteten Dateisysteme.
+!item [(!bullet) Sysconf~~] Betriebssystem-Konfiguration (!uumlaut)berpr(!uumlaut)fen.
+!end_xlist
+
+Querverweis:
+Dateifunktionen ~ Prozessfunktionen
+
+
+!endif
+
+
+!include gemdos/system/salert.ui
+!include gemdos/system/sconfig.ui
+!include gemdos/system/scookie.ui
+!include gemdos/system/shutdown.ui
+!include gemdos/system/slbclose.ui
+!include gemdos/system/slbopen.ui
+!include gemdos/system/srealloc.ui
+!include gemdos/system/ssystem.ui
+!include gemdos/system/stefcntr.ui
+!include gemdos/system/super.ui
+!include gemdos/system/suptime.ui
+!include gemdos/system/sversion.ui
+!include gemdos/system/syield.ui
+!include gemdos/system/sync.ui
+!include gemdos/system/sysconf.ui
+
+!end_node

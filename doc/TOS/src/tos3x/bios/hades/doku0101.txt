@@ -1,0 +1,856 @@
+Dokumentation zum Hades.  Stand 26.1.2001
+=====================================================================
+Software
+#####################################################################
+Im Auto-Ordner mÅssen sich folgende Programme befinden:
+-FPU3.PRG           : EnthÑlt folgendens
+                     -FPUxx.PRG       FPU-Emulation fÅr 40 und 60er.
+		     -UIIHx.PRG       Unimplem. Integer Handler fÅr 
+                                      MC68060.
+                     -OVFIXx.PRG      TastaturÅberlaufkorrektur
+                     -XYTASTAT.PRG    Tasttaturbelegungskorrektur. 
+                                      Nur wenn XYTASTAT.INF im Auto-
+                                      Ordner.
+                     -SCSI            SCSI pseudo DMA-Routinen. 
+                      (Die Routinen FPUxx.PRG,UIIHx.PRG und SCSI sind
+                       schon im ROM implementiert. Jedoch laufen sie 
+                       im RAM schneller!).                
+                       
+                       
+-Grafikkartentreiber: Entsprechend der eingesetzen Grafikkarte.
+		      Folgende Grafikkarten werden im Moment unter-
+                      stÅtzt: -ET4000
+                              -ET6000
+                              -MACH64
+		      Normalerweise folgende Programme (NOVA-Treiber
+                      der Computerinsel Huber!).
+		     -EMULATOR.PRG    Grafikkarteninitalisierung
+                      EMULATOR.BIB    Auflîsungsdatei dazu
+                     -MENU.PRG        Auslîsungsauswahl
+                      MENU.INF        Einstellungsfile
+		     -STA_VDI.PRG     VDI zu Grafikkarte
+                      STA_VDI.INF     Auflîsungsdatei dazu
+-NVDI.PRG           : evt.
+-NOVACAL.PRG	    : Damit Calamus in 32k, 65k und 24bit Farben lÑuft
+- Grafikkarten
+  ACHTUNG: Bei den ETx000- und Mach64-Grafikkarten gibt es etliche ver-
+           schiedene Versionen. Nur wenn Sie die Grafikkarte bei uns bestellen,
+           kînnen Sie sicher sein, da· der zugehîrige Treiber auch wirklich
+           funktioniert !!!!!!!!!!!!
+
+  a) ET4000 W32 PCI mit 1MB bis 2MB RAM
+     ET6000 PCI mit 2 bis 8MB MDRAM
+     FÅr diese Karten gibt es bisher zwei Treiber: das NOVA-VDI von
+     Computerinsel und das NVDI ET4000 von Behne und Behne.
+   - NVDI-ET4000
+     Durch den angepaûten VMG kînnen nun auch die
+     hîheren Pixeltakte (bis 110 MHz) der PCI-Grafikkarte genutzt werden.
+     Nachteil:
+     NVDI hat im 256 Farben Modus Probleme bei der Darstellung von gerasterten
+     FlÑchen (siehe Darstellung des HADES.ACCs). Dies liegt an der fehlenden
+     Anpassung an den integrierten Accelerator des ET4000/W32 Chips.
+     Abhilfe:
+     Verwendet man GEMRAMH und WINX im Autoordner, so hat man neben der besseren
+     Fensterverwaltung auch keinen DarstellungsmÅll bei den 256 Farben mehr.
+
+     Aber auch bei hîheren Farbtiefen haben einige Programme KompatibilitÑtsprobleme
+     mit dem NVDI ET4000. Beim gepatchten VMG4000.PRG kînnen noch keine neuen Modi
+     erzeugt werden, sondern nur vorhandene kopiert und anschlie·end manuell abge-
+     Ñndert werden, da einige Bits fÅr die Initialisierung sonst nicht korrekt ge-
+     setzt werden.
+
+   - Das NOVA-VDI ist diesbezÅglich "sauberer", da gibt es keine Probleme in den
+     verschiedenen Farbtiefen. Auch von der Geschwindigkeit ist es etwas schneller,
+     obwohl es noch nicht die speziellen Features des ET4000 W32 nutzt. 
+     FÅr die ET6000 unterstÅtzt die Software die speziellen Features 
+     und ist  desshalb besonders schnell. 
+     Aufgrund der besseren KompatibilitÑt empfehlen wir das NOVA-VDI einzusetzten.
+
+  b) MACH64 ISA
+     Von Computerinsel gibt es Nova-Treiber fÅr die 2MB DRAM (110MHz), die 2MB VRAM
+     und die 4MB VRAM ISA-Karten (135MHz Pixeltakt). Vorteil: hîherer Pixeltakt und
+     mehr Speicher -> hîhere Auflîsungen, hîhere Farbtiefe, hîhere Bildwiederhol-
+     frequenzen und natÅrlich die hîhere Geschwindigkeit (bei den VRAM-Karten auch
+     bei hîheren Farbtiefen !!!).
+
+  c) MACH64 PCI
+     Hier gibt es es von Computerinsel einen Treiber fÅr die 2MB und 4MB
+     VRAM-Karten. Die DRAM-Karten laufen noch nicht.
+     Vorteil zu den VRAM-ISA-Karten: vor allem beim Blitten nochmals deutlich mehr
+     Geschwindigkeit (32 Bit Busbreite beim PCI-Bus anstatt 16 Bit beim ISA-Bus !)
+
+  NOVA-VDI + NVDI
+  Beim Einsatz des NOVA_VDIs kann man das normale NVDI als reines GDOS nachgeladen
+  werden. Dies beschleunigt auch die Bildschirmausgabe erheblich.
+  Vorgehensweise:
+  1. NOVA-VDI installieren
+  2. NVDI ganz normal installieren
+  3. Die NVDIDRVx.SYS (4 StÅck insgesamt ) Treiber im GEMSYS-Ordner entfernen oder
+     umbenennen.
+  4. Die ASSIGN.SYS der Nova-Diskette nach auf die Bootpartition kopieren oder bei
+     der bereits vorhandenen ASSIGSN.SYS alle Bildschirmtreiber als 0xp SCREEN.SYS
+     anmelden, damit das NVDI die bereits vorhandenen Nova-Treiber verwendet.
+  5. Neustart (nun mit Nova-VDI und NVDI)
+
+  Das TOS initialisiert beim Booten zuerst die Grafikkarten im PCI-Bus (egal ob
+  MACH64 oder ETx000), falls diese nicht vorhanden ist, die ET4000-ISA, und falls
+  auch diese nicht vorhanden ist, die Mach64 im ISA-Bus. Sollte auch die nicht
+  da sein, so bleibt der Monitor halt dunkel.
+  Das bedeutet, da· man immer direkt beim Booten ein Bild und damit auch alle
+  eventuell auftretenden Fehlermeldungen sieht.
+  Es ist auch der gemischte Betrieb ET4000/ISA und Mach64/PCI bzw. ETx000/PCI und
+  MACH64/ISA mîglich. Zwei Grafikarten gleichzeitig im ISA- oder PCI-Bus sind nicht
+  mîglich.
+
+
+- ATI Rage Pro 8MB
+  ****************
+  Diese Grafikkarte funktioniert zusammen mit NVDI 5.
+  Einfach NVDI 5 mit Option ET4000 installieren. Nachher "INSTALL.TOS" ab der 
+  Diskette zur Grafikkarte starten. Das wars.
+
+***********************************************************************************
+Funtionierende Reihenfolge von mîglichen Autoordnerprogrammen:
+--------------------------------------------------------------
+-XBOOT.PRG
+-MAGXBOOT.PRG
+-IPRN2.PRG
+-DRVIN.PRG
+-MFP.PRG
+-MFP_TT.PRG
+-EMULATOR.PRG
+-FPU__3.PRG
+-JAR128.PRG
+-MENU.PRG
+-PCI_CONF.PRG
+-BIGDOS.PRG
+-STA_VDI.PRG
+-WDIALOG.PRG
+-NVDI.PRG
+-CKBD.PRG
+-RSVX.PRG
+-HA_ESCC.PRG
+-MINTNP.PRG
+-GEMRAM.PRG
+-WINX.PRG
+-NOVACAL.PRG
+-METADOS.PRG
+Die Reihenfolge der dazugehîrenden Info- und Config-Files spielt keine Rolle.
+NatÅrlich mÅssen Sie nicht all diese Programme installiert haben.
+Das ist nur die Reihenfolge der mîglichen Autoordnerprogramme.
+**********************************************************************************
+Im Wurzelverzeichnis (normalerweise Laufwerk C:/) befinden sich noch
+-HADES_xx.ACC       : Cache Verwaltung (ohne dies keine Leistung)
+ HADES_xx.INF       : Einstellungsdatei dazu
+-NOVA_COL.ACC       : Einstellung der Grafikkarte 
+ NOVA-COL.INF       : Info-File dazu.
+
+Das A und O fÅr die Performance des Hades ist der CPU-Cache der 68060
+bzw. 68040. Deshalb bildet das HADES.ACC die entscheidende Steuerzentrale
+fÅr die Geschwindigkeit der Programme. Es gibt 2 verschiedene interne Caches:
+  - der Daten-Cache ist fÅr die meisten Programme unkritisch und ist deshalb
+    in der Regel eingeschaltet
+  - der Instruction-Cache ist etwas kritischer und mu· bei Programmen mit
+    selbstmodifizierendem Code beim Programmstart ausgeschaltet werden.
+    Ist das Programm vollstÑndig geladen, so kann auch der Instruction-Cache
+    in der Regel wieder eingeschaltet werden.
+    Saubere Programme laufen natÅrlich auch mit eingeschaltetem Instruction-
+    Cache.
+HADES_B3.ACC: Cache Einstellungen vom File HADES_B.INF werden Åbernommen.
+HADES_B6.ACC: Cache werden nur von Hand beeinflusst. Korrektur fÅr XAIRON.
+
+Au·erdem kann man zwischen write-through und copy-back Modus wÑhlen.
+Beim write-through wird bei jedem Schreibzugriff auf den Cache auch
+direkt der Hauptspeicher aktualisiert. Beim copy-back Modus werden die
+Daten erst dann in den Hauptspeicher geschrieben, wenn sie verÑndert
+werden. Dies vermindert die Schreibzugriffe auf das RAM und hat somit
+eine weitere Geschwindigkeitssteigerung zur Folge.
+
+Mit der ASCII Steuerdatei HADES_xx.INF wird der Zustand des Prozessorcaches
+beim Programmstart bestimmt. Diese Datei kann mit jedem Editor angesehen
+und fÅr eigene Programme angepa·t werden. Unbedingt ansehen! Ist fÅr ein
+Programm kein Eintrag in der HADES_xx.INF vorhanden, so werden beide interne
+Caches beim Programmstart fÅr 1 Sekunde ausgeschaltet (natÅrlich nur, wenn
+das HADES_xx.ACC aktiv ist!!!). Durch die geeignete Cache-Einstellung sollte
+man fast jedes einigerma·en saubere Programm auf dem Hades zum Laufen bringen.
+
+
+Zusammenbau
+###########################################################################
+
+Lassen Sie den Zusammenbau durch uns erledigen, dann sind Sie sicher 
+dass richtig funktioniert. Ansonsten lesen Sie die folgenden 
+ErklÑrungen genau durch!
+
+ Was Sie beim Einbau des HADES-Mainboards beachten mÅssen
+---------------------------------------------------------
+Die Beachtung der nachfolgenden Punkte ist fÅr die spÑtere
+einwandfreie Funktion Ihres HADES unbedingt erforderlich.
+
+
+ACHTUNG:
+
+Der Einbau und die Inbetriebnahme geschieht ausschlie·lich auf eigenes
+Risiko und sollte nur von geÅbtem Fachpersonal vorgenommen werden.
+Medusa Computer Systems Åbernimmt keine Haftung fÅr irgendwelche 
+FolgeschÑden, die auf diese oder andere zugehîrigen Anleitungen zum 
+HADES zurÅckzufÅhren sind !!!
+
+
+1.:     das HADES Mainboard besitzt PC-Standardabmessungen und pa·t daher
+        in jedes PC-GehÑuse. Sie sind also in der Wahl Ihres GehÑuses frei.
+        Das dazugehîrige Netzteil sollte, um spÑtere RAM-Erweiterungen auch
+        von der Stromversorgung her zu ermîglichen, mindestens eine
+        Leistungsabgabe von 200W besitzen. Fragen Sie diesbezÅglich bitte
+        bei Ihrem GehÑuselieferanten nach.
+
+2.:     PC Mainboards werden im GehÑuse an verschiedenen Stellen
+        verschraubt. Nicht anders verhÑlt es sich beim HADES.
+
+        VORSICHT!!!
+
+        Beim HADES ist es unbedingt erforderlich, Papp- oder Plastikunterleg-
+        scheiben zwischen Befestigungsschraube und Mainboard zu legen, damit
+        die in unmittelbarer NÑhe der Befestigungslîcher liegenden Leiter-
+        bahnen nicht beschÑdigt werden. Es droht sonst ein fÅr das Mainboard
+        gefÑhrlicher Kurzschlu·. Auf der Unterseite kînnen Sie die Kurzschlu·-
+        gefahr durch Anbringen von doppelten Lagen Gewebebandstreifen Åber
+        den Lîchern beseitigen. Sie mÅssen die Streifen dann nur noch
+        vorsichtig durchstechen, damit die Schrauben durchpassen.
+
+3.:     Die Schnittstellenbelegung (MODEM, Floppy, IDE etc.) entnehmen Sie
+        bitte dem beiliegenden Layoutplan. Der Pin 1 jedes Kabels (Pin 1
+        ist rot markiert) mu· zum Tastaturanschlu· zeigen.
+
+4.:     Die serielle Schnittstelle beim IDE-Port wird nicht verwendet, ebenso
+        die Vierfach-Pfostenfeldleiste in der NÑhe des Floppy-Ports. Die
+        LocalTalk-Schnittstelle wird momentan nicht vom TOS-Betriebssystem
+        unterstÅtzt.
+
+5.:     Beim Einbau eines Floppylaufwerks mÅssen Sie darauf achten, da·
+        dieses auf DS0 eingestellt ist. Fragen Sie im Zweifel Ihren HÑndler.
+
+6.:     Auf dem Mainboard ist ein Spannungsregler-IC stehend in unmittelbarer
+        NÑhe eines PCI-Slots untergebracht. Bitte sorgen Sie dafÅr, da· er zu
+        benachbarten Karten (Kurzschlu·gefahr durch BerÅhrung) oder Kabeln
+        (dito durch Versengen) keinen Kontakt hat.
+
+7.:     Die StromversorgungsanschlÅsse am Mainboard sind PC-konform; somit
+        kann jedes von der Leistung her ausreichende PC-Netzteil angeschlossen
+        werden. Beachten Sie hierzu bitte den beiliegenden Layoutplan.
+
+8.:     Die BestÅckung des Mainboards mit Speicherbausteinen gestaltet sich
+        Ñu·erst einfach. Es finden PS/2 Fast Page SIMM's Verwendung.
+        EDO-SIMM's kînnen auch eingesetzt werden! Bei der BestÅckung
+        achten Sie bitte auf ausreichende Geschwindigkeit. FÅr den HADES sind
+        SIMMS mit 60ns oder schneller nîtig. Sie mÅssen die Speicherbausteine
+        vom Steckplatz aus einsetzen, der der CPU am nÑchsten liegt. Die
+        folgenden Bausteine mÅssen Sie der Reihe nach bestÅcken.
+
+9.:     Die SpeichersteckplÑtze sind paarweise in sogenannten BÑnken
+        organisiert. Demnach hat der HADES vier BÑnke zu je zwei SteckplÑtzen.
+        Die einzelnen BÑnke mÅssen immer voll und paarweise bestÅckt werden.
+        Au·erdem mÅssen sie innerhal der BÑnke die gleiche Speicherplatzgrî·e
+        (z.B. zweimal 8 MB) besitzen. Folglich ist eine ungerade Anzahl an
+        SIMM-Bausteinen oder unterschiedliche Speicherplatzgrî·en oder
+        -geschwindigkeiten innerhalb der BÑnke nicht mîglich - es wird bei
+        Zuwiderhandlung unter UmstÑnden nur ein Teil des insgesamt
+        eingesteckten Speichers erkannt.
+
+10.:    Das HADES Mainboard ist fÅr die Verwendung des MOTOROLA 68040
+        sowie des 68060 ausgelegt. Wir liefern das Mainboard den
+        KundenwÅnschen entsprechend mit allen fÅr die jeweilig bestellte
+        CPU vorzunehmenden Einstellungen aus.
+        Weitere Einstellungen oder énderungen sind nicht erforderlich.
+
+        Wer sich einen HADES mit 68040-CPU gekauft hat, kann sich zu einem
+        spÑteren Zeitpunkt mit einem 68060 ausrÅsten oder umgekehrt, 
+        wenn Ihnen Ihr Hades zu schnell ist.
+
+- Floppylaufwerk
+  Beim Hades kann jedes PC-Åbliche Floppylaufwerk (DD und HD, 3.5"
+  angeschlossen werden. Es werden maximal 2 Floppies verwaltet.
+  Da ein neuer Floppydiskcontroller eingesetzt wird (WD37065C), kînnen
+  Disketten nur Åbers Betriebssystem formatiert werden oder mit PUMPUP
+  oder ECOPY 1.72. PUMPUP ist ein Shareware-Formatierprogramm von Claus Brod,
+  welches die gÑngisten Diskettenformate bietet und automatisch immer
+  Betriebssystemroutinen verwendet. Sie finden es auf der Utility-Diskette.
+  Bei ECOPY mÅssen Sie dazu Åber "Einstellungen - Floppyparameter - Zugriffe
+  Åber Betriessystem (BIOS)" die direkten FDC-Zugriffe deaktivieren.
+
+  ACHTUNG: der neue Floppycontroller kennt nur noch PC-kompatible
+           Formate. Hîherformatierte TOS-Disketten und sonstige Sonder-
+           formate wie z.B. getrickste Bootsektoren werden von dem
+           neuen FDC nicht unterstÅtzt. Das kann dazu fÅhren, da· in-
+           kompatible Installationdisketten erst auf einem normalen
+           ST/TT entpackt werden mÅssen, um sie dann mittels einer PC-
+           kompatiblen Diskette auf den Hades zu Åberspielen.
+
+Zum Abschlu· noch ein paar allgemeine Hinweise:
+
+- Festplattentreiber
+  Verwenden Sie den HDDRIVER 8.01. Der funktioniert zuverlÑssig.
+  Andere Treiber auf eigene Gefahr!!
+- BIGDOS
+  sehr nÅtzliche Erweiterung, ermîglicht die Verwendung von grî·eren MSDOS-
+  kompatiblen Partitionen. Entgegen der Angabe im zugehîrigen Text sollten Sie
+  BIGDOS erst hinter STA_VDI.PRG bzw NVDI.PRG im Autoordner starten. Alles weiter
+  steht im Text.
+
+- Beim Tastaturreset werden die ISA-Bus Varianten der Mach64-Grafikkarten nicht
+  zurÅckgesetzt. Das bedeutet, da· man in der ersten Bootphase kein sinnvolles
+  Bild erhÑlt und erst wenn der Grafikkartentreiber geladen wird, erscheint
+  wieder das richtige Bild. Beim "richtigem" Reset per Resetschalter erscheint
+  sofort wieder das Bootlogo.
+
+- Die hohe Geschwindigkeit (ab 19200 Baud) der Modem2-Schnittstelle wird Åber
+  die niedrigen Baudraten eingestellt. Dazu benîtigen Sie die TOS-Version vom
+  13.08.96 oder neuer. (siehe Desktop-Info... im MenÅ DESK). FÅr eine effektive 
+  Nutzung dieser Schnittstelle empfehlen wir Ihnen HSMODEM und insbesondere 
+  HA_ESCC eine extra gepatchte Version zu verwenden. (Bei Ihrem 
+  SystemhÑndler erhÑltlich)
+
+- Sollte die beigelegte Maus nicht richtig funktionieren, so schauen Sie bitte
+  zuerst mal nach, ob der Schalter auf der Unterseite auf "ATARI" steht.
+  Werkseitig wird meistens AMIGA voreingestellt.
+
+- Die 68060 CPU ist bezÅglich der Spannungsversorgung sehr empfindlich, da er im
+  Gegensatz zur restlichen Platine mit 3.3 Volt statt 5 Volt betrieben wird.
+  Dies hat zur Folge, daû man nach dem Auschalten bis maximal 5 Minuten warten
+  muû, bevor man den Hades wieder einschalten kann. Deshalb sollte man den
+  Reset bevorzugen, da der Rechner dann sofort wieder bootet.
+
+
+Hardware
+#####################################################################
+Allgemein
+*********************************************************************
+Der Hades wird normalerweise mit der Bustaktfrequenz von 32 MHz 
+ausgeliefert, ausser beim MC68060RC50, dort ist sie 30 MHz. 
+Bei den Transferraten sind jeweils die benîtigten Bustakte angegeben. 
+
+Prozessor
+*********************************************************************
+Als Prozessoren lassen sich der MC68040 oder der MC68060 einsetzen.
+Beide Prozessoren haben als Prozessorclock den doppelten Bustakt.
+Der MC68060 fÅhrt allerdings 2 Befehle pro Prozessorclock aus.
+Zu beachten sind die Softwareunterschiede zwischen beiden Prozessoren. 
+So kennt z.B. der MC68060 kein MOVEP. Details sind in den 
+entsprechenden DatenbÅchern zu finden.
+FÅr den MC68040 muss ein 16 MHz Quarz eingesetzt werden und die 
+LîtbrÅcke links unten neben dem Prozessor auf +5V gesetzt werden. Beim 
+MC68060 ist der Quarz 15 MHz und die BrÅcke muss auf 3.3V stehen. 
+Sehen Sie hierzu auch den Schaltplan an. Die Bustakt und 
+Prozessorfrequenzen werden automatisch von der Hardware auf 2, 4 resp. 
+8-fachen Takt gesetze. 
+
+
+Betriebssystem
+*********************************************************************
+Als Betriebssystem ist ein angepasstes TOS 3.06 serienmÑssig auf dem 
+Hades Board. Das Betriebssystem befindet sich in 4 EPROMs.
+Beim Aufstarten sucht das Betriebssystem zuerst ET4000 Grafikkart, 
+dann nach einer ET6000 und zuletzt nach einer Mach64 Grafikkarte. 
+Zuerst auf dem PCI-Bus und anschliessend auf dem ISA-Bus. Wurde eine  
+Grafikkarte erkannt, so werden auf dieser die Ausgaben beim Hochfahren 
+ausgegeben.
+
+UU 	Upper 		Offset +0  high byt D31-D24
+MU      Middle Upper    Offset +1  middle upper D23-D16
+ML      Middle Lower    Offset +2  middle lower D15-D8
+LL      Lower           Offset +3  low byt D7-D0
+
+Der Hades fÑhrt das Betriebsystem mit ausgeschalteten Caches und MMU  
+hoch. Alle 4 Transparent Translation Register (ITT0, DTT0, ITT1, 
+DTT1) sind wie folgt gesetzt:
+Adresse: 1 zu 1
+Caches : non cachable, serialized
+
+RAM
+*********************************************************************
+Beim Hades gibt es nur ein lineares RAM, dass als ST-RAM angemeldet 
+wird.
+
+Adresse        	: $0000'0000 - $3FFF'FFFF
+Bus-Breite	: 32 Bit resp. 64 Bit Interleave
+Minimale Grîsse	: 4 MegaByt
+Maximale Grîsse	: 1 GigaByt
+Burstmode	: Ja
+Transferraten	
+normal		: Byt, Word und Long: Read 4 Takte. Write 3 Takte
+                : Line nur 1 Modul  : Read 4-4-4-4. Write 3-4-4-4
+                : Line Interleave   : Read 4-1-1-1. Write 3-1-1-1
+fast (nur 060)	: Byt, Word und Long: Read 3 Takte. Write 3 Takte
+                : Line Interleave   : Read 3-1-1-1. Write 3-1-1-1
+Cacheable	: Ja
+
+Die Memory-Module bilden jeweils Paare und werden im Interleave-Modus 
+angesprochen. Ist nur ein Memory-Modul eingesetzt so sinkt die 
+Transferrate im Burstmodus auf ca. 55% ab. Bei EDO-RAMs sinkt die 
+Transferrate auch bei nur einem Module nicht ab. 
+EDO-RAMs kînnen nur beim Hades 60 eingesetzt werden.
+Bei FPM-Modulen mÅssen ab Revision "RAMROM Fx" (Fast Hades) immer
+mindestens 2 Module eingesetzt werden.
+
+Als Memory Module kommen die SIMM72-Typen zur Anwendung. Parity ist 
+nicht nîtig und wird auch nicht ausgewertet. Einsetzen kann man sie 
+aber trotzdem. Es kînnen sowohl FPM- wie EDO-RAM eingesetzt werden. 
+Dazu sind allerdings unterschiedliche XILINX "RAMROM" nîtig.
+FPM : RAMROM 7 oder 9  oder F3
+EDO : RAMROM 16 oder F4
+Die Module mÅssen mindesten 60ns schnell sein.
+
+Folgende Module lassen sich einsetzen:
+--------------------------------------
+Organisation			  Grîsse
+------------------------------------------------------
+ 1Mx32 (oder 36 oder 40)	  4MegaByt
+ 2Mx32 				  8MegaByt
+ 4Mx32				 16MegaByt
+ 4Mx32 Byt wide			 16MegaByt
+ 8Mx32				 32MegaByt
+16Mx32				 64MegaByt
+16Mx32 Byt wide			 64MegaByt
+32Mx32				128MegaByt
+
+Die Ansteuerelectronic kann maximal 96 Speicher-Chips ansteuern!
+
+Folgende SpeicherbestÅckungen sind mîglich:
+-------------------------------------------
+MC3..0 bezeichnet den Memory Konfigurationswert.
+
+MM1   MM2   MM3   MM4   MM5   MM6   MM7   MM8     Grîsse   MC3..0(bit)
+----------------------------------------------------------------------
+4MB   4MB                                          8MB     0101
+4MB   4MB   4MB   4MB                             16MB     0101
+8MB   8MB                                         16MB     0100
+8MB   8MB   4MB   4MB                             24MB     0100
+8MB   8MB   8MB   8MB                             32MB     0100
+16MB  16MB                                        32MB     0011
+16MB  16MB  4MB   4MB                             40MB     0011
+16MB  16MB  16MB  16MB                            64MB     0011
+16MB  16MB  16MB  16MB  4MB   4MB                 72MB     0011
+16MB  16MB  16MB  16MB  16MB  16MB                96MB     0011
+16MB  16MB  16MB  16MB  16MB  16MB  4MB   4MB    104MB     0011
+16MB  16MB  16MB  16MB  16MB  16MB  16MB  16MB   132MB     0011
+32MB  32MB                                        64MB     0010
+32MB  32MB  4MB   4MB                             72MB     0010
+32MB  32MB  16MB  16MB                            96MB     0010
+32MB  32MB  32MB  32MB                           128MB     0010
+32MB  32MB  32MB  32MB  4MB   4MB                136MB     0010
+32MB  32MB  32MB  32MB  16MB  16MB               160MB     0010
+32MB  32MB  32MB  32MB  32MB  32MB               196MB     0010
+64MB  64MB					 128MB     0001
+64MB  64MB  4MB   4MB                            136MB     0001
+64MB  64MB  16MB  16MB                           160MB     0001
+64MB  64MB  64MB  64MB                           256MB     0001
+.(etc) bis
+64MB  64MB  64MB  64MB  64MB  64MB  64MB  64MB   512MB     0001
+128MB 128MB                                      256MB     0000
+128MB 128MB 4MB   4MB                            264MB     0000
+128MB 128MB 16MB  16MB                           288MB     0000
+128MB 128MB 64MB  64MB                           384MB     0000
+128MB 128MB 128MB 128MB                          512MB     0000
+.(etc) bis
+128MB 128MB 128MB 128MB 128MB 128MB             1024MB     0000
+
+
+ROM resp. EPROM
+*********************************************************************
+Der ROM-Bereich ist auf vier EPROMs verteilt. Jedes EPROM beinhaltet 
+ein Byt. Die Bezeichnung ist UU fÅr das upper, MU fÅr das middle 
+upper, ML fÅr das middle lower und LL fÅr das lower Byt. Im 
+ROM-Bereich ist das TOS untergebracht, dass sich von der Atari 
+Åblichen Adresse $00E0'0000 nach $7FE0'0000 verschoben hat um Platz 
+fÅr das lineare RAM zu schaffen.
+
+Adresse		: $7FE0'0000 - $7FFF'FFFF
+Bus-Breite	: 32 Bit
+Minimale Grîsse	: 512 KiloByt
+Maximale Grîsse : 2 MegaByt
+Burstmode	: Nein
+Transferraten	: 5 Takte
+Cacheable	: Ja
+
+
+Atari kompatible I/O Bausteine und andere I/O Bausteine
+*********************************************************************
+SÑmtlich I/O Bausteine lassen sich nur im Bereich von $FFF0'0000 bis 
+$FFFF'FFFF ansprechen und nicht mehr wie vorher Åblich zusÑtzlich 
+unter den Adresse $00F0'0000 bis $00FF'FFFF da hier jetzt ja das 
+lineare RAM ist. Lesen und schreiben in diesen Bereich geht nur im 
+Supervisormodus.
+
+Adresse		: $FFFF'8000 - $FFFFFFFF
+Bus-Breite	: 8 Bit resp. 16 Bit
+Grîsse		: 32 KiloByt
+Burstmode	: Nein
+Transferraten	: 4-? Takte
+Cacheable	: Nein
+
+Im Ordner Utility befindet sich ein Programm Names "KORR00FF.PRG". 
+Wenn Sie dieses starten, kînnen Sie unerlaubte $00FF'xxxx in 
+$FFFF'xxxx Adressen korrigieren lassen. Seien Sie damit aber 
+vorsichtig, denn es kînnten unter bestimmten UmstÑnden auch nicht 
+erwÅnschte Korrekturen vorgenommen werden, wenn zufÑllig ein 
+Byt-Kombination wie eine I/O-Adresse aussieht.
+
+PCI-Bus
+*********************************************************************
+Interrupt Acknowledge ist auf dem PCI-Bus nicht mîglich. Die 
+INTA#-INTD# Leitungen jedes Slots sind zusammengefasst und werden der 
+TTMFP zugefÅhrt. Nicht belegete Speicherbereiche lîsen keinen Buserror 
+aus, sondern nach ca. 125us wird ein Auto-Data-Transferacknowledge 
+ausgelîst mit undefiniertem Wert. 
+
+Slot           	TTMFP-Anschluss
+------------------------------------
+PCI1		IO0  	Pin 25
+PCI2		IO1	Pin 26
+PCI3		IO2	Pin 27
+PCI4		IO5	Pin 30
+
+DMA vom PCI-Bus her ist mîglich. Allerdings kann im Moment nur auf das 
+RAM zugegriffen werden. Die REQ# und GNT# Leitungen von PCI3 und PCI4  
+sind zusammengehÑngt und belegen den DMA-Kanal 3. Vom PCI-Bus aus 
+gesehen befindet sich das RAM vom $8000'0000-BFFF'FFFF. 
+
+Slot		DMA-Kanal	PrioritÑt
+--------------------------------------------
+PCI1		1		hîchste
+PCI2		2		mittlere
+PCI3 + PCI4	3		kleinste
+
+PERR# und SERR# werden nicht ausgewertet.
+ParitÑt wird nach PCI Spezifikationen erzeugt aber nicht kontrolliert.
+JTAG ist nicht angeschlossen.
+Cache support wird nicht unterstÅtzt.
+Spezial Cycle sind nicht mîglich.
+Memory Read Multiple ist nicht mîglich.
+Dual Adress Cycle sind nicht mîglich.
+Memory Read Line ist nicht mîglich.
+Memory Write und Invalidate ist nicht mîglich.
+Da der PCI-Bus wegen der Cache Coherenz des Prozessors nicht cachable 
+sein sollte treten keine Burstzugriffe auf und werden im Moment desshalb 
+nicht unterstÅtzt. Die Motorola Prozessoren haben auch eine von PCI-Bus 
+nicht unterstÅtzte Burst-Longword-Reihenfolge.
+
+Folgende Zugriffe werden unterstÅtzt:
+-------------------------------------
+I/O Read und Write
+Memory Read und Write
+Configuration Read und Write
+DMA read und write (kein Burst)
+
+Adressen:
+Slot		Configuration	I/O		Memory
+--------------------------------------------------------------------
+PCI1		$A008'xxxx	$Bxxx'xxxx      $8000'0000-8FFF'FFFF
+PCI2		$A004'xxxx      $Bxxx'xxxx	$8000'0000-8FFF'FFFF
+PCI3		$A002'xxxx	$Bxxx'xxxx	$8000'0000-8FFF'FFFF
+PCI4		$A001'xxxx      $Bxxx'xxxx	$8000'0000-8FFF'FFFF
+
+Bus-Breite	    : 32 Bit resp. 64 Bit
+Grîsse Configuration: 64 KiloByt resp. 256 Byt (gespiegelt)
+Grîsse I/O	    : 256 MegaByt
+Grîsse Memory	    : 256 MegaByt
+Burstmode	    : Nein
+Transferraten	    : 3-? Takte
+Cacheable	    : teilweise mîglich
+
+
+ISA-Bus
+*********************************************************************
+DMA wird auf dem ISA-Bus nicht untersÅtzt. SÑmtliche Interruptsignale 
+eines Slots sind zusammengefasst und werden der STMFP zugefÅhrt.
+
+Slot		STMFP-Anschluss
+-------------------------------
+ISA1		IO3 Pin 28
+ISA2		IO7 Pin 32
+
+Bei Byt-Zugriffen im I/O-Bereich $FFF3'0000 - $FFF3'FFFF werden die 
+Byts beim Lesen und beim Schreiben von und nach SD0-7 transferiert, 
+sowohl bei high wie auch by low Byt Zugriffen. Dies ist z.B. fÅr 
+ET4000 Grafikkarten mit NVDI nîtig. 
+Im Rest dieses Bereichs wird beim Schreiben das Byt auf der anderen 
+WordhÑlfte ebenfalls ausgegeben. 
+ 
+Adressen I/O	: $FFF0'0000-$FFF7'FFFF
+Adressen Mem	: $FF00'0000-$FF7F'FFFF
+Bus-Breite	: 16 Bit
+Grîsse I/O	: 8x64 KiloByt gespiegelt
+Grîsse Mem	: 8 MegaByt
+Burstmode	: Nein
+Transferrate	: 5-?
+Cachable	: Normal Nein, aber mîglich
+
+
+VME-Bus
+*********************************************************************
+Der VME-Bus ist im Prinzip wie der beim Atari-TT aufgebaut. 
+Bus-Arbitration und der serielle Bus werden also nicht unterstÅtzt.
+Es werden nur die Interrupts 7,5 und 3 bedient. Sie sind alle 
+Vector-Interrupts. SYSFAIL und BERR sind nicht angeschlossen. 
+AM0,AM2 und AM3 sind mit +5 Volt, AM1 mit GND verbunden. AM4 wird 
+normal bedient. Damit sind nur die folgenden Zugriffe mîglich:
+ -Standard Supervisor, Datenbereich
+ -Short Supervisor E/A-Bereich
+ -Interrupt Acknolewdge 7,5 und 3
+Mit dem Register $FFFF8717 lassen sich die Interrupts maskieren.
+Bit 7 	Maske VME-Interrupt 7
+Bit 5   Maske VME-Interrupt 5
+Bit 3   Maske VME-Interrupt 3
+Bit gesetzt heisst, dass die Interrupts weitergeleitet werden. Beim 
+Aufstarten sind die Bits auf 0 und somit werden die VME-Interrupts 
+gesperrt.
+
+Normal		: FE00'0000-FEFE'FFFF
+Short		: FEFF'0000-FEFF'FFFF
+Adresse-Breite  : 24 Bit
+Datenbus-Breite	: 16 Bit
+Burstmode	: Nein
+Transferraten	: 5-?
+Cachable	: Normal Nein, aber mîglich
+
+
+SCSI-Bus
+*********************************************************************
+Der SCSI-Bus funktioniert von aussen, wie der beim TT. Der Datentrans- 
+fer wird jedoch nicht per DMA sondern wird Åber Interrupt 2 
+abgewickelt. Blockieren Sie diesen also nicht. Die ganze Transfersache 
+ist so, dass bei einem Request vom SCSI-Chip ein Interrupt 2 
+ausgelîst wird. Dann probiert eine kleine Routine im EPROM soviele 
+Daten wie bereitstehen zu transportieren. Dazu wird Interrupt maskiert 
+sodass keine Interrupt vom SCSI mehr ausgelîst wird. Wenn nach 10'000 
+Buserrors von 8us=80ms (die Routine hÑngt sich voll an den SCSI an und 
+wird nur durch den Buserror unterbrochen) keine Daten vom oder zum 
+SCSI zu transferieren sind, wird der Interrupt des SCSI-Transfers wieder 
+scharf gemacht und die Routine verlassen. Das geht dann so weiter bis 
+alle Daten transferiert sind oder der SCSI ausgeschaltet wird.
+FÅr die Kontrolle dieser Funktionen ist das Register $FFFF'8717 
+zustÑndig. 
+Bit 0 ist mit dem EOP des SCSI-Chips und Bit 6 (Count ist 0) von 
+Register  $FFFF'8715 (SCSI Controll) verbunden. 
+Bit 1 ist mit Bit 7 (Bus Error) von Register $FFFF'8715 (SCSI Control) 
+verbunden.
+Damit lassen sich die vom DMA fehlenden Signale per Software setzen.
+
+
+Flopppy
+*********************************************************************
+Der Floppy-Anschluss wird mit dem WD37C65 hergestellt und ist somit 
+Åberhaupt nicht mehr Atari-Kompatibel. Zum Formatieren, Lesen und 
+Schreiben kînnen daher nur Programme verwendet werden die Åber die 
+Betriebssystemroutinen gehen. Der Datentransfer geht auch hier nicht 
+per DMA sondern wird Åber Interrupt 6 resp. TTMFP Interrupt IO4 
+abgewickelt. FÅr jedes transportierte Byt wird ein Interrupt 
+ausgelîst. Blockieren Sie daher den Interrupt nicht.
+Beachten Sie das das erste Floppy auf DS0 gejumpert sein muss. Wenn 
+Sie normalerweise ein PC-Floppy erhalten ist es auf DS1 gejumpert. 
+éndern Sie das also oder verwenden Sie Floppykabel mit verdrehten 
+Litzen.
+- Floppylaufwerk
+  Beim Hades kann jedes PC-Åbliche Floppylaufwerk (DD und HD, 3.5"
+  angeschlossen werden. Es werden maximal 2 Floppies verwaltet.
+  Da ein neuer Floppydiskcontroller eingesetzt wird (WD37065C), kînnen
+  Disketten nur Åbers Betriebssystem formatiert werden oder mit PUMPUP
+  oder ECOPY 1.72. PUMPUP ist ein Shareware-Formatierprogramm von Claus Brod,
+  welches die gÑngisten Diskettenformate bietet und automatisch immer
+  Betriebssystemroutinen verwendet. Sie finden es auf der Utility-Diskette.
+  Bei ECOPY mÅssen Sie dazu Åber "Einstellungen - Floppyparameter - Zugriffe
+  Åber Betriessystem (BIOS)" die direkten FDC-Zugriffe deaktivieren.
+
+  ACHTUNG: der neue Floppycontroller kennt nur noch PC-kompatible
+           Formate. Hîherformatierte TOS-Disketten und sonstige Sonder-
+           formate wie z.B. getrickste Bootsektoren werden von dem
+           neuen FDC nicht unterstÅtzt. Das kann dazu fÅhren, da· in-
+           kompatible Installationdisketten erst auf einem normalen
+           ST/TT entpackt werden mÅssen, um sie dann mittels einer PC-
+           kompatiblen Diskette auf den Hades zu Åberspielen.
+
+
+
+Local Talk und Modem 2
+*********************************************************************
+Diese beiden Schnittstellen werden von einem Zilog Z85230 bedient. 
+Dieser ist bis auf ein paar Zusatzfunktionen gleich wie der im 
+Atari-TT eingesetzte Z8530. Damit lÑsst er sich normal Åber das 
+Betriebssytem ansprechen. 
+
+Unterschiede Z8530 TT  und Z85230 Hades:
+----------------------------------------
+PLCK ist 14.7456 MHz und nicht 8MHz
+TRxTB und TRxTB sind mit 3.7688 MHz verbunden
+Kanal A wird als Local Talk Schnittstelle genutzt und lÑsste sich 
+nicht umschalten.
+Damit ergeben sich Åber die XBIOS-Funktion 15 "Rsconf" folgende
+Transferraten: (ab TOS vom 12.8.1996)
+
+Wert von speed		Baudrate
+---------------------------------------------------
+0			19200		;wie bisher
+1			9600		;wie bisher
+2			4800		;wie bisher
+3			3600		;wie bisher
+4			2400		;wie bisher
+5			2000		;wie bisher
+6			1800		;wie bisher
+7			1200		;wie bisher
+8			600		;wie bisher
+9			300		;wie bisher
+10			38400		;neu statt 200 Baud
+11			57600		;neu statt 150 Baud
+12			76800		;neu statt 134 Baud
+13			115200		;neu statt 110 Baud
+14			153600		;neu statt 75 Baud
+15			230400		;neu statt 50 Baud
+
+Wenn DFö-Programme nicht Åber die Betriebssystemroutine gehen, werden 
+die Baudraten falsch gesetzt. WÑhlen Sie also im DFö-Programm Modem 2 
+und die Baudrate 19200, damit wird der Rest (Clock source etc.) 
+richtig vorbesetzt. Dann kînnen Sie Åber das CPX-Modul "Modem" die 
+richtige Baudrate einstellen. Allerdings erscheinen im Moment im 
+AuswahlmenÅ dieses Moduls noch die alten (50,75,etc.) falschen 
+Baudraten. Anhand dieser Tabelle kînnen Sie die tatsÑchlichen 
+Baudraten nachsehen.
+
+SCU
+*********************************************************************
+Der SCU wird im Hades nicht emuliert. Alle Funktionen betreffend 
+Interrupt-Verwaltung sind somit nicht nutzbar.
+
+Hardware Uhr
+*********************************************************************
+Beim Hades ist eine Hardware-Uhr kompatibel zur Uhr im Atari-TT 
+eingebaut.
+
+ROM-PORT-Kart
+*********************************************************************
+Die ROM-PORT-Karte wird am ISA-Bus eingesteckt. Mittels des Accessorys 
+kînnen die 3 SteckplÑtze durch die MMU an der Orginaladresse $FA0000 und 
+folgende eingeblendet werden. Dies lÑsste sich auch automatisch durch 
+entsprechende EintrÑge im HADES_xx.INF einstellen. 
+Durch die Einblendung wird allerdings an der Stelle $FA0000 ff.. ein  
+Loch aus dem RAM herausgeschnitten. Dieser Speicher ist dann 
+verloren und zusÑtzlich wird dadurch der Speicher geteilt. 
+Wenn Sie eine ROM-PORT-Karte nutzen wollen, kînnen Sie schon (durch 
+Eintrag im HADES_xx.INF) diesen beim Aufstarten anmelden. WÑhrend des 
+Betriebs ist kein Ausschalten mehr mîglich.
+ 
+Spezielle Steckerbelegungen
+*********************************************************************
+Midi:
+-----
+DSUB 9 Pol
+----------
+Pin 1		Midi trough TLR
+Pin 2           Midi out OLR
+Pin 3           Midi OLD
+Pin 4		Midi in 1 ILR
+Pin 5           Midi LID
+Pin 6		Midi in 2 IPD
+Pin 7		GND
+Pin 8           GND
+Pin 9           VCC (+5)
+
+Local Talk (RS422/423):
+-----------------------
+DSUB 9 Pol
+----------                     	       (RS232 +/-5V  Pin)
+Pin 1		DTR-/HSKO   	-> 	DTR          4 + 7
+Pin 2           CTS+/HSKI               GND          5
+Pin 3		TxD-                    TxD          3
+Pin 4           GND                     GND          5
+Pin 5           RxD-                    RxD          2
+Pin 6           TxD+                    
+Pin 7           DCD-/GPI                DCD          1
+Pin 8           RxD+                    GND          5
+Pin 9           leer
+
+Belegung des Speicherbereichs des Hades
+*********************************************************************
+(rw=Read und write. wo=Write only. ro=Read only)
+Adresse		   Mode	Art
+---------------------------------------------------------------------
+0000'0000-3FFF'FFFF rw	1 GB RAM
+7000'0000-71FF'FFFF wo  Memory Configurationsregister 
+                        a20=1 setzt MC0=1 -> einseitige Module
+                        a21=1 setzt MC1=1
+                        a22=1 setzt MC2=1
+                        a23=1 setzt MC3=1 -> nur 1 RAM-Modul,kein Burst
+7FE0'0000-7FFF'FFFF wo  2 MB EPROM
+8000'0000-8FFF'FFFF rw  PCI Memory Bereich
+A001'0000-A001'FFFF rw  PCI 4 Configurations Bereich
+A002'0000-A002'FFFF rw  PCI 3 Configurations Bereich
+A004'0000-A004'FFFF rw  PCI 2 Configurations Bereich
+A008'0000-A008'FFFF rw  PCI 1 Configurations Bereich
+B000'0000-BFFF'FFFF rw  PCI I/O-Bereich
+FE00'0000-FEFE'FFFF rw  VME-Bus Standard Zugriff
+FEFF'0000-FEFF'FFFF rw  VME-Bus Short Zugriff
+FF00'0000-FF7F'FFFF rw  ISA-Bus Memory Zugriffe
+FF7A'0000-FF7B'FFFF ro  ROM-Port A (mit ROM-PORT-Karte) 
+FF7C'0000-FF7D'FFFF ro  ROM-Port B (mit ROM-PORT-Karte) 
+FF7E'0000-FF7F'FFFF ro  ROM-Port C (mit ROM-PORT-Karte) 
+FFF0'0000-FFF2'FFFF rw  ISA-Bus I/O Zugriff. Byt write auf beiden 
+                        WordhÑlften
+FFF3'0000-FFF3'FFFF rw  ISA-Bus I/O Zugriff. Byt write auf beiden 
+                        WordhÑlften, Byt read immer von SD0-7
+                        (fÅr ET4000 und andere) 
+FFF4'0000-FFF7'FFFF rw  ISA-Bus I/O Zugriffe. Byt write auf beiden 
+			WordhÑlften 
+FFF0'0000-FFF0'001F rw  IDE Register 0
+FFF0'0020-FFF0'003F rw  IDE Register 1
+FFF0'0080-FFF0'009F rw  Floppy Controller Chip Select
+FFF0'00C0-FFF0'00DF rw  Floppy Controller Digital Output Register
+FFF0'00E0-FFF0'00FF wo  Floppy Controller Control Register
+FFFF'8000-FFFF'86FF rw  nicht belegt. Dummy Zugriff (kein Buserror!)
+FFFF'8701           rw  SCSI Transfer Adresse high Byt
+FFFF'8703           rw  SCSI Transfer Adresse middle upper Byt
+FFFF'8705           rw  SCSI Transfer Adresse middle lower Byt
+FFFF'8707           rw  SCSI Transfer Adresse low Byt
+FFFF'8709           rw  SCSI Byt Counter high Byt
+FFFF'870B           rw  SCSI Byt Counter middle upper Byt
+FFFF'870D           rw  SCSI Byt Counter middle lower Byt
+FFFF'870F           rw  SCSI Byt Counter low Byt
+FFFF'8710-FFFF'8713 rw  SCSI Restdatenregister by SCSI read
+FFFF'8715           rw  SCSI Control Register:
+                        Bit 7: Bus Error
+                        Bit 6: Byte Count ist Null
+                        Bit 1: DMA enable (resp. INT 2 activ)
+                        Bit 0: SCSI write. 0=SCSI read
+FFFF'8717           rw  SCSI und Interrupt Control Register: (wenn =1)
+                        Bit 7: VME-Interrupt 7 activ
+                        Bit 5: VME-Interrupt 5 activ
+                        Bit 3: VME-Interrupt 3 activ
+                        Bit 1: Bus Error fÅr SCSI Control Register
+                        Bit 0: Byte Count ist Null fÅr SCSI Control 
+                               Register
+FFFF'8800-FFFF'88FF rw  ST Sound Chip wie ST und TT
+FFFF'8961           rw  Uhr Registerauswahl
+FFFF'8963           rw  Uhr Daten Register
+FFFF'8C80-FFFF'8CFF rw  SCC. Register-Belegung wie beim TT.
+                        Kanal A: Local Talk
+                        Kanal B: Modem 2
+FFFF'FA00-FFFF'FA3F rw  STMFP  wie beim ST und TT:
+                        IO0: Drucker Busy
+                        IO1: DCD Modem 1
+                        IO2: CTS Modem 1
+                        IO3: Interrupt ISA 1
+                        IO4: Interrupt ACIAs
+                        IO5: Interrupt IDE
+                        IO6: RI Modem 1
+                        IO7: Interrupt ISA 2
+FFFF'FA80-FFFF'FABF rw  TTMFP  wie beim TT:
+                        IO0: Interrupt PCI 1
+                        IO1: Interrupt PCI 2
+                        IO2: Interrupt PCI 3
+                        IO3: RI Modem 2
+                        IO4: Floppy Interrupt
+                        IO5: Interrupt PCI 4
+                        IO6: Uhr Interrupt
+                        IO7: SCSI Interrupt
+FFFF'FC00-FFFF'FC03 rw  Tastatur ACIA
+FFFF'FC04-FFFF'FC07 rw  MIDI ACIA
+
+-ende-

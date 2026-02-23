@@ -1,0 +1,87 @@
+!iflang [english]
+
+!begin_node Interface programming
+!html_name xbios_interface
+
+!begin_xlist [x Kbdvbase] !compressed
+!item [(!bullet) Bconmap]
+Selects a serial port.
+!item [(!bullet) Dosound]
+Programs sound generator.
+!item [(!bullet) ExtRsConf]
+Configures the RS-232/RS-485 port.
+!item [(!bullet) Giaccess]
+Reads from and writes to the GI sound chip.
+!item [(!bullet) Ikbdws]
+Programs the keyboard chip.
+!item [(!bullet) Iorec]
+Obtains address of the input/output buffer of RS-232,
+keyboard chip or MIDI port serial device.
+!item [(!bullet) Kbdvbase]
+Obtains buffer and interrupt vectors for mouse, MIDI
+and intelligent keyboard.
+!item [(!bullet) Mfpint]
+Initializes the multi-function peripheral chip interrupt.
+!item [(!bullet) Midiws]
+Writes string of characters to the MIDI port.
+!item [(!bullet) Offgibit]
+Clears a bit in port A register of the GI sound chip.
+!item [(!bullet) Ongibit]
+Sets a bit in port A register of the GI sound chip.
+!item [(!bullet) Rsconf]
+Configures the RS-232 port.
+!end_xlist
+
+See also: Interrupt functions
+
+!else
+
+!begin_node Schnittstellenprogrammierung
+!html_name xbios_interface
+
+!begin_xlist [x Kbdvbase] !compressed
+!item [(!bullet) Bconmap]
+Ausw(!aumlaut)hlen einer seriellen Schnittstelle.
+!item [(!bullet) Dosound]
+Soundgenerator programmieren.
+!item [(!bullet) ExtRsConf]
+Konfiguration der RS232/RS485-Schnittstelle
+!item [(!bullet) Giaccess]
+Register des GI-Soundchips lesen und schreiben.
+!item [(!bullet) Ikbdws]
+Programmierung des Tastatur-Chips.
+!item [(!bullet) Iorec]
+Interruptpuffer f(!uumlaut)r RS232, Tastatur-Chip und MIDI-Schnittstelle abfragen.
+!item [(!bullet) Kbdvbase]
+Puffer und Interruptvektoren f(!uumlaut)r Maus-, MIDI- und Tastaturschnittstelle
+abfragen.
+!item [(!bullet) Mfpint]
+Programmierung des Multifunktionsperipherie-Chips.
+!item [(!bullet) Midiws]
+Strings lesen und schreiben auf MIDI-Schnittstelle.
+!item [(!bullet) Offgibit]
+Bit im Port A-Register des GI-Chips l(!oumlaut)schen.
+!item [(!bullet) Ongibit]
+Bit im Port A-Register des GI-Chips setzen.
+!item [(!bullet) Rsconf]
+Konfiguration der RS232-Schnittstelle.
+!end_xlist
+
+Querverweis: Interruptfunktionen
+
+
+!endif
+
+!include xbios/intrface/bconmap.ui
+!include xbios/intrface/dosound.ui
+!include xbios/intrface/extrscon.ui
+!include xbios/intrface/giaccess.ui
+!include xbios/intrface/ikbdws.ui
+!include xbios/intrface/iorec.ui
+!include xbios/intrface/kbdvbase.ui
+!include xbios/intrface/mfpint.ui
+!include xbios/intrface/midiws.ui
+!include xbios/intrface/offgibit.ui
+!include xbios/intrface/ongibit.ui
+!include xbios/intrface/rsconf.ui
+!end_node

@@ -1,0 +1,62 @@
+!iflang [english]
+
+!begin_node Fsendto
+(!begin_liste) [Availability]
+!item [Name:]
+¯sendto® - Send a message on a socket
+
+!item [Opcode:]
+361
+
+!item [Syntax:]
+int32_t Fsendto(int16_t fd, const void *buf, int32_t buflen,
+    int32_t flags, const struct sockaddr *to, uint32_t addrlen);
+
+!item [Description:]
+
+!item [(!nolink [Return]) value:]
+
+!item [Availability:]
+This function is available as of FreeMiNT 1.16. 
+
+!item [Group:]
+Network
+
+!item [See also:]
+
+(!ende_liste)
+
+!end_node
+
+!else
+
+!begin_node Fsendto
+
+(!begin_liste) [Beschreibung]
+!item [Name:]
+¯sendto® - Eine Nachricht an einen Socket schicken
+
+!item [Gemdosnummer:]
+361
+
+!item [Deklaration:]
+int32_t Fsendto(int16_t fd, const void *buf, int32_t buflen,
+    int32_t flags, const struct sockaddr *to, uint32_t addrlen);
+
+!item [Beschreibung:]
+
+!item [Ergebnis:]
+
+!item [Verfgbar:]
+Sie steht ab FreeMiNT 1.16 zur Verfgung. 
+
+!item [Gruppe:]
+Netzwerk
+
+!item [Querverweis:]
+
+(!ende_liste)
+
+!end_node
+
+!endif

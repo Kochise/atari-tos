@@ -1,0 +1,1282 @@
+########################################
+# @(#) VT-52 terminal
+########################################
+
+!iflang [english]
+
+!begin_node VT-52 terminal
+!html_name VT_52_terminal
+The output functions of the (!nolink [GEMDOS]) or (!nolink [BIOS]) can emulate a
+VT52 video terminal. All (!nolink [control]) sequences are prefaced by the ESC
+character of the (!link [ASCII code][ASCII table]), followed by further characters for the
+desired function. That is why one also speaks about (!I)Escape sequences(!i).
+The ASCII code (!nolink [control]) sequences are available as well.
+
+The VT52 emulator has the following (!nolink [control]) sequences available:
+
+!begin_table [l l l]
+Code !! Name !! Meaning
+!hline
+BEL !! Bell !! Systemglocke.
+BS !! (!link [Backspace][Escape sequences]) !! Delete character to left of cursor.
+HT !! (!link [Tabulator][Escape sequences]) !! Horizontal tabulator.
+LF !! (!link [Line feed][Line_feed]) !! Line feed.
+VT !! (!link [Tabulator][Escape sequences]) !!Vertical tabulator
+FF !! (!link [Formfeed][Escape sequences]) !! Form feed.
+CR !! (!link [Carriage Return][Return, VT-52]) !! Move cursor to the start of the line.
+ESC A !! (!link [Cursor up][Cur_up]) !! Move cursor one line upwards.
+ESC B !! (!link [Cursor down][Cur_down]) !! Move cursor one line downwards.
+ESC C !! (!link [Cursor right][Cur_right]) !! Move cursor one column to the right.
+ESC D !! (!link [Cursor left][Cur_left]) !! Move cursor one column to the left.
+ESC E !! (!link [Clear screen][Clear_home]) !! Clear screen and place cursor at top left corner.
+ESC H !! (!link [Cursor home][Cur_home]) !! Move cursor to the upper left corner.
+ESC I !! (!link [Cursor up and insert][Scroll_up]) !! Move cursor one line upwards and scroll.
+ESC J !! (!link [Clear to end of screen] [Clear_down]) !! Clear screen from cursor onwards.
+ESC K !! (!link [Clear to end of line][Clear_eol]) !! Clear line from cursor onwards.
+ESC L !! (!link [Insert line][Ins_line]) !!Insert a line.
+ESC M !! (!link [Delete line][Del_line]) !! Remove line.
+ESC Y <y> <x> !! (!link [Set cursor position][Goto_pos]) !! Position cursor.
+ESC b <c> !! (!link [Foreground color][Ink]) !! Set text color.
+ESC c <c> !! (!link [Background color][Paper]) !! Set background color.
+ESC d !! (!link [Clear to start of screen][Clear_up]) !! Clear screen up to cursor.
+ESC j !! (!link [Save cursor position][Save_pos]) !! "Remember" cursor.
+ESC k !! (!link [Restore cursor position][Load_pos]) !! Restore cursor.
+ESC l !! (!link [Clear line][Clear_line]) !! Clear current line.
+ESC o !! (!link [Clear to start of line][Clear_sol]) !! Clear current line up to cursor.
+ESC p !! (!link [Reverse video][Rev_on]) !! Switch on inverse video text.
+ESC q !! (!link [Normal video][Rev_off]) !! Switch off inverse video text.
+ESC v !! (!link [Wrap on][Wrap_on]) !! Enable line wrap.
+ESC w !! (!link [Wrap off][Wrap_off]) !! Disable line wrap.
+~ !! ~ !! ~
+ESC e !! Cur_on     !! Show cursor.
+ESC f !! Cur_off    !! Hide cursor.
+~ !! Blink_on   !! Switch on cursor blinking.
+~ !! Blink_off  !! Switch off cursor blinking.
+~ !! Set_blink  !! Set blink rate.
+~ !! Get_blink  !! Inquire blink rate.
+!end_table
+
+The VT52 emulation of TosWin2 adds the following extensions:
+!begin_table [l l l]
+Code !! Name !! Meaning
+ESC 3 <c> !! ANSI foreground color !! Set foreground color.
+ESC 4 <c> !! ANSI background color !! Set background color.
+ESC F !! Enter graphics mode !! Start alternate character set.
+ESC G !! Exit graphics mode !! End alternate character set.
+ESC R <cols,rows> CR  !! Set window size !! Set window size.
+ESC S <s> CR  !! Set title bar !! Set window title.
+ESC Z !! Identify !! Sends response ESC / Z
+ESC a !! Delete character !! Delete character at cursorposition.
+ESC h !! Enter insert mode !! Enter insert mode.
+ESC i !! Exit insert mode !! Exit insert mode.
+ESC u !! Original colors !! Reset colors to original colors.
+ESC y <c> !! Set text effects !! Set text effects.
+ESC z <c> !! Clear text effects !! Clear text effects.
+!hline
+!end_table
+
+
+(!B)Note:(!b) Programs that use VT52 sequences for drawing the screen should,
+of course, use all of the available area. However, as this area can
+(!I)not(!i) be ascertained with (!nolink [GEMDOS]), (!nolink [BIOS]) or (!nolink [XBIOS])
+functions, the following conventions apply:
+
+If the environment variables LINES (ROWS) and COLUMNS exist, then
+they contain the maximum number of lines or columns respectively.
+
+In the following escape sequence entries, C macros are shown as an
+example. As the call of the escape sequences results in an output of
+the corresponding characters, the C example should be easily ported
+to other languages.
+
+See also: ASCII table ~ (!link [Scancode table][The scancode])
+
+
+!begin_node Bell
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Bell(!ldouble) - System bell or beep.
+!item [Declaration:]
+ #define Bell() Cconout('\a')
+!item [Description:]
+Bell' makes the system bell or beep sound.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Blink_off
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Blink off(!ldouble) - Switch off cursor blinking.
+!item [Declaration:]
+ #define Blink_off()  Cursconf ( 3, 0 )
+!item [Description:]
+'Blink_off' is a function macro with which the blinking
+of the cursor can be switched off. The (!nolink [XBIOS]) function
+Cursconf is used for this.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Blink_on
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Blink on(!ldouble) - Switch on cursor blinking.
+!item [Declaration:]
+ #define Blink_on()  Cursconf ( 2, 0 )
+!item [Description:]
+'Blink_on' is a function macro with which the blinking
+of the cursor can be switched on. The (!nolink [XBIOS]) function
+Cursconf is used for this.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+!begin_node Clear_down
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Clear to end of screen(!ldouble) - Clear screen from the cursor onwards.
+!item [Declaration:]
+ #define Clear_down() Cconws("\33J")
+!item [Description:]
+With 'Clear to end of screen' one can clear the screen
+from the cursor position onwards.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_eol
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Clear to end of line(!ldouble) - Clear current line from the cursor onwards.
+!item [Declaration:]
+ #define Clear_eol() Cconws("\33K")
+!item [Description:]
+With 'Clear to end of line' one can clear the current
+line from the cursor position onwards.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_home
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Clear screen(!ldouble) - Clear the screen.
+!item [Declaration:]
+ #define Clear_home() Cconws("\33E")
+!item [Description:]
+With 'Clear screen' the complete screen can be cleared
+and the (!nolink [TOS])-cursor positioned in the upper
+left corner of the screen.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_line
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Clear line(!ldouble) - Clear the current line.
+!item [Declaration:]
+ #define Clear_line() Cconws("\33l")
+!item [Description:]
+With 'Clear line' the current line can be cleared. The
+following lines will not be moved up. The cursor will
+be placed at the start of the line.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_sol
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Clear to start of line(!ldouble) - Clear current line up to the cursor.
+!item [Declaration:]
+ #define Clear_sol() Cconws("\33o")
+!item [Description:]
+With 'Clear to start of line' the current line can be
+cleared up to the cursor position.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_up
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Clear to start of screen(!ldouble) - Clear screen up to the cursor.
+!item [Declaration:]
+ #define Clear_up() Cconws("\33d")
+!item [Description:]
+With 'Clear to start of screen' the screen can be
+cleared up to the cursor position.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_down
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Cursor down(!ldouble) - Move cursor one line downwards.
+!item [Declaration:]
+ #define Cur_down() Cconws("\33B")
+!item [Description:]
+With 'Cursor down' the (!nolink [TOS])-cursor can be moved one line
+downwards. If the cursor is already in the lowest line
+then nothing happens.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_home
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Cursor home(!ldouble) - Move cursor into the upper left corner.
+!item [Declaration:]
+ #define Cur_home() Cconws("\33H")
+!item [Description:]
+With 'Cursor home' one can place the (!nolink [TOS])-cursor in the
+upper left corner of the screen.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_left
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Cursor left(!ldouble) - Move cursor one column to the left.
+!item [Declaration:]
+ #define Cur_left() Cconws("\33D")
+!item [Description:]
+With 'Cursor left' the (!nolink [TOS])-cursor can be moved one
+column to the left. If the cursor is already in the
+left-most column, then nothing happens.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+
+!begin_node Cur_off
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Hide cursor(!ldouble) - Switch off cursor.
+!item [Declaration:]
+ #define Cur_off()  Cursconf ( 0, 0 )
+!item [Description:]
+'Cur_off' is a function macro, with which the cursor
+can be switched off. The (!nolink [XBIOS]) function Cursconf
+is used for this.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_on
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Show cursor(!ldouble) - Switch on cursor.
+!item [Declaration:]
+ #define Cur_on()   Cursconf ( 1, 0 )
+!item [Description:]
+'Cur_on' is a function macro, with which the cursor
+can be switched on. The (!nolink [XBIOS]) function Cursconf
+is used for this.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_right
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Cursor right(!ldouble) - Move cursor one column to the right.
+!item [Declaration:]
+ #define Cur_right() Cconws("\33C")
+!item [Description:]
+With 'Cursor right' one can move the (!nolink [TOS])-cursor by one
+column to the right. If the cursor is already in the
+right-most column, then nothing happens.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+!begin_node Cur_up
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Cursor up(!ldouble) - Move cursor one line upwards.
+!item [Declaration:]
+ #define Cur_up() Cconws("\33A")
+!item [Description:]
+With 'Cursor up' the (!nolink [TOS])-cursor can be moved one line
+upwards. If the cursor is already in the top line, then
+nothing happens.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Del_line
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Delete line(!ldouble) - Remove line.
+!item [Declaration:]
+ #define Del_line() Cconws("\33M")
+!item [Description:]
+With 'Delete line' the current line can be deleted. The
+following lines will be moved up, the cursor will be
+set at the start of the line.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Escape sequences
+
+!begin_table [l l l l]
+C-sequence !! Value !! Character !! Effect
+!hline
+\a !! 0x07 !! BEL !! Bell (System bell)
+\b !! 0x08 !! BS  !! Backspace
+\f !! 0x0C !! FF  !! Formfeed (Page feed)
+\n !! 0x0A !! LF  !! Linefeed (Newline)
+\r !! 0x0D !! CR  !! Carriage return
+\t !! 0x09 !! HT  !! Tabulator (horizontal)
+\v !! 0x0B !! VT  !! Tabulator (vertical)
+!end_table
+
+See also: VT-52 terminal ~  GEMDOS ~  BIOS ~  XBIOS
+!end_node
+
+
+!begin_node Get_blink
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Get blink rate(!ldouble) - Obtain cursor blink rate.
+!item [Declaration:]
+ #define Get_blink() Cursconf ( 5, 0 )
+!item [Description:]
+'Get_blink' is a function macro with which the rate of
+the cursor blink can be established. The (!nolink [XBIOS]) function
+Cursconf is used for this.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Goto_pos
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Set cursor position(!ldouble) - Position the cursor.
+!item [Declaration:]
+ #define Goto_pos(x,y) (Cconws("\33Y"),Cconout(' '+y),Cconout(' '+x))
+!item [Description:]
+With 'Set cursor position' one can position the cursor
+in the x-th line and y-th column. Please note that the
+count starts at 32 (the screen has coordinates (32,32)
+at the upper left of the screen). That is why 32 (spaces)
+were added in the above macro, so that the count can
+start at 0 when using the macro.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Ink
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Foreground color(!ldouble) - Set text color.
+!item [Declaration:]
+ #define Ink(c) (Cconws("\33b"),Cconout(c))
+!item [Description:]
+With 'Foreground color' one can set the text color.
+The number of available colors depends on the current
+screen resolution.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Ins_line
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Insert line(!ldouble) - Insert a line.
+!item [Declaration:]
+ #define Ins_line() Cconws("\33L")
+!item [Description:]
+With 'Insert line' one can insert a line at the cursor
+position. The cursor will be set at the start of the new line.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Line_feed
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Line feed(!ldouble) - Line feed.
+!item [Declaration:]
+ #define Line_feed() Cconout('\n')
+!item [Description:]
+'Line feed' sets the cursor in the next line (line feed).
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Load_pos
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Restore cursor position(!ldouble) - Restore cursor.
+!item [Declaration:]
+ #define Load_pos() Cconws("\33k")
+!item [Description:]
+With 'Restore cursor position' the cursor can be placed
+again at the position it occupied earlier when "marked"
+with 'Save cursor position'.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal ~ Save_pos
+!end_xlist
+!end_node
+
+
+!begin_node Paper
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Background color(!ldouble) - Set background color.
+!item [Declaration:]
+ #define Paper(c) (Cconws("\33c"),Cconout(c))
+!item [Description:]
+With 'Background color' one can set the background
+color.
+The number of available colors depends on the current
+screen resolution.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Return
+!ignore_links
+!label Return, VT-52
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Carriage Return(!ldouble) - Move cursor to the start of the line.
+!item [Declaration:]
+ #define Return() Cconout('\r')
+!item [Description:]
+'Return' sets the cursor to the start of the current line.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Rev_off
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Normal video(!ldouble) - Switch off inverse video.
+!item [Declaration:]
+ #define Rev_off()  Cconws("\33q")
+!item [Description:]
+With 'Normal video', inverse video for the text can
+can be switched off again.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal ~ Rev_on
+!end_xlist
+!end_node
+
+
+!begin_node Rev_on
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Reverse video(!ldouble) - Switch on inverse video.
+!item [Declaration:]
+ #define Rev_on() Cconws("\33p")
+!item [Description:]
+With 'Reverse video', one can switch on inverse video
+(background and text colors swapped over). This mode
+can be switched off again with 'Normal video'.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal ~ Rev_off
+!end_xlist
+!end_node
+
+
+!begin_node Save_pos
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Save cursor position(!ldouble) - "Remember" cursor position.
+!item [Declaration:]
+ #define Save_pos() Cconws("\33j")
+!item [Description:]
+With 'Save cursor position' the current cursor position
+can be stored in an internal buffer. The stored cursor
+position can be restored later with 'Restore cursor
+position'.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal ~ Load_pos
+!end_xlist
+!end_node
+
+
+!begin_node Scroll_up
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Cursor up and insert(!ldouble) - Move cursor one line upwards and scroll.
+!item [Declaration:]
+ #define Scroll_up() Cconws("\33I")
+!item [Description:]
+With 'Cursor up and insert' the (!nolink [TOS])-cursor can be
+positioned one line upwards. If the cursor is already
+in the top line, then the screen contents are scrolled
+one line downwards and an empty line is inserted.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Set_blink
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Set blink rate(!ldouble) - Set cursor blink rate.
+!item [Declaration:]
+ #define Set_blink( rate ) Cursconf ( 4, rate )
+!item [Description:]
+'Set_blink' is a function macro with which the rate of
+the cursor blink can be set. The (!nolink [XBIOS]) function
+Cursconf is used for this.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Tab
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Tabulator(!ldouble) - Move cursor to next tabulator position.
+!item [Declaration:]
+ #define Tab() Cconout('\t')
+!item [Description:]
+'Tab' sets the cursor at the next tabulator position.
+!item [See also:]    Escape sequences ~ VT-52 terminal
+!end_xlist
+!end_node
+
+
+!begin_node Wrap_off
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Wrap off(!ldouble) - Switch off line-wrapping.
+!item [Declaration:]
+ #define Wrap_off()  Cconws("\33w")
+!item [Description:]
+With 'Wrap off' one can switch off line-wrapping.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal ~ Wrap_on
+!end_xlist
+!end_node
+
+
+!begin_node Wrap_on
+
+!begin_xlist [Description]
+!item [Name:]
+(!rdouble)Wrap on(!ldouble) - Switch on line-wrapping.
+!item [Declaration:]
+ #define Wrap_on()  Cconws("\33v")
+!item [Description:]
+With 'Wrap on' one can switch on line-wrapping. This
+has the effect that when the end of a line is reached,
+the cursor will jump automatically to the start of the
+next line.
+
+!item [See also:]    Escape sequences ~ VT-52 terminal ~ Wrap_off
+!end_xlist
+!end_node
+!end_node
+
+!else
+
+!begin_node VT-52-Terminal
+!html_name VT_52_terminal
+Die (!nolink [Ausgabefunktionen]) des GEMDOS bzw. BIOS k(!oumlaut)nnen ein VT-52 Videoterminal emulieren.
+Alle Steuersequenzen werden durch das ESC Zeichen des (!link [ASCII-Codes][ASCII-Tabelle])
+eingeleitet, dem weitere Zeichen f(!uumlaut)r die gew(!uumlaut)nschte Funktion folgen. Deshalb
+spricht man auch von (!I)Escape-Sequenzen(!i). Zus(!aumlaut)tzlich stehen auch die
+Steuerzeichen des ASCII-Codes zur Verf(!uumlaut)gung.
+
+Der VT-52 Emulator stellt die folgenden Steuercodes zur Verf(!uumlaut)gung:
+
+!begin_table [l l l]
+Code !! Name !! Bedeutung
+!hline
+BEL !! Bell !! Systemglocke.
+BS !! (!link [Backspace][Escapesequenzen]) !! Zeichen links vom Cursor l(!oumlaut)schen
+HT !! (!link [Tabulator][Escapesequenzen]) !! horizontaler Tabulator
+LF !! (!link [Line feed][Line_feed]) !! Zeilenvorschub
+VT !! (!link [Tabulator][Escapesequenzen]) !! vertikaler Tabulator
+FF !! (!link [Formfeed][Escapesequenzen]) !! Seitenvorschub
+CR !! (!link [Carriage Return][Return]) !! Cursor zum Anfang der Zeile.
+ESC A !! (!link [Cursor up][Cur_up]) !! Cursor eine Zeile nach oben.
+ESC B !! (!link [Cursor down][Cur_down]) !! Cursor eine Zeile nach unten.
+ESC C !! (!link [Cursor right][Cur_right]) !! Cursor eine Spalte nach rechts.
+ESC D !! (!link [Cursor left][Cur_left]) !! Cursor eine Spalte nach links.
+ESC E !! (!link [Clear screen][Clear_home]) !! Bildschirm l(!oumlaut)schen.
+ESC H !! (!link [Cursor home][Cur_home]) !! Cursor in die obere linke Ecke.
+ESC I !! (!link [Cursor up and insert][Scroll_up]) !! Cursor eine Zeile nach oben und scrollen.
+ESC J !! (!link [Clear to end of screen] [Clear_down]) !! Bildschirm ab Cursor l(!oumlaut)schen.
+ESC K !! (!link [Clear to end of line][Clear_eol]) !! Aktuelle Zeile ab Cursor l(!oumlaut)schen.
+ESC L !! (!link [Insert line][Ins_line]) !! Zeile einf(!uumlaut)gen.
+ESC M !! (!link [Delete line][Del_line]) !! Zeile entfernen.
+ESC Y <x> <y> !! (!link [Set cursor position][Goto_pos]) !! Cursor positionieren.
+ESC b <c> !! (!link [Foreground color][Ink]) !! Textfarbe setzen.
+ESC c <c> !! (!link [Background color][Paper]) !! Hintergrundfarbe setzen.
+ESC d !! (!link [Clear to start of screen][Clear_up]) !! Bildschirm bis Cursor l(!oumlaut)schen.
+ESC j !! (!link [Save cursor position][Save_pos]) !! Cursor "merken".
+ESC k !! (!link [Restore cursor position][Load_pos]) !! Cursor restaurieren.
+ESC l !! (!link [Clear line][Clear_line]) !! Aktuelle Zeile l(!oumlaut)schen.
+ESC o !! (!link [Clear to start of line][Clear_sol]) !! Aktuelle Zeile bis Cursor l(!oumlaut)schen.
+ESC p !! (!link [Reverse video][Rev_on]) !! Reverse Schrift einschalten.
+ESC q !! (!link [Normal video][Rev_off]) !! Reverse Schrift ausschalten.
+ESC v !! (!link [Wrap on][Wrap_on]) !! Zeilenumbruch einschalten.
+ESC w !! (!link [Wrap off][Wrap_off]) !! Zeilenumbruch ausschalten.
+~ !! ~ !! ~
+ESC e !! Cur_on     !! Cursor zeigen
+ESC f !! Cur_off    !! Cursor verstecken
+~ !! Blink_on   !! Cursor-Blinken einschalten
+~ !! Blink_off  !! Cursor-Blinken ausschalten
+~ !! Set_blink  !! Blinkrate setzen
+~ !! Get_blink  !! Blinkrate abfragen
+!end_table
+
+Die VT52 Emulation von TosWin2 unterst(!uumlaut)tzt ausserdem folgende Steuercodes:
+!begin_table [l l l]
+Code !! Name !! Bedeutung
+ESC 3 <c> !! ANSI foreground color !! ANSI Vordergrundfarbe setzen.
+ESC 4 <c> !! ANSI background color !! ANSI Hintergrundfarbe setzen.
+ESC F !! Enter graphics mode !! Alternativen Zeichensatz benutzen.
+ESC G !! Exit graphics mode !! Normalen Zeichensatz benutzen.
+ESC R <cols,rows> CR  !! Set window size !! Fenstergr(!oumlaut)(!sharps)e setzen.
+ESC S <s> CR  !! Set title bar !! Fenstertitel setzen.
+ESC Z !! Identify !! Antwortet mit ESC / Z
+ESC a !! Delete character !! Zeichen unter Cursor l(!oumlaut)schen.
+ESC h !! Enter insert mode !! Einf(!uumlaut)gemodus starten.
+ESC i !! Exit insert mode !! Einf(!uumlaut)gemodus beenden.
+ESC u !! Original colors !! Originalfarben wieder herstellen.
+ESC y <c> !! Set text effects !! Text-Effekte setzen.
+ESC z <c> !! Clear text effects !! Text-Effekte l(!oumlaut)schen.
+!hline
+!end_table
+
+
+(!B)Hinweis:(!b) Programme die VT-52-Sequenzen f(!uumlaut)r den Bildschirmaufbau
+verwenden, sollten nat(!uumlaut)rlich die gesamte verf(!uumlaut)gbare Fl(!aumlaut)che nutzen. Da diese
+Fl(!aumlaut)che jedoch (!I)nicht(!i) mit GEMDOS, BIOS oder XBIOS-Funktionen
+ermittelt werden kann gilt die folgende Konvention:
+
+Wenn die Environmentvariablen LINES (ROWS) und COLUMNS existieren, enthalten
+sie die maximal m(!oumlaut)gliche Zeilen- bzw. Spaltenzahl.
+
+Als Beispiel f(!uumlaut)r die im folgenden vorgestellten Escape-Sequenzen wird ein
+C Makro gezeigt. Da der Aufruf der Escape-Sequenzen in einer Ausgabe der
+entsprechenden Zeichen besteht, sollte sich das C Beispiel leicht auf
+andere Sprachen portieren lassen.
+
+Querverweis: ASCII-Tabelle ~ (!link [Scan-Code Tabelle][Der Scan-Code])
+
+
+!begin_node Bell
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Bell(!ldouble) - Systemglocke.
+!item [Deklaration:]
+ #define Bell() Cconout('\a')
+!item [Beschreibung:]
+'Bell' l(!aumlaut)(!sharps)t die Systemglocke ert(!oumlaut)nen.
+
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Blink_off
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Blink off(!ldouble) - Cursorblinken ausschalten.
+!item [Deklaration:]
+ #define Blink_off()  Cursconf ( 3, 0 )
+!item [Beschreibung:]
+'Blink_off' ist ein Funktionen-Makro, mit der das Blinken
+des Cursors ausgeschaltet werden kann. Hierzu  wird die
+XBIOS-Funktion Cursconf verwendet.
+
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Blink_on
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Blink on(!ldouble) - Cursorblinken einschalten.
+!item [Deklaration:]
+ #define Blink_on()  Cursconf ( 2, 0 )
+!item [Beschreibung:]
+'Blink_on' ist ein Funktionen-Makro, mit der das Blinken
+des Cursors eingeschaltet werden kann. Hierzu wird die
+XBIOS-Funktion Cursconf verwendet.
+
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+!begin_node Clear_down
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Clear to end of screen(!ldouble) - Bildschirm ab Cursor l(!oumlaut)schen.
+!item [Deklaration:]
+ #define Clear_down() Cconws("\33J")
+!item [Beschreibung:]
+Mit 'Clear to end of screen' kann der Bildschirm ab der Cursorposition
+gel(!oumlaut)scht werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_eol
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Clear to end of line(!ldouble) - Aktuelle Zeile ab Cursor l(!oumlaut)schen.
+!item [Deklaration:]
+ #define Clear_eol() Cconws("\33K")
+!item [Beschreibung:]
+Mit 'Clear to end of line' kann die aktuelle Zeile ab der Cursorposition
+gel(!oumlaut)scht werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_home
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Clear screen(!ldouble) - Bildschirm l(!oumlaut)schen.
+!item [Deklaration:]
+ #define Clear_home() Cconws("\33E")
+!item [Beschreibung:]
+Mit 'Clear screen' kann der gesamte Bildschirm gel(!oumlaut)scht und der TOS-Cursor in
+die obere linke Ecke des Bildschirms positioniert werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_line
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Clear line(!ldouble) - Aktuelle Zeile l(!oumlaut)schen.
+!item [Deklaration:]
+ #define Clear_line() Cconws("\33l")
+!item [Beschreibung:]
+Mit 'Clear line' kann die aktuelle Zeile gel(!oumlaut)scht werden. Die nachfolgenden
+Zeilen werden nicht nachgeschoben. Der Cursor wird zum Anfang der Zeile
+gesetzt.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_sol
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Clear to start of line(!ldouble) - Aktuelle Zeile ab Cursor l(!oumlaut)schen.
+!item [Deklaration:]
+ #define Clear_sol() Cconws("\33o")
+!item [Beschreibung:]
+Mit 'Clear to start of line' kann die aktuelle Zeile bis zur Cursorposition
+gel(!oumlaut)scht werden kann.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Clear_up
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Clear to start of screen(!ldouble) - Bildschirm bis Cursor l(!oumlaut)schen.
+!item [Deklaration:]
+ #define Clear_up() Cconws("\33d")
+!item [Beschreibung:]
+Mit 'Clear to start of screen' kann der Bildschirm bis zur Cursorposition
+gel(!oumlaut)scht werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_down
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Cursor down(!ldouble) - Cursor eine Zeile nach unten.
+!item [Deklaration:]
+ #define Cur_down() Cconws("\33B")
+!item [Beschreibung:]
+Mit 'Cursor down' kann der TOS-cursor um eine Zeile nach unten positioniert
+werden. Befindet sich der Cursor bereits in der untersten Zeile, passiert
+nichts.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_home
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Cursor home(!ldouble) - Cursor in die obere linke Ecke.
+!item [Deklaration:]
+ #define Cur_home() Cconws("\33H")
+!item [Beschreibung:]
+Mit 'Cursor home' kann der TOS-cursor in die obere linke Ecke des Bildschirms
+positioniert werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_left
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Cursor left(!ldouble) - Cursor eine Spalte nach links.
+!item [Deklaration:]
+ #define Cur_left() Cconws("\33D")
+!item [Beschreibung:]
+Mit 'Cursor left' kann der TOS-cursor um eine Spalte nach links positioniert
+werden. Befindet sich der Cursor bereits in der ganz linken Spalte, passiert
+nichts.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+
+!begin_node Cur_off
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Hide cursor(!ldouble) - Cursor ausschalten.
+!item [Deklaration:]
+ #define Cur_off()  Cursconf ( 0, 0 )
+!item [Beschreibung:]
+'Cur_off' ist ein Funktionen-Makro, mit der der Cursor
+ausgeschaltet werden kann. Hierzu wird die XBIOS-Funktion
+Cursconf verwendet.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_on
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Show cursor(!ldouble) - Cursor einschalten.
+!item [Deklaration:]
+ #define Cur_on()   Cursconf ( 1, 0 )
+!item [Beschreibung:]
+'Cur_on' ist ein Funktionen-Makro, mit der der Cursor
+eingeschaltet werden kann. Hierzu wird die XBIOS-Funktion
+Cursconf verwendet.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Cur_right
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Cursor right(!ldouble) - Cursor eine Spalte nach rechts.
+!item [Deklaration:]
+ #define Cur_right() Cconws("\33C")
+!item [Beschreibung:]
+Mit 'Cursor right' kann der TOS-cursor um eine Spalte nach rechts positioniert
+werden. Befindet sich der Cursor bereits in der ganz rechten Spalte, passiert
+nichts.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+!begin_node Cur_up
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Cursor up(!ldouble) - Cursor eine Zeile nach oben.
+!item [Deklaration:]
+ #define Cur_up() Cconws("\33A")
+!item [Beschreibung:]
+Mit 'Cursor up' kann der TOS-cursor um eine Zeile nach oben positioniert
+werden. Befindet sich der Cursor bereits in der obersten Zeile, passiert
+nichts.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Del_line
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Delete line(!ldouble) - Zeile entfernen.
+!item [Deklaration:]
+ #define Del_line() Cconws("\33M")
+!item [Beschreibung:]
+Mit 'Delete line' kann die aktuelle Zeile gel(!oumlaut)scht werden. Die nachfolgenen
+Zeilen werden nachgeschoben, der Cursor wird an den Anfang der Zeile
+gesetzt.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Escapesequenzen
+
+!begin_table [l l l l]
+C-Sequenz !! Wert !! Zeichen !! Wirkung
+!hline
+\a !! 0x07 !! BEL !! Bell (Systemglocke)
+\b !! 0x08 !! BS  !! Backspace
+\f !! 0x0C !! FF  !! Formfeed (Seitenvorschub)
+\n !! 0x0A !! LF  !! Linefeed (Newline)
+\r !! 0x0D !! CR  !! Carriage return (Wagenr(!uumlaut)cklauf)
+\t !! 0x09 !! HT  !! Tabulator (horizontal)
+\v !! 0x0B !! VT  !! Tabulator (vertikal)
+!end_table
+
+Querverweis: VT-52-Terminal ~  GEMDOS ~  BIOS ~  XBIOS
+!end_node
+
+
+!begin_node Get_blink
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Get blink rate(!ldouble) - Cursorblinkfrequenz abfragen.
+!item [Deklaration:]
+ #define Get_blink() Cursconf ( 5, 0 )
+!item [Beschreibung:]
+'Get_blink' ist ein Funktionen-Makro, mit der die Frequenz
+des  Cursorblinkens abgefragt  werden kann. Hierzu  wird
+die XBIOS-Funktion Cursconf verwendet.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Goto_pos
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Set cursor position(!ldouble) - Cursor positionieren.
+!item [Deklaration:]
+ #define Goto_pos(x,y) (Cconws("\33Y"),Cconout(' '+x),Cconout(' '+y))
+!item [Beschreibung:]
+Mit 'Set cursor position' kann der Cursor an x-te Zeile und y-te Spalte
+positioniert werden. Beachten Sie bitte, da(!sharps) die Z(!aumlaut)hlung bei 32 beginnt.
+Deshalb wurde in obigem Makro 32 (Leerzeichen) addiert, um bei der
+Verwendung des Makros mit 0 z(!aumlaut)hlen zu k(!oumlaut)nnen.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Ink
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Foreground color(!ldouble) - Textfarbe setzen.
+!item [Deklaration:]
+ #define Ink(c) (Cconws("\33b"),Cconout(c))
+!item [Beschreibung:]
+Mit 'Foreground color' kann die Textfarbe gesetzt werden kann. Die Anzahl der
+verf(!uumlaut)gbaren Farben ist aufl(!oumlaut)sungsabh(!aumlaut)ngig.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Ins_line
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Insert line(!ldouble) - Zeile einf(!uumlaut)gen.
+!item [Deklaration:]
+ #define Ins_line() Cconws("\33L")
+!item [Beschreibung:]
+Mit 'Insert line' kann eine neue Zeile an der Cursorposition eingef(!uumlaut)gt werden.
+Der Cursor wird an den Anfang der neuen Zeile gesetzt.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Line_feed
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Line feed(!ldouble) - Zeilenvorschub
+!item [Deklaration:]
+ #define Line_feed() Cconout('\n')
+!item [Beschreibung:]
+'Line feed' setzt den Cursor in die n(!aumlaut)chste Zeile (Zeilenvorschub).
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Load_pos
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Restore cursor position(!ldouble) - Cursor restaurieren.
+!item [Deklaration:]
+ #define Load_pos() Cconws("\33k")
+!item [Beschreibung:]
+Mit 'Restore cursor position' kann der Cursor wieder an die Stelle
+positioniert werden, die vorher mit 'Save cursor position' "gemerkt" wurde.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal ~ Save_pos
+!end_xlist
+!end_node
+
+
+!begin_node Paper
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Background color(!ldouble) - Hintergrundfarbe setzen.
+!item [Deklaration:]
+ #define Paper(c) (Cconws("\33c"),Cconout(c))
+!item [Beschreibung:]
+Mit 'Background color' kann die Hintergrundfarbe gesetzt werden. Die Anzahl
+der verf(!uumlaut)gbaren Farben ist aufl(!oumlaut)sungsabh(!aumlaut)ngig.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Return
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Carriage Return(!ldouble) - Cursor zum Anfang der Zeile.
+!item [Deklaration:]
+ #define Return() Cconout('\r')
+!item [Beschreibung:]
+'Return' setzt den Cursor an den Anfang der aktuellen Zeile.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Rev_off
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Normal video(!ldouble) - Reverse Schrift ausschalten.
+!item [Deklaration:]
+ #define Rev_off()  Cconws("\33q")
+!item [Beschreibung:]
+Mit 'Normal video' kann die reverse Schrift (Reverse video) wieder
+ausgeschaltet werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal ~ Rev_on
+!end_xlist
+!end_node
+
+
+!begin_node Rev_on
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Reverse video(!ldouble) - Reverse Schrift einschalten.
+!item [Deklaration:]
+ #define Rev_on() Cconws("\33p")
+!item [Beschreibung:]
+Mit 'Reverse video' kann die reverse Schrift (Hintergrund- und Textfarbe
+vertauscht) eingeschaltet werden. Dieser Modus kann mit 'Normal video' wieder
+ausgeschaltet weden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal ~ Rev_off
+!end_xlist
+!end_node
+
+
+!begin_node Save_pos
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Save cursor position(!ldouble) - Cursor "merken".
+!item [Deklaration:]
+ #define Save_pos() Cconws("\33j")
+!item [Beschreibung:]
+Mit 'Save cursor' position kann die aktuelle Cursorposition in einen internen
+Puffer gespeichert wird. Die gespeicherte Cursorposition kann sp(!aumlaut)ter mit
+Restore cursor position restauriert werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal ~ Load_pos
+!end_xlist
+!end_node
+
+
+!begin_node Scroll_up
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Cursor up and insert(!ldouble) - Cursor eine Zeile nach oben und scrollen.
+!item [Deklaration:]
+ #define Scroll_up() Cconws("\33I")
+!item [Beschreibung:]
+Mit 'Cursor up' and insert kann der TOS-cursor um eine Zeile nach oben
+positioniert werden. Befindet sich der Cursor bereits in der obersten Zeile,
+wird der Bildschirminhalt um eine Zeile nach unten gescrollt und eine
+Leerzeile eingef(!uumlaut)gt.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Set_blink
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Set blink rate(!ldouble) - Cursorblinkfrequenz einstellen.
+!item [Deklaration:]
+ #define Set_blink( rate ) Cursconf ( 4, rate )
+!item [Beschreibung:]
+'Set_blink' ist ein Funktionen-Makro, mit der die Frequenz
+des Cursorblinkens eingestellt werden kann. Hierzu  wird
+die XBIOS-Funktion Cursconf verwendet.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Tab
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Tabulator(!ldouble) - Cursor zur n(!aumlaut)chsten Tabulatorposition.
+!item [Deklaration:]
+ #define Tab() Cconout('\t')
+!item [Beschreibung:]
+'Tab' setzt den Cursor an die n(!aumlaut)chste Tabulatorposition.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal
+!end_xlist
+!end_node
+
+
+!begin_node Wrap_off
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Wrap off(!ldouble) - Zeilenumbruch ausschalten.
+!item [Deklaration:]
+ #define Wrap_off()  Cconws("\33w")
+!item [Beschreibung:]
+Mit 'Wrap off' kann der Zeilenumbruch (Wrap on) ausgeschaltet werden.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal  ~ Wrap_on
+!end_xlist
+!end_node
+
+
+!begin_node Wrap_on
+
+!begin_xlist [Beschreibung:]
+!item [Name:]
+(!rdouble)Wrap on(!ldouble) - Zeilenumbruch einschalten.
+!item [Deklaration:]
+ #define Wrap_on()  Cconws("\33v")
+!item [Beschreibung:]
+Mit 'Wrap on' kann der Zeilenumbruch eingeschaltet werden. Dies bewirkt, da(!sharps)
+bei Erreichen des Endes einer Zeile automatisch zum Anfang der n(!aumlaut)chsten
+Zeile gesprungen wird.
+!item [Querverweis:]    Escapesequenzen ~ VT-52-Terminal ~ Wrap_off
+!end_xlist
+!end_node
+!end_node
+
+!endif

@@ -1,0 +1,13 @@
+winframe.slb
+.C[-I..\..\inc_c]
+.C[-I..\..\pc\include]
+.L[-S=256]	; minimaler Stack
+=
+win_head.s      ; startup code for SLBs
+win_slb.c 	(winframe.h,win_objs.h,globals.h)
+win_objs.c		(winframe.h,win_objs.h,globals.h)
+aesctrl.s
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcgemlib.lib

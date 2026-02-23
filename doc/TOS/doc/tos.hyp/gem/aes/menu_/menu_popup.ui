@@ -1,0 +1,228 @@
+!iflang [english]
+
+!begin_node menu_popup
+
+(!begin_liste) [Availability]
+
+!item [Name:]
+¯Menu popup® - Take over the display and handling of a popup menu.
+
+!item [Opcode:]
+36
+
+!item [Syntax:]
+int16_t menu_popup ( MENU *me_menu, int16_t me_xpos,
+                  int16_t me_ypos, MENU *me_mdata );
+
+!item [Description:]
+The call menu_popup takes over the display and handling of a popup menu,
+returning the user's selection. The following apply:
+
+!begin_xlist !compressed [Parameter]
+!item [Parameter]
+Meaning
+!item [~]
+~
+!item [me_menu]
+Pointer to the (!link [structure][MENU]) of the popup
+!item [me_xpos]
+X-coordinate, (!U)and(!u)
+!item [me_ypos]
+Y-coordinate of the menu's top left corner
+!item [me_mdata]
+ Pointer to the data of the selected menu entry
+!end_xlist
+
+If (!I)mn_scroll(!i) of MENU is set to 0 when menu_popup is called, a
+non-scrollable popup menu will be displayed.
+
+if (!I)mn_scroll(!i) of MENU is set to >0 when menu_popup is called, a
+scrolling popup menu will be displayed; (!I)height(!i) of MN_SET determines
+it's height in items (note that Atari's (!nolink [AES]) implements up/down arrows
+within the popup for scrolling to maintain the same look and feel of
+dropdown menus as they can be attached to menubar items, note that NAES
+mimics this exact behavior). See also menu_settings.
+
+As of (!nolink [AES]) version 4.1, if (!I)mn_scroll(!i) of MENU is set to -1
+when menu_popup is called, a dropdown list box instead of a popup menu will be
+displayed; this will have a scroll bar if eight entries or more exist.
+
+!item [(!nolink [Return]) value:]
+An error has arisen only if the value 0 is returned.
+
+!item [Availability:]
+This function is available only with (!nolink [AES]) versions 3.30 and above.
+
+The presence of this function can be ascertained by a call of
+(!link [appl_getinfo][%apgi_9]) (opcode 9).
+
+!item [Group:]
+Menu library
+
+!item [See also:]
+(!link [Binding] [Bindings for menu_popup]) ~ menu_settings ~ XMEN_MGR
+
+(!ende_liste)
+
+
+
+!begin_node Bindings for menu_popup
+!ignore_index
+
+(!begin_liste) [GEM-Arrays]
+
+!item [C:]
+int16_t menu_popup ( MENU *me_menu, int16_t me_xpos,
+                  int16_t me_ypos, MENU *me_mdata );
+
+!item [Binding:]
+!begin_verbatim
+int16_t menu_popup (MENU *me_menu, int16_t me_xpos,
+                    int16_t me_ypos,
+                    MENU *me_mdata)
+{
+   int_in[0]  = me_xpos;
+   int_in[1]  = me_ypos;
+   addr_in[0] = me_menu;
+   addr_in[1] = me_mdata;
+
+   return ( crys_if(36) );
+}
+!end_verbatim
+
+!item [GEM-Arrays:]
+!begin_table [l l l]
+Address !! Element !! (!nolink [Contents])
+!hline
+control   !! control[0] !! 36    # Function opcode
+control+2 !! control[1] !! 2     # Entry in int_in
+control+4 !! control[2] !! 1     # Entry in int_out
+control+6 !! control[3] !! 2     # Entry in addr_in
+control+8 !! control[4] !! 0     # Entry in addr_out
+int_in    !! int_in[0]  !! me_xpos
+int_in+2  !! int_in[1]  !! me_ypos
+addr_in   !! addr_in[0] !! me_menu
+addr_in+4 !! addr_in[1] !! me_mdata
+int_out   !! int_out[0] !! Return value
+!end_table
+
+(!ende_liste)
+!end_node
+!end_node
+
+!else
+
+!begin_node menu_popup
+
+(!begin_liste) [Beschreibung]
+
+!item [Name:]
+¯Menu (!nolink [Popup])® - (!uumlaut)bernimmt die Darstellung und Abarbeitung eines (!nolink [Popup])-Men(!uumlaut)s
+
+!item [AES-Nummer:]
+36
+
+!item [Deklaration:]
+int16_t menu_popup ( MENU *me_menu, int16_t me_xpos,
+                  int16_t me_ypos, MENU *me_mdata );
+
+!item [Beschreibung:]
+Die Funktion (!uumlaut)bernimmt die Darstellung und Bearbeitung eines (!nolink [Popup])-Men(!uumlaut)s. Es
+gilt:
+
+!begin_xlist !compressed [Parameter]
+!item [Parameter]
+Bedeutung
+!item [~]
+~
+!item [me_menu]
+Zeiger auf die Struktur des (!link [Popups][MENU])
+!item [me_xpos]
+x-Koordinate des Men(!uumlaut)s
+!item [me_ypos]
+y-Koordinate des Men(!uumlaut)s
+!item [me_mdata]
+Zeiger auf die Daten des selektierten Men(!uumlaut)eintrages.
+!end_xlist
+
+Wenn (!I)mn_scroll(!i) von MENU auf 0 gesetzt ist wenn menu_popup
+aufgerufen wird, wird ein nicht scrollbares Popup-Men(!uumlaut) angezeigt.
+
+Wenn (!I)mn_scroll(!i) von MENU auf >0 gesetzt ist wenn menu_popup
+aufgerufen wird, wird ein scrollbares Popup-Men(!uumlaut) angezeigt; der Wert (!I)height(!i) von
+MN_SET bestimmt seine H(!oumlaut)he in Elementen (beachten Sie, dass Ataris AES
+Auf-/Ab-Pfeile innerhalb des Popups zum Scrollen implementiert, um das
+gleiche Erscheinungsbild von Dropdown-Men(!uumlaut)s beizubehalten, wie sie an
+Men(!uumlaut)leistenelemente angeh(!aumlaut)ngt werden k(!oumlaut)nnen; beachten Sie, dass NAES
+genau dieses Verhalten nachahmt). Siehe auch menu_settings.
+
+Ab (!nolink [AES]) Version 4.1 wird, wenn (!I)mn_scroll(!i) von MENU
+auf -1 gesetzt ist wenn menu_popup aufgerufen wird, ein
+Dropdown-Listenfeld statt eines Popup-Men(!uumlaut)s angezeigt; dieses verf(!uumlaut)gt
+(!uumlaut)ber eine Bildlaufleiste, wenn acht oder mehr Eintr(!aumlaut)ge vorhanden sind.
+
+!item [Ergebnis:]
+Ein Fehler ist nur dann aufgetreten, wenn als Ergebnis der Wert 0
+zur(!uumlaut)ckgegeben wird.
+
+!item [Verf(!uumlaut)gbar:]
+Diese Funktion ist nur verf(!uumlaut)gbar seit (!nolink [AES]) Version 3.30 und
+h(!oumlaut)her.
+
+Das Vorhandensein dieser Funktion kann (!uumlaut)ber einen Aufruf
+von (!link [appl_getinfo][%apgi_9]) (Opcode 9) festgestellt werden.
+
+!item [Gruppe:]
+(!link [Men(!uumlaut)s][Men(!uumlaut)funktionen])
+
+!item [Querverweis:]
+(!link [Binding] [Bindings f(!uumlaut)r menu_popup]) ~ menu_settings ~ XMEN_MGR
+
+(!ende_liste)
+
+
+
+!begin_node Bindings f(!uumlaut)r menu_popup
+!ignore_index
+
+(!begin_liste) [GEM-Arrays]
+
+!item [C:]
+int16_t menu_popup ( MENU *me_menu, int16_t me_xpos,
+                  int16_t me_ypos, MENU *me_mdata );
+
+!item [Umsetzung:]
+!begin_verbatim
+int16_t menu_popup (MENU *me_menu, int16_t me_xpos,
+                   int16_t me_ypos, MENU *me_mdata)
+{
+   int_in[0]  = me_xpos;
+   int_in[1]  = me_ypos;
+   addr_in[0] = me_menu;
+   addr_in[1] = me_mdata;
+
+   return ( crys_if(36) );
+}
+!end_verbatim
+
+!item [GEM-Arrays:]
+!begin_table [l l l]
+Adresse !! Feldelement !! Belegung
+!hline
+control   !! control[0] !! 36    # Opcode der Funktion
+control+2 !! control[1] !! 2     # Eintr(!aumlaut)ge in int_in
+control+4 !! control[2] !! 1     # Eintr(!aumlaut)ge in int_out
+control+6 !! control[3] !! 2     # Eintr(!aumlaut)ge in addr_in
+control+8 !! control[4] !! 0     # Eintr(!aumlaut)ge in addr_out
+int_in    !! int_in[0]  !! me_xpos
+int_in+2  !! int_in[1]  !! me_ypos
+addr_in   !! addr_in[0] !! me_menu
+addr_in+4 !! addr_in[1] !! me_mdata
+int_out   !! int_out[0] !! Return-Wert
+!end_table
+
+(!ende_liste)
+!end_node
+!end_node
+
+!endif

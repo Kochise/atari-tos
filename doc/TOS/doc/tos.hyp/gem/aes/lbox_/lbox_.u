@@ -1,0 +1,165 @@
+!iflang [english]
+
+!begin_node  List boxes
+!html_name lbox
+
+The following routines were introduced with MagiC 4, and permit the
+creation and hadling of list boxes:
+
+!begin_xlist [x lbox_get_slct_item] !compressed
+!item [(!bullet) lbox_ascroll_to]
+Positions slider A of the list box
+!item [(!bullet) lbox_bscroll_to]
+ Positions slider B of the list box
+!item [(!bullet) lbox_cnt_items]
+Obtains number of list items
+!item [(!bullet) lbox_create]
+Creates a list box
+!item [(!bullet) lbox_delete]
+Releases memory allocated for a list box
+!item [(!bullet) lbox_do]
+Processes button of a list box
+!item [(!bullet) lbox_free_items]
+Releases items list
+!item [(!bullet) lbox_free_list]
+Releases items list
+!item [(!bullet) lbox_get_afirst]
+Obtains index of first visible item (slider A)
+!item [(!bullet) lbox_get_avis]
+Obtains number of visible entries (slider A)
+!item [(!bullet) lbox_get_bentries]
+Obtains number of entries (slider B)
+!item [(!bullet) lbox_get_bfirst]
+Obtains index of first visible item (slider B)
+!item [(!bullet) lbox_get_bvis]
+Obtains number of visible entries (slider B)
+!item [(!bullet) lbox_get_idx]
+Obtains index of an item
+!item [(!bullet) lbox_get_item]
+Returns pointer to n-th item
+!item [(!bullet) lbox_get_items]
+Returns pointer to the first item
+!item [(!bullet) lbox_get_slct_idx]
+Obtains index of the first selected item
+!item [(!bullet) lbox_get_slct_item]
+Returns pointer to the first selected item
+!item [(!bullet) lbox_get_tree]
+Obtains object tree of the dialog
+!item [(!bullet) lbox_get_udata]
+Gets pointer to program-specific data
+!item [(!bullet) lbox_set_asldr]
+Sets position of the slider A
+!item [(!bullet) lbox_set_bentries]
+Sets number of entries for slider B
+!item [(!bullet) lbox_set_bsldr]
+Sets position of the slider B
+!item [(!bullet) lbox_set_items]
+Sets new items list
+!item [(!bullet) lbox_update]
+Updates list box
+!end_xlist
+
+(!B)Hint:(!b)
+The presence of this call should be checked for using
+(!link [appl_getinfo][%apgi_7]) (Opcode 7).
+
+See also: (!nl)
+Calling procedure for modal dialogs ~ Style guidelines ~ WDIALOG
+
+!else
+
+!begin_node Listboxen
+!html_name lbox
+
+Die folgenden Routinen wurden mit MagiC 4 eingef(!uumlaut)hrt, und erlauben die
+Erstellung und Handhabung von Listboxen:
+
+!begin_xlist [x lbox_get_slct_item] !compressed
+!item [(!bullet) lbox_ascroll_to]
+Slider-A der Listbox positionieren
+!item [(!bullet) lbox_bscroll_to]
+Slider-B der Listbox positionieren.
+!item [(!bullet) lbox_cnt_items]
+Anzahl der Listenelemente ermitteln.
+!item [(!bullet) lbox_create]
+Listbox initialisieren.
+!item [(!bullet) lbox_delete]
+Speicher f(!uumlaut)r Listbox freigeben.
+!item [(!bullet) lbox_do]
+Button einer Listbox abarbeiten.
+!item [(!bullet) lbox_free_items]
+Elementliste freigeben.
+!item [(!bullet) lbox_free_list]
+Elementliste freigeben.
+!item [(!bullet) lbox_get_afirst]
+Index der ersten sichtbaren Elements ermitteln.
+!item [(!bullet) lbox_get_avis]
+Anzahl sichtbarer Eintr(!aumlaut)ge (Slider-A) ermitteln.
+!item [(!bullet) lbox_get_bentries]
+Anzahl der Elemente ermitteln (Slider B).
+!item [(!bullet) lbox_get_bfirst]
+Index des ersten sichtbaren Elements f(!uumlaut)r Slider B ermitteln.
+!item [(!bullet) lbox_get_bvis]
+Anzahl sichtbarer Eintr(!aumlaut)ge ermitteln (Slider B).
+!item [(!bullet) lbox_get_idx]
+Index eines Elementes ermitteln.
+!item [(!bullet) lbox_get_item]
+Zeiger auf n-tes Element zur(!uumlaut)ckliefern.
+!item [(!bullet) lbox_get_items]
+Zeiger auf das erste Element zur(!uumlaut)ckliefern.
+!item [(!bullet) lbox_get_slct_idx]
+Index des ersten selekt. Elementes ermitteln.
+!item [(!bullet) lbox_get_slct_item]
+Zeiger auf das erste selekt. Element ermitteln.
+!item [(!bullet) lbox_get_tree]
+Objektbaum des Dialogs ermitteln.
+!item [(!bullet) lbox_get_udata]
+Zeiger auf programmeigene Daten holen.
+!item [(!bullet) lbox_set_asldr]
+Position des Sliders-A setzen.
+!item [(!bullet) lbox_set_bentries]
+Anzahl der Elemente f(!uumlaut)r Slider-B setzen.
+!item [(!bullet) lbox_set_bsldr]
+Position des Sliders-B setzen.
+!item [(!bullet) lbox_set_items]
+Neue Elementliste setzen.
+!item [(!bullet) lbox_update]
+Listbox aktualisieren.
+!end_xlist
+
+(!B)Hinweis:(!b) Die Existenz dieser Funktionen kann per (!link [appl_getinfo][%apgi_7])
+(Opcode 7) festgestellt werden.
+
+Querverweis: Listboxen im Dialog ~  Style-Guidelines ~  WDIALOG
+
+!endif
+
+!include gem/aes/lbox_/lbox_ascroll_to.ui
+!include gem/aes/lbox_/lbox_bscroll_to.ui
+!include gem/aes/lbox_/lbox_cnt_items.ui
+!include gem/aes/lbox_/lbox_create.ui
+!include gem/aes/lbox_/lbox_delete.ui
+!include gem/aes/lbox_/lbox_do.ui
+!include gem/aes/lbox_/lbox_free_items.ui
+!include gem/aes/lbox_/lbox_free_list.ui
+!include gem/aes/lbox_/lbox_get_afirst.ui
+!include gem/aes/lbox_/lbox_get_avis.ui
+!include gem/aes/lbox_/lbox_get_bentries.ui
+!include gem/aes/lbox_/lbox_get_bfirst.ui
+!include gem/aes/lbox_/lbox_get_bvis.ui
+!include gem/aes/lbox_/lbox_get_idx.ui
+!include gem/aes/lbox_/lbox_get_item.ui
+!include gem/aes/lbox_/lbox_get_items.ui
+!include gem/aes/lbox_/lbox_get_slct_idx.ui
+!include gem/aes/lbox_/lbox_get_slct_item.ui
+!include gem/aes/lbox_/lbox_get_tree.ui
+!include gem/aes/lbox_/lbox_get_udata.ui
+!include gem/aes/lbox_/lbox_set_asldr.ui
+!include gem/aes/lbox_/lbox_set_bentries.ui
+!include gem/aes/lbox_/lbox_set_bsldr.ui
+!include gem/aes/lbox_/lbox_set_items.ui
+!include gem/aes/lbox_/lbox_update.ui
+!include gem/aes/lbox_/use.ui
+!include gem/aes/lbox_/flags.ui
+
+!end_node

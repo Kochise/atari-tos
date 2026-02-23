@@ -1,0 +1,60 @@
+!iflang [english]
+
+!begin_node Scrap library
+!html_name scrp
+
+This library makes functions available that permit a standardized
+interchange of data betweeen various applications. The following
+routines are present for this purpose:
+
+!begin_xlist [x scrp_write] !compressed
+!item [(!bullet) scrp_clear]
+Deletes files in the clipboard
+!item [(!bullet) scrp_read]
+Obtains path of the clipboard
+!item [(!bullet) scrp_write]
+Sets path of the clipboard
+!item [(!bullet) x_scrp_get]
+Obtains path of the clipboard
+!end_xlist
+
+(!B)Note:(!b) Besides these functions, some other particulars have to be
+taken into account for
+(!link [exchanging data via the clipboard][Data exchange via the GEM clipboard]).
+
+See also: Messages ~ SC_CHANGED ~ SH_WDRAW ~ Style guidelines
+
+!else
+
+!begin_node Klemmbrett-Funktionen
+!html_name scrp
+
+Diese Bibliothek stellt Funktionen zur Verf(!uumlaut)gung, die einen standardisierten
+Datenaustausch zwischen verschiedenen Programmen erm(!oumlaut)glichen. F(!uumlaut)r diesen
+Zweck sind die folgenden Routinen vorhanden:
+
+!begin_xlist [x scrp_write] !compressed
+!item [(!bullet) scrp_clear]
+Dateien im Klemmbrett l(!oumlaut)schen.
+!item [(!bullet) scrp_read]
+Pfad des Klemmbrettes ermitteln.
+!item [(!bullet) scrp_write]
+Pfad des Klemmbrettes setzen.
+!item [(!bullet) x_scrp_get]
+Pfad des Klemmbrettes ermitteln.
+!end_xlist
+
+(!B)Hinweis:(!b) Neben diesen Funktionen sind beim Datenaustausch (!uumlaut)ber das
+Klemmbrett noch weitere Einzelheiten zu beachten.
+
+Querverweis: Nachrichten ~  SC_CHANGED ~  SH_WDRAW ~  Style-Guidelines
+
+
+!endif
+
+!include gem/aes/scrp_/scrp_clear.ui
+!include gem/aes/scrp_/scrp_read.ui
+!include gem/aes/scrp_/scrp_write.ui
+!include gem/aes/scrp_/x_scrp_get.ui
+
+!end_node

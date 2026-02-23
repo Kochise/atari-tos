@@ -1,0 +1,63 @@
+!iflang [english]
+
+!begin_node Metafile functions
+
+This library contains functions that are indispensable for creating
+metafiles. In all, the following routines are available:
+
+!begin_xlist !compressed [x v_meta_extents]
+!item [(!bullet) v_meta_extents]
+Calculates dimensions of a metafile
+!item [(!bullet) v_write_meta]
+Stores graphic primitives in a metafile
+!item [(!bullet) vm_coords]
+Sets new coordinate system for a metafile
+!item [(!bullet) vm_filename]
+Renames a metafile
+!item [(!bullet) vm_pagesize]
+Sets physical page size for a metafile
+!end_xlist
+
+(!B)Note:(!b) The main purpose of a metafile lies in standardized data
+exchange between various (!nolink [GEM]) systems.
+
+See also: (!nl)
+Metafile format ~ VDI workstations ~ Style guidelines ~
+          VDI fundamentals
+
+!else
+
+!begin_node Metafile-Funktionen
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen, die beim Erzeugen eines Metafiles
+unentbehrlich sind. Insgesamt stehen die folgenden Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [x v_meta_extents]
+!item [(!bullet) v_meta_extents]
+Dimensionen eines Metafiles berechnen.
+!item [(!bullet) v_write_meta]
+Grafik-Primitive im Metafile ablegen.
+!item [(!bullet) vm_coords]
+Neues Koordinatensystem f(!uumlaut)r Metafile.
+!item [(!bullet) vm_filename]
+Metafile umbenennen.
+!item [(!bullet) vm_pagesize]
+Physikalische Seitengr(!oumlaut)(!sharps)e f(!uumlaut)r Metafile.
+!end_xlist
+
+(!B)Hinweis:(!b) Der Hauptzweck eines Metafiles liegt im standardisierten
+Datenaustausch zwischen verschiedenen GEM-Systemen.
+
+Querverweis: (!nl)
+Metafile-Format  ~  Workstations des VDI ~
+Style-Guidelines  ~  Grundlagen des VDI
+
+!endif
+
+!include gem/vdi/escape/metafile/vm_coords.ui
+!include gem/vdi/escape/metafile/vm_filename.ui
+!include gem/vdi/escape/metafile/vm_pagesize.ui
+!include gem/vdi/escape/metafile/v_meta_extents.ui
+!include gem/vdi/escape/metafile/v_write_meta.ui
+
+!end_node

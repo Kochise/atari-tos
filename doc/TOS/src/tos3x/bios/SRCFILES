@@ -1,0 +1,73 @@
+BIOS_306_OBJS=startup.o nvram.o ikbdclk.o chardev.o floppy.o keytbl.o sounds.o prtblk.o blkdev.o prt.o memtest.o
+BIOS_208_OBJS=startup.o nvram.o ikbdclk.o chardev.o floppy.o keytbl.o sounds.o prtblk.o blkdev.o prt.o memtest.o
+BIOS_206_OBJS=startup.o nvram.o ikbdclk.o chardev.o floppy.o keytbl.o sounds.o prtblk.o blkdev.o prt.o memtest.o
+
+BIOS_OBJS=$(BIOS_$(TOSVERSION)_OBJS)
+
+BIOS_HEADERS=\
+	bios.h \
+	biosdefs.h \
+	blkdev.h \
+	bpb.h \
+	header.h \
+	ide.h \
+	keytbl.h \
+	linea.h \
+	pbdef.h \
+	tosvars.h \
+	${empty}
+
+BIOS_INCLUDES=\
+	dma.inc \
+	linea.inc \
+	mmu030.inc \
+	romcrc.inc \
+	scrdmp.inc \
+	intpriv.inc \
+	zeromem.S \
+	${empty}
+
+BIOS_ASRCS = \
+	startup.S \
+	nvram.S \
+	ikbdclk.S \
+	chardev.S \
+	floppy.S \
+	hadxbios.S \
+	hadflopp.S \
+	hadesmm.S \
+	medusamm.S \
+	medxbios.S \
+	m64_isa.S \
+	m64_pci.S \
+	prt.S \
+	memtest.S \
+	${empty}
+
+BIOS_CSRCS = \
+	keytbl.c \
+	sounds.c \
+	prtblk.c \
+	blkdev.c \
+	${empty}
+
+FPSP060 = \
+       fpsp060/skel060.S \
+       fpsp060/isp.sa \
+       fpsp060/fpsp.sa \
+       $(empty)
+
+BIOS_SRCS = $(BIOS_HEADERS) $(BIOS_INCLUDES) $(BIOS_ASRCS) $(BIOS_CSRCS) $(FPSP060)
+
+EXTRA_DIST1:=\
+	Makefile \
+	SRCFILES \
+	optimize.mak \
+	prtkeys.c \
+	${empty}
+
+EXTRA_DIST2:=\
+	GNUmakefile \
+	${empty}
+
+SRCS:=${BIOS_SRCS}

@@ -1,0 +1,13 @@
+pdlgsmp1.app
+.C[-I..\..\pc\include]
+.C[-A-]
+
+=
+
+..\..\pc\lib\cstart0.o				;PC-Startup-Code
+
+pdlgsmp1.c				;Hauptprogramm
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcgemlib.lib

@@ -1,0 +1,232 @@
+!iflang [english]
+
+!begin_node vs_calibrate
+
+(!begin_liste) [Availability]
+
+!item [Name:]
+(!rdouble)Set calibration(!ldouble) - Set colour calibration.
+
+!item [Opcode:]
+5 (Escape 76)
+
+!item [Syntax:]
+int16_t vs_calibrate ( int16_t handle, int16_t flag, int16_t *rgb );
+
+!item [Description:]
+The call vs_calibrate switches colour calibration on or off and can be used
+to set a calibration table.
+
+!begin_xlist !compressed [Parameter]
+!item [Parameter]
+Meaning
+!item [~]
+~
+!item [handle]
+Workstation identifier
+!item [flag]
+Calibration:
+!begin_xlist !compressed
+!item [0 =]
+Turn off
+!item [1 =]
+Turn on
+!end_xlist
+!item [rgb]
+Pointer to calibration table, or NULL
+!end_xlist
+
+(!B)Note:(!b) A calibration table consists of 1001 RGB entries, that allocate
+for the value range 0- to 1000- thousandths of each input value a corrected
+thousandth value. Before calling this function, one should use
+vq_calibrate to check whether it is even present.
+
+The colour calibration is valid for the whole system for the driver
+identified by (!I)handle.(!i) Hence it should not be set by individual
+applications, but only with a CPX module or a desk accessory.
+
+(!B)Note for TC-VDI:(!b) Syntax is vs_calibrate(handle, rgb, flag) however
+(!nolink [intin]) entries are assigned to the same values in both cases.
+
+!item [(!nolink [Return]) value:]
+The function returns the value 0 if the calibration is switched off, or the
+value 1 if this is switched on.
+
+!item [Availability:]
+NVDI (depends on the driver), MATRIX TC-VDI.
+
+!item [Group:]
+Special graphic functions
+
+!item [See also:]
+(!link [Binding] [Bindings for vs_calibrate]) ~ vq_calibrate
+
+(!ende_liste)
+!end_node
+
+
+
+!begin_node Bindings for vs_calibrate
+!ignore_index
+
+(!begin_liste) [GEM-Arrays]
+
+!item [C:]
+int16_t vs_calibrate ( int16_t handle, int16_t flag, int16_t *rgb );
+
+!item [Binding:]
+!begin_verbatim
+int16_t vs_calibrate (int16_t handle, int16_t flag,
+                      int16_t *rgb)
+{
+   intin[0..1] = rgb;
+   intin[2] = flag;
+
+   contrl[0] = 5;
+   contrl[1] = 0;
+   contrl[3] = 3;
+   contrl[5] = 76;
+   contrl[6] = handle;
+
+   vdi ();
+
+   return ( intout[0] );
+}
+!end_verbatim
+
+!item [GEM-Arrays:]
+!begin_table [l l l]
+Address !! Element !! Contents
+!hline
+contrl    !! contrl[0]   !! 5     # Function opcode
+contrl+2  !! contrl[1]   !! 0     # Entry in ptsin
+contrl+4  !! contrl[2]   !! 0     # Entry in ptsout
+contrl+6  !! contrl[3]   !! 3     # Entry in intin
+contrl+8  !! contrl[4]   !! 1     # Entry in intout
+contrl+10 !! contrl[5]   !! 76    # Escape/Sub-opcode
+contrl+12 !! contrl[6]   !! handle
+intin     !! intin[0..1] !! rgb
+intin+4   !! intin[2]    !! flag
+intout    !! intout[0]   !! Return Value
+!end_table
+
+(!ende_liste)
+!end_node
+
+!else
+
+!begin_node vs_calibrate
+
+(!begin_liste) [Beschreibung]
+
+!item [Name:]
+(!rdouble)Set calibration(!ldouble) - Farbkalibration setzen
+
+!item [VDI-Nummer:]
+5 (Escape 76)
+
+!item [Deklaration:]
+int16_t vs_calibrate ( int16_t handle, int16_t flag, int16_t *rgb );
+
+!item [Beschreibung:]
+Die Funktion erm(!oumlaut)glicht das Ein- bzw. Ausschalten der Farbkalibration oder
+das (!Uumlaut)bergeben einer Kalibrationstabelle. Es gilt:
+
+!begin_xlist !compressed [Parameter]
+!item [Parameter]
+Bedeutung
+!item [~]
+~
+!item [handle]
+Kennung der Workstation
+!item [flag]
+Kalibration
+!begin_xlist !compressed
+!item [0 =]
+ausschalten
+!item [1 =]
+einschalten
+!end_xlist
+!item [rgb]
+Zeiger auf Kalibrationstabelle oder NULL
+!end_xlist
+
+(!B)Hinweis:(!b) Eine Kalibrationstabelle besteht aus 1001 RGB-Eintr(!aumlaut)gen,
+die f(!uumlaut)r den Wertebereich 0 bis 1000 Promille jedem Eingabewert einen
+korrigierten Promille-Wert zuordnet. Bevor man diese Funktion aufruft,
+sollte man mit vq_calibrate feststellen, ob sie (!uumlaut)berhaupt vorhanden ist.
+
+Die Farbkalibration ist im gesamten System f(!uumlaut)r den mit (!I)handle(!i)
+bezeichneten Treiber g(!uumlaut)ltig. Daher sollte sie nicht von einzelnen
+Anwendungen, sondern nur durch ein CPX-Modul oder Accessory eingestellt
+werden.
+
+(!B)Hinweis zu TC-VDI:(!b) Syntax is vs_calibrate(handle, rgb, flag) however
+(!nolink [intin]) entries are assigned to the same values in both cases.
+
+!item [Ergebnis:]
+Die Funktion liefert den Wert 0, wenn die Kalibration ausgeschaltet bzw. den
+Wert 1, wenn diese eingeschaltet ist.
+
+!item [Verf(!uumlaut)gbar:]
+NVDI (depends on the driver), MATRIX TC-VDI.
+
+!item [Gruppe:]
+Grafikspezial-Funktionen
+
+!item [Querverweis:]
+(!link [Binding] [Bindings f(!uumlaut)r vs_calibrate]) ~ vq_calibrate
+
+(!ende_liste)
+!end_node
+
+
+
+!begin_node Bindings f(!uumlaut)r vs_calibrate
+!ignore_index
+
+(!begin_liste) [Umsetzung]
+
+!item [C:]
+int16_t vs_calibrate ( int16_t handle, int16_t flag, int16_t *rgb );
+
+!item [Umsetzung:]
+!begin_verbatim
+int16_t vs_calibrate (int16_t handle, int16_t flag,
+                      int16_t *rgb)
+{
+   intin[0..1] = rgb;
+   intin[2] = flag;
+
+   contrl[0] = 5;
+   contrl[1] = 0;
+   contrl[3] = 3;
+   contrl[5] = 76;
+   contrl[6] = handle;
+
+   vdi ();
+
+   return ( intout[0] );
+}
+!end_verbatim
+
+!item [GEM-Arrays:]
+!begin_table [l l l]
+Adresse !! Feldelement !! Belegung
+!hline
+contrl    !! contrl[0]   !! 5     # Opcode der Funktion
+contrl+2  !! contrl[1]   !! 0     # Eintr(!aumlaut)ge in ptsin
+contrl+4  !! contrl[2]   !! 0     # Eintr(!aumlaut)ge in ptsout
+contrl+6  !! contrl[3]   !! 3     # Eintr(!aumlaut)ge in intin
+contrl+8  !! contrl[4]   !! 1     # Eintr(!aumlaut)ge in intout
+contrl+10 !! contrl[5]   !! 76    # Escape/Sub-Opcode
+contrl+12 !! contrl[6]   !! handle
+intin     !! intin[0..1] !! rgb
+intin+4   !! intin[2]    !! flag
+intout    !! intout[0]   !! Return-Wert
+!end_table
+
+(!ende_liste)
+!end_node
+
+!endif

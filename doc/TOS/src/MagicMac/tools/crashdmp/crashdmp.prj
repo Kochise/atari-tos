@@ -1,0 +1,16 @@
+crashdmp.tos
+.C[-I..\..\pc\include]
+
+.C[-K-]
+.C[-P-]
+.C[-A-]
+.C[-G-]
+.L[-S=4096]
+
+=
+..\..\pc\lib\cstart0.o
+
+crashdmp.c
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib

@@ -1,0 +1,200 @@
+!iflang [english]
+
+!begin_node SETTINGS
+
+Describes Geneva's global settings
+
+!begin_verbatim
+typedef struct Settings
+{
+  int16_t version;                    /* Version SETTINGS is for, in BCD    */
+  int16_t struct_len;                 /* Total # of bytes in SETTINGS       */
+  int16_t boot_rez;                   /* ST/TT resolution at startup        */
+  int16_t falcon_rez;                 /* Falcon video mode at startup       */
+  union                               /* Preferences                        */
+  {
+    struct                            /* Bitmapped flags                    */
+    {
+      unsigned pulldown          :1;  /* use pulldown menus                 */
+      unsigned insert_mode       :1;  /* insert in dialog edits             */
+      unsigned long_titles       :1;  /* long underlines X_UNDERLINE        */
+      unsigned alerts_under_mouse:1;  /* alerts appear under mouse          */
+      unsigned fsel_1col         :1;  /* column in Item Selector            */
+      unsigned grow_shrink       :1;  /* 1: FMD_GROW/SHRINK on              */
+      unsigned tear_aways_topped :1;  /* 1: tear aways always usable        */
+      unsigned auto_update_shell :1;  /*                                    */
+      unsigned alert_mode_change :1;  /*                                    */
+      unsigned ignore_video_mode :1;  /*                                    */
+      unsigned no_alt_modal_equiv:1;  /* rel 004                            */
+      unsigned no_alt_modeless_eq:1;  /* rel 004                            */
+      unsigned preserve_palette  :1;  /* rel 004                            */
+      unsigned mouse_on_off      :1;  /* rel 004                            */
+      unsigned top_all_at_once   :1;  /* rel 005                            */
+      unsigned child_pexec_single:1;  /* rel 006                            */
+    } s;
+    uint16_t i;                       /* Word for accessing all flags       */
+  } flags;                            /* Preferences                        */
+  int16_t gadget_pause;               /* # of 50 Hz timer tics to wait      */
+  KEYCODE menu_start;                 /* Key to start menus                 */
+  KEYCODE app_switch;                 /* Key to toggle between apps         */
+  KEYCODE app_sleep;                  /*                                    */
+  KEYCODE ascii_table;                /* Key to open ASCII table            */
+  KEYCODE redraw_all;                 /* Key to redraw whole screen         */
+  KEYCODE wind_keys[13];              /* Keys for window events             */
+
+  OB_PREFER color_3D[4];              /* Colors for 3D objects              */
+  OB_PREFER color_root[4];            /* Colors for root objects            */
+  OB_PREFER color_exit[4];            /* Colors for EXIT objects            */
+  OB_PREFER color_other[4];           /* Colors for other objects           */
+
+  int8_t sort_type                    /* fsel sort type, 0(Name) - 4(None)  */
+  int8_t find_file[26]                /* fsel Search string                 */
+  int8_t fsel_path[10][35]            /* Item Selector paths                */
+  int8_t fsel_ext[10][6];             /* Item Selector extension strings    */
+
+  KEYCODE cycle_in_app;               /* rel 004                            */
+  KEYCODE iconify;                    /* rel 004                            */
+  KEYCODE alliconify;                 /* rel 004                            */
+  KEYCODE procman;                    /* rel 006                            */
+  KEYCODE unused[4];
+
+  int8_t  graymenu;                   /* rel 004                            */
+  int8_t  reserved;                   /* rel 004                            */
+
+  union                               /* rel 006                            */
+  {
+    struct
+    {
+      unsigned procman_details  :1;
+      unsigned reserved         :31;
+    } s;
+    unsigned int32_t l;
+  } flags2;
+
+} SETTINGS;
+!end_verbatim
+
+The (!I)color_xx(!i) arrays are indexed depending upon the number of bitplanes
+in the current resolution:  1-plane=0, 2-planes=1, 4-planes=2, >4-planes=3.
+
+The (!I)wind_keys(!i) array is indexed using the following constants:
+!begin_table [lrl]
+XS_UPPAGE !! 0 !! Index for up page key
+XS_DNPAGE !! 1 !! Index for down page key
+XS_UPLINE !! 2 !! Index for up line key
+XS_DNLINE !! 3 !! Index for down line key
+XS_LFPAGE !! 4 !! Index for page left key
+XS_RTPAGE !! 5 !! Index for page right key
+XS_LFLINE !! 6 !! Index for line left key
+XS_RTLINE !! 7 !! Index for line right key
+XS_CLOSE  !! 8 !! Index for close box key
+XS_CYCLE  !! 9 !! Index for cycle window key
+XS_FULL   !! 10 !! Index for full window key
+XS_LFINFO !! 11 !! Index for info left key
+XS_RTINFO !! 12 !! Index for info right key
+!end_table
+
+See also: x_settings ~ KEYCODE ~ OB_PREFER
+!end_node
+
+!else
+
+!begin_node SETTINGS
+
+Describes Geneva's global settings
+
+!begin_verbatim
+typedef struct Settings
+{
+  int16_t version;                    /* Version SETTINGS is for, in BCD    */
+  int16_t struct_len;                 /* Total # of bytes in SETTINGS       */
+  int16_t boot_rez;                   /* ST/TT resolution at startup        */
+  int16_t falcon_rez;                 /* Falcon video mode at startup       */
+  union                               /* Preferences                        */
+  {
+    struct                            /* Bitmapped flags                    */
+    {
+      unsigned pulldown          :1;  /* use pulldown menus                 */
+      unsigned insert_mode       :1;  /* insert in dialog edits             */
+      unsigned long_titles       :1;  /* long underlines X_UNDERLINE        */
+      unsigned alerts_under_mouse:1;  /* alerts appear under mouse          */
+      unsigned fsel_1col         :1;  /* column in Item Selector            */
+      unsigned grow_shrink       :1;  /* 1: FMD_GROW/SHRINK on              */
+      unsigned tear_aways_topped :1;  /* 1: tear aways always usable        */
+      unsigned auto_update_shell :1;  /*                                    */
+      unsigned alert_mode_change :1;  /*                                    */
+      unsigned ignore_video_mode :1;  /*                                    */
+      unsigned no_alt_modal_equiv:1;  /* rel 004                            */
+      unsigned no_alt_modeless_eq:1;  /* rel 004                            */
+      unsigned preserve_palette  :1;  /* rel 004                            */
+      unsigned mouse_on_off      :1;  /* rel 004                            */
+      unsigned top_all_at_once   :1;  /* rel 005                            */
+      unsigned child_pexec_single:1;  /* rel 006                            */
+    } s;
+    uint16_t i;                       /* Word for accessing all flags       */
+  } flags;                            /* Preferences                        */
+  int16_t gadget_pause;               /* # of 50 Hz timer tics to wait      */
+  KEYCODE menu_start;                 /* Key to start menus                 */
+  KEYCODE app_switch;                 /* Key to toggle between apps         */
+  KEYCODE app_sleep;                  /*                                    */
+  KEYCODE ascii_table;                /* Key to open ASCII table            */
+  KEYCODE redraw_all;                 /* Key to redraw whole screen         */
+  KEYCODE wind_keys[13];              /* Keys for window events             */
+
+  OB_PREFER color_3D[4];              /* Colors for 3D objects              */
+  OB_PREFER color_root[4];            /* Colors for root objects            */
+  OB_PREFER color_exit[4];            /* Colors for EXIT objects            */
+  OB_PREFER color_other[4];           /* Colors for other objects           */
+
+  int8_t sort_type                    /* fsel sort type, 0(Name) - 4(None)  */
+  int8_t find_file[26]                /* fsel Search string                 */
+  int8_t fsel_path[10][35]            /* Item Selector paths                */
+  int8_t fsel_ext[10][6];             /* Item Selector extension strings    */
+
+  KEYCODE cycle_in_app;               /* rel 004                            */
+  KEYCODE iconify;                    /* rel 004                            */
+  KEYCODE alliconify;                 /* rel 004                            */
+  KEYCODE procman;                    /* rel 006                            */
+  KEYCODE unused[4];
+
+  int8_t  graymenu;                   /* rel 004                            */
+  int8_t  reserved;                   /* rel 004                            */
+
+  union                               /* rel 006                            */
+  {
+    struct
+    {
+      unsigned procman_details  :1;
+      unsigned reserved         :31;
+    } s;
+    unsigned int32_t l;
+  } flags2;
+
+} SETTINGS;
+!end_verbatim
+
+The (!I)color_xx(!i) arrays are indexed depending upon the number of bitplanes
+in the current resolution:  1-plane=0, 2-planes=1, 4-planes=2, >4-planes=3.
+
+The (!I)wind_keys(!i) array is indexed using the following constants:
+!begin_table [lrl]
+XS_UPPAGE !! 0 !! Index for up page key
+XS_DNPAGE !! 1 !! Index for down page key
+XS_UPLINE !! 2 !! Index for up line key
+XS_DNLINE !! 3 !! Index for down line key
+XS_LFPAGE !! 4 !! Index for page left key
+XS_RTPAGE !! 5 !! Index for page right key
+XS_LFLINE !! 6 !! Index for line left key
+XS_RTLINE !! 7 !! Index for line right key
+XS_CLOSE  !! 8 !! Index for close box key
+XS_CYCLE  !! 9 !! Index for cycle window key
+XS_FULL   !! 10 !! Index for full window key
+XS_LFINFO !! 11 !! Index for info left key
+XS_RTINFO !! 12 !! Index for info right key
+!end_table
+
+Querverweis: x_settings ~ KEYCODE ~ OB_PREFER
+
+!end_node
+
+!endif

@@ -1,0 +1,99 @@
+!iflang [english]
+
+!begin_node Shell library
+!html_name shel
+
+This library contains functions to read information from the program
+environment (such as the (!nolink [GEM]) desktop and similar applications), or to
+write them; in addition they can take on the launch of other (!nolink [GEM])
+programs. The following routines are available for this:
+
+!begin_xlist [x shel_envrn] !compressed
+!item [(!bullet) shel_envrn]
+Obtains value of environment variable
+!item [(!bullet) shel_find]
+Searches for a file
+!item [(!bullet) shel_get]
+Reads from the environment buffer
+!item [(!bullet) shel_help]
+Outputs Help-texts
+!item [(!bullet) shel_put]
+Writes to the environment buffer
+!item [(!bullet) shel_rdef]
+Inquires the default program
+!item [(!bullet) shel_read]
+Reads command line parameters
+!item [(!bullet) shel_wdef]
+Sets the default program
+!item [(!bullet) shel_write]
+Launches application
+!item [(!bullet) x_shel_get]
+Read information from GENEVA.CNF
+!item [(!bullet) x_shel_put]
+Write information to GENEVA.CNF
+!end_xlist
+
+(!B)Note:(!b) Here special merit has been earned by shel_write, which as of
+(!nolink [AES]) Version 4.0 (or MagiC 3) has made many other useful things
+available, such as Shutdown of the system, resolution changes, (!nolink [AES])
+broadcasting etc.
+
+See also: About the AES ~ Style guidelines
+
+!else
+
+!begin_node Shellfunktionen
+!html_name shel
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen um Informationen aus der
+Programmumgebung zu lesen bzw. in diese zu schreiben; au(!sharps)erdem kann hier(!uumlaut)ber
+der Start anderer GEM-Programme (!uumlaut)bernommen werden. Insgesamt stehen die
+folgenden Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist [x shel_envrn] !compressed
+!item [(!bullet) shel_envrn]
+Environment-Variable abfragen
+!item [(!bullet) shel_find]
+Datei suchen
+!item [(!bullet) shel_get]
+Aus dem Environment-Puffer lesen
+!item [(!bullet) shel_help]
+Ausgabe von Hilfetexten
+!item [(!bullet) shel_put]
+In den Environment-Puffer schreiben
+!item [(!bullet) shel_rdef]
+Abfragen des Default-Programms
+!item [(!bullet) shel_read]
+Kommandozeilenparameter lesen
+!item [(!bullet) shel_wdef]
+Setzen des Default-Programms
+!item [(!bullet) shel_write]
+Applikation starten
+!item [(!bullet) x_shel_get]
+Liest die Informationen aus der GENEVA.CNF
+!item [(!bullet) x_shel_put]
+Schreibt Informationen in die GENEVA.CNF
+!end_xlist
+
+(!B)Hinweis:(!b) Eine besondere Beachtung hat dabei shel_write verdient,
+welches ab (!nolink [AES])-Version 4.0 (bzw. MagiC 3) viele weitere n(!uumlaut)tzliche
+Dinge wie ein Herunterfahren des Systems (Shut-Down), Aufl(!oumlaut)sungswechsel,
+(!nolink [AES])-Broadcasting usw. zur Verf(!uumlaut)gung stellt.
+
+Querverweis: AES ~ Style-Guidelines
+
+!endif
+
+!include gem/aes/shel_/shel_envrn.ui
+!include gem/aes/shel_/shel_find.ui
+!include gem/aes/shel_/shel_get.ui
+!include gem/aes/shel_/shel_help.ui
+!include gem/aes/shel_/shel_put.ui
+!include gem/aes/shel_/shel_rdef.ui
+!include gem/aes/shel_/shel_read.ui
+!include gem/aes/shel_/shel_wdef.ui
+!include gem/aes/shel_/shel_write.ui
+!include gem/aes/shel_/x_shel_get.ui
+!include gem/aes/shel_/x_shel_put.ui
+
+!end_node

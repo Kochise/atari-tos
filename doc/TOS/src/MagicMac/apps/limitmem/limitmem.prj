@@ -1,0 +1,11 @@
+limitmem.ttp
+.C[-K-]
+.C[-P-]
+.C[-I..\..\inc_c]
+.C[-I..\..\pc\include]
+=
+..\..\pc\lib\cstartv.o
+limitmem.c
+
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcstdlib.lib

@@ -1,0 +1,125 @@
+!iflang [english]
+
+!begin_node Object library
+!html_name objc
+
+This library makes functions available for drawing and manipulating
+objects (of any kind). The following routines exist for this:
+
+!begin_xlist [x objc_wchange] !compressed
+!item [(!bullet) objc_add]
+Inserts an object in object tree
+!item [(!bullet) objc_change]
+Alters status of an object
+!item [(!bullet) objc_delete]
+Removes object from the object tree
+!item [(!bullet) objc_draw]
+Draws (!nolink [AES]) objects (or part-objects)
+!item [(!bullet) objc_edit]
+Edits text in an object
+!item [(!bullet) objc_find]
+Determines object at given screen position
+!item [(!bullet) objc_offset]
+Obtains true screen coordinates of an object
+!item [(!bullet) objc_order]
+Alters order of objects in object tree
+!item [(!bullet) objc_sysvar]
+Manipulates 3D objects
+!item [(!bullet) objc_wchange]
+Alters status of an object (in window)
+!item [(!bullet) objc_wdraw]
+Draws objects (or part-objects) (in window)
+!item [(!bullet) objc_wedit]
+Edits text in an object (in window)
+!item [(!bullet) objc_xedit]
+Edits text in an object
+!item [(!bullet) objc_xfind]
+Finds object index from its position
+!item [(!bullet) objc_xoffset]
+No information available at present
+!item [(!bullet) x_objc_edit]
+Edits text in an object, with extensions
+!end_xlist
+
+(!B)Note:(!b) Here special merit has been earned by objc_sysvar, with whose
+help the 3D-look of objects can be controlled (and as of MagiC 3 also
+switched off).
+
+See also: (!nl)
+About the AES ~ (!link [AES object structure][The object structure]) ~
+(!link [Scrollable input fields][Scrollable input fields]) ~
+Style guidelines
+
+
+!else
+
+!begin_node Objektfunktionen
+!html_name objc
+
+Diese Bibliothek stellt Funktionen zur Verf(!uumlaut)gung, um Objekte (gleich welcher
+Art) zu zeichnen und zu manipulieren; hierzu gibt es die folgenden Routinen:
+
+!begin_xlist [x objc_wchange] !compressed
+!item [(!bullet) objc_add]
+Objekt im Objektbaum einf(!uumlaut)gen
+!item [(!bullet) objc_change]
+Status eine Objekts (!aumlaut)ndern
+!item [(!bullet) objc_delete]
+Objekt aus dem Objektbaum entfernen
+!item [(!bullet) objc_draw]
+Objekt (mit Unterobjekten) zeichnen
+!item [(!bullet) objc_edit]
+Text eines Objektes editieren
+!item [(!bullet) objc_find]
+Objekt an der Mausposition ermitteln
+!item [(!bullet) objc_offset]
+Bildschirmkoordinaten eines Objekts ermitteln
+!item [(!bullet) objc_order]
+Reihenfolge im Objektbaum umstellen
+!item [(!bullet) objc_sysvar]
+Modifikation der 3D-Objekte
+!item [(!bullet) objc_wchange]
+Status eines Objektes (!aumlaut)ndern (im Fenster)
+!item [(!bullet) objc_wdraw]
+Objekt (mit Unterobjekten) zeichnen (im Fenster)
+!item [(!bullet) objc_wedit]
+Text eines Objektes editieren (im Fenster)
+!item [(!bullet) objc_xedit]
+Text eines Objektes editieren
+!item [(!bullet) objc_xfind]
+Objektindex (!uumlaut)ber Position ermitteln
+!item [(!bullet) objc_xoffset]
+z.Zt. keine Informationen bekannt
+!item [(!bullet) x_objc_edit]
+Text eines Objektes editieren, mit Erweiterung
+!end_xlist
+
+(!B)Hinweis:(!b) Eine besondere Beachtung hat dabei objc_sysvar verdient,
+mit dessen Hilfe der 3D-Look der Objekte gesteuert (und ab MagiC 3 auch
+abgeschaltet) werden kann.
+
+Querverweis:
+AES ~ (!link [Objektstruktur im AES][Die Objekt-Struktur]) ~
+(!link [Scrollende Eingabefelder][scrollende Eingabefelder]) ~
+Style-Guidelines
+
+
+!endif
+
+!include gem/aes/objc_/objc_add.ui
+!include gem/aes/objc_/objc_change.ui
+!include gem/aes/objc_/objc_delete.ui
+!include gem/aes/objc_/objc_draw.ui
+!include gem/aes/objc_/objc_edit.ui
+!include gem/aes/objc_/objc_find.ui
+!include gem/aes/objc_/objc_offset.ui
+!include gem/aes/objc_/objc_order.ui
+!include gem/aes/objc_/objc_sysvar.ui
+!include gem/aes/objc_/objc_wchange.ui
+!include gem/aes/objc_/objc_wdraw.ui
+!include gem/aes/objc_/objc_wedit.ui
+!include gem/aes/objc_/objc_xedit.ui
+!include gem/aes/objc_/objc_xfind.ui
+!include gem/aes/objc_/x_objc_edit.ui
+
+!end_node

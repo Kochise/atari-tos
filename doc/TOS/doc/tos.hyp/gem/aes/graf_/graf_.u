@@ -1,0 +1,120 @@
+!iflang [english]
+
+!begin_node Graphics library
+!html_name graf
+
+This library takes on the management of rectangles; so one can draw a
+rectangle that moves automatically with the mouse pointer, say.
+In all, the following functions are available:
+
+!begin_xlist [x graf_multirubber] !compressed
+!item [(!bullet) graf_dragbox]
+Moves a rectangular outline frame
+!item [(!bullet) graf_growbox]
+Animates a growing rectangle
+!item [(!bullet) graf_handle]
+Obtains ID of the (!nolink [AES]) workstation
+!item [(!bullet) graf_mbox]
+Displays moving rectangle
+!item [(!bullet) graf_mkstate]
+Obtains state of mouse pointer and keyboard
+!item [(!bullet) graf_mouse]
+Alters appearance of mouse pointer
+!item [(!bullet) graf_multirubber]
+Displays two 'rubber band' outline rectangles
+!item [(!bullet) (!link [graf_rubbox][graf_rubberbox])]
+Display 'rubber band' outline rectangle
+!item [(!bullet) graf_shrinkbox]
+Animates a shrinking rectangle
+!item [(!bullet) graf_slidebox]
+Obtains slider position
+!item [(!bullet) graf_watchbox]
+Selects an object and supervises mouse movements referring to this object
+!item [(!bullet) graf_wwatchbox]
+Selects an object in a window and supervises mouse movements referring to this
+object.
+!item [(!bullet) graf_xhandle]
+Obtains ID of the (!nolink [AES]) workstation
+!item [(!bullet) x_graf_blit]
+Blit one area of the screen to another location
+!item [(!bullet) x_graf_rast2rez]
+Convert a bit image
+!item [(!bullet) x_graf_rubberbox]
+Extended rubberband box drawing
+!end_xlist
+
+(!B)Note:(!b) Of these, graf_handle has earned special importance because
+with its aid the ID of the (!I)physical(!i) screen workstation can be
+obtained.
+
+See also: Style guidelines
+
+!else
+
+!begin_node Grafikfunktionen
+!html_name graf
+
+Diese Bibliothek (!uumlaut)bernimmt die Verwaltung von Rechtecken; so kann etwa
+ein Rechteck aufgezogen werden, da(!sharps) sich automatisch mit dem Mauszeiger
+mitbewegt. Insgesamt stehen die folgenden Funktionen zur Verf(!uumlaut)gung:
+
+!begin_xlist [x graf_multirubber] !compressed
+!item [(!bullet) graf_dragbox]
+Verschieben eines Rechtecks.
+!item [(!bullet) graf_growbox]
+Animation eines sich vergr(!oumlaut)(!sharps)ernden Rechtecks.
+!item [(!bullet) graf_handle]
+Kennung der (!nolink [AES])-Workstation ermitteln.
+!item [(!bullet) graf_mbox]
+Rechteckverschiebung darstellen.
+!item [(!bullet) graf_mkstate]
+Maus- und Tastaturstatus ermitteln.
+!item [(!bullet) graf_mouse]
+Form des Mauszeigers bestimmen.
+!item [(!bullet) graf_multirubber]
+Zwei Rechteckh(!uumlaut)lle ((!rdouble)Gummiband(!ldouble)) darstellen.
+!item [(!bullet) (!link [graf_rubbox][graf_rubberbox])]
+Rechteckh(!uumlaut)lle ((!rdouble)Gummiband(!ldouble)) darstellen.
+!item [(!bullet) graf_shrinkbox]
+Animation eines sich verkleinernden Rechtecks.
+!item [(!bullet) graf_slidebox]
+Sliderposition ermitteln.
+!item [(!bullet) graf_watchbox]
+Objektstatus an Position des Mauszeigers koppeln.
+!item [(!bullet) graf_wwatchbox]
+Objektstatus an Mausposition koppeln (im Fenster).
+!item [(!bullet) graf_xhandle]
+Kennung der (!nolink [AES])-Workstation ermitteln.
+!item [(!bullet) x_graf_blit]
+Blit one area of the screen to another location
+!item [(!bullet) x_graf_rast2rez]
+Convert a bit image
+!item [(!bullet) x_graf_rubberbox]
+Extended rubberband box drawing
+!end_xlist
+
+(!B)Hinweis:(!b) Eine besondere Beachtung hat dabei graf_handle verdient,
+mit dessen Hilfe die Kennung der (!I)physikalischen(!i)
+Bildschirm-Workstation erfragt werden kann.
+
+Querverweis: Style-Guidelines
+
+!endif
+
+!include gem/aes/graf_/graf_dragbox.ui
+!include gem/aes/graf_/graf_growbox.ui
+!include gem/aes/graf_/graf_handle.ui
+!include gem/aes/graf_/graf_mbox.ui
+!include gem/aes/graf_/graf_mkstate.ui
+!include gem/aes/graf_/graf_mouse.ui
+!include gem/aes/graf_/graf_multirubber.ui
+!include gem/aes/graf_/graf_rubberbox.ui
+!include gem/aes/graf_/graf_shrinkbox.ui
+!include gem/aes/graf_/graf_slidebox.ui
+!include gem/aes/graf_/graf_watchbox.ui
+!include gem/aes/graf_/graf_wwatchbox.ui
+!include gem/aes/graf_/graf_xhandle.ui
+!include gem/aes/graf_/x_graf_blit.ui
+!include gem/aes/graf_/x_graf_rast2rez.ui
+!include gem/aes/graf_/x_graf_rubberbox.ui
+!end_node

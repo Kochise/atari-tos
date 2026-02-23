@@ -1,0 +1,111 @@
+!iflang [english]
+
+!begin_node Font selection
+!html_name fnts
+
+This library contains routines for handling a font selector, which an
+application can use to select fonts for its use. The routines were
+introduced with MagiC 4.
+
+!begin_xlist [x fnts_get_no_styles] !compressed
+!item [(!bullet) fnts_add]
+Adds user's fonts for selection
+!item [(!bullet) fnts_close]
+Closes selector
+!item [(!bullet) fnts_create]
+Initializes the font selector
+!item [(!bullet) fnts_delete]
+Releases memory used by font selector
+!item [(!bullet) fnts_do]
+Displays font selector in modal dialog
+!item [(!bullet) fnts_evnt]
+Processes events for dialog in window
+!item [(!bullet) fnts_get_info]
+Obtains information about a font
+!item [(!bullet) fnts_get_name]
+Obtains name of a font
+!item [(!bullet) fnts_get_no_styles]
+Obtains number of styles of a font family
+!item [(!bullet) fnts_get_style]
+Obtains ID of the n-th style of a family
+!item [(!bullet) fnts_open]
+Opens font selector in a window
+!item [(!bullet) fnts_remove]
+Removes user's fonts from the list
+!item [(!bullet) fnts_update]
+Updates font selector
+!end_xlist
+
+(!B)Note:(!b) The existence of these functions is best established with a
+call of (!link [appl_getinfo][%apgi_7]) (opcode 7).
+
+See also: (!nl)
+(!link [Selector in a window][Font selector in a window]) ~
+(!link [Selector in a modal dialog][Font selector in a modal dialog]) ~ WDIALOG ~
+(!link [xFSL interface][About the xFSL interface])
+
+!else
+
+!begin_node Zeichensatzauswahl
+!html_name fnts
+
+Diese Bibliothek enth(!aumlaut)lt Routinen zur Handhabung eines Font-Selektors, mit
+dem eine Applikation Zeichens(!aumlaut)tze ausw(!aumlaut)hlen kann. Die Routinen wurden mit
+MagiC 4 eingef(!uumlaut)hrt.
+
+!begin_xlist [x fnts_get_no_styles] !compressed
+!item [(!bullet) fnts_add]
+Eigene Fonts zur Auswahl hinzuf(!uumlaut)gen
+!item [(!bullet) fnts_close]
+Auswahl schlie(!sharps)en
+!item [(!bullet) fnts_create]
+Initialisiert die Zeichensatzauswahl
+!item [(!bullet) fnts_delete]
+Speicher freigeben
+!item [(!bullet) fnts_do]
+Modalen Dialog anzeigen
+!item [(!bullet) fnts_evnt]
+Ereignisse f(!uumlaut)r Dialog im Fenster bearbeiten
+!item [(!bullet) fnts_get_info]
+Informationen (!uumlaut)ber einen Font ermitteln
+!item [(!bullet) fnts_get_name]
+Namen eines Fonts ermitteln
+!item [(!bullet) fnts_get_no_styles]
+Zahl der Stile einer Fontfamilie ermitteln
+!item [(!bullet) fnts_get_style]
+ID des n-ten Stil einer Familie ermitteln
+!item [(!bullet) fnts_open]
+Auswahl im Fenster (!oumlaut)ffnen
+!item [(!bullet) fnts_remove]
+Eigene Fonts aus der Liste entfernen
+!item [(!bullet) fnts_update]
+Zeichensatzauswahl aktualisieren
+!end_xlist
+
+(!B)Hinweis:(!b) Die Existenz dieser Funktionen sollte am besten durch einen
+Aufruf von (!link [appl_getinfo][%apgi_7]) (Opcode 7) festgestellt werden.
+
+Querverweis: (!nl)
+(!link [Auswahl im Fenster][Zeichensatzauswahl im Fenster]) ~
+(!link [Auswahl als Dialog][Zeichensatzauswahl als Dialog]) ~ WDIALOG ~
+xFSL-Schnittstelle
+
+
+!endif
+
+!include gem/aes/fnts_/fnts_add.ui
+!include gem/aes/fnts_/fnts_close.ui
+!include gem/aes/fnts_/fnts_create.ui
+!include gem/aes/fnts_/fnts_delete.ui
+!include gem/aes/fnts_/fnts_do.ui
+!include gem/aes/fnts_/fnts_evnt.ui
+!include gem/aes/fnts_/fnts_get_info.ui
+!include gem/aes/fnts_/fnts_get_name.ui
+!include gem/aes/fnts_/fnts_get_no_styles.ui
+!include gem/aes/fnts_/fnts_get_style.ui
+!include gem/aes/fnts_/fnts_open.ui
+!include gem/aes/fnts_/fnts_remove.ui
+!include gem/aes/fnts_/fnts_update.ui
+!include gem/aes/fnts_/use.ui
+
+!end_node

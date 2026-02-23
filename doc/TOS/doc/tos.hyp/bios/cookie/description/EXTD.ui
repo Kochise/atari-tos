@@ -1,0 +1,17 @@
+!iflang [english]
+
+!begin_node Cookie, EXTD
+
+(!B)(!nolink [TOS]) Filename Extender(!b)
+
+!end_node
+
+!else
+
+!begin_node Cookie, EXTD
+
+(!B)(!nolink [TOS]) Filename Extender(!b)
+
+!end_node
+
+!endif

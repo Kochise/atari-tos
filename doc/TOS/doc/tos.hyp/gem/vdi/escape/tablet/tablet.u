@@ -1,0 +1,55 @@
+!iflang [english]
+
+!begin_node Graphics tablet functions
+
+This library contains functions to access a graphics tablet in an
+optimum manner. The following routines are available for this purpose:
+
+!begin_xlist !compressed [x vq_tdimensions]
+!item [(!bullet) vq_tdimensions]
+Gets dimensions of the graphics tablet in 1/10 inch
+!item [(!bullet) vt_alignment]
+Sets offsets to graphics tablet coordinate system
+!item [(!bullet) vt_axis]
+Sets resolution of the graphics tablet
+!item [(!bullet) vt_origin]
+Sets coordinate origin for graphics tablet
+!item [(!bullet) vt_resolution]
+Sets resolution of the graphics tablet
+!end_xlist
+
+See also:
+VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Grafiktablett-Funktionen
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen, um ein Grafiktablett optimal ansprechen
+zu k(!oumlaut)nnen. Zu diesem Zweck stehen die folgenden Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [x vq_tdimensions]
+!item [(!bullet) vq_tdimensions]
+Ausma(!sharps)e des Grafiktabletts in 1/10-Zoll.
+!item [(!bullet) vt_alignment]
+Koordinatensystem des Grafiktabletts ausrichten.
+!item [(!bullet) vt_axis]
+Aufl(!oumlaut)sung des Grafiktabletts einstellen.
+!item [(!bullet) vt_origin]
+Koordinatenursprung f(!uumlaut)r Grafiktablett setzen.
+!item [(!bullet) vt_resolution]
+Aufl(!oumlaut)sung des Grafiktabletts einstellen.
+!end_xlist
+
+Querverweis:
+Workstations des VDI ~ Style-Guidelines
+
+!endif
+
+!include gem/vdi/escape/tablet/vq_tdimensions.ui
+!include gem/vdi/escape/tablet/vt_alignment.ui
+!include gem/vdi/escape/tablet/vt_axis.ui
+!include gem/vdi/escape/tablet/vt_origin.ui
+!include gem/vdi/escape/tablet/vt_resolution.ui
+
+!end_node

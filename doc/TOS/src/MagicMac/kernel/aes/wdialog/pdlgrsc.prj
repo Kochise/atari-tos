@@ -1,0 +1,6 @@
+pdlgrsc.tos
+=
+..\..\pc\lib\cstartv.o
+pdlgrsc.c
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcstdlib.lib

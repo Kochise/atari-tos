@@ -1,0 +1,1316 @@
+!begin_node OLGA-Protokoll
+!html_name proto_olga
+!label Object-Linking
+!label Linking, Object-
+
+Das OLGA-Protokoll (Object Linking for (!nolink [GEM])-Applications)
+wurde von (!I)Thomas
+Much(!i) entwickelt, und ermîglicht Object Linking auch unter GEM. 
+
+(!B)Da dieses Konzept vielleicht nicht allen Lesern bekannt ist, zunÑchst ein
+mîgliches Anwendungsbeispiel:(!b) Stellen Sie sich vor, Sie benutzen Ihre
+Textverarbeitung und mîchten ein Dokument durch eine Grafik etwas auflockern.
+Nachdem Sie die Grafik im Text plaziert haben, entscheiden Sie
+sich, diese noch geringfÅgig zu verÑndern. Normalerweise wechseln Sie dazu
+in das Grafikprogramm, nehmen dort die nîtigen énderungen vor, wechseln
+zurÅck in die Textverarbeitung, verwerfen die alte Grafik, importieren
+und plazieren die neue. WÅrden beide (!nolink [Applikationen]) (d.h. Grafikprogramm
+ und Textverarbeitung) das OLGA-Protokoll unterstÅtzen, kînnte die
+Lîsung dieser Aufgabe jedoch wie folgt aussehen: Sie wechseln in das Grafikprogramm,
+ modifizieren dort die Grafik und nach dem Abspeichern sind
+Sie fertig! Die Textverarbeitung erkennt (!I)automatisch(!i), daû die Grafik
+verÑndert wurde, und liest diese lebststÑndig ein!
+
+Das obige Beispiel setzt dabei ein Multitasking-Betriebssystem wie MagiC
+oder MultiTOS voraus. Und in der Tat: Single-(!nolink [TOS])-Systeme werden von OLGA
+nicht (mehr) unterstÅtzt. Wer sich nÑher mit dem OLGA-Protokoll beschÑftigen
+mîchte, sollte die folgenden Punkte beachten:
+
+!begin_itemize !compressed
+!item (!link [Initialisierung und Terminierung][OLGA-Initialisierung])
+!item (!link [Funktionen eines Servers][OLGA-Server])
+!item (!link [Funktionen eines Clients][OLGA-Client])
+!item (!link [Das Info-Datei-Format][OLGA-Info-Dateiformat])
+!end_itemize
+
+OLGA arbeitet (!I)dokumentenzentriert(!i), d.h. das Protokoll ist darauf vorbereitet,
+daû eine Applikation mehrere Dokumente (evtl. sogar mit komplett verschiedenen
+(!nolink [Datentypen])) verwalten kann. Zur Steuerung des Object-Linkings
+wird ein sogenannter (!B)OLGA-Manager(!b) (kurz: Manager) eingesetzt. Die Kommunikation
+zwischen den (!nolink [Applikationen]) wird komplett Åber diesen Manager
+abgewickelt, vom dem es Åbrigens immer nur (!I)einen(!i) im System geben kann.
+
+Das Bild zeigt eine einfach OLGA-Verbindung
+!image (!picture_path)olga_1
+
+
+Das eigentliche Object-Linking wird bei OLGA durch sogenannte (!B)Links(!b)
+realisiert: dies sind Referenzen des Clients auf Datenobjekte, oder genauer:
+Dateinamen mit (!I)absolutem(!i) Pfad. Wird nun vom Server ein Objekt geÑndert,
+auf das ein Link besteht, so wird der Client (vom Manager) davon unterrichtet,
+und kann das geÑnderte Objekt neu darstellen.
+
+From Rev 1.2 (1996-11-20) onwards, extra functions were added and the
+OLGA architecture model now looks like this:
+!image (!picture_path)olga_4
+The above illustration shows the distribution of services between the
+OLGA-Manager and the applications using it (i.e. (!link [Client][OLGA-Client]) or (!link [Server][OLGA-Server])).
+During linking, InplaceDrawing and Notification, the correct balance
+of communication between Manager and application for the embedding
+is the sole responsibility of the Client application.
+
+Finally, the Info files are co-ordinated by the Manager but then
+operate directly between Server and Client applications. Schematically
+communications are handled something like this:
+!image (!picture_path)olga_3
+
+#(!B)Hinweis:(!b) Ein vollstÑndiges und aktuelles Archiv (OLGA.LZH) zum OLGA-Protokoll
+#befindet sich stets in der Maus-KA (Karlsruhe). Dieses beinhaltet neben dem
+#normalen Manager auch eine (!I)Debug-Version(!i), mit der alle eingehenden
+#(und einige der verschickten) Nachrichten recht einfach ÅberprÅft werden
+#kînnen, da die nîtigen Informationen einfach auf dem
+#(!link [Device CON:][Die Ein-/AusgabekanÑle des BIOS])
+#ausgegeben werden.
+#
+# Maus KA gibt es nicht mehr!
+
+Querverweis: AV-Protokoll ~  Drag&Drop-Protokoll
+
+
+
+!begin_node OLGA-Initialisierung
+
+(!U)Initialisierung und Terminierung bei OLGA(!u)
+
+Das OLGA-Protokoll entspricht dem OLE-Protokoll, welches Object Embedding
+mit OEP (Object Exchange Protocol) und Objekt Linking mit OLGA ermîglicht.
+Da es sehr sinnvoll sein kann, beide Varianten in einer Applikation zu unterstÅtzen,
+werde (!I)beide(!i) (!nolink [Protokolle]) (d.h. OLGA und OEP) mit denselben
+(!nolink [Nachrichten]) evtl. (!I)gleichzeitig(!i) (!) initialisiert.
+Die notwendigen Routinen
+um sich an- bzw. abzumelden lauten:
+
+!begin_itemize !compressed
+!item OLE_EXIT~~~~~Aus dem Protokoll ausklinken.
+!item OLE_INIT~~~~~Applikation beim Manager anmelden.
+!item OLE_NEW~~~~~~Manager wurde nachgestartet.
+!item OLGA_INIT~~~~BestÑtigung fÅr Anmeldung per (!nolink [OLE_INIT]).
+!end_itemize
+
+Wie bereits erwÑhnt erfolgt die Kommunikation zwischen den OLGA-Applikationen
+Åber einen Manager, dessen AES-ID fÅr den Nachrichtenaustausch
+ermittelt werden muss. Das Kochrezept hierzu lautet:
+
+(!bullet) (!B)Fall 1: Die Applikation benîtigt OLE (d.h. OEP und OLGA)(!b)
+!begin_xlist [(a)]
+!label OLEMANGR
+
+!item [(a)] Den Manager per (!nolink [appl_find]) ("OLEMANGR") suchen. War die Suche
+		erfolgreich, so ist man bereits fertig.
+!label Environmentvariable OLEMANAGER
+!label OLEMANAGER, Environmentvariable
+      
+!item [(b)] Ansonsten sollte man die Environmentvariable OLEMANAGER inspizieren,
+      die einen kompletten Zugriffspfad auf den Manager enthalten kann.
+      Aus diesem Pfad extrahiert man dann zunÑchst den eigentlichen Programmnamen
+			fÅr appl_find, und geht dann wie unter (a) beschrieben
+      vor. Wenn auch dies nicht zum Erfolg fÅhrt, sollte man das durch
+      OLEMANAGER spezifizierte Programm per shel_write nachstarten.
+!label OEP_SERV
+      
+!item [(c)] Wenn alle bisherigen Anstrengungen nicht zum gewÅnschten Ergebnis
+      gefÅhrt haben, gibt es offenbar (!I)keinen(!i) OLE-Manager, und man muss
+      sich evtl. mit dem reinen (!nolink [OLGA-Protokoll]) begnÅgen. In diesem Fall
+      fÅhrt man analog zu (a) ein (!nolink [appl_find]) ("OLGA    ") (!I)und(!i) ein appl_-
+      find ("OEP_SERV") aus; evtl. mÅssen nÑmlich nun (!I)zwei(!i) Manager unterstÅtzt
+      werden!
+!label Environmentvariable OLGAMANAGER
+!label OLGAMANAGER, Environmentvariable
+!label Environmentvariable OEPMANAGER
+!label OEPMANAGER, Environmentvariable
+
+!item [(d)] Sollte auch die letzte Aktion keinen Erfolg gebracht haben, so sollten
+      noch die Environmentvariablen OLGAMANAGER und OEPMANAGER (wie unter
+			(b)) ausgewertet werden.
+!end_xlist
+
+(!bullet) (!B)Fall 2: Die Applikation benîtigt nur OLGA(!b)
+!begin_quote
+  In diesem Fall geht man wie unter dem ersten (!nolink [Punkt]) beschrieben vor,
+  allerdings Ñndert sich die Reihenfolge der Aktionen zu (c),(d),(a) und (b).
+  NatÅrlich brauchen OEP_SERV und OEPMANAGER in diesem Fall (!I)nicht(!i) abgefragt
+  zu werden, da es unwahrscheinlich ist, dass ein OEP-Server das (!nolink [OLGA-Protokoll])
+  versteht.
+!end_quote
+Querverweis: OLGA-Protokoll ~  AV-Protokoll ~  Drag&Drop-Protokoll
+  
+!end_node
+
+
+!begin_node OLGA-Client
+
+Die folgenden Nachrichten kînnen von einem OLGA-Client verschickt bzw.
+empfangen werden:
+
+!begin_xlist [x OLGA_LINKBROKEN ] !compressed
+!item [(!bullet) OLGA_CLOSEDOC] Schlieûen eines Dokumentes anzeigen.
+!item [(!bullet) OLGA_GETINFO] Indexnummer fÅr eine Info-Datei ermitteln.
+!item [(!bullet) OLGA_LINK] Einbindung einer Datei in ein Dokument anzeigen.
+!item [(!bullet) OLGA_LINKBROKEN] Referenz auf ein Objekt steht nicht mehr zur
+                      VerfÅgung.
+                         
+!item [(!bullet) OLGA_LINKRENAMED]    Referenz auf ein Objekt wurde aktualisiert.
+!item [(!bullet) OLGA_OPENDOC]        Dokument beim Manager anmelden.
+!item [(!bullet) OLGA_RENAMELINK]     Referenz auf ein Objekt aktualisieren.
+!item [(!bullet) OLGA_START]          Server fÅr einen Client nachstarten.
+!item [(!bullet) OLGA_UPDATED]        Server hat eine Datei verÑndert.
+!item [(!bullet) OLGA_UNLINK]         öberwachung einer Datei beenden.
+!end_xlist
+
+(!B)Achtung:(!b) An dieser Stelle sei darauf hingewiesen, daû im Hinblick auf
+zukÅnftige Betriebssystem-Versionen zur Kommunikation zwischen verschiedenen
+Programmen benutzte oder Åber Zeiger zugewiesene Speicherbereiche (!nolink [global])
+sein mÅssen (Mxalloc-Funktion mit Global-Flag). Andernfalls wird es beim
+Einsatz auf Rechnern mit (!nolink [PMMU]) (z.B. Atari-TT oder Falcon) zu
+Speicherschutzverletzungen kommen.
+
+Querverweis: (!link [minimale Anforderungen][Client minimal]) ~  OLGA-Protokoll ~  OLGA-Server
+
+!end_node
+
+
+
+!begin_node OLGA-Server
+
+Die folgenden Nachrichten kînnen von einem OLGA-Server verschickt bzw.
+empfangen werden:
+
+!begin_xlist [x OLGA_BREAKLINK ] !compressed
+!item [(!bullet) OLGA_BREAKLINK]    Link auf ein Objekt aufheben.
+!item [(!bullet) OLGA_INFO]         Antwort auf eine OLGA_GETINFO-Nachricht.
+!item [(!bullet) OLGA_RENAME]       NamensÑnderung eines Objektes mitteilen.
+!item [(!bullet) OLGA_UPDATE]       énderung an einem Objekt mitteilen.
+!end_xlist
+
+(!B)Achtung:(!b) An dieser Stelle sei darauf hingewiesen, daû im Hinblick auf
+zukÅnftige Betriebssystem-Versionen zur Kommunikation zwischen verschiedenen
+Programmen benutzte oder Åber Zeiger zugewiesene Speicherbereiche (!nolink [global])
+sein mÅssen (Mxalloc-Funktion mit Global-Flag). Andernfalls wird es beim
+Einsatz auf Rechnern mit (!nolink [PMMU]) (z.B. Atari-TT oder Falcon) zu
+Speicherschutzverletzungen kommen.
+
+Querverweis: (!link [minimale Anforderungen][Server minimal]) ~  OLGA-Protokoll ~  OLGA-Client
+
+!end_node
+
+
+
+###
+### Funktionen eines OLGA-Servers
+###
+
+!begin_node OLGA_BREAKLINK
+
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_BREAKLINKÆ - Link auf ein Objekt aufheben.
+
+!item [Nummer:]         0x1244
+
+!item [Beschreibung:]   Diese Nachricht wird vom Server an den Manager geschickt
+               wenn er eine Datei lîscht, oder anderweitig fÅr den Client
+               unbrauchbar macht. 
+               
+!begin_flushleft
+!begin_table [l|l]
+               Parameter !!    Bedeutung
+!hline
+               
+               Word 0    !!    Nachrichtennummer (0x1244)
+               Word 1    !!    (!nolink [AES])-Kennung des eigenen Programms
+               Word 2    !!    0
+               Word 3+4  !!    Zeiger auf den absoluten Dateinamen
+               Word 5    !!    0
+               Word 6    !!    0
+               Word 7    !!    0
+!end_table               
+!end_flushleft
+               (!B)Hinweis:(!b) Der Manager informiert anschlieûend alle Clients,
+               die einen Link auf diese Datei gesetzt hatten.
+
+               Der Server erhÑlt anschlieûend eine (!link [Antwort][OLGA_BREAKLINK, Antwort auf]) vom Manager,
+               damit er sicher sein kann, das seine Absicht verstanden
+               worden ist.
+               
+!item [Gruppe:]         OLGA-Server
+
+!item [Querverweis:]    OLGA_INFO ~  OLGA_RENAME ~  OLGA_UPDATE
+(!ende_liste)
+
+
+
+!begin_node OLGA_BREAKLINK, Antwort auf
+(!B)Diese Nachricht erhÑlt der Server als Antwort auf eine
+verschickte OLGA_BREAKLINK-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3+4 = exakt dieselben Werte von OLGA_BREAKLINK
+Word 5   = 0
+Word 6   = 0
+Word 7   = OLGA_BREAKLINK
+!end_verbatim
+!end_node
+!end_node
+
+
+
+!begin_node OLGA_INFO
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_INFOÆ - Antwort auf eine (!nolink [OLGA_GETINFO])-Message.
+
+!item [Nummer:]         0x1248
+
+!item [Beschreibung:]   Diese Nachricht ist als Antwort auf OLGA_GETINFO zu verstehen,
+											 und wird vom Server (!I)direkt(!i) an den Client geschickt.
+               
+               
+!begin_table [l|l]               
+               Parameter  !!   Bedeutung
+!hline
+               Word 0   !!     Nachrichtennummer (0x1248)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3+4 !!     Zeiger auf absoluten Info-Dateinamen
+               Word 5   !!     Index-Nummer der Info-Datei
+               Word 6   !!     0
+               Word 7   !!     0
+!end_table
+               (!B)Hinweis:(!b) Vor dem Verschicken der Nachricht muss der Server
+               evtl. die zugehîrige (!link [Info-Datei][OLGA-Info-Dateiformat]) aufbauen, sofern diese
+               nicht bereits vorhanden ist. Ein Client darf sich jedoch
+               (!I)nicht(!i) auf das Eintreffen dieser Antwort verlassen, denn
+               der Server kînnte ja inzwischen terminiert sein; auûerdem
+               darf er nur (!I)lesend(!i) auf die Datei zugreifen.
+               
+               Sobald der Client die Info-Datei wieder geschlossen hat,
+               schickt er eine (!link [Antwort][OLGA_INFO, Antwort auf]) an den Server, damit dieser die
+               Datei evtl. wieder lîschen kann.
+               
+!item [Gruppe:]         OLGA-Server
+
+!item [Querverweis:]    OLGA_BREAKLINK ~  OLGA_RENAME ~  OLGA_UPDATE
+(!ende_liste)
+
+
+
+!begin_node OLGA_INFO, Antwort auf
+(!B)Diese Nachricht erhÑlt der Server als Antwort auf eine
+verschickte OLGA_INFO-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3+4 = exakt dieselben Werte von OLGA_INFO
+Word 5   = Index-Nummer der Info-Datei
+Word 6   = 0
+Word 7   = OLGA_INFO
+!end_verbatim 
+!end_node
+!end_node
+
+
+!begin_node OLGA_RENAME
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_RENAMEÆ - NamensÑnderung eines Objektes mitteilen.
+
+!item [Nummer:]         0x123a
+
+!item [Beschreibung:]   Diese Nachricht wird vom Server an den Manager geschickt,
+               falls der Benutzer eine Datei im Server umbenannt oder
+               verschoben hat. Es gilt
+
+               
+!begin_table [l|l]       
+               Parameter  !!   Bedeutung
+!hline
+               
+               Word 0   !!     Nachrichtennummer (0x123a)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3+4  !!    Zeiger auf alten absoluten Dateinamen
+               Word 5+6  !!    Zeiger auf neuen absoluten Dateinamen
+               Word 7    !!    0
+!end_table               
+               (!B)Hinweis:(!b) Es liegt im Ermessen des Servers, ob er nach dem
+               Befehl 'Speichern als...' diese Nachricht verschickt. Sinnvoll
+							 wÑre dies auf jedenfall, wenn der Server die neue
+               Pfadangabe bzw. den neuen Dateinamen fÅr das Dokument Åbernimmt.
+							 Nach Mîglichkeit sollten Links zwar immer nur fÅr
+               Dateien auf (!I)nicht(!i) wechselbaren Medien bestehen, in der
+               Praxis dÅrfte dies aber wohl kaum durchzuhalten sein. Falls
+               der Inhalt der Datei verÑndert wurde, muss zusÑtzlich noch
+               die Nachricht OLGA_UPDATE verschickt werden.
+               
+               Der Server erhÑlt anschlieûend eine (!link [Antwort][OLGA_RENAME, Antwort auf]),
+							 auf die er
+               z.B. mit der Freigabe des alten Speicherplatzes reagieren
+               kann. Die BestÑtigung bedeutet Åbrigens nur, daû der Manager
+							 das Umbenennen weitergemeldet hat; reagiert ein Client
+               nicht darauf, so ist der entsprechende Link tot, d.h. er
+               kann nicht weiter Åberwacht werden!
+
+!item [Gruppe:]         OLGA-Server
+
+!item [Querverweis:]    OLGA_BREAKLINK  ~ OLGA_INFO ~  OLGA_UPDATE
+(!ende_liste)
+
+
+
+!begin_node OLGA_RENAME, Antwort auf
+(!B)Diese Nachricht erhÑlt der Server als Antwort auf eine
+verschickte OLGA_RENAME-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3+4 = exakt dieselben Werte von OLGA_RENAME
+Word 5+6 = exakt dieselben Werte von OLGA_RENAME
+Word 7   = OLGA_RENAME
+!end_verbatim
+!end_node
+!end_node
+
+
+
+!begin_node OLGA_UPDATE
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_UPDATEÆ - énderung an einem Objekt mitteilen.
+
+!item [Nummer:]         0x1238
+
+!item [Beschreibung:]   Diese Nachricht muss vom Server an den Manager geschickt
+               werden, wenn er eine Datei abgespeichert hat.
+               
+               
+!begin_table [l|l]               
+               Parameter  !!    Bedeutung
+!hline
+              
+               Word 0    !!     Nachrichtennummer (0x1238)
+               Word 1    !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2    !!     0 
+               Word 3+4  !!     Zeiger auf Dateinamen incl. absolutem
+               ~          !!     Pfad
+                              
+               Word 5    !!     0, oder eine Server-Interne (eindeutige)
+               ~         !!      Index-Nummer, falls eine (!link [Info-Datei][OLGA-Info-Dateiformat]) zur
+               ~          !!     VerfÅgung steht bzw. erzeugt werden  kann
+                              
+               Word 6     !!    0
+               Word 7     !!    0
+!end_table               
+               (!B)Hinweis:(!b) Die Bearbeitung erfolgt z.Zt. (!I)nicht(!i) Case-Sensitiv,
+               d.h. die Groû- bzw. Kleinschreibung des Dateinamens wird
+               ignoriert, damit das Linking nicht an unterschiedlichen
+               Benutzereingaben scheitert. Dies wird in spÑteren Versionen
+               (Stichwort: (!link [alternative Dateisysteme][UnterstÅtzung fremder Dateisysteme])) allerdings nicht mehr
+               der Fall sein.
+               
+               Der Server erhÑlt anschlieûend eine (!link [Antwort][OLGA_UPDATE, Antwort auf]), auf die er
+               z.B. mit der Freigabe des fÅr den Dateinamen reservierten
+               Speichers reagieren kann.
+               
+!item [Gruppe:]         OLGA-Server
+
+!item [Querverweis:]    OLGA_BREAKLINK ~  OLGA_INFO ~  OLGA_RENAME
+(!ende_liste)
+
+
+
+!begin_node OLGA_UPDATE, Antwort auf
+(!B)Diese Nachricht erhÑlt der Server als Antwort auf eine
+verschickte OLGA_UPDATE-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3+4 = exakt dieselben Werte von OLGA_UPDATE
+Word 5   = 0
+Word 6   = 0
+Word 7   = OLGA_UPDATE
+!end_verbatim
+!end_node
+!end_node
+
+
+
+###
+### Funktionen eines OLGA-Clients
+###
+
+
+!begin_node OLGA_CLOSEDOC
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_CLOSEDOCÆ - Schlieûen eines Dokumentes anzeigen.
+
+!item [Nummer:]         0x123c
+
+!item [Beschreibung:]   Diese Nachricht sollte vom Client an den OLGA-Manager
+              ge!-schickt werden, wenn ein Dokument geschlossen wird.
+               
+               
+!begin_table [l|l]        
+               Parameter !!    Bedeutung
+!hline
+               
+               Word 0   !!     Nachrichtennummer (0x123c)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3   !!     0
+               Word 4   !!     0
+               Word 5   !!     Gruppenkennung des Dokumentes
+               Word 6   !!     0
+               Word 7   !!     0
+!end_table               
+               (!B)Hinweis:(!b) Der Manager kann dann alle Links mit der
+							 entsprechenden Gruppennummer lîschen. Dies kînnte zwar auch
+               mit einzelnen OLGA_UNLINK-Aufrufen realisiert werden,
+               jedoch kînnen so die Manager-Internen-Strukturen einfacher
+               freigegeben werden.
+               
+               Die Nachricht darf beim Programmende (!I)nicht(!i) verwendet
+							 werden, da durch (!nolink [OLE_EXIT]) bereits alle nîtigen Aktionen
+							 vorgenommen werden. Als (!link [Antwort][OLGA_CLOSEDOC, Antwort auf]) erhÑlt der
+							 Client eine einfache BestÑtigung.
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_GETINFO   ~   OLGA_LINK ~  OLGA_LINKBROKEN ~ OLGA_OPENDOC ~
+               OLGA_LINKRENAMED ~ OLGA_START ~ OLGA_UPDATED  ~   OLGA_UNLINK
+(!ende_liste)
+
+
+!begin_node OLGA_CLOSEDOC, Antwort auf
+(!B)Diese Nachricht erhÑlt ein Client als Antwort auf eine
+verschickte OLGA_CLOSEDOC-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3   = 0
+Word 4   = 0
+Word 5   = Gruppenkennung des Dokumentes
+Word 6   = 0
+Word 7   = OLGA_CLOSEDOC
+!end_verbatim
+!end_node
+!end_node
+
+
+
+!begin_node OLGA_GETINFO
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_GETINFOÆ - Indexnummer fÅr eine Info-Datei ermitteln.
+
+!item [Nummer:]         0x1247
+
+!item [Beschreibung:]   Mit dieser Nachricht kann ein Client direkt beim Server 
+               eine Index-Nummer fÅr eine Info-Datei erfragen, wenn dieser
+               eine solche bei OLGA_UPDATE bekanntgegeben hat.
+               
+               
+!begin_table [l|l]        
+               Parameter !!   Bedeutung
+!hline
+              
+               Word 0   !!     Nachrichtennummer (0x1247)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3   !!     0
+               Word 4   !!     0
+               Word 5   !!     Index-Nummer der (!link [Info-Datei][OLGA-Info-Dateiformat])
+               Word 6   !!     0
+               Word 7   !!     0
+!end_table               
+               (!B)Hinweis:(!b) Nach dem Empfang dieser Nachricht kann der Server
+               die entsprechende Datei aufbauen, sofern sie noch nicht
+               vorhanden ist. Zu beachten ist auûerdem, daû die Åbergebene
+               Index-Nummer (!I)ungÅltig(!i) sein kann, und dann vom Server
+							 ignoriert werden muss.
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC ~  OLGA_LINK     ~    OLGA_LINKBROKEN ~
+               OLGA_OPENDOC  ~  OLGA_LINKRENAMED ~ OLGA_RENAMELINK ~
+               OLGA_START   ~   OLGA_UPDATED   ~   OLGA_UNLINK
+(!ende_liste)
+
+!end_node
+
+
+!begin_node OLGA_LINK
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_LINKÆ - Einbindung einer Datei in ein Dokument
+               anzeigen.
+
+!item [Nummer:]         0x123d
+
+!item [Beschreibung:]   Diese Nachricht muss vom Client an den Manager geschickt
+               werden, wenn er eine Datei in eines seiner Dokumente eingebunden
+               hat. 
+               
+!begin_table [l|l]        
+               Parameter !!    Bedeutung
+!hline
+               Word 0   !!     Nachrichtennummer (0x123d)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3+4 !!     Zeiger auf einen absoluten Dateinamen
+               ~        !!     der Åberwacht werden soll.
+                             
+               Word 5   !!     Gruppenkennung des Dokumentes
+               Word 6   !!     0
+               Word 7   !!     0
+!end_table               
+               (!B)Hinweis:(!b) Wenn die angegebene Datei von einem (!nolink [OLGA-Server])
+               verÑndert wird (oder eine AV_PATH_UPDATE-Message von
+							 einem Programm empfangen wird, welches kein Server ist), erhÑlt
+							 der Client eine entsprechende OLGA_UPDATED-Nachricht.
+               
+               Als BestÑtigung erhalt der Client vom Manager eine ent!-sprechende
+               (!link [Antwort][OLGA_LINK, Antwort auf]).
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC   ~   OLGA_GETINFO ~  OLGA_LINKBROKEN ~
+               OLGA_LINKRENAMED ~  OLGA_OPENDOC ~  OLGA_RENAMELINK ~
+               OLGA_START   ~      OLGA_UPDATED ~  OLGA_UNLINK
+(!ende_liste)
+
+
+
+
+!begin_node OLGA_LINK, Antwort auf
+(!B)Diese Nachricht erhÑlt ein Client als Antwort auf eine
+verschickte OLGA_LINK-Message:(!b)
+!begin_verbatim
+Word 0    = OLGA_ACK (0x1239)
+Word 1    = apID
+Word 2    = 0
+Word 3+4  = exakt dieselben Werte von OLGA_LINK
+Word 5    = Gruppenkennung des Dokumentes
+Word 6    = Fehler bei Wert 0, sonst Ok
+Word 7    = OLGA_LINK
+!end_verbatim
+!end_node
+!end_node
+
+
+!begin_node OLGA_LINKBROKEN
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_LINKBROKENÆ - Referenz auf ein Objekt steht nicht
+               mehr zur VerfÅgung.
+
+!item [Nummer:]         0x1245
+
+!item [Beschreibung:]   Diese Nachricht erhÑlt der Client vom Manager, wenn ihm
+               eine Datei nicht mehr zur VerfÅgung steht (z.B. weil sie
+               gelîscht wurde). 
+               
+!begin_table [l|l]       
+               Parameter !!    Bedeutung
+!hline
+               Word 0    !!    Nachrichtennummer (0x1245)
+               Word 1    !!    (!nolink [AES])-Kennung des eigenen Programms
+               Word 2    !!    0
+               Word 3+4  !!    Zeiger auf alten absoluten Dateinamen
+               Word 5    !!    Gruppenkennung des Dokumentes
+               Word 6    !!    0
+               Word 7    !!    0
+!end_table               
+               (!B)Hinweis:(!b) Der Client kînnte daraufhin den Benutzer informieren,
+							 oder auch per (!nolink [Dateiauswahl]) eine andere Datei auswÑhlen
+							 lassen. Auûerdem sollte er den jetzt ungÅltigen
+               Link mit einer OLGA_UNLINK-Nachricht auflîsen lassen.
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC  ~    OLGA_GETINFO ~  OLGA_LINK ~
+               OLGA_LINKRENAMED  ~ OLGA_OPENDOC  ~ OLGA_RENAMELINK ~
+               OLGA_START     ~    OLGA_UPDATED  ~ OLGA_UNLINK
+(!ende_liste)
+
+!end_node
+
+
+!begin_node OLGA_LINKRENAMED
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_LINKRENAMEDÆ - Referenz auf ein Objekt wurde aktualisiert.
+
+!item [Nummer:]         0x1241
+
+!item [Beschreibung:]   Diese Nachricht muss vom Client als Antwort auf eine 
+               OLGA_RENAMELINK-Message an den Manager geschickt werden.
+               
+               
+!begin_table [l|l]
+               Parameter  !!   Bedeutung
+!hline
+              
+               Word 0   !!     Nachrichtennummer (0x1241)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3+4 !!     Zeiger auf alten absoluten Dateinamen
+               Word 5+6 !!     Zeiger auf neuen absoluten Dateinamen
+               Word 7   !!     Gruppenkennung des Dokumentes
+!end_table               
+               (!B)Hinweis:(!b) Unterbleibt diese Antwort, so ist der entsprechende
+							 Link tot, d.h. er kann (!I)nicht(!i) mehr Åberwacht werden,
+               da im Manager ja noch der alte Name gespeichert ist.
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC   ~   OLGA_GETINFO  ~  OLGA_LINK ~
+               OLGA_LINKBROKEN  ~  OLGA_OPENDOC  ~  OLGA_RENAMELINK ~
+               OLGA_START      ~   OLGA_UPDATED  ~  OLGA_UNLINK
+(!ende_liste)
+
+!end_node
+
+
+!begin_node OLGA_OPENDOC
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_OPENDOCÆ - Dokument beim Manager anmelden.
+
+!item [Nummer:]         0x123b
+
+!item [Beschreibung:]   Diese Nachricht kann vom Client an den Manager geschickt
+               werden, wenn ein Dokument geîffnet worden ist.
+               
+               
+!begin_table [l|l]        
+               Parameter !!   Bedeutung
+!hline
+              
+               Word 0  !!      Nachrichtennummer (0x123b)
+               Word 1  !!      (!nolink [AES])-Kennung des eigenen Programms
+               Word 2  !!      0
+               Word 3  !!      0
+               Word 4  !!      0
+               Word 5  !!      Gruppenkennung des Clients
+               Word 6  !!      0
+               Word 7  !!      0
+!end_table               
+               (!B)Hinweis:(!b) Diese Nachricht dient z.Zt. nur zu Informationszwecken;
+							 die benîtigten internen Strukturen werden vom
+               Manager ansonsten beim Empfang der ersten OLGA_LINK Message
+               angelegt. Die Gruppenkennung ist eine innerhalb des Clients
+               eindeutige, und von diesem frei wÑhlbare Zahl, mit der die
+               Links innerhalb des Clients den Dokumenten zugeordnet
+               werden kînnen; sie sollte nach Mîglichkeit stets angegeben
+               werden.
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC ~     OLGA_GETINFO   ~    OLGA_LINK  ~
+               OLGA_LINKBROKEN  ~  OLGA_LINKRENAMED  ~ OLGA_RENAMELINK ~
+               OLGA_START       ~  OLGA_UPDATED   ~    OLGA_UNLINK
+(!ende_liste)
+
+!end_node
+
+
+!begin_node OLGA_RENAMELINK
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_RENAMELINKÆ - Referenz auf ein Objekt aktualisieren.
+
+!item [Nummer:]         0x1240
+
+!item [Beschreibung:]   Diese Nachricht erhÑlt der Client vom Manager, wenn der
+               Server eine Datei (auf die ein Link gesetzt ist) umbenannt
+               oder verschoben hat. 
+               
+!begin_table [l|l]
+               Parameter  !!   Bedeutung
+!hline
+               
+               Word 0  !!      Nachrichtennummer (0x1240)
+               Word 1  !!      (!nolink [AES])-Kennung des eigenen Programms
+               Word 2  !!      0
+               Word 3+4 !!     Zeiger auf alten absoluten Dateinamen
+               Word 5+6 !!     Zeiger auf neuen absoluten Dateinamen
+               Word 7   !!     Gruppenkennung des Dokumentes
+!end_table               
+               (!B)Hinweis:(!b) Diese Nachricht soll den Client nur anweisen,
+               seine interne Referenz zu aktualisieren; das Dokument
+               muss (!I)nicht(!i) neu gezeichnet werden. Der Zeiger auf den
+               neuen Namen ist Åbrigens solange gÅltig, wie der Link
+               besteht.
+
+               Als Antwort auf diese Nachricht muss der Client eine
+               OLGA_LINKRENAMED-Message an den Manager schicken, damit
+							 dieser seine Referenz aktualisieren, und unnîtigen
+               Speicherplatz freigeben kann.
+               
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC   ~   OLGA_GETINFO  ~     OLGA_LINK   ~
+               OLGA_LINKBROKEN   ~ OLGA_LINKRENAMED  ~ OLGA_OPENDOC ~
+               OLGA_START      ~   OLGA_UPDATED   ~    OLGA_UNLINK
+(!ende_liste)
+
+!end_node
+
+
+!begin_node OLGA_START
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_STARTÆ - Server fÅr einen Client nachstarten.
+
+!item [Nummer:]         0x1246
+
+!item [Beschreibung:]   Mit dieser Nachricht kann ein Client einen fÅr sich
+                       passen!-den Server nachstarten lassen.
+               
+               
+!begin_table [l|l]              
+               Parameter  !!   Bedeutung
+!hline
+              
+               Word 0   !!     Nachrichtennummer (0x1246)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3   !!     Konstanten
+               
+               ~        !!      0x0001 = OLS_TYPE
+               ~        !!      0x0002 = OLS_EXTENSION
+               ~        !!      0x0003 = OLS_NAME
+                             
+               Word 4+5  !!    Angaben Åber zu startendes Programm
+               ~          !!    bzw. Programmtyp (von Word[3] abhÑngig)
+                             
+               Word 6+7  !!    Zeiger auf die Kommandozeile, oder NULL
+!end_table               
+               (!B)Hinweis:(!b) Um das Programm zu starten wird (bei (!nolink [OLS_TYPE]) und
+               (!nolink [OLS_EXTENSION])) die Konfigurations-Datei 'olga.inf' ausgewertet.
+							 ZunÑchst wird der darin gefundene Server im Speicher
+							 gesucht, und bei Erfolg mit VA_START aufgerufen. Anderenfalls wird
+							 das Programm in einer Multitaskingumgebung
+               wie (!nolink [MagiC]) oder MultiTOS per shel_write nachgestartet.
+
+               Als BestÑtigung erhÑlt man eine einfache (!link [Antwort][OLGA_START, Antwort auf]), sowie
+               eine weitere (!link [Nachricht][OLGA_START, Antwort2 auf]), um die Kommandozeile leichter
+               freigeben zu kînnen (falls diese nicht NULL war).
+               
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC  ~    OLGA_GETINFO   ~     OLGA_LINK ~
+               OLGA_LINKBROKEN  ~  OLGA_LINKRENAMED ~   OLGA_OPENDOC ~
+               OLGA_RENAMELINK  ~  OLGA_UPDATED     ~   OLGA_UNLINK
+(!ende_liste)
+
+
+!begin_node OLGA_START, Antwort auf
+(!B)Diese Nachricht erhÑlt der Client als Antwort auf eine
+verschickte OLGA_START-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3   = OLS-Konstante von OLGA_START
+Word 4+5 = exakt dieselben Werte von OLGA_START
+Word 6   = Fehler (bei Wert 0), sonst ok
+Word 7   = OLGA_START
+!end_verbatim
+!end_node
+
+!begin_node OLGA_START, Antwort2 auf
+(!B)Diese Nachricht erhÑlt der Client als Antwort auf eine
+verschickte OLGA_START-Message:(!b)
+!begin_verbatim
+Word 0   = OLGA_ACK (0x1239)
+Word 1   = apID
+Word 2   = 0
+Word 3   = 0 (!)
+Word 4+5 = exakt dieselben Werte von OLGA_START [6]+[7]
+Word 6   = Fehler (bei Wert 0), sonst ok
+Word 7   = OLGA_START
+!end_verbatim
+!end_node
+
+
+!begin_node OLS_TYPE
+(!B)OLS_TYPE (0x0001):(!b) Word[4] = 0. In Word[5]
+steht ein XAcc-Programmtyp.
+!end_node
+
+
+!begin_node OLS_EXTENSION
+(!B)OLS_EXTENSION (0x0002):(!b) In Word[4,5] steht eine
+Extension (z.B. ".GEM").
+!end_node
+
+
+!begin_node OLS_NAME
+(!B)OLS_NAME (0x0003):(!b) In Word[4,5] steht ein Zeiger
+auf den (!I)absoluten(!i) Dateinamen der zu startenden
+Applikation.
+!end_node
+!end_node
+
+!begin_node OLGA_UPDATED
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_UPDATEDÆ - Server hat eine Datei verÑndert.
+
+!item [Nummer:]         0x123f
+
+!item [Beschreibung:]   Diese Nachricht erhÑlt der Client vom Manager, wenn der
+               Server eine Datei, auf die ein Link gesetzt ist, verÑn-
+               dert hat. 
+               
+!begin_table [l|l]               
+               Parameter !!    Bedeutung
+!hline
+               
+               Word 0   !!     Nachrichtennummer (0x123f)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3+4 !!     Zeiger auf absoluten Dateinamen
+               Word 5   !!     0 oder eine Index-Nummer, falls eine
+               ~        !!     (!link [Info-Datei][OLGA-Info-Dateiformat]) angefordert werden kann
+                             
+               Word 6   !!     (!nolink [AES])-Kennung des Servers
+               Word 7   !!     Gruppenkennung des Dokumentes
+!end_table               
+               (!B)Hinweis:(!b) Wenn der Client diese Nachricht empfÑngt, sollte
+               er also das zugehîrige Dokument neu anzeigen. Der Zeiger
+               ist Åbrigens solange gÅltig, wie der Link besteht.
+               
+               Die Kennung des Servers (Word 6) ist garantiert gesetzt,
+               falls Word 5 einen Wert ungleich 0 besitzt. An diese ID
+               (d.h. (!I)direkt(!i) an den Server) kann dann eine OLGA_GETINFO
+               Nachricht geschickt werden.
+               
+!item [Gruppe:]         OLGA-Client
+!item [Querverweis:]    OLGA_CLOSEDOC ~     OLGA_GETINFO ~       OLGA_LINK ~
+               OLGA_LINKBROKEN  ~  OLGA_LINKRENAMED  ~  OLGA_OPENDOC ~
+               OLGA_RENAMELINK  ~  OLGA_START       ~   OLGA_UNLINK
+(!ende_liste)
+!end_node
+
+
+!begin_node OLGA_UNLINK
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_UNLINKÆ - öberwachung einer Datei beenden.
+
+!item [Nummer:]         0x123e
+
+!item [Beschreibung:]   Diese Nachricht muss vom Client an den Manager geschickt
+               werden, wenn die öberwachung einer bestimmten Datei ein-
+               gestellt werden soll.
+               
+               
+!begin_table [l|l]               
+               Parameter !!    Bedeutung
+!hline
+               
+               Word 0 !!       Nachrichtennummer (0x123e)
+               Word 1 !!       (!nolink [AES])-Kennung des eigenen Programms
+               Word 2    !!    0
+               Word 3+4  !!    Zeiger auf einen absoluten Dateinamen,
+               ~         !! 	 der nicht mehr Åberwacht
+               ~         !!     werden soll.
+                             
+               Word 5    !!    Gruppenkennung des Dokumentes
+               Word 6    !!    0
+               Word 7    !!    0
+!end_table               
+               (!B)Hinweis:(!b) Falls das Dokument geschlossen wird, sollte
+							 stattdessen OLGA_CLOSEDOC verwendet werden. Wenn der Client
+							 terminiert, werden per (!nolink [OLE_EXIT]) alle entsprechenden Links
+							 automatisch gelîscht.
+               
+               Der angegebene Dateiname muss (!I)exakt(!i) mit der bei OLGA_LINK
+               Åbergebenen Zeichenkette Åbereinstimmen. Als BestÑtigung
+               erhÑlt der Client eine passende (!link [Antwort][OLGA_UNLINK, Antwort auf]).
+
+!item [Gruppe:]         OLGA-Client
+
+!item [Querverweis:]    OLGA_CLOSEDOC   ~   OLGA_GETINFO   ~    OLGA_LINK ~
+               OLGA_LINKBROKEN ~   OLGA_LINKRENAMED ~  OLGA_OPENDOC ~
+               OLGA_RENAMELINK ~   OLGA_START      ~   OLGA_UPDATED
+(!ende_liste)
+
+
+!begin_node OLGA_UNLINK, Antwort auf
+(!B)Diese Nachricht erhÑlt ein Client als Antwort auf eine
+verschickte OLGA_UNLINK-Message:(!b)
+!begin_verbatim
+Word 0    = OLGA_ACK (0x1239)
+Word 1    = apID
+Word 2    = 0
+Word 3+4  = exakt dieselben Werte von OLGA_UNLINK
+Word 5    = Gruppenkennung des Dokumentes
+Word 6    = Fehler bei Wert 0, sonst Ok
+Word 7    = OLGA_UNLINK
+!end_verbatim
+!end_node
+!end_node
+
+
+!begin_node Server minimal
+(!B)Ein OLGA-Server muss wenigstens folgendes tun:(!b)
+!begin_itemize !compressed
+!item OLE_INIT verschicken.
+!item OLE_NEW auswerten.
+!item OLGA_INIT empfangen.
+!item OLE_EXIT verschicken.
+!item VA_START unterstÅtzen.
+!end_itemize
+!end_node
+
+
+!begin_node Client minimal
+(!B)Ein OLGA-Client muss wenigstens folgendes tun:(!b)
+!begin_itemize !compressed
+!item OLE_INIT verschicken.
+!item OLE_NEW auswerten.
+!item OLGA_INIT empfangen.
+!item OLE_EXIT verschicken.
+!item auf OLGA_RENAMELINK mit OLGA_LINKRENAMED antworten.
+!item auf OLGA_LINKBROKEN mit OLGA_UNLINK antworten.
+!end_itemize
+!end_node
+
+
+###
+### Initialisierung und Terminierung
+### beim OLGA-Protokoll
+###
+
+
+!begin_node OLE_EXIT
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLE_EXITÆ - Aus dem Protokoll ausklinken.
+
+!item [Nummer:]         0x4951
+
+!item [Beschreibung:]   Diese Nachricht sollte bei Programmende an den Manager
+               geschickt werden. 
+               
+!begin_table [l|l]              
+               Parameter  !!   Bedeutung
+!hline
+               
+               Word 0     !!   Nachrichtennummer (0x4951)
+               Word 1     !!   (!nolink [AES])-Kennung des eigenen Programms
+               Word 2-7   !!   0
+!end_table               
+               (!B)Hinweis:(!b) Die Nachricht wird auûerdem vom Manager an
+               die (!nolink [Applikationen]) geschickt, wenn dieser terminiert.
+               Wenn sich ein OLGA-Client beim Manager abmeldet, werden
+							 automatisch alle zugehîrigen Links und Documents
+               gelîscht.
+               
+!item [Gruppe:]         OLGA-Initialisierung
+
+!item [Querverweis:]    OLE_INIT ~  OLE_NEW  ~ OLGA_INIT
+(!ende_liste)
+
+!end_node
+
+
+
+!begin_node OLE_INIT
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLE_INITÆ - Applikation beim Manager anmelden.
+
+!item [Nummer:]         0x4950
+
+!item [Beschreibung:]   Diese Nachricht muss an den OLGA-Manager geschickt werden, 
+               und sorgt dafÅr, daû die betreffende Applikation dem
+                Manager bekannt wird.
+               
+!label XAcc-Programmtypen
+!begin_table [l|l]
+               Parameter  !!   Bedeutung
+!hline
+               
+               Word 0   !!     Nachrichtennummer (0x4950)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3   !!    Bitmap fÅr OLGA
+               ~         !!     0x0001 = OL_SERVER
+               ~         !!     0x0002 = OL_CLIENT
+               ~         !!     0x1000 = OL_PIPES
+               Word 4    !!    maximale von der Applikation verstan-
+               ~          !!    dene Stufe des Protokolls (z.Zt. 0)
+               Word 5    !!    nur fÅr OEP: Bitmap, OL_OEP gesetzt
+               Word 6    !!    nur fÅr OEP: reserviert
+               Word 7    !!    XAcc-Programmtyp (oder 0) mit fol-
+               ~         !!     gender Bedeutung:
+               ~         !! ~
+               ~         !!     "WP" = Textverarbeitung
+               ~         !!     "DP" = Desktop Publishing
+               ~         !!     "ED" = Text-Editor
+               ~         !!     "DB" = Datenbank
+               ~         !!     "SS" = Tabellenkalkulation
+               ~         !!     "RG" = Rastergrafikprogramm
+               ~         !!     "VG" = Vektorgrafikprogramm
+               ~         !!     "GG" = allgemeines Grafikprogramm
+               ~         !!     "MU" = Musikanwendung
+               ~         !!     "CD" = Computer Aided Design
+               ~         !!     "DC" = Datenkommunikation
+               ~         !!     "DT" = Desktop
+               ~         !!     "PE" = Programmierumgebung
+!end_table
+               (!B)Hinweis:(!b) Wenn ein Protokoll von der Applikation nicht
+							 unterstÅtzt wird, sind die Wîrter 3 und 4 bzw. 5 und 6
+							 auszunullen. Je nach Protokollauswahl erhÑlt man dann vom
+               Manager eine OEP_CONFIG und/oder eine OLGA_INIT-Message;
+               es ist dann nach den Beschreibungen des jeweiligen Protokolls
+							 fortzufahren.
+                               
+!item [Gruppe:]         OLGA-Initialisierung
+
+!item [Querverweis:]    OLE_EXIT ~  OLE_NEW  ~ OLGA_INIT
+(!ende_liste)
+
+!end_node
+
+
+
+!begin_node OLE_NEW
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLE_NEWÆ - Manager wurde nachgestartet.
+
+!item [Nummer:]         0x4952
+
+!item [Beschreibung:]   Diese Nachricht wird vom Manager an alle erreichbaren
+               (!nolink [Applikationen]) verschickt, wenn er nachgestartet worden
+               ist. 
+               
+!begin_table [l|l]               
+               Parameter !!    Bedeutung
+!hline
+              
+               Word 0   !!     Nachrichtennummer (0x4952)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3   !!     Bitmap
+               ~        !! ~
+               ~        !!      0x1000 = OL_PIPES
+               ~        !!      0x2000 = OL_START
+               ~        !!      0x4000 = OL_MANAGER
+                             
+               Word 4   !!     max. Stufe des OLGA-Protokolls
+               Word 5   !!     nur fÅr OEP: OL_OEP (0x001) gesetzt,
+               ~         !!     falls der Manager OEP beherrscht
+
+               Word 6   !!     nur fÅr OEP: reserviert (0)
+               Word 7   !!     Versionsnummer des Managers (BCD)
+!end_table               
+               Nach Empfang und Auswertung dieser Message sollte
+               eine Applikation die Nachricht OLE_INIT verschicken, um
+               sich beim Manager anzumelden. Achtung: Die Werte in dieser
+               Nachricht ersetzen (!I)nicht(!i) die RÅckgabe von OEP_CONFIG bzw.
+               von (!nolink [OLGA_INIT]), sie dienen nur zu Informationszwecken.
+               
+!item [Gruppe:]         OLGA-Initialisierung
+
+!item [Querverweis:]    OLE_EXIT ~  OLE_INIT ~  OLGA_INIT
+(!ende_liste)
+
+!end_node
+
+
+
+!begin_node OLGA_INIT
+(!begin_liste) [Beschreibung]
+!item [Name:]           ØOLGA_INITÆ - BestÑtigung fÅr Anmeldung per (!nolink [OLE_INIT]).
+
+!item [Nummer:]         0x1236
+
+!item [Beschreibung:]   Diese Nachricht wird als Antwort auf eine OLE_INIT-Message
+               verschickt.
+               
+!begin_table [l|l]             
+               Parameter !!    Bedeutung
+!hline
+               
+               Word 0   !!     Nachrichtennummer (0x1236)
+               Word 1   !!     (!nolink [AES])-Kennung des eigenen Programms
+               Word 2   !!     0
+               Word 3   !!     Bitmap ((!nolink [OL_MANAGER]) gesetzt)
+               ~        !! ~
+               ~        !!      0x1000 = OL_PIPES
+               ~        !!      0x2000 = OL_START
+               ~         !!     0x4000 = OL_MANAGER
+                             
+               Word 4   !!     Stufe des verwendeten Protokolls
+               Word 5   !!     0
+               Word 6   !!     0
+               Word 7   !!     0 = Fehler, sonst: alles ok
+!end_table
+               (!B)Hinweis:(!b) (!nolink [Applikationen]) sollten den OLGA-Mechanismus erst
+               verwenden, nachdem sie diese Nachricht erhalten haben, und
+               diese keinen Fehler signalisiert hat.
+               
+               (!B)Ausnahme:(!b) Bei Programmen, die bereits wÑhrend der Startphase
+							 Dokumente îffnen, kann es sinnvoll sein, auch (!I)ohne(!i)
+               Empfang dieser Nachricht das Protokoll zu benutzen; allerdings
+							 sollten bei der Applikation dann keine Fehler auftreten, falls
+							 sich der Manager doch nicht meldet.
+               
+!item [Gruppe:]         OLGA-Initialisierung
+
+!item [Querverweis:]    OLE_EXIT ~  OLE_INIT ~   OLE_NEW
+(!ende_liste)
+
+!end_node
+
+
+
+!begin_node OLGA-Info-Dateiformat
+
+Das OLGA-Protokoll ermîglicht den Austausch von speziellen Informationen
+zwischen Client und Server durch sogenannte (!I)Info-Dateien(!i). Diese Dateien
+beinhalten zwei Arten von Datenstrukturen:
+!begin_itemize !compressed
+!item OLGAInfHeader
+!item OLGABlockHeader
+!end_itemize
+Die Info-Dateien selbst sind dabei folgendermaûen aufgebaut:
+!begin_verbatim
+InfHeader
+BlockHeader 1
+Daten 1
+BlockHeader 2
+Daten 2
+...
+...
+BlockHeader n-1
+Daten n-1
+BlockHeader n (id=0)
+!end_verbatim
+Das Dateiende (bzw. Block n) wird durch eine ID mit dem Wert 0 gekennzeichnet.
+(!B)Einige Block-ID's sind bereits fest definiert. Im einzelnen:(!b)
+
+!begin_table [l|l]
+  ID    !!       Bedeutung
+!hline
+
+'AUTH'  !!       Autor: Die Codierung entspricht dabei 'REM' 
+~       !!        (s.u.). Allerdings sollte man sich auf eine 
+~       !!        einzige Zeile beschrÑnken.
+~       !! ~        
+'DATE'  !!       Datum der letzten énderung als DOSTIME-Struktur.
+'KEYW'  !!       Stichworte: Die Codierung entspricht dabei 'REM'
+~       !!        (s.u.). Innerhalb der Zeilen liegen die Stich-
+~       !!        worte durch (!I)Kommata(!i) getrennt vor.
+~       !!      ~  
+'REM '  !!       Kommentar: Einzelne Zeilen sind null-terminiert,
+~       !!        das Ende wird Åber die LÑnge erkannt. Somit kîn-
+~       !!        nen auch Leerzeilen verschickt werden.
+~       !!     ~   
+0x00000000 !!    Dateiende: Die Komponente (!I)length(!i) der OLGABlockHeader
+~          !!    Struktur sollte also den Wert 0 besitzen.
+!end_table
+(!B)Achtung:(!b) Damit ist natÅrlich noch Åberhaupt (!I)nicht(!i) festgelegt, welche Blîcke
+(und in welcher Reihenfolge) (!I)tatsÑchlich(!i) gespeichert werden. Unbekannte 
+Blîcke mÅssen daher ignoriert (d.h. Åberlesen) werden. Neue Block-ID's
+kînnen frei definiert werden; damit es aber nicht zu Kollisionen mit bereits
+bestehenden ID's kommt, sollten Programmierer besser vorher mit dem
+(!link [OLGA-Entwickler][Much, Thomas]) Kontakt aufnehmen.
+
+Querverweis: OLGA-Protokoll  ~ OLGA-Client ~  OLGA-Server
+
+!end_node
+
+
+!begin_node OLGAInfHeader
+!begin_verbatim
+typedef struct
+{
+    LONG magic;    /* Kennung: 'OLGA'                   */
+    WORD version;  /* Versionsnummer (z.Zt. 0x0100)     */
+    WORD skip;     /* Anzahl der folgenden Headerbytes, */
+                   /* die Åberlesen werden mÅssen.      */
+} OLGAInfHeader;
+!end_verbatim
+!end_node
+
+
+!begin_node OLGABlockHeader
+!begin_verbatim
+typedef struct
+{
+    LONG id;       /* Block-ID */
+    LONG length;   /* Anzahl der folgenden Datenbytes */
+} OLGABlockHeader;
+!end_verbatim
+!end_node
+
+
+
+!begin_node Much, Thomas
+Thomas Much (!nl)
+Gerwigstraûe 46 (!nl)
+D-76131 Karlsruhe   Fax: (0721) 622821 (!nl)
+(!B)E-Mail:(!b) Thomas.Much@stud.uni-karlsruhe.de (Internet) (!nl)
+http://www.uni-karlsruhe.de/~Thomas.Much (WorldWideWeb)
+!end_node
+
+
+###
+### wichtige Konstanten
+###
+
+!begin_node OL_SERVER
+(!B)OL_SERVER (0x0001):(!b) (!nl)
+Die Applikation ist ein OLGA-Server.
+!end_node
+
+
+!begin_node OL_CLIENT
+(!B)OL_CLIENT (0x0002):(!b) (!nl)
+Die Applikation ist ein OLGA-Client.
+!end_node
+
+
+!begin_node OL_PEER
+(!B)OL_PEER (0x0003):(!b) (!nl)
+Die Applikation ist ein Client und Server.
+!end_node
+
+!begin_node OL_PIPES
+(!B)OL_PIPES (0x1000):(!b) (!nl)
+Die Applikation mîchte (!I)nicht(!i) Åber
+Zeiger, sondern Åber MultiTOS-kompatible Drag&Drop-
+Pipes kommunizieren.
+
+Der Manager informiert dann, ob er diese Art der
+Kommunikation versteht bzw. ob sie auf dem aktuellen
+System mîglich ist. (!B)Z.Zt. wird diese Form jedoch 
+noch nicht unterstÅtzt.(!b)
+!end_node
+
+
+!begin_node OL_START
+(!B)OL_START (0x2000):(!b) (!nl)
+Der Manager kann OLGA_START ausfÅhren.
+!end_node
+
+
+!begin_node OL_MANAGER
+(!B)OL_MANAGER (0x4000):(!b) (!nl)
+Die Applikation ist ein OLGA-Manager.
+!end_node
+
+
+!begin_node OL_OEP
+(!B)OL_OEP (0x0001):(!b) (!nl)
+Die Applikation versteht OEP.
+!end_node
+
+!end_node

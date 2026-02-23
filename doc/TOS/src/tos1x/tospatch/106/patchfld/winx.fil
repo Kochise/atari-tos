@@ -1,0 +1,369 @@
+;***************************************************************************
+;* Martin Osieka: (implementiert durch MH)
+;* Der WINX-Patch erlaubt mehr Fenster als je zuvor !!!
+
+;             ;Damit WINX richtig reloziert wird (evtl. 1CAFA)
+
+.WX_VERSION = 220
+.WX_DATE    = 1B51 ; 1993/10/17
+
+.WX_QUEUE_SIZE = 500
+.WX_QUEUE_OFFSET = 32 ; offsetof(struct PD, p_qaddr)
+.WX_MAXWIN = .40
+
+; static BSS
+.shifty         = 0EBD
+.gl_dcindex     = 6DF2
+.gl_ticktime    = 6E5C
+.TICKS          = 6B62
+.appl_msg       = 705E
+.button         = A890
+.rlr            = A7D6
+.gl_mowner      = 70A4
+.ml_pkown       = 6AD2
+.gl_dclick      = 6DA6
+.ad_stdesk      = 6E0A
+.thedesk        = A7CC
+.D              = 74A2
+.gl_newdesk     = 6E7C
+.gl_newroot     = 707E
+.gl_wtop        = 70d0
+.gl_rfull       = 7052
+.gl_kowner      = 7096
+.gl_fake        = 6D2E
+.rul            = A7DA
+.gl_bpend       = 6E1A
+.gl_pglue       = 7046
+.gl_rscreen     = 7070
+.gl_awind       = 6E8E
+.w_walkflag     = 6E6A
+.wind_msg       = 7086
+.gl_ws          = 712E
+.gl_rzero       = 70B8
+.ctl_pd         = A810
+.gl_wbox        = 709E
+.gl_hbox        = 6F5C
+.ad_windspb     = 6E14
+.xrat           = 6D22
+.gl_mntree      = 70A0
+.ml_ocnt        = 706E
+.intin          = 71A2
+
+
+; functions
+.wind_update    = 186D8+.BASE+.d1
+.gsx_sclip      = 149D4+.BASE+.d1
+.bb_screen      = 14C50+.BASE+.d1
+.gsx_start      = 14cbe+.BASE+.d1
+.all_run        = 13f16+.BASE+.d1
+.wind_set       = 1871a+.BASE+.d1
+.objc_order     = 18616+.BASE+.d1
+.pinit          = 1446e+.BASE+.d1
+
+.dsptch         = 1E456+.BASE+.d2
+.win_find       = 1D8C2+.BASE+.d2
+.win_blt        = 1DEF0+.BASE+.d2
+.wm_update      = 28176+.BASE+.d2
+.ev_mesag       = 217E6+.BASE+.d2
+.ev_mchk        = 2183c+.BASE+.d2
+.ap_sendmsg     = 273E4+.BASE+.d2
+.gr_dragbox     = 238DC+.BASE+.d2
+.gr_slidebox    = 239B0+.BASE+.d2
+.gr_stilldn     = 2377A+.BASE+.d2
+.crysbind       = 20A78+.BASE+.d2
+.rc_intersect   = 2842A+.BASE+.d2
+.rc_union       = 28494+.BASE+.d2
+.inside         = 283DE+.BASE+.d2
+.ob_add         = 2570A+.BASE+.d2
+.ob_actxywh     = 25A7C+.BASE+.d2
+.gsx_moff       = 23D22+.BASE+.d2
+.gsx_mon        = 23D3E+.BASE+.d2
+.ob_draw        = 25544+.BASE+.d2
+.ct_chgown      = 1F7F6+.BASE+.d2
+.gsx_mret       = 23A64+.BASE+.d2
+.tak_flag       = 1FDBA+.BASE+.d2
+.ev_block       = 21730+.BASE+.d2
+.take_ownership = 1F9C2+.BASE+.d2
+.unsync         = 1FE30+.BASE+.d2
+.gr_setup       = 23838+.BASE+.d2
+.gr_wait        = 237F8+.BASE+.d2
+.gsx_ncode      = 23A7A+.BASE+.d2
+.win_ontop      = 1D964+.BASE+.d2
+.win_top        = 1D906+.BASE+.d2
+.desk_verify    = 1B02A+.BASE+.d2
+.close_window   = 1BE52+.BASE+.d2
+.ob_find        = 255DE+.BASE+.d2
+.ap_rdwr        = 21412+.BASE+.d2
+
+
+; offsets in desktop structure
+.g_pscreen      = .24108
+
+; patch addresses
+.WINXCOL  = 1852E+.d1
+.WINXRUN  = 1B156+.d2
+.WINXHMS1 = 1CB76+.d2
+.WINXHMSG = 1CBD6+.d2
+.WINXBLT  = 1DF8E+.d2
+.WINXARR  = 1E188+.d2
+.WINXPROC = 1F312+.d2
+.WINXHCTL = 1F38A+.d2
+.WINXDOWN = 200A4+.d2
+.WINXFAPD = 20380+.d2
+.WINXNAME = 204F6+.d2
+.WINXRUL  = 2074E+.d2
+.WINXXIF  = 2133A+.d2
+.WINXWM   = 2696E+.d2
+.WINXTAB  = 2D77C+.d3
+.WINXTICK = 28C46+.d2
+
+
+
+; in bb_fill
+14E6A+.d1 $61,00,.WINXRUN+20-~.W ; bsr wx_fills
+
+; in app_blddesk
+15f1a+.d1 $3E,BC,34,DB    ; move.w #$34DB,(a7)
+        ~ $4E,71          ; nop
+
+; disable evnt_dclick call in desktop
+18430+.d1 $4E,75
+
+; replace unused graf_handle by a helper function to initialize the window colors
+.WINXCOL
++winxcol.fil   ; 1852E - 18556 (28)
+
+;optimize get_xywh() to make room for a small helper function
+.WINXRUN
++winxrun.fil   ; 1B156 - 1B194 (3E)
+
+.WINXHMS1
++winxhms1.fil  ; 1CB76 - 1CB94 (1E)
+
+.WINXHMSG
++winxhmsg.fil  ; 1CBD6 - 1CC40 (6A)
+
+.WINXBLT
++winxblt.fil   ; 1DF8E - 1E0A8 (11A)
+
+; fix win_arrow in desktop
+.WINXARR
++winxarr.fil   ; 1E188 - 1E210 (88)
+
+; Fix in iasync()
+1EE12+.d2
+~ $4E,B9,.ev_mchk.L  ; jsr ev_mchk
+~ $50,8F             ; addq.l    #8,a7
+~ $4A,40             ; tst.w      d0
+  _FILL ~,~+14,$4E71.W
+
+; fix in cre_aproc
+.WINXPROC
++winxproc.fil      ; 1F312 - 1F352 (40)
+
+; replace ct_msg() & hctl_window()
+.WINXHCTL
++winxhctl.fil      ; 1F38A - 1F6EA (360)
+
+; remove call to post_button() in ct_chgown()
+1F836+.d2
+  _FILL ~,~+18,$4E71.W
+
+; ctlmgr(): change parameter for ev_multi()
+1F87E+.d2
+~ $4E,B9,.WINXWM+98E+.BASE.L ; jsr        w_setactive
+~ $48,6e,ff,f4               ; pea.l      -12(a6)
+~ $42,A7                     ; clr.l      -(a7)
+~ $2F,3C,01,02,03,00         ; move.l     #$01020300,-(a7)
+
+;1FBEC+.d2
+;~ $61,00,20026+.d2-~.W       ; bsr $E20026
+
+; amutex(): call wx_evinsert() from WINXBLT.FIL
+1FE16+.d2 $4E,B9,.WINXBLT+104+.BASE.L ; jsr wx_evinsert
+
+; in bchange
+1FFB2+.d2 $4E,B9,.WINXWM+152C+.BASE.L ; jsr $FE5A18
+
+; in bchange
+;2000A+.d2
+;~ $70,FF        ; moveq.l    #-1,d0
+;~ $60,10        ; bra.s      $00E2001E
+;~ $4E,71,4E,71  ; nop nop
+
+; in bchange
+2001E+.d2
+~ $4e,b9,.WINXWM+EBE+.BASE.L   ; jsr        $E2782C
+~ $60,00,00,1C                 ; bra.w      $E20042
+~ $3d,40,ff,fe                 ; move.w     d0,-2(a6)
+~ $0c,6e,ff,ff,ff,fe           ; cmpi.w     #$FFFF,-2(a6)
+
+; replace downorup()
+.WINXDOWN      ; 200A4 - 200F0 (3C)
++winxdown.fil
+
+; replace fapd()
+.WINXFAPD      ; 20380 - 203D0 (50)
++winxfapd.fil
+
+;p_nameit: optimized version to insert call to wx_nameit()
+.WINXNAME      ; 204F6 - 20522 (2C)
++winxname.fil
+
+; doq: change access to appl specific message buffer
+205B8+.d2
+~ $26,6B,.WX_QUEUE_OFFSET.W     ;movea.l p_qaddr(a3),a3
+~ $D6,C0           ;adda.w d0,a3
+~ $4E,71,4E,71     ;nop;nop
+205CE+.d2
+~ $28,6C,.WX_QUEUE_OFFSET.W     ;movea.l p_qaddr(a4),a4
+~ $D8,C6           ;adda.w d6,a4
+~ $4E,71           ;nop
+
+; aqueue: changed QUEUE_SIZE
+2067C+.d2 $30,3C,.WX_QUEUE_SIZE.W    ;move.w #$0500,d0
+
+.WINXRUL   ; 2074E - 20A16 (2C8)
++winxrul.fil
+
+;
+; in ap_exit(), change parameter in call to ap_rdwr
+;
+20B3E+.d2 $2E,A8,.WX_QUEUE_OFFSET.W,4E,71        ;move.l p_qaddr(a0),(a7); nop
+
+;
+; optimize xif(), to make room for appl_getinfo() check
+;
+.WINXXIF   ; 2133A - 213DA (A0)
++winxxif.fil
+
+; fm_dial(): new address for w_drawdesk()
+225E4+.d2
+~ $61,00,.WINXWM+658-~.W     ; bsr        $00E26FC6
+~ $60,00,00,10               ; bra.w      $00E225FA
+
+; gr_stilldn(): support for button modes
+23782+.d2
+~ $4E,B9,.WINXWM+1548+.BASE.L
+
+; mn_clsda(): new address for ap_sendmsg()
+2450E+.d2
+~ $4e,b9,.WINXWM+12+.BASE.L     ; jsr        ap_sendmsg
+
+; sh_main(): insert calls to all_run
+26790+.d2
+~ $4E,B9,.WINXRUN+26+.BASE.L     ; jsr $E1B17C
+
+; sh_main(): new address for wm_start()
+267DC+.d2
+~ $4e,b9,.WINXWM+FE4+.BASE.L  ; jsr        wx_start
+
+;
+; replacements for all window manager functions
+;
+.WINXWM   ; 2696E - 28020 (16B2)
++winxwm.fil
+
+; b_click(): remove test for gl_bpend
+; (same as ARROWFIX)
+28B04+.d2 $4E,71,4E,71,4E,71,4E,71  ;nop
+
+; overwrite code of delay with a helper function for hctl_window
+.WINXTICK
++winxtick.fil
+
+_IF .RSC
+; wegen NEWRSC
+2A0D6+.d2
+~      $20,40                 ; movea.l   d0,a0
+~      $4E,B9,.WINXBLT+6C+.BASE.L   ; jsr       $00FDCA86
+~      $21,C0,.gl_pglue.W     ; move.l    d0,(gl_pglue).w
+~      $4A,B8,.gl_pglue.W     ; tst.l     (gl_pglue).w
+~      $4E,71,4E,71
+_ELSE
+; Original
+2A0D0+.d2
+~      $42,80                  ; clr.l      d0
+~      $30,2D,00,04            ; move.w    4(a5),d0
+~      $2e,80                  ; move.l     d0,(a7)
+~      $4E,B9,.WINXBLT+6A+.BASE.L   ; jsr       $00FDCA84
+_ENDIF
+
+; new address for hctl_button
+1f8c2+.d2 $61,00,.WINXHCTL+33E-~.W
+; new address for wm_start
+142d2+.d1 $.WINXWM+F86+.BASE.L
+
+; take_ownership(): mouse owner is also keyboard owner
+1FA0C+.d2 $23,F9,.gl_mowner.L,.ml_pkown.L ; move.l gl_mowner,ml_pkown
+
+; disable interrupts in forkq()
+1FA66+.d2 $2F,0D                    ;move.l a5,-(a7)
+~         $40,C1                    ;move.w sr,d1
+~         $00,7C,07,00              ;ori.w #$0700,sr
+1FAA6+.d2 $2A,AF,00,08              ;move.l 8(a7),(a5)
+~         $2B,6F,00,0C,00,04        ;move.l 12(a7),4(a5)
+1FABC+.d2 $46,C1                    ;move.w d1,sr
+~         $2A,5F                    ;movea.l (a7)+,a5
+~         $4E,75                    ;rts
+
+; several tables   ; 2D77C - 2D7FA (7E)
+.WINXTAB
++winxtab.fil
+
+; new address for wm_get
+1870C+.d1 $4e,b9,.WINXWM+10E8+.BASE.L
+21172+.d2 $4e,b9,.WINXWM+10E8+.BASE.L
+
+; new address for wm_set
+18722+.d1 $4e,b9,.WINXWM+1268+.BASE.L
+21188+.d2 $4e,b9,.WINXWM+1268+.BASE.L
+
+; new address for wm_calc
+18738+.d1 $4e,b9,.WINXWM+1486+.BASE.L
+211d6+.d2 $4e,b9,.WINXWM+1486+.BASE.L
+
+; new address for wm_create
+186e2+.d1 $41,F9,.WINXWM+C9C+.BASE.L  ; lea wx_create,a0
+21124+.d2 $4e,b9,.WINXWM+C9C+.BASE.L
+
+; new address for wm_open
+186f8+.d1 $41,F9,.WINXWM+DAC+.BASE.L  ; lea wx_open,a0
+2113c+.d2 $4e,b9,.WINXWM+DAC+.BASE.L
+
+; new address for wm_close
+186ba+.d1 $41,F9,.WINXWM+E38+.BASE.L  ; lea wx_close,a0
+2114c+.d2 $4e,b9,.WINXWM+E38+.BASE.L
+
+; new address for wm_delete
+186c4+.d1 $41,F9,.WINXWM+E10+.BASE.L  ; lea wx_delete,a0
+2115c+.d2 $4e,b9,.WINXWM+E10+.BASE.L
+
+; new address for wm_find()
+186ce+.d1 $41,F9,.WINXWM+13D2+.BASE.L ; lea wx_find,a0
+20016+.d2 $4e,b9,.WINXWM+13D2+.BASE.L
+21198+.d2 $4e,b9,.WINXWM+13D2+.BASE.L
+; 1f70e+.d2 $4e,b9,.WINXWM+13D2+.BASE.L not patched???
+
+; new address for wm_update
+13f36+.d1 $4e,b9,.WINXWM+1408+.BASE.L
+13f3e+.d1 $4e,b9,.WINXWM+1408+.BASE.L
+186d8+.d1 $41,F9,.WINXWM+1408+.BASE.L ; lea wx_update,a0
+1f8b2+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+1f8da+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+1f9d0+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+1fa5c+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+211aa+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+220ca+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+2215a+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+23876+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+238cc+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+238ea+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+23964+.d2 $4e,b9,.WINXWM+1408+.BASE.L
+
+; new address for wm_new
+211e6+.d2 $4e,b9,.WINXWM+15B8+.BASE.L
+26930+.d2 $4e,b9,.WINXWM+15B8+.BASE.L
+
+;***************************************************************************
+;* end of Winx patch

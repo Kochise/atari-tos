@@ -1,0 +1,122 @@
+# Source: Kennung BLOW from the sourcecode
+
+!iflang [english]
+
+!begin_node Virtual Screen protocol
+!html_name proto_vscreen
+!label Protocol, Virtual Screen
+
+A real problem when using a large-screen emulation is that dialog and
+alert boxes often appear outside the visible portion of the total
+screen area. Programs such as (!I)BigScreen(!i) cannot alter this. A solution
+to this is offered by the possibility of providing information about
+which portion of the screen is visible at any given time.
+
+The cookie jar can be used for this, which is intended for just such purposes.
+In our case the cookie is called VSCR, which is short for Virtual Screen. It
+points to a structure that contains information about the displayed segment of
+the total screen image. Applications can use this information to centre dialog
+boxes on the actually visible part of the screen, for instance.
+
+The structure is defined as follows:
+!label VSCR
+!begin_preformatted !inside
+typedef struct
+{
+  int32_t cookie;   /* Must be 'VSCR'                     */
+  int32_t product;  /* Same as XBRA ID of emulator        */
+  int16_t version;  /* Version of the VSCR protocol       */
+  int16_t x,y,w,h;  /* Visible segment of virtual screen  */
+} INFOVSCR;
+!end_preformatted
+
+(!B)A description of the individual components:(!b) (!I)cookie(!i) must have the
+value 0x56534352 ('VSCR'). The point of the whole thing is that a large-screen
+simulator can set the information structure to 'invalid', without having to
+remove the cookie first. (!I)BigScreen(!i), for instance, can be active or
+inactive depending on the chosen resolution, and when the
+(!link [screen resolution][Resolution change]) is changed it uses this
+mechanism to switch the structure on or off as redquired.
+
+A large-screen simulator can enter its own identifier in (!I)product.(!i)
+The four bytes should consist of four printable characters (ASCII-code
+between 32 and 126), just as with an XBRA identifier.
+!begin_table [l|l]
+Program !! Identifier
+!hline
+BigScreen  !! BIGS
+BlowUP030  !! BLOW
+LaceScan !! LEmu
+NOVA VDI !! IMNE
+!end_table
+
+The component (!I)version(!i) identifies the version of the VSCR protocol,
+and is intended to allow at some time in the future to supplement
+the structure with new fields. Finally, (!I)x, y, w(!i) and (!I)h(!i) specify the
+position, width and height of the visible screen segment.
+
+The protocol is deliberately constructed in such a way that it may be
+used by other simulators as well, and extended if required.
+!end_node
+
+!else
+
+!begin_node Virtual-Screen-Protokoll
+!html_name proto_vscreen
+!label Protokoll, Virtual-Screen-Protokoll
+
+Ein echtes Problem bei Benutzung einer Gro(!sharps)bildschirm-Emulation ist, da(!sharps)
+Dialog- und (!nolink [Alertboxen]) oft au(!sharps)erhalb des sichtbaren Bildschirmausschnitts
+erscheinen. Daran k(!oumlaut)nnen auch Programme wie (!I)BigScreen(!i) nichts (!aumlaut)ndern.
+Als L(!oumlaut)sung bietet sich eine M(!oumlaut)glichkeit an, mit der man sich dar(!uumlaut)ber
+informieren kann, welcher Teil des Bildschirms zur Zeit sichtbar ist.
+
+Dazu wird der Cookie-Jar benutzt, der genau f(!uumlaut)r solche Zwecke vorgesehen
+ist. In unserem Fall hei(!sharps)t der Cookie VSCR, was f(!uumlaut)r Virtual-Screen steht.
+Er zeigt auf eine Struktur, die insbesondere Informationen (!uumlaut)ber den
+dargestellten Bildschirmausschnitt enth(!aumlaut)lt. Anwendungsprogramme k(!oumlaut)nnen diese
+Information beispielsweise dazu benutzen, um (!nolink [Dialogboxen]) auf dem
+tats(!aumlaut)chlich sichtbaren Teil des Bildschirms zu zentrieren. Die Struktur ist
+wie folgt definiert:
+!label VSCR
+!begin_preformatted !inside
+typedef struct
+{
+  int32_t cookie;   /* mu(!sharps) 'VSCR' sein                       */
+  int32_t product;  /* Analog zur XBRA-Kennung               */
+  int16_t version;  /* Version des VSCR-Protokolls           */
+  int16_t x,y,w,h;  /* Sichtbarer Ausschnitt des Bildschirms */
+} INFOVSCR;
+!end_preformatted
+
+(!B)Zur Beschreibung der einzelnen Komponenten:(!b) (!I)cookie(!i) mu(!sharps) den
+Wert $56534352 ('VSCR') haben. Sinn der Sache ist, da(!sharps) ein
+Gro(!sharps)bildschirm-Simulator die Informationsstruktur auf 'ung(!uumlaut)ltig' setzen
+kann, ohne erst den Cookie entfernen zu m(!uumlaut)ssen. (!I)BigScreen(!i)
+beispielsweise kann je nach gew(!aumlaut)hlter Aufl(!oumlaut)sung aktiv oder inaktiv sein und
+benutzt diesen Mechanismus, um beim Aufl(!oumlaut)sungswechsel die Struktur ein- oder
+auszuschalten.
+
+In (!I)product(!i) kann ein Gro(!sharps)bildschirm-Simulator eine eigene Kennung
+eintragen. Die vier Bytes sollten genauso wie bei einer XBRA-Kennung aus
+vier druckbaren Zeichen (ASCII-Code 32 bis 126) bestehen.
+
+!begin_table [l|l]
+Programm !! Kennung
+!hline
+BigScreen  !! BIGS
+BlowUP030  !! BLOW
+LaceScan !! LEmu
+NOVA VDI !! IMNE
+!end_table
+
+
+Die Komponente (!I)version(!i) kennzeichnet die Version des VSCR-Protokolls
+und soll es erlauben, sp(!aumlaut)ter einmal die Struktur um neue Felder zu erg(!aumlaut)nzen.
+(!I)x, y, w(!i) und (!I)h(!i) schlie(!sharps)lich geben Position, Breite und H(!oumlaut)he
+des sichtbaren Ausschnitts an. Das Protokoll ist absichtlich so ausgelegt,
+da(!sharps) es auch von anderen Simulatoren benutzt und bei Bedarf erweitert werden
+kann.
+!end_node
+
+!endif

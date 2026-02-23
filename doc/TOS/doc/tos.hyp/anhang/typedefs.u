@@ -1,0 +1,86 @@
+!iflang [english]
+
+!begin_node Type definitions
+!html_name typedefs
+
+In this hypertext there are references to the following data types:
+
+!begin_table [l l l l l]
+AESVARS      !! APPLRECORD   !! ARHEADER     !! BASEPAGE     !! BCB
+BCONMAP      !! BITBLK       !! BPB          !! CD_DISC_INFO !! CD_TOC_ENTRY
+CICON        !! CICONBLK     !! CPXINFO      !! dev_descr    !! DEVDRV
+DISKINFO     !! DITHER_MODE  !! DOSTIME      !! DOSVARS      !! DRV_INFO
+DSPBLOCK     !! DTA          !! EVNT         !! fcookie      !! FILEPTR
+FILESYS      !! fix31        !! FNTS_ITEM    !! FONT_HDR     !! fs_descr
+GEM_MUPB     !! GRECT        !! HDFUNCS      !! HNDL_OBJ     !! ICONBLK
+IOREC        !! KBDVBASE     !! KEYTAB       !! LBOX_ITEM    !! LINE
+ltchars      !! MAPTAB       !! MCB          !! (!link [MD][Memory Descriptor (MD!) in TOS]) !! MEDIA_SIZE
+MEDIA_TYPE   !! MENU         !! META_DRVINFO !! META_INFO_1  !! META_INFO_2
+META_HEADER  !! MFDB         !! MFORM        !! MN_SET       !! MOUSE
+MPB          !! MRETS        !! mutimbuf     !! OBJECT       !! OHEADER
+OSHEADER     !! OVERPATCH    !! PARMBLK      !! PBDEF        !! PD
+PDLG_SUB     !! PH           !! ploadinfo    !! POPINFO      !! PRN_ENTRY
+PRN_MODE     !! PRN_TRAY     !! PRN_SETTINGS !! PRN_SWITCH   !! PUN_INFO
+pxyarray     !! RGB_LIST     !! RSHDR        !! SCANX        !! SCREEN
+SET_ITEM     !! sgttyb       !! SHELTAIL     !! SLCT_ITEM    !! SWINFO
+tchars       !! timeval      !! timezone     !! TEDINFO      !! THREADINFO
+USERBLK      !! UTXT_FN      !! winsize      !! XAESMSG      !! XATTR
+XCPB         !! XDO_INF      !! XFNT_INFO    !! XFSL_FILTER  !! XSHW_COMMAND
+XTED         !! xkey         !! ~      !! ~      !! ~
+!end_table
+
+
+!else
+
+!begin_node Typdefinitionen
+!html_name typedefs
+
+In diesem Hypertext finden sich Verweise auf die folgenden Datentypen:
+
+!begin_table [l l l l l]
+AESVARS      !! APPLRECORD   !! ARHEADER     !! BASEPAGE     !! BCB
+BCONMAP      !! BITBLK       !! BPB          !! CD_DISC_INFO !! CD_TOC_ENTRY
+CICON        !! CICONBLK     !! CPXINFO      !! dev_descr    !! DEVDRV
+DISKINFO     !! DITHER_MODE  !! DOSTIME      !! DOSVARS      !! DRV_INFO
+DSPBLOCK     !! DTA          !! EVNT         !! fcookie      !! FILEPTR
+FILESYS      !! fix31        !! FNTS_ITEM    !! FONT_HDR     !! fs_descr
+GEM_MUPB     !! GRECT        !! HDFUNCS      !! HNDL_OBJ     !! ICONBLK
+IOREC        !! KBDVBASE     !! KEYTAB       !! LBOX_ITEM    !! LINE
+ltchars      !! MAPTAB       !! MCB          !! (!link [MD][Memory-Deskriptor (MD!) in TOS]) !! MEDIA_SIZE
+MEDIA_TYPE   !! MENU         !! META_DRVINFO !! META_INFO_1  !! META_INFO_2
+META_HEADER  !! MFDB         !! MFORM        !! MN_SET       !! MOUSE
+MPB          !! MRETS        !! mutimbuf     !! OBJECT       !! OHEADER
+OSHEADER     !! OVERPATCH    !! PARMBLK      !! PBDEF        !! PD
+PDLG_SUB     !! PH           !! ploadinfo    !! POPINFO      !! PRN_ENTRY
+PRN_MODE     !! PRN_TRAY     !! PRN_SETTINGS !! PRN_SWITCH   !! PUN_INFO
+pxyarray     !! RGB_LIST     !! RSHDR        !! SCANX        !! SCREEN
+SET_ITEM     !! sgttyb       !! SHELTAIL     !! SLCT_ITEM    !! SWINFO
+tchars       !! timeval      !! timezone     !! TEDINFO      !! THREADINFO
+USERBLK      !! UTXT_FN      !! winsize      !! XAESMSG      !! XATTR
+XCPB         !! XDO_INF      !! XFNT_INFO    !! XFSL_FILTER  !! XSHW_COMMAND
+XTED         !! xkey         !! ~      !! ~      !! ~
+!end_table
+
+
+!endif
+
+!include anhang/typedefs/AESVARS.ui
+!include anhang/typedefs/ARHEADER.ui
+!include anhang/typedefs/BCB.ui
+!include anhang/typedefs/CPXINFO.ui
+!include anhang/typedefs/FlpDrvInfo.ui
+!include anhang/typedefs/GEM_MUPB.ui
+!include anhang/typedefs/GRECT.ui
+!include anhang/typedefs/HDFUNCS.ui
+!include anhang/typedefs/MacVersion.ui
+!include anhang/typedefs/MCB.ui
+!include anhang/typedefs/MD.ui
+!include anhang/typedefs/MRETS.ui
+!include anhang/typedefs/OHEADER.ui
+!include anhang/typedefs/OSHEADER.ui
+!include anhang/typedefs/PrintDesc.ui
+!include anhang/typedefs/RGB_LIST.ui
+!include anhang/typedefs/THREADINFO.ui
+!include anhang/typedefs/XCPB.ui
+
+!end_node

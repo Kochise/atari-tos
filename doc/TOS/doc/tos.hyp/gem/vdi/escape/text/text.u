@@ -1,0 +1,111 @@
+!iflang [english]
+
+!begin_node Text functions
+
+This library contains functions for control of the alphanumeric
+screen; the following routines are available for this purpose:
+
+!begin_xlist !compressed [x vq_curaddress]
+!item [(!bullet) v_alpha_text]
+Outputs text in text mode to printer or metafile
+!item [(!bullet) v_curdown]
+Moves text cursor one row down
+!item [(!bullet) v_curhome]
+Moves text cursor to top left corner
+!item [(!bullet) v_curleft]
+Moves text cursor one column left
+!item [(!bullet) v_curright]
+Moves text cursor one column right
+!item [(!bullet) v_curtext]
+Outputs text to screen from text cursor position on
+!item [(!bullet) v_curup]
+Moves text cursor one row up
+!item [(!bullet) v_eeol]
+Clears screen from text cursor to end of line
+!item [(!bullet) v_eeos]
+Clears screen from text cursor to end of screen
+!item [(!bullet) v_enter_cur]
+Switches on text mode
+!item [(!bullet) v_exit_cur]
+Exits text mode
+!item [(!bullet) v_rvoff]
+Switches off inverse video
+!item [(!bullet) v_rvon]
+Switches on inverse video
+!item [(!bullet) vq_chcells]
+Gets number of rows and columns of the text screen
+!item [(!bullet) vq_curaddress]
+Gets row and column of current text cursor
+!item [(!bullet) vs_curaddress]
+Positions text cursor at given row and column
+!end_xlist
+
+See also:
+VDI workstations ~  Style guidelines
+
+!else
+
+!begin_node Text-Funktionen
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen zur Ansteuerung des alphanumerischen
+Bildschirms; zu diesem Zweck stehen die folgenden Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [x vq_curaddress]
+!item [(!bullet) v_alpha_text]
+Ausgabe von Text im Textmodus.
+!item [(!bullet) v_curdown]
+Textcursor eine Zeile nach unten bewegen.
+!item [(!bullet) v_curhome]
+Textcursor in die linke obere Ecke bewegen.
+!item [(!bullet) v_curleft]
+Textcursor eine Spalte nach links bewegen.
+!item [(!bullet) v_curright]
+Textcursor eine Spalte nach rechts bewegen.
+!item [(!bullet) v_curtext]
+Text ab Textcursorposition ausgeben.
+!item [(!bullet) v_curup]
+Textcursor eine Zeile nach oben bewegen.
+!item [(!bullet) v_eeol]
+Bildschirm ab Textcursor bis Zeilenende l(!oumlaut)schen.
+!item [(!bullet) v_eeos]
+Bildschirm ab Textcursor bis Bildschirmende l(!oumlaut)schen.
+!item [(!bullet) v_enter_cur]
+Textmodus einschalten.
+!item [(!bullet) v_exit_cur]
+Textmodus verlassen.
+!item [(!bullet) v_rvoff]
+Inverse Darstellung abschalten.
+!item [(!bullet) v_rvon]
+Inverse Darstellung einschalten.
+!item [(!bullet) vq_chcells]
+Zeilen und Spalten des Textbildschirms ermitteln.
+!item [(!bullet) vq_curaddress]
+Zeile und Spalte des Textcursors ermitteln.
+!item [(!bullet) vs_curaddress]
+Textcursor in Reihe und Spalte positionieren.
+!end_xlist
+
+Querverweis:
+Workstations des VDI ~  Style-Guidelines
+
+!endif
+
+!include gem/vdi/escape/text/vq_chcells.ui
+!include gem/vdi/escape/text/vq_curaddress.ui
+!include gem/vdi/escape/text/v_alpha_text.ui
+!include gem/vdi/escape/text/v_curaddress.ui
+!include gem/vdi/escape/text/v_curdown.ui
+!include gem/vdi/escape/text/v_curhome.ui
+!include gem/vdi/escape/text/v_curleft.ui
+!include gem/vdi/escape/text/v_curright.ui
+!include gem/vdi/escape/text/v_curtext.ui
+!include gem/vdi/escape/text/v_curup.ui
+!include gem/vdi/escape/text/v_eeol.ui
+!include gem/vdi/escape/text/v_eeos.ui
+!include gem/vdi/escape/text/v_enter_cur.ui
+!include gem/vdi/escape/text/v_exit_cur.ui
+!include gem/vdi/escape/text/v_rvoff.ui
+!include gem/vdi/escape/text/v_rvon.ui
+
+
+!end_node

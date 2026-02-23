@@ -1,0 +1,13 @@
+SRCS = cmprom.c newglue.c findrsc.c mkbininc.c mkrom.c
+
+
+EXTRA_DIST1 = \
+	Makefile \
+	SRCFILES \
+	$(empty)
+
+EXTRA_DIST2 = \
+	GNUmakefile \
+	$(empty)
+
+newglue.o: newglue.c ../common/config.h

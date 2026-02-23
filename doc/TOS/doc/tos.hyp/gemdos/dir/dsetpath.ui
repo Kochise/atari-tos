@@ -1,0 +1,158 @@
+!iflang [english]
+
+
+!begin_node Dsetpath
+(!begin_liste) [Availability]
+!item [Name:]
+ØSet pathÆ - Set the current directory.
+
+!item [Opcode:]
+59
+
+!item [Syntax:]
+int16_t Dsetpath ( CONST int8_t *path );
+
+!item [Description:]
+The (!nolink [GEMDOS]) routine Dsetpath sets a new access path for the
+current drive. The parameter (!I)path(!i) contains the new current access
+path for the drive.
+
+(!B)Note:(!b) For each drive, (!nolink [GEMDOS]) will remember the current
+directory. However, the function Dsetpath should be used only for the
+current drive. For other drives the following method should be applied
+instead:
+
+!begin_itemize !compressed
+!item Establish current drive
+!item Set desired drive
+!item Set path for this drive
+!item Make the old (remembered) drive the current one again
+!end_itemize
+
+On some (older) versions of (!nolink [GEMDOS]), a too frequent setting of
+non-existing paths can lead to disturbance in the internal structures.
+
+!item [(!nolink [Return]) value:]
+The function can return the following results:
+
+!begin_xlist !compressed [EPTHNF]
+!item [E_OK]
+No eror has arisen
+!item [EPTHNF]
+Directory not found
+!end_xlist
+
+!item [Availability:]
+All (!nolink [GEMDOS]) versions.
+
+!item [Group:]
+Directory functions
+
+!item [See also:]
+(!link [Binding][Bindings for Dsetpath]) ~ Dgetpath
+(!ende_liste)
+
+
+!begin_node Bindings for Dsetpath
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+int16_t Dsetpath ( CONST int8_t *path );
+
+!item [Assembler:]
+!begin_verbatim
+pea       path         ; Offset 2
+move.w    #59,-(sp)    ; Offset 0
+trap      #1           ; GEMDOS
+addq.l    #6,sp        ; Correct stack
+!end_verbatim
+
+!item [GFA-Basic]
+Fehler%=Gemdos(&H3B,L:path%)
+(!ende_liste)
+!end_node
+!end_node
+
+
+!else
+
+
+!begin_node Dsetpath
+(!begin_liste) [Beschreibung]
+!item [Name:]
+Øset pathÆ - legt das aktuelle Verzeichnis fest.
+
+!item [Gemdosnummer:]
+59
+
+!item [Deklaration:]
+int16_t Dsetpath ( CONST int8_t *path );
+
+!item [Beschreibung:]
+Die GEMDOS-Routine Dsetpath setzt einen neuen Zugriffspfad fÅr das aktuelle
+Laufwerk. Der Parameter (!I)path(!i) enthÑlt den neuen aktuellen
+Zugriffspfad fÅr das Laufwerk.
+
+(!B)Hinweis:(!b) FÅr jedes Laufwerk merkt sich (!nolink [GEMDOS]) das
+aktuelle Verzeichnis. Die Funktion Dsetpath sollte aber nur fÅr das aktuelle
+Laufwerk benutzt werden. FÅr andere Laufwerke sollte hingegen die folgende
+Methode angewendet werden:
+
+!begin_itemize !compressed
+!item aktuelles Laufwerk ermitteln
+!item gewÅnschtes Laufwerk setzen
+!item Pfad fÅr dieses Laufwerk setzen
+!item das alte (gemerkte) Laufwerk wieder zum aktuellen machen.
+!end_itemize
+
+Auf einigen (Ñlteren) Versionen von (!nolink [GEMDOS]) kann ein zu hÑufiges
+Setzen von nicht existierenden Pfaden zu Stîrungen in internen Strukturen
+fÅhren.
+
+!item [Ergebnis:]
+Die Funktion liefert folgende Resultate:
+
+!begin_xlist !compressed [EPTHNF]
+!item [Wert]
+Bedeutung
+!item [~]
+~
+!item [E_OK]
+kein Fehler aufgetreten
+!item [EPTHNF]
+Verzeichnis nicht gefunden
+!end_xlist
+
+!item [VerfÅgbar:]
+Alle (!nolink [GEMDOS]) Versionen.
+
+!item [Gruppe:]
+Verzeichnisfunktionen
+
+!item [Querverweis:]
+(!link [Binding][Bindings fÅr Dsetpath]) ~ Dgetpath
+(!ende_liste)
+
+
+!begin_node Bindings fÅr Dsetpath
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+int16_t Dsetpath ( CONST int8_t *path );
+
+!item [Assembler:]
+!begin_verbatim
+pea       path         ; Offset 2
+move.w    #59,-(sp)    ; Offset 0
+trap      #1           ; GEMDOS aufrufen
+addq.l    #6,sp        ; Stack korrigieren
+!end_verbatim
+
+!item [GFA-Basic]
+Fehler%=Gemdos(&H3B,L:path%)
+(!ende_liste)
+!end_node
+!end_node
+
+
+!endif

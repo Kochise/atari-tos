@@ -1,0 +1,86 @@
+cp68:
+    -Ddefine
+    -Iinclude
+    -c         leave comments
+    -E         preprocess to stdout
+    -P         preprocess only
+    -[3-7]     various compat flags (using different standard include paths)
+
+c068:
+    -e         IEEE floats
+    -f         FFP floats
+    -g         symbolic debugger flag
+    -t         put strings into text segment
+    -p         profiler output file
+    -w         warning messages
+    -d         turn debugging on
+    -i         debug initialization
+    -s         debug symbols
+    -x         debug expr tree
+    
+c168:
+    -a,-l      long addresses only
+    -f         accepted but does nothing
+    -g         generate line labels for cdb
+    -c,-e,-m,-o debug options
+    -t         generates code for the 68010
+    
+
+as68:
+    -a         short addresses only
+    -i         initialize the assembler
+    -p         produce a listing
+    -u         make undefined symbols external
+    -n         no branch optimization
+    -l         long addresses only
+    -t         generating code suitable for the 68010
+    -f <dir>   Redirect temp files
+    -s <exp>   Change symbol table prefix
+
+
+aln:
+    -a <text> <data> <bss>   absolute link
+    -d                       desktop; wait for return
+    -f                       file symbols in object files
+    -l                       include local symbols
+    -m                       produce load map on stdout
+    -o <file>                produce output on <file>
+    -p                       partial link; combine objects
+    -s                       generate a symbols table
+    -u                       do not abort on unresolved symbols
+    -v                       verbose
+    -w                       warnings
+    -y <path>                library path
+    -i <file> <label>        include file verbatim in data segment
+    -x <file>                include all modules from archive
+    -c <file>                command file
+    
+ar68: flags [pos] archive file1 file2 ...
+    d                        Delete the specified files from the archive
+    p                        Print the specified files
+    r                        Replace the specified files
+    t                        Print a table of contents of the archive
+    x                        Extract the specified files from the archive
+    a pos                    insert files after the file "pos" 
+    b pos                    insert files before the file "pos" 
+    i pos                    same as b
+    v                        verbose
+
+/* '[' here means the literal character, not an optional value */
+link68:
+    ABSOLUTE                 perform absolute link
+    ALLMODS                  include all modules from library
+    BSSBASE[<hex>]           set absolute bss start
+    CHAINED                  chain overlays
+    COMMAND[<file>]          read commands from file
+    DATABASE[<hex>]          set absolute data start
+    IGNORE                   ignore range overflows
+    INCLUDE[<sym>]
+    LOCALS                   include local symbols in map
+    MAP                      generate a load map
+    NOLOCALS                 do not include local symbols in map
+    SYMBOLS                  keep symbol table in output
+    TEMPFILES[<drv>]         driver for temporary files
+    TEXTBASE[<hex>]          set absolute text start
+    UNDEFINED                allow undefined symbols
+    XXYYZ                    dump internal symbol table

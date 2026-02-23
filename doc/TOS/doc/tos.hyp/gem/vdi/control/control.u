@@ -1,0 +1,203 @@
+!iflang [english]
+
+!begin_node Control functions
+!html_name vdi_control
+
+This library contains functions to open and close working devices and
+to load fonts. Furthermore, these functions allow manipulation for
+Bezier spline creation and the management of vector font caches.
+
+In total the following routines are available:
+
+!begin_xlist !compressed [x vst_ex_load_fonts]
+!item [(!bullet) v_bez_on]
+Switches on Bezier spline creation
+!item [(!bullet) v_bez_off]
+Switches off Bezier spline creation
+!item [(!bullet) v_clr_cachedir]
+No information available at present
+!item [(!bullet) v_clrwk]
+Reinitializes workstation
+!item [(!bullet) v_clsbm]
+Closes an off-screen bitmap
+!item [(!bullet) v_clsvwk]
+Closes a virtual screen workstation
+!item [(!bullet) v_clswk]
+Closes a physical workstation
+!item [(!bullet) v_def_cachedir]
+No information available at present
+!item [(!bullet) v_delete_cache]
+No information available at present
+!item [(!bullet) v_fgetoutline]
+No information available at present
+!item [(!bullet) v_flushcache]
+Clears vector font cachen.
+!item [(!bullet) v_get_cachedir]
+No information available at present
+!item [(!bullet) v_get_outline]
+Calculates outline of a character (improved version for NVDI)
+!item [(!bullet) v_getoutline]
+Calculates outline of a character
+!item [(!bullet) v_killoutline]
+Releases memory for outline generation
+!item [(!bullet) v_loadcache]
+Loads vector font cache
+!item [(!bullet) v_open_bm]
+Opens an off-screen bitmap (modernized version)
+!item [(!bullet) v_opnbm]
+Opens an off-screen bitmap
+!item [(!bullet) v_opnprn]
+Opens a printer driver
+!item [(!bullet) v_opnvwk]
+Opens a virtual screen workstation
+!item [(!bullet) v_opnwk]
+Opens a physical workstation.
+!item [(!bullet) v_pat_rotate]
+Rotates a pattern
+!item [(!bullet) v_resize_bm]
+Alters the size of an off-screen bitmap
+!item [(!bullet) v_savecache]
+Saves outline font cache to disk.
+!item [(!bullet) v_set_app_buff]
+Designates memory workspace for Bezier spline creation
+!item [(!bullet) v_set_cachedir]
+No information available at present.
+!item [(!bullet) v_updwk]
+Executes buffered workstation output commands
+!item [(!bullet) vs_backmap]
+No information available at present
+!item [(!bullet) vs_clip]
+Sets or deletes a clipping rectangle
+!item [(!bullet) vs_outmode]
+No information available at present
+!item [(!bullet) vs_use_fonts]
+No information available at present
+!item [(!bullet) vst_ex_load_fonts]
+Loads additional fonts (extended version)
+!item [(!bullet) vst_load_fonts]
+Loads fonts
+!item [(!bullet) vst_unload_fonts]
+nloads fonts
+!end_xlist
+
+See also:
+VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Kontrollfunktionen
+!html_name vdi_control
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen, um Arbeitsger(!aumlaut)te zu (!oumlaut)ffnen oder zu
+schlie(!sharps)en und Zeichens(!aumlaut)tze zu laden. Dar(!uumlaut)ber hinaus kann (!uumlaut)ber diese Funktionen
+die Bezier-Spline Rrzeugung manipuliert, und die Verwaltung des
+Vektorzeichen-Caches gesteuert werden.
+
+Insgesamt stehen die folgenden Routinen zur Verf(!uumlaut)gung:
+!begin_xlist !compressed [x vst_ex_load_fonts]
+!item [(!bullet) v_bez_on]
+Bezier-Spline-Erzeugung einschalten.
+!item [(!bullet) v_bez_off]
+Bezier-Spline-Erzeugung ausschalten.
+!item [(!bullet) v_clr_cachedir]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_clrwk]
+Reinitialisierung einer Arbeitsstation.
+!item [(!bullet) v_clsbm]
+Offscreen-Bitmap schlie(!sharps)en.
+!item [(!bullet) v_clsvwk]
+Virtuelle Arbeitstation abmelden.
+!item [(!bullet) v_clswk]
+Physikalische Arbeitstation abmelden.
+!item [(!bullet) v_def_cachedir]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_delete_cache]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_fgetoutline]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_flushcache]
+Vektorzeichen-Cache l(!oumlaut)schen.
+!item [(!bullet) v_get_cachedir]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_get_outline]
+Outline eines Zeichens berechnen, erweiterte Version.
+!item [(!bullet) v_getoutline]
+Outline eines Zeichens berechnen.
+!item [(!bullet) v_killoutline]
+Speicher zur Outline-Generierung freigeben.
+!item [(!bullet) v_loadcache]
+Vektorzeichen-Cache laden.
+!item [(!bullet) v_open_bm]
+Moderne Variante zum (!oumlaut)ffnen von Offscreen-Bitmap
+!item [(!bullet) v_opnbm]
+Offscreen-Bitmap (!oumlaut)ffnen.
+!item [(!bullet) v_opnprn]
+Druckertreiber (!oumlaut)ffnen
+!item [(!bullet) v_opnvwk]
+Virtuelle Arbeitstation anmelden.
+!item [(!bullet) v_opnwk]
+Physikalische Arbeitstation anmelden.
+!item [(!bullet) v_pat_rotate]
+~
+!item [(!bullet) v_resize_bm]
+Gr(!oumlaut)(!sharps)e einer Offscreenbitmap ver(!aumlaut)ndern
+!item [(!bullet) v_savecache]
+Vektorzeichen-Cache speichern.
+!item [(!bullet) v_set_app_buff]
+Speicher f(!uumlaut)r Bezier-Spline-Erzeugung reservieren.
+!item [(!bullet) v_set_cachedir]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_updwk]
+Gepufferte Befehle einer Workstation ausf(!uumlaut)hren.
+!item [(!bullet) vs_backmap]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) vs_clip]
+Clipping setzen oder aufheben.
+!item [(!bullet) vs_outmode]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) vs_use_fonts]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) vst_ex_load_fonts]
+Zus(!aumlaut)tzliche Zeichens(!aumlaut)tze laden.
+!item [(!bullet) vst_load_fonts]
+Zus(!aumlaut)tzliche Zeichens(!aumlaut)tze laden.
+!item [(!bullet) vst_unload_fonts]
+Zeichens(!aumlaut)tze entfernen.
+!end_xlist
+
+Querverweis:
+Workstations des VDI ~ Style-Guidelines
+
+
+!endif
+
+!include gem/vdi/control/v_bez_off.ui
+!include gem/vdi/control/v_bez_on.ui
+!include gem/vdi/control/v_clrwk.ui
+!include gem/vdi/control/v_clsbm.ui
+!include gem/vdi/control/v_clsvwk.ui
+!include gem/vdi/control/v_clswk.ui
+!include gem/vdi/control/v_flushcache.ui
+!include gem/vdi/control/v_getoutline.ui
+!include gem/vdi/control/v_get_outline.ui
+!include gem/vdi/control/v_killoutline.ui
+!include gem/vdi/control/v_loadcache.ui
+!include gem/vdi/control/v_load_cache.ui
+!include gem/vdi/control/v_open_bm.ui
+!include gem/vdi/control/v_opnbm.ui
+!include gem/vdi/control/v_opnprn.ui
+!include gem/vdi/control/v_opnvwk.ui
+!include gem/vdi/control/v_opnwk.ui
+!include gem/vdi/control/v_opnwk_pc_gem.ui
+!include gem/vdi/control/v_pat_rotate.ui
+!include gem/vdi/control/v_resize_bm.ui
+!include gem/vdi/control/v_savecache.ui
+!include gem/vdi/control/v_save_cache.ui
+!include gem/vdi/control/v_set_app_buff.ui
+!include gem/vdi/control/v_updwk.ui
+!include gem/vdi/control/vs_clip.ui
+!include gem/vdi/control/vst_ex_load_fonts.ui
+!include gem/vdi/control/vst_load_fonts.ui
+!include gem/vdi/control/vst_unload_fonts.ui
+
+!end_node

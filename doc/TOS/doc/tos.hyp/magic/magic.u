@@ -1,0 +1,1693 @@
+!iflang [english]
+
+!include magic/magic_en.u
+
+!else
+
+!begin_node MagiC
+!html_name magic
+!ignore_subtoc
+
+... ist ein weitgehend TOS-kompatibles Betriebssystem, welches mit
+preemptiven Multitasking und einer Reihe von weiteren Features aufwarten
+kann. Das wichtigste Argument (!I)f(!uumlaut)r(!i) MagiC ist zweifellos die Tatsache,
+da(!sharps) es das einzige (kompatible) Betriebssystem ist, welches z.Zt. noch
+weiterentwickelt wird, und dar(!uumlaut)ber hinaus die Verwendung einer modernen
+Hardware (dem Power-PC) erm(!oumlaut)glicht. Letzteres wurde durch eine Portierung
+von MagiC auf die Apple-Plattform realisiert (MagiC Mac). Dieser Abschnitt
+beschreibt die folgenden Punkte:
+
+!begin_itemize !compressed
+!item Accessories in MagiC
+!item (!link [AUTOEXEC.BAT-Datei] [Die AUTOEXEC.BAT-Datei in MagiC])
+!item (!link [DFS-Konzept in MagiC][Das DFS-Konzept von MagiC])
+!item (!link [Fehlermeldungen von MagiC] [Spezielle Fehlermeldungen von MagiC])
+!item (!link [Iconify] [Das Iconify in MagiC])
+!item (!link [MAGX.INF-Datei von MagiC] [Der Aufbau der MAGX.INF-Datei])
+!item (!link [Shutdown] [Allgemeines zum Shutdown])
+!item (!link [Smart-Redraw] [Der Smart-Redraw in MagiC])
+!item Test auf MagiC
+!item VFAT-XFS in MagiC
+!item (!link [Zusatzprogramme f(!uumlaut)r MagiC][Die Zusatzprogramme f(!uumlaut)r MagiC])
+!item Auszug aus dem BIOS von MagiC
+!item (!link [Besonderheiten des 3D-Looks] [Anmerkungen zum 3D-Look von MagiC])
+!item (!link [Eingabefelder] [Eingabefelder in MagiC])
+!item (!link [Hintergrund-DMA] [Der Hintergrund-DMA von MagiC])
+!item (!link [Laufwerk U:] [Das Laufwerk U: in MagiC])
+!item Semaphoren in MagiC
+!item Single-Modus
+!item (!link [Task-Manager] [Der Task-Manager in MagiC])
+!item (!link [Threads][Threads in MagiC])
+!item (!link [XFS-Konzept in MagiC][Das XFS-Konzept von MagiC])
+!item Shared Libraries
+!end_itemize
+
+(!B)Hinweis:(!b) Verschwiegen werden soll an dieser Stelle nicht, da(!sharps) MagiC
+gegen(!uumlaut)ber Atari's MultiTOS (!I)deutliche Schw(!aumlaut)chen(!i) besitzt: Die
+Funktionalit(!aumlaut)t des AES Version 4.0 ist noch nicht erreicht, viele
+GEMDOS-Funktionen sind nicht implementiert, und auch das Interface zur
+Einbindung alternativer Filesysteme darf, verglichen mit der
+MultiTOS-L(!oumlaut)sung, wohl als sehr ungl(!uumlaut)cklich bezeichnet werden.
+
+Querverweis: BIOS ~ XBIOS ~ GEM ~ VDI
+
+
+
+!begin_node AESVARS, Zeiger auf AESVARS
+!html_name magic_aesvars
+
+!label DOMagixAESVars
+!begin_preformatted !inside
+/* Der folgende Code ermittelt auf zuverl(!aumlaut)ssige Art und Weise den
+   Zeiger auf die AESVARS-Struktur von MagiC.
+
+   Die Routine ist deshalb besonders wichtig, weil die entsprechende
+   Komponente im MagX-Cookie zur Bootzeit noch keinen g(!uumlaut)ltigen Wert
+   besitzt. */
+
+
+AESVARS* DOMagixAESVars (VOID)
+{
+    LOCAL WORD have_it = 0;
+    LOCAL AESVARS *ap = 0;
+
+    if (!have_it)
+    {
+        OSHEADER *O;
+
+        have_it = 1;
+
+        O = (OSHEADER *) Supexec (get_osheader);
+        ap = (AESVARS *) O->os_magic;
+
+        if (!get_cookie ('MagX', NULL) ||
+            ap->magic != 0x87654321L || ap->magic2 != 'MAGX')
+              ap = 0;
+    }
+
+    return (ap);
+
+} /* DOMagixAESVars */
+!end_preformatted
+
+Querverweis: Test auf MagiC ~ (!link [get_cookie][Beispiel-Code])
+!end_node
+
+
+!begin_node MAGX_COOKIE, status_bits
+!html_name magic_cookie
+
+Ein Bitvektor, der wie folgt definiert ist:
+
+!begin_table [l l l]
+Bit-00 !! = !! MagiC Task-Manager z.Zt. aktiv?
+Bit-01 !! = !! reserviert
+.. !! ~
+Bit-31 !! = !! reserviert
+!end_table
+
+(!B)Achtung:(!b) Die angegebenen Bits in diesem LONG-Wert sind Read-Only,
+d.h. sie d(!uumlaut)rfen (!I)nicht(!i) ver(!aumlaut)ndert werden.
+!end_node
+
+
+
+!begin_node Auszug aus dem BIOS von MagiC
+!html_name magic_bios
+
+!begin_preformatted !inside
+*******************************
+******* ACSI ******************
+*******************************
+
+
+* Interruptsteuerung:
+*
+* Alles geht (!uumlaut)ber den Eingang I5 des ST-MFP, hat den Interrupt #7
+* (aktiviert mit Bit 7 von ierb)
+* Polling (!uumlaut)ber Bit 5 von gpip
+* 1. aer f(!uumlaut)r Bit 5 mu(!sharps) 0 sein, d.h. Interrupt wird ausgel(!oumlaut)st beim
+*    (!Uumlaut)bergang von 1 auf 0
+* 2. Interrupt _mfpint (7) aktivieren und Vektor setzen (Adr. $11c)
+*
+
+**********************************************************************
+*
+* Sperre den FDC/ACSI-DMA
+* und gib ihn wieder frei.
+* Kein Register (au(!sharps)er d0 bei dma_end) wird ver(!aumlaut)ndert
+*
+* F(!uumlaut)r die Zeit, in der AES noch nicht initialisiert ist, kann evnt_sem
+* nicht sperren, weil act_appl immer NULL ist.
+*
+
+dma_begin:
+ movem.l  d1-d2/a0-a2,-(sp)
+ lea      dma_sem,a0
+ moveq    #0,d1               ; kein Timeout
+ moveq    #SEM_SET,d0
+ jsr      evnt_sem
+ st       flock
+ movem.l  (sp)+,d1-d2/a0-a2
+ rts
+
+dma_end:
+ movem.l  d0-d2/a0-a2,-(sp)
+ lea      dma_sem,a0
+ moveq    #SEM_FREE,d0
+ jsr      evnt_sem
+ clr.w    flock
+ movem.l  (sp)+,d0-d2/a0-a2
+ rts
+
+
+**********************************************************************
+*
+* long wait_ACSI( d0 = long ticks_200hz )
+*
+* R(!Uumlaut)ckgabe:    0    OK
+*             -1    TimeOut
+*             -2    Busfehler
+*
+
+wait_ACSI:
+ movem.l  d1-d2/a0-a2,-(sp)
+ tst.w    pe_slice            ; pr(!aumlaut)emptiv ?
+ bmi.b    wdma_no_yield       ; nein, busy waiting
+ move.l   act_appl,d2
+ ble.b    wdma_no_yield       ; aktuelle Applikation ung(!uumlaut)ltig
+
+* neue Routine (!uumlaut)ber evnt_IO und MFP- Interrupt
+
+ lsr.l    #2,d0               ; AES: 50Hz statt 200Hz
+wdma_neu:
+ move     sr,d1
+ ori      #$700,sr
+ btst     #5,gpip             ; schon fertig ?
+ beq.b    wdma_ok2            ; ja, enable interrupt
+; Interrupt aufsetzen
+ pea      int_mfp7_unsel(pc)
+ move.l   d2,imfp7_appl       ; act_appl
+ move.l   sp,imfp7_unsel
+; Interrupt freigeben
+ move.w   d1,sr
+; Auf Interrupt warten
+ move.l   sp,a0
+;move.w   d0,d0               ; TimeOut in 50Hz- Ticks
+ jsr      evnt_IO
+ addq.l   #4,sp
+wdma_ende:
+ movem.l  (sp)+,d1-d2/a0-a2
+ rts
+
+* alte Routine mit busy waiting (!uumlaut)ber _hz_200
+
+wdma_no_yield:
+ add.l    _hz_200,d0
+wdma_loop:
+ btst     #5,gpip
+ beq.b    wdma_ok
+ cmp.l    _hz_200,d0
+ bcc.b    wdma_loop
+wdma_timeout:
+ moveq    #-1,d0              ; Timeout
+ bra.b    wdma_ende
+wdma_ok2:
+ move.w   d1,sr
+wdma_ok:
+ moveq    #0,d0               ; OK
+ bra.b    wdma_ende
+
+
+**********************************************************************
+*
+* Interruptroutine f(!uumlaut)r MFP, Interruptkanal #7 = I/O-Port 5
+* (DMA/FDC busy)
+*
+* R(!uumlaut)ckgabewert 0 (OK)
+*
+
+int_mfp7:
+ tst.l    imfp7_unsel                   ; Interrupt aktiviert ?
+ beq.b    imfp7_ende                    ; nein, weiter
+ movem.l  d0-d2/a0-a2,-(sp)
+
+ move.l   imfp7_unsel,a0
+ clr.l    imfp7_unsel                   ; Interrupt deaktivieren
+ clr.l    (a0)                          ; als eingetroffen markieren
+
+ move.l   imfp7_appl,a0
+ jsr      appl_IOcomplete               ; wartende APP aufwecken
+ movem.l  (sp)+,d0-d2/a0-a2
+imfp7_ende:
+ move.b   #$7f,isrb                     ; service- Bit l(!oumlaut)schen
+ rte
+
+
+**********************************************************************
+*
+* void int_mfp7_unsel( a0 = long *unselect, a1 = APPL *ap );
+*
+* Deaktiviert den Interrupt wieder, wenn er nicht eingetroffen ist
+* R(!uumlaut)ckgabewert -1 (Timeout)
+*
+
+int_mfp7_unsel:
+ clr.l    imfp7_unsel                   ; Interrupt deaktivieren
+ moveq    #-1,d0
+ move.l   d0,(a0)                       ; nicht eingetroffen
+ rts
+
+
+
+*******************************
+******* SCSI ******************
+*******************************
+
+
+* Interruptsteuerung:
+*
+* SCSI-DMA-Busfehler: Eingang I5 des TT-MFP
+* 1. aer f(!uumlaut)r Bit 5 mu(!sharps) 0 sein, d.h. Interrupt wird ausgel(!oumlaut)st beim
+*    (!Uumlaut)bergang von 1 auf 0
+* Polling (!uumlaut)ber Bit 5 von gpip
+* Interrupt #7 des TT-MFP (Adresse $15c)
+
+* SCSI: Eingang I7 des TT-MFP
+* 1. aer f(!uumlaut)r Bit 7 mu(!sharps) 1 sein, d.h. Interrupt wird ausgel(!oumlaut)st beim
+*    (!Uumlaut)bergang von 0 auf 1
+* Polling (!uumlaut)ber Bit 7 von gpip
+* Interrupt #15 des TT-MFP (Adresse $17c)
+
+* W(!aumlaut)hrend der (!Uumlaut)bertragung mu(!sharps) offenbar im Betriebsartenregister
+* $fff785 des ncr 5380 das Bit 3 (enable process interrupt)
+* gesetzt sein.
+
+**********************************************************************
+*
+* Interruptroutine f(!uumlaut)r TT-MFP, Interruptkanal #7 = I/O-Port 5
+* (SCSI-DMA Busfehler)
+*
+* R(!uumlaut)ckgabewert -2
+*
+
+int_scsidma:
+ tst.l    ncrdma_unsel                  ; Interrupt aktiviert ?
+ beq.b    incrdma_ende                  ; nein, weiter
+ movem.l  d0-d2/a0-a2,-(sp)
+
+ moveq    #-2,d0                        ; eingetroffen (Fehler)
+ move.l   ncrdma_unsel,a0
+ clr.l    ncrdma_unsel                  ; Interrupt deaktivieren
+ move.l   d0,(a0)                       ; als eingetroffen markieren
+
+ move.l   ncrdma_appl,a0
+ jsr      appl_IOcomplete               ; wartende APP aufwecken
+ movem.l  (sp)+,d0-d2/a0-a2
+incrdma_ende:
+ move.b   #$7f,isrb+$80                 ; service- Bit l(!oumlaut)schen (TT-MFP)
+ rte
+
+
+**********************************************************************
+*
+* Interruptroutine f(!uumlaut)r TT-MFP, Interruptkanal #15 = I/O-Port 7
+* (SCSI)
+*
+* R(!uumlaut)ckgabewert 0
+*
+
+int_ncr:
+ tst.l    ncrdma_unsel                  ; Interrupt aktiviert ?
+ beq.b    incr_ende                     ; nein, weiter
+ movem.l  d0-d2/a0-a2,-(sp)
+
+ move.l   ncrdma_unsel,a0
+ clr.l    ncrdma_unsel                  ; Interrupt deaktivieren
+ clr.l    (a0)                          ; als eingetroffen markieren
+
+ move.l   ncrdma_appl,a0
+ jsr      appl_IOcomplete               ; wartende APP aufwecken
+ movem.l  (sp)+,d0-d2/a0-a2
+incr_ende:
+ move.b   #$7f,isra+$80                 ; service- Bit l(!oumlaut)schen (TT-MFP)
+ rte
+
+
+**********************************************************************
+*
+* void incrdma_unsel( a0 = long *unselect, a1 = APPL *ap );
+*
+* Deaktiviert den Interrupt wieder, wenn er nicht eingetroffen ist.
+* (R(!uumlaut)ckgabewert -1)
+*
+
+incrdma_unsel:
+ clr.l    ncrdma_unsel                  ; Interrupt deaktivieren
+ moveq    #-1,d0                        ; Timeout
+ move.l   d0,(a0)                       ; nicht eingetroffen
+ rts
+
+
+**********************************************************************
+*
+* long wait_NCR( d0 = long ticks_200hz )
+*
+* R(!Uumlaut)ckgabe:    0    OK
+*             -2    Busfehler
+*             -1    TimeOut
+*
+* kein Register au(!sharps)er d0 wird ver(!aumlaut)ndert
+*
+
+wait_NCR:
+ movem.l  d1-d2/a0-a2,-(sp)
+ tst.w    pe_slice            ; pr(!aumlaut)emptiv ?
+ bmi.b    wncr_no_yield       ; nein, busy waiting
+ move.l   act_appl,d2
+ ble.b    wncr_no_yield       ; aktuelle Applikation ung(!uumlaut)ltig
+
+* neue Routine (!uumlaut)ber evnt_IO und MFP- Interrupt
+
+ lsr.l    #2,d0               ; AES: 50Hz statt 200Hz
+wncr_neu:
+ move     sr,d1
+ ori      #$700,sr
+ btst     #5,gpip+$80         ; DMA- Busfehler ?
+ beq.b    wncr_err2           ; ja, return(-2)
+ btst     #7,gpip+$80         ; schon fertig ?
+ bne.b    wncr_ok2            ; ja, enable interrupt, return(0)
+; Interrupt aufsetzen
+ pea      incrdma_unsel(pc)
+ move.l   d2,ncrdma_appl      ; act_appl
+ move.l   sp,ncrdma_unsel
+; Interrupt freigeben
+ move.w   d1,sr
+; Auf Interrupt warten
+ move.l   sp,a0
+;move.w   d0,d0               ; TimeOut in 50Hz- Ticks
+ jsr      evnt_IO
+ addq.l   #4,sp
+wncr_ende:
+ movem.l  (sp)+,d1-d2/a0-a2
+ rts
+
+* alte Routine mit busy waiting (!uumlaut)ber _hz_200
+
+wncr_no_yield:
+ add.l    _hz_200,d0
+wncr_loop:
+ btst     #5,gpip+$80
+ beq.b    wncr_err
+ btst     #7,gpip+$80
+ bne.b    wncr_ok
+ cmp.l    _hz_200,d0
+ bcc.b    wncr_loop
+ moveq    #-1,d0                   ; Timeout
+ bra.b    wncr_ende
+wncr_ok2:
+ move.w   d1,sr
+wncr_ok:
+ moveq    #0,d0
+ bra.b    wncr_ende
+wncr_err2:
+ move.w   d1,sr
+wncr_err:
+ moveq    #-2,d0
+ bra.b    wncr_ende
+
+
+**********************************************************************
+*
+* Sperre den NCR-SCSI
+*
+* kein Register au(!sharps)er d0 wird ver(!aumlaut)ndert
+*
+* und gib ihn wieder frei.
+*
+* Kein Register wird ver(!aumlaut)ndert
+*
+* F(!uumlaut)r die Zeit, in der AES noch nicht initialisiert ist, kann evnt_sem
+* nicht sperren, weil act_appl immer NULL ist.
+*
+
+ncr_begin:
+ movem.l  d1-d2/a0-a2,-(sp)
+ lea      ncr_sem,a0
+ moveq    #0,d1               ; kein Timeout
+ moveq    #SEM_SET,d0
+ jsr      evnt_sem
+ movem.l  (sp)+,d1-d2/a0-a2
+ rts
+
+ncr_end:
+ movem.l  d0-d2/a0-a2,-(sp)
+ lea      ncr_sem,a0
+ moveq    #SEM_FREE,d0
+ jsr      evnt_sem
+ movem.l  (sp)+,d0-d2/a0-a2
+ rts
+!end_preformatted
+
+(!B)Achtung:(!b) Die hier angegebenen Routinen, k(!oumlaut)nnen sich nat(!uumlaut)rlich
+jederzeit wieder (!aumlaut)ndern!
+
+Querverweis: MagiC ~ GEMDOS ~ BIOS ~
+(!link [XFS-Konzept in MagiC][Das XFS-Konzept von MagiC])
+!end_node
+
+
+
+!begin_node Die AUTOEXEC.BAT-Datei in MagiC
+!label AUTOEXEC.BAT in MagiC
+!html_name magic_autoexec
+
+Aufgrund des vorw(!aumlaut)rts- bzw. r(!uumlaut)ckw(!aumlaut)rtssortierten Auto-Ordners auf dem Apple
+Macintosh (Stichwort: MagiC Mac) gibt es jetzt auch f(!uumlaut)r Atari-Maschinen eine
+Alternative:
+
+Wird beim Booten im Auto-Ordner eine Datei mit Namen AUTOEXEC.BAT gefunden,
+so werden alle Programme ausgef(!uumlaut)hrt, die darin zeilenweise aufgelistet
+sind. Leerzeilen sind erlaubt, Programmnamen werden bis zum ersten
+Leerzeichen (!uumlaut)bernommen. Daher k(!oumlaut)nnen Kommentare (durch Leerzeichen von den
+Programmen getrennt) eingegeben werden. Programmnamen d(!uumlaut)rfen
+(!I)absolute(!i) Pfade enthalten; tun sie dies nicht, so wird im Auto-Ordner
+gesucht.
+
+Als aktuelles Verzeichnis gilt dabei, wie gehabt, das Wurzelverzeichnis.
+Durch dieses Feature gibt es also eine MagiC-spezifische
+Auto-Ordner-Kollektion, da die AUTOEXEC.BAT von anderen Systemen ignoriert
+wird.
+
+Querverweis: _autopath ~ (!link [Systemvariablen][Die Systemvariablen])
+!end_node
+
+
+
+!begin_node Anmerkungen zum 3D-Look von MagiC
+!html_name magic_3dlook
+
+Ab MagiC 3 steht f(!uumlaut)r Objekte ein 3D-Look zur Verf(!uumlaut)gung, der sich jedoch in
+einigen Details von der Atari-Variante unterscheidet. Die wichtigsten
+Punkte in K(!uumlaut)rze:
+
+!begin_itemize
+!item der 3D-Look steht nur in Aufl(!oumlaut)sungen mit (!I)mindestens 16 Farben(!i)
+      zur Verf(!uumlaut)gung.
+!item w(!aumlaut)hrend man in TOS 4.0 per objc_sysvar das Verhalten der Indikatoren
+      und Aktivatoren, sowie die Farben beeinflussen kann, erlaubt (!nolink [MagiC])
+      nur die Abfrage der Daten. Als Farben werden in (!nolink [MagiC]) immer die
+      Farbnummern 8 und 9 (hell- bzw. dunkelgrau) verwendet.
+!item Aktivatoren werden bei SELECTED immer eingedr(!uumlaut)ckt, Indikatoren oder
+      Background-Objekte werden verf(!aumlaut)rbt.
+!item Indikatoren und Background-Objekte werden gleich behandelt.
+!item f(!uumlaut)r alle Objekttypen k(!oumlaut)nnen 3D-Effekte angefordert werden, dies gilt
+      auch f(!uumlaut)r Texteingabefelder, (!Uumlaut)berschriften, Gruppenrahmen etc.
+!item 3D-Objekte bekommen keinen zus(!aumlaut)tzlichen Rahmen und (!aumlaut)ndern sich daher
+      nicht in der Gr(!oumlaut)(!sharps)e. Je nach Rahmenbreite stehen sie weiter heraus und
+      haben ggf. auch noch einen zus(!aumlaut)tzlichen Rand und Schatten.
+      (!Uumlaut)berschriften sollten statt bisher 1+2 die H(!oumlaut)he 1+3 haben, damit es
+      ordentlich aussieht.
+!item der Objektstatus DRAW3D wird ignoriert.
+!item Schmuckr(!aumlaut)nder f(!uumlaut)r (!nolink [Dialogboxen]) werden genau dann erzeugt, wenn ein
+      innerer Rahmen von 2 Pixeln und OUTLINED angew(!aumlaut)hlt wurde.
+!end_itemize
+
+Querverweis: AES ~ GEM ~ Style-Guidelines
+!end_node
+
+
+!begin_node Eingabefelder in MagiC
+!label Editfelder in MagiC
+!html_name magic_editable
+
+Die Eingabefelder bieten in MagiC von Haus aus bereits viele Funktionen, die
+sonst m(!uumlaut)hsam zu Fu(!sharps) programmiert werden m(!uumlaut)ssen. U.a. sind dies:
+
+!begin_itemize !compressed
+!item exakte Cursorpositionierung per Maus
+!item Tastaturk(!uumlaut)rzel, um den Cursor zum vorherigen/n(!aumlaut)chsten Wort oder zum
+      Zeilenanfang/Zeilenende zu bewegen.
+!item Einf(!uumlaut)ge/(!Uumlaut)berschreibmodus
+!item L(!oumlaut)schen bis Zeilenende
+!item Cut, Copy, Paste
+!item Eingabefelder mit kleiner Schrift funktionieren
+!end_itemize
+
+Die Funktionen f(!uumlaut)r Help, Undo, Shift-hoch, Shift-runter und Ctrl-Q sind in
+form_keybd enthalten (sie werden allerdings ignoriert, falls das
+entsprechende Objekt (!nolink [DISABLED]) ist) die Cursorpositionierung per Maus in
+form_do bzw. form_xdo und objc_edit und die restlichen Funktionen in
+objc_edit.
+
+Wer in den Genu(!sharps) der entsprechenden Funktionen kommen m(!oumlaut)chte, mu(!sharps) die dazu
+geh(!oumlaut)rigen (!nolink [AES])-Aufrufe benutzen.
+
+Querverweis: AES ~ GEM ~ Style-Guidelines ~ (!link [scrollende Eingabefelder][scrollende Eingabefelder])
+!end_node
+
+
+
+!begin_node scrollende Eingabefelder
+!html_name magic_scroll
+
+!begin_preformatted !inside
+/*******************************************************************
+*
+* Dieses Beispielprogramm demonstriert den Gebrauch scrollender
+* Eingabefelder in MagiC 3.
+*
+*******************************************************************/
+
+#include <aes.h>
+#include <tos.h>
+#include <string.h>
+#include <magx.h>
+#include "magxlib.h"
+#include "edscroll.h"
+
+#define TLEN  30
+
+int  do_dialog    (OBJECT *dialog);
+
+void main()
+{
+  OBJECT *adr_dialog;
+  ULONG crdate;
+  int is_scroll;
+
+  XTED xted;
+  char tmplt[TLEN+1],txt[TLEN+1];
+
+
+  /* Feststellen, ob das System Scrolledit kann */
+  /* (---)(---)(---)(---)(---)(---)(---)(---)(---)(---)(---)(---)(---)(---) */
+
+  is_scroll = ((0 < get_MagiC_ver(&crdate)) &&
+    (crdate >= 0x19950829L));
+
+     /* Applikation beim AES anmelden */
+     /* (---)(---)(---)(---)(---)(---)(---)(---)(---)(--) */
+
+     if   (appl_init() < 0)
+          Pterm(1);
+
+     /* Resourcedatei laden */
+     /* (---)(---)(---)(---)(---)(---)- */
+     if   (!rsrc_load("edscroll.rsc"))
+     {
+          form_alert(1, "[3][Kann \"EDSCROLL.RSC\"|nicht finden][Abbruch]");
+          goto err;
+     }
+
+     rsrc_gaddr(0, EDIT, &adr_dialog);
+
+  /* Scroll-TEDINFO initialisieren */
+  /* (---)(---)(---)(---)(---)(---)(---)(---)(---)(--) */
+
+  init_scrlted(adr_dialog+EDITTXT, is_scroll, &xted,
+        txt, tmplt, TLEN);
+
+  strcpy(txt, "Beispiel");
+
+  /* Dialog */
+  /* (---)(---) */
+
+     wind_update(BEG_MCTRL);
+     graf_mouse(ARROW, 0L);
+     do_dialog(adr_dialog);
+     wind_update(END_MCTRL);
+     rsrc_free();
+
+  err:
+     appl_exit();
+     Pterm0();
+}
+
+
+/****************************************************************
+*
+* do_dialog
+*
+****************************************************************/
+
+int do_dialog(OBJECT *dialog)
+{
+     int cx, cy, cw, ch;
+     int exitbutton;
+
+     form_center(dialog, &cx, &cy, &cw, &ch);
+     form_dial(FMD_START, 0,0,0,0, cx, cy, cw, ch);
+     objc_draw(dialog, ROOT, MAX_DEPTH, cx, cy, cw, ch);
+     exitbutton = 0x7f & form_do(dialog, 0);
+     form_dial(FMD_FINISH, 0,0,0,0,cx, cy, cw, ch);
+     return(exitbutton);
+}
+
+
+/*******************************************************************
+*
+* MagiC-Version ermitteln.
+* ========================
+*
+* Falls <crdate> != NULL ist, wird das Erstelldatum in der
+* Form jjjjmmdd geliefert. Durch "<" und ">" kann dann
+* direkt ermittelt werden, ob eine bestimmte Funktion
+* bei der vorliegenden MagiC- Version verf(!uumlaut)gbar ist.
+*
+* R(!uumlaut)ckgabe:  0     kein MagiC installiert
+*           -1    bin noch im AUTO-Ordner
+*       0x0a0b    Version a.b
+*
+*******************************************************************/
+
+WORD get_MagiC_ver(ULONG *crdate)
+{
+  ULONG *cookie;
+  AESVARS *av;
+
+  cookie = get_cookie('MagX');
+  if  (!cookie)
+    return(0);
+  else
+  {
+    av = ((MAGX_COOKIE *) (*cookie))->aesvars;
+    if  (!av)
+      return(-1);
+    else if (crdate)
+    {
+      *crdate = av->date << 16L;        /* jjjj0000 */
+      *crdate |= av->date >> 24L;       /* jjjj00tt */
+      *crdate |= (av->date >> 8L) & 0xff00L;    /* jjjjmmtt */
+      return(av->version);
+    }
+  }
+}
+
+
+/****************************************************************
+*
+* Macht ein F(BOX)TEXT-Objekt scrollbar, wenn MagiC l(!aumlaut)uft.
+*
+* Wenn <is_scroll> FALSE ist, wird nur das Textfeld auf eine
+* Benutzerzeichenkette umgesetzt.
+*
+* Im RCS sollte das Textfeld leer gelassen werden, die Schablone
+* und die Valid-Zeichenkette m(!uumlaut)ssen jedoch eingegeben werden,
+* weil sonst das RCS streikt.
+* F(!uumlaut)r scrollende Felder mu(!sharps) eine neue Schablone angelegt werden,
+* die in der .RSC-Datei angemeldete kann nicht verwendet werden,
+* weil sie zu kurz ist. Die hier angelegte Schablone besteht
+* nur aus '_'-Zeichen, weil dies 99.9% aller Anwendungsf(!aumlaut)lle
+* f(!uumlaut)r scrollende !{"Objekte" ignore} abdeckt. Die L(!aumlaut)nge der
+* Valid-Zeichenkette ist egal, d.h. mu(!sharps) mindestens 1 sein, weil
+* das AES das letzte Zeichen der Valid-Zeichenkette
+* automatisch vervielfacht, bis die L(!aumlaut)nge des Textfeld erreicht
+* ist.
+*
+* Die maximale L(!aumlaut)nge f(!uumlaut)r die Eingabezeichenkette ist in jedem
+* Fall (TEDINFO.te_txtlen - 1).
+*
+****************************************************************/
+
+void init_scrlted(OBJECT *o, WORD is_scroll, XTED *xted,
+        char *txt, char *tmplt, WORD len)
+{
+  TEDINFO *t;
+
+  t = o->ob_spec.tedinfo;
+  t->te_just = TE_LEFT;   /* wichtig! */
+  t->te_ptext = txt;
+  if  (is_scroll)
+  {
+    memset(tmplt, '_', len);  /* neue Schablone */
+    tmplt[len] = '\0';
+    xted->xte_ptmplt = tmplt;
+    xted->xte_pvalid = t->te_pvalid;
+    xted->xte_vislen = t->te_tmplen - 1;
+    xted->xte_scroll = 0;
+
+    t->te_tmplen = len+1;
+    t->te_ptmplt = NULL;
+    t->te_pvalid = (void *) xted;
+  }
+  t->te_txtlen = t->te_tmplen;
+}
+!end_preformatted
+
+Querverweis: AES ~ Eingabefelder in MagiC ~ GEM ~ TEDINFO
+!end_node
+
+
+
+!include magic/magicerr.u
+
+
+!begin_node Der Hintergrund-DMA von MagiC
+!label Hintergrund-DMA in MagiC
+!html_name magic_dma
+
+Ab MagiC 3 ist das gesamte DOS einschlie(!sharps)lich der Zugriffe auf DOS
+Dateisysteme reentrant und l(!aumlaut)uft im Hintergrund ab. So ist es m(!oumlaut)glich, auf
+Laufwerk A Dateien zu bearbeiten, ohne den Rechner bei den
+Diskettenzugriffen merklich zu bremsen. Voraussetzung hierf(!uumlaut)r sind jedoch
+Disketten- und Festplattenroutinen, die im Hintergrund arbeiten.
+
+Damit der Plattentreiber diese Funktionen nicht zur Verf(!uumlaut)gung zu stellen
+braucht, enth(!aumlaut)lt das BIOS von (!nolink [MagiC]) alle notwendigen Funktionen. (!Uumlaut)ber den
+MagX-Cookie (Komponente (!I)hddrv_functions(!i)) erh(!aumlaut)lt man Zugriff auf die
+folgende Struktur, die Zeiger auf wichtige Routinen des Hintergrund-DMAs
+enth(!aumlaut)lt:
+
+!begin_verbatim
+typedef struct
+{
+    LONG dma_begin ( VOID);
+    LONG dma_end   ( VOID );
+    LONG dma_wait  ( d0 = LONG ticks_200hz );
+    LONG ncr_begin ( VOID );
+    LONG ncr_end   ( VOID );
+    LONG ncr_wait  ( d0 = LONG ticks_200hz );
+} HDFUNCS;
+!end_verbatim
+
+(!B)Hinweis:(!b) Direkt vor der Struktur (2 Bytes vorher) liegt ein WORD,
+das die Tabellenl(!aumlaut)nge in LONGs angibt (in diesem Fall 6). Alle 6 Zeiger
+liegen im Systemvariablenbereich und d(!uumlaut)rfen notfalls ver(!aumlaut)ndert werden. Die
+internen Funktionen f(!uumlaut)r die Floppy springen ebenfalls (!uumlaut)ber die 6 Zeiger.
+(!B)Wichtig:(!b) Der Zeiger (!I)hddrv_functions(!i) im MagX-Cookie darf
+nicht ver(!aumlaut)ndert werden.
+
+Zur Bootzeit ist das pr(!aumlaut)emptive Multitasking abgeschaltet (eigentlich ist
+auch das Multitasking abgeschaltet), aber die Routinen funktionieren auch
+vor Installation des AES, wobei die Warteroutinen dann ein 'busy waiting'
+machen (wie auch beim Abschalten des pr(!aumlaut)emptiven Multitasking), und die
+Semaphorenroutinen machen (bis auf das Setzen und L(!oumlaut)schen von flock) einfach
+nichts.
+
+Dieser Hypertext enth(!aumlaut)lt (!nolink [Ausz(!uumlaut)ge aus dem BIOS]) von (!nolink [MagiC]),
+die demonstrieren
+sollen, wie das ganze funktioniert; dazu einige Worte:
+
+!begin_itemize
+!item die Routinen acsi_xxx sind gleichzeitig f(!uumlaut)r ACSI und FDC, d.h.
+      dma_begin setzt (!nolink [flock]), dma_end l(!oumlaut)scht es wieder.
+!item die Routinen ncr_xxx sind f(!uumlaut)r TT-SCSI.
+!item die Funktionen xxx_begin reservieren die jeweilige Semaphore. F(!uumlaut)r die
+      R(!uumlaut)ckgabwerte gilt:
+!begin_table [l|l]
+Wert !! Bedeutung
+!hline
+-1 !! Semaphore ist bereits im Besitz
+~0 !! Ok
+!end_table
+      Die Routinen ver(!aumlaut)ndern mit Ausnahme von d0 keine Register.
+!item die Funktionen xxx_end geben die Semaphore wieder frei; auch hier wird
+      kein Register ver(!aumlaut)ndert.
+!item dma_wait wartet auf einen Interrupt des ACSI-DMA (bzw. FDC)
+      Controllers; ncr_wait ist f(!uumlaut)r den SCSI-Bus des Atari-TT. F(!uumlaut)r die
+      R(!uumlaut)ckgabewerte gilt:
+!begin_table [l|l]
+Wert !! Bedeutung
+!hline
+-2 !! Busfehler (Interrupt vom TT-SCSI)
+-1 !! Timeout
+~0 !! Ok
+!end_table
+!end_itemize
+
+Querverweis: BIOS ~ GEMDOS ~
+(!link [XFS-Konzept in MagiC][Das XFS-Konzept von MagiC])
+!end_node
+
+
+
+!begin_node Das Iconify in MagiC
+!label Iconify in MagiC
+!html_name magic_iconify
+
+(!nolink [MagiC]) beherrscht (ab Version 3.0) wie MultiTOS das Ikonifizieren von
+Fenstern. Folgendes ist dabei zu beachten:
+
+!label Iconify, Algorithmus beim
+Der Algorithmus zum Festlegen der Position des ikonifizierten Fensters
+funktioniert anders als bei MultiTOS; MagiC durchsucht die aktuellen
+Positionen der bereits ikonifizierten Fenster und setzt das neue Fenster
+auf einen freien Platz. (!I)Ein Platz ist nur dann frei(!i), wenn der
+Schnitt mit der neuen Position leer ist.
+
+!label Iconify, Elemente nach dem
+!label Iconify, Gr(!oumlaut)(!sharps)e nach dem
+Das AES schickt beim Un-/Ikonifizieren explizit eine Redraw-Nachricht, auch
+wenn sich die Gr(!oumlaut)(!sharps)e (!I)nicht(!i) ge(!aumlaut)ndert hat. Ikonifizierte Fenster haben
+als Elemente nur Mover und (!nolink [Titel]). Ihre Gr(!oumlaut)(!sharps)e betr(!aumlaut)gt (wie unter MultiTOS)
+72x72 Pixel brutto. Diese Gr(!oumlaut)(!sharps)e ist jedoch keinesfalls als fest anzusehen;
+sie k(!oumlaut)nnte sich in sp(!aumlaut)teren Versionen durchaus (!aumlaut)ndern. Aus diesem Grund
+sollte die Gr(!oumlaut)(!sharps)e eines ikonifizierten Fensters der (!nolink [WM_ICONIFY]) Nachricht
+entnommen, oder per (!nolink [wind_get])((!nolink [WF_ICONIFY])) ermittelt werden.
+
+Querverweis: wind_get  ~   wind_set  ~  WM_ICONIFY ~  WM_ALLICONIFY  ~
+WM_UNICONIFY ~ (!link [Shortcuts][Iconify, Shortcuts f(!uumlaut)r])
+!end_node
+
+
+
+!begin_node Das Laufwerk U: in MagiC
+!html_name magic_driveu
+
+Unter MagiC wird Laufwerk U: bei der Initialisierung des DOS angelegt. Damit
+es von g(!aumlaut)ngigen Programmen als existent erkannt wird, wird das entsprechende
+Bit in _drvbits gesetzt; es existiert jedoch kein entsprechendes
+(!nolink [BIOS])-Laufwerk.
+
+!image (!picture_path)drv_u
+
+Innerhalb des Laufwerks gibt es einige Spezialverzeichnisse, und zwar:
+
+!begin_itemize !compressed
+!item (!link [U:\DEV][Das Verzeichnis U:\DEV])    ~(Devices)
+!item (!link [U:\PIPE][Das Verzeichnis U:\PIPE])  ~((!nolink [Pipes]))
+!item (!link [U:\PROC][Das Verzeichnis U:\PROC])  (Prozesse)
+!item (!link [U:\SHM][Das Verzeichnis U:\SHM])    ~((!nolink [Shared Memory]))
+!end_itemize
+
+Im Gegensatz zu MiNT sind dies jedoch keine eigenen Dateisysteme, sondern
+einfach nur Unterverzeichnisse des DFS f(!uumlaut)r Laufwerk U:. Je nach
+Unterverzeichnis legt das U-DFS verschiedene Dateitypen und -treiber an. Da
+die Verzeichniskontrolle dem DOS_XFS obliegt, werden z.B. Schreibzugriffe
+auf ein Device im Verzeichnis per Dateidatum protokolliert. Das geht sogar
+soweit, da(!sharps) ein Schreibzugriff auf das Wurzelverzeichnis von Laufwerk A:
+automatisch das Dateidatum von U:\A ver(!aumlaut)ndert.
+
+Alle Verzeichnisse sind z.Zt. auf maximal 32 Eintr(!aumlaut)ge beschr(!aumlaut)nkt, und
+Aufrufe von Dfree liefern nur den Wert Null zur(!uumlaut)ck. Auf dem
+Wurzelverzeichnis k(!oumlaut)nnen au(!sharps)er den bestehenden Dateien nur symbolische Links
+(per Fsymlink) erstellt werden.
+
+Vor jedem Zugriff auf Laufwerk U: werden neu hinzugekommene Laufwerke per
+symbolischem Link hinzugef(!uumlaut)gt bzw. nicht mehr existierende entfernt; dies
+wird (!uumlaut)ber _drvbits erkannt. Ein symbolischer Link f(!uumlaut)r Laufwerk X: wird
+standardm(!aumlaut)(!sharps)ig unter dem Namen U:\X angemeldet, und zeigt auf das Verzeichnis
+X:\. Symbolische Links k(!oumlaut)nnen umbenannt oder gel(!oumlaut)scht werden (auch ein
+umbenannter Link wird automatisch gel(!oumlaut)scht, wenn das entsprechende Bit in
+der Systemvariablen _drvbits gel(!oumlaut)scht wird).
+
+(!B)Achtung:(!b) MiNT bindet die Laufwerke nicht als symbolische Links ein,
+daher kann man folgende Befehlsfolge absetzen:
+
+!begin_xlist !compressed [Dgetpath ]
+!item [(!nolink [Dsetdrv])]  U:
+!item [(!nolink [Dsetpath])] U:\A
+!item [(!nolink [Dgetpath])] ==> U:\A
+!item [(!nolink [Dsetpath])] ..
+!item [(!nolink [Dgetpath])] ==> U:\
+!end_xlist
+
+Bei einem symbolischen Link wechselt man hingegen tats(!aumlaut)chlich den Pfad, d.h.
+in der dritten Zeile erscheint A:\ als aktueller Pfad. Um dieses Problem zu
+umgehen, gibt es eine Sonderbehandlung im Kernel, der die obige Befehlsfolge
+auch in MagiC erm(!oumlaut)glicht. Dabei gibt es allerdings ein Problem: Der
+symbolische Link darf nicht umbenannt werden, da sonst folgendes passiert:
+
+!begin_xlist !compressed [Dgetpath ]
+!item [(!nolink [Frename])]  U:\A U:\FLOPPY
+!item [(!nolink [Dsetdrv])]  U:
+!item [(!nolink [Dsetpath])] U:\FLOPPY
+!item [(!nolink [Dgetpath])] ==> U:\A
+!item [(!nolink [Dsetpath])] ..
+!item [(!nolink [Dgetpath])] ==> U:\
+!end_xlist
+
+Weil alle Dateifunktionen auf U: genauso funktionieren wie auf einer
+Diskette ist es auch m(!oumlaut)glich, Verzeichnisse wie U:\DEV umzubenennen.
+(!B)Achtung:(!b) Dies sollte tunlichst vermieden werden, da sonst
+Anwenderprogramme ihre Ger(!aumlaut)tetreiber nicht mehr finden k(!oumlaut)nnen.
+
+Querverweis: BIOS ~ GEMDOS ~
+(!link [XFS-Konzept in MagiC][Das XFS-Konzept von MagiC]) ~
+(!link [Test auf Pipes][Pipes, Test auf])
+
+
+
+!begin_node Das Verzeichnis U:\DEV
+
+In diesem Verzeichnis werden Ger(!aumlaut)tetreiber (Devices) eingetragen. Es handelt
+sich dabei um Pseudodateien, die nur dem DOS, nicht jedoch dem (!nolink [BIOS]) bekannt
+sind.
+
+!image (!picture_path)drv_udev
+
+Auch die altbekannten Ger(!aumlaut)tenamen finden sich in diesem Verzeichnis wieder,
+denn es gilt:
+
+!begin_itemize !compressed
+!item CON: (Handle -1) ==> U:\DEV\CON
+!item AUX: (Handle -2) ==> U:\DEV\AUX
+!item PRN: (Handle -3) ==> U:\DEV\PRN
+!item NUL: (Handle -4) ==> U:\DEV\NULL
+!end_itemize
+
+Da auf die hier installierten Ger(!aumlaut)te mit den normalen Dateifunktionen des
+(!nolink [GEMDOS]) zugegriffen werden kann, ist es z.B. m(!oumlaut)glich ein Textdokument durch
+einfaches Speichern per Fwrite auf dem Drucker auszugeben. Dateinamen wie
+CON: werden dabei vom Kernel automatisch in die richtige Form umgewandelt
+(in diesem Fall also: U:\DEV\CON).
+
+Abh(!aumlaut)ngig vom Rechnermodell stehen per Default die folgenden Devices zur
+Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [SERIAL1]
+!item [Ger(!aumlaut)t]
+Beschreibung
+!item [~]
+~
+!item [AUX]
+(!nolink [BIOS])-Ger(!aumlaut)t 2
+!item [CON]
+Console
+!item [LAN]
+(!nolink [BIOS])-Ger(!aumlaut)t 7, i.a. SCC, Kanal A
+!item [MIDI]
+(!nolink [BIOS])-Ger(!aumlaut)t 3, beim Ausgabestatus hingegen das Ger(!aumlaut)t mit der Nummer 4.
+!item [MODEM1]
+(!nolink [BIOS])-Ger(!aumlaut)t 6, i.a. die mit dem ST-MFP realisierte serielle Schnittstelle,
+auf dem Falcon der SCC mit Kanal-B.
+!item [MODEM2]
+(!nolink [BIOS])-Ger(!aumlaut)t 7, i.a. SCC, Kanal B
+!item [NULL]
+leere Pseudodatei, liefert beim Schreiben immer den Status Ok und beim Lesen
+den Wert EOF (kein Zeichen verf(!uumlaut)gbar).
+!item [PRN]
+(!nolink [BIOS])-Ger(!aumlaut)t 0, bei der Ausgabe wird bei einem Timeout abgebrochen.
+!item [SERIAL1]
+(!nolink [BIOS])-Ger(!aumlaut)t 8, i.a. der TT-MFP
+!item [SERIAL2]
+(!nolink [BIOS])-Ger(!aumlaut)t 9, i.a. SCC, Kanal A
+!end_xlist
+
+Von CON: einmal abgesehen, arbeiten alle Ger(!aumlaut)te im "Raw-Modus", d.h.
+Steuersequenzen wie Control-C werden nicht ber(!uumlaut)cksichtigt.
+
+Weitere Ger(!aumlaut)te k(!oumlaut)nnen jederzeit per Dcntl erstellt und eingetragen werden;
+aufgrund des inkompatiblen Treiberformates mu(!sharps) jedoch der Opcode
+DEV_M_INSTALL und nicht wie sonst (!uumlaut)blich DEV_INSTALL benutzt werden. Die
+vorhandenen Ger(!aumlaut)te k(!oumlaut)nnen mit den (!uumlaut)blichen Methoden umbenannt und gel(!oumlaut)scht
+werden; im Gegensatz zu MiNT wird das L(!oumlaut)schen eines Ger(!aumlaut)tes (!uumlaut)ber den
+Ger(!aumlaut)tetreiber selbst abgewickelt, der sich so aus den entsprechenden
+Systemvektoren zur(!uumlaut)ckziehen und den Speicher freigeben bzw. sich beenden
+kann. Ein weiterer Unterschied zu MiNT besteht darin, da(!sharps) MagiC die volle
+Funktionalit(!aumlaut)t des DOS-Dateisystems zur Verf(!uumlaut)gung stellt, d.h.:
+
+!begin_itemize !compressed
+!item es d(!uumlaut)rfen keine Ger(!aumlaut)te gleichen Namens existieren.
+!item Schreibzugriffe werden mit (!Aumlaut)nderung des Dateidatums (!uumlaut)berwacht.
+!item schreibgesch(!uumlaut)tzte Ger(!aumlaut)te d(!uumlaut)rfen nicht beschrieben, gel(!oumlaut)scht oder
+      umbenannt werden.
+!end_itemize
+
+(!B)Hinweis:(!b) (!Uumlaut)ber (!nolink [Fcreate]) k(!oumlaut)nnen hier keine Dateien erzeugt werden; es
+ist allerdings m(!oumlaut)glich per Fsymlink symbolische Links anzulegen.
+
+Querverweis: BIOS ~ GEMDOS ~ (!link [XFS-Konzept in MagiC][Das XFS-Konzept von MagiC])
+!end_node
+
+
+
+!begin_node Das Verzeichnis U:\PIPE
+!label Pipes
+
+In diesem Verzeichnis werden Pipes abgelegt; es handelt sich dabei um
+tempor(!aumlaut)re Dateien, die insbesondere f(!uumlaut)r den Datenaustausch zwischen
+Prozessen benutzt werden.
+
+Man unterscheidet (!I)unidirektionale(!i) und (!I)bidirektionale(!i) Pipes:
+erstere erlauben einen Datenflu(!sharps) nur in einer Richtung, letztere k(!oumlaut)nnen in
+beide Richtungen (!uumlaut)bertragen, jedoch nicht gleichzeitig. Bidirektionale Pipes
+finden z.B. beim Drag&Drop-Protokoll Verwendung. Pipes liefern beim Lesen
+per (!nolink [Fread]) grunds(!aumlaut)tzlich EOF (End-of-File) wenn sie leer sind, oder kein
+schreibender Proze(!sharps) vorhanden ist. Analog wird beim Schreiben per Fwrite der
+Wert EOF geliefert, falls kein lesender Prozess vorhanden ist.
+
+Der Zugriff erfolgt dabei rein asynchron, d.h. Applikationen warten auf das
+Lesen bzw. Schreiben und wecken ggf. eine andere Applikation wieder auf.
+Pipes werden automatisch gel(!oumlaut)scht, wenn das letzte Programm, da(!sharps) sie
+benutzt, die sie repr(!aumlaut)sentierende Datei geschlossen hat.
+
+(!B)Hinweis:(!b) (!nolink [MagiC]) unterst(!uumlaut)tzt maximal 32 Pipes gleichzeitig. Ein Fseek
+auf Pipes f(!uumlaut)hrt grunds(!aumlaut)tztlich zur R(!uumlaut)ckgabe von 0L, d.h. der Dateizeiger
+kann nicht beeinflu(!sharps)t werden. Im Verzeichnisfenster erscheinen Pipes mit
+einer L(!aumlaut)nge von 2 bzw. 4k und dem Datum ihrer Erstellung. Falls beim (!Oumlaut)ffnen
+einer Pipe eine Kennung > 31 geliefert wird, kann die Systemfunktion Fselect
+nicht benutzt werden.
+
+(!B)Dar(!uumlaut)ber hinaus ist ab (!nolink [MagiC]) 3 folgendes zu beachten:(!b)
+
+!begin_itemize
+!item Pipes mit Modus 4 (Pseudo-TTYs) werden nicht unterst(!uumlaut)tzt. MagiC kennt
+      nur uni- und bidirektionale Pipes und erstellt bei Modus 4 eine
+      bidirektionale Pipe. Der Hauptgrund f(!uumlaut)r Pipes sind zur Zeit das
+      (!nolink [Drag&Drop-Protokoll]).
+!item Pipes liefern bei Finstat/Foutstat die Anzahl der vorhandenen bzw.
+      noch freien Bytes im Block.
+!item Wird eine Pipe geschlossen, so werden alle wartenden Programme
+      aufgeweckt, um evtl. m(!oumlaut)gliche (!I)Deadlocks(!i) zu vermeiden.
+!end_itemize
+
+Querverweis: (!nl)
+Fcreate ~  Fread ~  Fwrite ~  Fclose ~ Fpipe ~  (!link [Test auf Pipes][Pipes, Test auf])
+!end_node
+
+
+
+!begin_node Das Verzeichnis U:\PROC
+!label Name eines Prozesses
+!label Prozesses, Name eines
+!label _PNAM
+
+Dieses Verzeichnis gibt einen (!Uumlaut)berblick (!uumlaut)ber die z.Zt. aktiven Prozesse im
+System. Jeder Eintrag besteht aus den folgenden Komponenten:
+
+!image (!picture_path)drvuproc
+
+!begin_itemize !compressed
+!item dem Prozessnamen
+!item der Prozess-ID (PID)
+!item dem aktuellen Speicherplatzverbrauch
+!item Datum und Uhrzeit der Prozesserstellung
+!end_itemize
+
+In der Abbildung oben beispielsweise, besitzt der Prozess (!I)XCONTROL(!i)
+die PID 4 und belegt z.Zt. 93460 Bytes Speicherplatz.
+
+Prozess IDs werden beim Programmstart vergeben und beim Terminieren
+freigegeben. Das L(!oumlaut)schen einer Datei in diesem Verzeichnis hat zur Folge,
+da(!sharps) der entsprechende Prozess ((!uumlaut)ber den Programmanager des AES) zerst(!oumlaut)rt
+wird.
+
+(!B)Hinweis:(!b) Die MiNT-konformen Prozess-Attribute (spezielle
+Dateiattribute) werden von MagiC z.Zt. nicht unterst(!uumlaut)tzt. Der Name eines
+Prozesses kann auch (!uumlaut)ber die Environment-Variable (!I)_PNAM(!i) ermittelt
+werden; die Prozess-ID findet sich auch in der (!nolink [Basepage]).
+
+Querverweis: GEM ~ Style-Guidelines ~ (!link [Task-Manager][Der Task-Manager in MagiC])
+!end_node
+
+
+
+!begin_node Das Verzeichnis U:\SHM
+!label Shared memory
+
+Dieses Verzeichnis dient als 'Ablage' f(!uumlaut)r Shared Memory; hier k(!oumlaut)nnen also
+Dateien angelegt werden die Speicherbl(!oumlaut)cke repr(!aumlaut)sentieren, und auf die
+andere Prozesse zugreifen d(!uumlaut)rfen.
+
+(!Uumlaut)ber Shared Memory (gemeinsamen Speicher) l(!aumlaut)(!sharps)t sich sehr leicht eine
+(!I)Interprozess-Kommunikation(!i) (IPC) realisieren.
+
+Querverweis: Fcntl ~ SHMGETBLK ~ SHMSETBLK
+!end_node
+!end_node
+
+
+
+!include magic/magicinf.u
+
+
+!begin_node Semaphoren in MagiC
+!html_name magic_semaphore
+
+Unter MagiC werden Semaphoren bei der Programmterminierung (genauer: bei der
+Applikations-Terminierung) freigegeben. Im Gegensatz zu MiNT gilt dies auch
+f(!uumlaut)r die per Psemaphore belegten Semaphoren.
+
+(!nolink [MagiC]) unterst(!uumlaut)tzt bei (!nolink [Psemaphore]) z.Zt. nur die Modi 2
+und 3, und kennt die folgenden System-Semaphoren:
+
+!begin_xlist !compressed [Semaphore]
+!item [Semaphore]
+Bedeutung
+!item [~]
+~
+
+!label Semaphore, _DMA
+!item [_DMA]
+(!B)ACSI und FDC(!b)
+(!nl)
+Beim Erhalt dieser Semaphore darf nicht vergessen werden, die Systemvariable
+flock zu setzen, und diese nach dem Freigeben der Semaphore ebenfalls wieder
+freizugeben.
+
+!label Semaphore, _NCR
+!item [_NCR]
+(!B)SCSI des Atari-TT(!b)
+
+!label Semaphore, _SCR
+!item [_SCR]
+(!B)(!nolink [AES])-Bildschirm(!b) (von wind_update benutzt)
+!end_xlist
+
+Querverweis:
+GEMDOS ~ Prozessfunktionen ~  Signale
+!end_node
+
+
+!include magic/shutdown/shutdown.u
+
+
+
+
+!begin_node Der Smart-Redraw in MagiC
+!label Smart-Redraw
+!html_name magic_smartredraw
+
+(!nolink [MagiC]) verfolgt die Philosophie, da(!sharps) Geschwindigkeit nicht mit brutalen
+Mitteln wie Grafikprozessoren usw. erreicht werden soll, sondern mit ein
+wenig Nachdenken. Dazu geh(!oumlaut)rt vor allem, immer nur soviel zu tun, wie n(!oumlaut)tig
+ist. W(!aumlaut)hrend TOS beim Wechsel des aktuellen Fensters, beim Schlie(!sharps)en oder
+beim Verschieben mit Vorliebe das (!I)gesamte(!i) Fenster oder gar noch
+v(!oumlaut)llig unschuldige, unbeteiligte andere Fenster neu zeichnet, wird dies
+unter MagiC wirkungsvoll vermieden. Obwohl diese unsch(!oumlaut)ne Eigenschaft des
+TOS nirgendwo dokumentiert ist, existieren leider Programme und Bibliotheken
+(etwa die aus dem Buch '(!I)Vom Anf(!aumlaut)nger zum (!nolink [GEM])-Profi(!i)'), welche die
+Eigenschaft nutzen, da(!sharps) TOS beim Vergr(!oumlaut)(!sharps)ern eines Fensters dieses immer neu
+zeichnet.
+
+(!B)Dazu ein Beispiel:(!b) Nehmen wir an, in ein Fenster passen f(!uumlaut)nf Spalten
+ne!-beneinander, die auch angezeigt werden. Wenn der Benutzer nun das Fenster
+so weit verkleinert, da(!sharps) nur noch vier Spalten hineinpassen, sortiert das
+Programm seine Daten um und veranla(!sharps)t anschlie(!sharps)end selbst(!aumlaut)ndig ein
+Neuzeichnen des Fensters (TOS zeichnet bei Verkleinerung das Fenster
+(!I)nicht(!i) von sich aus neu). Vergr(!oumlaut)(!sharps)ert der Benutzer dagegen das Fenster
+auf eine Breite von 7 Spalten, sortiert das Anwenderprogramm die Daten
+ebenfalls um, veranla(!sharps)t jedoch hier (!I)kein(!i) Neuzeichnen des Fensters.
+Aufgrund des eher als Fehlverhalten des TOS zu bezeichnenden Verhaltens, das
+Fenster f(!uumlaut)r diesen Fall (!I)immer ganz(!i) neu zu zeichnen, findet dann die
+Ausgabe statt.
+
+MagiC zeichnet nun immer nur den minimal n(!oumlaut)tigen Teil des Fensters neu;
+das w(!aumlaut)ren im Fall des Aufziehens eines Fensters h(!oumlaut)chstens rechts und unten
+zwei Rechtecke. F(!uumlaut)r die Programme, die den oben beschriebenen Fehler des
+TOS ausnutzen, gibt sich so eine (!I)Diskrepanz zwischen logischem und
+physikalischem Bildschirminhalt(!i).
+
+Viel einfacher w(!aumlaut)re es gewesen, einfach auf die Fallunterscheidung 'Fenster
+gr(!oumlaut)(!sharps)er oder kleiner als vorher' zu verzichten und immer im Fall des
+Umsortierens einen Redraw zu veranlassen. Da das Betriebssystem auch im
+TOS die Redraws zusammenfa(!sharps)t, hat ein eventuell (!uumlaut)berfl(!uumlaut)ssiger Redraw
+(!I)niemals(!i) irgendwelche Auswirkungen.
+
+Den gleichen Effekt wie beschrieben hat man (!uumlaut)brigens auch beim Vergr(!oumlaut)(!sharps)ern
+des Fensters, wenn bereits die unterste Zeile bzw. die rechteste Zeile
+dargestellt wird.
+
+(!B)Auch hier ein Beispiel:(!b) Ein Text habe 100 Zeilen, das Fenster habe
+eine H(!oumlaut)he von 20 Zeilen. Da der Scrollbalken ganz unten ist, werden also die
+Zeilen 80 bis 100 im Fenster dargestellt. Wird nun das Fenster nach unten
+vergr(!oumlaut)(!sharps)ert, so da(!sharps) etwa 30 Zeilen Platz finden, k(!oumlaut)nnte man eigentlich nur
+einen wei(!sharps)en Bereich aufziehen, da unterhalb von Zeile 100 ja keine Daten
+mehr sind. Um dies zu verhindern scrollen die meisten Programme in dieser
+Situation ihre Daten, in unserem Beispiel um 10 Zeilen nach oben. Folglich
+zeigt das Programm jetzt die Zeilen 70 bis 100 an; da es aber auf einem
+TOS- Fehler aufbaut, wird (!I)kein(!i) Neuzeichnen veranla(!sharps)t, was unter
+MagiC nat(!uumlaut)rlich prompt zur Konfusion f(!uumlaut)hrt.
+
+Auch hier w(!aumlaut)re ein generelles Neuzeichnen des Fensters beim Umsortieren auch
+unter TOS nicht nur sauber, sondern auch ohne Nebenwirkung, da TOS auch hier
+unn(!oumlaut)tige Redraws vermeidet. Beim direkten Vergleich zwischen 'Smart Redraw'
+und 'TOS Redraw', was hier durchaus im w(!oumlaut)rtlichen Sinn als Gegenteil zu
+verstehen ist, zeigt sich in ersterem Fall ein wesentlich schnellerer,
+ruhigerer und saubererer Bildschirmaufbau, der durchaus mit dem
+(!I)Macintosh(!i)-System konkurrieren kann und unter TOS selbst mit Blitter
+und 68040 Prozessor in dieser Form nicht m(!oumlaut)glich w(!aumlaut)re. Daher wird dringend
+empfohlen, diese elegante L(!oumlaut)sung nicht durch Ausnutzen undokumentierter
+Eigenschaften des TOS zunichte zu machen.
+
+(!B)Sollten sie Programme benutzen, die das oben beschriebene Fehlverhalten
+aufweisen, so sollten sie wie folgt verfahren:(!b)
+
+!begin_itemize !compressed
+!item im MagxConf ACC/CPX den Schalter 'Smart Redraw' deaktivieren
+!item beim Autor des betreffenden Programmes anregen, da(!sharps) dieser Fehler
+      umgehend behoben wird.
+!end_itemize
+
+Querverweis:
+Smart-Redraw ausschalten ~  GEM ~  Style-Guidelines
+!end_node
+
+
+
+!begin_node Der Task-Manager in MagiC
+!html_name magic_taskmanager
+
+(!Uumlaut)ber den Task-Manager von MagiC k(!oumlaut)nnen verschiedene Aufgaben wie z.B. das
+Einfrieren, Auftauen oder Beenden von Prozessen ausgef(!uumlaut)hrt werden.
+Aufgerufen wird der Manager durch die Tastenkombination Ctrl-Alt-Esc. Nach
+dem Aufruf erscheint eine Liste aller im Speicher befindlichen Programme,
+die wie folgt aufgebaut ist:
+
+!image (!picture_path)taskman
+
+(!B)Hinweis:(!b) Unterhalb dieser Liste befindet sich ein Men(!uumlaut), welches eine
+Reihe von Kommandos zur Steuerung des Systems zur Verf(!uumlaut)gung stellt. Im
+einzelnen:
+
+!begin_xlist !compressed [prev, next]
+!item [Kommando]
+Bedeutung
+!item [~]
+~
+!item [Control]
+(!nolink [MagiC]) versucht, der gew(!aumlaut)hlten Applikation die Kontrolle (!uumlaut)ber Bildschirm und
+Maus zu geben - dies kann u.U. bei Deadlocks helfen.
+!item [freeze]
+Die gew(!aumlaut)hlte Applikation wird eingefroren, sie ist dann f(!uumlaut)r alle anderen
+Programme unsichtbar und bekommt keine Rechenzeit.
+!item [OK]
+zur(!uumlaut)ck zum Normalbetrieb, der Taskmanager wird ohne Aktion verlassen.
+!item [prev, next]
+eine Zeile der obigen Liste ist immer invertiert dargestellt, welche das
+ist, kann mittels Cursor hoch/runter eingestellt werden; die folgenden
+Kommandos beziehen sich jeweils auf die so festgelegte Applikation.
+Applikationen mit einstelligen IDs k(!oumlaut)nnen auch direkt durch Eingabe der
+entsprechenden Ziffer ausgew(!aumlaut)hlt werden.
+!item [Switch]
+Die Menueleiste der gew(!aumlaut)hlten Applikation wird aktiviert.
+!item [Terminate]
+Die gew(!aumlaut)hlte Applikation wird unsanft aus dem Speicher geworfen, wobei in
+der Regel alle ihre Daten verloren gehen; zuweilen kann das sogar zu
+Abst(!uumlaut)rzen f(!uumlaut)hren, diese Funktion sollte also mit besonderer Vorsicht
+genossen werden.
+!item [unfreeze]
+Hiermit werden eingefrorene Applikationen wieder aufgetaut, sie fahren dann
+an der Stelle mit ihrer Arbeit fort, an der sie eingefroren wurden.
+!end_xlist
+
+Querverweis:
+Prozessfunktionen ~
+(!link [U:\PROC][Das Verzeichnis U:\PROC])
+!end_node
+
+
+
+!begin_node Test auf MagiC
+!html_name magic_test
+
+!begin_preformatted !inside
+/*  Der folgende Code testet ob MagiC installiert ist, und liefert
+    einen der folgenden Werte zur(!uumlaut)ck:
+
+    -1 = kein MagiC vorhanden
+    -2 = MagiC installiert, aber MagiC-AES inaktiv, d.h. MagiC
+         wird nur als schnelles Dateisystem benutzt.
+
+    >0 = MagiC vorhanden und MagiC-AES aktiv. Der R(!uumlaut)ckgabewert
+         enth(!aumlaut)lt die BCD-codierte Versionsnummer. */
+
+GLOBAL WORD InqMagX (VOID)
+{
+    MAGX_COOKIE *cv;
+
+    if (get_cookie ("MagX", (LONG) &cv))
+    {
+        if (cv->aesvars)
+            return (cv->aesvars->version);
+        else
+           return (-2);
+    }
+    else
+       return (-1);
+} /* InqMagX */
+!end_preformatted
+
+(!B)Hinweis:(!b) Programme die im AUTO-Ordner gestartet werden, k(!oumlaut)nnen mit
+Hilfe dieser Routine (!I)nicht(!i) die Versionsnummer von MagiC ermitteln,
+da das (!nolink [AES]) zur Bootzeit noch nicht initialisiert ist. In diesem Fall sollte
+auf die Funktion DOMagixAESVars zur(!uumlaut)ckgegriffen werden.
+
+Querverweis:
+Cookie-Jar ~  Cookie- und XBRA-Liste
+!end_node
+
+
+
+!include magic/threads/threads.u
+
+
+
+!begin_node Die Zusatzprogramme f(!uumlaut)r MagiC
+!html_name magic_programs
+
+Auf der MagiC-Diskette befinden sich eine Reihe von Programmen f(!uumlaut)r
+unterschiedliche Zwecke; im einzelnen:
+
+!begin_xlist [Programm]
+!item [Programm]
+Bedeutung
+!item [~]
+~
+
+!label ADDMEM
+!label Speicher erweitern, internen
+!item [ADDMEM]
+entspricht dem f(!uumlaut)r TOS notwendigen foldr100 und stellt dem System
+zus(!aumlaut)tzlichen Speicher f(!uumlaut)r die interne Verwaltung der Daten zur Verf(!uumlaut)gung.
+Die Installation dieses Programmes ist (!I)nicht(!i) zwingend erforderlich,
+sollte aber erfolgen, wenn die Meldung 'Kein interner Speicher mehr'
+erscheint.
+
+!label APPLICAT
+!item [APPLICAT]
+Dieses Programm ist gewisserma(!sharps)en eine ausgelagerte Funktion des MagXDesk,
+sollte also nur von letzterem aufgerufen werden, und ist insbesondere nicht
+geeignet zum direkten Start per (!nolink [Doppelklick]) auf das Programm-Icon. Es
+erm(!oumlaut)glicht die Zuordnung von Icons an Dateien sowie das Anmelden von
+Applikationen f(!uumlaut)r bestimmte Dateitypen.
+
+!label FLP_PAR
+!label Floppy-Parallelbetrieb
+!label Parallelbetrieb der Floppy
+!item [FLP_PAR]
+Mit diesem Programm-Paar kann der Floppy-Parallelbetrieb konfiguriert
+werden; es gilt:
+!begin_xlist !compressed
+!item [FLP_PAR0 =]
+Parallelbetrieb ausschalten
+!item [FLP_PAR1 =]
+Parallelbetrieb einschalten
+!end_xlist
+
+!label HARDCOPY
+!label Hardcopy-Routinen installieren
+!item [HARDCOPY]
+Die interne Hardcopyroutine f(!uumlaut)r 9-Nadel-Epsondrucker ist aus dem BIOS
+rausgeflogen. Statt der ALT-Help-Routine, Scrdmp und Prtblk sind nur noch
+Dummy-Routinen vorhanden.
+
+Das beiliegende Programm HARDCOPY.PRG installiert die bisher im BIOS
+integrierten Hardcopy-Funktionen. Das Programm l(!aumlaut)(!sharps)t sich nur unter (!nolink [MagiC])
+starten. (!B)Achtung:(!b) Es hat keine Abfrage auf die MagiC-Version und
+darf unter (!nolink [MagiC]) Version 2.0 oder (!aumlaut)lteren 3.0-Versionen (!I)nicht(!i)
+gestartet werden.
+
+!label MAGXBOOT
+!label MagiC, Bootprogramme f(!uumlaut)r
+!item [MAGXBOOT]
+Das Programm liegt in zwei Versionen vor (magxboot.prg und magxboot32.prg).
+Die f(!uumlaut)r ihr System geeignete Version dieses Programmes wird in den
+Autoordner kopiert und startet bzw. installiert (!nolink [MagiC]) beim Booten; daher
+sollte es m(!oumlaut)glichst weit vorne im Autoordner stehen, damit alle anderen
+Programme auch mitbekommen, da(!sharps) MagiC l(!aumlaut)uft. Au(!sharps)erdem geht das Booten dann
+schneller, weil Magxboot nach einem Kaltstart zus(!aumlaut)tzlich noch einen
+Warmstart ausl(!oumlaut)st. Der Unterschied zwischen den beiden Startprogrammen ist
+der, da(!sharps) magxboot32 die Datei 'magic.ram' so in den Speicher l(!aumlaut)dt, da(!sharps) es
+per Outside (einer virtuellen Speicherverwaltung), Magx2rom etc. vor dem
+(!Uumlaut)berschreiben durch amoklaufende Programme gesch(!uumlaut)tzt werden kann. Dies
+funktioniert jedoch nur auf Rechnern ab 68030-Prozessor und PMMU, also
+beispielsweise auf Computern der TT- und Falcon-Serie.
+
+!label MAGXCONF
+!item [MAGXCONF]
+Das CPX-Modul bzw. Accessorie erlaubt die Konfiguration von MagiC in einigen
+Punkten. Es bedeuten:
+!begin_blist !compressed []
+
+!label Fastload
+!item [Fastload]
+(!nl)
+Hiermit wird das schnelle Lesen von Disketten eingeschaltet; da es das
+Schreiben nicht beeinflu(!sharps)t, kann es eigentlich immer eingeschaltet werden.
+
+!label TOS-Kompatibilit(!aumlaut)t
+!item [TOS-Kompatibilit(!aumlaut)t]
+(!nl)
+Aufgrund der Tatsache, da(!sharps) (!nolink [MagiC]) mehrere Programme gleichzeitig laufen
+lassen kann, m(!uumlaut)ssen strengere Sicherheitsvorkehrungen getroffen werden.
+Leider gibt es immer noch Programme, die fehlerhafte Systemaufrufe machen,
+was unter Umst(!aumlaut)nden zu Problemen im Multitasking f(!uumlaut)hren kann. Andererseits
+verlassen sich einige Programme auf Fehler im TOS und laufen daher nicht
+mehr korrekt, wenn sie unter (!nolink [MagiC]) gestartet werden. Daher k(!oumlaut)nnen ein paar
+der Sicherheitsvorkehrungen abgeschaltet werden, um solche Programme zur
+Mitarbeit zu (!uumlaut)berreden - da dann nat(!uumlaut)rlich die Betriebssicherheit
+beeintr(!aumlaut)chtigt wird, sollten solche Programme schnellstm(!oumlaut)glich gegen neuere
+Versionen oder Alternativen ausgetauscht werden.
+!label Smart-Redraw ausschalten
+!item [Smart Redraw]
+(!nl)
+(De-)Aktiviert den schnelleren Bildschirmaufbau unter (!nolink [MagiC]). Manche (meist
+(!aumlaut)ltere) Programme verlassen sich auf bestimmte Eigenschaften des TOS beim
+Fenster-Redraw, die (weil unn(!oumlaut)tig oder fehlerhaft) unter (!nolink [MagiC]) nicht mehr
+existieren. Um solche Programme zur Mitarbeit zu (!uumlaut)berreden, kann der
+elegantere Smart-Redraw Mechanismus von MagiC abgeschaltet werden.
+!label Growboxen ausschalten
+!label Shrinkboxen ausschalten
+!item [Grow- und Shrinkboxen]
+(!nl)
+Hiermit werden die wachsenden und schrumpfenden Rechtecke ein/ausgeschaltet,
+die in manchen Programmen vor dem (!Oumlaut)ffnen/Schlie(!sharps)en von Fenstern/Dialogen
+erscheinen. Das Abschalten bringt auf manchen Rechnern einen kleinen
+Geschwindigkeitsvorteil, hat aber sonst keine Auswirkungen.
+!label Hintergrund-DMA ausschalten
+!item [Hintergrund-DMA]
+(!nl)
+(!Uumlaut)ber diesen Schalter kann der Hintergrundbetrieb der Floppy ein- bzw.
+ausgeschaltet werden.
+!label Pull-Down-Men(!uumlaut)s einschalten
+!label Drop-Down-Men(!uumlaut)s ausschalten
+!item [Pull-Down-Menues]
+(!nl)
+Ist dieser Schalter aktiviert, so fallen die Menues erst bei einem Mausklick
+herunter, (!oumlaut)ffnen sich also nicht mehr unerw(!uumlaut)nschterweise, z.B. beim
+Verschieben eines Fensters. Dieses Verhalten ist z.B. vom Apple Macintosh
+bekannt.
+!end_blist
+
+!label MGCOPY
+!item [MGCOPY]
+Dieses Programm ist gewisserma(!sharps)en eine ausgelagerte Funktion des MagXDesk,
+sollte also nur von letzterem aufgerufen werden, und ist insbesondere nicht
+geeignet zum direkten Start per (!nolink [Doppelklick]) auf das Programm-Icon. Das
+Programm (!uumlaut)bernimmt das Kopieren und Verschieben von Dateien und Ordnern; der
+Aufbau der Kommandozeile bzw. das Format der verschickten Nachrichten ist
+nicht dokumentiert und kann sich daher jederzeit (!aumlaut)ndern.
+
+!label MGFORMAT
+!label Formatieren im Hintergrund
+!item [MGFORMAT]
+Mit diesem Programm k(!oumlaut)nnen Disketten formatiert werden, und zwar
+(!I)ohne(!i) das dabei der Rechner blockiert wird. Zum Erstellen des
+Bootsektors wird (!uumlaut)brigens nicht mehr Protobt benutzt; bei 720k-Disketten
+wird jetzt ein MSDOS-Format mit 730.112 freien Bytes erzeugt.
+
+!label MGSEARCH
+!item [MGSEARCH]
+Dieses Programm ist gewisserma(!sharps)en eine ausgelagerte Funktion des MagXDesk,
+sollte also nur von letzterem aufgerufen werden, und ist insbesondere nicht
+geeignet zum direkten Start per (!nolink [Doppelklick]) auf das Programm-Icon. Das Tool
+stellt einen Dateisucher dar, wie er etwa im TOS 2.06 Desktop eingebaut ist.
+Auch dieses Modul ist nicht oder nur bedingt geeignet zum direkten Start per
+(!nolink [Doppelklick]) auf das Programmicon, denn die zu durchsuchenden Laufwerke
+werden im Desktop eingestellt und beim Direktstart wird nur das aktuelle
+Laufwerk durchsucht.
+
+!label SHUTDOWN
+!item [SHUTDOWN]
+Dies ist dasjenige Programm, welches normalerweise vom Desktop bei der
+Auswahl von (!I)Ausschalten(!i) (oder Bet(!aumlaut)tigen der Tastenkombination
+Alternate-Control-Delete) aufgerufen wird, und daf(!uumlaut)r sorgt, da(!sharps) alle noch
+!label SHUTDOWN.INF
+laufenden Applikationen ihre Daten sichern und terminieren. Die Datei
+(!I)SHUTDOWN.INF(!i) dient als Konfigurationsdatei f(!uumlaut)r dieses Programm, und
+kann neben Kommentaren (eingeleitet durch das Zeichen '#') die folgenden
+Kommandos enthalten:
+!begin_itemize !compressed
+!item (!B)ignore <prg>:(!b) f(!uumlaut)r unkritische alte Programme. Diese werden
+      (!I)nicht(!i) von SHUTDOWN angemahnt, so da(!sharps) ein Herunterfahren des
+      Systems trotzdem m(!oumlaut)glich ist. (!B)Vorsicht:(!b) Solche Programme
+      sichern ihre Daten nicht, so da(!sharps) es im Einzelfall sinnvoll sein kann,
+      sie von Hand zu beenden (bevor das System heruntergefahren wird).
+!item (!B)terminate <prg>:(!b) Sonderfall f(!uumlaut)r XCONTROL. Auf diese Art
+      aufgef(!uumlaut)hrte Programme werden 'zwangsterminiert'; f(!uumlaut)r die
+      Datensicherheit gilt das unter (!I)ignore(!i) gesagte.
+!item (!B)timeout <zeit>:(!b) maximale Reaktionszeit f(!uumlaut)r moderne Programme.
+      Ein Wert von 0 steht f(!uumlaut)r 'beliebig lange warten'.
+!end_itemize
+
+!label TSLICE
+!label Zeitscheiben f(!uumlaut)r Multitasking
+!label Multitasking, Zeitscheiben f(!uumlaut)r
+!item [TSLICE]
+Mit diesem CPX-Modul kann zum einen das preemptive Multitasking abgeschaltet
+werden, wonach das System im kooperativen Multitasking l(!aumlaut)uft. Zum anderen
+kann hier die Zeitscheibenl(!aumlaut)nge sowie die Hintergrundpriorit(!aumlaut)t eingestellt
+werden. Preemptives Multitasking kann man sich so vorstellen, da(!sharps) es eine
+Uhr gibt, deren Ziffernblatt in lauter gleichgro(!sharps)e Tortenst(!uumlaut)cke unterteilt
+wird, die dann an die laufenden Programme verteilt werden.
+
+Der (!B)Parameter Zeitscheibendauer(!b) bestimmt dann die Gr(!oumlaut)(!sharps)e der
+Tortenst(!uumlaut)cke, w(!aumlaut)hlt man sie klein, so finden mehr Wechsel statt, die
+nat(!uumlaut)rlich auch Zeit kosten, daf(!uumlaut)r wird die Rechenzeit gleichm(!aumlaut)(!sharps)iger
+verteilt; w(!aumlaut)hlt man sie gro(!sharps), so wird der rechnende Proze(!sharps) seltener
+unterbrochen, die einzelnen Programme m(!uumlaut)ssen aber auch l(!aumlaut)nger warten, bis
+sie wieder ein Tortenst(!uumlaut)ck bekommen, was sich im Extremfall z.B. in
+ruckelndem Scrolling zeigen kann.
+
+Der (!B)Parameter Hintergrundpriorit(!aumlaut)t(!b) legt fest, wieviel mehr
+Tortenst(!uumlaut)cke das Programm mit dem obersten Fenster erh(!aumlaut)lt, denn dieses wird
+offenbar aktuell benutzt und soll daher schneller reagieren, als die im
+Hintergrund laufenden Programme.
+
+In der Praxis hat sich eine Zeitscheibendauer von 5-10ms (Millisekunden) und
+eine Hintergrundpriorit(!aumlaut)t von 1:20 bis 1:32 bew(!aumlaut)hrt. Diese Werte k(!oumlaut)nnen
+(!uumlaut)brigens per _TSL auch direkt in der MAGX.INF-Datei eingestellt werden.
+
+!label VFATCONF
+!label VFAT, Konfigurieren bei
+!item [VFATCONF]
+Mit diesem Programm kann festgelegt werden, auf welchen
+Festplattenpartitionen lange Dateinamen im VFAT-Format von Windows95
+unterst(!uumlaut)tzt werden sollen. Das Programm l(!aumlaut)uft ab der MagiC-Version 4.02 vom
+16.02.96. Weitere Einzelheiten zu VFATCONF k(!oumlaut)nnen der Originaldokumentation
+von (!nolink [MagiC]) entnommen werden.
+
+!label WBDAEMON
+!label Writeback-Daemon
+!item [WBDAEMON]
+Der Writeback-Daemon ist ein Programm, da(!sharps) die Schreibzugriffe aller
+laufenden Applikationen verz(!oumlaut)gert und damit das System sp(!uumlaut)rbar beschleunigt.
+
+Der Betrieb mit dem Writeback-Daemon ist jetzt prinzipiell sicher, weil er
+nicht mehr eingefroren werden kann. Bisher f(!uumlaut)hrte der Start einer
+Single-Tasking-Applikation immer dazu, da(!sharps) der WBDAEMON eingefroren wurde
+und bis zum Wiederauftauen der Cache nicht zur(!uumlaut)ckgeschrieben wurde. Im
+Gegensatz zum Atari, wo dieses Programm nur optional ist, empfiehlt sich der
+Einsatz auf einem (!B)Macintosh(!b) ausdr(!uumlaut)cklich: auf dieser Plattform
+steigert es n(!aumlaut)mlich Geschwindigkeit (!I)und(!i) Datensicherheit des
+Dateisystems.
+
+!label WDIALOG
+!item [WDIALOG]
+Bei diesem Programm handelt es sich um eine Systemerweiterung, die (!nolink [MagiC])
+kompatible AES-Erweiterungen (z.B. Fenster- und Druckdialoge, Listboxen,
+Zeichensatzauswahl) auch unter (!aumlaut)lteren Betriebssystemen zur Verf(!uumlaut)gung
+stellt. Die Installation erfolgt durch Kopieren des Programms in den
+AUTO-Ordner, und anschlie(!sharps)enden Neustart des Systems. Nach g(!aumlaut)ngigen
+Erfahrungen empfiehlt sich eine Reihenfolge im AUTO-Ordner, bei der WDIALOG
+(!I)vor(!i) NVDI liegt.
+
+!label XMEN_MGR
+!label Men(!uumlaut)funktionen, erweiterte
+!item [XMEN_MGR]
+Das Programm ist f(!uumlaut)r die Kompatibilit(!aumlaut)t zu den erweiterten Men(!uumlaut)-Funktionen
+von MultiTOS entstanden und mu(!sharps) darum nur bei Bedarf eingesetzt werden. Es
+installiert die folgenden Funktionen:
+!begin_itemize !compressed
+!item menu_attach
+!item menu_istart
+!item menu_popup
+!item menu_settings
+!end_itemize
+Die Funktion appl_getinfo liefert bei den entsprechenden Unterfunktionen den
+Wert TRUE, wenn dieses Programm installiert ist.
+!end_xlist
+
+Querverweis:
+MagiC ~  GEM ~  Style-Guidelines
+!end_node
+
+
+
+!include magic/DFS/dfs.u
+!include magic/XFS/xfs.u
+
+
+
+
+!begin_node VFAT-XFS in MagiC
+!html_name magic_vfat
+
+(!nolink [MagiC]) unterst(!uumlaut)tzt ab Version 5.0 ein VFAT-XFS, mit dessen Hilfe sich lange
+Dateinamen im Windows95-Format auf dem Atari nutzen lassen.
+
+(!B)Vorteile dieses Konzepts:(!b)
+
+!begin_itemize
+!item bestehende Partitionen m(!uumlaut)ssen nicht neu formatiert werden; die langen
+      Dateinamen stehen also direkt zur Verf(!uumlaut)gung.
+!item auf diese Weise erzeugte Dateien k(!oumlaut)nnen direkt zwischen MagiC und
+      Windows95 ausgetauscht werden, und das Bearbeiten der erzeugten
+      Dateien ist auch ohne installiertes VFAT-XFS m(!oumlaut)glich (wichtig, falls
+      z.B. einmal ohne (!nolink [MagiC]) gebootet wird).
+!item da VFAT auf dem FAT-Konzept beruht, war eine einfache Implementierung
+      ohne nennenswerten Speicherbedarf m(!oumlaut)glich.
+!end_itemize
+
+(!B)Nachteile dieses Konzepts:(!b)
+
+!begin_itemize
+!item VFAT hat alle Probleme von FAT geerbt. So gibt es den bekannten
+      Clusterverschnitt z.B. auch unter VFAT.
+!item es gibt modernere Konzepte, die sowohl schneller als auch sicherer
+      sind.
+!item auf dem Atari fehlen derzeit noch Programme, die Volumes mit langen
+      Dateinamen reparieren k(!oumlaut)nnen. Diese m(!uumlaut)ssten allen Dateinamenseintr(!aumlaut)ge
+      die unvollst(!aumlaut)ndig sind, oder von einem falschen Haupteintrag
+      gefolgt werden, l(!oumlaut)schen.
+!end_itemize
+
+(!B)Technische Beschreibung des VFAT-Systems:(!b)
+
+!begin_verbatim
+typedef struct
+{
+    BYTE   head;       /* Bit 0..4: Nummer, Bit 6: Endofname */
+    UBYTE  name1[10];  /* 5 Unicode- Zeichen                 */
+    BYTE   attr;       /* Attribut (0x0f)                    */
+    BYTE   unused;     /* z.Zt. unbenutzt                    */
+    BYTE   chksum;     /* Checksumme des kurzen Namens       */
+    UBYTE  name2[12];  /* 6 Unicode- Zeichen                 */
+    WORD   stcl;       /* erster Cluster (0)                 */
+    UBYTE  name3[4];   /* 2 Unicode-Zeichen                  */
+} LDIR;
+!end_verbatim
+
+(!B)Hinweis:(!b) Dabei ist (!I)head(!i) beim ersten Eintrag z.B. 0x01, beim
+zweiten 0x02 und beim dritten 0x43, wenn der Name drei Eintr(!aumlaut)ge braucht.
+
+Pro Eintrag k(!oumlaut)nnen 13 Zeichen abgelegt werden. Die Eintr(!aumlaut)ge mit dem langen
+Dateinamen liegen immer unmittelbar vor dem Haupteintrag. Die Unicode
+Zeichen liegen im Intel-Format vor. Im letzten Eintrag werden nach dem
+Nullbyte die nicht verwendeten Zeichen mit 0xff,0xff belegt. Die Reihenfolge
+der Eintr(!aumlaut)ge ist umgekehrt, d.h. die letzten 13 Zeichen des langen Namens
+liegen physikalisch an erster Stelle. Der letzte Verzeichniseintrag, der mit
+gesetztem Bit 6 im Feld (!I)head(!i) gekennzeichnet ist, liegt physikalisch
+an erster Stelle.
+
+Die Komponente (!I)stcl(!i) ist immer Null; (!I)chksum(!i) berechnet sich
+aus dem kurzen Namen (im internen Format) durch abwechselndes Rechtsrotieren
+des bisherigen Ergebnisses und Aufaddieren der 11 Zeichen. Linux verwendet
+das Feld (!I)unused(!i), um Flags f(!uumlaut)r Gro(!sharps)-/Kleinschrift abzuspeichern. Die
+aktuelle Windows95-Version schreibt jedoch immer Nullen in dieses Feld, und
+so verh(!aumlaut)lt sich auch MagiC. Weitere Hinweise:
+
+!begin_itemize
+!item das Umbenennen von Dateien bei bis auf Klein-/Gro(!sharps)schrift identischem
+      Namen ist m(!oumlaut)glich. Beispiel: Durch das Umbenennen von 'test.txt' in
+      'TEST.TXT' f(!aumlaut)llt der lange Name automatisch weg.
+!item die Umsetzung Unicode <-> ASCII ist entsprechend dem NVDI-Mapping
+      implementiert.
+!item beim Erzeugen des Kurznamens werden Leerstellen durch Unterstriche
+      ersetzt. Beispiel: 'Wassili Kandinsky.app" -> "WASSILI_.APP"
+!item das VFAT-XFS kann (egal ob lange Namen zugelassen sind oder nicht)
+      auch Ordner innerhalb der Verzeichnisstruktur verschieben.
+!end_itemize
+
+Querverweis:
+(!link [XFS-Konzept in MagiC] [Das XFS-Konzept von MagiC]) ~  VFATCONF
+!end_node
+
+!include magic/sharelib.u
+
+!end_node
+
+!endif

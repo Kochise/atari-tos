@@ -1,0 +1,10 @@
+dis2.ttp
+.C[-I..\..\inc_c]
+.C[-I..\..\pc\include]
+=
+..\..\pc\lib\cstartv.o
+dis2.c
+dis.c
+disass.c
+..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\pc\lib\pctoslib.lib   ; TOS lib

@@ -1,0 +1,50 @@
+;*******************************************************************************
+;* MH:
+;* TOS-Daten festlegen
+
+.BASE   = 7FE00000    ;TOS-ROM-Adresse
+.LENGTH =    80000    ;TOS-LÑnge (Default $80000)
+.WIDTH  =      .32    ;TOS-Breite (Default 32-bittig)
+.lang_dif = 0
+
+;*******************************************************************************
+;* MRF:
+;* Einleseformat des Patchprogramms
+
+<TOSH.IMG   	;ungepatches TOS 3.06 lesen. Bei "<*" wird das ROM ausgelesen,
+               	;dabei muû .LENGTH der originalen TOS-LÑnge entsprechen!
+=24.09.1991    	;muû die Version vom 24.9.1991 sein! (sonst Message!)
+
+>1
+
+;*******************************************************************************
+;* MH:
+;* Berechnen und Setzen der CRC-PrÅfsumme von TOS 2.06/3.06.
+;* (Wichtig fÅr RAMRESET, da sonst bei jedem Hardreset das TOS aus
+;* dem RAM entfernt wird. Beim ROM-TOS erscheint sonst die Message
+;* 'CRC-error in chip X.', falls der Test nicht ausgeschaltet ist (s.u.).)
+
+›
+
+;*******************************************************************************
+
+-patchfld.306\      ;Dsetpath("patchfld.306\")
+
+;*******************************************************************************
+;fa mach64 init programm. org auf $300000
+
+70000 inim64pb.bin
+72000 inim64ib.bin
+
+;*******************************************************************************
+;* MH:
+;* Abbruch bei öberschreiten der TOS-LÑnge.
+
+_IF ~ > .LENGTH-.LENGTH/10000
+_ERROR 'Patches lÑnger als das TOS'
+_ENDIF
+
+;*******************************************************************************
+;* Ende der Datei...
+
+-..            ;Dsetpath("..") (Ein Verzeichnis zurÅck)

@@ -1,0 +1,149 @@
+# Source: MagicMac sourcecode
+
+!iflang [english]
+
+!begin_node sys_set_appl_getinfo
+
+(!begin_liste) [Availability]
+
+!item [Name:]
+Install function for appl_getinfo.
+
+!item [Opcode:]
+0 (sub-opcode 3)
+
+!item [Syntax:]
+AES_FUNCTION *sys_set_appl_getinfo( AES_FUNCTION *f );
+
+
+!item [Description:]
+
+
+!item [(!nolink [Return]) value:]
+Previous function for appl_getinfo.
+
+!item [Availability:]
+As of MagiC 5.20
+
+!item [Group:]
+MagiC library
+
+!item [See also:]
+(!link [Binding] [Bindings for sys_set_appl_getinfo])
+
+(!ende_liste)
+
+
+
+!begin_node Bindings for sys_set_appl_getinfo
+!ignore_index
+
+(!begin_liste) [GEM-Arrays]
+
+!item [C:]
+AES_FUNCTION *sys_set_appl_getinfo( AES_FUNCTION *f );
+
+!item [Binding:]
+!begin_verbatim
+AES_FUNCTION *sys_set_appl_getinfo( AES_FUNCTION *f )
+{
+   int_in[0]  = 3;      /* Subcode 3: define Edit objcet */
+   addr_in[0] = f;
+
+   crys_if(0);
+
+   return ( addr_out[0] );
+}
+!end_verbatim
+
+!item [GEM-Arrays:]
+!begin_table [l l l]
+Address !! Element !! (!nolink [Contents])
+!hline
+control   !! control[0] !! 0     # Function opcode
+control+2 !! control[1] !! 1     # Entry in int_in
+control+4 !! control[2] !! 0     # Entry in int_out
+control+6 !! control[3] !! 1     # Entry in addr_in
+control+8 !! control[4] !! 1     # Entry in addr_out
+int_in    !! int_in[0]  !! 3
+addr_in   !! addr_in[0] !! f
+addr_out  !! addr_out[0] !! 
+!end_table
+
+(!ende_liste)
+!end_node
+!end_node
+
+!else
+
+!begin_node sys_set_appl_getinfo
+
+(!begin_liste) [Beschreibung]
+
+!item [Name:]
+In appl_getinfo einklinken.
+
+!item [AES-Nummer:]
+0 (Unterfunktion 6)
+
+!item [Deklaration:]
+AES_FUNCTION *sys_set_appl_getinfo( AES_FUNCTION *f );
+
+!item [Beschreibung:]
+
+!item [Ergebnis:]
+Vorherige Funktion.
+
+!item [VerfÅgbar:]
+Ab MagiC 5.20
+
+!item [Gruppe:]
+MagiC Funktionen
+
+!item [Querverweis:]
+(!link [Binding] [Bindings fÅr sys_set_appl_getinfo])
+
+(!ende_liste)
+
+
+
+!begin_node Bindings fÅr sys_set_appl_getinfo
+!ignore_index
+
+(!begin_liste) [GEM-Arrays]
+
+!item [C:]
+AES_FUNCTION *sys_set_appl_getinfo( AES_FUNCTION *f );
+
+!item [Umsetzung:]
+!begin_verbatim
+AES_FUNCTION *sys_set_appl_getinfo( AES_FUNCTION *f )
+{
+   int_in[0]  = 3;      /* Subcode 4: define Edit objcet */
+   addr_in[0] = f
+
+   crys_if(0);
+
+   return ( addr_out[0] );
+}
+!end_verbatim
+
+!item [GEM-Arrays:]
+!begin_table [l l l]
+Adresse !! Feldelement !! Belegung
+!hline
+control   !! control[0] !! 0     # Function opcode
+control+2 !! control[1] !! 1     # Entry in int_in
+control+4 !! control[2] !! 0     # Entry in int_out
+control+6 !! control[3] !! 1     # Entry in addr_in
+control+8 !! control[4] !! 1     # Entry in addr_out
+int_in    !! int_in[0]  !! 3
+addr_in   !! addr_in[0] !! f
+addr_out  !! addr_out[0] !! 
+!end_table
+
+(!ende_liste)
+!end_node
+!end_node
+
+!endif

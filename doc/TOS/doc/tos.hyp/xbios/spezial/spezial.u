@@ -1,0 +1,58 @@
+!iflang [english]
+
+!begin_node Special commands
+!html_name xbios_special
+
+!begin_xlist [x CacheCtrl ] !compressed
+!item [(!bullet) Blitmode]  Gets or changes blitter configuration.
+!item [(!bullet) CacheCtrl] CPU cache management.
+!item [(!bullet) CJar]      Creates, interrogates and removes cookies.
+!item [(!bullet) Dbmsg]     Outputs debug message.
+!item [(!bullet) Janus]     Makes the "Janus" emulator available.
+!item [(!bullet) Puntaes]   Switches off AES in ROM.
+!item [(!bullet) Random]    Generates a random number.
+!item [(!bullet) Ssbrk]     Reserves memory (only used internally).
+!item [(!bullet) Supexec]   Starts routine in supervisor-mode.
+!item [(!bullet) Trapper]   Hooks into system functions.
+!item [(!bullet) WdgCtrl]   Sets the hardware watchdog.
+!end_xlist
+
+See Also: Interface programming
+
+!else
+
+!begin_node Spezialbefehle
+!html_name xbios_special
+
+!begin_xlist [x CacheCtrl ] !compressed
+!item [(!bullet) Blitmode]  Blitterkonfiguration (!aumlaut)ndern oder ermitteln.
+!item [(!bullet) CacheCtrl] CPU Cacheverwaltung
+!item [(!bullet) CJar]      Erzeugen, Abfragen  und  L(!oumlaut)schen von Cookies
+!item [(!bullet) Dbmsg]     Debugmeldungen ausgeben
+!item [(!bullet) Janus]     Funktion des "Janus" Emulator
+!item [(!bullet) Puntaes]   AES im ROM abschalten.
+!item [(!bullet) Random]    Zufallszahlengenerator
+!item [(!bullet) Ssbrk]     Speicherplatz reservieren (nur intern verwendet).
+!item [(!bullet) Supexec]   Unterprogramm im Supervisor-Modus starten.
+!item [(!bullet) Trapper]   Einklinken in Systemfunktionen.
+!item [(!bullet) WdgCtrl]   Einstellen des Hardware-Watchdog
+!end_xlist
+
+Querverweis: Schnittstellenprogrammierung
+
+!endif
+
+!include xbios/spezial/blitmode.ui
+!include xbios/spezial/cachectr.ui
+!include xbios/spezial/cjar.ui
+!include xbios/spezial/dbmsg.ui
+!include xbios/spezial/janus.ui
+!include xbios/spezial/puntaes.ui
+!include xbios/spezial/random.ui
+!include xbios/spezial/ssbrk.ui
+!include xbios/spezial/supexec.ui
+!include xbios/spezial/trapper.ui
+!include xbios/spezial/wdgctrl.ui
+
+!end_node
+

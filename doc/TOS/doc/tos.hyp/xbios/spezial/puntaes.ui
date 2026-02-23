@@ -1,0 +1,188 @@
+!iflang [english]
+
+
+!begin_node Puntaes
+#!html_name Puntaes
+(!begin_liste) [Availability]
+
+!item [Name:]
+¯punt (!nolink [AES])® - Switch off AES in ROM
+
+!item [Opcode:]
+39
+
+!item [Syntax:]
+void Puntaes( void );
+
+!item [Description:]
+The (!nolink [XBIOS]) function Puntaes switches off the AES part of the operating
+system. The AES will start only if the "os_magic" in OSHEADER has the magic
+number 0x87654321. Puntaes sets the flag back (if possible) and reboots
+the system. Note that the call is only valid with disk-loaded AES's.
+
+(!B)Hint:(!b)
+Ab MagiC 4.00 wurde diese Funktion ver„ndert und besitzt verschiedene
+Unterfunktionen. Zum Aufruf muss zus„tzlich der Wert 'AnKr' bergeben
+werden. Bei einer falschen Funktionsnummer wird EINVFN zurckgeliefert.
+
+int32_t Puntaes ( 'AnKr', subfn, ... ) (!nl)
+
+!begin_itemize
+!item int32_t Puntaes ( 'AnKr', 0 ) (!nl)
+System beenden und zurck zum MacOS bzw. Windows
+
+!item int32_t Puntaes ( 'AnKr', 1, int16_t keycode ) (!nl)
+Wandle folgenden Alt-Tastencode in ASCII u.
+
+!item int32_t Puntaes ( 'AnKr', 2 ) (!nl)
+Neustart (warm_boot, nur fr Atari)
+
+!item int32_t Puntaes ( 'AnKr', 3 ) (!nl)
+Kaltstart (cold_boot, nur fr Atari)
+
+!item int32_t Puntaes ( 'AnKr', 4, int32_t key ) seit 12.04.1998 (!nl)
+Ermittle Cookie (!nl)
+Liefert den Zeiger des Cookies (!I)key(!i) oder 0L wenn er nicht vorhanden ist.
+
+!item int32_t Puntaes ( 'AnKr', 5 ) (!nl)
+Date2str: initialisiert die interne Variable datemode von MagiC und liefert
+einen Zeiger auf die interne Funktion date2str.
+
+void date2str ( int8_t *s, int16_t date ); (!nl)
+DOS-Datum in eine Zeichenkette umwandeln.
+
+!item int32_t Puntaes ( 'AnKr', 6, vtsys *pointer ) (!nl)
+VT52 anmelden, alten Vektor zurckgeben.
+Ist (!I)pointer(!i) -1 dann wird nur der alte Vektor zurckgeliefert,
+bei 0 wird er gel”scht.
+
+!end_itemize
+
+!item [(!nolink [Return]) value:]
+Die Funktion liefert kein Ergebnis.
+
+!item [Availability:]
+All (!nolink [TOS]) versions.
+
+!item [Group:]
+Special commands
+
+!item [See Also:]
+(!link [Binding] [Bindings for Puntaes]) ~ (!link [Cookie function] [S_GETCOOKIE])
+
+(!ende_liste)
+
+
+!begin_node Bindings for Puntaes
+#!html_name Bindings_for_Puntaes
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+ #include <tos.h>
+
+void Puntaes( void );
+!item [Assembler:]
+!begin_verbatim
+move.w    #39,-(sp)    ; Offset 0
+trap      #14          ; Call XBIOS
+addq.l    #2,sp        ; Correct stack
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!else
+
+
+!begin_node Puntaes
+#!html_name Puntaes
+(!begin_liste) [Beschreibung]
+
+!item [Name:]
+¯punt (!nolink [AES])® - AES abschalten.
+
+!item [Xbiosnummer:]
+39
+
+!item [Deklaration:]
+void Puntaes( void );
+
+!item [Beschreibung:]
+Die XBIOS-Routine Puntaes schaltet das (!nolink [AES])-Betriebs!-system ab.
+Das AES wird nur gestart, wenn "os_magic" im OSHEADER auf die korrekte magische
+Zahl (0x87654321) zeigt. Puntaes setzt dieses Flag (sofern m”glich) zurck und
+boote dann das System neu.
+
+(!B)Hinweis:(!b)
+Ab MagiC 4.00 wurde diese Funktion ver„ndert und besitzt verschiedene
+Unterfunktionen. Zum Aufruf muss zus„tzlich der Wert 'AnKr' bergeben
+werden. Bei einer falschen Funktionsnummer wird EINVFN zurckgeliefert.
+
+int32_t Puntaes ( 'AnKr', subfn, ... ) (!nl)
+
+!begin_itemize
+!item int32_t Puntaes ( 'AnKr', 0 ) (!nl)
+System beenden und zurck zum MacOS bzw. Windows
+
+!item int32_t Puntaes ( 'AnKr', 1, int16_t keycode ) (!nl)
+Wandle folgenden Alt-Tastencode in ASCII u.
+
+!item int32_t Puntaes ( 'AnKr', 2 ) (!nl)
+Neustart (warm_boot, nur fr Atari)
+
+!item int32_t Puntaes ( 'AnKr', 3 ) (!nl)
+Kaltstart (cold_boot, nur fr Atari)
+
+!item int32_t Puntaes ( 'AnKr', 4, int32_t key ) seit 12.04.1998 (!nl)
+Ermittle Cookie (!nl)
+Liefert den Zeiger des Cookies (!I)key(!i) oder 0L wenn er nicht vorhanden ist.
+
+!item int32_t Puntaes ( 'AnKr', 5 ) (!nl)
+Date2str: initialisiert die interne Variable datemode von MagiC und liefert
+einen Zeiger auf die interne Funktion date2str.
+
+void date2str ( int8_t *s, int16_t date ); (!nl)
+DOS-Datum in eine Zeichenkette umwandeln.
+
+!item int32_t Puntaes ( 'AnKr', 6, vtsys *pointer ) (!nl)
+VT52 anmelden, alten Vektor zurckgeben.
+Ist (!I)pointer(!i) -1 dann wird nur der alte Vektor zurckgeliefert,
+bei 0 wird er gel”scht.
+
+!end_itemize
+
+!item [Ergebnis:]
+Die Funktion liefert kein Ergebnis.
+
+!item [Verfgbar:]
+Alle (!nolink [TOS]) Versionen.
+
+!item [Gruppe:]
+Spezialbefehle
+
+!item [Querverweis:]
+(!link [Binding] [Bindings fr Puntaes]) ~ (!link [Cookie Funktionen] [S_GETCOOKIE])
+
+(!ende_liste)
+
+
+!begin_node Bindings fr Puntaes
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+ #include <tos.h>
+
+void Puntaes( void );
+!item [Assembler:]
+!begin_verbatim
+move.w    #39,-(sp)    ; Offset 0
+trap      #14          ; XBIOS aufrufen
+addq.l    #2,sp        ; Stack korrigieren
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!endif

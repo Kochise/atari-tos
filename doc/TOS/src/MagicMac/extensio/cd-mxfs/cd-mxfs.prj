@@ -1,0 +1,24 @@
+spinmagc.xfs
+.C[-I..\..\inc_c]
+.C[-I..\..\pc\include]
+.S[-I..\..\inc_as]
+.C[-P-]
+.C[-M-]
+.C[-G-]
+.C[-DMAGIC]
+.L[-S=4096]
+=
+..\..\pc\lib\cstart0.o      ; startup code
+cd-mxfsc.c (cd-mxfs.h, cfgread.c)
+cd-mxfs.s
+cd-mxfsk.s
+
+doscache.c
+doskern.c
+hfs.c
+iso9660.c
+tocfs.c
+procfile.s
+
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcstdlib.lib

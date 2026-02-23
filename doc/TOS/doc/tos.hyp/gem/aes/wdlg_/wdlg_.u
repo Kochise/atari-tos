@@ -1,0 +1,112 @@
+!iflang [english]
+
+!begin_node Window-dialogs
+!html_name wdlg
+
+The following functions were introduced with MagiC 4 and WDIALOG.
+They permit simple construction of dialog boxes in windows:
+
+!begin_xlist [x wdlg_set_uniconify] !compressed
+!item [(!bullet) wdlg_close]
+Closes a window-dialog
+!item [(!bullet) wdlg_create]
+Creates a window-dialog
+!item [(!bullet) wdlg_delete]
+Releases memory of closed window-dialog
+!item [(!bullet) wdlg_evnt]
+Evaluates the dialog-events
+!item [(!bullet) wdlg_get_edit]
+Obtains current editable field
+!item [(!bullet) wdlg_get_handle]
+Obtains window ID of a dialog
+!item [(!bullet) wdlg_get_tree]
+Obtains object tree of the window
+!item [(!bullet) wdlg_get_udata]
+Obtains user data
+!item [(!bullet) wdlg_open]
+Opens a window-dialog
+!item [(!bullet) wdlg_redraw]
+Draws an object in a window-dialog
+!item [(!bullet) wdlg_set_edit]
+Activates editable field in the dialog
+!item [(!bullet) wdlg_set_iconify]
+Iconifies a window-dialog
+!item [(!bullet) wdlg_set_size]
+Alters the size of a dialog
+!item [(!bullet) wdlg_set_tree]
+Anchors a new object tree in the dialog
+!item [(!bullet) wdlg_set_uniconify]
+Uniconifies a window-dialog
+!end_xlist
+
+(!B)Note:(!b) The existence of these functions can be checked for with
+(!link [appl_getinfo][%apgi_7]) (opcode 7).
+
+See also: (!link [Window management][Window library]) ~ Style guidelines ~ WDIALOG
+
+!else
+
+!begin_node Fensterdialoge
+!html_name wdlg
+
+Die folgenden Funktionen wurden mit MagiC 4 eingef(!uumlaut)hrt und erlauben die
+einfache Konstruktion von (!nolink [Dialogboxen]) in Fenstern:
+
+!begin_xlist [x wdlg_set_uniconify] !compressed
+!item [(!bullet) wdlg_close]
+Fensterdialog schlie(!sharps)en.
+!item [(!bullet) wdlg_create]
+Fensterdialog erstellen.
+!item [(!bullet) wdlg_delete]
+Fensterdialog schlie(!sharps)en.
+!item [(!bullet) wdlg_evnt]
+Auswerten der Dialog-Events.
+!item [(!bullet) wdlg_get_edit]
+Aktuelles Edit-Feld ermitteln.
+!item [(!bullet) wdlg_get_handle]
+Fenster-Kennung eines Dialogs ermitteln.
+!item [(!bullet) wdlg_get_tree]
+Objektbaum des Fensters ermitteln.
+!item [(!bullet) wdlg_get_udata]
+Userdaten ermitteln.
+!item [(!bullet) wdlg_open]
+Fensterdialog (!oumlaut)ffnen.
+!item [(!bullet) wdlg_redraw]
+Zeichnet ein Objekt in einem Fensterdialog.
+!item [(!bullet) wdlg_set_edit]
+Edit-Feld im Dialog aktivieren.
+!item [(!bullet) wdlg_set_iconify]
+Fensterdialog ikonifizieren.
+!item [(!bullet) wdlg_set_size]
+Gr(!oumlaut)(!sharps)e eines Dialogs ver(!aumlaut)ndern.
+!item [(!bullet) wdlg_set_tree]
+Neuen Objektbaum im Dialog verankern. 
+!item [(!bullet) wdlg_set_uniconify]
+Fensterdialog unikonifizieren.
+!end_xlist
+
+(!B)Hinweis:(!b) Die Existenz dieser Funktionen kann per (!link [appl_getinfo][%apgi_7])
+(Opcode 7) festgestellt werden.
+
+Querverweis: Fensterverwaltung ~ Style-Guidelines ~ WDIALOG
+
+
+!endif
+
+!include gem/aes/wdlg_/wdlg_close.ui
+!include gem/aes/wdlg_/wdlg_create.ui
+!include gem/aes/wdlg_/wdlg_delete.ui
+!include gem/aes/wdlg_/wdlg_evnt.ui
+!include gem/aes/wdlg_/wdlg_get_edit.ui
+!include gem/aes/wdlg_/wdlg_get_handle.ui
+!include gem/aes/wdlg_/wdlg_get_tree.ui
+!include gem/aes/wdlg_/wdlg_get_udata.ui
+!include gem/aes/wdlg_/wdlg_open.ui
+!include gem/aes/wdlg_/wdlg_redraw.ui
+!include gem/aes/wdlg_/wdlg_set_edit.ui
+!include gem/aes/wdlg_/wdlg_set_iconify.ui
+!include gem/aes/wdlg_/wdlg_set_size.ui
+!include gem/aes/wdlg_/wdlg_set_tree.ui
+!include gem/aes/wdlg_/wdlg_set_uniconify.ui
+
+!end_node

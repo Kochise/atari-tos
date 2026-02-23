@@ -1,0 +1,94 @@
+!iflang [english]
+
+!begin_node Event library
+!html_name evnt
+
+This library makes functions available with whose aid events can be
+recognized and processed. As a rule, program (!nolink [control]) is released to
+the operating system until the specified event has occurred. The
+following routines are available for this purpose:
+
+
+!begin_xlist [x evnt_button] !compressed
+!item [(!bullet) evnt_button]
+Waits for a mouse button press
+!item [(!bullet) evnt_dclick]
+Obtains/alters the double-click response rate
+!item [(!bullet) evnt_keybd]
+Waits for a keypress
+!item [(!bullet) evnt_mesag]
+Waits for a message
+!item [(!bullet) evnt_mouse]
+Waits for a move of the mouse pointer
+!item [(!bullet) evnt_multi]
+Reacts to several events
+!item [(!bullet) evnt_timer]
+Waits for a timer event
+!end_xlist
+
+!begin_xlist [x Standard messages] !compressed
+!item [(!bullet) (!link [Standard messages][Messages])]
+~
+!item [(!bullet) Message-list]
+Overview of all known messages, including: (!nl)
+Messages from Geneva (!nl)
+(!link [RSDAEMON messages][RSDAEMON_MSG])
+!end_xlist
+
+(!B)Note:(!b) 'event' in this case should be understood as a message, key
+press, mouse movement and button activation, timer events etc.
+
+See also: About the AES ~  GEM  ~ Style guidelines
+
+!else
+
+!begin_node Ereignisverwaltung
+!html_name evnt
+
+Diese Bibliothek stellt Funktionen zur Verf(!uumlaut)gung, mit deren Hilfe Ereignisse
+erkannt und bearbeitet werden k(!oumlaut)nnen. F(!uumlaut)r diesen Zweck stehen die folgenden
+Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist [x evnt_button] !compressed
+!item [(!bullet) evnt_button]
+Auf Maustastendruck warten.
+!item [(!bullet) evnt_dclick]
+Geschwindigkeit f(!uumlaut)r Doppelklicks ermitteln/(!aumlaut)ndern.
+!item [(!bullet) evnt_keybd]
+Auf Tastendruck warten.
+!item [(!bullet) evnt_mesag]
+Auf Mitteilung warten.
+!item [(!bullet) evnt_mouse]
+Auf Bewegungen des Mauszeigers warten.
+!item [(!bullet) evnt_multi]
+Auf mehrere Ereignisse reagieren.
+!item [(!bullet) evnt_timer]
+Auf Zeit-Ereignis warten.
+!end_xlist
+
+!begin_xlist [x Standard-Nachrichten] !compressed
+!item [(!bullet) (!link [Standard-Nachrichten][Nachrichten])]
+~
+!item [(!bullet) (!link [Nachrichten-Liste][Nachrichten-Liste])]
+(!Uumlaut)bersicht von allen bekannten (!nolink[Nachrichten])
+!end_xlist
+
+(!B)Hinweis:(!b) Unter Ereignissen sind in diesem Fall (!nolink [Nachrichten]),
+Tastaturklicks, Mausbewegungen, Zeitereignisse usw. zu verstehen.
+
+Querverweis: AES ~  GEM  ~ Style-Guidelines
+
+!endif
+
+!include gem/aes/evnt_/evnt_button.ui
+!include gem/aes/evnt_/evnt_dclick.ui
+!include gem/aes/evnt_/evnt_keybd.ui
+!include gem/aes/evnt_/evnt_mesag.ui
+!include gem/aes/evnt_/evnt_mouse.ui
+!include gem/aes/evnt_/evnt_multi.ui
+!include gem/aes/evnt_/evnt_timer.ui
+
+!include gem/aes/evnt_/messages/evnts.ui
+!include gem/aes/evnt_/messages/messages.u
+
+!end_node

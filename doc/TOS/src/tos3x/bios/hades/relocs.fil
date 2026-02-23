@@ -1,0 +1,212 @@
+; country specific offsets for various routines
+; .d1 is caused by different alt-key handling in bios,
+;    and affects all addresses >= $00E0363A
+; .d2 is caused by different time/date formats in desktop,
+;    and affects all addresses >= $00E2FF6A
+; .d3 is caused by different length of desktop data segment,
+;    and affects all addresses >= $00E3E930
+; lang_dif2 is for hades only, and specifies where
+;    to patch the copyright info in the about dialog
+_SWITCH .NATION
+
+  _CASE .USA:
+    .d1 = -5A
+    .d2 = -30
+    .d3 = .d2
+    .lang_dif2 = -4B
+    .INFDATA = 3EC06
+    .RSC_TAB = 3ECA2
+    .TOSINFO_OFS = 1A8B
+    .ROMTOP  = 46134
+
+  _CASE .FRG:
+    .d1 = 0
+    .d2 = 0
+    .d3 = .d2
+    .lang_dif2 = 0
+    .INFDATA = 3EC92       ; desktop filenames
+    .RSC_TAB = 3ED2E       ; start of resource data
+    .TOSINFO_OFS = 1A4A    ; offset to tos-info-dialog from RSC_TAB
+    .ROMTOP  = 46232       ; end of text+data segments
+
+  _CASE .FRA:
+    .d1 = 1E
+    .d2 = 1E
+    .d3 = .d2
+    .lang_dif2 = 161
+    .INFDATA = 3ECCC
+    .RSC_TAB = 3ED68
+    .TOSINFO_OFS = 1B71
+    .ROMTOP  = 464F0
+
+  _CASE .UK:
+    .d1 = -5A
+    .d2 = -30
+    .d3 = .d2
+    .lang_dif2 = -4B
+    .INFDATA = 3EC06
+    .RSC_TAB = 3ECA2
+    .TOSINFO_OFS = 1A8B
+    .ROMTOP  = 46134
+
+  _CASE .SPA:
+    .d1 = 2C
+    .d2 = 2C
+    .d3 = .d2
+    .lang_dif2 = 122
+    .INFDATA = 3ECA4
+    .RSC_TAB = 3ED40
+    .TOSINFO_OFS = 1B5A
+    .ROMTOP  = 46470
+
+  _CASE .ITA:
+    .d1 = 0E
+    .d2 = 0E
+    .d3 = .d2
+    .lang_dif2 = CD
+    .INFDATA = 3EC78
+    .RSC_TAB = 3ED14
+    .TOSINFO_OFS = 1B31
+    .ROMTOP  = 462D8
+
+  _CASE .SWE:
+    .d1 = 1E
+    .d2 = 1E
+    .d3 = .d2
+    .lang_dif2 = -3E
+    .INFDATA = 3EC30
+    .RSC_TAB = 3ECCC
+    .TOSINFO_OFS = 1A6E
+    .ROMTOP  = 46324
+
+  _CASE .SWF:
+    .d1 = 2C
+    .d2 = 2C
+    .d3 = .d2
+    .lang_dif2 = 16F
+    .INFDATA = 3ECDA
+    .RSC_TAB = 3ED76
+    .TOSINFO_OFS = 1B71
+    .ROMTOP  = 464FE
+
+  _CASE .SWG:
+    .d1 = 2C
+    .d2 = 2C
+    .d3 = .d2
+    .lang_dif2 = 2C
+    .INFDATA = 3ECBE
+    .RSC_TAB = 3ED5A
+    .TOSINFO_OFS = 1A4A
+    .ROMTOP  = 4625E
+
+  _CASE .CZE:
+    .d1 = 0
+    .d2 = 0
+    .d3 = .d2
+    .lang_dif2 = 0
+    .INFDATA = 3EC92       ; desktop filenames
+    .RSC_TAB = 3ED2E       ; start of resource data
+    .TOSINFO_OFS = 1A4A    ; offset to tos-info-dialog from RSC_TAB
+    .ROMTOP  = 46232       ; end of text+data segments
+
+  _DEFAULT:
+    _ERROR "unsupported country"
+_ENDSWITCH
+
+.RSC_LEN  = .ROMTOP-.RSC_TAB
+
+;*******************************************************************************
+;* MH:
+;* Reloc-Korrekturen NUR (!!!) fÅr das TOS 3.06 vom 24.9.1991
+;* nach einer Idee von Andreas Kromke (KAOS 1.2 bzw. KAOS 1.4).
+;* Die Reloc-Korrekturen unterstÅtzen TOS-LÑngen bis $100000.
+
+!001D6 ; address used to setup ttram refresh rate
+!01CE6 ; andi.b    #$EF,($FFFF8783).w
+!01E88 ; move.b    #$EC,$FFF0001D
+!028D8 ; move.b    #$EF,14(a2)
+
+!038B2+.d1 ; move.b    #$EF,d2
+!0E5BC+.d1 ; move.b    $E3(pc,d0.w),d0
+!14126+.d1 ; movem.l   (a7)+,d5-d7
+!1561C+.d1 ; cmpi.b    #$E5,(a3)
+!15676+.d1 ; cmpi.b    #$E5,(a0)
+!15D70+.d1 ; cmpi.b    #$E5,(a3)
+!163C8+.d1 ; move.b    #$E5,-6(a6)
+163C8+.d1 $00 ; fix bug from original hades.fil
+!169D6+.d1 ; move.b    #$E5,-2(a6)
+!16B24+.d1 ; move.b    #$E5,-20(a6)
+!1738E+.d1 ; cmpi.b    #$E5,(a4)
+!173A2+.d1 ; cmpi.b    #$E5,(a5)
+!1B5B0+.d1 ; movem.l   (a7)+,d5-d7
+!1C6C2+.d1 ; movem.l   (a7)+,d5-d7
+!1CB62+.d1 ; movem.l   (a7)+,d5-d7
+!1CCDA+.d1 ; movem.l   (a7)+,d5-d7
+!1D7CA+.d1 ; movem.l   (a7)+,d5-d7
+!1ECAA+.d1 ; movem.l   (a7)+,d5-d7
+!1FE62+.d1 ; movem.l   (a7)+,d5-d7
+!204CA+.d1 ; movem.l   (a7)+,d5-d7
+!20730+.d1 ; movem.l   (a7)+,d5-d7
+!207FE+.d1 ; movem.l   (a7)+,d5-d7
+!20A24+.d1 ; movem.l   (a7)+,d5-d7
+!21290+.d1 ; movem.l   (a7)+,d5-d7
+!242BA+.d1 ; movem.w   46(a7),d5-d7
+!24C76+.d1 ; movem.l   36(a7),d5-d7
+!26642+.d1 ; clr.w     224(a5)
+!2665E+.d1 ; move.w    #$0080,224(a5)
+!29F76+.d1 ; move.w    #$0080,224(a4) (us)
+29F76+.d1 $00 ; fix bug from original hades.fil
+!2A01E+.d1 ; move.w    #$0001,226(a4)
+!2A050+.d1 ; clr.w     224(a4) (us)
+2A050+.d1 $00 ; fix bug from original hades.fil
+!2A078+.d1 ; move.w    #$0080,224(a4) (us)
+2A078+.d1 $00 ; fix bug from original hades.fil
+!2A10C+.d1 ; btst      #0,227(a4)
+!2A3CA+.d1 ; move.b    #$E9,(a5)
+!2F268+.d1 ; clr.w     226(a5)
+!2F26C+.d1 ; clr.w     226(a5) (us)
+2F26C+.d1 $00 ; fix bug from original hades.fil
+!2F290+.d1 ; move.w    #$0001,226(a5)
+!2F298+.d1 ; move.w    #$0001,226(a5) (us)
+2F298+.d1 $00 ; fix bug from original hades.fil
+!2F47E+.d1 ; btst      #0,227(a5)
+!3091C+.d2 ; movea.l   228(a4),a0
+
+!014F6 .. 01516       ; bomb image
+!06476+.d1 .. 06676+.d1 ; color table
+!073A0+.d1 .. 073E6+.d1 ; offset table in vdi
+!07D2E+.d1 .. 07D4E+.d1 ; offset table in vdi
+
+!36018+.d2 .. 36420+.d2 ; Atari logo
+!36420+.d2 .. 36534+.d2 ; mmu table
+!36534+.d2 .. 36734+.d2 ; crc table
+!3676C+.d2 .. 368EC+.d2 ; bios keyboard tables
+!368EC+.d2 .. 3690A+.d2 ; bell sound
+!3690A+.d2 .. 36928+.d2 ; click sound
+!36ACC+.d2 .. 36CCE+.d2 ; 6x6 offsets
+!36CCE+.d2 .. 3714E+.d2 ; 6x6 font data
+!371A8+.d2 .. 373AA+.d2 ; 8x8 offsets
+!373AA+.d2 .. 37BAA+.d2 ; 8x8 font data
+!37BAA+.d2 .. 38BAA+.d2 ; 8x16 font data
+!38C5E+.d2 .. 38E60+.d2 ; 16x32 offsets
+!38E60+.d2 .. 3CE60+.d2 ; 16x32 font data
+!3CE60+.d2 .. 3D0F8+.d2 ; vdi patterns
+!3D25E+.d2 .. 3D65E+.d2 ; pel mapping tables
+!3E514+.d2 .. 3E532+.d2 ; desktop keyboard table
+!3EA2A+.d2 .. .INFDATA+2C ; desktop strings
+!.RSC_TAB .. .ROMTOP ; resource data
+
+; new addresses originating from hades patches
+!003C2 ; move.l     d0,($000000E4).w
+!0122E ; move.l     d0,($000000E4).w
+!01244 ; move.l     ($000000E4).w,d0
+!031E4 .. 03204 ; scc baud table
+!03D38+.d1 ; andi.b     #$E0,d0
+!03D84+.d1 ; andi.b     #$E0,d0
+!03DB6+.d1 ; andi.b     #$E0,d0
+!03E90+.d1 ; move.b     5(a1),$FFF000E0
+!04264+.d1 ; move.b     5(a1),$FFF000E0
+
+!49C02 .. 4B502 ; Integer support package
+!4B57A .. 58A8A ; FPSP060
+!70000 .. 74000 ; mach64 init

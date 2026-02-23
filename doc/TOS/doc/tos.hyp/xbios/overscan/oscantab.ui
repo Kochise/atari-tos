@@ -1,0 +1,135 @@
+!iflang [english]
+
+
+!begin_node Oscantab
+(!begin_liste) [Availability]
+
+!item [Name:]
+ØOscantabÆ - Get pointer to data structure of a screen resolution.
+
+!item [Opcode:]
+4201 (old: 85)
+
+!item [Syntax:]
+(!link [SCREEN] [SCREEN, OverScan]) *Oscantab( int16_t res );
+
+!item [Description:]
+The function returns a pointer to a structure for a 
+description of the screen. The following apply:
+!begin_xlist [Parameter]
+!item [Parameter]
+Meaning
+!item [res]
+!begin_table [r l l]
+-1 !! = !! Current setting
+0 !! = !! Low resolution
+1 !! = !! Medium resolution
+2 !! = !! High resolution
+!end_table
+!end_xlist
+The data structure of the current setting is updated 
+at each call of the function.
+
+!item [(!nolink [Return]) value:]
+The function returns a pointer to the corresponding 
+structure for the description of the screen.
+
+!item [Availability:]
+If the (!link [cookie][Cookie, OVER]) 'OVER is present and since the
+version 1.8.
+
+!item [Group:]
+(!link [OverScan XBIOS functions] [OverScan XBIOS extension])
+
+!item [See also:]
+(!link [Binding] [Bindings for Oscantab]) ~ Oscanis ~ Oscanpatch ~
+Oscanphy ~ Oscanscr ~ Oscanswitch ~ Oscanvb
+
+(!ende_liste)
+
+
+!begin_node Bindings for Oscantab
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+(!link [SCREEN] [SCREEN, OverScan]) *Oscantab( int16_t res );
+!item [Assembler:]
+!begin_verbatim
+move.w    res,-(sp)    ; Offset 2
+move.w    #4201,-(sp)  ; Offset 0
+trap      #14          ; XBIOS aufrufen
+addq.l    #4,sp        ; Stack korrigieren
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!else
+
+
+!begin_node Oscantab
+(!begin_liste) [Beschreibung]
+
+!item [Name:]
+ØOscantabÆ - Zeiger auf die Datenstruktur einer Auflîsung ermitteln.
+
+!item [Xbiosnummer:]
+4201 (alt: 85)
+
+!item [Deklaration:]
+(!link [SCREEN] [SCREEN, OverScan]) *Oscantab( int16_t res );
+
+!item [Beschreibung:]
+Die Funktion liefert einen Zeiger auf eine Struktur zur Beschreibung des
+Bildschirms zurÅck. Es gilt:
+!begin_xlist [Parameter]
+!item [Parameter]
+Bedeutung
+!item [res]
+!begin_table [r l l]
+-1 !! = !! aktuelle Einstellung
+0 !! = !! niedrige Auflîsung
+1 !! = !! mittlere Auflîsung
+2 !! = !! hohe Auflîsung
+!end_table
+!end_xlist
+Die Datenstruktur der aktuellen Einstellung wird bei jedem Aufruf der
+Funktion aktualisiert.
+
+!item [Ergebnis:]
+Die Funktion liefert einen Zeiger auf die entsprechende Struktur zur
+Beschreibung des Bildschirms zurÅck.
+
+!item [VerfÅgbar:]
+Wenn der (!link [Cookie][Cookie, OVER]) 'OVER' vorhanden ist und seit
+der Version 1.8.
+
+!item [Gruppe:]
+(!link [OverScan-XBIOS-Funktionen] [OverScan-XBIOS-Erweiterungen])
+
+!item [Querverweis:]
+(!link [Binding] [Bindings fÅr Oscantab]) ~ Oscanis ~ Oscanpatch ~
+Oscanphy ~ Oscanscr ~ Oscanswitch ~ Oscanvb
+
+(!ende_liste)
+
+
+!begin_node Bindings fÅr Oscantab
+!ignore_index
+(!begin_liste) [Assembler:]
+!item [C:]
+(!link [SCREEN] [SCREEN, OverScan]) *Oscantab( int16_t res );
+!item [Assembler:]
+!begin_verbatim
+move.w    res,-(sp)    ; Offset 2
+move.w    #4201,-(sp)  ; Offset 0
+trap      #14          ; XBIOS aufrufen
+addq.l    #4,sp        ; Stack korrigieren
+!end_verbatim
+(!ende_liste)
+!end_node
+!end_node
+
+
+!endif

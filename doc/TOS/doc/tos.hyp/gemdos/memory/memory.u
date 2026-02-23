@@ -1,0 +1,68 @@
+!iflang [english]
+
+
+!begin_node Memory management
+!html_name gemdos_memory
+
+!begin_xlist [x Mvalidate] !compressed
+!item [(!bullet) Maccess~~] Verify accessibility of a region of memory.
+!item [(!bullet) Maddalt~~] Registers 'Alternative' memory.
+!item [(!bullet) Malloc~~~] Reserves memory or inquires free memory.
+!item [(!bullet) Mfree~~~~] Releases a block of memory.
+!item [(!bullet) Mshrink~~] Reduces/increases size of a memory block.
+!item [(!bullet) Mvalidate] Verify accessibility of a process region of memory.
+!item [(!bullet) Mxalloc~~] Reserves a block of memory.
+!end_xlist
+
+(!B)Warning:(!b) Here one should emphasise that in view of future operating
+system versions, memory blocks used for communication between different
+programs, or blocks allocated via pointers, have to be 
+(!I)(!nolink [global])(!i) (Mxalloc functions with a (!nolink [global])
+flag). Otherwise, when using computers with PMMU (e.g. Atari-TT030 or
+Falcon030), memory protection violations may arise.
+
+See also: (!nl)
+Program launch and TPA ~ Process functions ~ Memory management in TOS ~
+Memory management in MagiC
+
+
+!else
+
+
+!begin_node Speicherverwaltung
+!html_name gemdos_memory
+
+!begin_xlist [x Mvalidate] !compressed
+!item [(!bullet) Maccess~~] Speicherbereich auf Zugriff pr(!uumlaut)fen.
+!item [(!bullet) Maddalt~~] Alternativen Speicher anmelden.
+!item [(!bullet) Malloc~~~] Speicher reservieren bzw. freien Speicher erfragen.
+!item [(!bullet) Mfree~~~~] Speicherbereich freigeben.
+!item [(!bullet) Mshrink~~] Speicherbereich verkleinern/vergr(!oumlaut)(!sharps)ern.
+!item [(!bullet) Mvalidate] Prozess-Speicherbereich auf Zugriff pr(!uumlaut)fen.
+!item [(!bullet) Mxalloc~~] Speicherbereich reservieren.
+!end_xlist
+
+(!B)Achtung:(!b) An dieser Stelle sei darauf hingewiesen, da(!sharps) im Hinblick
+auf zuk(!uumlaut)nftige Betriebssystem-Versionen zur Kommunikation zwischen
+verschiedenen Programmen benutzte oder (!uumlaut)ber Zeiger zugewiesene
+Speicherbereiche (!I)global(!i) sein m(!uumlaut)ssen (Mxalloc-Funktion mit
+Global-Flag). Andernfalls wird es beim Einsatz auf Rechnern mit PMMU (z.B.
+Atari-TT oder Falcon) zu Speicherschutzverletzungen kommen.
+
+Querverweis:
+Programmstart und TPA ~	Prozessfunktionen ~ Speicherverwaltung in TOS ~
+Speicherverwaltung in MagiC
+
+
+!endif
+
+
+!include gemdos/memory/maccess.ui
+!include gemdos/memory/maddalt.ui
+!include gemdos/memory/malloc.ui
+!include gemdos/memory/mfree.ui
+!include gemdos/memory/mshrink.ui
+!include gemdos/memory/mvalidate.ui
+!include gemdos/memory/mxalloc.ui
+
+!end_node

@@ -1,0 +1,17 @@
+cmdline.prg
+
+.C[-K-]
+.C[-P-]
+.C[-A-]
+.C[-G-]
+.C[-I..\..\pc\include]
+.L[-S=0]
+
+=
+..\..\pc\lib\cstartv.o
+
+cmdline.c
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcgemlib.lib

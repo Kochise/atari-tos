@@ -1,0 +1,627 @@
+##ACE-STGPAR 4 0009 
+@if VERSION >= 6
+@os Atari
+@charset atarist
+@inputenc atarist
+@lang de
+@endif
+@database "AppLine - Was l„uft hier?"
+@author "Holger Weets/Rainer Wiesenfeller"
+@$VER: APPLINE.HYP (24/3/1997)
+@subject "Dokumentation/Utilities"
+@options "+i -s +z -t4 -d12"
+@width 75
+
+
+@node "Main" "AppLine"
+@symbol r "AppLine"
+@{B}@{"AppLine V2.6                                                        AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+@limage "appline.img" 1
+
+
+
+ Was macht AppLine?
+ Installation
+ Systemvoraussetzung
+ Einschr„nkungen und Hinweise
+ Benutzung
+
+ Fairware
+
+ History
+@endnode
+
+
+@node "Was macht AppLine?"
+@{B}@{"Was macht AppLine?                                                  AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+AppLine installiert eine Leiste am unteren Bildschirmrand, in der alle
+laufenden (GEM-)Programme aufgefhrt werden.
+
+Automatisch ausgeblendet wird nur der Screenmananger; weitere nicht in der
+Leiste darzustellende Applikationen k”nnen in der Datei <appline.inf>
+angegeben werden.
+@endnode
+
+
+@node "Installation"
+@{B}@{"Installation                                                        AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+AppLine geh”rt in den APP Ordner von MagiC und l„uft nur unter diesem
+Betriebssystem.
+
+Zur Steuerung des Verhaltens von AppLine kann eine Datei Namens
+"appline.inf" angelegt werden, sie bietet folgende M”glichkeiten:
+
+* @{B}<name>@{b}
+  so notierte Applikationen werden in der Leiste nicht angezeigt;
+  Beispiel: WBDAEMON
+
+@symbol ai "!<name>"
+* @{B}!<name>@{b}
+  durch mit einem Ausrufezeichen markierte Namen werden Applikationen
+  gekennzeichnet, die beim @{"nach vorne" LINK "Benutzung" "nach vorne"} holen durch AppLine abstrzen,
+  wenn sie zu diesem Zeitpunkt keine Fenster ge”ffnet haben; AppLine
+  unterl„t dann die Provokation dieses Fehlers in solchen Applikationen
+  Beispiel: !CAT
+
+@symbol ai "-<name>"
+* @{B}-<name>@{b}
+  Teilt AppLine mit, da die Applikation <name> keine eigene Menueleiste
+  besitzt; AppLine verwendet dann ein leicht modifiziertes Verfahren, diese
+  Applikation nach vorne zu bringen.
+  Beispiel: -ST-GUIDE
+
+@symbol ai "=<name>"
+* @{B}=<name>@{b}
+  Legt die Farbe fest, in der der Name dieser Applikation im Button
+  erscheinen soll, erlaubt sind Werte zwischen 0 und 15.
+  Die Defaultfarbe wird per '=*' festgelegt, wird sie nicht angegeben, so
+  erscheinen entsprechende Texte schwarz.
+  Beispiel: =THING 11       # Desktop grn darstellen
+
+Zu beachten ist obigen Angaben unbedingt, da die Dateinamen exakt so
+geschrieben werden mssen, wie sie auch in der Leiste erscheinen, also
+aktuell in Grobuchstaben, maximal 8 Zeichen lang und ohne ihre Endung.
+
+Auerdem stehen folgende Schalter zur Verfgung, um eine m”glichst freie
+Konfigurierbarkeit zu erreichen:
+
+/topwind            - AppLinefenster vorne lassen
+/backwind           - AppLinefenster immer hinten halten
+/nocloser           - AppLine Button nicht zeigen
+/default            - Aktion bei Klick auf den AppLine Button festlegen
+/showmem            - freien Speicher anzeigen
+/large              - Speicher mit groem Font anzeigen
+/topline            - Leiste am oberen Bildschirmrand zeigen
+/select             - Button der aktiven App selektieren
+/timer              - Zeit zwischen zwei Aktualisierungen festlegen
+/resize             - Leiste immer passend breit zeigen
+/rstart             - Leiste "w„chst" von rechts nach links
+/vertical           - Buttons untereinander darstellen
+/deskfirst          - Desktop als ersten Button zeigen
+/fkeys              - Buttons per F-Taste ansprechbar
+/xoff               - Abstand der Leiste zum linken Bildschirmrand
+/yoff               - Abstand der Leiste zum unteren/oberen Bildschirmrand
+/space              - Rand zwischen zwei "Gruppen"
+/nowind             - Buttons von Apps ohne offene Fenster markieren
+/frozen-disabled    - Buttondarstellung ver„ndern
+/border             - St„rke des 3D-Effektes festlegen
+/firstapp           - App angeben, die immer im ersten Button gezeigt wird
+@endnode
+
+
+@node "/topwind"
+@xref "/backwind"
+@{B}@{"/topwind                                                            AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Hiermit wird erreicht, da AppLine die Leiste beim ™ffnen nicht sofort
+  @{"nach hinten" LINK "Benutzung" "nach hinten"} legt.
+@endnode
+
+
+@node "/nocloser"
+@xref "/default"
+@{B}@{"/nocloser                                                           AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Hiermit kann das Symbol am linken Rand der Leiste ausgeblendet werden,
+  falls es nicht ben”tigt wird.
+@endnode
+
+
+@node "/showmem"
+@xref "/large"
+@{B}@{"/showmem                                                            AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Hiermit wird die Anzeige des freien Speichers am rechten Rand der Leiste
+  eingeschaltet. Sie wird ggfls. durch die Buttons einfach berschrieben,
+  kostet so gesehen also keinen Platz.
+@endnode
+
+
+@node "/topline"
+@{B}@{"/topline                                                            AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  šberredet AppLine, sich direkt unter der Menueleiste zu zeigen, statt wie
+  normalerweise am unteren Bildschirmrand.
+@endnode
+
+
+@node "/select"
+@{B}@{"/select                                                             AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Schaltet das Selektieren derjenigen Applikation, der das oberste Fenster
+  geh”rt, ein. Wenn das Fenster von AppLine vorne liegt, dann wird selbst-
+  verst„ndlich der "Aktionsbutton" (das Symbol am linken Rand der Leiste)
+  selektiert.
+  Gibt es kein aktives Fenster, dann wird die App selektiert, deren
+  Menuezeile aktiv ist.
+@endnode
+
+
+@node "/timer"
+@{B}@{"/timer                                                              AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Legt das Intervall fest, in dem die Leiste aktualisiert werden soll.
+  Fehlt diese Zeile, so erfolgt die Aktualisierung alle 2 Sekunden.
+@endnode
+
+
+@node "/resize"
+@{B}@{"/resize                                                             AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Legt fest, da AppLine die Leiste immer nur so breit darstellt, wie auch
+  Buttons vorhanden sind, also nicht die volle Bildschirmbreite belegt,
+  wenn es nicht sein mu.
+@endnode
+
+
+@node "/rstart"
+@xref "/resize"
+@{B}@{"/rstart                                                             AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Zeigt nur Wirkung, wenn /resize eingeschaltet ist und bewirkt, da die
+  Leiste von rechts nach links "w„chst".
+@endnode
+
+
+@node "/vertical"
+@{B}@{"/vertical                                                           AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Bewirkt, da die Buttons untereinander dargestellt werden und die Leiste
+  von oben nach unten "w„chst"; ist /vertical gesetzt, so bleiben folgende
+  Optionen ohne Wirkung:
+  /resize (ist dann immer aktiv),
+  /rstart (macht keinen Sinn),
+  /topline (ist prinzipbedingt aktiv),
+  /showmem (funktioniert mit dem verwendeten Konzept einfach nicht),
+  /large (kein /showmem, kein /large)
+  Defaultm„ig erscheint die Leiste dann in der linken oberen Ecke des
+  Bildschirmes, dies kann jedoch mithilfe von /xoff und /yoff variiert
+  werden.
+@endnode
+
+
+@node "/backwind"
+@xref "/topwind"
+@{B}@{"/backwind                                                           AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Hiermit ist es m”glich, das Fenster von AppLine stets hintenliegend zu
+  halten, d.h. es wird niemals das oberste Fenster sein (es sei denn, es
+  ist das einzige offene Fenster).
+  Nachteile: AppLine nimmt dann nicht mehr am WindowCycling teil, und die
+  šbergabe von Dateien durch Ziehen derselben auf die Buttons von AppLine
+  ist dann nicht mehr m”glich.
+@endnode
+
+
+@node "/default"
+@xref "/nocloser"
+@{B}@{"/default                                                            AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Hiermit wird festgelegt, welche Aktion beim Anklicken des AppLine
+  Buttons ausgefhrt werden soll.
+  Erlaubt sind 'close', 'top' oder 'bottom', ist etwas anderes oder gar
+  nichts angegeben, so erscheint das Popup.
+@endnode
+
+
+@node "/deskfirst"
+@xref "/firstapp"
+@{B}@{"/deskfirst                                                          AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Bewirkt, da der Desktop immer als erster Button in der Leiste
+  erscheint, anstatt nach den ACCs. Ein Ausblendversuch des Desktops wird
+  ignoriert, wenn dieser Schalter gesetzt ist.
+  /deskfirst wird ignoriert, wenn /firstapp gesetzt ist.
+@endnode
+
+
+@node "/fkeys"
+@{B}@{"/fkeys                                                              AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Schaltet die M”lichkeit ein, bei vorneliegendem AppLine Fenster die
+  Buttons der Reihe nach per Funktionstaste ausw„hlen zu k”nnen; der
+  AppLine Button wird dabei nicht mitgez„hlt, d.h. der erste Button
+  mit dem Namen einer Applikation wird mit F1 gew„hlt, der n„chste mit
+  F2 etc.
+  Nachteil: dann werden die F-Tasten natrlich nicht mehr an den AV Server
+  durchgereicht.
+@endnode
+
+
+@node "/large"
+@xref "/showmem"
+@{B}@{"/large                                                              AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Schaltet den zur Anzeige des freien Speichers verwendeten Font auf den
+  groen Systemzeichensatz um (defaultm„ig wird der kleine verwendet).
+  Ist ein Parameter angegeben der ungleich 0 ist, wird auch fr alle
+  anderen Buttons der groe Systemzeichensatz benutzt.
+@endnode
+
+
+@node "/xoff"
+@xref "/yoff"
+@{B}@{"/xoff                                                               AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Definiert den Abstand der Leiste zum linken Bildschirmrand; Sinn dieser
+  Option ist es, iconifizierte Fenster entlang des linken Bildschirmrandes
+  platzieren zu k”nnen, ohne das AppLine dadurch verdeckt wird.
+  Beispiel: /xoff 72
+@endnode
+
+
+@node "/yoff"
+@xref "/xoff"
+@xref "/topline"
+@{B}@{"/yoff                                                               AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Definiert den Abstand der Leiste zum unteren Bildschirmrand bzw den
+  Abstand zur Menueleiste, falls /topline verwendet wird;
+  Beispiel: /yoff 4
+@endnode
+
+
+@node "/space"
+@{B}@{"/space                                                              AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Fgt nach dem angegebenen Button einen schmalen Rand ein; der AppLine
+  Button wird dabei nicht mitgez„hlt.
+  Beispiel: /space 3
+@endnode
+
+
+@node "/nowind"
+@xref "/frozen-disabled"
+@{B}@{"/nowind                                                             AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Markiert alle Applikationen, die gerade keine Fenster ge”ffnet haben
+  dadurch, da die Buttons hell dargestellt erscheinen. Diese Darstellung
+  kann mittels /frozen-disabled beeinflut werden.
+
+@endnode
+
+
+@node "/frozen-disabled"
+@{B}@{"/frozen-disabled                                                    AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Markiert alle Applikationen, die gerade keine Fenster ge”ffnet haben
+  dadurch, da die Buttons "durchgesstrichen" werden, und eingefrorene
+  Apps durch helle Schrift, schaltet das Default Verhalten also um.
+@endnode
+
+
+@node "/border"
+@{B}@{"/border                                                             AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Hiermit wird die "St„rke des 3D-Effektes eingestellt; je gr”er der
+  angegebene Wert, desto st„rker sind die Rahmen der App”ikationen.
+
+@endnode
+
+
+@node "/firstapp"
+@xref "/deskfirst"
+@{B}@{"/firstapp                                                           AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+  Falls die als Parameter angegebene App l„uft, wird sie immer im ersten
+  Button von Appline angezeigt und /deskfirst wird ignoriert.
+
+@endnode
+
+
+@node "Systemvoraussetzung"
+@{B}@{"Systemvoraussetzung                                                 AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+AppLine l„uft in jeder Aufl”sung auf allen Rechnern, auf denen ein MagiC
+>= V3.00 oder MagiCMac installiert ist.
+@endnode
+
+
+@node "Einschr„nkungen und Hinweise"
+@{B}@{"Einschr„nkungen und Hinweise                                        AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+Solange genug Platz in der Leiste ist, werden alle Buttons in gleicher
+Gr”e dargestellt, wird es eng, so werden die Buttons auf minimale
+Breite reduziert; reicht der Platz dann immer noch nicht, so ist das
+pers”nliches Pech ;-)
+Eigene Tests ergaben, da sich selbst auf meinem [alten] Monitor (704
+Pixel horizontal) locker 16 Buttons darstellen lassen...den meisten
+Anwendern drfte daher der Speicher ausgehen, bevor es in der Leiste
+zu eng wird ;-)
+
+Wem der verwendete kleine Font in der Leiste zu mickrig ist, der kann
+den Schalter /large mit einem Parameter ungleich 0 versehen.
+Frei definierbare Fonts werde ich nicht implementieren.
+@endnode
+
+
+@node "Benutzung"
+@{B}@{"Benutzung                                                           AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+Ein Klick auf einen der Buttons bringt alle(!) Fenster der betreffenden
+Applikation in der richtigen Reihenfolge nach vorne; hat die Applikation
+keine offenen Fenster, so bekommt sie eine VA_START Nachricht mit einem
+Nullpointer als Parameter, was die meisten Progs dazu bewegt, aktiv zu
+werden.
+
+@box 1 70 10 0
+
+  Nun gibt es offenbar Programme, die damit nicht zurechtkommen:
+      - QED: im n„chsten Update behoben
+      - COMA: ab V3.20 behoben
+      VT52, Kandinsky, TakeOff, Esscode, Zoom, Hex-Edit, Interface
+      haben ebenfalls Probleme.
+  Also bitte bei 2 Bomben als Reaktion auf ein versuchtes nach vorne
+  holen einer Applikation nicht mich anschreiben, sondern den Autor
+  des betreffenden Programmes.
+
+
+@{U}Klick mit CTRL, Rechtsklick oder Doppelklick ”ffnet ein Popup mit
+folgenden Funktionen:@{u}
+
+@limage "popup.img" 1
+
+@symbol ai "nach vorne"
+    nach vorne      bringt alle Fenster der App nach vorne
+                    (wie Einfachklick)
+
+@symbol ai "nach hinten"
+    nach hinten     verlegt alle Fenster der betreffenden App nach hinten
+
+@symbol ai "ausblenden"
+    ausblenden      l„t alle Fenster der betreffenden Applikation vom
+                    Bildschirm verschwinden; dies geschieht MagiC
+                    kompatibel, d.h. diese und die entsprechende Funktion
+                    aus dem MagiC-Menue k”nnen gemischt verwendet werden.
+
+                    Achtung: dieses MagiC Feature existiert noch nicht
+                    immer, unter MagiC 4 funktioniert es, aber es gibt
+                    MagiC 3 Versionen, in denen dieses Feature noch nicht
+                    enthalten ist (ob es welche gibt, in denen 'ausblenden'
+                    per Nachricht funktioniert, wei ich derzeit nicht).
+
+@symbol ai "andere ausblenden"
+    a. ausblenden   l„t alle Fenster auer denen der gew„hlten Applikation
+                    (und dem von AppLine) vom Bildschirm verschwinden;
+
+                    Genau wie 'ausblenden' mu diese Funktion nicht
+                    zwangsl„ufig funktionieren, denn manche Programme
+                    lassen sich einfach nicht ausblenden, mehr als es ver-
+                    suchen kann AppLine nicht tun ;-)
+                    Hat die gew„hlte Applikation keine offenen Fenster, so
+                    zeigen beide Ausblend-Funktionen keinerlei Wirkung.
+
+                    Fr die Verfgbarkeit dieser Funktion gilt das unter
+                    'ausblenden' gesagte.
+
+@symbol ai "auftauen"
+@symbol ai "einfrieren"
+    einfrieren
+    auftauen        friert den Proze ein bzw. taut ihn auf; im einge-
+                    frorenen Zustand ist eine Applikation quasi nicht
+                    existent, sie ist fr andere Prozesse nicht auffind-
+                    bar, ihre Fenster werden versteckt und sie bekommt
+                    keine Rechenzeit.
+                    AppLine stellt die Buttons solcher Prozesse durch-
+                    gestrichen dar (per /frozen-disabled einstellbar)
+
+@symbol ai "beenden"
+    beenden         schickt der App eine AP_TERM Nachricht, so da sie
+                    terminiert, sofern es sich um eine saubere App handelt
+
+@symbol ai "rauswerfen"
+    rauswerfen      die App wird "unsanft" aus dem System entfernt; nach
+                    M”glichkeit sollte diese Funktion nicht verwendet
+                    werden, weil a) die App normalerweise ihre Daten
+                    nicht mehr sichern kann, und b) diese Aktion zu einem
+                    Totalabsturz fhren kann, falls die entfernte App
+                    unsauber programmiert ist
+                    ALSO VORSICHT!
+
+Werden Dateien auf einen der Buttons gezogen, so werden diese an die be-
+treffende Applikation weitergereicht
+
+AppLine wird beendet, indem auf das Symbol am linken Rand der Leiste
+geklickt und im erscheinenden Popup 'Quit' ausgew„hlt wird.
+@endnode
+
+
+@node "Fairware"
+@{B}@{"Fairware                                                            AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+AppLine ist Fairware, d.h. jeder darf dieses Programm installieren und
+benutzen. Bei regelm„iger @{Benutzung ignore} w„re aber eine kleine Spende an den
+Author eine faire Geste, ohne die er die Weiterentwicklung von AppLine
+sicher bald einstellen wird.
+
+Meine Adresse:
+    Holger Weets @@ OL
+        oder
+    Holger_Weets@@OL.maus.de
+
+Wer eine aktuelle Version auf Diskette von mir haben m”chte, der berweise
+bzw. schicke bitte 10,- DM (als Aufwandsentsch„digung) und schicke mir
+eine Disk und einen frankierten und adressierten Rckumschlag an
+folgende Adresse:
+
+    Holger Weets
+    Tangastr. 45
+    26121 Oldenburg
+
+    Konto: 023-182 041
+    BLZ  : 280 501 00
+@endnode
+
+
+@node "History"
+@{B}@{"History                                                             AppLine" ignore} @{b}
+@line 1 75 0 0 7
+
+@{B}V2.5 -> V2.6@{b}
+ú Umstellung auf Pure-C
+ú Schalter /large um Parameter erweitert, dadurch jetzt nur noch eine
+  Resource-Datei.
+
+
+@{B}V2.4 -> V2.5@{b}
+ú Aufgrund der Vielzahl der Anfragen ist Anzeige der Namen in den Buttons
+  wieder wie "frher", d.h. es werden wieder die Dateinamen und nicht die
+  'Prozessnamen' angezeigt
+
+
+@{B}V2.3 -> V2.4@{b}
+ú /firstapp funktionierte manchmal nicht - behoben
+ú (Doppel-)Klick auf die Freispeicher-Anzeige wirkt jetzt wie ein solcher
+  auf den Closer, so das letzterer bei Bedarf abgeschaltet werden kann
+ú je nach Konfig. auftretende optische Unsch”nheit bei abgeschaltetem
+  Closer behoben
+
+
+@{B}V2.2 -> V2.3@{b}
+ú jetzt sollten auch solche Apps korrekt dargestellt werden, die sich im
+  laufenden Betrieb "umbenennen"
+ú die .inf Datei wird jetzt in allen Pfaden aus PATH gesucht, statt nur im
+  Startverzeichnis von AppLine
+ú ist die Env.-Variable AVSERVER gesetzt, so wartet AppLine so lange mit
+  dem ™ffnen des Fensters, bis der Server gestartet ist
+ú neues Kommando '/firstapp <name>' setzt den Button fr die App <name>
+  ganz @{"nach vorne" LINK "Benutzung" "nach vorne"}, sofern sie l„uft (/deskfirst wird ignoriert)
+
+
+@{B}V2.1 -> V2.2@{b}
+ú die restlichen relevanten Strings ins RSC-File verlegt, damit das An-
+  fertigen der englischen Version einfacher ist
+ú Protokoll fr SMU erweitert
+ú optische Unsch”nheit bei /rstart & /resize behoben
+ú /border wird bei weniger als 16 Farben ignoriert
+ú mehrfach laufende Applikationen werden jetzt besser untersttzt
+
+
+@{B}V2.0 -> V2.1@{b}
+ú es liegt ein neues RSC-File 'applineb.rsc' bei, mit Buttons in groer
+  Schrift; bei Bedarf einfach in 'appline.rsc' umbenennen
+ú Angabe von /rstart und /vertical bewirkt, da die Leiste von unten nach
+  oben "w„chst"
+ú neues Kommando /border legt die "St„rke" des 3D-Effektes fest
+ú der "Closer" zeigt jetzt ein eigenes Popup mit den Funktionen
+  'Alle/Auswahl zeigen', 'Alle einblenden', 'Quit'
+ú Die Popups der Applikationen zeigen jetzt den Speicherbedarf des
+  jeweiligen Kandidaten an
+
+
+@{B}V1.9 -> V2.0@{b}
+ú bei eingeschaltetem /deskfirst erscheinen jetzt keine Ziffern mehr im
+  ersten Button, wenn der Desktop noch gar nicht l„uft, weil AppLine aus
+  dem Apps-Ordner gestartet wurde.
+ú Aktionen bei /resize minimiert, vielleicht lindert das die Probleme
+  einiger Anwender beim Fensterscrolling
+ú neue Option /rstart l„t die Leiste bei /resize von rechts nach links
+  "wachsen"
+ú neue Option /vertical l„t die Buttons untereinander im Fenster
+  erscheinen, die Leiste "w„chst" dann von oben nach unten
+ú auf vielfachen Wunsch eines einzelnen Herren lassen sich die zur
+  Visualisierung von "eingefroren" und "hat keine ge”ffneten Fenster"
+  verwendeten Attribute jetzt einstellen: /frozen-disabled zeigt
+  eingefrorene Apps mit heller Schrift und (falls eingeschaltet) Apps
+  ohne Fenster ge-X-t
+
+
+@{B}V1.8 -> V1.9@{b}
+ú neues Kommando /nowind stellt die Buttons aller Apps hell dar, die gerade
+  kein Fenster ge”ffnet haben; die Buttons eingefrorener Prozesse werden
+  jetzt durchgestrichen
+ú /resize funktioniert jetzt auch, wenn gar keine Apps in der Leiste
+  stehen
+
+
+@{B}V1.7 -> V1.8@{b}
+ú bei /yoff k”nnen jetzt auch negative Werte angegeben werden, z.B. -2, um
+  das "alte" Design (flachere Leiste) wieder herzubekommen
+ú beim @{"nach vorne" LINK "Benutzung" "nach vorne"} holen bekommt das anschlieend oberste Fenster eine ent-
+  sprechende Nachricht, so das der Cursor in den Editfenstern von Cat jetzt
+  wieder erscheint
+ú neues Kommando /space fgt einen "Absatz" nach dem angegebenen Button ein
+
+
+@{B}V1.6 -> V1.7@{b}
+ú die Popups erscheinen jetzt auch bei angegebenem /xoff wieder bndig mit
+  dem Button
+ú bei angegebenem /xoff sowie /showmem und fehlendem /resize war die
+  Speicheranzeige nicht mehr sichtbar - behoben
+ú bei eingeschaltetem /deskfirst wird der Ausblendversuch des Desktop
+  ignoriert
+
+
+@{B}V1.5 -> V1.6@{b}
+ú Der AV-Server wird jetzt ber die Environment-Variable gesucht; sorry
+  fr dieses šberbleibsel der ersten AppLine-Skizze :-}
+ú der freie Speicher wird jetzt mit einem Leerzeichen rechtem Rand
+  angezeigt
+ú bei der Kombination von /resize und /showmem wird jetzt rechts
+  entsprechend Platz hinter den Buttons gelassen
+ú bei eingeschalteter Freispeicheranzeige wird jetzt entsprechend frher
+  auf den Platzspar-Modus umgeschaltet
+ú der untere Rand der Buttons liegt jetzt nicht mehr auerhalb des Bild-
+  schirmes
+ú per /fkeys kann (auf vielfachen Wunsch eines einzelnen Herren ;-) jetzt
+  eingeschaltet werden, da bei vorneliegendem AppLine Fenster die Buttons
+  der Reihe nach mit den F-Tasten ausgew„hlt werden k”nnen
+ú Tastendrcke gehen jetzt immer an den AV Server und nicht mehr mal an
+  diese und mal an jene App (diejenige, deren Menue gerade dargestellt
+  wird) ...zumal kaum ein Prog AV_SENDKEY auswertet.
+ú per /large kann die Anzeige des freien Speichers jetzt auf den groen
+  Systemfont umgeschaltet werden
+ú Kommandos /xoff und /yoff zur Bestimmung des Abstandes der Leiste von
+  den R„ndern des Desktops eingebaut
+@endnode

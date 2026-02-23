@@ -1,0 +1,102 @@
+.BASE	= E00000	;TOS-ROM-Adresse  (TOS 4.04: $E00000)
+.LENGTH =  80000	;TOS-L„nge		  (TOS 4.04:  $80000)
+.WIDTH	=	  .8	;TOS-Breite 	  (TOS 4.04:	  .8)
+
+.NATION = -1		;TOS-Nationalit„t (TOS 4.04: keine bestimmte)
+<tos404.img 		;Ungepatches TOS 4.04 aus File TOS404.IMG lesen.
+
+=08.03.1993,.NATION     ;Muss die Version vom 8.3.1993 sein
+
+>1		; eine Datei (TOS.IMG) erzeugen
+
+.CRC = 1			;1: CRC berechnen und setzen, 0: CRC nicht berechnen
+
+; version
+02 $04,06
+; date
+18 $01,04,20,26
+; dosdate
+1E $5c,24
+
+; soundcmd (FPATCH2)
+5DB $40
+; .BOOT_DEV (TOSPATCH)
+7E2 $30
+; .STACK_POINTER (TOSPATCH)
+1198 $DE,FC,00,0C,4A,40,66,68,3F,3C,00,07,2F,38
+; clr.w -> clr.l in _bscr_dump
+125F $B8
+; move.b #$ffff -> move.b #$00ff (no real effect)
+22A2 $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+290E $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+2954 $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+29CE $00
+; Bconmap (FPATCH2)
+2A37 $20
+2A44 $67,12,61,34,4a,2a,00,2c
+~    $6a,fa,11,6a,00,2c,00,1d
+~    $15,40,00,2e,20,5f,4e,75
+~    $4e,71
+; steprate (TOSPATCH)
+2CCF $03
+;
+2D8D $23
+2D9B $23
+; move.b #$fff8 -> move.b #$00f8 (no real effect)
+37EA $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+37FA $00
+; move.b #$fff8 -> move.b #$00f8 (no real effect)
+380C $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+381C $00
+; muls (no effect)
+580D $02
+; muls (no effect)
+80F5 $01
+; muls (no effect)
+8773 $01
+; movem.w -> movem.l (unneeded, since only low bits of d3/d4 are changed)
+F21B $E7
+F221 $0C
+F225 $0E
+F229 $10
+F22D $12
+F253 $14
+F271 $DF
+F287 $DF
+; move.b #$ffff -> move.b #$00ff (no real effect)
+1450C $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+148C4 $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+14F1A $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+152B2 $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+15A94 $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+15B20 $00
+; move.b #$ffff -> move.b #$00ff (no real effect)
+160E6 $00
+; mulu (no effect)
+1CEF1 $01
+; dbmi -> dbf (no effect since a zero is moved)
+1F4E2 $51
+; return TRUE in rsc_read
+27645 $B0
+276F2 $70,01,4C,DF,20,80
+; arg .menu +2 at the end of _mn_getmn (bogus patch, will crash)
+30D03 $10
+30D0B $10
+30D15 $10
+30D1F $10
+; desktop info
+577A3 $' Version 4.06 '
+5B28F $' Version 4.06 '
+67E9E $' Version 4.06 '
+702CE $' Version 4.06 '
+786E0 $' Version 4.06 '

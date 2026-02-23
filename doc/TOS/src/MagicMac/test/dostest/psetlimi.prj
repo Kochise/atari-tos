@@ -1,0 +1,8 @@
+psetlimi.tos
+.C[-I..\..\pc\include]
+.L[-S=$4000]   ; stacksize 16k
+=              ; list of modules follows...
+..\..\pc\lib\cstartv.o
+psetlimi.c
+..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\pc\lib\pctoslib.lib

@@ -1,0 +1,16 @@
+showfree.tos
+.C[-I..\..\pc\include]
+
+.C[-K-]
+.C[-P-]
+.C[-A-]
+.C[-G-]
+.L[-S=0]
+
+=
+..\..\pc\lib\cstartv.o
+
+showfree.c
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib

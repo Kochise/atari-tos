@@ -1,0 +1,163 @@
+!iflang [english]
+
+!begin_node Output functions
+!html_name vdi_output
+
+This library contains a multitude of functions to enable output of
+various types to be made on an output device. In all, the following
+routines are available:
+
+!begin_xlist !compressed [x v_ftext_offset16]
+!item [(!bullet) v_arc]
+Draws arcs of circles
+!item [(!bullet) v_bar]
+Draws filled rectangles
+!item [(!bullet) v_bez]
+Draws Bezier-splines
+!item [(!bullet) v_bez_fill]
+Draws and fills Bezier-splines
+!item [(!bullet) v_cellarray]
+Sets colours by coordinates of colour cells
+!item [(!bullet) v_circle]
+Draws filled circle
+!item [(!bullet) v_contourfill]
+Fills area up to a given limit
+!item [(!bullet) v_ellarc]
+Draws elliptical arc
+!item [(!bullet) v_ellipse]
+Draws filled ellipse
+!item [(!bullet) v_ellpie]
+Draws filled ellipse segment
+!item [(!bullet) v_etext]
+Outputs graphics text
+!item [(!bullet) v_fillarea]
+Fills specified area (polygon)
+!item [(!bullet) v_ftext]
+Outputs outline text (vector font)
+!item [(!bullet) v_ftext16]
+Outputs 16-bit Speedo characters
+!item [(!bullet) v_ftext_offset]
+Outputs outline text with offset vectors
+!item [(!bullet) v_ftext_offset16]
+Ditto, with 16-bit Speedo characters
+!item [(!bullet) v_gtext]
+Outputs graphics text
+!item [(!bullet) v_justified]
+Outputs justified text
+!item [(!bullet) v_mono_ftext]
+No information available at present
+!item [(!bullet) v_pieslice]
+Draws filled circular segment
+!item [(!bullet) v_pline]
+Outputs a polyline
+!item [(!bullet) v_pmarker]
+Draws marker(s)
+!item [(!bullet) v_rbox]
+Draws rounded rectangle
+!item [(!bullet) v_rfbox]
+Draws filled, rounded rectangle
+!item [(!bullet) vr_recfl]
+Draws filled rectangle
+!end_xlist
+
+(!B)Note:(!b) One can specify the type of output further with the attribute
+functions.
+
+See also: VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Ausgabefunktionen
+!html_name vdi_output
+
+Diese Bibliothek enth(!aumlaut)lt eine Vielzahl von Funktionen, um Ausgaben
+unterschiedlicher Art auf einem Ausgabeger(!aumlaut)t vornehmen zu k(!oumlaut)nnen. Insgesamt
+stehen die folgenden Routinen zur Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [x v_ftext_offset16]
+!item [(!bullet) v_arc]
+Kreisbogen zeichnen.
+!item [(!bullet) v_bar]
+Ausgef(!uumlaut)lltes Rechteck zeichnen.
+!item [(!bullet) v_bez]
+Bezier-Spline zeichnen.
+!item [(!bullet) v_bez_fill]
+Bezier-Spline zeichnen und f(!uumlaut)llen.
+!item [(!bullet) v_cellarray]
+Farbauswahltabelle darstellen.
+!item [(!bullet) v_circle]
+Ausgef(!uumlaut)llten Kreis zeichnen.
+!item [(!bullet) v_contourfill]
+Fl(!aumlaut)che bis zu bestimmten Begrenzungen ausf(!uumlaut)llen.
+!item [(!bullet) v_ellarc]
+Ellipsenbogen zeichnen.
+!item [(!bullet) v_ellipse]
+Ausgef(!uumlaut)llte Ellipse zeichnen.
+!item [(!bullet) v_ellpie]
+Ausgef(!uumlaut)lltes Ellipsensegment zeichnen.
+!item [(!bullet) v_etext]
+Text grafisch ausgeben.
+!item [(!bullet) v_fillarea]
+Angegebene Fl(!aumlaut)che ausf(!uumlaut)llen.
+!item [(!bullet) v_ftext]
+Text mittels Vektor-Font ausgeben.
+!item [(!bullet) v_ftext16]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_ftext_offset]
+Text mittels Vektor-Font ausgeben.
+!item [(!bullet) v_ftext_offset16]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_gtext]
+Text grafisch ausgeben.
+!item [(!bullet) v_justified]
+Ausgerichteten Text ausgeben.
+!item [(!bullet) v_mono_ftext]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) v_pieslice]
+Ausgef(!uumlaut)lltes Kreissegment zeichnen.
+!item [(!bullet) v_pline]
+Linienzug zeichnen.
+!item [(!bullet) v_pmarker]
+Markierung zeichnen.
+!item [(!bullet) v_rbox]
+Abgerundetes Rechteck zeichnen.
+!item [(!bullet) v_rfbox]
+Ausgef(!uumlaut)lltes, abgerundetes Rechteck zeichnen.
+!item [(!bullet) vr_recfl]
+Rechteck ausf(!uumlaut)llen.
+!end_xlist
+
+(!B)Hinweis:(!b) (!Uumlaut)ber die Attributfunktionen ist es dar(!uumlaut)ber hinaus m(!oumlaut)glich,
+die Art der Ausgabe weiter zu spezifizieren.
+
+Querverweis: Workstations des VDI ~  Style-Guidelines
+
+
+!endif
+
+
+!include gem/vdi/output/vr_recfl.ui
+!include gem/vdi/output/v_arc.ui
+!include gem/vdi/output/v_bar.ui
+!include gem/vdi/output/v_bez.ui
+!include gem/vdi/output/v_bez_fill.ui
+!include gem/vdi/output/v_cellarray.ui
+!include gem/vdi/output/v_circle.ui
+!include gem/vdi/output/v_contourfill.ui
+!include gem/vdi/output/v_ellarc.ui
+!include gem/vdi/output/v_ellipse.ui
+!include gem/vdi/output/v_ellpie.ui
+!include gem/vdi/output/v_etext.ui
+!include gem/vdi/output/v_fillarea.ui
+!include gem/vdi/output/v_ftext.ui
+!include gem/vdi/output/v_ftext_offset.ui
+!include gem/vdi/output/v_gtext.ui
+!include gem/vdi/output/v_justified.ui
+!include gem/vdi/output/v_pieslice.ui
+!include gem/vdi/output/v_pline.ui
+!include gem/vdi/output/v_pmarker.ui
+!include gem/vdi/output/v_rbox.ui
+!include gem/vdi/output/v_rfbox.ui
+
+!end_node
+

@@ -1,0 +1,59 @@
+;*******************************************************************************
+;* MH:
+;* TOS-Daten festlegen
+
+.BASE   =   E00000    ;TOS-ROM-Adresse
+.LENGTH =    80000    ;TOS-L„nge (Default $80000)
+.WIDTH  =      .32    ;TOS-Breite (Default 32-bittig)
+
+;
+; Select nation.
+; Valid values: USA/UK/FRA/FRG/SPA/ITA/SWE/SWF/SWG/CZE
+; Note: if you change nation here, you must also
+; adjust lang_dif in tosxxx.S accordingly
+;
+.NATION = .UK      ;TOS-Nationalit„t
+
+;*******************************************************************************
+;* MRF:
+;* Einleseformat des Patchprogramms
+
+<TOSH.IMG   	;read Image assembled by SEKA
+=24.09.1991,.NATION    	;muž die Version vom 24.9.1991 sein! (sonst Message!)
+.CRC = 1                   ; Berechnen und Setzen der CRC-Prfsumme vom TOS.
+
+; create a single file, relocated to 7FE00000
+>1 7FE00000
+
+;*******************************************************************************
+;fa mach64 init programm. org auf $300000
+
+70000 m64_pci.bin
+72000 m64_isa.bin
+
+; reloc exceptions
++relocs.fil
+
+;*******************************************************************************
+
+; Patch the about dialog
+407A2+.lang_dif2
+; in the es and it versions, strings are a bit shorter
+_IF .NATION = .SPA !O! .NATION = .ITA
+~ 'Medusa Computer Sys',0
+_ELSE
+~ 'Medusa Computer System',0
+_ENDIF
+~ 'Atari Corporation',0
+~ 'Hades TOS : 14.04.1998'
+
+;*******************************************************************************
+;* MH:
+;* Abbruch bei šberschreiten der TOS-L„nge.
+
+_IF ~ > .LENGTH-.LENGTH/10000
+_ERROR 'Patches l„nger als das TOS'
+_ENDIF
+
+;*******************************************************************************
+;* Ende der Datei...

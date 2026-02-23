@@ -1,0 +1,83 @@
+!iflang [english]
+
+!begin_node Sound routines
+!html_name xbios_sound
+
+The following routines for sound programming are available on the  
+Falcon030:
+
+!begin_xlist [x setmontracks]  !compressed
+!item [(!bullet) buffoper] Sets record/playback mode.
+!item [(!bullet) buffptr] Gets record/playback mode.
+!item [(!bullet) devconnect] Connects audio subsystem components.
+!item [(!bullet) dsptristate] Coordinates external DSP hardware.
+!item [(!bullet) gpio] Communication via the external DSP port.
+!item [(!bullet) locksnd] Locks sound system for other applications.
+!item [(!bullet) setbuffer] Sets record/playback buffer addresses.
+!item [(!bullet) setinterrupt] Sets interrupt at the end of recording/playback.
+!item [(!bullet) setmode] Selects record/playback mode.
+!item [(!bullet) setmontracks] Sets playback track for internal loudspeaker.
+!item [(!bullet) settracks] Sets number of record and playback tracks.
+!item [(!bullet) sndstatus] Gets status of the A/D and D/A converter.
+!item [(!bullet) soundcmd] Sets/gets the parameters of the A/D and D/A converter.
+!item [(!bullet) StarTrack] (!nolink [XBIOS]) extension for the StarTrack card.
+!item [(!bullet) unlocksnd] Frees sound system for other applications.
+!item [(!bullet) WavePlay]  Replays a sample.
+
+!end_xlist
+(!B)Note:(!b) The availability of these routines on other computer systems  
+can be ascertained via the (!link [McSn-Cookie][Cookie, McSn])
+or the (!link [_SND][Cookie, _SND]) cookie.
+
+!else
+
+!begin_node Soundroutinen
+!html_name xbios_sound
+
+Auf dem Falcon stehen die folgenden Routinen zur Soundprogrammierung zur
+Verf(!uumlaut)gung:
+
+!begin_xlist [x setmontracks]  !compressed
+!item [(!bullet) buffoper] Aufnahme-/Wiedergabemodus setzen.
+!item [(!bullet) buffptr] Aufnahme-/Wiedergabeposition ermitteln.
+!item [(!bullet) devconnect] Audio-Subsystem-Komponenten verbinden.
+!item [(!bullet) dsptristate] Externe DSP-Hardware koordinieren.
+!item [(!bullet) gpio] (!Uumlaut)ber externe DSP-Buchse kommunizieren.
+!item [(!bullet) locksnd] Soundsystem f(!uumlaut)r andere Anwendungen sperren.
+!item [(!bullet) setbuffer] Aufnahme-/Wiedergabepuffer setzen.
+!item [(!bullet) setinterrupt] Interrupt am Ende einer Aufnahme/Wiedergabe festlegen.
+!item [(!bullet) setmode] Aufnahme-/Wiedergabemodus w(!aumlaut)hlen. 
+!item [(!bullet) setmontracks] Wiedergabespur f(!uumlaut)r internen Lautsprecher festlegen.
+!item [(!bullet) settracks] Spurenanzahl festlegen.
+!item [(!bullet) sndstatus] Status des A/D- und D/A-Wandlers ermitteln.
+!item [(!bullet) soundcmd] Parameter des A/D- und D/A-Wandlers setzen/ermitteln.
+!item [(!bullet) StarTrack] (!nolink [XBIOS])-Erweiterumg der StarTrack-Karte.
+!item [(!bullet) unlocksnd] Soundsystem f(!uumlaut)r andere Anwendungen freigeben.
+!item [(!bullet) WavePlay]  Abspielen eines Samples.
+
+!end_xlist
+(!B)Hinweis:(!b) Die Verf(!uumlaut)gbarkeit dieser Routinen auf anderen
+Rechnersystemen kann (!uumlaut)ber den (!link [McSn-Cookie][Cookie, McSn])
+oder den (!link [_SND][Cookie, _SND])-Cookie ermittelt werden.
+
+
+!endif
+
+!include xbios/sound/buffoper.ui
+!include xbios/sound/buffptr.ui
+!include xbios/sound/devconne.ui
+!include xbios/sound/dsptrist.ui
+!include xbios/sound/gpio.ui
+!include xbios/sound/locksnd.ui
+!include xbios/sound/setbuffe.ui
+!include xbios/sound/setinter.ui
+!include xbios/sound/setmode.ui
+!include xbios/sound/setmontr.ui
+!include xbios/sound/settrack.ui
+!include xbios/sound/sndstatu.ui
+!include xbios/sound/soundcmd.ui
+!include xbios/sound/startrac.ui
+!include xbios/sound/unlocksn.ui
+!include xbios/sound/waveplay.ui
+
+!end_node

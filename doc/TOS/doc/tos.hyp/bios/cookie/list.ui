@@ -1,0 +1,1969 @@
+!iflang [english]
+
+!begin_table [|c|c|l|l|l|] !hline
+
+C !! X !! Name !! Author !! Description
+
+!hline
+ ~ !! x !! (!link [3DMN][Cookie, 3DMN]) !!  Sven Kopacz !!  3D-Menu
+ x !! x !! (!link [3RDB][Cookie, 3RDB]) !!  Ole Pahl !!  Third Button
+ ~ !! x !! (!link [60Hz][Cookie, 60Hz]) !!  Jean-Pierre Rasquon !!  60Hz resident
+ ~ !! x !! (!link [8*8][Cookie, 8*8]) !!  Rainer Seitel !!  Font switching for (!nolink [GEM])-programs
+!hline
+ ~ !! x !! (!link [A2sv][Cookie, A2sv]) !!  Harald Siegmund !!  Trapsave
+ ~ !! x !! (!link [AB40][Cookie, AB40]) !!  GE-Soft !!  68882.PRG
+ ~ !! x !! (!link [ACCS][Cookie, ACCS]) !!  Steffen Engel !!  ACC.PRG
+ x !! x !! (!link [AFnt][Cookie, AFnt]) !!  Hayo Schmidt !!  (!nolink [AES]) Font loader
+ ~ !! x !! (!link [AgK0][Cookie, AgK0]) !!  Marcel Waldvogel !!  AusGuck RAMdisk
+ x !! x !! (!link [AHVR][Cookie, AHVR]) !!  Alexander Herzlinger, OverScan GbR !!  VRAM
+ ~ !! ~ !! (!link [ALHP][Cookie, ALHP]) !!   ~  !!  Alman HP DeskJet screen-dumper
+ x !! x !! (!link [ALIC][Cookie, ALIC]) !!  Sven Kopacz !!  Alice
+ ~ !! x !! (!link [ALRM][Cookie, ALRM]) !!  Torsten Lang !!  Driver for DIGIFON TDS3000
+ x !! x !! (!link [AmAN][Cookie, AmAN]) !!  Sven Kopacz !!  A-MAN
+ ~ !! x !! (!link [AMC1][Cookie, AMC1]) !!  Arnd Beižner !!  Monitor Switchbox
+ ~ !! x !! (!link [AMC2][Cookie, AMC2]) !!  Arnd Beižner !!  PC keyboard driver Software
+ x !! ~ !! (!link [AMCG][Cookie, AMCG]) !!  Arnd Beižner !!  AMC-GDOS
+ ~ !! x !! (!link [ANSe][Cookie, ANSe]) !!  Borek Lupomesky !!  ANSI emulation
+ x !! ~ !! (!link [APGM][Cookie, APGM]) !!  Andreas Pietsch !!  SysGem
+ ~ !! x !! (!link [ARAe][Cookie, ARAe]) !!  ARAnyM !! ARAnyM ethernet card emulation
+ ~ !! x !! (!link [ARTS][Cookie, ARTS]) !!  Massimo Farina !!  Screen-Artist screensaver
+ x !! x !! (!link [asGT][Cookie, asGT]) !!  Harald Siegmund, adequate systems !!  Wacom Graphics Tablet Driver
+ ~ !! x !! (!link [ASum][Cookie, ASum]) !!  Holger Nassenstein, MW-electronic !!  ASUNLENK
+ ~ !! ~ !! (!link [AVmw][Cookie, AVmw]) !!   ~  !!  Virus warning program
+ ~ !! x !! (!link [AVOJ][Cookie, AVOJ]) !!  Oliver Joppich !!  Oliver Joppich's Anti Virus program
+ ~ !! x !! (!link [AVSV][Cookie, AVSV]) !!  Alexander Barton !! AV-Server
+!hline
+ ~ !! x !! (!link [BASH][Cookie, BASH]) !!  Edgar R”der !!  Bourne Again Shell
+ x !! x !! (!link [BBD2][Cookie, BBD2]) !!  Michael Maažen !!  Bastel Bus Driver V2.xx
+ x !! ~ !! (!link [BCKW][Cookie, BCKW]) !!  C. Dupuydauby !!  BackWard
+ x !! ~ !! (!link [BGEM][Cookie, BGEM]) !!  Thomas Much !!  BubbleGEM
+ x !! ~ !! (!link [BGHD][Cookie, BGHD]) !!  Thomas Much !!  BubbleGEM Help-Daemon
+ ~ !! x !! (!link [BHdl][Cookie, BHdl]) !!  Steffen Richter !!  BadHandle
+ x !! ~ !! (!link [BHLP][Cookie, BHLP]) !!  Thomas Much !!  BubbleGEM config-cookie
+ x !! x !! (!link [BIGS][Cookie, BIGS]) !!  Julian Reschke, SciLab GmbH !!  Big Screen
+ ~ !! x !! (!link [BIOC][Cookie, BIOC]) !!  Tiemann Bj”rn !!  Pirosca
+ ~ !! ~ !! (!link [BLNK][Cookie, BLNK]) !!   ~  !!  Screen Blanker
+ x !! x !! (!link [BLOW][Cookie, BLOW]) !!  Georg Acher, Michael Eberl !!  Blowup030
+ x !! x !! (!link [BScn][Cookie, BScn]) !!  Roland Skuplik !!  BACKSCAN
+ ~ !! x !! (!link [BSIM][Cookie, BSIM]) !!  Marcel Waldvogel !!  Blitter Simulator
+ ~ !! x !! (!link [BSTE][Cookie, BSTE]) !!  Matthias Andr„ !!  BigSTE
+ ~ !! x !! (!link [BUG1][Cookie, BUG1]) !!  Markus Fritze !!  Bugaboo Debugger
+!hline
+ ~ !! x !! (!link [C24P][Cookie, C24P]) !!  Cybercube Research Limited !!  CyRel 24Bit-Patch
+ x !! ~ !! (!link [CACH][Cookie, CACH]) !!  Robert Federle !!  Cache Control
+ x !! ~ !! (!link [CALD][Cookie, CALD]) !!  Walter Hermann !!  Computer Aided Loudspeaker Desgin
+ x !! ~ !! (!link [CASE][Cookie, CASE]) !!  Julian Reschke !!  Casing type, Gemini
+ ~ !! x !! (!link [CatS][Cookie, CatS]) !!  Hayo Schmidt !!  CatStick
+ x !! ~ !! (!link [CaTT][Cookie, CaTT]) !!  Cybercube Research Ltd, Toronto, Canada !!  CyRel Cattamaran
+ ~ !! x !! (!link [CB2K][Cookie, CB2K]) !!  Claus Brod !!  Claus Brod (!nolink [GEMDOS]) 2k-bug patch
+ ~ !! x !! (!link [CBCE][Cookie, CBCE]) !!  Claus Brod !!  Claus Brod Critical Error handler patch
+ ~ !! x !! (!link [CBDF][Cookie, CBDF]) !!  Claus Brod !!  Claus Brod Dabbel Feature
+ ~ !! x !! (!link [CBHD][Cookie, CBHD]) !!  Claus Brod !!  Claus Brod HD Driver
+ ~ !! x !! (!link [CBHY][Cookie, CBHY]) !!  Claus Brod !!  Claus Brod Hyper Format
+ ~ !! x !! (!link [CBIT][Cookie, CBIT]) !!  Guido Sawade !!  C'T Bus Interface Driver
+ x !! ~ !! (!link [CBTS][Cookie, CBTS]) !!  Andre Felbrich !!  Crazy Bits Tabletttreiber System
+ ~ !! x !! (!link [CCDA][Cookie, CCDA]) !!  CCD !!  Tempus Word
+ ~ !! x !! (!link [cdMC][Cookie, cdMC]) !!  Guenther Leis !!  CDROM.XFS
+ ~ !! x !! (!link [CDOT][Cookie, CDOT]) !!   ~  !!  Crazy-Dots graphic driver
+ x !! ~ !! (!link [ceci][Cookie, ceci]) !!   CENTEK !! Cecile disk drive driver
+ ~ !! ~ !! (!link [CFIX][Cookie, CFIX]) !!   ~  !!  Console Fix
+ ~ !! ~ !! (!link [CFsl][Cookie, CFsl]) !!   ~  !!  Compo FSel
+ x !! x !! (!link [CHAM][Cookie, CHAM]) !!  Karsten Isakovic !!  Chameleon
+ ~ !! x !! (!link [CHBT][Cookie, CHBT]) !!   ~  !!  (!nolink [Changes])
+ x !! x !! (!link [CHN1][Cookie, CHN1]) !!   ~  !!  (!nolink [Changes])
+ ~ !! ~ !! (!link [CHNG][Cookie, CHNG]) !!   ~  !!  (!nolink [Changes])
+ ~ !! x !! (!link [CHTW][Cookie, CHTW]) !!  Dirk Haun !!  Chatwin
+ x !! ~ !! (!link [CICN][Cookie, CICN]) !!  Roger Jordan !!  C-ICON
+ ~ !! x !! (!link [CISY][Cookie, CISY]) !!  Ingo Ciechowski !!  CISYSTEM
+ ~ !! x !! (!link [CJAR][Cookie, CJAR]) !!  Volker Janzen !!  Cookie.prg
+ x !! ~ !! (!link [CJar][Cookie, CJar]) !!   ~  !!  JarXXX Program
+ ~ !! x !! (!link [ck01][Cookie, ck01]) !!  Arnd Beissner !!  Cookie library
+ x !! x !! (!link [CKBD][Cookie, CKBD]) !!  Pascal Fellerich !!  Composed Character Deluxe Keyboard Driver
+ ~ !! x !! (!link [CKJR][Cookie, CKJR]) !!  Julian Reschke !!  Create Cookie Jar Program
+ x !! x !! (!link [CLCK][Cookie, CLCK]) !!  Sieghard Sch„fer !!  Mega-ST Hardware clock TSR Utilities
+ ~ !! x !! (!link [CLK1][Cookie, CLK1]) !!  Dieter Jankowski !!  MEGA ST Clock Utility
+ ~ !! ~ !! (!link [CLOK][Cookie, CLOK]) !!   ~  !!  CLOK for GMT settings (?)
+ x !! ~ !! (!link [CM16][Cookie, CM16]) !!  Cybercube Research Limited !!  CyReL's M16 versatile installation program
+ ~ !! ~ !! (!link [CNTS][Cookie, CNTS]) !!  David Godec, Sacha Hnatiuk, CENTEK !!  CentScreen
+ ~ !! x !! (!link [COLO][Cookie, COLO]) !!  Meinolf Schneider !!  Colos mono-colour converter
+ ~ !! x !! (!link [CPSL][Cookie, CPSL]) !!  Patrick Dubbrow, Jrgen Heindel !!  CapsLock display
+ ~ !! x !! (!link [CRAC][Cookie, CRAC]) !!  Protar !!  Protar HD Driver
+ x !! x !! (!link [CRIT][Cookie, CRIT]) !!  Thomas Schr”ter, Fast Electronic GmbH !!  Crypt-It
+ x !! x !! (!link [CSMD][Cookie, CSMD]) !!  Cybercube Research Limited !!  CyReL's Serial Mouse Manager
+ x !! ~ !! (!link [CT40][Cookie, CT40]) !!  ~ !! CT60 68040 falcon acceleration card by Rodolphe Czuba
+ x !! x !! (!link [CT60][Cookie, CT60]) !!  Didier Mequignon !!  CT60 68060 falcon acceleration card by Rodolphe Czuba
+ x !! ~ !! (!link [CTCH][Cookie, CTCH]) !!  Edgar R”der !!  Master-module catch.mmx
+ ~ !! x !! (!link [CtCp][Cookie, CtCp]) !!  Jean-Pierre Rasquin !!  CapsLock Display
+ ~ !! x !! (!link [CTSF][Cookie, CTSF]) !!  Lars Erik Osterud !!  CTS Bug Fix
+ x !! ~ !! (!link [cVDI][Cookie, cVDI]) !!  Cybercube Research Limited !!  CyReL's M-16-1280 (!nolink [VDI]) driver
+ ~ !! ~ !! (!link [CWCo][Cookie, CWCo]) !!   ~  !!  Compo FSel
+!hline
+ x !! ~ !! (!link [DATE][Cookie, DATE]) !!   ~  !!  Led Panel Date
+ x !! x !! (!link [DATL][Cookie, DATL]) !!  Delirium Arts A. Freude & P. Scherer GbR !!  TwiLight
+ ~ !! ~ !! (!link [DAWN][Cookie, DAWN]) !!   ~  !!  Before Dawn
+ x !! x !! (!link [DBFX][Cookie, DBFX]) !!  Julian Reschke !!  Diablo Emulator patch fix for MiNT
+ ~ !! ~ !! (!link [DCdd][Cookie, DCdd]) !!   ~  !!  Double-Click Software Data Diet
+ ~ !! x !! (!link [DCF7][Cookie, DCF7]) !!  Sven Kopacz !!  DCF77
+ x !! ~ !! (!link [DCSD][Cookie, DCSD]) !!  ~ !!  Calamus screen driver
+ x !! x !! (!link [DECD][Cookie, DECD]) !!  Markus Fichtenbauer !!  DECDriver cookie
+ x !! x !! (!link [DEPI][Cookie, DEPI]) !!  Norbert Marschalleck !!  DeskPic
+ x !! ~ !! (!link [DHST][Cookie, DHST]) !!  Thomas Much !!  Document (!nolink [History]) protocol
+ ~ !! ~ !! (!link [DIG2][Cookie, DIG2]) !!  Emmanuel Jaccard  !!  Digiplay
+ ~ !! x !! (!link [DJBX][Cookie, DJBX]) !!  Roland Skuplik !!  DeskJet-Init (!nolink [BIOS]) extension
+ ~ !! ~ !! (!link [DKEY][Cookie, DKEY]) !!  Brainstorm  !!  Dead Key
+ ~ !! ~ !! (!link [DNTR][Cookie, DNTR]) !!   ~  !!  DNT RAMdisk
+ x !! ~ !! (!link [DPAT][Cookie, DPAT]) !!  Martin Osieka !!  Desktop Patterns
+ ~ !! x !! (!link [DPRS][Cookie, DPRS]) !!  Wilfried Cordes !!  Printer buffer
+ ~ !! x !! (!link [DRIV][Cookie, DRIV]) !!  Stefan Hintz !!  Drive Edit
+ ~ !! x !! (!link [DRRH][Cookie, DRRH]) !!  Dietmar Rabich !!  Wodan Keyboard Layout program
+ ~ !! x !! (!link [Dsel][Cookie, Dsel]) !!  Sven Kopacz !!  Dsel - System kernel for file-selector
+ ~ !! x !! (!link [DSSO][Cookie, DSSO]) !!  David von Stetten !!  Sokrates keyboard driver
+ x !! ~ !! (!link [DYDL][Cookie, DYDL]) !!  Dimitri Junker !!  DIR_LWR
+ ~ !! x !! (!link [DYJA][Cookie, DYJA]) !!  Dimitri Junker !!  CCONRS.PRG
+ ~ !! x !! (!link [DYJD][Cookie, DYJD]) !!  Dimitri Junker !!  Dosound_MPC
+ ~ !! x !! (!link [DYJT][Cookie, DYJT]) !!  Dimitri Junker !!  ToBig
+ x !! ~ !! (!link [DYNL][Cookie, DYNL]) !!  Robert Federle !!  Dynamic Link Library driver
+ x !! ~ !! (!link [DYWL][Cookie, DYWL]) !!  Dimitri Junker !!  WIN_LNK
+ x !! ~ !! (!link [DYwl][Cookie, DYwl]) !!  Dimitri Junker !!  WIN_LNK
+!hline
+ x !! ~ !! (!link [F117][Cookie, F117]) !!   ~  !!  Speeder SST
+ ~ !! ~ !! (!link [EBPO][Cookie, EBPO]) !!   ~  !!  EB Modeleur Universel Modeler
+ x !! x !! (!link [EdDI][Cookie, EdDI]) !!  Sven & Wilfried Behne, BELA !!  EdDI
+ ~ !! x !! (!link [EDFX][Cookie, EDFX]) !!  Hansi Richstein, Kaktus GbR !!  EDPBFIX.PRG
+ ~ !! ~ !! (!link [EGON][Cookie, EGON]) !!   ~  !!  EGON! (!nolink [CD])-ROM Driver
+ ~ !! x !! (!link [EMNP][Cookie, EMNP]) !!  Jiri Lamac !!  MNP emulator
+ ~ !! ~ !! (!link [ENV$][Cookie, ENV$]) !!   ~  !!  Desktop environment manager
+ x !! x !! (!link [ENVN][Cookie, ENVN]) !!  Volker Janzen !!  Environ.prg - sets (!nolink [GEM]) environment
+ x !! ~ !! (!link [ENVR][Cookie, ENVR]) !!  Pascal Fellerich !!  Environment manager
+ x !! x !! (!link [EPro][Cookie, EPro]) !!  Roger Burrows !!  Extendos Pro (!nolink [CD])-ROM driver
+ ~ !! x !! (!link [ETM][Cookie, ETM]) !!  M. Nick !!  Entmauser (De-mouser)
+ x !! ~ !! (!link [EURO][Cookie, EURO]) !!   ~  !!  Euro-character
+ x !! ~ !! (!link [EUSB][Cookie, EUSB]) !!   ~  !!  Ethernet USB API exported by inet4
+ ~ !! x !! (!link [EXRA][Cookie, EXRA]) !!  Marcel Waldvogel !!  Extra RAM Speeder Card software
+ ~ !! ~ !! (!link [EXTD][Cookie, EXTD]) !!   ~  !!  (!nolink [TOS]) Filename Extender
+!hline
+ x !! ~ !! (!link [FaKE][Cookie, FaKE]) !!  Guido Flohr !!  FakeMiNT
+ ~ !! x !! (!link [FALT][Cookie, FALT]) !!  Richard Kurz !!  Faltoff Screen() MEGA STE bugfixer
+ x !! ~ !! (!link [FAX!/][Cookie, FAX!/]) !!  Ingo Linkweiler !!  STarFax
+ ~ !! x !! (!link [FAXR][Cookie, FAXR]) !!  Julian F. Reschke, TKR GmbH !!  FaxRedirector
+ ~ !! x !! (!link [FHFX][Cookie, FHFX]) !!  Thomas Binder !!  F030HFIX - Falcon (!nolink [GEMDOS]) handle fix
+ x !! ~ !! (!link [FIX2][Cookie, FIX2]) !!  Uwe Seimet !!  FIX24 68030 -> 24 bits
+ x !! x !! (!link [FLTP][Cookie, FLTP]) !!  Patrick Dubbrow !!  FlyTop
+ ~ !! x !! (!link [FLXD][Cookie, FLXD]) !!  Alex Esser !!  Flexdisk
+ ~ !! x !! (!link [fMSX][Cookie, fMSX]) !!  J. J³rgen von Bargen !!  freeMSX emulators
+ x !! x !! (!link [FOse][Cookie, FOse]) !!  Hayo Schmidt !!  Font-selector
+ ~ !! ~ !! (!link [Fose][Cookie, Fose]) !!   ~  !!  Font-selector
+ ~ !! ~ !! (!link [FrmD][Cookie, FrmD]) !!   ~  !!  Form_do_it
+ x !! ~ !! (!link [FSEL][Cookie, FSEL]) !!  (Standardcookie) !!  Extended File-Selector (e.g. Selectric¿,Freedom¿)
+ x !! x !! (!link [FSER][Cookie, FSER]) !!  Franz Sirl !!  Fast Serial interface routines
+ x !! ~ !! (!link [FSMC][Cookie, FSMC]) !!   ~  !!  Advanced GDOS
+ ~ !! x !! (!link [FSmp][Cookie, FSmp]) !!  Martin Patzel !!  File-selector
+ x !! x !! (!link [fVDI][Cookie, fVDI]) !!  Johan Klockars !!  fVDI
+ x !! ~ !! (!link [FxOP][Cookie, FxOP]) !!   ~  !!  Tele Office
+ ~ !! x !! (!link [F_3D][Cookie, F_3D]) !!  Ralf Trinler !!  Focus 3D
+!hline
+ ~ !! x !! (!link [GABI][Cookie, GABI]) !!  Michael Schwingen !!  Gabrielle Serial Port Typewriter emulator
+ ~ !! ~ !! (!link [GBel][Cookie, GBel]) !!   ~  !!  GemBell
+ x !! ~ !! (!link [GCOM][Cookie, GCOM]) !!  Thomas Much !!  (!nolink [GEM]) Component Object Model
+ x !! ~ !! (!link [GDEV][Cookie, GDEV]) !!  Edgar R”der !!  GNU-C Device driver
+ ~ !! x !! (!link [GEHC][Cookie, GEHC]) !!  GE-Soft !!  Hypercache Turbo
+ ~ !! x !! (!link [GEHD][Cookie, GEHD]) !!  GE-Soft !!  Hard Disk driver
+ ~ !! ~ !! (!link [GEMB][Cookie, GEMB]) !!   ~  !!  GE Soft HD driver
+ ~ !! x !! (!link [GENV][Cookie, GENV]) !!  Julian Reschke !!  (!nolink [GEM]) Environment setter
+ ~ !! x !! (!link [Gfix][Cookie, Gfix]) !!  Thomas Binder !!  Gamefix for Falcon030
+ x !! x !! (!link [GI30][Cookie, GI30]) !!  Andreas B„r !!  Gandhi
+ ~ !! x !! (!link [GIGA][Cookie, GIGA]) !!  Roland Alder !!  Giga Box ST Driver
+ ~ !! x !! (!link [gk5"][Cookie, gk5"]) !!  ~Gerd Knops !!  Driver for 5.25" HIGH-density third drive
+ ~ !! x !! (!link [gkCO][Cookie, gkCO]) !!  Gerd Knops !!  Calamus Thingy
+ ~ !! x !! (!link [GLAS][Cookie, GLAS]) !!  Uland T„ffner !!  Free drive-space display
+ x !! x !! (!link [GLBL][Cookie, GLBL]) !!  Volker Janzen !!  GEMLABEL system extension
+ x !! x !! (!link [GMNI][Cookie, GMNI]) !!  Stefan Eissing & Gereon Steffens !!  Gemini
+ x !! ~ !! (!link [GMTC][Cookie, GMTC]) !!   ~  !!  Timezone CPX
+ ~ !! x !! (!link [GNUC][Cookie, GNUC]) !!  Edgar R”der, Jwahar Bammi !!  GNU-C library
+ x !! ~ !! (!link [Gnva][Cookie, Gnva]) !!  Gribnif Software !! Geneva multi-tasking (!nolink [AES])
+ x !! ~ !! (!link [GOBJ][Cookie, GOBJ]) !!  Thomas Much !!  ObjectGEM PurePascal library
+ ~ !! x !! (!link [GOff][Cookie, GOff]) !!  Laurenz Pržner !!  Grow/Shrink-boxes off
+ x !! ~ !! (!link [GSND][Cookie, GSND]) !!  Richard Kurz  !!  GEM Sound
+ ~ !! x !! (!link [GSP1][Cookie, GSP1]) !!  Steven van Rossen !!  (!nolink [GEM]) Spooler
+ ~ !! ~ !! (!link [GSXB][Cookie, GSXB]) !!   ~  !!  Generic sound (!nolink [XBIOS]) 
+ ~ !! x !! (!link [GULM][Cookie, GULM]) !!  Jwahar Bammi !!  Gulam shell
+!hline
+ ~ !! x !! (!link [HABO][Cookie, HABO]) !!  Julian Reschke !!  Haboo Harddisk Cache
+ ~ !! ~ !! (!link [hade][Cookie, hade]) !!  Medusa !!  Hades
+ ~ !! x !! (!link [HAMM][Cookie, HAMM]) !!  Ingomar Otter & Hybrid Arts !!  Melody Maker software
+ x !! x !! (!link [HBFS][Cookie, HBFS]) !!  Harald Becker !!  BoxKite File-Selector
+ ~ !! x !! (!link [HcP6][Cookie, HcP6]) !!  Michael Schwingen !!  NEC P6 Hardcopy driver
+ ~ !! ~ !! (!link [HDDR][Cookie, HDDR]) !!   ~  !!  HD Driver
+ x !! ~ !! (!link [HDEX][Cookie, HDEX]) !!  Uwe Seimet !!  HDDriver's-own interface
+ ~ !! x !! (!link [HDEY][Cookie, HDEY]) !!  Borek Lupomesky !!  Hard Disc Eye
+ x !! x !! (!link [HDJR][Cookie, HDJR]) !!  Dieter Jankowski, J. Reschke, Hard&Soft !!  Hushi HD interface driver
+ ~ !! x !! (!link [HDLD][Cookie, HDLD]) !!  Jean-Pierre Rasquin !!  'HD-LED'
+ ~ !! x !! (!link [HDPR][Cookie, HDPR]) !!  Roland Scholz !!  HD Protect
+ x !! x !! (!link [HDRC][Cookie, HDRC]) !!  Torsten Lang !!  AUDIODRV
+ ~ !! ~ !! (!link [HDST][Cookie, HDST]) !!   ~  !!  Eickmann HD Driver
+ ~ !! x !! (!link [HDSW][Cookie, HDSW]) !!  Oliver Scheel !!  High Density Switcher
+ x !! x !! (!link [HFIX][Cookie, HFIX]) !!  Patrick Dubbrow !!  Handle bug-fix
+ ~ !! x !! (!link [hFRB][Cookie, hFRB]) !!  Steffen Engel !!  (!nolink [BIOS]) driver for Rwabs-transfers
+ ~ !! x !! (!link [HIDS][Cookie, HIDS]) !!  Oliver Scheel !!  High Density disk driver
+ ~ !! x !! (!link [HMDU][Cookie, HMDU]) !!  Thomas Uhl !!  HM2 System Memory Dump
+ ~ !! x !! (!link [HMOC][Cookie, HMOC]) !!  Andreas Alich !!  H„nisch Modula Object Cache
+ ~ !! x !! (!link [HMRD][Cookie, HMRD]) !!  Thomas Uhl !!  H„nisch Modula Run-time Debugger
+ ~ !! x !! (!link [HMRS][Cookie, HMRS]) !!  Thomas Uhl !!  HM2 Run-time System
+ ~ !! x !! (!link [HPHC][Cookie, HPHC]) !!  Martin Wunderli !!  HP Deskjet Hardcopy
+ ~ !! x !! (!link [HPLJ][Cookie, HPLJ]) !!  Robert Federle !!  HP-Laserjet-Emulator V1.04
+ ~ !! x !! (!link [HSCD][Cookie, HSCD]) !!  Julian Reschke !!  MiNT (!nolink [CD])-ROM driver
+ x !! ~ !! (!link [HSND][Cookie, HSND]) !!  Richard Kurz !!  CrazySounds
+ ~ !! x !! (!link [HSnd][Cookie, HSND]) !!  Richard Kurz !!  CrazySounds
+ ~ !! ~ !! (!link [HWAM][Cookie, HWAM]) !!   ~  !!  Cookie Jar creator program
+!hline
+ ~ !! x !! (!link [IBMP][Cookie, IBMP]) !!  Lars Erik Osterud !!  Norwegian->IBM Printer converter
+ x !! x !! (!link [ICFS][Cookie, ICFS]) !!  Dirk Haun !!  Iconify Server
+ x !! ~ !! (!link [ICST][Cookie, ICST]) !!   ~  !!  INETCUST cookie
+ ~ !! x !! (!link [IDSK][Cookie, IDSK]) !!  Stefan Becker !!  Icon Desk
+ ~ !! x !! (!link [iniT][Cookie, iniT]) !!   ~  !!  Manhatten TETRA
+ ~ !! x !! (!link [IMAC][Cookie, IMAC]) !!  Wilfried Cordes !!  Bootsector guardian
+ ~ !! ~ !! (!link [IMNE][Cookie, IMNE]) !!   ~  !!  Imagine graphics card
+ x !! ~ !! (!link [INSJ][Cookie, INSJ]) !!  Oliver Groeger !!  Cookie Jar installer/extendor program
+ x !! ~ !! (!link [INXR][Cookie, INXR]) !!  Dietmar Pttmann/Dietmar Rabich !!  (!nolink [Index]) generator
+ x !! x !! (!link [iPRN][Cookie, iPRN]) !!  Peter Missel !!  iPRN
+ ~ !! x !! (!link [IRSB][Cookie, IRSB]) !!  Ilja Rateiczak !!  SEGA Shuttered spectacles
+ ~ !! x !! (!link [iTMA][Cookie, iTMA]) !!  Robert Weiss !!  MFP Timer A interrupt handler
+!hline
+ ~ !! x !! (!link [JAM1][Cookie, JAM1]) !!  Pascal Fellerich !!  Butler James
+ x !! ~ !! (!link [JAM1][Cookie, JANU]) !!  vhf Computer !!  Janus Emulator
+ x !! x !! (!link [JB2G][Cookie, JB2G]) !!  John McLoud !!  Bios2Gdos
+ x !! x !! (!link [JCLK][Cookie, JCLK]) !!  Petr Stehlik !!  Clocky multi-utility
+ ~ !! x !! (!link [JCNB][Cookie, JCNB]) !!  Jens C. Neffe !!  JCN boot-selector
+ ~ !! x !! (!link [JCNC][Cookie, JCNC]) !!  Jens C. Neffe !!  JCN multi-accessory
+ ~ !! x !! (!link [JCNH][Cookie, JCNH]) !!  Jens C. Neffe !!  Hardcopy program
+ ~ !! x !! (!link [JCNT][Cookie, JCNT]) !!  Jens C. Neffe !!  Cocteau word processor
+ x !! x !! (!link [JFTP][Cookie, JFTP]) !!  Jan-Hinrich Fessel !!  SCSI driver for generic tape devices
+ ~ !! ~ !! (!link [JINX][Cookie, JINX]) !!   ~  !!  Jinx
+ ~ !! x !! (!link [JMLB][Cookie, JMLB]) !!  John McLoud !!  McBoot
+ x !! x !! (!link [JMLS][Cookie, JMLS]) !!  John McLoud !!  JML Snapshot
+ ~ !! x !! (!link [JSHD][Cookie, JSHD]) !!  Jrgen Stessun !!  Hyper-Density (!nolink [control]) program
+ ~ !! x !! (!link [JUST][Cookie, JUST]) !!  Robert Irrgang, Trillian Computer AG !!  Justify
+ x !! ~ !! (!link [J_Sc][Cookie, J_Sc]) !!  John McLoud !!  SECURE.PRG
+!hline
+ x !! ~ !! (!link [KAOS][Cookie, KAOS]) !!  Andreas Kromke !!  KAOS (!nolink [TOS]) 1.4
+ ~ !! x !! (!link [KbEv][Cookie, KbEv]) !!  Michael Seyfried !!  MM2 Keyboard-handling module
+ x !! ~ !! (!link [KEYT][Cookie, KEYT]) !!  Thomas Much !!  KEYTAB
+ ~ !! ~ !! (!link [KGTF][Cookie, KGTF]) !!   ~  !!  Tos Fix
+ ~ !! x !! (!link [KIDI][Cookie, KIDI]) !!  Robert Irrgang !!  RAMdisk
+ ~ !! x !! (!link [KLME][Cookie, KLME]) !!  Andreas Kromke !!  CMD
+ ~ !! x !! (!link [KREG][Cookie, KREG]) !!  Julian F. Reschke !!  Kill Registers
+ ~ !! x !! (!link [KyMp][Cookie, KyMp]) !!  Eric Smith !!  Keyboard Macro & Remapping utility
+ x !! ~ !! (!link [KyWt][Cookie, KyWt]) !!  Manfred Lippert !!  KeyWatch
+!hline
+ x !! x !! (!link [Lace][Cookie, Lace]) !!  Ulf Ronald Andersson !! LaceScan
+ ~ !! x !! (!link [LACY][Cookie, LACY]) !!  Oliver Michalak !!  LAZy-Shell-III
+ ~ !! x !! (!link [LALA][Cookie, LALA]) !!  Laurenz Pržner !!  Albolala BellHook sample player
+ ~ !! x !! (!link [lanc][Cookie, lanc]) !!  Torsten Lang !! MiNT-Net ethernet driver for AMD LANCE
+ ~ !! x !! (!link [LASB][Cookie, LASB]) !!  Klaus Garms, DMC !!  Laserbrain
+ x !! x !! (!link [LAWC][Cookie, LAWC]) !!  Robert Federle !!  Look-Ahead Write Cache
+ x !! ~ !! (!link [LDGM][Cookie, LDGM]) !!  Olivier Landemarre && Dominique Bereziat !! (!nolink [GEM]) Dynamical Libraries (LDG)
+ x !! x !! (!link [LEDP][Cookie, LEDP]) !!  Christoph Zwerschke !!  LED Panel
+ x !! x !! (!link [LEmu][Cookie, LEmu]) !!  Ulf Ronald Andersson !! LaceScan command-keys
+ x !! ~ !! (!link [Lity][Cookie, Lity]) !!  Christian Krger !! Liberty
+ ~ !! x !! (!link [LLCR][Cookie, LLCR]) !!  Logilex !!  Logilex 1st Lock
+ x !! x !! (!link [LMus][Cookie, LMus]) !!  Ulf Ronald Andersson !! LaceScan mouse accelerators
+ x !! x !! (!link [LOGB][Cookie, LOGB]) !!  Uwe Holtkamp, Jrgen Holtkamp !!  Logbuch (Logbook)
+ ~ !! x !! (!link [LoSe][Cookie, LoSe]) !!  Markus Kohm !!  SER-LOG
+ ~ !! x !! (!link [LP/2][Cookie, LP/2]) !!  Laurenz Pržner !!  Malloc/2 (!nolink [GEMDOS]) vector
+ ~ !! x !! (!link [LPCD][Cookie, LPCD]) !!  Laurenz Pržner !!  Carrier Detector
+ ~ !! x !! (!link [LPJM][Cookie, LPJM]) !!  Laurenz Pržner !!  Joy Mouse
+ x !! x !! (!link [LTMF][Cookie, LTMF]) !!  Oliver Scheel !!  Let 'em Fly
+!hline
+ ~ !! x !! (!link [M16s][Cookie, M16s]) !!  Cybercube Research Limited !!  CyRel M16-1280 graphics card
+ ~ !! x !! (!link [M16X][Cookie, M16X]) !!  Cybercube Research Limited !!  CyReL M16 (!nolink [XBIOS]) emulator
+ x !! x !! (!link [macc][Cookie, macc]) !!  Ken Badertscher, Atari Corporation !!  Maccel 3
+ x !! ~ !! (!link [MADD][Cookie, MADD]) !!  Uwe Seimet !!  ADDMEM for TT030
+ x !! ~ !! (!link [MADN][Cookie, MADN]) !!  Robert Federle !!  NEX-output
+ ~ !! x !! (!link [Maes][Cookie, Maes]) !!  Olivier Landemarre !!  MyAES
+ x !! ~ !! (!link [MagC][Cookie, MagC]) !!  Dirk Steins !!  Magic Dials configuration program
+ x !! ~ !! (!link [MAGN][Cookie, MAGN]) !!  Michael Schwingen !!  MAGNUM card
+ x !! ~ !! (!link [MagX][Cookie, MagX]) !!  Sven&Wilfried Behne, Andreas Kromke !!  MagiC
+ ~ !! x !! (!link [MAST][Cookie, MAST]) !!  Naumann&R”der !!  Master
+ x !! ~ !! (!link [MaTC][Cookie, MaTC]) !!   ~  !!  Matrix True Colour graphics card
+ x !! ~ !! (!link [MbAr][Cookie, MbAr]) !!  Manfred Lippert !!  MenuBar
+ x !! x !! (!link [MBRD][Cookie, MBRD]) !!  Michael Maažen !!  Blit_RD: Ramdisk
+ ~ !! ~ !! (!link [MCL_][Cookie, MCL_]) !!   ~  !!  MiNT (!nolink [control])
+ x !! ~ !! (!link [McSn][Cookie, McSn]) !!   ~  !!  MacSound
+ ~ !! x !! (!link [MCSP][Cookie, MCSP]) !!  F. Aschwanden !!  Unimplemented integer instruction and floating point handler
+ x !! ~ !! (!link [MCWR][Cookie, MCWR]) !!   ~  !!  Microwire DMA sound interface
+ x !! x !! (!link [MDIA][Cookie, MDIA]) !!  Helmut Neukirchen !!  Multi-Dialog
+ ~ !! x !! (!link [MDRK][Cookie, MDRK]) !!  Steffen Engel !!  MegaDark
+ x !! ~ !! (!link [MDSa][Cookie, MDSa]) !!  Bill Penner  !!  Medical Design Software's serial fix
+ ~ !! ~ !! (!link [MFAC][Cookie, MFAC]) !!   ~  !!  Multi-accessory
+ ~ !! x !! (!link [MFFM][Cookie, MFFM]) !!  Markus Haebler !!  Marcus' file-selector for MiNT
+ ~ !! x !! (!link [MFIX][Cookie, MFIX]) !!  Thomas Binder !!  MONOFIX.PRG
+ x !! ~ !! (!link [MFMV][Cookie, MFMV]) !!  ~ !! From Magic installed
+ x !! x !! (!link [MFNT][Cookie, MFNT]) !!  Hayo Schmidt !!  Fontloader
+ x !! x !! (!link [MGEM][Cookie, MGEM]) !!  Pascal Merle !!  MultiGEM
+ x !! ~ !! (!link [MgMc][Cookie, MgMc]) !!  Tempelmann, Kromke, Behne, ASH !! MagiC Mac
+ x !! ~ !! (!link [MgMx][Cookie, MgMx]) !!  Andreas Kromke !!  MagiC Mac X
+ x !! ~ !! (!link [MgPC][Cookie, MgPC]) !!  Franz Schmerbeck, Andreas Kromke !! MagiC PC
+ x !! ~ !! (!link [MgSn][Cookie, MgSn]) !!  Didier Mequignon !!  MagiC Mac Sound driver
+ ~ !! x !! (!link [MID3][Cookie, MID3]) !!  Lars Erik Osterud !!  MIDINET3
+ ~ !! x !! (!link [MIMA][Cookie, MIMA]) !!  Oliver Scheel !!  MIDI Manager
+ x !! x !! (!link [MiNT][Cookie, MiNT]) !!  Eric Smith, Atari Corporation !!  Mint/MultiTOS
+ x !! x !! (!link [MIPS][Cookie, MIPS]) !!  Michael Maažen !!  SPOOL120.PRG - Printer spooler
+ ~ !! x !! (!link [MJAF][Cookie, MJAF]) !!  Martin Jahr !!  AUTOFONT
+ ~ !! x !! (!link [MKHC][Cookie, MKHC]) !!  Marcus Kraft !!  Hardcopy fix
+ x !! ~ !! (!link [MkJr][Cookie, MkJr]) !!  Thomas Schallar !!  Cookie Jar creator program
+ ~ !! x !! (!link [MM2X][Cookie, MM2X]) !!  Thomas Tempelmann !!  Megamax Modula
+ x !! x !! (!link [MMAC][Cookie, MMAC]) !!  Emanuel Moecklin !!  Magic Mouse Accelerator
+ ~ !! x !! (!link [MMUT][Cookie, MMUT]) !!  Oliver Scheel !!  Midi Maze ][ utility
+ ~ !! x !! (!link [MM_2][Cookie, MM_2]) !!  Markus Fritze !!  Midimaze 2
+ ~ !! x !! (!link [MN3D][Cookie, MN3D]) !!  Manfred Lippert !!  Menus and submenus in 3D-look
+ x !! ~ !! (!link [MNAM][Cookie, MNAM]) !!  Standardcookie !!  Machine Name cookie
+ ~ !! x !! (!link [MOAF][Cookie, MOAF]) !!  Martin Osieka !!  ARROWFIX
+ x !! x !! (!link [MOGR][Cookie, MOGR]) !!  Martin Osieka !!  GEMRAM
+ x !! ~ !! (!link [MPRO][Cookie, MPRO]) !!  Thomas Kuenneth !!  Magic Pro Config CPX
+ ~ !! x !! (!link [MRAM][Cookie, MRAM]) !!  Rainer Seitel !!  More RAM
+ ~ !! x !! (!link [MSPD][Cookie, MSPD]) !!  Lars Erik Osterud !!  Mouse Speeder
+ x !! x !! (!link [MSPO][Cookie, MSPO]) !!  Emanuel Moecklin !!  Magic Spooler
+ ~ !! ~ !! (!link [mstx][Cookie, mstx]) !!   ~  !! Mouse tricks
+ ~ !! X !! (!link [MTCI][Cookie, MTCI]) !!   ~  !!  MATRIX MatGraph - TCxx
+ x !! x !! (!link [MTft][Cookie, MTft]) !!  Markus Kohm !!  Trapper
+ x !! x !! (!link [MUPF][Cookie, MUPF]) !!  Gereon Steffens !!  Mupfel
+ x !! ~ !! (!link [MWHL][Cookie, MWHL]) !!  Armin Diedering !!  MWheel
+ ~ !! ~ !! (!link [MZTR][Cookie, MZTR]) !!   ~  !!  TRASH
+ x !! x !! (!link [MZVT][Cookie, MZVT]) !!   Michael Zuhl  !!  Driver videotext decoder from Print-Technik
+ ~ !! X !! (!link [M_IN][Cookie, M_IN]) !!   ~  !!  MATRIX MatGraph - Cxx
+!hline
+ ~ !! x !! (!link [N203][Cookie, N203]) !!  Noud v. Kruysbergen !! Multi-accessory
+ x !! ~ !! (!link [nAES][Cookie, nAES]) !!  Jens Hiescher, Rainer Mannigel, Woller Systeme !! (!nolink [N.AES]), the (!nolink [AES]) for MiNT
+ x !! x !! (!link [NAH3][Cookie, NAH3]) !!  Noud van Kruysbergen !! N_ALTHLP snapshot utility
+ ~ !! x !! (!link [NBEL][Cookie, NBEL]) !!  Robert Irrgang !!  SOUND.PRG
+ ~ !! x !! (!link [NBLL][Cookie, NBLL]) !!  Volker Janzen !!  NEWBELL.PRG
+ x !! x !! (!link [NCLN][Cookie, NCLN]) !!  Oliver Scheel !!  NiceLine
+ ~ !! x !! (!link [ne2k][Cookie, ne2k]) !!  Torsten Lang !!  ne2000.xif
+ ~ !! x !! (!link [NERV][Cookie, NERV]) !!  Laurenz Pržner/ST-Magazin !!  No etv_critic_alert
+ ~ !! x !! (!link [NETS][Cookie, NETS]) !!  PAM's Software !!  PAM Novell Netware
+ x !! ~ !! (!link [NEXB][Cookie, NEXB]) !!  Robert Federle !!  NEX-Buffer
+ x !! ~ !! (!link [NEXK][Cookie, NEXK]) !!  Robert Federle !!  NEX-Toolkit
+ x !! ~ !! (!link [NFMT][Cookie, NFMT]) !!  Andreas Kunz !!  INFOMAT
+ ~ !! ~ !! (!link [NFnt][Cookie, NFnt]) !!   ~  !!  Neodesk Font Loader
+ ~ !! x !! (!link [NKCC][Cookie, NKCC]) !!  Harald Siegmund !!  NKCC - Normalized Key Code Converter
+ ~ !! ~ !! (!link [NLdr][Cookie, NLdr]) !!   ~  !!  Neodesk Loader
+ ~ !! x !! (!link [NMGE][Cookie, NMGE]) !! Simon Gleissner !!  No More amc-Gdos Errors
+ ~ !! x !! (!link [NO7P][Cookie, NO7P]) !!  Lars Erik Osterud !!  Norwegian->7 bit printer converter
+ ~ !! ~ !! (!link [noCF][Cookie, noCF]) !!   ~  !!  noSystem
+ ~ !! x !! (!link [NOR5][Cookie, NOR5]) !!  Lars Erik Osterud !!  Norwegian keyboard driver
+ ~ !! ~ !! (!link [NOVA][Cookie, NOVA]) !!   ~  !!  NOVA graphics card
+ ~ !! x !! (!link [NSC1][Cookie, NSC1]) !!  Noud v. Kruysbergen !!  N_Syscom accessory
+ x !! ~ !! (!link [Nspd][Cookie, Nspd]) !!  ~ !!  Nemesis
+ x !! ~ !! (!link [nTAS][Cookie, nTAS]) !!  Steffen Engel !!  TAS-instructions
+ ~ !! ~ !! (!link [NTK4][Cookie, NTK4]) !!   ~  !!  NTK4 Falcon MOD player
+ ~ !! x !! (!link [nTOS][Cookie, nTOS]) !!   Rainer Mannigel  !!  MilanBlaster
+ ~ !! ~ !! (!link [NUL>][Cookie, NUL>]) !!   ~  !!  System startup utility
+ x !! x !! (!link [NVDI][Cookie, NVDI]) !!  Sven&Wilfried Behne, BELA !!  NewVDI
+!hline
+ x !! ~ !! (!link [OBNL][Cookie, OBNL]) !!  Stephan Junker, Dirk Haun !!  Load-Time Linking protocol
+ x !! x !! (!link [OFLS][Cookie, OFLS]) !!  Hans-Jrgen Richstein (Standardcookie) !!  Check Open Files
+ x !! x !! (!link [OPMM][Cookie, OPMM]) !!  Martin Mertens !!  Open Helper
+ ~ !! ~ !! (!link [OSBL][Cookie, OSBL]) !!   ~  !!  Screen Blaster
+ ~ !! ~ !! (!link [OSTT][Cookie, OSTT]) !!   ~  !!  OverScan TT
+ x !! ~ !! (!link [OTOS][Cookie, OTOS]) !!   ~  !!  oTOSis - (!nolink [TOS]) emulator for Linux/68k
+ ~ !! x !! (!link [OV24][Cookie, OV24]) !!   ~  !!  OverScan hardcopy driver for 24 pins
+ ~ !! x !! (!link [oVDI][Cookie, oVDI]) !!  Odd Skancke !!  oVDI
+ ~ !! x !! (!link [OVDJ][Cookie, OVDJ]) !!  Karsten Isakovic, OverScan GbR !!  Overscan hardcopy driver for HP-DeskJet
+ ~ !! x !! (!link [OVEP][Cookie, OVEP]) !!  Karsten Isakovic, OverScan GbR !!  OverScan hardcopy driver for 9 pins
+ x !! x !! (!link [OVER][Cookie, OVER]) !!  Karsten Isakovic, OverScan GbR !!  AutoSwitch OverScan hardware driver
+ ~ !! x !! (!link [OVEX][Cookie, OVEX]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Exception patch
+ ~ !! x !! (!link [OVFS][Cookie, OVFS]) !!  Karsten Isakovic, OverScan GbR !!  OverScan File-Selector patch
+ ~ !! x !! (!link [OVIM][Cookie, OVIM]) !!  Karsten Isakovic, OverScan GbR !!  OverScan hardcopy driver
+ ~ !! x !! (!link [OVLS][Cookie, OVLS]) !!  Karsten Isakovic, OverScan GbR !!  OverScan DMC Laserbrain patch
+ ~ !! x !! (!link [OVRD][Cookie, OVRD]) !!  Karsten Isakovic, OverScan GbR !!  OverScan RAMDisk
+ ~ !! x !! (!link [OVUT][Cookie, OVUT]) !!  Karsten Isakovic, OverScan GbR !!  OverScan screen blanker
+ ~ !! x !! (!link [OVWI][Cookie, OVWI]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Window-size patch
+!hline
+ ~ !! x !! (!link [PAMN][Cookie, PAMN]) !!  PAM's Software !!  PAM Network Driver
+ ~ !! x !! (!link [PAUL][Cookie, PAUL]) !!  Pascal Fellerich !!  Paula 2, Amiga MODfile player
+ x !! x !! (!link [PBUG][Cookie, PBUG]) !!  Emanuel Moecklin !!  PeaceBug
+ ~ !! x !! (!link [PDEB][Cookie, PDEB]) !!  Dimitri Junker !!  PureDebuggger
+ ~ !! x !! (!link [PDeb][Cookie, PDEB]) !!  Dimitri Junker !!  PureDebuggger
+ x !! x !! (!link [PDOS][Cookie, PDOS]) !!  Chris Latham !!  PowerDOS
+ ~ !! x !! (!link [PDRZ][Cookie, PDRZ]) !!  Patrick Dubbrow !!  LockGetrez
+ ~ !! x !! (!link [PFIX][Cookie, PFIX]) !!  Julian Reschke, SciLab GmbH !!  PTSINFIX Fix
+ ~ !! x !! (!link [Pinp][Cookie, Pinp]) !!  Jens Schmidt !!  Parallel input port driver
+ ~ !! x !! (!link [PKSH][Cookie, PKSH]) !!  Pahlen & Krauž Software !!  PKS-Shell
+ x !! ~ !! (!link [PMMU][Cookie, PMMU]) !!  Alexander Herzlinger (Standardcookie) !!  PMMU reprogrammed
+ ~ !! x !! (!link [POIS][Cookie, POIS]) !!  Bernhard Artz/Gregor Tielsch/Shift !!  Poison!
+ ~ !! ~ !! (!link [POWM][Cookie, POWM]) !!   ~  !!  PowerMouse
+ ~ !! x !! (!link [PRCS][Cookie, PRCS]) !!  Peter Rohde !!  CopySTar
+ ~ !! x !! (!link [PRDS][Cookie, PRDS]) !!  Peter Rohde !!  Peter Rohde Disk Speeder
+ ~ !! x !! (!link [PRMD][Cookie, PRMD]) !!  Markus Kohm !!  MIDIPRT
+ ~ !! ~ !! (!link [PRN!/][Cookie, PRN!/]) !!   ~  !!  WandelSZ
+ ~ !! x !! (!link [PRNž][Cookie, PRNž]) !!  Michal Bernards/ST-Magazin !!  WandelSZ
+ ~ !! x !! (!link [PRO5][Cookie, PRO5]) !!  Lars Erik Osterud !!  Resident virus check/kill/protect program
+ ~ !! x !! (!link [PROB][Cookie, PROB]) !!  Markus und Michael Meurer !!  Profibase
+ ~ !! x !! (!link [PROT][Cookie, PROT]) !!  Meinolf Schneider !!  Protos screen utility
+ ~ !! x !! (!link [PRTD][Cookie, PRTD]) !!  Robert Federle !!  Print to Disk V1.10
+ ~ !! x !! (!link [PRTO][Cookie, PRTO]) !!  Peter Rohde !!  ST Tools
+ ~ !! x !! (!link [PRTR][Cookie, PRTR]) !!  Protar !!  Protar HD driver
+ ~ !! x !! (!link [prtr][Cookie, prtr]) !!  Konrad Hinsen !!  Atari->IBM printer converter
+ ~ !! ~ !! (!link [PSND][Cookie, PSND]) !!   ~  !!  ProSound driver
+ ~ !! x !! (!link [PSSG][Cookie, PSSG]) !!  Thomas Much !!  Paint Shop hardcopy vector
+ x !! x !! (!link [PTOS][Cookie, PTOS]) !!  Alexander Herzlinger !!  ROMRAM: Copy (!nolink [TOS]) to TT-RAM
+!hline
+ ~ !! x !! (!link [QIKM][Cookie, QIKM]) !!  Gereon Steffens !!  Quick Mouse
+ ~ !! x !! (!link [QMAC][Cookie, QMAC]) !!  Wilfried Cordes !!  Quick Mouse driver Accessory
+ ~ !! x !! (!link [QMCP][Cookie, QMCP]) !!  Wilfried Cordes !!  Chemplot Quick Mouse driver
+ ~ !! ~ !! (!link [QST2][Cookie, QST2]) !!   ~  !!  Quick ST 2
+ ~ !! ~ !! (!link [QST3][Cookie, QST3]) !!   ~  !!  Quick ST 3
+ ~ !! x !! (!link [QUAN][Cookie, QUAN]) !!  Bernd Blank !!  QuanTOS multi-utility
+!hline
+ ~ !! x !! (!link [RAIL][Cookie, RAIL]) !!  Otmar Birn !!  Rail Manager
+ ~ !! ~ !! (!link [RaSn][Cookie, RaSn]) !!   ~  !!  Rational Sounds
+ ~ !! x !! (!link [RESG][Cookie, RESG]) !!  J”rg Hahne !!  RESET GUARD
+ x !! x !! (!link [RFLX][Cookie, RFLX]) !!  Karsten Isakovic, OverScan GbR !!  AutoSwitch driver for Reflex graphics card
+ ~ !! x !! (!link [RFUS][Cookie, RFUS]) !!  Michael Bernards !!  Rufus terminal program
+ ~ !! x !! (!link [RGUS][Cookie, RGUS]) !!  Daniel Hollis !!  Argus
+ ~ !! x !! (!link [RING][Cookie, RING]) !!  Julian Reschke !!  Telephone-bell detector
+ ~ !! x !! (!link [ROMD][Cookie, ROMD]) !!  Andreas Kromke !!  MagiC DOS driver for the ROM module
+ ~ !! x !! (!link [ROT8][Cookie, ROT8]) !!  Thomas Frh”lter !!  Rotate
+ ~ !! x !! (!link [RPIT][Cookie, RPIT]) !!  Arpad Beszedes !!  TIMEFIX
+ ~ !! x !! (!link [RREG][Cookie, RREG]) !!  Reiner Wiechert !!  Restore Register
+ ~ !! x !! (!link [RSLT][Cookie, RSLT]) !!  Volker Brodel, GengTEC !!  GengTEC VGA monochrome/16-colour driver
+ x !! ~ !! (!link [RSpd][Cookie, RSpd]) !!  Stephan Skrodzki !!  RS_SPEED (Serial fix)
+ x !! x !! (!link [RSVE][Cookie, RSVE]) !!  Harun Scheutzow !!  RSVE patch
+ x !! ~ !! (!link [RSVF][Cookie, RSVF]) !!  Harun Scheutzow !!  RS232 Version Fast (HSMODEM)
+ ~ !! x !! (!link [RTKC][Cookie, RTKC]) !!  Robert Tolksdorf !!  Keyclick
+ ~ !! x !! (!link [RTOB][Cookie, RTOB]) !!  Robert Tolksdorf !!  Optobell
+ x !! x !! (!link [RWIN][Cookie, RWIN]) !!  Karsten Isakovic !!  RootWindow
+!hline
+ ~ !! ~ !! (!link [SAM][Cookie, SAM]) !!   ~  !!  System Audio Manager
+ ~ !! x !! (!link [SBKM][Cookie, SBKM]) !!  Stefan Brck !!  Ring recognition in modem routines
+ ~ !! x !! (!link [SBTE][Cookie, SBTE]) !!  Stefan Brck !!  TerminalpProgram
+ ~ !! x !! (!link [SBTS][Cookie, SBTS]) !!  Stefan Brck !!  Trap Spy
+ ~ !! x !! (!link [SCAH][Cookie, SCAH]) !!  Julian Reschke, Hard&Soft !!  Speed Cache
+ x !! x !! (!link [SCKM][Cookie, SCKM]) !!   ~  !!  MagXNet (SOCKET.DEV)
+ x !! ~ !! (!link [SCPN][Cookie, SCPN]) !!   ~  !!  Screen Blaster 3 screen enhancer
+ ~ !! x !! (!link [SCRD][Cookie, SCRD]) !!  Robert Federle !!  Screen to Disk
+ ~ !! x !! (!link [SCRN][Cookie, SCRN]) !!  Edgar R”der !!  Screen scroll
+ ~ !! x !! (!link [SCRS][Cookie, SCRS]) !!  Urs Thrmann !!  Screen blanker
+ x !! x !! (!link [SCRW][Cookie, SCRW]) !!  Uwe Seimet !!  Screen Watch
+ x !! ~ !! (!link [SCSI][Cookie, SCSI]) !!   ~  !!  SCSI drive interface
+ ~ !! ~ !! (!link [SCSV][Cookie, SCSV]) !!   ~  !!  Line Art Screensaver
+ ~ !! x !! (!link [SDCH][Cookie, SDCH]) !!  Sven Kopacz !!  2C - Second Chance
+ ~ !! x !! (!link [SDES][Cookie, SDES]) !!  Markus und Michael Meurer !!  Softdesk
+ ~ !! x !! (!link [SDsk][Cookie, SDsk]) !!  Gerhard H”lscher !!  Softdisk
+ ~ !! x !! (!link [SDWN][Cookie, SDWN]) !!  Marcel Waldvogel !!  ScreenDown
+ ~ !! x !! (!link [SELC][Cookie, SELC]) !!  Michael Haydn !!  C-Lab file-selector
+ ~ !! x !! (!link [SENV][Cookie, SENV]) !!  Andreas Grož !!  Set Environment
+ x !! x !! (!link [SFA^][Cookie, SFA^]) !!  Sevo Stille !! Fontloader system
+ ~ !! x !! (!link [SFIX][Cookie, SFIX]) !!  Allan Pratt, Atari Corporation !!  Serial port fix
+ ~ !! ~ !! (!link [SFMN][Cookie, SFMN]) !!   ~  !!  SafeMenu
+ ~ !! x !! (!link [ShLk][Cookie, ShLk]) !!  Jean-Pierre Rasquin !!  Shift Lock
+ ~ !! x !! (!link [shlp][Cookie, shlp]) !!  J”rg Westheide !!  shelhelp
+ x !! x !! (!link [SKEY][Cookie, SKEY]) !!  Ole Pahl !!  SpecialKeys
+ ~ !! x !! (!link [SLCT][Cookie, SLCT]) !!  Stefan Radermacher & Oliver Scheel !!  Selectric¿ enhanced file-selector
+ x !! x !! (!link [SLif][Cookie, SLif]) !!  Michael Schwingen !!  SoundLifter
+ x !! ~ !! (!link [SLIP][Cookie, SLIP]) !!  Sven Kopacz !!  Socket library
+ x !! x !! (!link [SM00][Cookie, SM00]) !!  STAGE Microsystems !!  SOTA Printer Spooler
+ x !! x !! (!link [SM01][Cookie, SM01]) !!  STAGE Microsystems !!  ReProK office management DUO
+ x !! x !! (!link [SM02][Cookie, SM02]) !!  STAGE Microsystems !!  ReProK International EM-NET II
+ x !! ~ !! (!link [SMAL][Cookie, SMAL]) !!  M. Nick, H. Schmidt (Standardcookie) !!  Small (!nolink [AES]) icon fonts
+ ~ !! x !! (!link [SMAU][Cookie, SMAU]) !!  Marcel Waldvogel !!  Set-Maus accessory
+ ~ !! x !! (!link [SMon][Cookie, SMon]) !!  Karsten Isakovic, OverScan GbR !!  SysMon
+ x !! x !! (!link [SMTT][Cookie, SMTT]) !!  Karsten Isakovic, OverScan GbR !!  SM-124 emulator
+ ~ !! x !! (!link [SNAP][Cookie, SNAP]) !!  Konrad Hinsen !!  That's Snap accessory
+ ~ !! x !! (!link [SOFS][Cookie, SOFS]) !!  Markus und Michael Meurer !!  Softscreen
+ ~ !! x !! (!link [SOSW][Cookie, SOSW]) !!  Markus und Michael Meurer !!  Softswitch
+ x !! x !! (!link [SpcE][Cookie, SpcE]) !!  Christian Grunenberg !!  Space
+ ~ !! x !! (!link [SPCK][Cookie, SPCK]) !!  Robert Irrgang !!  RAMdisk for SPC Modula
+ ~ !! x !! (!link [SPEE][Cookie, SPEE]) !!  Stefan Hintz !!  Mouse Speeder
+ ~ !! x !! (!link [SPEK][Cookie, SPEK]) !!  Stefan Hintz, Wilhelm Elektronik !!  Spektrum graphics cards
+ x !! x !! (!link [SPEX][Cookie, SPEX]) !!  Stefan Eissing, SciLab Gmbh !!  Steve's Printing Exzessory
+ x !! x !! (!link [spMR][Cookie, spMR]) !!  Martin Rogge !!  Printer- and file-spooler
+ x !! x !! (!link [Spol][Cookie, Spol]) !!  Andreas Mandel !!  Flexible printer spooler
+ ~ !! x !! (!link [SPRG][Cookie, SPRG]) !!  Bernd Blank ~  !!  STARTER.ACC
+ x !! ~ !! (!link [SR17][Cookie, SR17]) !!   ~  !!  Speeder SST Cockpit
+ ~ !! ~ !! (!link [SSND][Cookie, SSND]) !!   ~  !!  Petra
+ ~ !! x !! (!link [ST-C][Cookie, ST-C]) !!  Matthias Andr„ !! Cache program
+ ~ !! x !! (!link [ST17][Cookie, ST17]) !!  Daniel Hollis !!  ST-68017
+ ~ !! x !! (!link [STAT][Cookie, STAT]) !!  Laurenz Pržner !!  StaTOS
+ x !! ~ !! (!link [STEM][Cookie, STEM]) !!  Thomas G”ttsch !!  STEmulator
+ x !! x !! (!link [STEW][Cookie, STEW]) !!  John McLoud !!  Stewart
+ ~ !! ~ !! (!link [STFA][Cookie, STFA]) !!   ~  !!  Sound driver for Atari
+ x !! ~ !! (!link [StIc][Cookie, StIc]) !!  John McLoud !!  Stewart Icon-server
+ ~ !! ~ !! (!link [STiK][Cookie, STiK]) !!   ~  !!  ST Internet Kit
+ ~ !! x !! (!link [STMS][Cookie, STMS]) !!  Martin Backschat & Peter Melzer !!  (!I)ST Magazin(!i) Screendump
+ x !! ~ !! (!link [strk][Cookie, strk]) !!   ~  !!  StarTrack (!nolink [XBIOS]) extension
+ x !! ~ !! (!link [STRX][Cookie, STRX]) !!  Martin Sperber !!  SAT-Trax antenna driver
+ x !! ~ !! (!link [SupV][Cookie, SupV]) !!  ~   !!  SuperVidel driver
+ x !! ~ !! (!link [SVAR][Cookie, SVAR]) !!  Brad Pickering !!  Shows MacMiNT
+ ~ !! ~ !! (!link [SVGA][Cookie, SVGA]) !!   ~  !!  (!nolink [Super]) VGA emulator
+ x !! x !! (!link [SWAP][Cookie, SWAP]) !!  Uwe Seimet, Maxon Computer !!  Outside
+ x !! x !! (!link [SwTm][Cookie, SwTm]) !!  Matthias Wallmann !!  Show Time clock
+ x !! x !! (!link [SYMB][Cookie, SYMB]) !!  Robert Federle !!  Symbol driver
+ ~ !! ~ !! (!link [SYNL][Cookie, SYNL]) !!   ~  !!  Dynamic Link Library driver
+ ~ !! x !! (!link [SYNT][Cookie, SYNT]) !!  Marcel Waldvogel !!  Syntex
+ ~ !! x !! (!link [SysE][Cookie, SysE]) !!  Martin Drrschnabel !!  System Editor
+ ~ !! x !! (!link [Syso][Cookie, Syso]) !!  Hecker + Knobbe Computersysteme GbR !!  ST Sysop
+ ~ !! x !! (!link [SYST][Cookie, SYST]) !!  Sven Kopacz !!  Systime
+ ~ !! x !! (!link [SZ_M][Cookie, SZ_M]) !!  Nickel Szebrowski !!  Dynamic Mouse speeder
+ x !! ~ !! (!link [S_DR][Cookie, S_DR]) !!  Peter Hilbring  !!  (!nolink [CD])-ROM SCSI driver
+!hline
+ ~ !! x !! (!link [T206][Cookie, T206]) !!  Harun Scheutzow !!  PATCHX06.PRG
+ x !! ~ !! (!link [T2GM][Cookie, T2GM]) !!  Thomas Binder !!  TOS2GEM
+ x !! ~ !! (!link [TALK][Cookie, TALK]) !!   Gadgets  !!  MegaTalk
+ ~ !! ~ !! (!link [TAPE][Cookie, TAPE]) !!   ~  !!  TapeBIOS
+ ~ !! x !! (!link [TASS][Cookie, TASS]) !!  Markus Fritze !!  Turbo Assembler
+ ~ !! x !! (!link [TCFS][Cookie, TCFS]) !!  Borland Mnchen !!  Turbo C File-Selector
+ x !! x !! (!link [TCRB][Cookie, TCRB]) !!  Ralf Biedermann !!  Turbo Cache
+ ~ !! x !! (!link [Tenv][Cookie, Tenv]) !!  Markus Bank !! Environment set program for Terminal
+ ~ !! x !! (!link [TFIX][Cookie, TFIX]) !!  Karsten Isakovic, Atari Corporation !!  (!nolink [TOS]) 1.04 fix
+ x !! x !! (!link [THNX][Cookie, THNX]) !!  Dirk Haun !!  Thinx
+ x !! x !! (!link [THRM][Cookie, THRM]) !!  Ole Pahl !!  Temperature-data evaluation
+ ~ !! x !! (!link [THST][Cookie, THST]) !!  Jiri Lamac !!  TurboHST
+ ~ !! x !! (!link [TIM3][Cookie, TIM3]) !!  Lars Erik Osterud !!  Time driver
+ ~ !! x !! (!link [TIM5][Cookie, TIM5]) !!  Lars Erik Osterud !!  Time driver plus Screen Blanker
+ x !! ~ !! (!link [TIME][Cookie, TIME]) !!   ~  !!  Led Panel Time
+ x !! x !! (!link [TK40][Cookie, TK40]) !!   ~  !!  MC68040 ToolKit
+ ~ !! x !! (!link [TL3D][Cookie, TL3D]) !!  Torsten Lang !!  Third floppy
+ ~ !! x !! (!link [TLWV][Cookie, TLWV]) !!  Torsten Lang !!  STGAWVBL
+ x !! x !! (!link [Tmon][Cookie, Tmon]) !!  Thomas Tempelmann & Johannes Hill !!  TempleMon
+ ~ !! ~ !! (!link [TMON][Cookie, Tmon]) !!  Thomas Tempelmann & Johannes Hill !!  TempleMon
+ x !! ~ !! (!link [tmsW][Cookie, tmsW]) !!  TMS !!  TMS Wacom-Treiber
+ ~ !! x !! (!link [TOpW][Cookie, TOpW]) !!  Laurenz Pržner !!  Top Manager Watcher
+ ~ !! x !! (!link [TOUC][Cookie, TOUC]) !!  Steffen Engel !!  Touch
+ ~ !! x !! (!link [TPat][Cookie, TPat]) !!  Laurenz Pržner !!  (!nolink [TOS]) Patch
+ ~ !! x !! (!link [TPGM][Cookie, TPGM]) !!  J”rg Westheide !!  TraPatch
+ ~ !! x !! (!link [TRAK][Cookie, TRAK]) !!  Julian F. Reschke !!  Track Speed
+ x !! x !! (!link [TraP][Cookie, TraP]) !!  J”rg Westheide !!  TraPatch
+ ~ !! x !! (!link [Trpp][Cookie, Trpp]) !!  Manfred Lippert !!  Trapper
+ ~ !! x !! (!link [TRUE][Cookie, TRUE]) !!  Christoph Zwerschke !!  TrueDisk
+ ~ !! x !! (!link [TSEN][Cookie, TSEN]) !!  Jrgen Kriege !!  TSE Net
+ x !! x !! (!link [TSWP][Cookie, TSWP]) !!  Matthias Becker !!  TonySoft Write Protection
+ x !! ~ !! (!link [TTTF][Cookie, TTTF]) !!  Marcel Waldvogel !!  Thirty Two to Twenty Four
+ x !! ~ !! (!link [TUBS][Cookie, TUBS]) !!  Andreas Alich !!  TUBS - The Ultimate Boot Selector
+ ~ !! x !! (!link [TWFS][Cookie, TWFS]) !!  Konrad Hinsen !!  That's Write File-Selector Accessory
+ x !! x !! (!link [Typ1][Cookie, Typ1]) !!  Frank Knobbe !!  Daisywheel accessory
+!hline
+ x !! ~ !! (!link [UFSL][Cookie, UFSL]) !!  Michael Th„nitz  !!  Extended Universal Font Selector
+ ~ !! ~ !! (!link [UIS3][Cookie, UIS3]) !!   ~  !!  Universal Item Selector 3
+ ~ !! x !! (!link [UKB1][Cookie, UKB1]) !!  Uwe Koloska !!  Fastload
+ ~ !! x !! (!link [UKB3][Cookie, UKB3]) !!  Uwe Koloska !!  Fastload plus MIDI Through
+ ~ !! x !! (!link [UN*X][Cookie, UN*X]) !!  Michael Schwingen !!  Unixname (/->\ converter)
+ ~ !! x !! (!link [USCK][Cookie, USCK]) !!  Uwe Seimet !!  CHECKIT
+ x !! x !! (!link [USHD][Cookie, USHD]) !!  Uwe Seimet !!  Diskus HD driver
+ x !! ~ !! (!link [UsNm][Cookie, UsNm]) !!  Carsten Tolkmit !!  User-Name cookie
+ x !! ~ !! (!link [USPK][Cookie, USPK]) !!  Uwe Seimet !!  Hard Disk Auto-Parker
+ x !! x !! (!link [USRS][Cookie, USRS]) !!  Uwe Seimet !!  ROMSPEED
+ x !! ~ !! (!link [USSC][Cookie, USSC]) !!  Uwe Seimet  !!  SCSI Driver for Hatari and ARAnyM
+ ~ !! ~ !! (!link [UTRK][Cookie, UTRK]) !!   ~  !!  Ultimate Tracker
+!hline
+ ~ !! x !! (!link [VBLF][Cookie, VBLF]) !!  Thomas Binder !!  VBLFIX.PRG
+ x !! x !! (!link [VDIp][Cookie, VDIp]) !!  ~ !!  (!nolink [VDI]) performance logger
+ x !! ~ !! (!link [VDLY][Cookie, VDLY]) !!   ~  !!  Videlity
+ ~ !! x !! (!link [VECS][Cookie, VECS]) !!  Stephan Gerle !!  Vecshow
+ ~ !! ~ !! (!link [VeiL][Cookie, VeiL]) !!   ~  !!  Turbo Veille
+ x !! x !! (!link [VFIX][Cookie, VFIX]) !!  Karsten Isakovic !!  VDIFix
+ x !! x !! (!link [VFNT][Cookie, VFNT]) !!  Harald Sommerfeldt !!  VdiFont
+ x !! x !! (!link [VGAS][Cookie, VGAS]) !!  Christoph Zwerschke !!  VGA Simulator
+ x !! ~ !! (!link [VI-2][Cookie, VI-2]) !!  Francois Galea !! Videl Inside
+ ~ !! ~ !! (!link [View][Cookie, View]) !!   ~  !!  View protocol
+ ~ !! x !! (!link [VIRA][Cookie, VIRA]) !!  Carsten Frischkorn, Galactic !!  Virus Alarm
+ x !! ~ !! (!link [VMEM][Cookie, VMEM]) !!  Robert Federle !!  (!nolink [Virtual Memory]) 
+ ~ !! x !! (!link [VPCH][Cookie, VPCH]) !!  Robert Irrgang !!  VDIPATCH.PRG
+ x !! ~ !! (!link [VRAM][Cookie, VRAM]) !!  Alexander Herzlinger, OverScan GbR !!  Virtual memory management for the TT030
+ ~ !! x !! (!link [VREP][Cookie, VREP]) !!  Carsten Frischkorn, Galactic !!  Vector Guard
+ ~ !! x !! (!link [VSco][Cookie, VSco]) !!  Arnfried Griesert !!  Virus Scope
+ x !! ~ !! (!link [VSCR][Cookie, VSCR]) !!  Julian F. Reschke (Standardcookie) !!  Structure of Virtual Screens
+ ~ !! x !! (!link [VSTM][Cookie, VSTM]) !!  Focke Frentzen !!  MIDI Transfer
+ ~ !! x !! (!link [vT52][Cookie, vT52]) !!  Cybercube Research Limited !!  CyRel VT52 emulator
+ ~ !! x !! (!link [VTFX][Cookie, VTFX]) !!  Thomas Binder !!  VT52FIX.PRG
+ ~ !! x !! (!link [VXCK][Cookie, VXCK]) !!  Martin H. Smith !!  VoxClock
+!hline
+ x !! ~ !! (!link [WaHW][Cookie, WaHW]) !!  Walter Hermann !!  HIGH_WAY
+ ~ !! ~ !! (!link [WARP][Cookie, WARP]) !!   ~  !!  Warp 9
+ x !! ~ !! (!link [WaSA][Cookie, WaSA]) !!  Walter Hermann !!  SATELLIT
+ ~ !! ~ !! (!link [WBrd][Cookie, WBrd]) !!   ~  !!  Bird's Wing
+ ~ !! x !! (!link [wdlg][Cookie, wdlg]) !!  Behne & Behne GbR !!  Window-dialog library (wdialog)
+ x !! x !! (!link [WDOG][Cookie, WDOG]) !!  Robert Federle !!  Watchdog
+ x !! x !! (!link [WEGA][Cookie, WEGA]) !!  Dietmar Rabich !!  WEGA libraries
+ x !! ~ !! (!link [WfNa][Cookie, WfNa]) !!  Manfred Lippert !!  Inquiry of window title via wind_get(WF_NAME)
+ x !! x !! (!link [WFSL][Cookie, WFSL]) !!  Gert Kramer !!  Window File-Selector
+ x !! x !! (!link [WICO][Cookie, WICO]) !!  Sven Kopacz !!  WinCom
+ ~ !! x !! (!link [WinK][Cookie, WinK]) !!  J”rg Westheide !!  WinKeys
+ x !! ~ !! (!link [WINX][Cookie, WINX]) !!  Martin Osieka  !!  WINX
+ ~ !! x !! (!link [WINZ][Cookie, WINZ]) !!  Claus Brod !!  Luftschlož/Winz RAMdisk
+ x !! x !! (!link [WPRO][Cookie, WPRO]) !!  Christoph Conrad !!  Write Protect
+ ~ !! x !! (!link [WRAP][Cookie, WRAP]) !!  Richard Kurz !!  WrapMouse
+ x !! ~ !! (!link [WrAp][Cookie, WRAP]) !!  Richard Kurz !!  WrapMouse
+!hline
+ x !! ~ !! (!link [XALT][Cookie, XALT]) !!   ~  !!  AlberTT GFX card driver
+ ~ !! x !! (!link [XBTN][Cookie, XBTN]) !!  Tassilo Nitz !!  Mouse routine in 'XBOOT'
+ x !! x !! (!link [XDsk][Cookie, XDsk]) !!  Thomas Schallar !!  X-DISK RAMdisk
+ ~ !! ~ !! (!link [XFRB][Cookie, XFRB]) !!   ~  !!  (!nolink [Extended Fast-RAM Buffer])
+ x !! x !! (!link [XFS1][Cookie, XFS1]) !!  Edgar R”der !!  Master-module for extended (!nolink [TOS]) file-system
+ x !! ~ !! (!link [xFSL][Cookie, xFSL]) !!  Dirk Haun, Stefan Rogel !!  Extended Font Selector
+ x !! ~ !! (!link [Xgem][Cookie, Xgem]) !!  Eric Reboux !!  Windframe Xgem
+ x !! ~ !! (!link [XHDI][Cookie, XHDI]) !!  Diverse (Standardcookie) !!  XHDI driver
+ ~ !! x !! (!link [XKBD][Cookie, XKBD]) !!  Alex Esser !!  Extended Keyboard
+ ~ !! ~ !! (!link [XMMU][Cookie, XMMU]) !!   ~  !!  TK40's interface for PMMU setting
+ ~ !! ~ !! (!link [XMuz][Cookie, XMuz]) !!   ~  !!  Ultra Player
+ ~ !! x !! (!link [xNet][Cookie, xNet]) !!  Daniel Roedding !!  xNet-ST
+ ~ !! ~ !! (!link [XPCI][Cookie, XPCI]) !!   ~  !!  (!nolink [XBIOS]) functions for PCI-(!nolink [BIOS])
+ x !! x !! (!link [xRmt][Cookie, xRmt]) !!  Markus Gutschke !!  XREMOTE
+ x !! ~ !! (!link [XSDD][Cookie, XSDD]) !!  Stephan Baucke !!  Extended Serial Device Driver
+ ~ !! ~ !! (!link [XSND][Cookie, XSND]) !!  Thomas Huth !!  Digi-Sound
+ x !! ~ !! (!link [XSSI][Cookie, XSSI]) !!   ~  !!  Extended Screen Saver Information
+ x !! ~ !! (!link [XTOS][Cookie, XTOS]) !!  Lo‹c S‚bald !!  Extend (!nolink [TOS])
+ x !! ~ !! (!link [xUAG][Cookie, xUAG]) !!    ~  !!  MegaVision300
+ ~ !! ~ !! (!link [xUFC][Cookie, xUFC]) !!   ~  !!  Extended Universal Font Selector configuration program
+ ~ !! x !! (!link [XWin][Cookie, XWin]) !!  Konrad Hinsen !!  Extended Windows module
+!hline
+ ~ !! ~ !! (!link [zCAC][Cookie, zCAC]) !!   ~  !!  680x0 Cache Control CPX
+ x !! x !! (!link [zDCF][Cookie, zDCF]) !!  Ralf Zimmermann !!  DCF-time receiver
+!hline
+ ~ !! x !! (!link [_5MS][Cookie, _5MS]) !!  Vincent RiviŠre  !!  Pointer to 200 Hz system timer interrupt vector
+ ~ !! ~ !! (!link [_AFM][Cookie, _AFM]) !!   ~  !!  Audio Fun Machine
+ x !! ~ !! (!link [_AKP][Cookie, _AKP]) !!  Atari Corporation !!  Keyboard/Language configuration
+ x !! ~ !! (!link [_CF_][Cookie, _CF_]) !!  Didier Mequignon !!  ColdFire CPU
+ x !! ~ !! (!link [_CPU][Cookie, _CPU]) !!  Atari Corporation !!  Central Processor Unit type
+ ~ !! x !! (!link [_DOS][Cookie, _DOS]) !!  Atari Corporation !!  (!nolink [GEMDOS]) entry-point (in (!nolink [GEMDOS]) 0.30)
+ x !! ~ !! (!link [_FDC][Cookie, _FDC]) !!  Atari Corporation (Standardcookie) !!  Disk drive type
+ x !! ~ !! (!link [_FLK][Cookie, _FLK]) !!  Atari Corporation (Standardcookie) !!  File Locking extension
+ x !! ~ !! (!link [_FPU][Cookie, _FPU]) !!  Atari Corporation !!  Floating Point Unit type
+ ~ !! ~ !! (!link [_FRB][Cookie, _FRB]) !!   ~  !!  Fast-RAM Buffer
+ ~ !! x !! (!link [_FSR][Cookie, _FSR]) !!  Atari Corporation !!  Patch program for Serial port ((!nolink [TOS]) 4.00->4.04)
+ x !! ~ !! (!link [_IDT][Cookie, _IDT]) !!  Atari Corporation !!  International Date/Time format
+ x !! ~ !! (!link [_INF][Cookie, _INF]) !!  Atari Corporation !!  STEFIX Program
+ x !! ~ !! (!link [_INU][Cookie, _INU]) !!  Martin Osieka !!  Format for numbers
+ x !! ~ !! (!link [_ISO][Cookie, _ISO]) !!   ~  !!  specifies the real keyboard/font nationality
+ ~ !! ~ !! (!link [_JPD][Cookie, _JPD]) !!   ~  !!  Falcon030 JPEG Decoder by Brainstorm
+ x !! ~ !! (!link [_MCF][Cookie, _MCF]) !!   ~  !!  ColdFire features
+ x !! ~ !! (!link [_MCH][Cookie, _MCH]) !!  Atari Corporation !! (!nolink [Machine type])
+ ~ !! x !! (!link [_MET][Cookie, _MET]) !!  Atari Corporation !!  MetaDOS
+ x !! ~ !! (!link [_MIL][Cookie, _MIL]) !!  Michael Schwingen !!  Milan computer
+ x !! ~ !! (!link [_NET][Cookie, _NET]) !!  Atari Corporation !!  (!nolink [GEMDOS]) Network support
+ x !! x !! (!link [_OOL][Cookie, _OOL]) !!  Allan Pratt, Atari Corporation !!  Pool Fix
+ x !! ~ !! (!link [_PCI][Cookie, _PCI]) !!  Markus Fichtenbauer !!  PCI-(!nolink [BIOS])
+ ~ !! ~ !! (!link [_PKT][Cookie, _PKT]) !!   ~  !!  Packet driver cookie
+ ~ !! ~ !! (!link [_PWR][Cookie, _PWR]) !!   ~  !!  Power management unit
+ x !! ~ !! (!link [_SLM][Cookie, _SLM]) !!  Atari Corporation !!  SLM driver
+ x !! ~ !! (!link [_SND][Cookie, _SND]) !!  Atari Corporation !!  (!nolink [Sound hardware])
+ x !! ~ !! (!link [_SWI][Cookie, _SWI]) !!  Atari Corporation !!  Configuration Switches
+ x !! ~ !! (!link [_T2W][Cookie, _T2W]) !!   ~  !!  TOS2WIN emulator
+ x !! ~ !! (!link [_T30][Cookie, _T30]) !!  Andreas Kromke !!  KAOS (!nolink [TOS])
+ x !! ~ !! (!link [_USB][Cookie, _USB]) !!   ~  !!  USB core API driver
+ x !! ~ !! (!link [_VDI][Cookie, _VDI]) !!  Michael Schwingen !!  Milan (!nolink [VDI])
+ x !! ~ !! (!link [_VDO][Cookie, _VDO]) !!  Atari Corporation !!  (!nolink [Video hardware])
+ x !! ~ !! (!link [__NF][Cookie, __NF]) !!   ~  !!  Native features proposal
+ ~ !! ~ !! (!link [(!sigma)FSC][Cookie, (!sigma)FSC]) !!   ~  !!  Falcon Screen
+!hline
+!end_table
+
+!else
+
+!begin_table [|c|c|l|l|l|] !hline
+
+C !! X !! Name !! Autor !! Beschreibung
+
+!hline
+ ~ !! x !! (!link [3DMN][Cookie, 3DMN]) !!  Sven Kopacz !!  3D-Menu
+ x !! x !! (!link [3RDB][Cookie, 3RDB]) !!  Ole Pahl !!  Third Button
+ ~ !! x !! (!link [60Hz][Cookie, 60Hz]) !!  Jean-Pierre Rasquon !!  60Hz resident
+ ~ !! x !! (!link [8*8][Cookie, 8*8]) !!  Rainer Seitel !!  Schriftumschaltung fr GEM-Programme
+!hline
+ ~ !! x !! (!link [A2sv][Cookie, A2sv]) !!  Harald Siegmund !!  Trapsave
+ ~ !! x !! (!link [AB40][Cookie, AB40]) !!  GE-Soft !!  68882.PRG
+ ~ !! x !! (!link [ACCS][Cookie, ACCS]) !!  Steffen Engel !!  ACC.PRG
+ x !! x !! (!link [AFnt][Cookie, AFnt]) !!  Hayo Schmidt !!  AES Font Loader
+ ~ !! x !! (!link [AgK0][Cookie, AgK0]) !!  Marcel Waldvogel !!  AusGuck RAMdisk
+ x !! x !! (!link [AHVR][Cookie, AHVR]) !!  Alexander Herzlinger, OverScan GbR !!  VRAM
+ ~ !! ~ !! (!link [ALHP][Cookie, ALHP]) !!   ~  !!  Alman HP Deskjet Screendumper
+ x !! x !! (!link [ALIC][Cookie, ALIC]) !!  Sven Kopacz !!  Alice
+ ~ !! x !! (!link [ALRM][Cookie, ALRM]) !!  Torsten Lang !!  Driver for DIGIFON TDS3000
+ x !! x !! (!link [AmAN][Cookie, AmAN]) !!  Sven Kopacz !!  A-MAN
+ ~ !! x !! (!link [AMC1][Cookie, AMC1]) !!  Arnd Beižner !!  Monitor Switchbox
+ ~ !! x !! (!link [AMC2][Cookie, AMC2]) !!  Arnd Beižner !!  PC Keyboard Driver Software
+ x !! ~ !! (!link [AMCG][Cookie, AMCG]) !!  Arnd Beižner !!  AMC-GDOS
+ ~ !! x !! (!link [ANSe][Cookie, ANSe]) !!  Borek Lupomesky !!  ANSI-Emulation
+ x !! ~ !! (!link [APGM][Cookie, APGM]) !!  Andreas Pietsch !!  SysGem
+ ~ !! x !! (!link [ARAe][Cookie, ARAe]) !!  ARAnyM !! ARAnyM ethernet card emulation
+ ~ !! x !! (!link [ARTS][Cookie, ARTS]) !!  Massimo Farina !!  Screen-Artist screensaver
+ x !! x !! (!link [asGT][Cookie, asGT]) !!  Harald Siegmund, adequate systems !!  Wacom Graphiktablett Driver
+ ~ !! x !! (!link [ASum][Cookie, ASum]) !!  Holger Nassenstein, MW-electronic !!  ASUNLENK
+ ~ !! ~ !! (!link [AVmw][Cookie, AVmw]) !!   ~  !!  Virus Warning Program
+ ~ !! x !! (!link [AVOJ][Cookie, AVOJ]) !!  Oliver Joppich !!  Oliver Joppich's Anti Virus program
+ ~ !! x !! (!link [AVSV][Cookie, AVSV]) !!  Alexander Barton !! AV-Server
+!hline
+ ~ !! x !! (!link [BASH][Cookie, BASH]) !!  Edgar R”der !!  Bourne Again Shell
+ x !! x !! (!link [BBD2][Cookie, BBD2]) !!  Michael Maažen !!  Bastel-Bus-Treiber V2.xx
+ x !! ~ !! (!link [BCKW][Cookie, BCKW]) !!  C. Dupuydauby !!  BackWard
+ x !! ~ !! (!link [BGEM][Cookie, BGEM]) !!  Thomas Much !!  BubbleGEM
+ x !! ~ !! (!link [BGHD][Cookie, BGHD]) !!  Thomas Much !!  BubbleGEM-Help-D„mon
+ ~ !! x !! (!link [BHdl][Cookie, BHdl]) !!  Steffen Richter !!  BadHandle
+ x !! ~ !! (!link [BHLP][Cookie, BHLP]) !!  Thomas Much !!  BubbleGEM Konficookie
+ x !! x !! (!link [BIGS][Cookie, BIGS]) !!  Julian Reschke, SciLab GmbH !!  Big Screen
+ ~ !! x !! (!link [BIOC][Cookie, BIOC]) !!  Tiemann Bj”rn !!  Pirosca
+ ~ !! ~ !! (!link [BLNK][Cookie, BLNK]) !!   ~  !!  Screenblanker
+ x !! x !! (!link [BLOW][Cookie, BLOW]) !!  Georg Acher, Michael Eberl !!  Blowup030
+ x !! x !! (!link [BScn][Cookie, BScn]) !!  Roland Skuplik !!  BACKSCAN
+ ~ !! x !! (!link [BSIM][Cookie, BSIM]) !!  Marcel Waldvogel !!  Drive B Simulator
+ ~ !! x !! (!link [BSTE][Cookie, BSTE]) !!  Matthias Andr„ !!  BigSTE
+ ~ !! x !! (!link [BUG1][Cookie, BUG1]) !!  Markus Fritze !!  Bugaboo Debugger
+!hline
+ ~ !! x !! (!link [C24P][Cookie, C24P]) !!  Cybercube Research Limited !!  CyRel 24Bit-Patch
+ x !! ~ !! (!link [CACH][Cookie, CACH]) !!  Robert Federle !!  Cache-Control
+ x !! ~ !! (!link [CALD][Cookie, CALD]) !!  Walter Hermann !!  Computer Aided Loudspeaker Desgin
+ x !! ~ !! (!link [CASE][Cookie, CASE]) !!  Julian Reschke !!  Casing Type Gemini
+ ~ !! x !! (!link [CatS][Cookie, CatS]) !!  Hayo Schmidt !!  CatStick
+ x !! ~ !! (!link [CaTT][Cookie, CaTT]) !!  Cybercube Research Ltd, Toronto, Canada !!  CyRel Cattamaran
+ ~ !! x !! (!link [CB2K][Cookie, CB2K]) !!  Claus Brod !!  Claus Brod GEMDOS Bug Patch
+ ~ !! x !! (!link [CBCE][Cookie, CBCE]) !!  Claus Brod !!  Claus Brod Critical Error Handler Patch
+ ~ !! x !! (!link [CBDF][Cookie, CBDF]) !!  Claus Brod !!  Claus Brod Dabbel Feature
+ ~ !! x !! (!link [CBHD][Cookie, CBHD]) !!  Claus Brod !!  Claus Brod HD Driver
+ ~ !! x !! (!link [CBHY][Cookie, CBHY]) !!  Claus Brod !!  Claus Brod Hyper Format
+ ~ !! x !! (!link [CBIT][Cookie, CBIT]) !!  Guido Sawade !!  C'T Bus Interface Driver
+ x !! ~ !! (!link [CBTS][Cookie, CBTS]) !!  Andre Felbrich !!  Crazy Bits Tabletttreiber System
+ ~ !! x !! (!link [CCDA][Cookie, CCDA]) !!  CCD !!  Tempus Word
+ ~ !! x !! (!link [cdMC][Cookie, cdMC]) !!  Guenther Leis !!  CDROM.XFS
+ ~ !! x !! (!link [CDOT][Cookie, CDOT]) !!   ~  !!  Crazy-Dots Grafikkarten Treiber
+ x !! ~ !! (!link [ceci][Cookie, ceci]) !!   CENTEK !! Cecile Festplattentreiber
+ ~ !! ~ !! (!link [CFIX][Cookie, CFIX]) !!   ~  !!  Console Fix
+ ~ !! ~ !! (!link [CFsl][Cookie, CFsl]) !!   ~  !!  Compo FSel
+ x !! x !! (!link [CHAM][Cookie, CHAM]) !!  Karsten Isakovic !!  Chameleon
+ ~ !! x !! (!link [CHBT][Cookie, CHBT]) !!   ~  !!  (!nolink [Changes])
+ x !! x !! (!link [CHN1][Cookie, CHN1]) !!   ~  !!  (!nolink [Changes])
+ ~ !! ~ !! (!link [CHNG][Cookie, CHNG]) !!   ~  !!  (!nolink [Changes])
+ ~ !! x !! (!link [CHTW][Cookie, CHTW]) !!  Dirk Haun !!  Chatwin
+ x !! ~ !! (!link [CICN][Cookie, CICN]) !!  Roger Jordan !!  C-ICON
+ ~ !! x !! (!link [CISY][Cookie, CISY]) !!  Ingo Ciechowski !!  CISYSTEM
+ ~ !! x !! (!link [CJAR][Cookie, CJAR]) !!  Volker Janzen !!  Cookie.prg
+ x !! ~ !! (!link [CJar][Cookie, CJar]) !!   ~  !!  JarXXX Program
+ ~ !! x !! (!link [ck01][Cookie, ck01]) !!  Arnd Beissner !!  Cookie library
+ x !! x !! (!link [CKBD][Cookie, CKBD]) !!  Pascal Fellerich !!  Composed Character Deluxe Keyboard Driver
+ ~ !! x !! (!link [CKJR][Cookie, CKJR]) !!  Julian Reschke !!  Create Cookie Jar Program
+ x !! x !! (!link [CLCK][Cookie, CLCK]) !!  Sieghard Sch„fer !!  Mega-ST Hardware clock TSR Utilities
+ ~ !! x !! (!link [CLK1][Cookie, CLK1]) !!  Dieter Jankowski !!  MEGA ST Clock Utility
+ ~ !! ~ !! (!link [CLOK][Cookie, CLOK]) !!   ~  !!  CLOK for GMT settings (?)
+ x !! ~ !! (!link [CM16][Cookie, CM16]) !!  Cybercube Research Limited !!  CyReL's M16 Versatile Installation Program
+ ~ !! ~ !! (!link [CNTS][Cookie, CNTS]) !!  David Godec, Sacha Hnatiuk, CENTEK !!  CentScreen
+ ~ !! x !! (!link [COLO][Cookie, COLO]) !!  Meinolf Schneider !!  Colos Mono-Colour Converter
+ ~ !! x !! (!link [CPSL][Cookie, CPSL]) !!  Patrick Dubbrow, Jrgen Heindel !!  Caps Lock Display
+ ~ !! x !! (!link [CRAC][Cookie, CRAC]) !!  Protar !!  Protar HD Driver
+ x !! x !! (!link [CRIT][Cookie, CRIT]) !!  Thomas Schr”ter, Fast Electronic GmbH !!  Crypt-It
+ x !! x !! (!link [CSMD][Cookie, CSMD]) !!  Cybercube Research Limited !!  CyReL's Serial Mouse Manager
+ x !! ~ !! (!link [CT40][Cookie, CT40]) !!  ~ !! CT40 68040 Falcon Beschleunigerkarte von Rodolphe Czuba
+ x !! x !! (!link [CT60][Cookie, CT60]) !!  Didier Mequignon !! CT60 68060 Falcon Beschleunigerkarte von Rodolphe Czuba
+ x !! ~ !! (!link [CTCH][Cookie, CTCH]) !!  Edgar R”der !! Master-Module Catch.mmx
+ ~ !! x !! (!link [CtCp][Cookie, CtCp]) !!  Jean-Pierre Rasquin !!  CapsLock Display
+ ~ !! x !! (!link [CTSF][Cookie, CTSF]) !!  Lars Erik Osterud !!  CTS Bug Fix
+ x !! ~ !! (!link [cVDI][Cookie, cVDI]) !!  Cybercube Research Limited !!  CyReL's M-16-1280 (!nolink [VDI]) Driver
+ ~ !! ~ !! (!link [CWCo][Cookie, CWCo]) !!   ~  !!  Compo FSel
+!hline
+ x !! ~ !! (!link [DATE][Cookie, DATE]) !!   ~  !!  Led Panel Date
+ x !! x !! (!link [DATL][Cookie, DATL]) !!  Delirium Arts A. Freude & P. Scherer GbR !!  TwiLight
+ ~ !! ~ !! (!link [DAWN][Cookie, DAWN]) !!   ~  !!  Before Dawn
+ x !! x !! (!link [DBFX][Cookie, DBFX]) !!  Julian Reschke !!  Diablo Emulator patch fix for MiNT
+ ~ !! ~ !! (!link [DCdd][Cookie, DCdd]) !!   ~  !!  Double-Click Software Data Diet
+ ~ !! x !! (!link [DCF7][Cookie, DCF7]) !!  Sven Kopacz !!  DCF77
+ x !! ~ !! (!link [DCSD][Cookie, DCSD]) !!  ~ !!  Calamus Bildschirmtreiber
+ x !! x !! (!link [DECD][Cookie, DECD]) !!  Markus Fichtenbauer !!  DECDriver Cookie
+ x !! x !! (!link [DEPI][Cookie, DEPI]) !!  Norbert Marschalleck !!  DeskPic
+ x !! ~ !! (!link [DHST][Cookie, DHST]) !!  Thomas Much !!  Document (!nolink [History]) Protocol
+ ~ !! ~ !! (!link [DIG2][Cookie, DIG2]) !!  Emmanuel Jaccard  !!  Digiplay
+ ~ !! x !! (!link [DJBX][Cookie, DJBX]) !!  Roland Skuplik !!  DeskJet-Init BIOS-Erweiterung
+ ~ !! ~ !! (!link [DKEY][Cookie, DKEY]) !!  Brainstorm  !!  Dead Key
+ ~ !! ~ !! (!link [DNTR][Cookie, DNTR]) !!   ~  !!  DNT ramdisk
+ x !! ~ !! (!link [DPAT][Cookie, DPAT]) !!  Martin Osieka !!  Desktop Patterns
+ ~ !! x !! (!link [DPRS][Cookie, DPRS]) !!  Wilfried Cordes !!  Printer Buffer
+ ~ !! x !! (!link [DRIV][Cookie, DRIV]) !!  Stefan Hintz !!  Drive Edit
+ ~ !! x !! (!link [DRRH][Cookie, DRRH]) !!  Dietmar Rabich !!  Wodan Keyboard Layout Program
+ ~ !! x !! (!link [Dsel][Cookie, Dsel]) !!  Sven Kopacz !!  Dsel - Systemkern fr Fileselector
+ ~ !! x !! (!link [DSSO][Cookie, DSSO]) !!  David von Stetten !!  Sokrates Keyboard Driver
+ x !! ~ !! (!link [DYDL][Cookie, DYDL]) !!  Dimitri Junker !!  DIR_LWR
+ ~ !! x !! (!link [DYJA][Cookie, DYJA]) !!  Dimitri Junker !!  CCONRS.PRG
+ ~ !! x !! (!link [DYJD][Cookie, DYJD]) !!  Dimitri Junker !!  Dosound_MPC
+ ~ !! x !! (!link [DYJT][Cookie, DYJT]) !!  Dimitri Junker !!  ToBig
+ x !! ~ !! (!link [DYNL][Cookie, DYNL]) !!  Robert Federle !!  Dynamic Link Library Driver
+ x !! ~ !! (!link [DYWL][Cookie, DYWL]) !!  Dimitri Junker !!  WIN_LNK
+ x !! ~ !! (!link [DYwl][Cookie, DYwl]) !!  Dimitri Junker !!  WIN_LNK
+!hline
+ x !! ~ !! (!link [F117][Cookie, F117]) !!   ~  !!  Beschleuniger SST
+ ~ !! x !! (!link [EADC][Cookie, EADC]) !!  Jrgen Luers !!  Easydisc - Ramdisk
+ ~ !! ~ !! (!link [EBPO][Cookie, EBPO]) !!   ~  !!  EB Modeleur Universel Modeler
+ x !! x !! (!link [EdDI][Cookie, EdDI]) !!  Sven & Wilfried Behne, BELA !!  EdDI
+ ~ !! x !! (!link [EDFX][Cookie, EDFX]) !!  Hansi Richstein, Kaktus GbR !!  EDPBFIX.PRG
+ ~ !! ~ !! (!link [EGON][Cookie, EGON]) !!   ~  !!  EGON! CD-ROM Driver
+ ~ !! x !! (!link [EMNP][Cookie, EMNP]) !!  Jiri Lamac !!  MNP emulator
+ ~ !! ~ !! (!link [ENV$][Cookie, ENV$]) !!   ~  !!  Desktop environment manager
+ x !! x !! (!link [ENVN][Cookie, ENVN]) !!  Volker Janzen !!  Environ.prg - setzt GEM-Environment
+ x !! ~ !! (!link [ENVR][Cookie, ENVR]) !!  Pascal Fellerich !!  Environment manager
+ x !! x !! (!link [EPro][Cookie, EPro]) !!  Roger Burrows !!  Extendos Pro CD-ROM Driver
+ ~ !! x !! (!link [ETM][Cookie, ETM]) !!  M. Nick !!  Entmauser
+ x !! ~ !! (!link [EURO][Cookie, EURO]) !!   ~  !!  Euro-Zeichen
+ x !! ~ !! (!link [EUSB][Cookie, EUSB]) !!   ~  !!  Ethernet USB API exported by inet4
+ ~ !! x !! (!link [EXRA][Cookie, EXRA]) !!  Marcel Waldvogel !!  Extra RAM Speeder Card Software
+ ~ !! ~ !! (!link [EXTD][Cookie, EXTD]) !!   ~  !!  TOS File Name Extender
+!hline
+ x !! ~ !! (!link [FaKE][Cookie, FaKE]) !!  Guido Flohr !!  FakeMiNT
+ ~ !! x !! (!link [FALT][Cookie, FALT]) !!  Richard Kurz !!  Faltoff Screen() MEGA STE bugfixer
+ x !! ~ !! (!link [FAX!/][Cookie, FAX!/]) !!  Ingo Linkweiler !!  STarFax
+ ~ !! x !! (!link [FAXR][Cookie, FAXR]) !!  Julian F. Reschke, TKR GmbH !!  FaxRedirector
+ ~ !! x !! (!link [FHFX][Cookie, FHFX]) !!  Thomas Binder !!  F030HFIX - Falcon-GEMDOS-Handle-Fix
+ x !! ~ !! (!link [FIX2][Cookie, FIX2]) !!  Uwe Seimet !!  FIX24 68030 -> 24 bits
+ x !! x !! (!link [FLTP][Cookie, FLTP]) !!  Patrick Dubbrow !!  FlyTop
+ ~ !! x !! (!link [FLXD][Cookie, FLXD]) !!  Alex Esser !!  Flexdisk
+ ~ !! x !! (!link [fMSX][Cookie, fMSX]) !!  J. J³rgen von Bargen !!  freeMSX emulators
+ x !! x !! (!link [FOse][Cookie, FOse]) !!  Hayo Schmidt !!  Fontselector
+ ~ !! ~ !! (!link [Fose][Cookie, Fose]) !!   ~  !!  Font Selector
+ ~ !! ~ !! (!link [FrmD][Cookie, FrmD]) !!   ~  !!  Form_do_it
+ x !! ~ !! (!link [FSEL][Cookie, FSEL]) !!  (Standardcookie) !!  Extended File Selector (e.g. Selectric¿,Freedom¿)
+ x !! x !! (!link [FSER][Cookie, FSER]) !!  Franz Sirl !!  Fast Serial Interface Routines
+ x !! ~ !! (!link [FSMC][Cookie, FSMC]) !!   ~  !!  Advanced GDOS
+ ~ !! x !! (!link [FSmp][Cookie, FSmp]) !!  Martin Patzel !!  Fileselector
+ x !! x !! (!link [fVDI][Cookie, fVDI]) !!  Johan Klockars !!  fVDI
+ x !! ~ !! (!link [FxOP][Cookie, FxOP]) !!   ~  !!  Tele Office
+ ~ !! x !! (!link [F_3D][Cookie, F_3D]) !!  Ralf Trinler !!  Focus 3D
+!hline
+ ~ !! x !! (!link [GABI][Cookie, GABI]) !!  Michael Schwingen !!  Gabrielle Serial Port Typewriter Emulator
+ ~ !! ~ !! (!link [GBel][Cookie, GBel]) !!   ~  !!  GemBell
+ x !! ~ !! (!link [GCOM][Cookie, GCOM]) !!  Thomas Much !!  GEM Component Object Model
+ x !! ~ !! (!link [GDEV][Cookie, GDEV]) !!  Edgar R”der !!  GNU-C Device-Driver
+ ~ !! x !! (!link [GEHC][Cookie, GEHC]) !!  GE-Soft !!  Hypercache Turbo
+ ~ !! x !! (!link [GEHD][Cookie, GEHD]) !!  GE-Soft !!  Harddisktreiber
+ ~ !! ~ !! (!link [GEMB][Cookie, GEMB]) !!   ~  !!  GE Soft HD Driver
+ ~ !! x !! (!link [GENV][Cookie, GENV]) !!  Julian Reschke !!  GEM Environment Setter
+ ~ !! x !! (!link [Gfix][Cookie, Gfix]) !!  Thomas Binder !!  Gamefix for Falcon030
+ x !! x !! (!link [GI30][Cookie, GI30]) !!  Andreas B„r !!  Gandhi
+ ~ !! x !! (!link [GIGA][Cookie, GIGA]) !!  Roland Alder !!  Giga Box ST Driver
+ ~ !! x !! (!link [gk5"][Cookie, gk5"]) !!  ~Gerd Knops !!  Treiber fr 5.25" HIGH-Density-Drittlaufwerk
+ ~ !! x !! (!link [gkCO][Cookie, gkCO]) !!  Gerd Knops !!  Calamus Thingy
+ ~ !! x !! (!link [GLAS][Cookie, GLAS]) !!  Uland T„ffner !!  Free memorydisplay
+ x !! x !! (!link [GLBL][Cookie, GLBL]) !!  Volker Janzen !!  GEMLABEL System Extension
+ x !! x !! (!link [GMNI][Cookie, GMNI]) !!  Stefan Eissing & Gereon Steffens !!  Gemini
+ x !! ~ !! (!link [GMTC][Cookie, GMTC]) !!   ~  !!  Timezone CPX
+ ~ !! x !! (!link [GNUC][Cookie, GNUC]) !!  Edgar R”der, Jwahar Bammi !!  GNU-C Library
+ x !! ~ !! (!link [Gnva][Cookie, Gnva]) !!  Gribnif Software !! Geneva Multi-tasking AES
+ x !! ~ !! (!link [GOBJ][Cookie, GOBJ]) !!  Thomas Much !!  ObjectGEM PurePascal library
+ ~ !! x !! (!link [GOff][Cookie, GOff]) !!  Laurenz Pržner !!  Grow/Shrinkbox off
+ x !! ~ !! (!link [GSND][Cookie, GSND]) !!  Richard Kurz  !!  GEM Sound
+ ~ !! x !! (!link [GSP1][Cookie, GSP1]) !!  Steven van Rossen !!  GEM Spooler
+ ~ !! ~ !! (!link [GSXB][Cookie, GSXB]) !!   ~  !!  Generic sound Xbios
+ ~ !! x !! (!link [GULM][Cookie, GULM]) !!  Jwahar Bammi !!  Gulam Shell
+!hline
+ ~ !! x !! (!link [HABO][Cookie, HABO]) !!  Julian Reschke !!  Haboo Harddisk Cache
+ ~ !! ~ !! (!link [hade][Cookie, hade]) !!  Medusa !!  Hades
+ ~ !! x !! (!link [HAMM][Cookie, HAMM]) !!  Ingomar Otter & Hybrid Arts !!  Melody Maker Software
+ x !! x !! (!link [HBFS][Cookie, HBFS]) !!  Harald Becker !!  BoxKite File Selector
+ ~ !! x !! (!link [HcP6][Cookie, HcP6]) !!  Michael Schwingen !!  NEC P6 Hardcopy Driver
+ ~ !! ~ !! (!link [HDDR][Cookie, HDDR]) !!   ~  !!  HD Driver
+ x !! ~ !! (!link [HDEX][Cookie, HDEX]) !!  Uwe Seimet !!  HDDriver-eigenes Interface
+ ~ !! x !! (!link [HDEY][Cookie, HDEY]) !!  Borek Lupomesky !!  Hard Disc Eye
+ x !! x !! (!link [HDJR][Cookie, HDJR]) !!  Dieter Jankowski, J. Reschke, Hard&Soft !!  Hushi HD Interface Driver
+ ~ !! x !! (!link [HDLD][Cookie, HDLD]) !!  Jean-Pierre Rasquin !!  'HD-LED'
+ ~ !! x !! (!link [HDPR][Cookie, HDPR]) !!  Roland Scholz !!  HD Protect
+ x !! x !! (!link [HDRC][Cookie, HDRC]) !!  Torsten Lang !!  AUDIODRV
+ ~ !! ~ !! (!link [HDST][Cookie, HDST]) !!   ~  !!  Eickmann HD Driver
+ ~ !! x !! (!link [HDSW][Cookie, HDSW]) !!  Oliver Scheel !!  High Density Switcher
+ x !! x !! (!link [HFIX][Cookie, HFIX]) !!  Patrick Dubbrow !!  Handle Bug Fix
+ ~ !! x !! (!link [hFRB][Cookie, hFRB]) !!  Steffen Engel !!  BIOS-Treiber fr Rwabs-Transfers
+ ~ !! x !! (!link [HIDS][Cookie, HIDS]) !!  Oliver Scheel !!  High Density Disk Driver
+ ~ !! x !! (!link [HMDU][Cookie, HMDU]) !!  Thomas Uhl !!  HM2 System Memory Dump
+ ~ !! x !! (!link [HMOC][Cookie, HMOC]) !!  Andreas Alich !!  H„nisch Modula Object Cache
+ ~ !! x !! (!link [HMRD][Cookie, HMRD]) !!  Thomas Uhl !!  H„nisch Modula Run-Time Debugger
+ ~ !! x !! (!link [HMRS][Cookie, HMRS]) !!  Thomas Uhl !!  HM2 Run-Time System
+ ~ !! x !! (!link [HPHC][Cookie, HPHC]) !!  Martin Wunderli !!  HP Deskjet Hardcopy
+ ~ !! x !! (!link [HPLJ][Cookie, HPLJ]) !!  Robert Federle !!  HP-Laserjet-Emulator V1.04
+ ~ !! x !! (!link [HSCD][Cookie, HSCD]) !!  Julian Reschke !!  MiNT-CDROM-Treiber
+ x !! ~ !! (!link [HSND][Cookie, HSND]) !!  Richard Kurz !!  CrazySounds
+ ~ !! x !! (!link [HSnd][Cookie, HSND]) !!  Richard Kurz !!  CrazySounds
+ ~ !! ~ !! (!link [HWAM][Cookie, HWAM]) !!   ~  !!  Cookie Jar creator program
+!hline
+ ~ !! x !! (!link [IBMP][Cookie, IBMP]) !!  Lars Erik Osterud !!  Norwegian->IBM Printer Converter
+ x !! x !! (!link [ICFS][Cookie, ICFS]) !!  Dirk Haun !!  Iconify Server
+ x !! ~ !! (!link [ICST][Cookie, ICST]) !!   ~  !!  INETCUST Cookie
+ ~ !! x !! (!link [IDSK][Cookie, IDSK]) !!  Stefan Becker !!  Icon Desk
+ ~ !! x !! (!link [iniT][Cookie, iniT]) !!   ~  !!  Manhatten TETRA
+ ~ !! x !! (!link [IMAC][Cookie, IMAC]) !!  Wilfried Cordes !!  Bootsector Guardian
+ ~ !! ~ !! (!link [IMNE][Cookie, IMNE]) !!   ~  !!  Imagine graphics card
+ x !! ~ !! (!link [INSJ][Cookie, INSJ]) !!  Oliver Groeger !!  Cookie Jar installer/extendor program
+ x !! ~ !! (!link [INXR][Cookie, INXR]) !!  Dietmar Pttmann/Dietmar Rabich !!  (!nolink [Index]) generator
+ x !! x !! (!link [iPRN][Cookie, iPRN]) !!  Peter Missel !!  iPRN
+ ~ !! x !! (!link [IRSB][Cookie, IRSB]) !!  Ilja Rateiczak !!  SEGA Shutterbrille
+ ~ !! x !! (!link [iTMA][Cookie, iTMA]) !!  Robert Weiss !!  MFP Timer A Interrupt Handler
+!hline
+ ~ !! x !! (!link [JAM1][Cookie, JAM1]) !!  Pascal Fellerich !!  Butler James
+ x !! ~ !! (!link [JAM1][Cookie, JANU]) !!  vhf Computer !!  Janus Emulator
+ x !! x !! (!link [JB2G][Cookie, JB2G]) !!  John McLoud !!  Bios2Gdos
+ x !! x !! (!link [JCLK][Cookie, JCLK]) !!  Petr Stehlik !!  Clocky Multiutility
+ ~ !! x !! (!link [JCNB][Cookie, JCNB]) !!  Jens C. Neffe !!  JCN Bootselector
+ ~ !! x !! (!link [JCNC][Cookie, JCNC]) !!  Jens C. Neffe !!  JCN Multi Accessory
+ ~ !! x !! (!link [JCNH][Cookie, JCNH]) !!  Jens C. Neffe !!  Hardcopy Program
+ ~ !! x !! (!link [JCNT][Cookie, JCNT]) !!  Jens C. Neffe !!  Cocteau Word Processor
+ x !! x !! (!link [JFTP][Cookie, JFTP]) !!  Jan-Hinrich Fessel !!  SCSI driver for generic tape devices
+ ~ !! ~ !! (!link [JINX][Cookie, JINX]) !!   ~  !!  Jinx
+ ~ !! x !! (!link [JMLB][Cookie, JMLB]) !!  John McLoud !!  McBoot
+ x !! x !! (!link [JMLS][Cookie, JMLS]) !!  John McLoud !!  JML Snapshot
+ ~ !! x !! (!link [JSHD][Cookie, JSHD]) !!  Jrgen Stessun !!  Hyper Density Control Program
+ ~ !! x !! (!link [JUST][Cookie, JUST]) !!  Robert Irrgang, Trillian Computer AG !!  Justify
+ x !! ~ !! (!link [J_Sc][Cookie, J_Sc]) !!  John McLoud !!  SECURE.PRG
+!hline
+ x !! ~ !! (!link [KAOS][Cookie, KAOS]) !!  Andreas Kromke !!  KAOS TOS 1.4
+ ~ !! x !! (!link [KbEv][Cookie, KbEv]) !!  Michael Seyfried !!  MM2 Keyboard Handling Module
+ x !! ~ !! (!link [KEYT][Cookie, KEYT]) !!  Thomas Much !!  KEYTAB
+ ~ !! ~ !! (!link [KGTF][Cookie, KGTF]) !!   ~  !!  Tos Fix
+ ~ !! x !! (!link [KIDI][Cookie, KIDI]) !!  Robert Irrgang !!  RAMdisk
+ ~ !! x !! (!link [KLME][Cookie, KLME]) !!  Andreas Kromke !!  CMD
+ ~ !! x !! (!link [KREG][Cookie, KREG]) !!  Julian F. Reschke !!  KillRegisters
+ ~ !! x !! (!link [KyMp][Cookie, KyMp]) !!  Eric Smith !!  Keyboard Macro & Remapping Utility
+ x !! ~ !! (!link [KyWt][Cookie, KyWt]) !!  Manfred Lippert !!  KeyWatch
+!hline
+ x !! x !! (!link [Lace][Cookie, Lace]) !!  Ulf Ronald Andersson !! LaceScan
+ ~ !! x !! (!link [LACY][Cookie, LACY]) !!  Oliver Michalak !!  LAZy-Shell-III
+ ~ !! x !! (!link [LALA][Cookie, LALA]) !!  Laurenz Pržner !!  Albolala BellHook Sample Player
+ ~ !! x !! (!link [lanc][Cookie, lanc]) !!  Torsten Lang !!  MiNT-Net ethernet driver for AMD LANCE
+ ~ !! x !! (!link [LASB][Cookie, LASB]) !!  Klaus Garms, DMC !!  Laserbrain
+ x !! x !! (!link [LAWC][Cookie, LAWC]) !!  Robert Federle !!  Look-Ahead-Write-Cache
+ x !! ~ !! (!link [LDGM][Cookie, LDGM]) !!  Olivier Landemarre && Dominique Bereziat !! GEM Dynamical Libraries (LDG)
+ x !! x !! (!link [LEDP][Cookie, LEDP]) !!  Christoph Zwerschke !!  LED-Panel
+ x !! x !! (!link [LEmu][Cookie, LEmu]) !!  Ulf Ronald Andersson !! LaceScan command-keys
+ x !! ~ !! (!link [Lity][Cookie, Lity]) !!  Christian Krger !! Liberty
+ ~ !! x !! (!link [LLCR][Cookie, LLCR]) !!  Logilex !!  Logilex 1st Lock
+ x !! x !! (!link [LMus][Cookie, LMus]) !!  Ulf Ronald Andersson !! LaceScan mouse accelerators
+ x !! x !! (!link [LOGB][Cookie, LOGB]) !!  Uwe Holtkamp, Jrgen Holtkamp !!  Logbuch
+ ~ !! x !! (!link [LoSe][Cookie, LoSe]) !!  Markus Kohm !!  SER-LOG
+ ~ !! x !! (!link [LP/2][Cookie, LP/2]) !!  Laurenz Pržner !!  Malloc 2 Gemdos Vector
+ ~ !! x !! (!link [LPCD][Cookie, LPCD]) !!  Laurenz Pržner !!  Carrier Detector
+ ~ !! x !! (!link [LPJM][Cookie, LPJM]) !!  Laurenz Pržner !!  Joy Mouse
+ x !! x !! (!link [LTMF][Cookie, LTMF]) !!  Oliver Scheel !!  Let 'em Fly
+!hline
+ ~ !! x !! (!link [M16s][Cookie, M16s]) !!  Cybercube Research Limited !!  CyRel M16-1280 Graphikkarte
+ ~ !! x !! (!link [M16X][Cookie, M16X]) !!  Cybercube Research Limited !!  CyReL M16 XBIOS-Emulator
+ x !! x !! (!link [macc][Cookie, macc]) !!  Ken Badertscher, Atari Corporation !!  Maccel 3
+ x !! ~ !! (!link [MADD][Cookie, MADD]) !!  Uwe Seimet !!  Add mem for TT
+ x !! ~ !! (!link [MADN][Cookie, MADN]) !!  Robert Federle !!  NEX-Output
+ ~ !! x !! (!link [Maes][Cookie, Maes]) !!  Olivier Landemarre !!  MyAES
+ x !! ~ !! (!link [MagC][Cookie, MagC]) !!  Dirk Steins !!  Magic Dials Configuration program
+ x !! ~ !! (!link [MAGN][Cookie, MAGN]) !!  Michael Schwingen !!  MAGNUM-Karte
+ x !! ~ !! (!link [MagX][Cookie, MagX]) !!  Sven&Wilfried Behne, Andreas Kromke !!  MagiC
+ ~ !! x !! (!link [MAST][Cookie, MAST]) !!  Naumann&R”der !!  Master
+ x !! ~ !! (!link [MaTC][Cookie, MaTC]) !!   ~  !!  Matrix True Colour Graphics Card
+ x !! ~ !! (!link [MbAr][Cookie, MbAr]) !!  Manfred Lippert !!  MenuBar
+ x !! x !! (!link [MBRD][Cookie, MBRD]) !!  Michael Maažen !!  Blit_RD: Ramdisk
+ ~ !! ~ !! (!link [MCL_][Cookie, MCL_]) !!   ~  !!  MiNT (!nolink [control])
+ x !! ~ !! (!link [McSn][Cookie, McSn]) !!   ~  !!  MacSound
+ ~ !! x !! (!link [MCSP][Cookie, MCSP]) !!  F. Aschwanden !!  Unimplemented Integer Instruction und Floating Point Handler
+ x !! ~ !! (!link [MCWR][Cookie, MCWR]) !!   ~  !!  Microwire DMA sound interface
+ x !! x !! (!link [MDIA][Cookie, MDIA]) !!  Helmut Neukirchen !!  Multi-Dialog
+ ~ !! x !! (!link [MDRK][Cookie, MDRK]) !!  Steffen Engel !!  MegaDark
+ x !! ~ !! (!link [MDSa][Cookie, MDSa]) !!  Bill Penner  !!  Medical Design Software's Serial Fix
+ ~ !! ~ !! (!link [MFAC][Cookie, MFAC]) !!   ~  !!  Multi Accessory
+ ~ !! x !! (!link [MFFM][Cookie, MFFM]) !!  Markus Haebler !!  Marcus' file selector for MiNT
+ ~ !! x !! (!link [MFIX][Cookie, MFIX]) !!  Thomas Binder !!  MONOFIX.PRG
+ x !! ~ !! (!link [MFMV][Cookie, MFMV]) !!  ~ !! Wird von Magic installiert
+ x !! x !! (!link [MFNT][Cookie, MFNT]) !!  Hayo Schmidt !!  Fontloader
+ x !! x !! (!link [MGEM][Cookie, MGEM]) !!  Pascal Merle !!  MultiGEM
+ x !! ~ !! (!link [MgMc][Cookie, MgMc]) !!  Tempelmann, Kromke, Behne, ASH !! MagiC Mac
+ x !! ~ !! (!link [MgMx][Cookie, MgMx]) !!  Andreas Kromke !!  MagiC Mac X
+ x !! ~ !! (!link [MgPC][Cookie, MgPC]) !!  Franz Schmerbeck, Andreas Kromke !! MagiC PC
+ x !! ~ !! (!link [MgSn][Cookie, MgSn]) !!  Didier Mequignon !!  MagiC Mac Sound driver
+ ~ !! x !! (!link [MID3][Cookie, MID3]) !!  Lars Erik Osterud !!  MIDINET3
+ ~ !! x !! (!link [MIMA][Cookie, MIMA]) !!  Oliver Scheel !!  MIDI Manager
+ x !! x !! (!link [MiNT][Cookie, MiNT]) !!  Eric Smith, Atari Corporation !!  Mint/MultiTOS
+ x !! x !! (!link [MIPS][Cookie, MIPS]) !!  Michael Maažen !!  SPOOL120.PRG - Druckerspooler
+ ~ !! x !! (!link [MJAF][Cookie, MJAF]) !!  Martin Jahr !!  AUTOFONT
+ ~ !! x !! (!link [MKHC][Cookie, MKHC]) !!  Marcus Kraft !!  Hardcopy Fixer
+ x !! ~ !! (!link [MkJr][Cookie, MkJr]) !!  Thomas Schallar !!  Cookie Jar creator program
+ ~ !! x !! (!link [MM2X][Cookie, MM2X]) !!  Thomas Tempelmann !!  Megamax Modula
+ x !! x !! (!link [MMAC][Cookie, MMAC]) !!  Emanuel Moecklin !!  Magic Mouse Accelerator
+ ~ !! x !! (!link [MMUT][Cookie, MMUT]) !!  Oliver Scheel !!  Midi Maze II Utility
+ ~ !! x !! (!link [MM_2][Cookie, MM_2]) !!  Markus Fritze !!  Midimaze 2
+ ~ !! x !! (!link [MN3D][Cookie, MN3D]) !!  Manfred Lippert !!  Mens und Submens im 3D-Look
+ x !! ~ !! (!link [MNAM][Cookie, MNAM]) !!  Standardcookie !!  Name cookie
+ ~ !! x !! (!link [MOAF][Cookie, MOAF]) !!  Martin Osieka !!  ARROWFIX
+ x !! x !! (!link [MOGR][Cookie, MOGR]) !!  Martin Osieka !!  GEMRAM
+ x !! ~ !! (!link [MPRO][Cookie, MPRO]) !!  Thomas Kuenneth !!  Magic Pro Config CPX
+ ~ !! x !! (!link [MRAM][Cookie, MRAM]) !!  Rainer Seitel !!  More RAM
+ ~ !! x !! (!link [MSPD][Cookie, MSPD]) !!  Lars Erik Osterud !!  Mouse Speeder
+ x !! x !! (!link [MSPO][Cookie, MSPO]) !!  Emanuel Moecklin !!  Magic Spooler
+ ~ !! ~ !! (!link [mstx][Cookie, mstx]) !!   ~  !! Mouse tricks
+ ~ !! X !! (!link [MTCI][Cookie, MTCI]) !!   ~  !!  MATRIX MatGraph - TCxx
+ x !! x !! (!link [MTft][Cookie, MTft]) !!  Markus Kohm !!  Trapper
+ x !! x !! (!link [MUPF][Cookie, MUPF]) !!  Gereon Steffens !!  Mupfel
+ x !! ~ !! (!link [MWHL][Cookie, MWHL]) !!  Armin Diedering !!  MWheel
+ ~ !! ~ !! (!link [MZTR][Cookie, MZTR]) !!   ~  !!  TRASH
+ x !! x !! (!link [MZVT][Cookie, MZVT]) !!   Michael Zuhl  !!  Driver videotext decoder from Print-Technik
+ ~ !! X !! (!link [M_IN][Cookie, M_IN]) !!   ~  !!  MATRIX MatGraph - Cxx
+!hline
+ ~ !! x !! (!link [N203][Cookie, N203]) !!  Noud v. Kruysbergen !!  Multi Accessory
+ x !! ~ !! (!link [nAES][Cookie, nAES]) !!  Jens Hiescher, Rainer Mannigel, Woller Systeme !!  N.AES, Das AES fr MiNT
+ x !! x !! (!link [NAH3][Cookie, NAH3]) !!  Noud van Kruysbergen !! N_ALTHLP Snapshot-Tool
+ ~ !! x !! (!link [NBEL][Cookie, NBEL]) !!  Robert Irrgang !!  SOUND.PRG
+ ~ !! x !! (!link [NBLL][Cookie, NBLL]) !!  Volker Janzen !!  NEWBELL.PRG
+ x !! x !! (!link [NCLN][Cookie, NCLN]) !!  Oliver Scheel !!  NiceLine
+ ~ !! x !! (!link [ne2k][Cookie, ne2k]) !!  Torsten Lang !!  ne2000.xif
+ ~ !! x !! (!link [NERV][Cookie, NERV]) !!  Laurenz Pržner/ST-Magazin !!  No etv_critic_alert
+ ~ !! x !! (!link [NETS][Cookie, NETS]) !!  PAM's Software !!  PAM Novell Software
+ x !! ~ !! (!link [NEXB][Cookie, NEXB]) !!  Robert Federle !!  NEX-Buffer
+ x !! ~ !! (!link [NEXK][Cookie, NEXK]) !!  Robert Federle !!  NEX-Toolkit
+ x !! ~ !! (!link [NFMT][Cookie, NFMT]) !!  Andreas Kunz !!  INFOMAT
+ ~ !! ~ !! (!link [NFnt][Cookie, NFnt]) !!   ~  !!  Neodesk Font Loader
+ ~ !! x !! (!link [NKCC][Cookie, NKCC]) !!  Harald Siegmund !!  NKCC - Normalized Key Code Converter
+ ~ !! ~ !! (!link [NLdr][Cookie, NLdr]) !!   ~  !!  Neodesk Loader
+ ~ !! x !! (!link [NMGE][Cookie, NMGE]) !! Simon Gleissner !!  No More amc-Gdos Errors
+ ~ !! x !! (!link [NO7P][Cookie, NO7P]) !!  Lars Erik Osterud !!  Norwegian->7 bit printer converter
+ ~ !! ~ !! (!link [noCF][Cookie, noCF]) !!   ~  !!  noSystem
+ ~ !! x !! (!link [NOR5][Cookie, NOR5]) !!  Lars Erik Osterud !!  Norwegian Keyboard Driver
+ ~ !! ~ !! (!link [NOVA][Cookie, NOVA]) !!   ~  !!  NOVA graphics card
+ ~ !! x !! (!link [NSC1][Cookie, NSC1]) !!  Noud v. Kruysbergen !!  N_Syscom accessory
+ x !! ~ !! (!link [Nspd][Cookie, Nspd]) !!  ~ !!  Nemesis
+ x !! ~ !! (!link [nTAS][Cookie, nTAS]) !!  Steffen Engel !!  TAS-Instruktionen
+ ~ !! ~ !! (!link [NTK4][Cookie, NTK4]) !!   ~  !!  NTK4 Falcon MOD player
+ ~ !! x !! (!link [nTOS][Cookie, nTOS]) !!   Rainer Mannigel  !!  MilanBlaster
+ ~ !! ~ !! (!link [NUL>][Cookie, NUL>]) !!   ~  !!  System startup utility
+ x !! x !! (!link [NVDI][Cookie, NVDI]) !!  Sven&Wilfried Behne, BELA !!  NewVDI
+!hline
+ x !! ~ !! (!link [OBNL][Cookie, OBNL]) !!  Stephan Junker, Dirk Haun !!  Load-Time-Linking Protokoll
+ x !! x !! (!link [OFLS][Cookie, OFLS]) !!  Hans-Jrgen Richstein (Standardcookie) !!  Check Open Files
+ x !! x !! (!link [OPMM][Cookie, OPMM]) !!  Martin Mertens !!  Open Helper
+ ~ !! ~ !! (!link [OSBL][Cookie, OSBL]) !!   ~  !!  Screen Blaster
+ ~ !! ~ !! (!link [OSTT][Cookie, OSTT]) !!   ~  !!  OverScan TT
+ x !! ~ !! (!link [OTOS][Cookie, OTOS]) !!   ~  !!  oTOSis - TOS emulator for Linux/68K
+ ~ !! x !! (!link [OV24][Cookie, OV24]) !!   ~  !!  OverScan Hardcopy Driver 24 pins
+ ~ !! x !! (!link [oVDI][Cookie, oVDI]) !!  Odd Skancke !!  oVDI
+ ~ !! x !! (!link [OVDJ][Cookie, OVDJ]) !!  Karsten Isakovic, OverScan GbR !!  Overscan Hardcopytreiber fr HP-DeskJet
+ ~ !! x !! (!link [OVEP][Cookie, OVEP]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Hardcopy Driver 9 pins
+ x !! x !! (!link [OVER][Cookie, OVER]) !!  Karsten Isakovic, OverScan GbR !!  AutoSwitch OverScan Hardware Driver
+ ~ !! x !! (!link [OVEX][Cookie, OVEX]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Exception Patch
+ ~ !! x !! (!link [OVFS][Cookie, OVFS]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Fileselector Patch
+ ~ !! x !! (!link [OVIM][Cookie, OVIM]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Hardcopy Driver
+ ~ !! x !! (!link [OVLS][Cookie, OVLS]) !!  Karsten Isakovic, OverScan GbR !!  OverScan DMC Laserbrain Patch
+ ~ !! x !! (!link [OVRD][Cookie, OVRD]) !!  Karsten Isakovic, OverScan GbR !!  OverScan RamDisk
+ ~ !! x !! (!link [OVUT][Cookie, OVUT]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Screen Blanker
+ ~ !! x !! (!link [OVWI][Cookie, OVWI]) !!  Karsten Isakovic, OverScan GbR !!  OverScan Window-Size Patch
+!hline
+ ~ !! x !! (!link [PAMN][Cookie, PAMN]) !!  PAM's Software !!  PAM Network Driver
+ ~ !! x !! (!link [PAUL][Cookie, PAUL]) !!  Pascal Fellerich !!  Paula 2, Amiga-MODfile-Player
+ x !! x !! (!link [PBUG][Cookie, PBUG]) !!  Emanuel Moecklin !!  PeaceBug
+ ~ !! x !! (!link [PDEB][Cookie, PDEB]) !!  Dimitri Junker !!  PureDebuggger
+ ~ !! x !! (!link [PDeb][Cookie, PDEB]) !!  Dimitri Junker !!  PureDebuggger
+ x !! x !! (!link [PDOS][Cookie, PDOS]) !!  Chris Latham !!  PowerDOS
+ ~ !! x !! (!link [PDRZ][Cookie, PDRZ]) !!  Patrick Dubbrow !!  LockGetrez
+ ~ !! x !! (!link [PFIX][Cookie, PFIX]) !!  Julian Reschke, SciLab GmbH !!  PTSINFIX Fix
+ ~ !! x !! (!link [Pinp][Cookie, Pinp]) !!  Jens Schmidt !!  Parallel Input Port Driver
+ ~ !! x !! (!link [PKSH][Cookie, PKSH]) !!  Pahlen & Krauž Software !!  PKS-Shell
+ x !! ~ !! (!link [PMMU][Cookie, PMMU]) !!  Alexander Herzlinger (Standardcookie) !!  PMMU reprogrammed
+ ~ !! x !! (!link [POIS][Cookie, POIS]) !!  Bernhard Artz/Gregor Tielsch/Shift !!  Poison!
+ ~ !! ~ !! (!link [POWM][Cookie, POWM]) !!   ~  !!  PowerMouse
+ ~ !! x !! (!link [PRCS][Cookie, PRCS]) !!  Peter Rohde !!  CopySTar
+ ~ !! x !! (!link [PRDS][Cookie, PRDS]) !!  Peter Rohde !!  Peter Rohde Disk Speeder
+ ~ !! x !! (!link [PRMD][Cookie, PRMD]) !!  Markus Kohm !!  MIDIPRT
+ ~ !! ~ !! (!link [PRN!/][Cookie, PRN!/]) !!   ~  !!  WandelSZ
+ ~ !! x !! (!link [PRNž][Cookie, PRNž]) !!  Michal Bernards/ST-Magazin !!  WandelSZ
+ ~ !! x !! (!link [PRO5][Cookie, PRO5]) !!  Lars Erik Osterud !!  Resident virus check/kill/protect program
+ ~ !! x !! (!link [PROB][Cookie, PROB]) !!  Markus und Michael Meurer !!  Profibase
+ ~ !! x !! (!link [PROT][Cookie, PROT]) !!  Meinolf Schneider !!  Protos Screen Utility
+ ~ !! x !! (!link [PRTD][Cookie, PRTD]) !!  Robert Federle !!  Print to Disk V1.10
+ ~ !! x !! (!link [PRTO][Cookie, PRTO]) !!  Peter Rohde !!  ST Tools
+ ~ !! x !! (!link [PRTR][Cookie, PRTR]) !!  Protar !!  Protar HD Driver
+ ~ !! x !! (!link [prtr][Cookie, prtr]) !!  Konrad Hinsen !!  Atari->IBM Printer Converter
+ ~ !! ~ !! (!link [PSND][Cookie, PSND]) !!   ~  !!  ProSound Driver
+ ~ !! x !! (!link [PSSG][Cookie, PSSG]) !!  Thomas Much !!  Paint Shop Hardcopy vector
+ x !! x !! (!link [PTOS][Cookie, PTOS]) !!  Alexander Herzlinger !!  ROMRAM: copy TOS in TT-RAM
+!hline
+ ~ !! x !! (!link [QIKM][Cookie, QIKM]) !!  Gereon Steffens !!  Quick Mouse
+ ~ !! x !! (!link [QMAC][Cookie, QMAC]) !!  Wilfried Cordes !!  Quick Mouse Driver Accessory
+ ~ !! x !! (!link [QMCP][Cookie, QMCP]) !!  Wilfried Cordes !!  Chemplot Quick Mouse Driver
+ ~ !! ~ !! (!link [QST2][Cookie, QST2]) !!   ~  !!  Quick ST 2
+ ~ !! ~ !! (!link [QST3][Cookie, QST3]) !!   ~  !!  Quick ST 3
+ ~ !! x !! (!link [QUAN][Cookie, QUAN]) !!  Bernd Blank !!  QuanTOS Multiutility
+!hline
+ ~ !! x !! (!link [RAIL][Cookie, RAIL]) !!  Otmar Birn !!  Rail Manager
+ ~ !! ~ !! (!link [RaSn][Cookie, RaSn]) !!   ~  !!  Rational Sounds
+ ~ !! x !! (!link [RESG][Cookie, RESG]) !!  J”rg Hahne !!  RESET GUARD
+ x !! x !! (!link [RFLX][Cookie, RFLX]) !!  Karsten Isakovic, OverScan GbR !!  AutoSwitch Treiber fr Reflex Graphics Card
+ ~ !! x !! (!link [RFUS][Cookie, RFUS]) !!  Michael Bernards !!  Rufus terminal program
+ ~ !! x !! (!link [RGUS][Cookie, RGUS]) !!  Daniel Hollis !!  Argus
+ ~ !! x !! (!link [RING][Cookie, RING]) !!  Julian Reschke !!  Telefonklingel Detektor
+ ~ !! x !! (!link [ROMD][Cookie, ROMD]) !!  Andreas Kromke !!  MagiC DOS Treiber fr ROM Module
+ ~ !! x !! (!link [ROT8][Cookie, ROT8]) !!  Thomas Frh”lter !!  Rotate
+ ~ !! x !! (!link [RPIT][Cookie, RPIT]) !!  Arpad Beszedes !!  TIMEFIX
+ ~ !! x !! (!link [RREG][Cookie, RREG]) !!  Reiner Wiechert !!  Restore Register
+ ~ !! x !! (!link [RSLT][Cookie, RSLT]) !!  Volker Brodel, GengTEC !!  GengTEC VGA Monochrome/16 Colour Driver
+ x !! ~ !! (!link [RSpd][Cookie, RSpd]) !!  Stephan Skrodzki !!  RS_SPEED (Serial Fix)
+ x !! x !! (!link [RSVE][Cookie, RSVE]) !!  Harun Scheutzow !!  RSVE Patch
+ x !! ~ !! (!link [RSVF][Cookie, RSVF]) !!  Harun Scheutzow !!  RS232 Version Fast (HSMODEM)
+ ~ !! x !! (!link [RTKC][Cookie, RTKC]) !!  Robert Tolksdorf !!  Keyclick
+ ~ !! x !! (!link [RTOB][Cookie, RTOB]) !!  Robert Tolksdorf !!  Optobell
+ x !! x !! (!link [RWIN][Cookie, RWIN]) !!  Karsten Isakovic !!  RootWindow
+!hline
+ ~ !! ~ !! (!link [SAM][Cookie, SAM]) !!   ~  !!  System Audio Manager
+ ~ !! x !! (!link [SBKM][Cookie, SBKM]) !!  Stefan Brck !!  Ring Recognition in Modem Routs
+ ~ !! x !! (!link [SBTE][Cookie, SBTE]) !!  Stefan Brck !!  Terminal Program
+ ~ !! x !! (!link [SBTS][Cookie, SBTS]) !!  Stefan Brck !!  Trap Spy
+ ~ !! x !! (!link [SCAH][Cookie, SCAH]) !!  Julian Reschke, Hard&Soft !!  Speed Cache
+ x !! x !! (!link [SCKM][Cookie, SCKM]) !!   ~  !!  MagXNet (SOCKET.DEV)
+ x !! ~ !! (!link [SCPN][Cookie, SCPN]) !!   ~  !!  Screen Blaster 3 screen enhancer
+ ~ !! x !! (!link [SCRD][Cookie, SCRD]) !!  Robert Federle !!  Screen To Disk
+ ~ !! x !! (!link [SCRN][Cookie, SCRN]) !!  Edgar R”der !!  Screen Scroll
+ ~ !! x !! (!link [SCRS][Cookie, SCRS]) !!  Urs Thrmann !!  Screen Blanker
+ x !! x !! (!link [SCRW][Cookie, SCRW]) !!  Uwe Seimet !!  Screen Watch
+ x !! ~ !! (!link [SCSI][Cookie, SCSI]) !!   ~  !!  SCSI Driver
+ ~ !! ~ !! (!link [SCSV][Cookie, SCSV]) !!   ~  !!  Line Art Screensaver
+ ~ !! x !! (!link [SDCH][Cookie, SDCH]) !!  Sven Kopacz !!  2C - Second Chance
+ ~ !! x !! (!link [SDES][Cookie, SDES]) !!  Markus und Michael Meurer !!  Softdesk
+ ~ !! x !! (!link [SDsk][Cookie, SDsk]) !!  Gerhard H”lscher !!  Softdisk
+ ~ !! x !! (!link [SDWN][Cookie, SDWN]) !!  Marcel Waldvogel !!  ScreenDown
+ ~ !! x !! (!link [SELC][Cookie, SELC]) !!  Michael Haydn !!  C-Lab File selector
+ ~ !! x !! (!link [SENV][Cookie, SENV]) !!  Andreas Grož !!  Set Environment
+ x !! x !! (!link [SFA^][Cookie, SFA^]) !!  Sevo Stille !!  Fontloader system
+ ~ !! x !! (!link [SFIX][Cookie, SFIX]) !!  Allan Pratt, Atari Corporation !!  Serial Port Fix
+ ~ !! ~ !! (!link [SFMN][Cookie, SFMN]) !!   ~  !!  SafeMenu
+ ~ !! x !! (!link [ShLk][Cookie, ShLk]) !!  Jean-Pierre Rasquin !!  Shift Lock
+ ~ !! x !! (!link [shlp][Cookie, shlp]) !!  J”rg Westheide !!  shelhelp
+ x !! x !! (!link [SKEY][Cookie, SKEY]) !!  Ole Pahl !!  SpecialKeys
+ ~ !! x !! (!link [SLCT][Cookie, SLCT]) !!  Stefan Radermacher & Oliver Scheel !!  Selectric
+ x !! x !! (!link [SLif][Cookie, SLif]) !!  Michael Schwingen !!  SoundLifter
+ x !! ~ !! (!link [SLIP][Cookie, SLIP]) !!  Sven Kopacz !!  Socket library
+ x !! x !! (!link [SM00][Cookie, SM00]) !!  STAGE Microsystems !!  SOTA Printer Spooler
+ x !! x !! (!link [SM01][Cookie, SM01]) !!  STAGE Microsystems !!  ReProK Office Management DUO
+ x !! x !! (!link [SM02][Cookie, SM02]) !!  STAGE Microsystems !!  ReProK International EM-NET II
+ x !! ~ !! (!link [SMAL][Cookie, SMAL]) !!  M. Nick, H. Schmidt (Standardcookie) !!  Small AES Icon fonts
+ ~ !! x !! (!link [SMAU][Cookie, SMAU]) !!  Marcel Waldvogel !!  Set Mouse Accessory
+ ~ !! x !! (!link [SMon][Cookie, SMon]) !!  Karsten Isakovic, OverScan GbR !!  SysMon
+ x !! x !! (!link [SMTT][Cookie, SMTT]) !!  Karsten Isakovic, OverScan GbR !!  SM-124 Emulator
+ ~ !! x !! (!link [SNAP][Cookie, SNAP]) !!  Konrad Hinsen !!  That's Snap Accessory
+ ~ !! x !! (!link [SOFS][Cookie, SOFS]) !!  Markus und Michael Meurer !!  Softscreen
+ ~ !! x !! (!link [SOSW][Cookie, SOSW]) !!  Markus und Michael Meurer !!  Softswitch
+ x !! x !! (!link [SpcE][Cookie, SpcE]) !!  Christian Grunenberg !!  Space
+ ~ !! x !! (!link [SPCK][Cookie, SPCK]) !!  Robert Irrgang !!  RAMdisk for SPC Modula
+ ~ !! x !! (!link [SPEE][Cookie, SPEE]) !!  Stefan Hintz !!  Mouse Speeder
+ ~ !! x !! (!link [SPEK][Cookie, SPEK]) !!  Stefan Hintz, Wilhelm Elektronik !!  Spektrum-Grafikkarten
+ x !! x !! (!link [SPEX][Cookie, SPEX]) !!  Stefan Eissing, SciLab Gmbh !!  Steve's Printing Exzessory
+ x !! x !! (!link [spMR][Cookie, spMR]) !!  Martin Rogge !!  Drucker und Filespuler
+ x !! x !! (!link [Spol][Cookie, Spol]) !!  Andreas Mandel !!  Flexible Printer Spooler
+ ~ !! x !! (!link [SPRG][Cookie, SPRG]) !!  Bernd Blank ~  !!  STARTER.ACC
+ x !! ~ !! (!link [SR17][Cookie, SR17]) !!   ~  !!  Beschleuniger SST Cockpit
+ ~ !! ~ !! (!link [SSND][Cookie, SSND]) !!   ~  !!  Petra
+ ~ !! x !! (!link [ST-C][Cookie, ST-C]) !!  Matthias Andr„ !!  Cache Program
+ ~ !! x !! (!link [ST17][Cookie, ST17]) !!  Daniel Hollis !!  ST-68017
+ ~ !! x !! (!link [STAT][Cookie, STAT]) !!  Laurenz Pržner !!  StaTOS
+ x !! ~ !! (!link [STEM][Cookie, STEM]) !!  Thomas G”ttsch !!  STEmulator
+ x !! x !! (!link [STEW][Cookie, STEW]) !!  John McLoud !!  Stewart
+ ~ !! ~ !! (!link [STFA][Cookie, STFA]) !!   ~  !!  Sound treiber fur Atari
+ x !! ~ !! (!link [StIc][Cookie, StIc]) !!  John McLoud !!  Stewart Iconserver
+ ~ !! ~ !! (!link [STiK][Cookie, STiK]) !!   ~  !!  ST Internet Kit
+ ~ !! x !! (!link [STMS][Cookie, STMS]) !!  Martin Backschat & Peter Melzer !!  (!I)ST Magazin(!i) Screendump
+ x !! ~ !! (!link [strk][Cookie, strk]) !!   ~  !!  StarTrack XBIOS Erweiterung
+ x !! ~ !! (!link [STRX][Cookie, STRX]) !!  Martin Sperber !!  SAT-Trax Antenna driver
+ x !! ~ !! (!link [SupV][Cookie, SupV]) !!  ~   !!  SuperVidel Treiber
+ x !! ~ !! (!link [SVAR][Cookie, SVAR]) !!  Brad Pickering !!  Shows MacMiNT
+ ~ !! ~ !! (!link [SVGA][Cookie, SVGA]) !!   ~  !!  (!nolink [Super]) VGA Emulator
+ x !! x !! (!link [SWAP][Cookie, SWAP]) !!  Uwe Seimet, Maxon Computer !!  Outside
+ x !! x !! (!link [SwTm][Cookie, SwTm]) !!  Matthias Wallmann !!  Uhr
+ x !! x !! (!link [SYMB][Cookie, SYMB]) !!  Robert Federle !!  Symbol driver
+ ~ !! ~ !! (!link [SYNL][Cookie, SYNL]) !!   ~  !!  Dynamic Link Library Driver
+ ~ !! x !! (!link [SYNT][Cookie, SYNT]) !!  Marcel Waldvogel !!  Syntex
+ ~ !! x !! (!link [SysE][Cookie, SysE]) !!  Martin Drrschnabel !!  System Editor
+ ~ !! x !! (!link [Syso][Cookie, Syso]) !!  Hecker + Knobbe Computersysteme GbR !!  ST Sysop
+ ~ !! x !! (!link [SYST][Cookie, SYST]) !!  Sven Kopacz !!  Systime
+ ~ !! x !! (!link [SZ_M][Cookie, SZ_M]) !!  Nickel Szebrowski !!  Dynamic Mouse Speeder
+ x !! ~ !! (!link [S_DR][Cookie, S_DR]) !!  Peter Hilbring  !!  CDROM SCSI driver
+!hline
+ ~ !! x !! (!link [T206][Cookie, T206]) !!  Harun Scheutzow !!  PATCHX06.PRG
+ x !! ~ !! (!link [T2GM][Cookie, T2GM]) !!  Thomas Binder !!  TOS2GEM
+ x !! ~ !! (!link [TALK][Cookie, TALK]) !!   Gadgets  !!  MegaTalk
+ ~ !! ~ !! (!link [TAPE][Cookie, TAPE]) !!   ~  !!  TapeBIOS
+ ~ !! x !! (!link [TASS][Cookie, TASS]) !!  Markus Fritze !!  Turbo Assembler
+ ~ !! x !! (!link [TCFS][Cookie, TCFS]) !!  Borland Mnchen !!  Turbo C File Selector
+ x !! x !! (!link [TCRB][Cookie, TCRB]) !!  Ralf Biedermann !!  Turbo Cache
+ ~ !! x !! (!link [Tenv][Cookie, Tenv]) !!  Markus Bank !!  Environment Set Program for Terminal
+ ~ !! x !! (!link [TFIX][Cookie, TFIX]) !!  Karsten Isakovic, Atari Corporation !!  TOS 1.04 fix
+ x !! x !! (!link [THNX][Cookie, THNX]) !!  Dirk Haun !!  Thinx
+ x !! x !! (!link [THRM][Cookie, THRM]) !!  Ole Pahl !!  Temoeraturdatenauswertung
+ ~ !! x !! (!link [THST][Cookie, THST]) !!  Jiri Lamac !!  TurboHST
+ ~ !! x !! (!link [TIM3][Cookie, TIM3]) !!  Lars Erik Osterud !!  Time Driver
+ ~ !! x !! (!link [TIM5][Cookie, TIM5]) !!  Lars Erik Osterud !!  Time Driver plus Screen Blanker
+ x !! ~ !! (!link [TIME][Cookie, TIME]) !!   ~  !!  Led Panel Time
+ x !! x !! (!link [TK40][Cookie, TK40]) !!   ~  !!  MC68040 ToolKit
+ ~ !! x !! (!link [TL3D][Cookie, TL3D]) !!  Torsten Lang !!  Dritte Floppy
+ ~ !! x !! (!link [TLWV][Cookie, TLWV]) !!  Torsten Lang !!  STGAWVBL
+ x !! x !! (!link [Tmon][Cookie, Tmon]) !!  Thomas Tempelmann & Johannes Hill !!  TempleMon
+ ~ !! ~ !! (!link [TMON][Cookie, Tmon]) !!  Thomas Tempelmann & Johannes Hill !!  TempleMon
+ x !! ~ !! (!link [tmsW][Cookie, tmsW]) !!  TMS !!  TMS Wacom-Treiber
+ ~ !! x !! (!link [TOpW][Cookie, TOpW]) !!  Laurenz Pržner !!  Top Manager Watcher
+ ~ !! x !! (!link [TOUC][Cookie, TOUC]) !!  Steffen Engel !!  Touch
+ ~ !! x !! (!link [TPat][Cookie, TPat]) !!  Laurenz Pržner !!  Tos Patch
+ ~ !! x !! (!link [TPGM][Cookie, TPGM]) !!  J”rg Westheide !!  TraPatch
+ ~ !! x !! (!link [TRAK][Cookie, TRAK]) !!  Julian F. Reschke !!  Track Speed
+ x !! x !! (!link [TraP][Cookie, TraP]) !!  J”rg Westheide !!  TraPatch
+ ~ !! x !! (!link [Trpp][Cookie, Trpp]) !!  Manfred Lippert !!  Trapper
+ ~ !! x !! (!link [TRUE][Cookie, TRUE]) !!  Christoph Zwerschke !!  TrueDisk
+ ~ !! x !! (!link [TSEN][Cookie, TSEN]) !!  Jrgen Kriege !!  TSE Net
+ x !! x !! (!link [TSWP][Cookie, TSWP]) !!  Matthias Becker !!  TonySoft Write Protection
+ x !! ~ !! (!link [TTTF][Cookie, TTTF]) !!  Marcel Waldvogel !!  Thirty Two to Twenty Four
+ x !! ~ !! (!link [TUBS][Cookie, TUBS]) !!  Andreas Alich !!  TUBS - The Ultimate Boot Selector
+ ~ !! x !! (!link [TWFS][Cookie, TWFS]) !!  Konrad Hinsen !!  That's Write File Selector Accessory
+ x !! x !! (!link [Typ1][Cookie, Typ1]) !!  Frank Knobbe !!  Daisywheel accessory
+!hline
+ x !! ~ !! (!link [UFSL][Cookie, UFSL]) !!  Michael Th„nitz  !!  Extended Universal Font Selector
+ ~ !! ~ !! (!link [UIS3][Cookie, UIS3]) !!   ~  !!  Universal Item Selector 3
+ ~ !! x !! (!link [UKB1][Cookie, UKB1]) !!  Uwe Koloska !!  Fastload
+ ~ !! x !! (!link [UKB3][Cookie, UKB3]) !!  Uwe Koloska !!  Fastload plus MIDI Through
+ ~ !! x !! (!link [UN*X][Cookie, UN*X]) !!  Michael Schwingen !!  Unixname (/->\ Converter)
+ ~ !! x !! (!link [USCK][Cookie, USCK]) !!  Uwe Seimet !!  CHECKIT
+ x !! x !! (!link [USHD][Cookie, USHD]) !!  Uwe Seimet !!  Diskus HD driver
+ x !! ~ !! (!link [UsNm][Cookie, UsNm]) !!  Carsten Tolkmit !!  User-Name-Cookie
+ x !! ~ !! (!link [USPK][Cookie, USPK]) !!  Uwe Seimet !!  Hard Disk Auto Parker
+ x !! x !! (!link [USRS][Cookie, USRS]) !!  Uwe Seimet !!  Romspeed
+ x !! ~ !! (!link [USSC][Cookie, USSC]) !!  Uwe Seimet  !!  SCSI Treiber fr Hatari und ARAnyM
+ ~ !! ~ !! (!link [UTRK][Cookie, UTRK]) !!   ~  !!  Ultimate Tracker
+!hline
+ ~ !! x !! (!link [VBLF][Cookie, VBLF]) !!  Thomas Binder !!  VBLFIX.PRG
+ x !! x !! (!link [VDIp][Cookie, VDIp]) !!  ~ !!  VDI performance logger
+ x !! ~ !! (!link [VDLY][Cookie, VDLY]) !!   ~  !!  Videlity
+ ~ !! x !! (!link [VECS][Cookie, VECS]) !!  Stephan Gerle !!  Vecshow
+ ~ !! ~ !! (!link [VeiL][Cookie, VeiL]) !!   ~  !!  Turbo Veille
+ x !! x !! (!link [VFIX][Cookie, VFIX]) !!  Karsten Isakovic !!  VDIFix
+ x !! x !! (!link [VFNT][Cookie, VFNT]) !!  Harald Sommerfeldt !!  VdiFont
+ x !! x !! (!link [VGAS][Cookie, VGAS]) !!  Christoph Zwerschke !!  VGA Simulator
+ x !! ~ !! (!link [VI-2][Cookie, VI-2]) !!  Francois Galea !! Videl Inside
+ ~ !! ~ !! (!link [View][Cookie, View]) !!   ~  !!  View Protocol
+ ~ !! x !! (!link [VIRA][Cookie, VIRA]) !!  Carsten Frischkorn, Galactic !!  Virus Alarm
+ x !! ~ !! (!link [VMEM][Cookie, VMEM]) !!  Robert Federle !!  Virtual Memory
+ ~ !! x !! (!link [VPCH][Cookie, VPCH]) !!  Robert Irrgang !!  VDIPATCH.PRG
+ x !! ~ !! (!link [VRAM][Cookie, VRAM]) !!  Alexander Herzlinger, OverScan GbR !!  Virtual Memory Management for the TT
+ ~ !! x !! (!link [VREP][Cookie, VREP]) !!  Carsten Frischkorn, Galactic !!  Vector Guard
+ ~ !! x !! (!link [VSco][Cookie, VSco]) !!  Arnfried Griesert !!  Virus Scope
+ x !! ~ !! (!link [VSCR][Cookie, VSCR]) !!  Julian F. Reschke (Standardcookie) !!  Structure of Virtual Screens
+ ~ !! x !! (!link [VSTM][Cookie, VSTM]) !!  Focke Frentzen !!  MIDI Transfer
+ ~ !! x !! (!link [vT52][Cookie, vT52]) !!  Cybercube Research Limited !!  CyRel VT52-Emulator
+ ~ !! x !! (!link [VTFX][Cookie, VTFX]) !!  Thomas Binder !!  VT52FIX.PRG
+ ~ !! x !! (!link [VXCK][Cookie, VXCK]) !!  Martin H. Smith !!  VoxClock
+!hline
+ x !! ~ !! (!link [WaHW][Cookie, WaHW]) !!  Walter Hermann !!  HIGH_WAY
+ ~ !! ~ !! (!link [WARP][Cookie, WARP]) !!   ~  !!  Warp 9
+ x !! ~ !! (!link [WaSA][Cookie, WaSA]) !!  Walter Hermann !!  SATELLIT
+ ~ !! ~ !! (!link [WBrd][Cookie, WBrd]) !!   ~  !!  Bird's Wing
+ ~ !! x !! (!link [wdlg][Cookie, wdlg]) !!  Behne & Behne GbR !!  Window-Dialog-Library (wdialog)
+ x !! x !! (!link [WDOG][Cookie, WDOG]) !!  Robert Federle !!  Watchdog
+ x !! x !! (!link [WEGA][Cookie, WEGA]) !!  Dietmar Rabich !!  WEGA Libraries
+ x !! ~ !! (!link [WfNa][Cookie, WfNa]) !!  Manfred Lippert !!  Abfrage des Fenstertittel per wind_get(WF_NAME)
+ x !! x !! (!link [WFSL][Cookie, WFSL]) !!  Gert Kramer !!  Window File Selector
+ x !! x !! (!link [WICO][Cookie, WICO]) !!  Sven Kopacz !!  WinCom
+ ~ !! x !! (!link [WinK][Cookie, WinK]) !!  J”rg Westheide !!  WinKeys
+ x !! ~ !! (!link [WINX][Cookie, WINX]) !!  Martin Osieka  !!  WINX
+ ~ !! x !! (!link [WINZ][Cookie, WINZ]) !!  Claus Brod !!  Luftschlož/Winz RAMdisk
+ x !! x !! (!link [WPRO][Cookie, WPRO]) !!  Christoph Conrad !!  Write Protect
+ ~ !! x !! (!link [WRAP][Cookie, WRAP]) !!  Richard Kurz !!  WarpMouse
+ x !! ~ !! (!link [WrAp][Cookie, WRAP]) !!  Richard Kurz !!  WarpMouse
+!hline
+ x !! ~ !! (!link [XALT][Cookie, XALT]) !!   ~  !!  AlberTT GFX card driver
+ ~ !! x !! (!link [XBTN][Cookie, XBTN]) !!  Tassilo Nitz !!  Maus-Routine in 'XBOOT'
+ x !! x !! (!link [XDsk][Cookie, XDsk]) !!  Thomas Schallar !!  X-DISK ramdisk
+ ~ !! ~ !! (!link [XFRB][Cookie, XFRB]) !!   ~  !!  Extended Fast Ram Buffer
+ x !! x !! (!link [XFS1][Cookie, XFS1]) !!  Edgar R”der !!  Master Module for extended TOS File System
+ x !! ~ !! (!link [xFSL][Cookie, xFSL]) !!  Dirk Haun, Stefan Rogel !!  Extended Font Selector
+ x !! ~ !! (!link [Xgem][Cookie, Xgem]) !!  Eric Reboux !!  Windframe Xgem
+ x !! ~ !! (!link [XHDI][Cookie, XHDI]) !!  Diverse (Standardcookie) !!  XHDI driver
+ ~ !! x !! (!link [XKBD][Cookie, XKBD]) !!  Alex Esser !!  Extended Keyboard
+ ~ !! ~ !! (!link [XMMU][Cookie, XMMU]) !!   ~  !!  TK40's interface for PMMU setting
+ ~ !! ~ !! (!link [XMuz][Cookie, XMuz]) !!   ~  !!  Ultra Player
+ ~ !! x !! (!link [xNet][Cookie, xNet]) !!  Daniel Roedding !!  xNet-ST
+ ~ !! ~ !! (!link [XPCI][Cookie, XPCI]) !!   ~  !!  (!nolink [XBIOS]) Funktionen fr das PCI-(!nolink [BIOS])
+ x !! x !! (!link [xRmt][Cookie, xRmt]) !!  Markus Gutschke !!  XREMOTE
+ x !! ~ !! (!link [XSDD][Cookie, XSDD]) !!  Stephan Baucke !!  Extended Serial Device Driver
+ ~ !! ~ !! (!link [XSND][Cookie, XSND]) !!  Thomas Huth !!  Digi-Sound
+ x !! ~ !! (!link [XSSI][Cookie, XSSI]) !!   ~  !!  Extended Screen Saver Information
+ x !! ~ !! (!link [XTOS][Cookie, XTOS]) !!  Lo‹c S‚bald !!  Extend (!nolink [TOS])
+ x !! ~ !! (!link [xUAG][Cookie, xUAG]) !!    ~  !!  MegaVision300
+ ~ !! ~ !! (!link [xUFC][Cookie, xUFC]) !!   ~  !!  Extended Universal Font Selector Configuration Program
+ ~ !! x !! (!link [XWin][Cookie, XWin]) !!  Konrad Hinsen !!  Extended Windows module
+!hline
+ ~ !! ~ !! (!link [zCAC][Cookie, zCAC]) !!   ~  !!  680x0 Cache Control CPX
+ x !! x !! (!link [zDCF][Cookie, zDCF]) !!  Ralf Zimmermann !!  DCF-Time receiver
+!hline
+ ~ !! x !! (!link [_5MS][Cookie, _5MS]) !!  Vincent RiviŠre  !!  Zeiger auf den 200 Hz System Timer Interupt Vektor
+ ~ !! ~ !! (!link [_AFM][Cookie, _AFM]) !!   ~  !!  Audio Fun Machine
+ x !! ~ !! (!link [_AKP][Cookie, _AKP]) !!  Atari Corporation !!  Keyboard/Language Configuration
+ x !! ~ !! (!link [_CF_][Cookie, _CF_]) !!  Didier Mequignon !!  ColdFire CPU
+ x !! ~ !! (!link [_CPU][Cookie, _CPU]) !!  Atari Corporation !!  Central Processor Unit Type
+ ~ !! x !! (!link [_DOS][Cookie, _DOS]) !!  Atari Corporation !!  GEMDOS-Einsprung (im GEMDOS 0.30)
+ x !! ~ !! (!link [_FDC][Cookie, _FDC]) !!  Atari Corporation (Standardcookie) !!  Disk Drive Type
+ x !! ~ !! (!link [_FLK][Cookie, _FLK]) !!  Atari Corporation (Standardcookie) !!  File Locking Extension
+ x !! ~ !! (!link [_FPU][Cookie, _FPU]) !!  Atari Corporation !!  Floating Point Unit Type
+ ~ !! ~ !! (!link [_FRB][Cookie, _FRB]) !!   ~  !!  Fast Ram Buffer
+ ~ !! x !! (!link [_FSR][Cookie, _FSR]) !!  Atari Corporation !!  Patch program for Serial port ((!nolink [TOS]) 4.00->4.04)
+ x !! ~ !! (!link [_IDT][Cookie, _IDT]) !!  Atari Corporation !!  International Date/Time Format
+ x !! ~ !! (!link [_INF][Cookie, _INF]) !!  Atari Corporation !!  STEFIX Program
+ x !! ~ !! (!link [_INU][Cookie, _INU]) !!  Martin Osieka !!  Format for numbers
+ x !! ~ !! (!link [_ISO][Cookie, _ISO]) !!   ~  !!  specifies the real keyboard/font nationality
+ ~ !! ~ !! (!link [_JPD][Cookie, _JPD]) !!   ~  !!  Falcon030 JPEG Decoder by Brainstorm
+ x !! ~ !! (!link [_MCF][Cookie, _MCF]) !!   ~  !!  ColdFire features
+ x !! ~ !! (!link [_MCH][Cookie, _MCH]) !!  Atari Corporation !!  Machine Type
+ ~ !! x !! (!link [_MET][Cookie, _MET]) !!  Atari Corporation !!  MetaDOS
+ x !! ~ !! (!link [_MIL][Cookie, _MIL]) !!  Michael Schwingen !!  Milan computer
+ x !! ~ !! (!link [_NET][Cookie, _NET]) !!  Atari Corporation !!  GEMDOS Network Support
+ x !! x !! (!link [_OOL][Cookie, _OOL]) !!  Allan Pratt, Atari Corporation !!  Pool Fix
+ x !! ~ !! (!link [_PCI][Cookie, _PCI]) !!  Markus Fichtenbauer !!  PCI-(!nolink [BIOS])
+ ~ !! ~ !! (!link [_PKT][Cookie, _PKT]) !!   ~  !!  Paket Driver Cookie
+ ~ !! ~ !! (!link [_PWR][Cookie, _PWR]) !!   ~  !!  Power Management unit
+ x !! ~ !! (!link [_SLM][Cookie, _SLM]) !!  Atari Corporation !!  SLM Driver
+ x !! ~ !! (!link [_SND][Cookie, _SND]) !!  Atari Corporation !!  Sound Hardware
+ x !! ~ !! (!link [_SWI][Cookie, _SWI]) !!  Atari Corporation !!  Configuration Switches
+ x !! ~ !! (!link [_T2W][Cookie, _T2W]) !!   ~  !!  TOS2WIN Emulator
+ x !! ~ !! (!link [_T30][Cookie, _T30]) !!  Andreas Kromke !!  KAOS TOS
+ x !! ~ !! (!link [_USB][Cookie, _USB]) !!   ~  !!  USB core API driver
+ x !! ~ !! (!link [_VDI][Cookie, _VDI]) !!  Michael Schwingen !!  Milan VDI
+ x !! ~ !! (!link [_VDO][Cookie, _VDO]) !!  Atari Corporation !!  Video Type
+ x !! ~ !! (!link [__NF][Cookie, __NF]) !!   ~  !!  Native features proposal
+ ~ !! ~ !! (!link [(!sigma)FSC] [Cookie, (!sigma)FSC]) !!   ~  !!  Falcon Screen
+!hline
+!end_table
+
+!endif
+
+!include bios/cookie/description/3DMN.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/3RDB.ui
+!include bios/cookie/description/60Hz.ui
+!include bios/cookie/description/8_8.ui
+!include bios/cookie/description/A2sv.ui
+!include bios/cookie/description/AB40.ui
+!include bios/cookie/description/ACCS.ui
+!include bios/cookie/description/AFnt.ui
+!include bios/cookie/description/AgK0.ui
+!include bios/cookie/description/AHVR.ui
+!include bios/cookie/description/ALHP.ui
+!include bios/cookie/description/ALIC.ui
+!include bios/cookie/description/ALRM.ui
+!include bios/cookie/description/AmAN.ui
+!include bios/cookie/description/AMC1.ui
+!include bios/cookie/description/AMC2.ui
+!include bios/cookie/description/AMCG.ui
+!include bios/cookie/description/ANSe.ui
+!include bios/cookie/description/APGM.ui
+!include bios/cookie/description/ARAe.ui
+!include bios/cookie/description/ARTS.ui
+!include bios/cookie/description/asGT.ui
+!include bios/cookie/description/ASum.ui
+!include bios/cookie/description/AVmw.ui
+!include bios/cookie/description/AVOJ.ui
+!include bios/cookie/description/AVSV.ui
+!include bios/cookie/description/BASH.ui
+!include bios/cookie/description/BBD2.ui
+!include bios/cookie/description/BCKW.ui
+!include bios/cookie/description/BGEM.ui
+!include bios/cookie/description/BGHD.ui
+!include bios/cookie/description/BHdl.ui
+!include bios/cookie/description/BHLP.ui
+!include bios/cookie/description/BIGS.ui
+!include bios/cookie/description/BIOC.ui
+!include bios/cookie/description/BLNK.ui
+!include bios/cookie/description/BLOW.ui
+!include bios/cookie/description/BScn.ui
+!include bios/cookie/description/BSIM.ui
+!include bios/cookie/description/BSTE.ui
+!include bios/cookie/description/BUG1.ui
+!include bios/cookie/description/C24P.ui
+!include bios/cookie/description/CACH.ui
+!include bios/cookie/description/CALD.ui
+!include bios/cookie/description/CASE.ui
+!include bios/cookie/description/CatS.ui
+!include bios/cookie/description/CaTT.ui
+!include bios/cookie/description/CB2K.ui
+!include bios/cookie/description/CBCE.ui
+!include bios/cookie/description/CBDF.ui
+!include bios/cookie/description/CBHD.ui
+!include bios/cookie/description/CBHY.ui
+!include bios/cookie/description/CBIT.ui
+!include bios/cookie/description/CBTS.ui
+!include bios/cookie/description/CCDA.ui
+!include bios/cookie/description/cdMC.ui
+!include bios/cookie/description/CDOT.ui
+!include bios/cookie/description/ceci.ui
+!include bios/cookie/description/CFIX.ui
+!include bios/cookie/description/CFsl.ui
+!include bios/cookie/description/CHAM.ui
+!include bios/cookie/description/CHBT.ui
+!include bios/cookie/description/CHN1.ui
+!include bios/cookie/description/CHNG.ui
+!include bios/cookie/description/CHTW.ui
+!include bios/cookie/description/CICN.ui
+!include bios/cookie/description/CISY.ui
+!include bios/cookie/description/CJar.ui
+!include bios/cookie/description/CJAR_.ui
+!include bios/cookie/description/ck01.ui
+!include bios/cookie/description/CKBD.ui
+!include bios/cookie/description/CKJR.ui
+!include bios/cookie/description/CLCK.ui
+!include bios/cookie/description/CLK1.ui
+!include bios/cookie/description/CLOK.ui
+!include bios/cookie/description/CM16.ui
+!include bios/cookie/description/CNTS.ui
+!include bios/cookie/description/COLO.ui
+!include bios/cookie/description/CPSL.ui
+!include bios/cookie/description/CRAC.ui
+!include bios/cookie/description/CRIT.ui
+!include bios/cookie/description/CSMD.ui
+!include bios/cookie/description/CT40.ui
+!include bios/cookie/description/CT60.ui
+!include bios/cookie/description/CTCH.ui
+!include bios/cookie/description/CtCp.ui
+!include bios/cookie/description/CTSF.ui
+!include bios/cookie/description/cVDI.ui
+!include bios/cookie/description/CWCo.ui
+!include bios/cookie/description/DATE.ui
+!include bios/cookie/description/DATL.ui
+!include bios/cookie/description/DAWN.ui
+!include bios/cookie/description/DBFX.ui
+!include bios/cookie/description/DCdd.ui
+!include bios/cookie/description/DCF7.ui
+!include bios/cookie/description/DCSD.ui
+!include bios/cookie/description/DECD.ui
+!include bios/cookie/description/DEPI.ui
+!include bios/cookie/description/DHST.ui
+!include bios/cookie/description/DIG2.ui
+!include bios/cookie/description/DJBX.ui
+!include bios/cookie/description/DKEY.ui
+!include bios/cookie/description/DNTR.ui
+!include bios/cookie/description/DPAT.ui
+!include bios/cookie/description/DPRS.ui
+!include bios/cookie/description/DRIV.ui
+!include bios/cookie/description/DRRH.ui
+!include bios/cookie/description/Dsel.ui
+!include bios/cookie/description/DSSO.ui
+!include bios/cookie/description/DYDL.ui
+!include bios/cookie/description/DYJA.ui
+!include bios/cookie/description/DYJD.ui
+!include bios/cookie/description/DYJT.ui
+!include bios/cookie/description/DYNL.ui
+!include bios/cookie/description/DYwl.ui
+!include bios/cookie/description/EADC.ui
+!include bios/cookie/description/EBPO.ui
+!raw [stg] @endif
+!include bios/cookie/description/EdDI.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/EDFX.ui
+!include bios/cookie/description/EGON.ui
+!include bios/cookie/description/EMNP.ui
+!include bios/cookie/description/ENV$.ui
+!include bios/cookie/description/ENVN.ui
+!include bios/cookie/description/ENVR.ui
+!include bios/cookie/description/EPro.ui
+!include bios/cookie/description/F117.ui
+!include bios/cookie/description/ETM.ui
+!include bios/cookie/description/EURO.ui
+!include bios/cookie/description/EUSB.ui
+!include bios/cookie/description/EXRA.ui
+!include bios/cookie/description/EXTD.ui
+!include bios/cookie/description/FaKE.ui
+!include bios/cookie/description/FALT.ui
+!include bios/cookie/description/FAX_.ui
+!include bios/cookie/description/FAXR.ui
+!include bios/cookie/description/FHFX.ui
+!include bios/cookie/description/FIX2.ui
+!include bios/cookie/description/FLTP.ui
+!include bios/cookie/description/FLXD.ui
+!include bios/cookie/description/fMSX.ui
+!include bios/cookie/description/Fose.ui
+!include bios/cookie/description/FOse_.ui
+!include bios/cookie/description/FrmD.ui
+!include bios/cookie/description/FSEL.ui
+!include bios/cookie/description/FSER.ui
+!raw [stg] @endif
+!include bios/cookie/description/FSMC.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/FSmp.ui
+!include bios/cookie/description/fVDI.ui
+!include bios/cookie/description/FxOP.ui
+!include bios/cookie/description/F_3D.ui
+!include bios/cookie/description/GABI.ui
+!include bios/cookie/description/GBel.ui
+!include bios/cookie/description/GCOM.ui
+!include bios/cookie/description/GDEV.ui
+!include bios/cookie/description/GEHC.ui
+!include bios/cookie/description/GEHD.ui
+!include bios/cookie/description/GEMB.ui
+!include bios/cookie/description/GENV.ui
+!include bios/cookie/description/Gfix.ui
+!include bios/cookie/description/GI30.ui
+!include bios/cookie/description/GIGA.ui
+!include bios/cookie/description/gk5_.ui
+!include bios/cookie/description/gkCO.ui
+!include bios/cookie/description/GLAS.ui
+!include bios/cookie/description/GLBL.ui
+!include bios/cookie/description/GMNI.ui
+!include bios/cookie/description/GMTC.ui
+!include bios/cookie/description/GNUC.ui
+!include bios/cookie/description/Gnva.ui
+!include bios/cookie/description/GOBJ.ui
+!include bios/cookie/description/GOff.ui
+!include bios/cookie/description/GSND.ui
+!include bios/cookie/description/GSP1.ui
+!include bios/cookie/description/GSXB.ui
+!include bios/cookie/description/GULM.ui
+!include bios/cookie/description/HABO.ui
+!include bios/cookie/description/hade.ui
+!include bios/cookie/description/HAMM.ui
+!include bios/cookie/description/HBFS.ui
+!include bios/cookie/description/HcP6.ui
+!include bios/cookie/description/HDDR.ui
+!include bios/cookie/description/HDEX.ui
+!include bios/cookie/description/HDEY.ui
+!include bios/cookie/description/HDJR.ui
+!include bios/cookie/description/HDLD.ui
+!include bios/cookie/description/HDPR.ui
+!include bios/cookie/description/HDRC.ui
+!include bios/cookie/description/HDST.ui
+!include bios/cookie/description/HDSW.ui
+!include bios/cookie/description/HFIX.ui
+!include bios/cookie/description/hFRB.ui
+!include bios/cookie/description/HIDS.ui
+!include bios/cookie/description/HMDU.ui
+!include bios/cookie/description/HMOC.ui
+!include bios/cookie/description/HMRD.ui
+!include bios/cookie/description/HMRS.ui
+!include bios/cookie/description/HPHC.ui
+!include bios/cookie/description/HPLJ.ui
+!include bios/cookie/description/HSCD.ui
+!include bios/cookie/description/HSND.ui
+!include bios/cookie/description/HWAM.ui
+!include bios/cookie/description/IBMP.ui
+!include bios/cookie/description/ICFS.ui
+!include bios/cookie/description/ICST.ui
+!include bios/cookie/description/IDSK.ui
+!include bios/cookie/description/iniT.ui
+!include bios/cookie/description/IMAC.ui
+!include bios/cookie/description/IMNE.ui
+!include bios/cookie/description/INSJ.ui
+!include bios/cookie/description/INXR.ui
+!include bios/cookie/description/iPRN.ui
+!include bios/cookie/description/IRSB.ui
+!include bios/cookie/description/iTMA.ui
+!include bios/cookie/description/JAM1.ui
+!include bios/cookie/description/JANU.ui
+!include bios/cookie/description/JB2G.ui
+!include bios/cookie/description/JCLK.ui
+!include bios/cookie/description/JCNB.ui
+!include bios/cookie/description/JCNC.ui
+!include bios/cookie/description/JCNH.ui
+!include bios/cookie/description/JCNT.ui
+!include bios/cookie/description/JFTP.ui
+!include bios/cookie/description/JINX.ui
+!include bios/cookie/description/JMLB.ui
+!include bios/cookie/description/JMLS.ui
+!include bios/cookie/description/JSHD.ui
+!include bios/cookie/description/JUST.ui
+!include bios/cookie/description/J_Sc.ui
+!include bios/cookie/description/KAOS.ui
+!include bios/cookie/description/KbEv.ui
+!include bios/cookie/description/KEYT.ui
+!include bios/cookie/description/KGTF.ui
+!include bios/cookie/description/KIDI.ui
+!include bios/cookie/description/KLME.ui
+!include bios/cookie/description/KREG.ui
+!include bios/cookie/description/KyMp.ui
+!include bios/cookie/description/KyWt.ui
+!include bios/cookie/description/Lace.ui
+!include bios/cookie/description/LACY.ui
+!include bios/cookie/description/LALA.ui
+!include bios/cookie/description/lanc.ui
+!include bios/cookie/description/LASB.ui
+!include bios/cookie/description/LAWC.ui
+!include bios/cookie/description/LDGM.ui
+!include bios/cookie/description/LEDP.ui
+!include bios/cookie/description/LEmu.ui
+!include bios/cookie/description/Lity.ui
+!include bios/cookie/description/LLCR.ui
+!include bios/cookie/description/LMus.ui
+!include bios/cookie/description/LOGB.ui
+!include bios/cookie/description/LoSe.ui
+!include bios/cookie/description/LPCD.ui
+!include bios/cookie/description/LPJM.ui
+!include bios/cookie/description/LP_2.ui
+!include bios/cookie/description/LTMF.ui
+!include bios/cookie/description/M16s.ui
+!include bios/cookie/description/M16X.ui
+!include bios/cookie/description/macc.ui
+!include bios/cookie/description/MADD.ui
+!include bios/cookie/description/MADN.ui
+!include bios/cookie/description/Maes.ui
+!include bios/cookie/description/MagC.ui
+!include bios/cookie/description/MAGN.ui
+!raw [stg] @endif
+!include bios/cookie/description/MagX.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/MAST.ui
+!include bios/cookie/description/MaTC.ui
+!include bios/cookie/description/MbAr.ui
+!include bios/cookie/description/MBRD.ui
+!include bios/cookie/description/MCL_.ui
+!raw [stg] @endif
+!include bios/cookie/description/McSn.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/MCSP.ui
+!include bios/cookie/description/MCWR.ui
+!include bios/cookie/description/MDIA.ui
+!include bios/cookie/description/MDRK.ui
+!include bios/cookie/description/MDSa.ui
+!include bios/cookie/description/MFAC.ui
+!include bios/cookie/description/MFFM.ui
+!include bios/cookie/description/MFIX.ui
+!include bios/cookie/description/MFMV.ui
+!include bios/cookie/description/MFNT.ui
+!include bios/cookie/description/MGEM.ui
+!raw [stg] @endif
+!include bios/cookie/description/MgMc.ui
+!include bios/cookie/description/MgMx.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/MgPC.ui
+!include bios/cookie/description/MgSn.ui
+!include bios/cookie/description/MID3.ui
+!include bios/cookie/description/MIMA.ui
+!include bios/cookie/description/MiNT.ui
+!include bios/cookie/description/MIPS.ui
+!include bios/cookie/description/MJAF.ui
+!include bios/cookie/description/MKHC.ui
+!include bios/cookie/description/MkJr.ui
+!include bios/cookie/description/MM2X.ui
+!include bios/cookie/description/MMAC.ui
+!include bios/cookie/description/MMUT.ui
+!include bios/cookie/description/MM_2.ui
+!include bios/cookie/description/MN3D.ui
+!raw [stg] @endif
+!include bios/cookie/description/MNAM.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/MOAF.ui
+!include bios/cookie/description/MOGR.ui
+!include bios/cookie/description/MPRO.ui
+!include bios/cookie/description/MRAM.ui
+!include bios/cookie/description/MSPD.ui
+!include bios/cookie/description/MSPO.ui
+!include bios/cookie/description/mstx.ui
+!include bios/cookie/description/MTCI.ui
+!include bios/cookie/description/MTft.ui
+!include bios/cookie/description/MUPF.ui
+!include bios/cookie/description/MWHL.ui
+!include bios/cookie/description/MZTR.ui
+!include bios/cookie/description/MZVT.ui
+!include bios/cookie/description/M_IN.ui
+!include bios/cookie/description/N203.ui
+!include bios/cookie/description/nAES.ui
+!include bios/cookie/description/NAH3.ui
+!include bios/cookie/description/NBEL.ui
+!include bios/cookie/description/NBLL.ui
+!include bios/cookie/description/NCLN.ui
+!include bios/cookie/description/ne2k.ui
+!include bios/cookie/description/NERV.ui
+!include bios/cookie/description/NETS.ui
+!include bios/cookie/description/NEXB.ui
+!include bios/cookie/description/NEXK.ui
+!include bios/cookie/description/NFMT.ui
+!include bios/cookie/description/NFnt.ui
+!include bios/cookie/description/NKCC.ui
+!include bios/cookie/description/NLdr.ui
+!include bios/cookie/description/NMGE.ui
+!include bios/cookie/description/NO7P.ui
+!include bios/cookie/description/noCF.ui
+!include bios/cookie/description/NOR5.ui
+!include bios/cookie/description/NOVA.ui
+!include bios/cookie/description/NSC1.ui
+!include bios/cookie/description/Nspd.ui
+!include bios/cookie/description/nTAS.ui
+!include bios/cookie/description/NTK4.ui
+!include bios/cookie/description/nTOS.ui
+!include bios/cookie/description/NUL_.ui
+!raw [stg] @endif
+!include bios/cookie/description/NVDI.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/OBNL.ui
+!include bios/cookie/description/OFLS.ui
+!include bios/cookie/description/OPMM.ui
+!include bios/cookie/description/OSBL.ui
+!include bios/cookie/description/OSTT.ui
+!include bios/cookie/description/OTOS.ui
+!include bios/cookie/description/OV24.ui
+!include bios/cookie/description/oVDI.ui
+!include bios/cookie/description/OVDJ.ui
+!include bios/cookie/description/OVEP.ui
+!raw [stg] @endif
+!include bios/cookie/description/OVER.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/OVEX.ui
+!include bios/cookie/description/OVFS.ui
+!include bios/cookie/description/OVIM.ui
+!include bios/cookie/description/OVLS.ui
+!include bios/cookie/description/OVRD.ui
+!include bios/cookie/description/OVUT.ui
+!include bios/cookie/description/OVWI.ui
+!include bios/cookie/description/PAMN.ui
+!include bios/cookie/description/PAUL.ui
+!include bios/cookie/description/PBUG.ui
+!raw [stg] @endif
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/PDEB.ui
+!include bios/cookie/description/PDOS.ui
+!include bios/cookie/description/PDRZ.ui
+!include bios/cookie/description/PFIX.ui
+!include bios/cookie/description/Pinp.ui
+!include bios/cookie/description/PKSH.ui
+!raw [stg] @endif
+!include bios/cookie/description/PMMU.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/POIS.ui
+!include bios/cookie/description/POWM.ui
+!include bios/cookie/description/PRCS.ui
+!include bios/cookie/description/PRDS.ui
+!include bios/cookie/description/PRMD.ui
+!include bios/cookie/description/PRN!.ui
+!include bios/cookie/description/PRNSS.ui
+!include bios/cookie/description/PRO5.ui
+!include bios/cookie/description/PROB.ui
+!include bios/cookie/description/PROT.ui
+!include bios/cookie/description/PRTD.ui
+!include bios/cookie/description/PRTO.ui
+!include bios/cookie/description/prtr.ui
+!include bios/cookie/description/PRTR_.ui
+!include bios/cookie/description/PSND.ui
+!include bios/cookie/description/PSSG.ui
+!include bios/cookie/description/PTOS.ui
+!include bios/cookie/description/QIKM.ui
+!include bios/cookie/description/QMAC.ui
+!include bios/cookie/description/QMCP.ui
+!include bios/cookie/description/QST2.ui
+!include bios/cookie/description/QST3.ui
+!include bios/cookie/description/QUAN.ui
+!include bios/cookie/description/RAIL.ui
+!include bios/cookie/description/RaSn.ui
+!include bios/cookie/description/RESG.ui
+!include bios/cookie/description/RFLX.ui
+!include bios/cookie/description/RFUS.ui
+!include bios/cookie/description/RGUS.ui
+!include bios/cookie/description/RING.ui
+!include bios/cookie/description/ROMD.ui
+!include bios/cookie/description/ROT8.ui
+!include bios/cookie/description/RPIT.ui
+!include bios/cookie/description/RREG.ui
+!include bios/cookie/description/RSLT.ui
+!include bios/cookie/description/RSpd.ui
+!include bios/cookie/description/RSVE.ui
+!include bios/cookie/description/RSVF.ui
+!include bios/cookie/description/RTKC.ui
+!include bios/cookie/description/RTOB.ui
+!include bios/cookie/description/RWIN.ui
+!include bios/cookie/description/SAM.ui
+!include bios/cookie/description/SBKM.ui
+!include bios/cookie/description/SBTE.ui
+!include bios/cookie/description/SBTS.ui
+!include bios/cookie/description/SCAH.ui
+!include bios/cookie/description/SCKM.ui
+!include bios/cookie/description/SCPN.ui
+!include bios/cookie/description/SCRD.ui
+!include bios/cookie/description/SCRN.ui
+!include bios/cookie/description/SCRS.ui
+!include bios/cookie/description/SCRW.ui
+!include bios/cookie/description/SCSI.ui
+!include bios/cookie/description/SCSV.ui
+!include bios/cookie/description/SDCH.ui
+!include bios/cookie/description/SDES.ui
+!include bios/cookie/description/SDsk.ui
+!include bios/cookie/description/SDWN.ui
+!include bios/cookie/description/SELC.ui
+!include bios/cookie/description/SENV.ui
+!include bios/cookie/description/SFA^.ui
+!include bios/cookie/description/SFIX.ui
+!include bios/cookie/description/SFMN.ui
+!include bios/cookie/description/ShLk.ui
+!include bios/cookie/description/shlp.ui
+!include bios/cookie/description/SKEY.ui
+!include bios/cookie/description/SLCT.ui
+!include bios/cookie/description/SLif.ui
+!include bios/cookie/description/SLIP.ui
+!include bios/cookie/description/SM00.ui
+!include bios/cookie/description/SM01.ui
+!include bios/cookie/description/SM02.ui
+!include bios/cookie/description/SMAL.ui
+!include bios/cookie/description/SMAU.ui
+!include bios/cookie/description/SMon.ui
+!include bios/cookie/description/SMTT.ui
+!include bios/cookie/description/SNAP.ui
+!include bios/cookie/description/SOFS.ui
+!include bios/cookie/description/SOSW.ui
+!include bios/cookie/description/SpcE.ui
+!include bios/cookie/description/SPCK.ui
+!include bios/cookie/description/SPEE.ui
+!include bios/cookie/description/SPEK.ui
+!include bios/cookie/description/SPEX.ui
+!include bios/cookie/description/spMR.ui
+!include bios/cookie/description/Spol.ui
+!include bios/cookie/description/SPRG.ui
+!include bios/cookie/description/SR17.ui
+!include bios/cookie/description/SSND.ui
+!include bios/cookie/description/ST-C.ui
+!include bios/cookie/description/ST17.ui
+!include bios/cookie/description/STAT.ui
+!include bios/cookie/description/STEM.ui
+!include bios/cookie/description/STEW.ui
+!include bios/cookie/description/STFA.ui
+!include bios/cookie/description/StIc.ui
+!include bios/cookie/description/STiK.ui
+!include bios/cookie/description/STMS.ui
+!include bios/cookie/description/strk.ui
+!include bios/cookie/description/STRX.ui
+!include bios/cookie/description/SupV.ui
+!include bios/cookie/description/SVAR.ui
+!include bios/cookie/description/SVGA.ui
+!include bios/cookie/description/SWAP.ui
+!include bios/cookie/description/SwTm.ui
+!include bios/cookie/description/SYMB.ui
+!include bios/cookie/description/SYNL.ui
+!include bios/cookie/description/SYNT.ui
+!include bios/cookie/description/SysE.ui
+!include bios/cookie/description/Syso.ui
+!include bios/cookie/description/SYST.ui
+!include bios/cookie/description/SZ_M.ui
+!include bios/cookie/description/S_DR.ui
+!include bios/cookie/description/T206.ui
+!include bios/cookie/description/T2GM.ui
+!include bios/cookie/description/TALK.ui
+!include bios/cookie/description/TAPE.ui
+!include bios/cookie/description/TASS.ui
+!include bios/cookie/description/TCFS.ui
+!include bios/cookie/description/TCRB.ui
+!include bios/cookie/description/Tenv.ui
+!include bios/cookie/description/TFIX.ui
+!include bios/cookie/description/THNX.ui
+!include bios/cookie/description/THRM.ui
+!include bios/cookie/description/THST.ui
+!include bios/cookie/description/TIM3.ui
+!include bios/cookie/description/TIM5.ui
+!include bios/cookie/description/TIME.ui
+!include bios/cookie/description/TK40.ui
+!include bios/cookie/description/TL3D.ui
+!include bios/cookie/description/TLWV.ui
+!include bios/cookie/description/Tmon.ui
+!include bios/cookie/description/tmsW.ui
+!include bios/cookie/description/TOpW.ui
+!include bios/cookie/description/TOUC.ui
+!include bios/cookie/description/TPat.ui
+!include bios/cookie/description/TPGM.ui
+!include bios/cookie/description/TRAK.ui
+!include bios/cookie/description/TraP.ui
+!include bios/cookie/description/Trpp.ui
+!include bios/cookie/description/TRUE.ui
+!include bios/cookie/description/TSEN.ui
+!include bios/cookie/description/TSWP.ui
+!include bios/cookie/description/TTTF.ui
+!include bios/cookie/description/TUBS.ui
+!include bios/cookie/description/TWFS.ui
+!include bios/cookie/description/Typ1.ui
+!include bios/cookie/description/UFSL.ui
+!include bios/cookie/description/UIS3.ui
+!include bios/cookie/description/UKB1.ui
+!include bios/cookie/description/UKB3.ui
+!include bios/cookie/description/un_x.ui
+!include bios/cookie/description/USCK.ui
+!include bios/cookie/description/USHD.ui
+!include bios/cookie/description/UsNm.ui
+!include bios/cookie/description/USPK.ui
+!include bios/cookie/description/USRS.ui
+!include bios/cookie/description/USSC.ui
+!include bios/cookie/description/UTRK.ui
+!include bios/cookie/description/VBLF.ui
+!include bios/cookie/description/VDIp.ui
+!include bios/cookie/description/VDLY.ui
+!include bios/cookie/description/VECS.ui
+!include bios/cookie/description/VeiL.ui
+!include bios/cookie/description/VFIX.ui
+!include bios/cookie/description/VFNT.ui
+!include bios/cookie/description/VGAS.ui
+!include bios/cookie/description/VI-2.ui
+!include bios/cookie/description/View.ui
+!include bios/cookie/description/VIRA.ui
+!include bios/cookie/description/VMEM.ui
+!include bios/cookie/description/VPCH.ui
+!include bios/cookie/description/VRAM.ui
+!include bios/cookie/description/VREP.ui
+!include bios/cookie/description/VSco.ui
+!include bios/cookie/description/VSCR.ui
+!include bios/cookie/description/VSTM.ui
+!include bios/cookie/description/vT52.ui
+!include bios/cookie/description/VTFX.ui
+!include bios/cookie/description/VXCK.ui
+!include bios/cookie/description/WaHW.ui
+!include bios/cookie/description/WARP.ui
+!include bios/cookie/description/WaSA.ui
+!include bios/cookie/description/WBrd.ui
+!include bios/cookie/description/wdlg.ui
+!include bios/cookie/description/WDOG.ui
+!include bios/cookie/description/WEGA.ui
+!include bios/cookie/description/WfNa.ui
+!include bios/cookie/description/WFSL.ui
+!include bios/cookie/description/WICO.ui
+!include bios/cookie/description/WinK.ui
+!include bios/cookie/description/WINX.ui
+!include bios/cookie/description/WINZ.ui
+!include bios/cookie/description/WPRO.ui
+!include bios/cookie/description/WRAP.ui
+!include bios/cookie/description/XALT.ui
+!include bios/cookie/description/XBTN.ui
+!include bios/cookie/description/XDsk.ui
+!include bios/cookie/description/XFRB.ui
+!include bios/cookie/description/XFS1.ui
+!include bios/cookie/description/xFSL.ui
+!include bios/cookie/description/Xgem.ui
+!include bios/cookie/description/XHDI.ui
+!include bios/cookie/description/XKBD.ui
+!include bios/cookie/description/XMMU.ui
+!include bios/cookie/description/XMuz.ui
+!include bios/cookie/description/xNet.ui
+!raw [stg] @endif
+!include bios/cookie/description/XPCI.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/xRmt.ui
+!include bios/cookie/description/XSDD.ui
+!include bios/cookie/description/XSND.ui
+!include bios/cookie/description/XSSI.ui
+!include bios/cookie/description/XTOS.ui
+!include bios/cookie/description/xUAG.ui
+!include bios/cookie/description/xUFC.ui
+!include bios/cookie/description/XWin.ui
+!include bios/cookie/description/zCAC.ui
+!include bios/cookie/description/zDCF.ui
+!include bios/cookie/description/_5MS.ui
+!include bios/cookie/description/_AFM.ui
+!raw [stg] @endif
+!include bios/cookie/description/_AKP.ui
+!include bios/cookie/description/_CF_.ui
+!include bios/cookie/description/_CPU.ui
+!include bios/cookie/description/_DOS.ui
+!include bios/cookie/description/_FDC.ui
+!include bios/cookie/description/_FLK.ui
+!include bios/cookie/description/_FPU.ui
+!include bios/cookie/description/_FRB.ui
+!include bios/cookie/description/_FSC.ui
+!include bios/cookie/description/_FSR.ui
+!include bios/cookie/description/_IDT.ui
+!include bios/cookie/description/_INF.ui
+!raw [stg] @if VERSION >= 6
+!include bios/cookie/description/_INU.ui
+!include bios/cookie/description/_ISO.ui
+!include bios/cookie/description/_JPD.ui
+!raw [stg] @endif
+!include bios/cookie/description/_MCF.ui
+!include bios/cookie/description/_MCH.ui
+!include bios/cookie/description/_MET.ui
+!include bios/cookie/description/_MIL.ui
+!include bios/cookie/description/_NET.ui
+!include bios/cookie/description/_OOL.ui
+!include bios/cookie/description/_PCI.ui
+!include bios/cookie/description/_PKT.ui
+!include bios/cookie/description/_PWR.ui
+!include bios/cookie/description/_SLM.ui
+!include bios/cookie/description/_SND.ui
+!include bios/cookie/description/_SWI.ui
+!include bios/cookie/description/_T2W.ui
+!include bios/cookie/description/_T30.ui
+!include bios/cookie/description/_USB.ui
+!include bios/cookie/description/_VDI.ui
+!include bios/cookie/description/_VDO.ui
+!include bios/cookie/description/__NF.ui

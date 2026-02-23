@@ -1,0 +1,9 @@
+!iflang [english]
+
+!include bios/cookie/cookie_en.ui
+
+!else
+
+!include bios/cookie/cookie_de.ui
+
+!endif

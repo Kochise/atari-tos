@@ -1,0 +1,167 @@
+!iflang [english]
+
+!begin_node Editable object functions
+!html_name edit
+
+This library makes functions available to undertake editing operations
+on an editable object.
+
+!begin_xlist [x edit_get_scrollinfo] !compressed
+!item [(!bullet) edit_close]
+Closes editable object
+!item [(!bullet) edit_create]
+Creates a new editable object
+!item [(!bullet) edit_cursor]
+Switches edit cursor on/off
+!item [(!bullet) edit_delete]
+Removes editable object
+!item [(!bullet) edit_evnt]
+Processes editable object
+!item [(!bullet) edit_get_buf]
+Examines settings: Text buffer
+!item [(!bullet) edit_get_colour]
+Examines settings: Colours
+!item [(!bullet) edit_get_cursor]
+Examines settings: Absolute cursor position
+!item [(!bullet) edit_get_dirty]
+Examines settings: Dirty flag
+!item [(!bullet) edit_get_font]
+Examines settings: Font
+!item [(!bullet) edit_get_format]
+Examines settings: Formating
+!item [(!bullet) edit_get_pos]
+Examines settings: Position
+!item [(!bullet) edit_get_scrollinfo]
+Examines settings: Scroll information
+!item [(!bullet) edit_get_sel]
+Examines settings: Selected region
+!item [(!bullet) edit_open]
+Opens editable object
+!item [(!bullet) edit_resized]
+Alters settings: Object size
+!item [(!bullet) edit_scroll]
+Alters settings: Scroll positions
+!item [(!bullet) edit_set_buf]
+Alters settings: Text buffer
+!item [(!bullet) edit_set_colour]
+Alters settings: Colours
+!item [(!bullet) edit_set_cursor]
+Alters settings: Absolute positioning of cursor
+!item [(!bullet) edit_set_dirty]
+Alters settings: Dirty flag
+!item [(!bullet) edit_set_font]
+Alters settings: Font
+!item [(!bullet) edit_set_format]
+Alters settings: Formating
+!item [(!bullet) edit_set_pos]
+~
+!end_xlist
+
+(!B)Hint:(!b) The editable object is available from MagiC 5.20 onwards. As it
+is implemented as part of the shared library (SLB or SharedLib), one
+only needs to open the library with:
+
+	Slbopen("EDITOBJC.SLB", NULL, 0L, &slb, &slbexec);
+
+The library installs a new (!nolink [AES]) object-type G_EDIT.
+
+See also: Using G_EDIT objects ~ AES ~ GEM ~ (!link [Object functions][Object library])
+
+!else
+
+!begin_node Editobjekt-Funktionen
+!html_name edit
+
+Diese Bibliothek stellt Funktionen zur Verf(!uumlaut)gung, um Editieroperationen
+an einem Objekt vorzunehmen.
+
+!begin_xlist [x edit_get_scrollinfo] !compressed
+!item [(!bullet) edit_close]
+Schlie(!sharps)t ein Editobjekt.
+!item [(!bullet) edit_create]
+Erstellt ein neues Editobjekt.
+!item [(!bullet) edit_cursor]
+Schaltet den Objekt-Cursor an bzw. aus.
+!item [(!bullet) edit_delete]
+Entfernt ein Editobjekt aus dem Speicher.
+!item [(!bullet) edit_evnt]
+(!nolink [Ereignisverwaltung]) f(!uumlaut)r das Objekt.
+!item [(!bullet) edit_get_buf]
+Textpuffer des Objektes abfragen.
+!item [(!bullet) edit_get_colour]
+Farben ermitteln.
+!item [(!bullet) edit_get_cursor]
+Cursorposition ermitteln.
+!item [(!bullet) edit_get_dirty]
+Objekt auf Ver(!aumlaut)nderungen (!uumlaut)berpr(!uumlaut)fen.
+!item [(!bullet) edit_get_font]
+Zeichensatz ermitteln.
+!item [(!bullet) edit_get_format]
+Formatierungen ermitteln.
+!item [(!bullet) edit_get_pos]
+~
+!item [(!bullet) edit_get_scrollinfo]
+Informationen f(!uumlaut)r Scrollbalken ermitteln.
+!item [(!bullet) edit_get_sel]
+Selektierten Bereich ermitteln.
+!item [(!bullet) edit_open]
+(!Oumlaut)ffnet ein Editobjekt.
+!item [(!bullet) edit_resized]
+Objektgr(!oumlaut)(!sharps)e ver(!aumlaut)ndern.
+!item [(!bullet) edit_scroll]
+Scrollt das Objekt in eine Richtung.
+!item [(!bullet) edit_set_buf]
+Weist dem Objekt einen Textpuffer zu.
+!item [(!bullet) edit_set_colour]
+Farben setzen.
+!item [(!bullet) edit_set_cursor]
+Cursorposition setzen.
+!item [(!bullet) edit_set_dirty]
+Objekt als ver(!aumlaut)ndert markieren.
+!item [(!bullet) edit_set_font]
+Zeichensatz setzen.
+!item [(!bullet) edit_set_format]
+Formatierungen setzen.
+!item [(!bullet) edit_set_pos]
+~
+!end_xlist
+
+(!B)Hinweis:(!b) Das Edit-Objekt steht ab MagiC 5.20 zur Verf(!uumlaut)gung, und ist
+als SharedLibrary implementiert. Aus diesem Grund muss die entsprechende
+Bibliothek mit Slbopen("EDITOBJC.SLB", NULL, 0L, &slb, &slbexec) ge(!oumlaut)ffnet
+werden. Anschliessend stehen dann die o.g. Funktionen, sowie der neue
+AES-Objekttyp G_EDIT zur Verf(!uumlaut)gung.
+
+Querverweis: Verwendung G_EDIT-Objekt ~ AES ~ GEM ~ Objektfunktionen
+
+
+!endif
+
+!include gem/aes/edit_/edit_close.ui
+!include gem/aes/edit_/edit_create.ui
+!include gem/aes/edit_/edit_cursor.ui
+!include gem/aes/edit_/edit_delete.ui
+!include gem/aes/edit_/edit_evnt.ui
+!include gem/aes/edit_/edit_get_buf.ui
+!include gem/aes/edit_/edit_get_colour.ui
+!include gem/aes/edit_/edit_get_cursor.ui
+!include gem/aes/edit_/edit_get_dirty.ui
+!include gem/aes/edit_/edit_get_font.ui
+!include gem/aes/edit_/edit_get_format.ui
+!include gem/aes/edit_/edit_get_pos.ui
+!include gem/aes/edit_/edit_get_scrollinfo.ui
+!include gem/aes/edit_/edit_get_sel.ui
+!include gem/aes/edit_/edit_open.ui
+!include gem/aes/edit_/edit_resized.ui
+!include gem/aes/edit_/edit_scroll.ui
+!include gem/aes/edit_/edit_set_buf.ui
+!include gem/aes/edit_/edit_set_colour.ui
+!include gem/aes/edit_/edit_set_cursor.ui
+!include gem/aes/edit_/edit_set_dirty.ui
+!include gem/aes/edit_/edit_set_font.ui
+!include gem/aes/edit_/edit_set_format.ui
+!include gem/aes/edit_/edit_set_pos.ui
+!include gem/aes/edit_/uses.ui
+
+
+!end_node

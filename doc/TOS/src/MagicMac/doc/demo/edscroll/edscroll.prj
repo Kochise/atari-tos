@@ -1,0 +1,8 @@
+edscroll.prg
+=
+..\..\pc\lib\pcstart.o				;PC-Startup-Code
+edscroll.c			;Hauptprogramm
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcgemlib.lib

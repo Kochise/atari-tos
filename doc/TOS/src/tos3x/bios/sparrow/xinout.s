@@ -1,0 +1,100 @@
+******************* Revision Control System *****************************
+*
+* $Author: kbad $
+* =======================================================================
+*
+* $Date: 1992/08/11 00:34:42 $
+* =======================================================================
+*
+* $Locker:  $
+* =======================================================================
+*
+* $Log: xinout.s,v $
+* Revision 2.4  1992/08/11  00:34:42  kbad
+* TOS 4.00 Falcon030 first production version
+*
+* Revision 2.3  1991/01/02  19:07:48  unknown
+* Checkin to shut up rcsdiff: no changes.
+*
+* Revision 2.2  90/08/03  13:25:10  apratt
+* TTOS FINAL RELEASE
+* 
+* Revision 2.1  89/02/21  17:47:03  kbad
+* *** TOS 1.4  FINAL RELEASE VERSION ***
+* 
+* Revision 1.1  87/11/20  14:24:52  lozben
+* Initial revision
+* 
+*
+* =======================================================================
+*
+* $Revision: 2.4 $
+* =======================================================================
+*
+* $Source: d:/tos/bios\rcs\xinout.s,v $
+* =======================================================================
+*
+*************************************************************************
+*+
+*  Hack _prtblk()'s character-output bindings
+*  so they go through some vectors.
+*
+*  Did you scream "hack"?
+*
+*-
+
+* imports:
+	.globl	prv_lsto		; LST: out_status() and out()
+	.globl	prv_lst
+	.globl	prv_auxo		; AUX: out_status() and out()
+	.globl	prv_aux
+
+* exports:
+	.globl	_plstostat
+	.globl	_plstout
+	.globl	_pauxostat
+	.globl	_pauxout
+
+
+_plstostat:
+	movem.l	d3-d7/a3-a6,-(sp)
+	sub.l	a5,a5			; quick zeropage
+	move.l	prv_lsto(a5),a0
+	jsr	(a0)
+	movem.l	(sp)+,d3-d7/a3-a6
+	rts
+
+
+_plstout:
+	move.w	6(sp),d0
+	movem.l	d3-d7/a3-a6,-(sp)
+	move.w	d0,-(sp)
+	move.w	d0,-(sp)
+	sub.l	a5,a5			; quick zeropage
+	move.l	prv_lst(a5),a0
+	jsr	(a0)
+	addq	#4,sp
+	movem.l	(sp)+,d3-d7/a3-a6
+	rts
+
+
+_pauxostat:
+	movem.l	d3-d7/a3-a6,-(sp)
+	sub.l	a5,a5			; quick zeropage
+	move.l	prv_auxo(a5),a0
+	jsr	(a0)
+	movem.l	(sp)+,d3-d7/a3-a6
+	rts
+
+
+_pauxout:
+	move.w	6(sp),d0
+	movem.l	d3-d7/a3-a6,-(sp)
+	move.w	d0,-(sp)
+	move.w	d0,-(sp)
+	sub.l	a5,a5			; quick zeropage
+	move.l	prv_aux(a5),a0
+	jsr	(a0)
+	addq	#4,sp
+	movem.l	(sp)+,d3-d7/a3-a6
+	rts

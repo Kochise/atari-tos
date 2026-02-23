@@ -1,0 +1,12 @@
+pdlgsmp3.app
+.C[-A-]
+.C[-I..\..\pc\include]
+=
+
+..\..\pc\lib\cstart0.o				;PC-Startup-Code
+
+pdlgsmp3.c				;Hauptprogramm
+
+..\..\pc\lib\pcstdlib.lib
+..\..\pc\lib\pctoslib.lib
+..\..\pc\lib\pcgemlib.lib

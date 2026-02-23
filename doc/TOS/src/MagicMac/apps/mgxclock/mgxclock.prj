@@ -1,0 +1,14 @@
+mgxclock.prg
+.C[-8-]
+.C[-K-]
+.C[-P-]
+.C[-I..\..\pc\include]
+.L[-S=$4000]
+=
+..\..\pc\lib\cstart0.o      ; startup code
+
+mgxclock.c
+
+..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\pc\lib\pctoslib.lib   ; TOS lib
+..\..\pc\lib\pcgemlib.lib   ; AES and VDI lib

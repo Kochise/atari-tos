@@ -1,0 +1,88 @@
+!iflang [english]
+
+!begin_node CENTScreen XBIOS extension
+!html_name CENTScreen_XBIOS_extension
+
+!begin_xlist [x MultiMon ] !compressed
+!item [(!bullet) MultiMon]  Multisynchro mode.
+!item [(!bullet) SetMon]    Sets the (!nolink [monitor]) type.
+!item [(!bullet) SizeComp]  Vgetsize compatibility.
+!item [(!bullet) Vattrib]   Alters attribute of a video mode.
+!item [(!bullet) Vclose]    Shutdown
+!item [(!bullet) Vcreate]   Adds a video mode.
+!item [(!bullet) Vdelete]   Deletes a video mode.
+!item [(!bullet) Vfirst]    Finds the first video mode.
+!item [(!bullet) Vload]     Loads VIDEO.DAT.
+!item [(!bullet) Vlock]     Locks the virtual screen.
+!item [(!bullet) Vnext]     Next video mode.
+!item [(!bullet) Voffset]   Gets position of the virtual screen.
+!item [(!bullet) Vopen]     Wakes up the screen.
+!item [(!bullet) Vread]     Obtains the current video mode.
+!item [(!bullet) Vsave]     Saves VIDEO.DAT.
+!item [(!bullet) Vscroll]   Chooses the method of scrolling.
+!item [(!bullet) Vseek]     Sets the position of the virtual screen.
+!item [(!bullet) Vsize]     Returns the size of the screen.
+!item [(!bullet) Vvalid]    Validates a video mode.
+!item [(!bullet) Vwrite]    (!nolink [Changes]) the screen resolution.
+!end_xlist
+
+(!B)Note:(!b) (!nl)
+These functions are (!I)only(!i) available under CENTScreen; they are
+not routines of the operating system.
+
+!else
+
+!begin_node CENTScreen-XBIOS-Erweiterung
+!html_name CENTScreen_XBIOS_extension
+
+!begin_xlist [x MultiMon ] !compressed
+!item [(!bullet) MultiMon]  Multisynchro Mode
+!item [(!bullet) SetMon]    Monitortyp setzen
+!item [(!bullet) SizeComp]  Vgetsize Kompatibilit(!aumlaut)t
+!item [(!bullet) Vattrib]   Attribute des Videomodes (!aumlaut)ndern
+!item [(!bullet) Vclose]    Shutdown
+!item [(!bullet) Vcreate]   ein Videomode hinzuf(!uumlaut)gen
+!item [(!bullet) Vdelete]   l(!oumlaut)scht ein Videomode
+!item [(!bullet) Vfirst]    Sucht den ersten Videomode
+!item [(!bullet) Vload]     L(!aumlaut)dt VIDEO.DAT
+!item [(!bullet) Vlock]     Lockt den virtuellen Bildschirm
+!item [(!bullet) Vnext]     N(!aumlaut)chster Videomode
+!item [(!bullet) Voffset]   Position des virtuellen Bildschirms
+!item [(!bullet) Vopen]     Bildschirm aufwecken
+!item [(!bullet) Vread]     Informationen (!uumlaut)ber aktuellen Videomode abfragen
+!item [(!bullet) Vsave]     speichert VIDEO.DAT
+!item [(!bullet) Vscroll]   Scrollmethode festlegen
+!item [(!bullet) Vseek]     setzen der Position des virtuellen Bildschirms
+!item [(!bullet) Vsize]     ermittelt die Gr(!oumlaut)(!sharps)e des Bildschirms
+!item [(!bullet) Vvalid]    pr(!uumlaut)ft einen Videomode
+!item [(!bullet) Vwrite]    Aufl(!oumlaut)sung wechseln
+!end_xlist
+
+(!B)Hinweis:(!b) (!nl)
+Es handelt sich hierbei (!I)nicht(!i) um dokumentierte Routinen des
+Betriebssystems.
+
+
+!endif
+
+!include xbios/centscrn/multimon.ui
+!include xbios/centscrn/setmon.ui
+!include xbios/centscrn/sizecomp.ui
+!include xbios/centscrn/vattrib.ui
+!include xbios/centscrn/vclose.ui
+!include xbios/centscrn/vcreate.ui
+!include xbios/centscrn/vdelete.ui
+!include xbios/centscrn/vfirst.ui
+!include xbios/centscrn/vload.ui
+!include xbios/centscrn/vlock.ui
+!include xbios/centscrn/vnext.ui
+!include xbios/centscrn/voffset.ui
+!include xbios/centscrn/vopen.ui
+!include xbios/centscrn/vread.ui
+!include xbios/centscrn/vsave.ui
+!include xbios/centscrn/vscroll.ui
+!include xbios/centscrn/vseek.ui
+!include xbios/centscrn/vsize.ui
+!include xbios/centscrn/vvalid.ui
+!include xbios/centscrn/vwrite.ui
+!end_node

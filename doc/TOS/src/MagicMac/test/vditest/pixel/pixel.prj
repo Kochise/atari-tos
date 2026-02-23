@@ -1,0 +1,9 @@
+pixel.prg
+.C[-I..\..\..\pc\include]
+.L[-S=$800]
+=
+..\..\..\pc\lib\cstartv.o	; bester Startup
+pixel.c
+..\..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\..\pc\lib\pctoslib.lib   ; TOS lib
+..\..\..\pc\lib\pcgemlib.lib	; GEM lib

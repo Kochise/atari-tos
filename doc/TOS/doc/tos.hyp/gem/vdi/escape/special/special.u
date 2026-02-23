@@ -1,0 +1,57 @@
+!iflang [english]
+
+!begin_node Special functions
+
+This library contains functions for some special purposes that cannot
+be assigned to any of the other groups of Escape functions. The
+following routines are available:
+
+!begin_xlist !compressed [x v_escape2000]
+!item [(!bullet) v_escape2000]
+Special function for the ATARI page-printer
+!item [(!bullet) v_fontinit]
+Selects custom system font
+!item [(!bullet) v_offset]
+Sets offset to top screen edge
+!item [(!bullet) v_sound]
+Generates a tone
+!item [(!bullet) vs_mute]
+Switches tone generation on/off
+!end_xlist
+
+See also:
+VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Spezialfunktionen
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen f(!uumlaut)r sehr spezielle Zwecke, die sich
+nicht einer der (!uumlaut)brigen Gruppen f(!uumlaut)r Escapefunktionen zuordnen lassen. Es
+stehen die folgenden Routinen zur Verf(!uumlaut)ggung:
+
+!begin_xlist !compressed [x v_escape2000]
+!item [(!bullet) v_escape2000]
+Spezialfunktion f(!uumlaut)r ATARI-Page-Printer.
+!item [(!bullet) v_fontinit]
+Eigenen Systemzeichensatz ausw(!aumlaut)hlen.
+!item [(!bullet) v_offset]
+Abstand zum linken Bildschirmrand festlegen.
+!item [(!bullet) v_sound]
+Ton generieren.
+!item [(!bullet) vs_mute]
+Ein-/Ausschalten der Tonerzeugung.
+!end_xlist
+
+Querverweis:
+Workstations des VDI ~ Style-Guidelines
+
+!endif
+
+!include gem/vdi/escape/special/v_escape2000.ui
+!include gem/vdi/escape/special/v_fontinit.ui
+!include gem/vdi/escape/special/v_offset.ui
+!include gem/vdi/escape/special/v_sound.ui
+!include gem/vdi/escape/special/vs_mute.ui
+
+!end_node

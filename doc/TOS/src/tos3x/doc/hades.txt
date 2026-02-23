@@ -1,0 +1,85 @@
+Belegung des Speicherbereichs des Hades
+*********************************************************************
+(rw=Read und write. wo=Write only. ro=Read only)
+Adresse		   Mode	Art
+---------------------------------------------------------------------
+0000'0000-3FFF'FFFF rw	1 GB RAM
+7000'0000-71FF'FFFF wo  Memory Configurationsregister 
+                        a20=1 setzt MC0=1 -> einseitige Module
+                        a21=1 setzt MC1=1
+                        a22=1 setzt MC2=1
+                        a23=1 setzt MC3=1 -> nur 1 RAM-Modul,kein Burst
+7FE0'0000-7FFF'FFFF wo  2 MB EPROM
+8000'0000-8FFF'FFFF rw  PCI Memory Bereich
+A001'0000-A001'FFFF rw  PCI 4 Configurations Bereich
+A002'0000-A002'FFFF rw  PCI 3 Configurations Bereich
+A004'0000-A004'FFFF rw  PCI 2 Configurations Bereich
+A008'0000-A008'FFFF rw  PCI 1 Configurations Bereich
+B000'0000-BFFF'FFFF rw  PCI I/O-Bereich
+FE00'0000-FEFE'FFFF rw  VME-Bus Standard Zugriff
+FEFF'0000-FEFF'FFFF rw  VME-Bus Short Zugriff
+FF00'0000-FF7F'FFFF rw  ISA-Bus Memory Zugriffe
+FF7A'0000-FF7B'FFFF ro  ROM-Port A (mit ROM-PORT-Karte) 
+FF7C'0000-FF7D'FFFF ro  ROM-Port B (mit ROM-PORT-Karte) 
+FF7E'0000-FF7F'FFFF ro  ROM-Port C (mit ROM-PORT-Karte) 
+FFF0'0000-FFF2'FFFF rw  ISA-Bus I/O Zugriff. Byt write auf beiden 
+                        Wordhaelften
+FFF3'0000-FFF3'FFFF rw  ISA-Bus I/O Zugriff. Byt write auf beiden 
+                        Wordhaelften, Byt read immer von SD0-7
+                        (fuer ET4000 und andere) 
+FFF4'0000-FFF7'FFFF rw  ISA-Bus I/O Zugriffe. Byt write auf beiden 
+			Wordhaelften 
+FFF0'0000-FFF0'001F rw  IDE Register 0
+FFF0'0020-FFF0'003F rw  IDE Register 1
+FFF0'0080-FFF0'009F rw  Floppy Controller Chip Select
+FFF0'00C0-FFF0'00DF rw  Floppy Controller Digital Output Register
+FFF0'00E0-FFF0'00FF wo  Floppy Controller Control Register
+FFFF'8000-FFFF'86FF rw  nicht belegt. Dummy Zugriff (kein Buserror!)
+FFFF'8701           rw  SCSI Transfer Adresse high Byt
+FFFF'8703           rw  SCSI Transfer Adresse middle upper Byt
+FFFF'8705           rw  SCSI Transfer Adresse middle lower Byt
+FFFF'8707           rw  SCSI Transfer Adresse low Byt
+FFFF'8709           rw  SCSI Byt Counter high Byt
+FFFF'870B           rw  SCSI Byt Counter middle upper Byt
+FFFF'870D           rw  SCSI Byt Counter middle lower Byt
+FFFF'870F           rw  SCSI Byt Counter low Byt
+FFFF'8710-FFFF'8713 rw  SCSI Restdatenregister by SCSI read
+FFFF'8715           rw  SCSI Control Register:
+                        Bit 7: Bus Error
+                        Bit 6: Byte Count ist Null
+                        Bit 1: DMA enable (resp. INT 2 activ)
+                        Bit 0: SCSI write. 0=SCSI read
+FFFF'8717           rw  SCSI und Interrupt Control Register: (wenn =1)
+                        Bit 7: VME-Interrupt 7 activ
+                        Bit 5: VME-Interrupt 5 activ
+                        Bit 3: VME-Interrupt 3 activ
+                        Bit 1: Bus Error fuer SCSI Control Register
+                        Bit 0: Byte Count ist Null fuer SCSI Control 
+                               Register
+FFFF'8800-FFFF'88FF rw  ST Sound Chip wie ST und TT
+FFFF'8961           rw  Uhr Registerauswahl
+FFFF'8963           rw  Uhr Daten Register
+FFFF'8C80-FFFF'8CFF rw  SCC. Register-Belegung wie beim TT.
+                        Kanal A: Local Talk
+                        Kanal B: Modem 2
+FFFF'FA00-FFFF'FA3F rw  STMFP  wie beim ST und TT:
+                        IO0: Drucker Busy
+                        IO1: DCD Modem 1
+                        IO2: CTS Modem 1
+                        IO3: Interrupt ISA 1
+                        IO4: Interrupt ACIAs
+                        IO5: Interrupt IDE
+                        IO6: RI Modem 1
+                        IO7: Interrupt ISA 2
+FFFF'FA80-FFFF'FABF rw  TTMFP  wie beim TT:
+                        IO0: Interrupt PCI 1
+                        IO1: Interrupt PCI 2
+                        IO2: Interrupt PCI 3
+                        IO3: RI Modem 2
+                        IO4: Floppy Interrupt
+                        IO5: Interrupt PCI 4
+                        IO6: Uhr Interrupt
+                        IO7: SCSI Interrupt
+FFFF'FC00-FFFF'FC03 rw  Tastatur ACIA
+FFFF'FC04-FFFF'FC07 rw  MIDI ACIA
+

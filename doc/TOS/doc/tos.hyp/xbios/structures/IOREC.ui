@@ -1,0 +1,60 @@
+!iflang [english]
+
+!begin_node IOREC
+#!html_name IOREC
+
+!begin_verbatim
+typedef struct
+{
+   void    *ibuf;        /* Pointer to buffer      */
+   int16_t ibufsiz;      /* Size of buffer         */
+   int16_t ibufhd;       /* Head index             */
+   int16_t ibuftl;       /* Tail index             */
+   int16_t ibuflow;      /* Low-water mark         */
+   int16_t ibufhi;       /* High-water mark        */
+} IOREC;
+!end_verbatim
+
+(!B)Note:(!b) The serial ports are connected directly to a corresponding
+output buffer. The two last pointers are only used for the serial
+port in XON/XOFF or RTS/CTS operation.
+
+If the buffer fill-level falls below the low-water mark, the sender
+is invited to send further characters; on the other hand, if it
+exceeds the high-water mark then it is signalled not to send any
+more characters.
+
+See also: Iorec
+!end_node
+
+!else
+
+!begin_node IOREC
+#!html_name IOREC
+
+Diese Struktur ist wie folgt definiert:
+
+!begin_verbatim
+typedef struct
+{
+   void    *ibuf;        /* Zeiger auf den Buffer   */
+   int16_t ibufsiz;      /* Grîûe des Buffers       */
+   int16_t ibufhd;       /* nÑchste Schreibposition */
+   int16_t ibuftl;       /* nÑchste Leseposition    */
+   int16_t ibuflow;      /* Marke fÅr Xon           */
+   int16_t ibufhi;       /* Marke fÅr Xoff          */
+} IOREC;
+!end_verbatim
+
+(!B)Hinweis:(!b) FÅr die serielle Schnittstelle schlieût sich direkt ein
+entsprechender Puffer fÅr die Ausgabe an. Die beiden letzten Zeiger werden
+nur fÅr die serielle Schnittstelle im XON/XOFF bzw. RTS/CTS-Betrieb genutzt.
+
+FÑllt nÑmlich der Pegel unter die untere 'Wassermarke', so wird der Sender
+aufgefordert weitere Zeichen zu senden; Åbersteigt er hingegen die obere
+'Wassermarke' so wird ihm signalisiert, keine Zeichen mehr zu schicken.
+
+Querverweis: Iorec
+!end_node
+
+!endif

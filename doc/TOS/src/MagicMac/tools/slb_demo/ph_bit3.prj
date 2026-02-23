@@ -1,0 +1,8 @@
+ph_bit3.ttp
+.C[-I..\..\inc_c]
+.C[-I..\..\pc\include]
+=
+..\..\pc\lib\cstartv.o    ; fuer lange Dateinamen
+ph_bit3.c
+..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\pc\lib\pctoslib.lib   ; TOS lib

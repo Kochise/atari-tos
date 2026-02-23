@@ -1,0 +1,156 @@
+; country specific offsets for various routines
+; .d1 is caused by different alt-key handling in bios,
+;    and affects all addresses >= $00e04000/04000
+; .d2 is caused by different time/date formats in desktop,
+;    and affects all addresses >= $00e18820/18820
+; .d3 is caused by different length of desktop data segment,
+;    and affects all addresses >= $00e2d180/2d180
+_SWITCH .NATION
+
+  _CASE .USA:
+    .d1 = -5A
+    .d2 = -30
+    .d3 = -2C
+    .RSC_TAB = 2DA7A
+    .ROMTOP  = 31C3E
+    .TOS_INFO = 2F212
+
+  _CASE .FRG:
+    .d1 = 0
+    .d2 = 0
+    .d3 = 0
+    .RSC_TAB = 2DAA6
+    .ROMTOP  = 31CCC
+    .TOS_INFO = 2F23F
+
+  _CASE .FRA:
+    .d1 = 1E
+    .d2 = 1E
+    .d3 = 1E
+    .RSC_TAB = 2DAC4
+    .ROMTOP  = 31F9A
+    .TOS_INFO = 2F392
+
+  _CASE .UK:
+    .d1 = -5A
+    .d2 = -30
+    .d3 = -2C
+    .RSC_TAB = 2DA7A
+    .ROMTOP  = 31C3E
+    .TOS_INFO = 2F212
+
+  _CASE .SPA:
+    .d1 = 2C
+    .d2 = 2C
+    .d3 = 2C
+    .RSC_TAB = 2DAD2
+    .ROMTOP  = 31EEC
+    .TOS_INFO = 2F366
+
+  _CASE .ITA:
+    .d1 = 0E
+    .d2 = 0E
+    .d3 = 0E
+    .RSC_TAB = 2DAB4
+    .ROMTOP  = 31E66
+    .TOS_INFO = 2F319
+
+  _CASE .SWE:
+    .d1 = 1E
+    .d2 = 1E
+    .d3 = 1E
+    .RSC_TAB = 2DAC4
+    .ROMTOP  = 31D9E
+    .TOS_INFO = 2F2BF
+
+  _CASE .SWF:
+    .d1 = 2C
+    .d2 = 2C
+    .d3 = 2C
+    .RSC_TAB = 2DAD2
+    .ROMTOP  = 31FA8
+    .TOS_INFO = 2F3A1
+
+  _CASE .SWG:
+    .d1 = 2C
+    .d2 = 2C
+    .d3 = 2C
+    .RSC_TAB = 2DAD2
+    .ROMTOP  = 31D38
+    .TOS_INFO = 2F26B
+
+  _CASE .CZE:
+    .d1 = 0
+    .d2 = 0
+    .d3 = 0
+    .RSC_TAB = 2DAA6
+    .ROMTOP  = 31CCC
+    .TOS_INFO = 2F213
+
+  _CASE .HOL:
+    .d1 = -5C
+    .d2 = -32
+    .d3 = -2E
+    .RSC_TAB = 2DA78
+    .ROMTOP  = 31E44
+    .TOS_INFO = 2F297
+
+  _DEFAULT:
+    _ERROR "unsupported country"
+_ENDSWITCH
+
+.RSC_LEN  = .ROMTOP-.RSC_TAB
+
+.INSTALL_RSC = 2A1AE+.d2
+
+;*******************************************************************************
+;*******************************************************************************
+;* MRF:
+;* Reloc corrections ONLY (!!!) for TOS 1.06 from 29.07.1989
+;* based on an idea by Andreas Kromke (KAOS 1.2 or KAOS 1.4).
+;* The Reloc corrections support TOS lengths up to $40000.
+
+
+!04DE2+.d1 ; movem.l    (a7)+,d5-d7
+!0D29A+.d1 ; move.w     #$00E1,-(a7)
+!0D2BC+.d1 ; move.w     #$00E1,-(a7)
+!1329E+.d1 ; move.b     $E5(pc,d0.w),d0
+!148FA+.d1 ; movem.w    46(a7),d5-d7
+!18EF8+.d2 ; adda.l     #$000000E2,a0
+!196F4+.d2 ; adda.l     #$000000E2,a0
+!1F7BA+.d2 ; movem.l    (a7)+,d5-d7
+!22012+.d2 ; movem.l    (a7)+,d5-d7
+!224B2+.d2 ; movem.l    (a7)+,d5-d7
+!2262A+.d2 ; movem.l    (a7)+,d5-d7
+!230EA+.d2 ; movem.l    (a7)+,d5-d7
+!236F2+.d2 ; movem.l    36(a7),d5-d7
+!24028+.d2 ; movem.l    (a7)+,d5-d7
+!25D84+.d2 ; movem.l    (a7)+,d5-d7
+!25FEA+.d2 ; movem.l    (a7)+,d5-d7
+!260B8+.d2 ; movem.l    (a7)+,d5-d7
+!262DE+.d2 ; movem.l    (a7)+,d5-d7
+!26B1E+.d2 ; movem.l    (a7)+,d5-d7
+!28BB4+.d2 ; movem.l    (a7)+,d5-d7
+!293C0+.d2 ; adda.l     #$000000E0,a0
+!294C4+.d2 ; adda.l     #$000000E0,a0
+!294F0+.d2 ; adda.l     #$000000E0,a0
+!29878+.d2 ; move.b     #$E9,(a5)
+
+?53C
+
+!00F3E .. 00F5E       ; bomb image
+!0B638+.d1 .. 0B660+.d1 ; color table
+!0A70A+.d1 .. 0A750+.d1 ; offset table in vdi
+!0B298+.d1 .. 0B2B8+.d1 ; offset table in vdi
+
+!2A4B4+.d2 .. 2A4D2+.d2 ; bell sound
+!2A4D2+.d2 .. 2A4EC+.d2 ; click sound
+
+!2A334+.d2 .. 2A4B4+.d2 ; bios keyboard tables
+!2A8E4+.d2 .. 2AAE6+.d2 ; 6x6 font offsets
+!2AAE6+.d2 .. 2AF66+.d2 ; 6x6 font data
+!2AFC0+.d2 .. 2B1C2+.d2 ; 8x8 font offsets
+!2B1C2+.d2 .. 2B9C2+.d2 ; 8x8 font data
+!2B9C2+.d2 .. 2C9C2+.d2 ; 8x16 font data
+!2CA1C+.d2 .. 2CE54+.d2 ; VDI patterns
+!.RSC_TAB .. .ROMTOP ; resource data

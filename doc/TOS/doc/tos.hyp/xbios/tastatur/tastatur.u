@@ -1,0 +1,34 @@
+!iflang [english]
+
+!begin_node Keyboard functions
+!html_name xbios_keyboard
+
+!begin_xlist [x Bioskeys ] !compressed
+!item [(!bullet) Bioskeys] Resets Bios table for key-codes.
+!item [(!bullet) Kbrate] Gets or alters auto-repeat of the keyboard.
+!item [(!bullet) Keytbl] Assigns new mapping table for key-codes.
+!end_xlist
+
+See also: ASCII table ~  (!link [Scancode table][The scancode])
+
+!else
+
+!begin_node Tastaturfunktionen
+!html_name xbios_keyboard
+
+!begin_xlist [x Bioskeys ] !compressed
+!item [(!bullet) Bioskeys] Bios-Tabelle f(!uumlaut)r Tastaturcodes zur(!uumlaut)cksetzen.
+!item [(!bullet) Kbrate] Auto-Repeat der Tastatur (!aumlaut)ndern oder ermitteln.
+!item [(!bullet) Keytbl] Neue Tabelle f(!uumlaut)r Tastaturcodes vorgeben.
+!end_xlist
+
+Querverweis: ASCII-Tabelle ~  (!link [Scan-Code Tabelle][Der Scan-Code])
+
+
+!endif
+
+!include xbios/tastatur/bioskeys.ui
+!include xbios/tastatur/kbrate.ui
+!include xbios/tastatur/keytbl.ui
+
+!end_node

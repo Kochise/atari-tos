@@ -1,0 +1,24 @@
+;*******************************************************************************
+;* Relocate TOS 1.06 to a certain address
+;*
+;* ½ 1990 ä-soft, Markus Fritze
+
+.BASE   = E00000    ;TOS-ROM-address
+.LENGTH =  40000    ;TOS-length
+.WIDTH  =    .16    ;TOS-width (16-bit)
+
+.NATION = .FRG      ;TOS country code: Germany
+
+<tos.img            ;Read TOS from file
+=29.07.1989,.NATION ;Version and nationality must be correct (otherwise message!)
+
+>1 3C0000 ;  4MB-computer / 1 File
+;>1 2C0000 ;  3MB-computer / 1 File
+;>1 240000 ;2.5MB-computer / 1 File
+;>1 1C0000 ;  2MB-computer / 1 File ;With less than 2MB of memory it does
+;>1 0C0000 ;  1MB-computer / 1 File ;hardly make sense to keep TOS 1.06 in the ram,
+;>1 040000 ;0.5MB-computer / 1 File ;except maybe for testing the patches!
+
+-patchfld      ;Dsetpath("PATCHFLD")
++relocs.fil
+-..

@@ -1,0 +1,30 @@
+;*******************************************************************************
+;* TOS 2.06 an eine bestimmte Adresse relozieren
+;*
+;* Ω 1992-94 Markus Heiden
+
+.BASE   = E00000    ;TOS-Basisadresse
+.LENGTH =  40000    ;LÑnge des TOS'
+.WIDTH  =    .16    ;Organisation des TOS (16-bittig)
+
+.NATION = .FRG      ;TOS-NationalitÑt
+
+<STE_TOS.IMG        ;TOS 2.06 lesen
+=14.11.1991,.NATION    ;muû die Version vom 14.11.1991 sein! (sonst Message!)
+
+>1 3C0000 ;  4MB-Rechner / 1 File
+;>1 2C0000 ;  3MB-Rechner / 1 File
+;>1 240000 ;2.5MB-Rechner / 1 File
+;>1 1C0000 ;  2MB-Rechner / 1 File ;Mit weniger als 2MB Speicher macht es
+;>1 0C0000 ;  1MB-Rechner / 1 File ;kaum Sinn TOS 2.06 im Ram zu halten,
+;>1 040000 ;0.5MB-Rechner / 1 File ;auûer vielleicht zum Testen derPatches!
+
+;Reloc-Korrekturen NUR (!!!) fÅr das deutsche TOS 2.06 vom 14.11.1991
+;nach einer Idee von Andreas Kromke (KAOS 1.2 bzw KAOS 1.4)
+
+-patchfld	; Dsetpath("patchfld\")
++relocs.fil
+-..                ; Dsetpath ('..')
+
+;PrÅfsumme berechnen
+.CRC = 1

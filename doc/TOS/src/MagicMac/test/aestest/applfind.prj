@@ -1,0 +1,9 @@
+applfind.tos
+.L[-S=$4000]   ; stacksize 16k
+.C[-I..\..\pc\include]
+=              ; list of modules follows...
+..\..\pc\lib\cstartv.o
+applfind.c
+..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\pc\lib\pcgemlib.lib
+..\..\pc\lib\pctoslib.lib

@@ -1,0 +1,101 @@
+!iflang [english]
+
+!begin_node Screen functions
+!html_name Screen_functions
+
+!begin_xlist [x EgetPalette ] !compressed
+!item [(!bullet) Cursconf]    (!nolink [Changes]) or gets cursor display.
+!item [(!bullet) EgetPalette] Reads colour palette.
+!item [(!bullet) EgetShift]   Reads shift mode register.
+!item [(!bullet) EsetBank]    Sets colour table.
+!item [(!bullet) EsetColor]   Sets colour table entry.
+!item [(!bullet) EsetGray]    Sets colour interpretation.
+!item [(!bullet) EsetPalette] Loads colour palette.
+!item [(!bullet) EsetShift]   Sets shift mode register.
+!item [(!bullet) EsetSmear]   Sets colour smear.
+!item [(!bullet) Getrez]      Gets resolution.
+!item [(!bullet) Initmouse]   Initializes mouse pointer.
+!item [(!bullet) Logbase]     Gets address of the logical screen memory.
+!item [(!bullet) mon_type]    Gets (!nolink [monitor]) type.
+!item [(!bullet) Physbase]    Gets address of the physical screen memory.
+!item [(!bullet) Setcolor]    Sets colour.
+!item [(!bullet) Setpalette]  Selects colour palette.
+!item [(!bullet) Setscreen]   Sets the current screen resolution and base addresses.
+!item [(!bullet) ValidMode]   Validates a mode code.
+!item [(!bullet) VgetRGB]     Gets RGB-value of a colour.
+!item [(!bullet) VsetScreen]  Sets the screen resolution and base addresses.
+!item [(!bullet) VgetSize]    Gets size of the screen buffer.
+!item [(!bullet) VsetMask]    Sets transparency for True-Color.
+!item [(!bullet) VsetMode]    Sets video hardware register.
+!item [(!bullet) VsetRGB]     Sets RGB-value of a colour.
+!item [(!bullet) VsetSync]    Sets type of synchronisation for external video.
+!item [(!bullet) Vsync]       Gets vertical synchronisation signal.
+!end_xlist
+
+!else
+
+!begin_node Bildschirmfunktionen
+!html_name Screen_functions
+
+!begin_xlist [x EgetPalette ] !compressed
+!item [(!bullet) Cursconf]    Cursordarstellung (!aumlaut)ndern oder ermitteln.
+!item [(!bullet) EgetPalette] Farbtabelle lesen.
+!item [(!bullet) EgetShift]   Shift Mode Register lesen.
+!item [(!bullet) EsetBank]    Farbtabelle setzen.
+!item [(!bullet) EsetColor]   Farbtabelleneintrag setzen.
+!item [(!bullet) EsetGray]    Farbinterpretation setzen.
+!item [(!bullet) EsetPalette] Farbtabelle laden.
+!item [(!bullet) EsetShift]   Shift Mode Register setzen.
+!item [(!bullet) EsetSmear]   Farbverwischung setzen.
+!item [(!bullet) Getrez]      Aufl(!oumlaut)sung ermitteln.
+!item [(!bullet) Initmouse]   Mauszeiger initialisieren.
+!item [(!bullet) Logbase]     Adresse des logischen Bildschirmspeichers ermitteln.
+!item [(!bullet) mon_type]   Monitortyp ermitteln.
+!item [(!bullet) Physbase]    Adresse des physikal. Bildschirmspeichers ermitteln.
+!item [(!bullet) Setcolor]    Farbe einstellen.
+!item [(!bullet) Setpalette]  Farbpalette ausw(!aumlaut)hlen.
+!item [(!bullet) Setscreen]   Festlegen der Bildschirmaufl(!oumlaut)sung und -adressen.
+!item [(!bullet) ValidMode]   Validates a mode code.
+!item [(!bullet) VgetRGB]     RGB-Wert einer Farbe ermitteln.
+!item [(!bullet) VsetScreen]  Festlegen der Bildschirmaufl(!oumlaut)sung und -adressen
+!item [(!bullet) VgetSize]    Gr(!oumlaut)(!sharps)e des Bildschirmpuffers ermitteln.
+!item [(!bullet) VsetMask]    Transparenz f(!uumlaut)r True-Color setzen.
+!item [(!bullet) VsetMode]    Videohardwareregister setzen.
+!item [(!bullet) VsetRGB]     RGB-Wert einer Farbe setzen.
+!item [(!bullet) VsetSync]    Synchronisationsart setzen.
+!item [(!bullet) Vsync]       Vertikales Synchronisationssignal abfragen.
+!end_xlist
+
+
+!endif
+
+!include xbios/bildscrm/cursconf.ui
+!include xbios/bildscrm/egetpale.ui
+!include xbios/bildscrm/egetshif.ui
+!include xbios/bildscrm/esetbank.ui
+!include xbios/bildscrm/esetcolo.ui
+!include xbios/bildscrm/esetgray.ui
+!include xbios/bildscrm/esetpale.ui
+!include xbios/bildscrm/esetshif.ui
+!include xbios/bildscrm/esetsmea.ui
+!include xbios/bildscrm/getrez.ui
+!include xbios/bildscrm/initmous.ui
+!include xbios/bildscrm/logbase.ui
+!include xbios/bildscrm/mon_type.ui
+!include xbios/bildscrm/physbase.ui
+!include xbios/bildscrm/setcolor.ui
+!include xbios/bildscrm/setpalet.ui
+!include xbios/bildscrm/setscree.ui
+!include xbios/bildscrm/Setscreen_Milan.ui
+!include xbios/bildscrm/Setscreen_ct60.ui
+!include xbios/bildscrm/validmod.ui
+!include xbios/bildscrm/vgetrgb.ui
+!include xbios/bildscrm/vsetscre.ui
+!include xbios/bildscrm/vgetsize.ui
+!include xbios/bildscrm/vsetmask.ui
+!include xbios/bildscrm/vsetmode.ui
+!include xbios/bildscrm/vsetrgb.ui
+!include xbios/bildscrm/vsetsync.ui
+!include xbios/bildscrm/vsync.ui
+!include xbios/bildscrm/bildscrm.ui
+!end_node

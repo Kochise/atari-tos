@@ -1,0 +1,17 @@
+wx_alloc:   23156
+ratrbp:     21840
+gempd:      11600 sizeof(WX_WINDOW) * WX_MAXWIN
+
+wtcolor:    21848
+winx19.fil: 21940
+
+8 * WX_QUEUE_SIZE = 10240
+
+struct wx_mem {
+    WX_WINDOW w_win;
+    char w_queue[MAX_ACCS + 2][WX_QUEUE_SIZE];
+    int16_t init_scroll;
+    int16_t cont_scroll;
+    int16_t cont_close;
+    int16_t cont_full;
+};

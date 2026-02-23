@@ -1,0 +1,13 @@
+               ; TTP.PRJ   for use with TTP- programs
+               ; ------------------------------------
+dev_lpt1.tos
+.C[-I..\..\..\inc_c]
+.C[-I..\..\..\pc\include]
+.S[-I..\..\..\inc_as]
+.S[-I..\..\..\kernel\inc]
+=              ; list of modules follows...
+..\..\..\pc\lib\cstartv.o     ; startup code (mit ParameterÅbergabe)
+dev_lpt1.c
+dev_lpts.s
+..\..\..\pc\lib\pcstdlib.lib   ; standard lib
+..\..\..\pc\lib\pctoslib.lib   ; TOS lib

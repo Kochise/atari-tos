@@ -1,0 +1,289 @@
+!iflang [english]
+
+!begin_node Inquire functions
+!html_name vdi_inquire
+
+This library contains functions to inquire about a multitude of set
+attributes. The following routines are available for this purpose:
+
+!begin_xlist !compressed [x v_write_default_settings]
+!item [(!bullet) vq_cellarray]
+Inquires the definition of a colour selection cell array
+!item [(!bullet) vq_color]
+Gets colour intensity information
+!item [(!bullet) vq_devinfo]
+Inquires status of an output device
+!item [(!bullet) vq_ext_devinfo]
+Gets information about a GDOS driver
+!item [(!bullet) vq_extnd]
+Gets additional information about the configuration of a workstation
+!item [(!bullet) vq_ptsinsz]
+Internal function from GDOS
+!item [(!bullet) vq_scrninfo]
+Gets information about screen format
+!item [(!bullet) vqf_attributes]
+Gets fill attributes
+!item [(!bullet) vqf_bg_color]
+Gets object background colour
+!item [(!bullet) vqf_fg_color]
+Gets object foreground colour
+!item [(!bullet) vqin_mode]
+Inquires input mode of an input device
+!item [(!bullet) vql_attributes]
+Gets line attributes
+!item [(!bullet) vql_bg_color]
+Gets line background colour
+!item [(!bullet) vql_fg_color]
+Gets line foreground colour
+!item [(!bullet) vqm_attributes]
+Gets marker atttributes
+!item [(!bullet) vqm_bg_color]
+Gets marker background colour
+!item [(!bullet) vqm_fg_color]
+Gets marker foreground colour
+!item [(!bullet) vqr_bg_color]
+Gets bitmap background colour
+!item [(!bullet) vqr_fg_color]
+Gets bitmap foreground colour
+!item [(!bullet) vqt_advance]
+Gets position for next vector character
+!item [(!bullet) vqt_advance32]
+Gets more exact position for next vector character ((!nolink [fix31])).
+!item [(!bullet) vqt_attributes]
+Gets text attributes
+!item [(!bullet) vqt_cacheinfo]
+No information available at present
+!item [(!bullet) vqt_cachesize]
+Gets size of the vector character cache
+!item [(!bullet) vqt_char_index]
+Converts index from/ to given mappings
+!item [(!bullet) vqt_devinfo]
+Inquires status of an output device
+!item [(!bullet) vqt_drv_avail]
+No information available at present
+!item [(!bullet) vqt_ext_name]
+Extended function for obtaining font information
+!item [(!bullet) vqt_extent]
+Calculates dimensions of a text bounding rectangle
+!item [(!bullet) vqt_f_extent]
+Calculates dimensions of a text for vector fonts
+!item [(!bullet) vqt_f_extent16]
+Calculates dimensions of a text for 16-bit Speedo character indexed text
+!item [(!bullet) vqt_bg_color]
+Gets text background colour
+!item [(!bullet) vqt_fg_color]
+Gets text foreground colour
+!item [(!bullet) vqt_fontheader]
+Gets information about a font header
+!item [(!bullet) vqt_fontinfo]
+Gets information about a font
+!item [(!bullet) vqt_get_table]
+Inquires address of the character transformation tables
+!item [(!bullet) vqt_justified]
+Inquires offsets from an alignment point
+!item [(!bullet) vqt_name]
+Gets name and index of a font
+!item [(!bullet) vqt_name_and_id]
+Finds font ID and name
+!item [(!bullet) vqt_pairkern]
+Gets adjustment vector information for kerning of a character pair
+!item [(!bullet) vqt_real_extent]
+Gets bounding rectangle around a text
+!item [(!bullet) vqt_trackkern]
+Gets adjustment vectors for fonts with track-kerning
+!item [(!bullet) vqt_width]
+Calculates width of a character cell
+!item [(!bullet) vqt_xfntinfo]
+Gets information about a font
+!item [(!bullet) v_create_driver_info]
+Gets information about a driver
+!item [(!bullet) v_delete_driver_info]
+Deletes information about a driver
+!item [(!bullet) v_get_driver_info]
+Gets extended information about a driver
+!item [(!bullet) v_getbitmap_info]
+Gets placement information about the bitmap of a vector character
+!item [(!bullet) v_read_default_settings]
+Gets default printer settings
+!item [(!bullet) v_write_default_settings]
+Sets the default printer settings
+!end_xlist
+
+(!B)Note:(!b) Besides general attributes, the functions listed here can
+obtain extensive information about text handling.
+
+See also: VDI workstations ~ Style guidelines
+
+!else
+
+!begin_node Auskunftsfunktionen
+!html_name vdi_inquire
+
+Diese Bibliothek enth(!aumlaut)lt Funktionen um eine Vielzahl von gesetzten
+Attributen abfragen zu k(!oumlaut)nnen. Zu diesem Zweck stehen die folgenden Routinen
+zur Verf(!uumlaut)gung:
+
+!begin_xlist !compressed [x v_write_default_settings]
+!item [(!bullet) vq_cellarray]
+Abfrage der Belegung einer Farbauswahltabelle.
+!item [(!bullet) vq_color]
+Farbintensit(!aumlaut)ten ermitteln.
+!item [(!bullet) vq_devinfo]
+Status eines Ausgabeger(!aumlaut)tes erfragen.
+!item [(!bullet) vq_ext_devinfo]
+Informationen (!uumlaut)ber einen Treiber ermitteln.
+!item [(!bullet) vq_extnd]
+Zus(!aumlaut)tzliche Informationen (!uumlaut)ber die Konfiguration einer Arbeitsstation
+ermitteln.
+!item [(!bullet) vq_ptsinsz]
+Interne Funktion von GDOS.
+!item [(!bullet) vq_scrninfo]
+Informationen (!uumlaut)ber Bildschirmformat ermitteln.
+!item [(!bullet) vqf_attributes]
+F(!uumlaut)llattribute ermitteln.
+!item [(!bullet) vqf_bg_color]
+Objekt Hintergrundfarbe ermitteln
+!item [(!bullet) vqf_fg_color]
+Objekt Vordergrundfarbe ermitteln
+!item [(!bullet) vqin_mode]
+Eingabemodus eines Eingabeger(!aumlaut)ts abfragen.
+!item [(!bullet) vql_attributes]
+Linienattribute ermitteln.
+!item [(!bullet) vql_bg_color]
+Linien Hintergrundfarbe ermitteln
+!item [(!bullet) vql_fg_color]
+Linen Vordergrundfarbe ermitteln
+!item [(!bullet) vqm_attributes]
+Markierungsattribute ermitteln.
+!item [(!bullet) vqm_bg_color]
+Marker Hintergrundfarbe ermitteln
+!item [(!bullet) vqm_fg_color]
+Marker Vordergrundfarbe ermitteln
+!item [(!bullet) vqr_bg_color]
+Bitmap Hintergrundfarbe ermitteln
+!item [(!bullet) vqr_fg_color]
+Bitmap Vordergrundfarbe ermitteln
+!item [(!bullet) vqt_advance]
+Position f(!uumlaut)r n(!aumlaut)chstes Vektor-Zeichen ermitteln.
+!item [(!bullet) vqt_advance32]
+Position f(!uumlaut)r n(!aumlaut)chstes Vektor-Zeichen ermitteln ((!nolink [fix31])).
+!item [(!bullet) vqt_attributes]
+Textattribute ermitteln.
+!item [(!bullet) vqt_cacheinfo]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) vqt_cachesize]
+Ermitteln der Gr(!oumlaut)(!sharps)e des Vektorzeichen-Caches.
+!item [(!bullet) vqt_char_index]
+Index-Konvertierung bzgl. eines Mappings.
+!item [(!bullet) vqt_devinfo]
+Status eines Ausgabeger(!aumlaut)tes erfragen.
+!item [(!bullet) vqt_drv_avail]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) vqt_ext_name]
+Erweiterte Funktion f(!uumlaut)r das Ermitteln von Zeichensatzinformationen.
+!item [(!bullet) vqt_extent]
+Dimensionen eines Textrechtecks berechnen.
+!item [(!bullet) vqt_f_extent]
+Dimensionen eines Textrechtecks f(!uumlaut)r Vektorfonts berechnen.
+!item [(!bullet) vqt_f_extent16]
+z.Zt. keine Informationen bekannt.
+!item [(!bullet) vqt_bg_color]
+Text Hintergrundfarbe ermitteln
+!item [(!bullet) vqt_fg_color]
+Text Vordergrundfarbe ermitteln
+!item [(!bullet) vqt_fontheader]
+Informationen (!uumlaut)ber einen Zeichensatz ermitteln.                  
+!item [(!bullet) vqt_fontinfo]
+Informationen (!uumlaut)ber einen Zeichensatz ermitteln.
+!item [(!bullet) vqt_get_table]
+Adresse der Zeichentransformationstabellen erfragen.
+!item [(!bullet) vqt_justified]
+Offsets von einem Ausrichtungspunkt erfragen.
+!item [(!bullet) vqt_name]
+Namen und Index eines Zeichensatzes ermitteln.
+!item [(!bullet) vqt_name_and_id]
+Zeichensatz-ID und Namen suchen.
+!item [(!bullet) vqt_pairkern]
+Korrekturfaktor f(!uumlaut)r Abst(!aumlaut)nde bei (!nolink [Pair-Kerning]) erfragen.
+!item [(!bullet) vqt_real_extent]
+Ermitteln des einen Text umgebenden Rechteckes.
+!item [(!bullet) vqt_trackkern]
+Korrekturfaktor f(!uumlaut)r Fonts mit Track-Kerning erfragen.
+!item [(!bullet) vqt_width]
+Dimensionen einer Zeichenzelle berechnen.
+!item [(!bullet) vqt_xfntinfo]
+Informationen (!uumlaut)ber einen Zeichensatz ermitteln.
+!item [(!bullet) v_create_driver_info]
+Informationen (!uumlaut)ber einen Treiber ermitteln.
+!item [(!bullet) v_delete_driver_info]
+Informationen (!uumlaut)ber einen Treiber l(!oumlaut)schen.
+!item [(!bullet) v_get_driver_info]
+Informationen (!uumlaut)ber einen Treiber ermitteln.
+!item [(!bullet) v_getbitmap_info]
+Informationen (!uumlaut)ber Vektorzeichen ermitteln.
+!item [(!bullet) v_read_default_settings]
+Ermitteln der Default Druckereinstellungen.
+!item [(!bullet) v_write_default_settings]
+Setzen der Default Druckereinstellungen.
+!end_xlist
+
+(!B)Hinweis:(!b) Neben allgemeinen Attributen k(!oumlaut)nnen (!uumlaut)ber die hier
+angegebenen Funktionen vor allem sehr ausf(!uumlaut)hrliche Informationen zum
+Text-Handling ermittelt werden.
+
+Querverweis: Workstations des VDI ~  Style-Guidelines
+
+
+!endif
+
+!include gem/vdi/inquire/vqf_attributes.ui
+!include gem/vdi/inquire/vqf_bg_color.ui
+!include gem/vdi/inquire/vqf_fg_color.ui
+!include gem/vdi/inquire/vqin_mode.ui
+!include gem/vdi/inquire/vql_attributes.ui
+!include gem/vdi/inquire/vql_bg_color.ui
+!include gem/vdi/inquire/vql_fg_color.ui
+!include gem/vdi/inquire/vqm_attributes.ui
+!include gem/vdi/inquire/vqm_bg_color.ui
+!include gem/vdi/inquire/vqm_fg_color.ui
+!include gem/vdi/inquire/vqr_bg_color.ui
+!include gem/vdi/inquire/vqr_fg_color.ui
+!include gem/vdi/inquire/vqt_advance.ui
+!include gem/vdi/inquire/vqt_advance32.ui
+!include gem/vdi/inquire/vqt_attributes.ui
+!include gem/vdi/inquire/vqt_bg_color.ui
+!include gem/vdi/inquire/vqt_cachesize.ui
+!include gem/vdi/inquire/vqt_char_index.ui
+!include gem/vdi/inquire/vqt_devinfo.ui
+!include gem/vdi/inquire/vqt_extent.ui
+!include gem/vdi/inquire/vqt_ext_name.ui
+!include gem/vdi/inquire/vqt_fg_color.ui
+!include gem/vdi/inquire/vqt_fontheader.ui
+!include gem/vdi/inquire/vqt_fontinfo.ui
+!include gem/vdi/inquire/vqt_f_extent.ui
+!include gem/vdi/inquire/vqt_get_table.ui
+!include gem/vdi/inquire/vqt_justified.ui
+!include gem/vdi/inquire/vqt_name.ui
+!include gem/vdi/inquire/vqt_name_and_id.ui
+!include gem/vdi/inquire/vqt_pairkern.ui
+!include gem/vdi/inquire/vqt_real_extent.ui
+!include gem/vdi/inquire/vqt_trackkern.ui
+!include gem/vdi/inquire/vqt_width.ui
+!include gem/vdi/inquire/vqt_xfntinfo.ui
+!include gem/vdi/inquire/vq_cellarray.ui
+!include gem/vdi/inquire/vq_color.ui
+!include gem/vdi/inquire/vq_devinfo.ui
+!include gem/vdi/inquire/vq_extnd.ui
+!include gem/vdi/inquire/vq_ext_devinfo.ui
+!include gem/vdi/inquire/vq_ptsinsz.ui
+!include gem/vdi/inquire/vq_scrninfo.ui
+!include gem/vdi/inquire/v_create_driver_info.ui
+!include gem/vdi/inquire/v_delete_driver_info.ui
+!include gem/vdi/inquire/v_getbitmap_info.ui
+!include gem/vdi/inquire/v_get_driver_info.ui
+!include gem/vdi/inquire/v_read_default_settings.ui
+!include gem/vdi/inquire/v_write_default_settings.ui
+!include gem/vdi/inquire/fontheader.ui
+!include gem/vdi/inquire/disable_nvdi.ui
+
+!end_node

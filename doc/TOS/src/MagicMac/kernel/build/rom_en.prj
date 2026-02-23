@@ -1,0 +1,69 @@
+; Project file for MAGIC.ROM
+; (Atari ROM Version, english localization)
+; Pure-C creates a 38 byte long header for programs
+; linked to absolute addresses; this must be stripped
+; before using it as ROM
+en\magic.rom
+.C[-I..\..\inc_c]
+.C[-I..\inc]
+.C[-I..\..\pc\include]
+.S[-I..\inc]
+
+.S[-DCOUNTRY=0]
+.C[-DCOUNTRY=0]
+
+.S[-DMAGICPC=0]
+.S[-DHADES=0]
+.S[-DRAVEN=0]
+
+.C[-A-]
+.C[-K-]
+.C[-P]
+.C[-G]
+.S[-S]
+.L[-S=0]
+.L[-T=$E00000]
+.L[-B=0]
+;.L[-binary] ; requires patched PC.PRG/PLINK.TTP
+=
+..\bios\atari\magibios.s
+..\bios\atari\xfs95\xfs95ini.s
+..\bios\atari\modules\ide.c
+..\allg\read_inf.s
+..\vdi\math.s
+..\allg\std.s
+..\dos\magidos.s
+..\dos\malloc.s
+..\dos\xfs_vdos.s
+..\dos\vfat_s.s
+..\dos\vfat.c
+..\dos\dfs_u.s
+..\dos\dev_bios.s
+..\dos\dev_pipe.s
+..\dos\dev_mem.s
+..\dos\dfs_fat.s
+..\bios\magicmac\macxfs.s
+..\vdi\mxvdiknl.s
+..\vdi\setup.c
+..\vdi\drivers.c
+..\vdi\filediv.c
+..\vdi\init_res.c
+..\vdi\string.s
+..\vdi\tos.s
+..\aes\aesmain.s
+..\aes\aesevt.s
+..\aes\aesfrm.s
+..\aes\aesobj.s
+..\aes\aeswin.s
+..\aes\aesmen.s
+..\aes\aesgraf.s
+..\aes\aesrsc.s
+..\aes\farbic.c
+..\aes\wdialog\wdialog.c
+..\aes\wdialog\listbox.c
+..\aes\wdialog\fnt_menu.c
+..\aes\wdialog\shelsort.c
+..\aes\wdialog\wdintrfc.s
+..\aes\fsel\fsel.c [-M-]
+..\aes\xmen_mgr\mtsmn.c
+..\ende.s
