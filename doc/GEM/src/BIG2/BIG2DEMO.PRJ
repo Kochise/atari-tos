@@ -1,0 +1,23 @@
+; Project file to create BIG Demo program
+; Developed by Claude ATTARD 
+; No debug information included
+
+
+BIG2DEMO.PRG       ; executable name
+.C [ -K -P ]       ; Compiler option
+;.C [ -K -P -Y ]   ; Compiler options with debug information
+;.L [ -G -L -Y ]	 ; Linker options with debug information
+
+=
+PCSTART.O          ; Startup code
+
+BIG2DEMO.C	(BIG2DEMO.H) ; main
+
+PCFLTLIB.LIB       ; Floating point library
+PCSTDLIB.LIB       ; Standard Library
+BIG2.LIB           ; BIG library
+;BIG2DEBG.LIB      ; BIG library with debug information
+BIG_IMGS.LIB       ; BIG image libary
+PCEXTLIB.LIB       ; Extended library
+PCTOSLIB.LIB       ; TOS library
+PCGEMLIB.LIB       ; AES & VDI library
