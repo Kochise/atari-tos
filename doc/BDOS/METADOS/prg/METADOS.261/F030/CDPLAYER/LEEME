@@ -1,0 +1,57 @@
+CD-Player V1.4       (10/1996)
+==============================
+un CD-Player de audio para los ATARI ST/STE/TT/Falcon
+
+Autor:   Alexander Clauss
+------   Stresemannstr. 44
+         D-64297 Darmstadt
+         -- Alemania --
+
+Email: aclauss@rbg.informatik.th-darmstadt.de
+
+
+CDP es  FREEWARE. Puede ser copiado y usado libremente. La distribuci¢n por
+BBSs y librerias de Dominio P£blico est  permitida. De todas formas, CDP NO
+puede ser incluido bajo NINGUNA circunstancia en ninguna  colecci¢n CD- ROM
+o  en discos  de portada  de revistas  sin mi permiso por escrito. CDP y su
+documentaci¢n deben  de permanecer siempre  juntos y completo con todos sus
+ficheros  y  documentaci¢n.  Cambios en  el programa  y documentaci¢n  est 
+prohibido.
+
+
+Si hay alguien interesado en traducir la documentaci¢n y/o  el fichero RSC,
+contacta conmigo por favor.
+
+
+Los siguientes ficheros componen CDP:
+-------------------------------------
+CDP.APP              Programa
+CDP.RSC              Fichero RSC (en Alem n)
+CDP.DAT              Base de datos (Ejemplo)
+LIESMICH             Este texto en Alem n
+README               Este texto en Ingl‚s
+LEEME                Este texto en castellano  (gracias a Antonio Lillo)
+DOC/
+    CDP.TXT          Documentaci¢n (en Alem n)
+    CDP.HYP
+RSC/
+    CDP_D.RSC        Fichero RSC en Alem n
+    CDP_E.RSC        Fichero RSC en Ingl‚s
+    CDP_SP.RSC       Fichero RSC en castellano   (gracias a Antonio Lillo)
+    CDP_FR.RSC
+    CDP_SWED.RSC
+
+El  lenguaje de  los men£s,  di logos y mensajes  de CDP puede ser cambiado
+reemplazando el fichero CDP.RSC con uno de los ficheros .RSC de la  carpeta
+RESOURCE. Copia  el fichero  RSC deseado  al mismo directorio que CDP.APP y
+renombralo como CDP.RSC (borra o renombra el que hab¡a anteriormente).
+
+Requerimientos de sistema:
+--------------------------
+* Atari ST/STE/TT/Falcon
+* unidad CD-ROM (debe soportar comandos de audio)
+* driver de CD-ROM para MetaDOS (debe soportar comandos de audio),
+  ExtenDOS, SCSI-Driver
+
+
+

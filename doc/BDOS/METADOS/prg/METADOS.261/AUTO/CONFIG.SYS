@@ -1,0 +1,33 @@
+;
+; Config.sys	An ascii file that describes the system configuration.
+;
+
+; Physical Basic operating system format
+;*BOS, [Physical Bos driver][Arguments], [Physical id]:[DMA channel], ... 
+;	Device #	meaning
+;	0 - 7		ACSI device 0 - 7
+;	8 - 15		SCSI device 0 - 7
+;   16 - 17     IDE device 0 or 1
+;
+;The next line installs CDARGEN.BOS for ACSI device 6.
+*BOS, A:\AUTO\CD_ACSI.BOS, Y:3
+
+; Logical DOS format.
+;*DOS  [Logical DOS] [Arguments], [Logical id]:[physical id],...
+;
+;The High Sierra driver won't be needed in most cases
+;*DOS, A:\AUTO\HSMAY.DOS, P:Y
+;
+;The next line installs ISO9660F.DOS for MetaDOS drive letter Y
+;(which has been assigned to SCSI 6 above) as GEMDOS drive R:. Note
+;that a lot of applications can't access drive letters beyond P:, so
+;you might have to change the drive letter.
+*DOS, A:\AUTO\ISO9660F.DOS, P:Y
+;
+; You can use statements as below to launch other applications.
+;
+;c:\auto\boot\ram512.prg	; Load in 512 byte ramdisk.
+;c:\auto\boot\gdos.prg		; Load in gdos.
+;c:\auto\boot\diab630.prg	; Load in diablo 630 emulator.
+;c:\auto\boot\sdump.prg		; Load in Screen dump to laser.
+

@@ -1,0 +1,129 @@
+INSTALLATION DU CD-ROM
+
+IMPORTANT :
+
+Cette notice est … lire absolument avant d'utiliser votre nouveau CD-ROM.
+
+Si vous remarquez des d‚fauts importants lors du d‚ballage du CD-ROM, appelez-nous 
+tout de suite avant d'aller plus loin.
+
+Le dossier AUTO sur la disquette ne sert qu'au ST, donc ne pas booter dessus pour les 
+autres !
+
+REGLES D'UNE CHAINE SCSI
+
+- une chaŒne est constitu‚e d'une suite lin‚aire de p‚riph‚riques: ne pas faire de connection en "Y" ou pire 
+en "T" !
+- au d‚but de la chaŒne se trouve l'initiateur (l'ordinateur pour nous...):
+  c'est l… que l'on branche l'interface ICD par exemple.
+- … la fin, il doit y avoir ce que l'on appelle un bouchon (TERMINATOR) et
+  aucun ‚l‚ment le long de la chaŒne ne doit en poss‚der (v‚rifiez …
+  l'int‚rieur des boŒtiers des autres p‚riph‚riques pour en ˆtre s–r !). 
+
+Ce CD-ROM n'a pas de bouchon interne.
+
+
+LES DRIVERS
+
+Il faut faire la distinction entre le driver disque dur (HUSHI de SCSITOOL, HDDRIVER, AHDI d'ATARI...) et le 
+driver de CD-ROM (METADOS ou EXTENDOS sous TOS, les *.XFS sous MINT):
+- le driver de disque dur permet d'identifier les disques durs et leurs
+  partitions sous TOS et de reconnaŒtre les autres p‚riph‚riques pour les
+  rendre accessibles pour les logiciels les g‚rant.
+- le driver de CD-ROM permet de faire reconnaŒtre le contenu d'un CD-ROM
+  sous le TOS dans une unit‚ logique ("P" ou "Z" par exemple).
+
+Par exemple:
+le logiciel CECILE, en cours de d‚veloppement chez CENTEK, est la partie disque dur et CECILE CD 
+regroupe, elle, l'ensemble driver disque dur et driver CD-ROM sous le mˆme logiciel.
+
+
+POUR FALCON ET TT
+
+Par d‚faut, sur ces machines, on possŠde au moins un disque dur, il est donc par utile de parler des 
+problŠmes rencontr‚s lors de l'installation d'un tel p‚riph‚rique (IDE ou SCSI).
+
+Raccordement de votre CD-ROM : 
+- reliez votre CD-ROM … la chaŒne.
+- n'oubliez pas de mettre un bouchon en fin de chaŒne.
+- v‚rifier que le num‚ro d'identification du CD-ROM est bien 3, sinon
+  changez-le (c'est une roue codeuse qui se trouve derriŠre le boitier).
+
+Installation logiciel :
+- allumez votre machine  et attendez d'ˆtre sous le bureau.
+- ins‚rez la disquette d'installation.
+- descendez dans le sous-dossier FALCON ou TT de la disquette.
+- copiez le contenu du dossier AUTO dans celui du disque de BOOT
+  (normalement "C").
+- Assurez-vous (… l'aide d'AUTOSORT.PRG livr‚ sur la disquette) que
+  METADOS.PRG est en premiŠre position dans le dossier AUTO (ou en deuxiŠme position si vous poss‚dez un selecteur de BOOT).
+- rebootez ensuite.
+- une fois sous le bureau le CD-ROM est dans le volume "Z" (c'est une
+  option modifiable).
+
+Pour les utilisateurs avertis :
+Vous pouvez ouvrir le boitier du CD-ROM pour acc‚der … sa configuration interne, mais en sachant que 
+vous faites sauter l'‚tiquette de garantie ! Pour Falcon et TT, cette op‚ration est de toute fa‡on inutile.
+
+
+NOTE SUR CD-PLAYER
+
+Les possibilit‚s de METADOS pour les commandes AUDIO sont un peu limit‚es et n'autorisent donc pas 
+toutes les options utilisables sous CD-PLAYER...
+
+...c'est normal !
+
+Seul un logiciel commercial permet de r‚soudre ce problŠme (ex: EXTENDOS ou bient“t CECILE CD !).
+
+
+
+POUR ATARI ST(F/E) ET MST(E)
+Connection du CD-ROM seul
+
+Configuration du CD-ROM :
+Pour fonctionner correctement avec une interface DMA/SCSI (comme THE LINK2 d'ICD), un p‚riph‚rique au 
+moins doit pouvoir l'alimenter par la broche TERMPOWER du connecteur SCSI. Malheureusement, ce CD-ROM 
+n'alimente pas cette broche car l'option est d‚sactiv‚e. La solution la plus facile, mais qui oblige … ouvrir le boitier 
+externe, consiste … modifier des cavaliers en interne:
+- rep‚rez les cavaliers … gauche du connecteur de la nappe SCSI.
+- descendez le cavalier "TERM POWER" (alimentation des terminateurs) sur
+  "ON".
+- descendez le cavalier "TERMINATOR" (terminateur) sur "ON".
+- remontez le CD-ROM.
+Cette op‚ration fait sauter l'‚tiquette de garantie et vous devez donc ˆtre s–r de ce que vous faites ! En cas de 
+doutes appelez-nous.
+
+
+Installation logiciel :
+- allumez votre machine et le CD-ROM.
+- ins‚rez la disquette de "BOOT".
+- votre machine va d‚marrer et reconnaŒtre vos unit‚s SCSI et installer le
+  CD-ROM sous l'unit‚ "P". Le num‚ro d'identification doit ˆtre sur 3
+  (c'est la roue codeuse qui se trouve derriŠre le boitier qui le rŠgle).
+
+Connection du CD-ROM avec d'autres p‚riph‚riques dont un disque dur :
+
+Les raccordements :
+- raccordez le cƒble DMA/SCSI (genre ICD, the link II) sur le connecteur en
+  haut du CD-ROM.
+- reliez ensuite votre chaŒne sur le connecteur du BAS.
+- n'oubliez pas de mettre un bouchon en fin de chaŒne.
+- v‚rifier que le num‚ro du CD-ROM est bien 3, sinon changez-le (c'est la
+  roue codeuse qui se trouve derriŠre le boitier qui le rŠgle).
+
+Installation logiciel :
+- allumez votre machine et le CD-ROM.
+- ins‚rez la disquette de "BOOT".
+- votre machine va d‚marrer et reconnaŒtre vos unit‚s SCSI et installer le CD-ROM sous l'unit‚ "P".
+- descendez dans le sous-dossier ST de la disquette.
+- copiez le contenu du dossier AUTO dans celui du disque de BOOT
+  (normalement "C").
+- Assurez-vous (… l'aide d'AUTOSORT.PRG livr‚ sur la disquette) que
+  METADOS.PRG est en premiŠre position dans le dossier AUTO (ou en deuxiŠme
+  position si vous poss‚dez un selecteur de BOOT).
+- rebootez ensuite.
+- une fois sous le bureau le CD-ROM est dans le volume "P".
+
+Pour les utilisateurs avertis :
+Vous pouvez ouvrir le boitier du CD-ROM pour acc‚der … sa configuration interne, mais en sachant que 
+vous faites sauter l'‚tiquette de garantie! Pour Falcon et TT, cette op‚ration est de toute fa‡on inutile.

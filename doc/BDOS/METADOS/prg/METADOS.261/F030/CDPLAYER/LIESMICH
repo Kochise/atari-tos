@@ -1,0 +1,67 @@
+CD-Player V1.4      (Oktober 1996)
+==================================
+ein Audio-CD-Player fÅr ATARI ST/STE/TT/Falcon
+
+Autor:   Alexander Clauss
+------   Stresemannstr. 44
+         D-64297 Darmstadt
+         -- Germany --
+
+Email: aclauss@rbg.informatik.th-darmstadt.de
+
+
+Dieses  Programm  ist  FREEWARE.  Es  darf  kostenlos  kopiert  und benutzt
+werden.  Eine  Verbreitung  Åber  Mailboxen,  FTP-Server  und PD-Serien ist
+erlaubt.   Eine   Verbreitung  auf  CD-ROMs  und  auf  Cover-Disketten  von
+Zeitschriften  ist  NUR  mit  meiner schriftlichen Genehmigung erlaubt. Das
+Programm  mu·  immer  komplett weitergegeben werden.
+Das VerÑndern des Programms und der Anleitung ist nicht gestattet.
+
+
+Zum Programm gehîren folgende Dateien:
+--------------------------------------
+CDP.APP              Das Programm
+CDP.RSC              Die RSC-Datei
+CDP.DAT              Beispiel-Datenbank
+LIESMICH             Dieser Text auf deutsch
+README               Dieser Text auf englisch
+LEEME                Dieser Text auf spanisch (Dank an Antonio Lillo)
+LEGGIMI              Dieser Text auf italienisch (Dank an Lodovico Zanier)
+LISEZMOI             Dieser Text auf franzîsisch (Dank an Romuald Jouffrey)
+DOC/
+    CDP.TXT          Die Anleitung
+    CDP.HYP
+RSC/
+    CDP_D.RSC        RSC-Datei in deutsch
+    CDP_E.RSC        RSC-Datei in englisch
+    CDP_SP.RSC       RSC-Datei in spanisch (Dank an Antonio Lillo)
+    CDP_FR.RSC       RSC-Datei in franzîsisch (Dank an Romuald Jouffrey)
+    CDP_SWED.RSC     RSC-Datei in schwedisch (Dank an Erik Hall)
+    CDP_IT.RSC       RSC-Datei in italienisch (Dank an Lodovico Zanier)
+    CDP_ICON.RSC     Farb-Icon (von Martin Rothaemel)
+
+Die  Sprache  der  BenutzungsoberflÑche des Programms kann geÑndert werden.
+Man  kopiert  dazu eine der RSC-Dateien aus dem RESOURCE-Ordner in das Ver-
+zeichnis, in dem sich auch CDP.APP befindet und benennt sie in CPD.RSC um.
+
+
+System Anforderungen:
+---------------------
+* Atari ST/STE/TT/Falcon (wahrscheinlich auch Medusa/Eagle)
+* CD-ROM-Laufwerk (muss Audio-Kommandos unterstÅtzen)
+* CD-ROM-Treiber fÅr MetaDOS (muss Audio-Kommandos unterstÅtzen) oder
+  ExtenDOS-Treiber oder
+  SCSI-Treiber von Steffen Engel
+
+Was bietet das Programm:
+------------------------
+* Fast alle Funktionen eines normalen Audio-CD-Players
+* CD-Identifizierung mit Anzeige von Titel und Interpret im Klartext
+  - kleine Datenbank integriert
+* Titel, die man nicht mag, werden auf Wunsch nicht gespielt
+* Digitales Kopieren von Audio-Tracks auf Festplatte
+  - UnterstÅtzt folgende Sampleformate: DVS,AVR,WAVE,AU,SND
+  - Umrechnung der CD-Frequenz (44100 Hz) auf alle Falcon-Frequenzen und
+    beliebige andere Frequenzen.
+  - 8/16 Bit, Mono/Stereo, Deltapack (DVS), u-Law (AU/SND)
+* ASCII-Export der Datenbank mîglich

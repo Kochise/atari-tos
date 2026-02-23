@@ -1,0 +1,74 @@
+CD-Player v1.4                                                  Ottobre 1996
+============================================================================
+Un audio CD-Player per ATARI ST/STE/TT/Falcon
+
+Autore:
+-------
+Alexander Clauss
+Stresemannstr. 44
+D-64297 Darmstadt
+Germany
+
+Email: aclauss@rbg.informatik.th-darmstadt.de
+
+
+CD- Player Š FREEWARE. Pu• essere copiato ed usato liberamente. E'
+consentita la sua distribuzione da parte di BBS e Librerie PD. Tuttavia,
+CD-Player NON pu•, in NESSUN caso essere incluso in collezioni CD-ROM
+o in dischi allegati a riviste senza la mia autorizzazione scritta.
+CD-Player e la sua documentazione devono sempre rimanere insieme e completi 
+di tutti i files e della documentazione.
+Modifiche al programma ed alla documentazione sono proibite.
+
+Se qualcuno Š interessato a tradurre la documentazione e/o il file
+RSC, Š pregato di contattarmi.
+
+I seguenti files compongono CD-Player:
+---------------------------------------
+CDP.APP              Programma
+CDP.RSC              RSC file (in Tedesco)
+CDP.DAT              Database (Esempio)
+LIESMICH             Questo testo in Tedesco
+README               Questo testo in Inglese
+LEEME                Questo testo in Spagnolo (Grazie ad Antonio Lillo)
+LEGGIMI              Questo testo in Italiano (Grazie a Lodovico Zanier)
+LISEZMOI
+DOC/
+    CDP.TXT          Documentazione (in Tedesco)
+    CDP.HYP
+RSC/
+    CDP_D.RSC        RSC file in Tedesco
+    CDP_E.RSC        RSC file in Inglese
+    CDP_SP.RSC       RSC file in Spagnolo (Grazie ad Antonio Lillo)
+    CDP_FR.RSC       RSC file in Francese (Grazie a Romuald Jouffrey)
+    CDP_SWED.RSC     RSC file in Svedese (Grazie ad Erik Hall)
+    CDP_IT.RSC       RSC file in Italiano (Grazie a Lodovico Zanier)
+    CDP_ICON.RSC     Icona a colori (di Martin Rothaemel)
+
+La lingua usata nei men—, dialoghi e messaggi di CD-Player pu•
+essere modificata sostituendo il file CDP.RSC con uno dei file .RSC
+presenti nella cartella RESOURCE. Copiate il file RSC desiderato e
+rinominatelo CDP.RSC (cancellate o rinominate il file RSC esistente).
+
+Requisiti di Sistema:
+--------------------
+* Atari ST/STE/TT/Falcon (probabilmente anche Medusa/Eagle)
+* CD-ROM drive (deve supportare i comandi audio)
+* CD-ROM driver per MetaDOS (deve supportare i comandi audio),
+  ExtenDOS o SCSI-Driver di Steffen Engel
+
+Cosa offre il programma:
+
+* Presenti quasi tutte le funzioni di un normale Lettore CD-Audio.
+* Identificazione del CD con indicazione del titolo e  dell'interprete, 
+  integrati in un piccolo database.
+* I brani non graditi, possono non essere eseguiti.
+* Copia digitale di traccie/segmenti audio su Hard Disk.
+  - Sono supportati i seguenti formati di campionamento:
+    DVS, AVR, WAVE (WAV), AU, SND.
+  - conversione della frequenza CD (44100 Hz) in tutte le frequenze Falcon 
+    o in altra frequenza.
+  - 8/16 Bit, Mono/Stereo, Compressione Delta (DVS), U-LAW (AU/SND).
+* Esportazione in formato ASCII (delimitato) del Database.
+
+EOF

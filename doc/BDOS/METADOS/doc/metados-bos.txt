@@ -1,0 +1,379 @@
+			Unofficial documentation for creating
+			BOS driver for MetaDOS
+
+			v 0.4 - 2003/09/24
+
+
+0. Disclaimer
+-------------
+
+This document describes the BOS drivers for MetaDOS. This is an unofficial
+document. The originals authors have nothing in common with this document,
+except the involved product.
+
+This document describes the BOS drivers as the author understands it. While
+every effort has been made to ensure that the contents of this document are
+accurate, the author does not guarantee that any portion of this document is
+actually correct. In addition, the author cannot be held responsible the
+consequences of the any use or misuse of the information contained in this
+document.
+
+
+1. Introduction
+---------------
+
+BOS drivers in MetaDOS are the hardware-level drivers, on which DOS drivers
+works. For example, for a CD-ROM, the BOS driver is responsible for communication
+through IDE,SCSI or ACSI bus, providing a simple interface for DOS drivers.
+Thus, custom filesystems (DOS drivers) can use any hardware supported by a BOS
+driver.
+
+
+2. The entry point
+------------------
+
+BOS drivers are Atari executables, and the entry point is a function ending with
+a RTS instruction, returning a pointer in register D0. This function should
+perform any global initialization for the driver, but no device-dependent
+initialization, which will be performed later.
+
+
+3. Device initialization
+------------------------
+
+The pointer returned in register D0 by the entry-point function, is a pointer
+to a function which has the task to initialize a device-dependent structure
+(bos_header_t). When entering the function, D0 will be set by MetaDOS to
+a physical device number, and D1 to a dma channel number (if needed).
+
+--8<--8<--8<-- \auto\config.sys
+
+*BOS, c:\auto\cdrom.bos, P:5
+
+--8<--8<--8<--
+
+D1 will be set on entry to 5. D0 will be set to the ascii value of 'P'.
+
+The function must initialize the device at this point, and return in D0 a
+pointer to the bos_header_t structure of the device, filled with
+appropriate informations (see below).
+
+
+4. The device functions
+-----------------------
+
+The functions in the bos_functions_t structure are the ones called from MetaDOS
+by the user, and map to Xbios calls with opcodes 0x30 to 0x3f. A pointer to
+your device's bos_header_t will be available in A0 upon entry of this functions.
+The parameters are on the stack, starting at 4(sp). The function must return
+a negative value as errorcode in D0, or NULL if no error.
+
+4.1 long (*init)(metainit_t *metainit)
+--------------------------------------
+
+This function pointer should be set to 0xffffffff in the bos_functions_t
+structure of any device driver you would write, because it will be overwritten
+by MetaDOS. It is also the case for undefined functions 0x08, 0x09, 0x0a.
+
+4.2 long (*open)(metaopen_t *metaopen)
+--------------------------------------
+
+Open your device, and fill the <metaopen> structure with the name of your
+device.
+
+4.3 long (*close)(void)
+-----------------------
+
+Surprisingly, your function should only return NULL in D0, and don't perform
+any closing operation on the device.
+
+4.4 long (*read)(void *buffer, unsigned long first, unsigned short count)
+-------------------------------------------------------------------------
+
+Read <count> blocks from the <first> block, and write it in memory from
+address <buffer>. A block is 2048 byte in size.
+
+4.5 long (*write)(void *buffer, unsigned long first, unsigned short count)
+--------------------------------------------------------------------------
+
+Write <count> blocks from the <first> block, and read it in memory from
+address <buffer>.  A block is 2048 byte in size. This function is not applicable
+for normal CD-ROM medias, but should be used when you have a device that can
+perform write operations (like unsupported hard-disk, or even a network device).
+
+4.6 long (*seek)(unsigned long offset)
+--------------------------------------
+
+Move the current drive pointer to the given <offset>. <offset> is given in
+number of blocks. A block is 2048 byte in size.
+
+4.7 long (*status)(bos_status_t *extended)
+------------------------------------------
+
+Return current status of the device. <extended> is optionnal, and should be
+set by caller to NULL if not used.
+
+If no error, in return value you'll get:
+	bit 3: 0=no media change, 1=media change
+
+
+4.8 long (*ioctl)(unsigned long magic, unsigned short opcode, void *buffer)
+---------------------------------------------------------------------------
+
+Perform a custom operation on the device. <magic> is set to 'FCTL' for this
+purpose. <opcode> is the opcode of the operation to perform, and <buffer>
+points to the required input parameters/output of the command performed.
+
+4.9 long (*startaudio)(unsigned short dummy, bos_tracks_t *tracks)
+------------------------------------------------------------------
+
+DEPRECATED: only for compatibility with CDAR-504 drive, and old software.
+Start audio playing on your CD-ROM device. The bos_tracks_t structure contains
+the first audio track to play, and the number of tracks to play.
+
+4.10 long (*stopaudio)(void)
+----------------------------
+
+DEPRECATED: only for compatibility with CDAR-504 drive, and old software.
+Stop audio playing on your CD-ROM device.
+
+4.11 long (*setsongtime)(unsigned short dummy, unsigned long start, unsigned long end)
+--------------------------------------------------------------------------------------
+
+DEPRECATED: only for compatibility with CDAR-504 drive, and old software.
+Start audio playing on your CD-ROM device. The <start> and <end> values contain
+in MSF format the start and end of the audio part of the CD to play.
+
+4.12 long (*gettoc)(unsigned short dummy, bos_tocentry_t *tocentry)
+-------------------------------------------------------------------
+
+DEPRECATED: only for compatibility with CDAR-504 drive, and old software.
+Read the table of content entries of the inserted CD. The <tocentry> is a buffer
+that will be filled with an array of bos_tocentry_t structures, one for each
+track of the CD. The end of the CD is marked as value 0xA2 for LEADOUT value
+in the tocentry.track field of the last toc entry.
+
+4.13 long (*discinfo)(bos_discinfo_t *discinfo)
+-----------------------------------------------
+
+DEPRECATED: only for compatibility with CDAR-504 drive, and old software.
+Read some informations about the inserted disc. <discinfo.disctype> is 0 for
+an audio CD-ROM, 1 for a data CD-ROM. <discinfo.first> and <discinfo.last> are
+the first and last track numbers. <discinfo.current> is the currently playing
+track, <discinfo.index> is the currently playing index for this track.
+<discinfo.absolute>, <discinfo.relative> and <discinfo.end> are MSF values BUT
+they are in BCD format.
+
+
+5. The various structures
+-------------------------
+
+typedef struct {
+	char status[32];
+} bos_status_t;
+
+
+typedef struct {
+	unsigned char count;
+	unsigned char first;
+} bos_tracks_t;
+
+
+typedef struct {
+	unsigned char track;
+	unsigned char minute;
+	unsigned char second;
+	unsigned char frame;
+} bos_tocentry_t;
+
+
+typedef struct {
+	unsigned char disctype;
+	unsigned char first, last, current;
+	bos_tocentry_t relative;
+	bos_tocentry_t absolute;
+	bos_tocentry_t end;
+	unsigned char index;
+	unsigned char reserved1[3];
+	unsigned long reserved2[123];
+} bos_discinfo_t;
+
+
+typedef struct {
+	long (*init)(metainit_t *metainit);
+	long (*open)(metaopen_t *metaopen);
+	long (*close)(void);
+	long (*read)(void *buffer, unsigned long first, unsigned short count);
+	long (*write)(void *buffer, unsigned long first, unsigned short count);
+	long (*seek)(unsigned long offset);
+	long (*status)(bos_status_t *extended);
+	long (*ioctl)(unsigned long magic, unsigned short opcode, void *buffer);
+	long (*undefined08)(void);
+	long (*undefined09)(void);
+	long (*undefined0a)(void);
+	long (*startaudio)(unsigned short dummy, bos_tracks_t *tracks);
+	long (*stopaudio)(void);
+	long (*setsongtime)(unsigned short dummy, unsigned long start, unsigned long end);
+	long (*gettoc)(unsigned short dummy, bos_tocentry_t *tocentry);
+	long (*discinfo)(bos_discinfo_t *discinfo);
+} bos_functions_t;
+
+
+typedef struct {
+	/* Pointer to next BOS driver, you leave it to NULL, filled by MetaDOS */
+	void *next;
+
+	/* Some attributes for the device, for your convenience */
+	unsigned long attrib;
+
+	/* The D0 value you get from MetaDOS in the initialization function */
+	unsigned short phys_letter;
+
+	/* The D1 value you get from MetaDOS in the initialization function */
+	unsigned short dma_channel;
+
+	/* One driver can manage several sub-devices, so this field is used
+	   to know which subdevice MetaDOS want to talk with */
+	unsigned short sub_device;
+
+	/* Pointer to a list of 16 functions (which correspond to the 16 Xbios
+	   MetaDOS functions traps */
+	bos_functions_t *functions;
+
+	/* A status field, to report more errors */
+	unsigned short status;
+
+	unsigned long reserved[2];
+
+	/* Name of the device */
+	char name[32];
+} bos_header_t;
+
+6. Example source file
+----------------------
+
+		TEXT
+entry_point:
+		; Perform any operation necessary for initializing the driver
+		[snip]
+		; Return our pointer for device initialization
+		move.l  #init_device_p,d0
+		rts
+
+init_device:
+		; d0.w contain the physical drive letter
+		; d1.w is the dma channel to use, if any
+		move.w	d0,bh_phys_drive
+		move.w	d1,bh_phys_channel
+
+		; Return our BOS header (or a negative error code, if needed)
+		move.l	#bos_header,d0
+		rts
+
+		; For these functions, a0 points to the bos_header of the device
+		; The parameters are on the stack, at 4(sp)
+open:
+		move.l	4(sp),a1
+		lea		bh_name-bos_header(a0),a0
+		move.l	a0,(a1)+
+		clr.l	(a1)+
+		clr.l	(a1)+
+		clr.l	(a1)
+
+		clr.l	d0
+		rts
+
+close:
+		clr.l	d0
+		rts
+
+read:
+		moveq	#-32,d0
+		rts
+
+write:
+		moveq	#-32,d0
+		rts
+
+seek:
+		moveq	#-32,d0
+		rts
+
+status:
+		moveq	#-32,d0
+		rts
+
+ioctl:
+		moveq	#-32,d0
+		rts
+
+startaudio:
+		moveq	#-32,d0
+		rts
+
+stopaudio:
+		moveq	#-32,d0
+		rts
+
+setsongtime:
+		moveq	#-32,d0
+		rts
+
+gettoc:
+		moveq	#-32,d0
+		rts
+
+discinfo:
+		moveq	#-32,d0
+		rts
+
+		DATA
+init_device_p:
+		dc.l	init_device
+
+bos_header:
+
+bh_next:
+		dc.l	0
+bh_attrib:
+		dc.l	0
+bh_phys_drive:
+		dc.w	0
+bh_phys_channel:
+		dc.w	0
+bh_subdevice:
+		dc.w	0
+bh_functions:
+		dc.l	bos_functions
+bh_status:
+		dc.w	0
+bh_reserved
+		dc.l	0,0
+bh_name:
+		dc.b	"Custom CD-ROM BOS driver"
+		dc.b	0,0,0,0,0,0,0,0
+
+bos_functions:
+		dc.l	$ffffffff
+		dc.l	open
+		dc.l	close
+		dc.l	read
+		dc.l	write
+		dc.l	seek
+		dc.l	status
+		dc.l	ioctl
+		dc.l	$ffffffff
+		dc.l	$ffffffff
+		dc.l	$ffffffff
+		dc.l	startaudio
+		dc.l	stopaudio
+		dc.l	setsongtime
+		dc.l	gettoc
+		dc.l	discinfo
+
+		END
+
+--
+Patrice Mandin <pmandin(at)caramail(dot)com>
+http://membres.lycos.fr/pmandin/
+

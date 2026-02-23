@@ -1,0 +1,61 @@
+CD-Player v1.4                                                  October 1996
+============================================================================
+An audio CD-Player for ATARI ST/STE/TT/Falcon
+
+Author:
+-------
+Alexander Clauss
+Stresemannstr. 44
+D-64297 Darmstadt
+Germany
+
+Email: aclauss@rbg.informatik.th-darmstadt.de
+
+
+CD-Player is FREEWARE. It may be copied and used freely. Distribution by
+BBSs and PD libraries is allowed. However, CD-Player may NOT under ANY
+circumstances be included in CD-ROM  collections or on magazine cover
+disks without my prior written permission. CD-Player and its documentation
+must always remain together and complete with all its files and
+documentation. Changes to the program and documentation is forbidden.
+
+If anyone is interested in translating the documentation and/or the RSC
+file, please contact me.
+
+
+The following files comprise CD-Player:
+---------------------------------------
+CDP.APP              Program
+CDP.RSC              RSC file (in German)
+CDP.DAT              Database (Example)
+LIESMICH             This text in German
+README               This text in English
+LEEME                This text in Spanish (Thanks to Antonio Lillo)
+LISEZMOI             This text in French (Thanks to Romuald Jouffrey)
+LEGGIMI              This text in Italian (Thanks to Lodovico Zanier)
+DOC/
+    CDP.TXT          Documentation (in German)
+    CDP.HYP          Documentation in ST-Guide format
+RSC/
+    CDP_D.RSC        RSC file in German
+    CDP_E.RSC        RSC file in English
+    CDP_SP.RSC       RSC file in Spanish (Thanks to Antonio Lillo)
+    CDP_FR.RSC       RSC file in French (Thanks to Romuald Jouffrey)
+    CDP_SWED.RSC     RSC file in Swedish (Thanks to Erik Hall)
+    CDP_IT.RSC       RSC file in Italian (Thanks to Lodovico Zanier)
+    CDP_ICON.RSC     Color icon (by Martin Rothaemel)
+
+The language of the menus, dialogs and messages within CD-Player can be
+changed by replacing the file CDP.RSC with one of the .RSC files in the
+RESOURCE folder. Copy the desired RSC file to the same directory as
+CDP.APP and rename it to CDP.RSC (delete or rename the existing RSC file).
+
+System requirements:
+--------------------
+* Atari ST/STE/TT/Falcon
+* CD-ROM drive (must support audio commands)
+* CD-ROM driver for MetaDOS (must support audio commands) or
+  Steffen Engels' SCSI driver or
+  ExtenDOS
+----------------------------------------------------------------------------
+EOF

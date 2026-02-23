@@ -1,0 +1,65 @@
+CD-Player v1.4                                                  Octobre 1996
+============================================================================
+Un Panneau de controle pour vos CD AUDIO pour ATARI ST/STE/TT/Falcon
+
+Auteur:
+-------
+Alexander Clauss
+Stresemannstr. 44
+D-64297 Darmstadt
+Allemagne
+
+Email: aclauss@rbg.informatik.th-darmstadt.de
+
+Traduction : Romuald Jouffrey
+
+CD-Player est FREEWARE. Il peut ˆtre copi‚ et utilis‚ gratuitement.
+Sa distribution par BBSs et bibliothŠque de domaines publiques est
+autoris‚. Cependant, CD-Player ne DOIT PAS et ce sous AUCUNE CIRCONSTANCE
+ˆtre plac‚ sur un CD-ROM ou disquette de magazine sans mon approbation
+‚crite pr‚alable. CD-Player et sa documentation doivent rester ensembles
+et inchang‚s, avec tous ses fichiers et sa documentation.
+Les modification du programme comme de sa documentation sont interdites.
+
+Si quelqu'un est int‚ress‚ par la traduction de cette documentation dans une
+langue encore non support‚e (et/ou le fichier ressource),
+contactez moi, s'il vous plait.
+
+
+La distribution de CD-PLAYER comprend les fichiers suivants :
+-------------------------------------------------------------
+CDP.APP              Le Programme
+CDP.RSC              fichier RSC (en Allemand)
+CDP.DAT              Database (Exemple de base de donn‚e)
+LIESMICH             ce texte en Allemand
+README               ce texte en anglais
+LISEZMOI             ce texte en Fran‡ais (Merci … Jouffrey Romuald)
+LEEME                ce texte en espagnol (Merci … Antonio Lillo)
+LEGGIMI
+DOC/
+    CDP.TXT          Documentation (en Allemand)
+    CDP.HYP
+RSC/
+    CDP_D.RSC        fichier RSC en Allemand
+    CDP_E.RSC        fichier RSC en anglais
+    CDP_FR.RSC       fichier RSC en Fran‡ais (Merci … Jouffrey Romuald)
+    CDP_SP.RSC       fichier RSC en espagnol (Merci … Antonio Lillo)
+    CDP_SWED.RSC
+    CDP_IT.RSC
+    CDP_ICON.RSC     Color icon (by Martin Rothaemel)
+
+La langue utilis‚e dans les menus, dialogues et messages affich‚s dans
+CD-Player peuvent ˆtre modifi‚e en remplacant le fichier CDP.RSC par un
+des fichiers .RSC fournis dans le r‚pertoire RESOURCE. Copier le fichier
+.RSC voulu dans le mˆme r‚pertoire que CDP.APP et renommer le CDP.RSC
+(Supprimer ou renommer l'ancien CDP.RSC)
+
+
+Ce programme n‚cessite :
+------------------------
+* un Atari ST/STE/TT/Falcon
+* un lecteur de CD-ROM (qui doit support‚ les commandes audio)
+* Le pilote de lecteur de CD-ROM pour MetaDOS (avec commandes audio),
+  SCSI-Driver ou ExtenDOS
+----------------------------------------------------------------------------
+EOF
