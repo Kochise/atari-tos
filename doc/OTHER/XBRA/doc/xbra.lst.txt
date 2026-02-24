@@ -1,0 +1,643 @@
+_AFM Audio Fun Machine; ATARI Corp
+_AKP Atari Keyboard & Processing Language config.; ATARI Corp
+_CF_ Coldfire; Didier Mequignon
+_CPU Central Processing Unit type; ATARI Corp
+_DOS Enhancer entry for GEMDOS 0.30; ATARI Corp
+_FDC Floppy Disk HD-Controller / AJAX; ATARI / Standardcookie
+_FLK FileLocKing Extension for GEMDOS; ATARI / Standardcookie
+_FPU Floatingpoint Processing Unit type / coproc.; ATARI Corp
+_FRB Fast RAM Buffer; ATARI Corp
+_FSR Falcon Serial Port patch / TOS 4.00 -> 4.04; ATARI Corp
+_IDT International Date & Time format; ATARI Corp
+_INF STEfix.PRG: Patch for STE desktop / TOS 1.06; ATARI Corp
+_INU Format for numbers; Martin Osieka
+_ISO Specifies the real keyboard/font nationality
+_JPD Falcon JPEG Decoder via DSP; ATARI Corp / Brainstorm
+_MCF ColdFire features
+_MCH Computer type / machine; ATARI Corp
+_MET MetaDOS for CD drives; ATARI Corp
+_MIL Milan computer; Michael Schwingen
+_NET Network Support / GEMDOS Netz-Erwtg.; ATARI / Std.cookie
+_OOL POOLFIX_3 MemoryManagement Patch for TOS 1.4/1.6; ATARI C.
+_PCI PCI bios
+_PKT Paket Driver cookie
+_PWR Power Management Unit installed; ATARI Corp
+_SLM SLM printer / laser driver; ATARI Corp
+_SND Sound Hardware Subsystem type; ATARI Corp
+_SWI DIP Switches Configuration; ATARI Corp
+_T2W Tos2Win emulator
+_T30 KAOS TOS mit korrigiertem GEMDOS; Andreas Kromke
+_VDI Milan VDI; Michael Schwingen
+_VDO Video type; ATARI Corp
+__NF Native features proposal
+3DMN 3D-menu; Sven Kopacz
+3RDB 3rd-button mouse driver; Ole Pahl
+60Hz 60Hz screen scan; Jean-Pierre Rasquon
+8*8  GEM system font changer; Rainer Seitel
+A2sv Trapsave; Harald Siegmund
+ACC3 ACCent 3
+ACCS ACCS accessory folder prg.; Steffen Engel
+AESF WINX AES enhancer line-F vector; Martin Osieka
+ÑFSC Falcon Screen
+AFnt AES font loader; Hayo Schmidt
+AgK0 AusGucK RAM-disk; Marcel Waldvogel
+AHVR VRAM virt. memory manager for TT30; A.Herzlinger, OverScan
+ALHP Alman HP DeskJet hard copy screen dumper
+ALIC Alice all application iconifier; Sven Kopacz
+ALRM Treiber fÅr DIGIFON TDS3000; Torsten Lang
+AmAN A-MAN window commander support prg.; Sven Kopacz
+AMC1 Hard & Soft monitor switchbox;  Arnd Bei·ner
+AMC2 Hard & Soft PC keyboard driver; Arnd Bei·ner
+AMN˘ Mouse Ka Mania II, AutoMouse
+AMCG AMC-GDOS; Arnd Beiûner
+ANSe ANSI-emulation; Borek Lupomesky
+APEX APEX; Black Scorpion Software
+APGM SysGem support prg.; Andreas Pietsch
+ARTS ARTSEVNT TT-Artist screen saver; Massimo Farina
+asGT ASGARD std./Wacom GrphTablDriver; H.Siegmund, adequate sys
+ASum ASUMLENK; Holger Nassenstein, MW-electronic
+AVmw Virus warning
+AVOJ Anti-Virus Prg.; Oliver Joppich
+AVSV AV-Server; ASH
+BASH Bourne Again Shell; Edgar Rîder
+BBD2 Bastel Bus Driver v2; Michael Maa·en
+BCKW Backward; Cyrille Dupuydauby
+BGEM BubbleGEM version info; Thomas Much / c. nur zur Laufzeit
+BGHD BubbleGEM help daimon;  Thomas Much / veraltet?
+BHdl BadHandle; Steffen Richter
+BHLP BubbleGEM help config.; Thomas Much
+BIGS BigScreen; Julian Reschke, SciLab GmbH
+BIOC Pirosca printer spooler; Tiemann Bjîrn
+BLNK ScreenBlanker; Karsten Isakovic, OverScan
+BLOW BlowUp030 Falcon VideoEnhancer; Georg Acher, Michael Eberl
+BPFX BlowUp030 Falcon FX card; Georg Acher, Michael Eberl
+BSIM BLiTSIM blitter simulator; Marcel Waldvogel
+BSTE BigSTE; Matthias AndrÑ
+BUG1 Bugaboo debugger; Markus Fritze
+BW_2 Bird's Wing virtual screen driver; Xavier Roche
+C24P CyReL 24-bit patch; Cybercube Research Ltd
+CACH Cache-Control; Robert Federle
+CALD Computer Aided Loudspeaker Design; Walter Hermann
+CASE Casing type; Julian Reschke / Standardcookie
+CatS CatStick accessory; Hayo Schmidt
+CATT CyReL CaTTamaran TT30 accelerator; Cybercube Research Ltd
+CaTT Cyrel CaTTamaran GIOS Beschleuniger; Cybercube Research L.
+CB2K Patch to clear '2K GEMDOS bugs'; Claus Brod
+CBCE Critical Error handler modifier; Claus Brod
+CBDF DabbelFeature drive access control prg.; Claus Brod
+CBHD CB's hard disk driver; Claus Brod
+CBHY Hyperformat floppy disk formatter; Claus Brod
+CBIT c't bus interface driver; Guido Sawade
+CBra SeBra; Patrik Persson
+CCDA Tempus Word; CCD
+CCal ColaCalc; Dan Wilga
+cdMC CDROM.XFS CDROM filing system; Guenther Leis
+CDOT Grafikkarten-Treiber; Crazy-Dots
+ceci Cecile Festplattentreiber; CENTEK
+CFIX Console bug fix
+CFsl File Selector; Compo
+CHAM Chameleon accessory loader; Karsten Isakovic
+Cham Chameleon accessory loader; Karsten Isakovic
+CHBT Changes
+CHN1 Changes
+CHNG Changes
+CHTW Chatwin; Dirk Haun
+CICN C-ICN; Roger Jordan
+CISY CISYSTEM; Ingo Ciechowski
+CJAR Setting cookie jar to xx entries; Volker Janzen
+CJar Geneva/NeoDesk Cookie Jar JARxxx prg.; Gribnif Software
+ck01 Cookie library; Arnd Beissner
+CKBD Composed Characters Keyboard Driver; Pascal Fellerich
+CKJR Create cookie jar prg.; Julian Reschke
+CKKK Freedom lib; Christian KrÅger, Kolja Koischwitz
+CLCK MegaST hardware clock utilities; Sieghard SchÑfer
+CLK1 MegaST hardware clock utility; Dieter Jankowski
+CLOK for GMT settings (?)
+CM16 CyReL M16-1280 graphics card inst.prg; Cybercube Res. Ltd
+CNTS CentScreen; David Godec, Sacha Hnatiuk, CENTEK
+COLO Colos mono-colour converter; Meinolf Schneider
+CPSL CapsLock 'LED'-Display; Patrick Dubbrow, JÅrgen Heindel
+CRAC Hard disk driver; Protar
+CRIT CRYPT-IT Pers.DataProtection; Th.Schrîter, Fast Electronic
+CSMD CyReL Serial Mouse Driver; Cybercube Research Ltd
+csMD RAM-Disk
+CT40 Falcon 68040 Speeder Card by Rodolphe Czuba
+CT60 Falcon 68060 Speeder; Rodolphe Czuba, Didier Mequignon
+CTCH Master module CATCH.MMX; Edgar Rîder
+CtCp Capslock display; Jean-Pierre Rasquin
+CTSF CTSFIX CTS serial interface bug fix; Lars Erik Osterud
+cVDI CyReL M16-1280 VDI driver; Cybercube Research Ltd
+CWCo File selector; Compo
+DATE LED-Panel Date; Christoph Zwerschke
+DATL TwiLight screensaver; Freude & Scherer, Delirium Arts GbR
+DAWN Before Dawn screensaver; Arne Rudolph
+DBFX Diablo-Fix Printer Emulator patch for MiNT; J.Reschke
+DCdd DC Data Diet; Double-Click Software
+DCF7 DCF77 joystick radio clock receiver; Sven Kopacz
+DCSD Calamus Bildschirmtreiber
+DECD resid. Treiber fÅr DEC-Ethernet am PCI-Bus; M.Fichtenbauer
+DEPI DeskPic desktop background picture; Norbert Marschalleck
+DHST Document History Protocol / StartMeUp; Thomas Much
+DIG2 Digiplay; Emmanuel Jaccard
+DJBX DeskJet-Init BIOS-Erweiterung; Roland Skuplik
+DKEY Dead Key; Brainstorm
+DKLD DarkLord
+DNTR DNT RAM disk; Nullos/DNT
+DPAT Desktop Patterns; Martin Osieka
+DPRS Printer Spooler; Wilfried Cordes
+DRIV Drive-Edit; Stefan Hintz
+DRRH Wodan keyboard layout accessory; Dietmar Rabich
+Dsel Dsel system kernel for file selector; Sven Kopacz
+DSSO SOKRATES keyboard driver; David von Stetten
+DYDL DIR_LWR; Dimitri Junker
+DYJA Modified CCONRS routine; Dimitri Junker
+DYJD Dosound_MPC; Dimitri Junker
+DYJT ToBig; Dimitri Junker
+DYNL Dynamic Link library driver; Robert Federle
+DYWL WIN_LNK; Dimitri Junker
+DYwl WIN_LNK; Dimitri Junker
+EADC Easydisc RAM disk; JÅrgen Luers
+EBPO EB Modeleur Universel Modeler
+EdDI NVDI offscreen bitmap support; Sven & Wilfried Behne, BELA
+EDFX ED floppy disk drive patch; Hansi Richstein, Kaktus GbR
+EGON EGON! CD-ROM Driver
+EMNP MNP emulator; Jiri Lamac
+ENV$ Desktop Environment Manager
+ENVN ENVIRON environment manager; Volker Janzen
+ENVR Environment manager; Pascal Fellerich
+EPro ExtenDOS Pro CDROM, multi & audio drivers; Roger Burrows
+ERAL Modula.RS Error Processor; Rolf Schrader
+ETM  Entmauser; Markus Nick
+EURO Euro-Zeichen
+EXRA ExtraRAM speeder card manager; Marcel Waldvogel
+EXTD TOS file name Extender
+FaKE FakeMiNT install. 'nen MiNT-Cookie ohne MiNT; Guido Flohr
+FALT FALTOFF Setscreen() function patch for MSTE; Richard Kurz
+FAX! STarFax; Ingo Linkweiler
+FAXR FaxRedirector printer control prg.; Julian F.Reschke, TKR
+FHFX F030HFIX Falcon GEMDOS handle patch; Thomas Binder
+FIX2 FIX24 force 24-bit addr. only for 68030 CPU; Uwe Seimet
+FLTP FlyTop dialog box position fixer; Patrick Dubbrow
+FLXD FlexDisk RAM disk; Alex Esser
+fMSX GEM port of freeMSX emulator; Joergen von Bargen
+FOse FontSelector; Hayo Schmidt
+Fose Font Selector
+FPRN Fast Printer Driver; Drupert Pixler
+FrmD Form_do_it
+FSEL File Selector Protocol / Selectric; Standardcookie
+FSER Fast_Ser serial interface patch; Franz Sirl
+FSMC Advanced GDOS Font Scaling Mechanism; ATARI / Std.cookie
+FSmp Fileselector; Martin Patzel
+fVDI freeVDI; Johan Klockars
+F_3D Focus_3D graphics prg.; Ralf Trinler
+GABI Gabriele9009 IFD1 TypewriterEmul. at ser.port; M.Schwingen
+GBel GemBell system events sound effects; Gard's
+GCOM GEM Component Object Model; Thomas Much
+GDEV GNU-C Device Driver; Edgar Rîder
+GEHC Hypercache Turbo+ Hotkey driver; GE-Soft
+GEHD Hard disk driver; GE-Soft
+GEMB Hard disk driver; GE-Soft
+GENV GEM Environment setter; Julian Reschke
+Gfix Gamefix for Falcon; Thomas Binder
+GI30 Gandhi Info statt Bomben; Andreas BÑr
+GIGA GIGA-BOX ST driver; Roland Alder
+gk5" 5.25" HD third floppy disk driver; Gerd Knops
+gkCO Calamus Thingy, mouse button & moving routines; Gerd Knops
+GLAS Disk free space accessory; Uland TÑffner
+GLBL GemLabel system extension; Volker Janzen
+GMNI Gemini desktop; Stefan Eissing & Gereon Steffens
+GMTC TimweZone CPX
+GNUC GNU-C libraries; Edgar Rîder, Jwahar Bammi
+Gnva Geneva coop. multitasking AES; Gribnif Software
+GOBJ Pure Pascal ObjectGEM library; Thomas Much
+GOff Grow/ShrinkBox switch off; Laurenz PrÅ·ner
+GSND GEMSound; Richard Kurz
+GSP1 GEM Spooler; Steven van Rossen
+GSXB Generic sound Xbios
+GULM GulÑm command shell; Jwahar Bammi
+HABO Haboo hard disk cache; Julian F.Reschke
+hade Hades; Medusa
+HAMM Hybrid Arts Melody Maker; Ingomar Otter, Hybrid Arts
+HBFS BoxKite file selector; Harald Becker
+HcP6 Hyperscreen NEC P6 hard copy prg.; Michael Schwingen
+HDDR Hard Disk Driver; Dr. Uwe Seimet
+HDEX HDDriver-eigenes Interface; Uwe Seimet
+HDEY HardDiskEye floppy LED lit by HD access; B.Lupomesky
+HDJR HuSHI hard disk driver; Jankowski & Reschke, Hard & Soft
+HDLD HD-LED floppy drv. LED lit by HD access; J-P.Rasquin
+HDPR HDPROTEC hard disk write & read protection; Roland Scholz
+HDRC AUDIODRV Treiber fÅr ein HardDisk-Rec.System; Torsten Lang
+HDST Hard disk driver; Eickmann
+HDSW HDSWITCH floppy disk HD switcher; Oliver Scheel
+HFIX Handle-BugFix; Patrick Dubbrow
+hFRB BIOS driver for FastRAM Rwabs / PAK accelerators; St.Engel
+HIDS Floppy HD disk driver; Oliver Scheel
+HMDU HÑnisch HM2-System Memory Dump for PMD; Thomas Uhl
+HMOC HÑnisch HM2-System Object Cache; Andreas Alich
+HMRD HÑnisch HM2-System Runtime Debugger; Thomas Uhl
+HMRS HÑnisch HM2-System Runtime System; Thomas Uhl
+HPHC HP DeskJet Hard Copy; Martin Wunderli
+HPLJ HP LaserJet Emulator; Robert Federle
+HSCD MiNT CDROM driver; Julian Reschke
+HSND CrazySounds; Richard Kurz
+HSnd CrazySounds; Richard Kurz
+HWAM Cookie Jar Creator
+IBMP IBMPRINT Norwegian ->IBM Printer CharConverter; LE.Osterud
+ICFS Iconify-Server; Dirk Haun
+ICST INETCUST Cookie
+IDSK ICON-Desk; Stefan Becker
+IMAC Boot sector guardian; Wilfried Cordes
+IMGC Imagecopy IMGCINFO; Jeremy Hughes
+IMNE Imagine graphics card
+INSJ Insjar cookie jar creator; Oliver Groeger
+INXR Index Generator; Dietmar PÅttmann, Dietmar Rabich
+iPRN Printer speeder; Peter Missel
+IRSB VBL_BRIX SEGA Shutterbrille; Ilja Rateiczak
+iTMA E-Copy & E-Backup v2.0+, Kobold 3.0+ tmAi handler; R.Weiss
+JAM1 Butler James; Pascal Fellerich
+JB2G Bios2Gdos; John McLoud
+JCLK Clocky MultiUtility; Petr Stehlik
+JCNB JCNBOOT boot selector; Jens C.Neffe
+JCNC JCN Control Field multi-accessory; Jens C.Neffe
+JCNH Hard copy prg.; Jens C.Neffe
+JCNT Cocteau word processor; Jens C.Neffe
+JEND Full Res
+JFTP MiNT SCSI generic tape devices driver; Jan-Hinrich Fessel
+JINX Jinx; Rolf Peukert
+JMLB McBoot boot selector; John McLoud
+JMLS JML_SNAP screen snapshot prg.; John McLoud
+JSHD High Density controller; JÅrgen Stessun
+JUST Justify FileCall Recorder; Robert Irrgang, Trillian CompAG
+J_Sc JML-Snapshot SECURE prg.; John McLoud
+KAOS KAOS-TOS 1.4; Andreas Kromke
+KbEv Midimaze 2 Keyboard Handling module; Michael Seyfried
+KEYT KeyTab Zeichensatz-Umwandlung; Thomas Much
+KGTF TOS Fix
+KIDI RAM disk; Robert Irrgang
+KREG Kill Registers; Julian F.Reschke
+KyMp Keyboard Macro & Remapping utility; Eric Smith
+KyWt KeyWatch; Manfred Lippert
+Lace LaceScan hardware screen overscanner; Ulf Ronald Andersson
+LACY LAZy-Shell III; Oliver Michalak
+LALA ALBOLALA! alarm bell sample player; Laurenz PrÅ·ner
+lanc einige Ethernet-Treiber fÅr MiNT-Net; Torsten Lang
+LASB LaserBrain Atari laser printer Epson emul.; K.Garms, DMC
+LAWC Look Ahead Write Cache; Robert Federle
+LDGM GEM Dynamical Libraries (LDG); O.Landemarre & D.Bereziat
+LEAK RAM Leak; John Kormylo
+LEDP LED-Panel; Christoph Zwerschke
+LEmu LaceEmulator screen scan modes command keys; U.R.Andersson
+Lity Liberty system enhancer; Christian KrÅger
+LGFS Little Green Selector; Charles F.Johnson
+LLCR 1st Lock; Logilex
+LMus LaceMouse mouse accelerator; Ulf Ronald Andersson
+LOGB Logbuch; Uwe & JÅrgen Holtkamp
+LoSe SER-LOG modem port recorder; Markus Kohm
+LP/2 Malloc/2 GEMDOS vector patch; Laurenz PrÅ·ner
+LPAK Lloyd's Packed file system; A.D.Webber
+LPCD Carrier Detector; Laurenz PrÅ·ner
+LPJM Joy-Mouse; Laurenz PrÅ·ner
+LTMF Let'em Fly!; Oliver Scheel
+M16s Data structure for CyReL M16-1280; Cybercube Research Ltd
+M16X CyReL M16-1280 GraphicsCard XBIOS emulator; Cybercube Res.
+macc MACCEL_3 Mouse Accelerator; Ken Badertscher, ATARI Corp
+MADD ADDMEM 24-bit fix for TT-RAM; Uwe Seimet
+MADN NEX-Output; Robert Federle
+MagC MagicDials for CAT, ~Putz & other Magic prgs; Dirk Steins
+MAGN MAGNUM-Karte; Michael Schwingen
+MagX Mag!X/MagiC; Andreas Kromke + Sven & Wilfried Behne, BELA
+MAST Master; Naumann & Rîder
+MaTC Matrix True Colour graphics card
+MAXI Maxidisk; Max Bîhm
+MbAr MenuBar; Manfred Lippert
+MBRD Blit_RD RAM disk; Michael Maa·en
+MCL_ MiNT Control
+McSn MacSound for MagiCMac
+MCSP Unimp.ed IntegerInst & FloatingPoint Handler; F.Aschwanden
+MCWR MICROWIRE DMA sound interface
+MDIA MultiDialog; Helmut Neukirchen
+MDRK MegaDark screen saver for MegaVision300 gr.card; St.Engel
+MDSa Medical Design Software's serial port fix; Bill Penner
+MFAC Multi Accessory
+MFFM Mfsfm Marcus' File Selector for MiNT; Markus Haebler
+MFIX MONOFIX monochrome monitor fix for Falcon; Thomas Binder
+MFMV MagiC Font Manager Version ?
+MFNT Fontloader accessory; Hayo Schmidt
+MGEM Multi-GEM; Pascal Merle
+MgMc MagiCMac Atari emul. on Mac; Tempelmann, Kromke et al. ASH
+MgMx MagiCMac_X Atari emul. on AppleMacOS_X; Andreas Kromke ASH
+MgPC MagiC-PC Atari emul. on  PC; F.Schmerbeck and A.Kromke ASH
+MgSn MagiC Mac Sound driver; Didier Mequignon
+MID3 MIDINET 3 resident Midinet terminal; Lars Erik Osterud
+MIMA MIDI Manager; Oliver Scheel
+MiNT MiNT kernel of MultiTOS; Eric Smith, ATARI Corp
+MIPS SPOOL120 printer spooler; Michael Maa·en
+MJAF AUTOFONT; Martin Jahr
+MKHC Hard Copy fix; Marcus Kraft
+MkJr Make Cookie Jar; Thomas Schallar
+MkNt MikeNet
+MM2X Megamax Modula2; Thomas Tempelmann
+MMAC Magic Mouse Accelerator; Emanuel Moecklin
+MMUT Midimaze utility; Oliver Scheel
+MMSS Mouse Speed Doubler
+MM_2 Midimaze 2; Markus Fritze
+MN3D MenÅs & SubmenÅs im 3D-Look; Manfred Lippert
+MNAM Name fÅr Rechner; Standardcookie
+MOAF ArrowFix; Martin Osieka
+MOD2 Modula_2 RunTime Error Handler; TDI
+MOGR GEMRAM installation of GEM in RAM; Martin Osieka
+MPRO MAGIC Modular Applic. GEM Interface Cadre Lib; Th.Kuenneth
+MRAM More RAM; Rainer Seitel
+MSPD Mouse Speeder; Lars Erik Osterud
+MSPO MagicSpooler for printer; Emanuel Moecklin
+mstx Mouse Tricks
+MTft Trapper; Markus Kohm
+MUPF Mupfel UNIXlike shell; Gereon Steffens
+MWHL Wheel Mouse; Armin Diedering
+MZTR TRASH recoverable trash can; Michael Zuhl
+N203 MultiPurpose accessory; Noud v.Kruysbergen
+nAES New AES; Jens Hiescher & Rainer Mannigel, woller systeme
+NBEL SOUND alarm bell DMA sample player; Robert Irrgang
+NBLL NewBell alarm bell; Volker Janzen
+NCLN Niceline; Oliver Scheel
+nDLG New Dialogue; woller systeme
+ne2k Treiber fÅr PCI NE2000; Torsten Lang
+NERV Removal of floppy drive etv-critic alert; PrÅ·ner ST-Mag
+NETS Novell-Netware network driver; PAM's Software
+NEXB NEX-Buffer;  Robert Federle
+NEXK NEX-Toolkit; Robert Federle
+NFMT INFOMAT cookie jar information & installer; Andreas Kunz
+NFnt NeoDesk Font Loader; Gribnif Software
+NKCC Normalized Key Code Converter; Harald Siegmund
+NLdr NeoDesk Loader; Gribnif Software
+NMGE No More AMC-GDOS Errors; Simon Gleissner
+NO7P NO7PRINT Norwegian to 7bit Printer CharsConverter; Osterud
+noCF noSystem extension; no|Software GmbH
+NOR5 NORKEY5  Norwegian Keyboard Driver; Lars Erik Osterud
+NOVA NOVA graphics card
+NSC1 N_SYSCOM accessory; Noud v.Kruysbergen
+Nspd Nemesis Speeder; Black Scorpion Software
+nTAS Hypercache bug fix, TAS instructions; Steffen Engel
+NTK4 NTK4 Falcon MOD player
+nTOS MilanBlaster; Rainer Mannigel
+NULL Cookie-Grîûe / CookieBar Termination
+NUL> System startup utility
+NVDI Soft Blitter / replacement for VDI & GDOS; S.+W.Behne
+O2PY Oasis 2; Phil Yeadon
+OBNL Load-Time-Linking protocol; Stephan Junker, Dirk Haun
+OFLS Check Open Files; Hans-JÅrgen Richstein / Standardcookie
+OPMM Open Helper; Martin Mertens
+OSBL Screen Blaster; 2B et al., OverScan GbR
+OSTT OverScan TT; OverScan GbR
+OTOS oTOSis - TOS emulator for Linux/68K
+OV24 OVER_24N hard copy driver for 24pin printers; OverScan GbR
+oVDI oVDI; Odd Skancke
+OVDJ OVER_DJT hard copy driver for HP DeskJets; Isakovic O'Scan
+OVEP OVER_EPS hard copy driver for 9-pin printers; OverScan GbR
+OVER hardware and driver; Karsten Isakovic, OverScan GbR
+OVEX OVER_EXC exception bombs patch; Karsten Isakovic, OverScan
+OVFS OVER_FSB FileSelector patch; Karsten Isakovic OverScan GbR
+OVIM OVER_IMG hard copy driver for IMG files; Isakovic OverScan
+OVLS OVER_LSB patch for Laserbrain; Karsten Isakovic, OverScan
+OVRD OVER_RAM RAM disk; Karsten Isakovic, OverScan GbR
+OVUT OVERUTIL screen saver and clock; Karsten Isakovic OverScan
+OVWI OVER_WIN Window Size patch; Karsten Isakovic, OverScan GbR
+PAMN Network driver; PAM's Software
+PAUL Paula 2, Amiga-MODfile-Player; Pascal Fellerich
+PBUG PeaceBug background debugger/assembler/disasl; E.Moecklin
+PCI_ BIOS fÅr PCI-Karten; Markus Fichtenbauer
+PDEB PureDebugger patch; Dimitri Junker
+PDeb PureDebugger patch; Dimitri Junker
+PDOS PowerDOS pre-emptive multitasking kernel; Chris Latham
+PDRZ LockGetrez; Patrick Dubbrow
+PFIX PTSINFIX VDI bug fix; Julian Reschke, SciLab GmbH
+Pinp Parallel port input driver; Jens Schmidt
+PKSH PKS-Shell; Pahlen & Krau· Software
+PMMU zur Programmierung der PMMU; A.Herzlinger / Standardcookie
+POIS Poison! boot sector virus checker; Artz & Tielsch, Shift
+POWM PowerMouse joypad replacement for mouse on STE/Falcon
+PRCS copySTar copy prg.; Peter Rohde
+PRDS Disk Speeder hard disk cache; Peter Rohde
+PRMD MIDIPRT MIDI/printer port redirection; Markus Kohm
+PRN! WandelSZ
+PRN· WandelSZ converts Atari '·' to MSDOS 'û'; Bernards, ST-Mag
+PRO5 PROTECT5 resident virus protection prg.; Lars Erik Osterud
+PROB Profibase; Markus & Michael Meurer
+PROT Protos screen utility; Meinolf Schneider
+PRTD Print to Disk; Robert Federle
+PRTO ST-Tools; Peter Rohde
+PRTR Removable HD driver; Protar
+prtr Atari to IBM converting printer driver; Konrad Hinsen
+PSND ProSound Driver
+PSSG Paint Shop hardcopy vector; Thomas Much
+PTOS ROMRAM for copy TOS into TT-RAM; A.Herzlinger / Std.cookie
+QIKM Quick Mouse speeder; Gereon Steffens
+QMAC Quick Mouse Speeder accessory;   Wilfried Cordes
+QMCP Quick Mouse speeder in CHEMPLOT; Wilfried Cordes
+QST2 Quick ST 2; Darek J.Mihocka, Branch Always Software
+QST3 Quick ST 3; Darek J.Mihocka, Branch Always Software
+QUAN QUANTOS MultiUtility; Bernd Blank
+RAIL RailManager SerialPort model RailwayController; Otmar Birn
+RamS RAM Scan; John Kormylo
+RaSn Rational Sounds
+RDCT Redirect NVDI graphic card driver; Sven & Wilfried Behne
+RESG RESET GUARD reset vector guardian; Jîrg Hahne
+RFLX AutoSwitch driver for Reflex grph.card; Isakovic, OverScan
+RFUS Rufus terminal prg.; Michael Bernards
+RGUS Argus disk track/sector address displayer; Daniel Hollis
+RING Telephone rrring detector; Julian Reschke
+ROT8 Rotate; Thomas FÅrhîlter
+ROMD Mag!X; MagiC, access ROM cartridge as a drive; A.Kromke
+RREG Restore Register; Reiner Wiechert
+RSLT GengTEC VGA graphics card driver; Volker Brodel, GengTEC
+RSpd RS_Speed serial port speed enhancer; Stephan Skrodzki
+RSVE RSVE hardware SerInterface Modif / BaudRt.Erw; H.Scheutzow
+RSVF HSMODEM fast RS232 DRVIN prog-loadable DevDrv; H.Scheutzow
+RTKC Keyclick; Robert Tolksdorf
+RTOB OptoBell changes display of ASCII BEL char.; R.Tolksdorf
+RWIN RootWin desktop background picture; Karsten Isakovic
+SAM  System Audio Manager; ATARI Corp
+SBKM RING recognition modem routine; Stefan BrÅck
+SBTE Terminal program; Stefan BrÅck
+SBTS Trap-Spy; Stefan BrÅck
+SCAH Speed Cache; Julian Reschke, Hard & Soft
+SCKM MagXNet (SOCKET.DEV)
+SCPN ScreenBlaster_3 screen enhancer
+SCRD Screen to Disk; Robert Federle
+SCRN Screen Scroller / Master module SCREEN.MMX; Edgar Rîder
+SCRS Screen Saver; Urs ThÅrmann
+SCRW Screen Watcher; Uwe Seimet
+SCSI SCSI driver interface protocol; Steffen Engel
+SCSV Line Art screensaver
+SDCH Second Chance recoverable files utility; Sven Kopacz
+SDES Softdesk desktop background picture utility; M.+M.Meurer
+SDsk Softdisk resetproof, bootable RAM disk; Gerhard Hîlscher
+SDWN ScreenDown; Marcel Waldvogel
+SELC File selector; Michael Haydn, C-Lab
+SENV Set Environment prg.; Andreas Groû
+SFA^ FONT_BLK/FONTLOAD alternative system fonts; Sevo Stille
+SFIX Serial interface patch for TOS 2.05/3.01/3.05; ATARI Corp
+SFMN SafeMenu
+ShLk Shift Lock; Jean-Pierre Rasquin
+shlp shelhelp; Jîrg Westheide
+SKEY SpecialKeys; Ole Pahl
+SLCT Selectric file selector; Stefan Radermacher, Oliver Scheel
+SLif SoundLifter; Michael Schwingen
+SLIP SLIP Socket UDP/TCP/IP/SLIP lib. for MagiC; Sven Kopacz
+SM00 SOTA printer spooler; STAGE Microsystems
+SM01 ReProK Office Management DUO; STAGE Microsystems
+SM02 ReProK internat. EM-NET2 databank server / PAM's-Net STAGE
+SMAL AESfonts & RUBY SmallFonts; Nick & Schmidt / Std.cookie
+SMAU Set Mouse accessory; Marcel Waldvogel
+SMon SysMon system monitor; Karsten Isakovic, OverScan GbR
+SMTT SM124 MonitorEmulator; Karsten Isakovic, OverScan GbR
+sMUS 3-step Speedy Mouse; Niki Naus
+SNAP That's Snap accessory; Konrad Hinsen
+SOFS Softscreen virtual big screen; Markus & Michael Meurer
+SOSW Softswitch multiprogram switcher; Markus & Michael Meurer
+SpcE Space alternative XCONTROL panel; Christian Grunenberg
+SPCK SPC-Modula RAM disk; Robert Irrgang
+SPEE Mouse Speeder; Stefan Hintz
+SPEK Spectrum graphics card; Stefan Hintz, Wilhelm Electronics
+SPEX Steve's Exzessory printer spooler; St Eissing, SciLab GmbH
+spMR SDrucker- & FileSpuler; Martin Rogge
+Spol SPOOL flexible printer spooler; Andreas Mandel
+SPRG STARTER accessory; Bernd Blank
+SSND Petra; Pascal Fellerich
+ST-C ST-Cache; Matthias AndrÑ
+ST17 ST-68017 MC68020 emulator; Daniel Hollis
+STAT StaTOS Statistical evaluation of OS calls; Laurenz PrÅ·ner
+STEM STEmulator; Thomas Gîttsch
+STEW Stewart MagiC customiser; John McLoud
+STFA Sound Treiber fÅr Atari
+STFX STraight FAX! Manager; NewSTar Technology Management
+StIc Stewart Icon server; John McLoud
+STiK ST Internet Kit; Dan Ackerman
+STMS ST-Magazin Screen dumper; Martin Backschat, Peter Melzer
+strk StarTrack XBIOS Erweiterung
+STRX SAT-Trax SatelliteObservation AntennaController; M.Sperber
+SupV SuperVidel Treiber
+SVAR MacMiNT utility pointing to system var. area; B.Pickering
+SVGA Super VGA emulator
+SWAP OUTSIDE virtual memory manager; Uwe Seimet / Maxon Comp.
+SwTm ShowTime clock utility; Matthias Wallmann
+SYMB Resident Symbol Driver; Robert Federle
+SYNL Dynamic Link library driver; Robert Federle
+SYNT Syntex OCR program; Marcel Waldvogel
+SysE Operating System Editor; Martin DÅrrschnabel
+Syso STsysop PC-Net compatible mailbox; Hecker + Knobbe CompGbR
+SYST Systime; Sven Kopacz
+SZ_M Dynamic Mouse accelerator; Nickel Szebrowski
+S_DR CDROM SCSI driver; Peter Hilbring
+T206 PATCHX06 TOS 2.06/3.06 disk BIOS patch; Harun Scheutzow
+T2GM TOS2GEM; Thomas Binder
+T4N˘ TOS4 fix
+TAPE TapeBIOS; GEMAR ?
+TASS Turbo-Assembler; Markus Fritze
+tbo7 Turbo RAM disk; K.D.Creasey
+TCFS Turbo-C File Selector accessory; Borland MÅnchen
+TCRB Turbo-Cache for HD installed; Ralf Biedermann
+TDVI Videl Inside Falcon soft res. enhancer; Zerkman, Trisomic
+Tenv Environment Setter for TRAPIDO terminal prg.; Markus Bank
+TFIX TOS14FIX TOS 1.4 fix XBRA version; Karsten Isakovic, ATARI
+THNX Thinx shell; Dirk Haun
+THRM Temperature data recorder printer port driver; Ole Pahl
+THST TurboHST serial port enhancer for USR HST modems; J.Lamac
+TIM3 TIMEDRV3 corner clock and disk drive display ; L.E.Osterud
+TIM5 TIMEDRV5 CornerClock DriveDisplay ScreenSaver; L.E.Osterud
+TIME LED-Panel Time; Christoph Zwerschke
+TK40 MC68040 ToolKit
+TL3D BIOS-Treiber fÅr 3. Floppy; Torsten Lang
+TLWV STGAWVBL WVBL-Routine fÅr MEGA4000; Torsten Lang
+TMON Templemon debugger; Thomas Tempelmann, Johannes Hill
+TMon Templemon debugger; Thomas Tempelmann, Johannes Hill
+TOpW TOp-Manager Watcher; Laurenz PrÅ·ner
+TOUC Touch file date updater; Steffen Engel
+TPat TOS Patch for vr_trnfm(); Laurenz PrÅ·ner
+TPGM TraPatch; Jîrg Westheide
+TRAK Track-Speed mouse accelerator; Julian F.Reschke
+TraP TraPatch; Jîrg Westheide
+Trpp Trapper; Manfred Lippert
+TRUE TrueDisk resident RAM disk; Christoph Zwerschke
+TSEN TSE-NET Inotec network driver; JÅrgen Kriege
+TSWP TonySoft Write Protection; Matthias Becker
+TTTF TT2TF ThirtyTwo-TwentyFour 24bit fixer for TT; M.Waldvogel
+TUBS TUBS - The Ultimate Boot Selector; Andreas Alich
+TWFS That's-Write File Selector accessory; Konrad Hinsen
+Typ1 TYPENRAD daisywheel accessory; Frank Knobbe
+UFSL Universal Font Selector interface; Michael ThÑnitz
+UIS3 Universal Item Selector III
+UKB1 Fastload; Uwe Koloska
+UKB3 Fastload and MIDI-Through; Uwe Koloska
+UN*X Unixname UNIX to GEMDOS file name conv.; Michael Schwingen
+USCK CHECKIT; Uwe Seimet
+USHD HDDRIVER Diskus HD driver; Uwe Seimet
+UsNm User-Name-Cookie; Carsten Tolkmit
+USPK AUTOPARK automatic head disk parker; Uwe Seimet
+USRS ROMSPEED; Uwe Seimet
+UTRK Ultimate Tracker
+VBLF VBLFIX VBLI fix for mono-monitors on Falcon; Thomas Binder
+VDIp VDI performance logger
+VDLY Videlity soft F30 resol. enhancer; Black Scorpion Software
+VECS Vecshow screen vector displayer; Stephan Gerle
+VeiL Turbo Veille; Xavier Roche
+VFIX VDIFix handle bugfix f. TOS 1.[046], 1.62 & 2.05; Isakovic
+VFNT VdiFont; Harald Sommerfeldt
+VGAS VGA-Simulator for TT monitor; Christoph Zwerschke
+VI-2 VidelInside soft F30 resol. enhancer; Francois Galea
+View View Protocol
+VIRA VirusAlarm BootSectorChecker; Carsten Frischkorn, Galactic
+VMEM VMEM virtual memory manager; Robert Federle
+VPCH VDIPATCH; Robert Irrgang
+VRAM VRAM VirtualMemory Manager; Alexander Herzlinger, OverScan
+VREP VectorGuard Reset guardian; Carsten Frischkorn, Galactic
+VSco VirusScope; Arnfried Griesert
+VSCR Virtual Screen; Julian F.Reschke / Standardcookie
+VSTM MIDI Transfer; Focke Frentzen
+VT52 VT52 in a Window; Sven & Wilfried Behne
+vT52 VT52 emulator for CyReL M16-1280 graph.card; Cybercube
+VTFX VT52FIX VT52 emulator bug fix for Falcon; Thomas Binder
+VXCK VoxClock; Martin H.Smith
+WaHW HIGH_WAY; Walter Hermann
+WARP Warp 9; Mihocka & Johnson, CodeHead Technologies
+WaSA SATELLIT multi-accessory; Walter Hermann
+WBrd Bird's Wing virtual screen driver; Xavier Roche
+wdlg Window Dialog Lib wdialog for std. TOS; Behne & Behne GbR
+WDOG Watchdog; Robert Federle
+WEGA WEGA-Library; Dietmar Rabich
+WfNa Abfrage des Fenstertitels per wind_get(WF_NAME); M.Lippert
+WFSL WFSEL Window File Selector; Gert Kramer
+WICO WINCOM Window Commander for MagiC; Sven Kopacz
+WinK WinKeys; Jîrg Westheide
+WINX WINX AES enhancer; Martin Osieka
+WINZ WINZ RAM disk / Luftschloû; Claus Brod
+WPRO WProtect write protection; Christoph Conrad
+WRAP WrapMouse MSDOS serial port mouse driver & accel.; R.Kurz
+WrAp WrapMouse MSDOS serial port mouse driver & accel.; R.Kurz
+WaHW HIGH_WAY accessory; Walter Hermann
+XALT AlberTT GFX card driver
+XBTN XBOOT's mouse speeder; Tassilo Nitz
+XDsk X-Disk resetfeste RAM disk; Thomas Schallar
+XFRB Extended Fast RAM Buffer
+XFS1 Master module XFS.MMX extended file system; Edgar Rîder
+xFSL Extended UFSL interface font selector; Dirk Haun, St.Rogel
+Xgem Windframe Xgem; Eric Reboux
+XHDI Extended Hard disk Driver Interface; Standardcookie
+XKBD Extended Keyboard; Alex Esser
+XMMU TK40's interface for PMMU setting
+XMuz Ultra Player
+xNet xNET-ST network driver; Daniel Roedding
+XPCI XBIOS Funktionen fÅr das PCI-BIOS
+xRmt xRemote, xRMaster, xRemAcc; Markus Gutschke
+XSDD Extended Serial Device Driver; Stephan Baucke
+XSND Digi-Sound; Thomas Huth
+XSSI Extended Screen Saver Information
+XTOS Extend TOS; Lonc Sebald
+xUAG MegaVision_300
+xUFC Extended Universal Font Selector Configurator
+XWin Extended Windows active; Konrad Hinsen
+zCAC 680x0 Cache Control CPX; Ralf Zimmermann
+zDCF DCF_TIME DCF77 receiver signal decoder; Ralf Zimmermann
+‰FSC Falcon SCreen                 .
+ÙıMB MultiBlow 030 screen driver; F.v.Nispen
+ˇˇˇˇ ultimate                                                 .
