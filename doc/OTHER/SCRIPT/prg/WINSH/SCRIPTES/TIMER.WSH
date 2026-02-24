@@ -1,0 +1,48 @@
+#! winsh.app
+#
+# Utilisation du timer GEM
+# pour afficher les diff‚rents sprite
+# de la souris (fonction graf_mouse de l'AES)
+
+require "aes.ldg"
+
+proc timer win
+	global count
+	global info
+	
+	incr ${count}
+	if ${count} > 7
+		set count 0
+	fi
+	set info "sprite souris nø${count}"
+	aes.graf_mouse ${count} 0L
+	windset ${win} 3 ${info}
+corp
+
+proc ferme win
+	windkill ${win}
+	exit
+corp
+
+proc apterm
+	global win
+	ferme ${win}
+corp
+
+set title "Timer GEM"
+set info  "sprite souris nø0"
+set win windopen 31 10 10 150 20
+windset ${win} 2 ${title}
+windset ${win} 3 ${info}
+set count 0
+
+eventattach ${win} 9 "ferme"
+eventattach ${win} 1 "timer"
+eventattach 0L 50 "apterm"
+
+eventset 1 1000
+
+while 1 != 0
+	eventdo 48
+end
+

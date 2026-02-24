@@ -1,0 +1,110 @@
+#! winsh
+# Affichage de texte en fenàtre
+# WinSh, par Dominique BÇrÇziat, 1998
+#
+
+# Routine de destruction de la fenàtre
+proc ferme win
+	global loaded
+	
+	if ${loaded} == 1
+		minitext.free ${win}
+	fi
+	windkill ${win}
+	rscfree
+	exit 0
+corp
+
+# Gestion du menu
+proc menu win title item
+	global loaded
+	global file
+
+	if ${item} == 8
+		alert 1 "[1][Une scripte WinSH pour afficher|du texte dans une fenàtre !|Dominique BÇrÇziat Ω 1998][OK]"
+	fi
+	if ${item} == 10
+		set file fsel
+		if ${file} != 0L
+			if ${loaded} == 1
+				minitext.free ${win}
+			fi
+			minitext.attach ${win} ${file}
+			windset ${win} 2 ${file}
+			redraw ${win}
+			set loaded 1
+		fi
+	fi
+	if ${item} == 11
+		apterm
+	fi
+	if ${item} == 13
+		if ${loaded} == 1
+			minitext.free ${win}
+		fi
+		set file "source code"
+		windset ${win} 2 ${file}
+		minitext.attach ${win} "SHOW.WSH"
+		redraw ${win}
+		set loaded 1
+	fi
+	if ${item} == 14
+		if ${loaded} == 1
+			set a minitext.tab ${win} -1
+			set b "${a}"
+			set dial formopen 1 ""
+			objcchange ${dial} 1 "string" ${b}
+			formdo 16
+			objcchange ${dial} 2 "state" 0
+			formclose
+			set a integer ${1,1}.string
+			minitext.tab ${win} ${a}
+			redraw ${win}
+		fi
+	fi
+	menutnormal ${win} ${title} 1
+corp
+
+
+# Routine de terminaison du programme
+proc apterm
+	global win
+	ferme ${win}
+	exit 0
+corp
+
+require "minitext.ldg"
+
+# Partie principale 
+
+rscload "show.rsc"
+
+# ouverture la fenàtre
+set win windopen 20463 10 10 400 400
+set loaded 0
+set file "Sans nom"
+menuset ${win} 0 "menu"
+
+# Lecture argument de la ligne de commande
+if argv 0 > 1
+	set file argv 2
+	# Nom de la fenàtre
+	# Ouverture du fichier et affichage dans la fenàtre
+	minitext.attach ${win} ${file}
+	set loaded 1
+fi
+windset ${win} 2 ${file}
+
+# detruire la fenàtre
+eventattach ${win} 9 "ferme"
+
+# ap-term
+eventattach 0L 50 "fin"
+
+
+# gäre les Çvemenents (boucle sans fin)
+# message (16) et clavier (1)
+while 0 == 0
+	eventdo 17
+end
+

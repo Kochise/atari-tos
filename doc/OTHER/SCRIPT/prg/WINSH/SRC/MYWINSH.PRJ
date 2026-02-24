@@ -1,0 +1,17 @@
+mywinsh.app
+.c [-y- -g+]
+.l [-y-]
+=
+pcstart.o
+
+function.c			; binding des fonctions	
+myfunc.c			; mes fichiers
+
+..\lib\winsh.lib	; WinSH
+windom.lib			; Librairie GEM WinDom
+ldg.lib				; Librairie des LDG
+
+pcfltlib.lib
+pcstdlib.lib
+pcgemlib.lib
+pctoslib.lib

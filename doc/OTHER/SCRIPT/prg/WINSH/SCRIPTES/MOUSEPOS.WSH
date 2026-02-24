@@ -1,0 +1,49 @@
+#! winsh.app
+#
+# Utilisation du timer GEM
+# pour afficher la position de la souris
+
+require "aes.ldg"
+
+proc timer win
+	global info
+	global xpos ypos
+	set x 0
+	set y 0
+	set dum 0
+	aes.graf_mkstate ${x} ${y} ${dum} ${dum}
+	if polish [ ${x} ${xpos} != ${y} ${ypos} != || ]
+		set info "(${x},${y})"	
+		windset ${win} 3 ${info}
+	fi
+corp
+
+proc ferme win
+	windkill ${win}
+	exit
+corp
+
+proc apterm
+	global win
+	windkill ${win}
+	exit
+corp
+
+set title "Position souris"
+set info  ""
+set win windopen 31 10 10 150 20
+set xpos 0
+set ypos 0
+windset ${win} 2 ${title}
+windset ${win} 3 ${info}
+
+eventattach ${win} 9 "ferme"
+eventattach ${win} 1 "timer"
+eventattach 0L 50 "apterm"
+
+eventset 1 100
+
+while 1 != 0
+	eventdo 48
+end
+

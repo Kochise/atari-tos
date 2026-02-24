@@ -1,0 +1,209 @@
+#! winsh
+###########################################
+# Exemple d'une scripte pour un programme #
+# d'installation						  #
+###########################################
+
+# Chargement des plugins
+
+if require "file.ldg" < 0
+	# bidouille pour que install.wsh soit d‚marr‚
+	# par install.app et puisse lancer ses plugins
+	if require "..\plugin\file.ldg" < 0
+		alert 1 "[1][Erreur: FILE.LDG introuvable][OK]"
+	fi
+fi
+
+if require "minitext.ldg" < 0
+	if require "..\plugin\minitext.ldg" < 0
+		alert 1 "[1][Erreur: MINITEXT.LDG introuvable][OK]"
+	fi
+fi
+
+if require "stdio.ldg" < 0
+	if require "..\plugin\stdio.ldg" < 0
+		alert 1 "[1][Erreur: STDIO.LDG introuvable][OK]"
+	fi
+fi
+
+# Fonction qui patche le fichier NEWDESK.INF
+
+proc patchdesktop file local
+	# Ouverture du fichier en mode ajout
+	set fp stdio.fopen ${file} "r"
+	if ${fp} == 0L
+		alert 1 "[1][Erreur, pas de fichier|… patcher.][OK]"
+		return
+	fi
+	# lecture du fichier, il ne doit pas contenir WINSH
+	set line reserv 255
+	while stdio.feof ${fp} == 0
+		stdio.fgets ${line} 255 ${fp}
+#		set a polish [ ${line} "WINSH" indexof > 0 ${line} "#G 03" indexof >= 0 && ]
+		set a polish [ ${line} "WINSH" indexof ]
+		println "a=${a} line=${line}"
+#		if ${a} >= 0
+#			println ${line}			
+#		fi
+#		if polish [ ${line} "#G 03 " indexof 0 == ${line} "WINSH.APP" indexof 0 > && ]
+#			alert 1 "[1][OK][ok]"
+#		fi
+	end
+	stdio.fclose ${fp}
+	return
+	# On se positionne en fin de fichier
+	stdio.fseek ${fp} 0L 2
+	# Ecriture de la ligne
+	if ${local}
+		stdio.fputs "#G 03 04 000 ${0,18}.string\BIN\WINSH.APP@ *.WSH@ @ " ${fp}
+	else
+		stdio.fputs "#G 03 04 000 ${0,12}.string\WINSH.APP@ *.WSH@ @ " ${fp}	
+	fi
+	# Nouvelle ligne (\n)
+	stdio.fputc 0x0A ${fp}
+	# fermeture du fichier
+	stdio.fclose ${fp}
+corp
+
+# Affiche un message dans la ligne d'info
+# du formulaire
+
+proc message win str
+	objcchange  ${win}  5 "string" ${str}
+	objcchange  ${win}  3 "string" ""
+corp
+
+# Sous fonction d'installation locale
+
+proc local win
+	file.mkdir ${0,18}.string
+	file.cp "test.wsh" "${0,18}.string"
+
+	objcchange  ${win}  5 "string" "Installation termin‚e"
+	objcchange  ${win}  3 "string" ""	
+corp
+
+# Sous fonction d'installation globale
+
+proc global
+corp
+
+# Gestion du message AP_TERM
+proc apterm
+	rscfree
+	exit 0
+corp
+
+# Gestion du message WM_DESTROY
+proc closeform win
+	windkill ${win}
+	apterm
+corp
+
+# Gestion du message WM_FORM
+proc doform win obj
+	# Bouton OK
+	if ${obj} == 1
+		# Bouton local s‚lectionn‚ ?
+		if ${0,22}.state == 1	
+			# Mode d'installation locale
+			# message ${win} "Installation locale"
+			if form 2 == 2
+			#	message ${win} "Installation locale en cours..."
+			#	local ${win}
+				
+				patchdesktop "C:\NEWDESK.BAK"
+				objcchange  ${win}  5 "string" "Installation termin‚e"
+				objcchange  ${win}  3 "string" ""	
+			else
+			#	message ${win} "Installation locale annul‚e !"
+			fi
+		else
+			# Mode d'installation globale
+			objcchange ${win} 5 "string" "Installation globale"
+			objcchange ${win} 3 "string" ""
+			if form 3 == 2
+				objcchange ${win} 5 "string" "Installation globale en cours..."
+				global
+			fi
+		fi
+		objcchange ${win} 1 "state" 0
+	fi 
+	# Fin OK
+	
+	# Bouton FIN
+	if ${obj} == 2
+		closeform ${win}
+	fi
+	#
+
+	# Bouton Global
+	if ${obj} == 20
+		objcchange	${win} 18 "state" 8
+		objcchange	${win} 12 "state" 0
+		objcchange	${win} 13 "state" 0
+		objcchange	${win} 14 "state" 0
+		objcchange	${win} 15 "state" 0
+		objcchange	${win} 16 "state" 0
+	fi
+	# Fin bouton globale
+	
+	# Bouton Local
+	if ${obj} == 22
+		objcchange	${win} 12 "state" 8
+		objcchange	${win} 13 "state" 8
+		objcchange	${win} 14 "state" 8
+		objcchange	${win} 15 "state" 8
+		objcchange	${win} 16 "state" 8
+		objcchange	${win} 18 "state" 0
+	fi
+	
+	# Bouton AIDE
+	if ${obj} == 23
+		set text windopen 20463 0 0 400 400
+		minitext.attach ${text} "AIDE"
+		objcchange ${win} 23 "state" 0
+	fi
+
+corp
+
+
+# Partie principale
+
+patchdesktop "C:\NEWDESK.BAK" 0
+exit
+
+if rscload "install.rsc" == 0
+	# bidouille pour que install.wsh soit d‚marr‚
+	# par install.app
+	if rscload "scriptes\install.rsc" == 0
+		alert 1 "[1][INSTALL:|Impossible to find|ressource file !][End]"
+		exit
+	fi
+fi
+
+# Ouvrir un dialogue en fenˆtre
+set title "Installation de WinSH 1.00"
+set win formcreate 0 16394 ${title} "doform"
+
+# Initialisation des objets du formulaire
+objcchange	${win} 18 "state" 8
+objcchange	${win} 12 "string" "C:\USR\BIN"
+objcchange	${win} 13 "string" "C:\USR\SCRIPTES"
+objcchange	${win} 14 "string" "C:\GEMSYS\LDG"
+objcchange	${win} 15 "string" "C:\HYP"
+objcchange	${win} 16 "string" "${HOME}\SRC"
+objcchange	${win} 18 "string" "C:\IMPORT\WINSH"
+objcchange  ${win}  5 "string" "Written by D.B‚r‚ziat (c) 1998"
+
+# d‚tournement du message AP_TERM
+eventattach 0L 50 "apterm"
+
+# destruction de la fenˆtre
+eventattach ${win} 9 "closeform"
+
+# gestion des ‚vemenents (boucle sans fin)
+while 0 == 0
+	eventdo 16
+end
+

@@ -1,0 +1,11 @@
+#! winsh.app
+#
+# "FrontEnd" du programme showlib
+# pour interroger les librairies dynamiques GEM
+#
+
+
+while 1 != 0
+	eventdo 0x10
+end
+

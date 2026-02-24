@@ -1,0 +1,30 @@
+#! winsh
+# 
+# WinSh, par Dominique B‚r‚ziat, 1998
+# Cette scripte affiche le contenu du fichier
+# qui lui est pass‚ en argument
+
+proc more file
+	set fp stdio.fopen ${file} "r"
+	if ${fp} == 0L
+		println "Error: no such file"
+		break
+	fi
+	set buffer reserv 255
+	while stdio.feof ${fp} == 0
+		stdio.fgets ${buffer} 255 ${fp}
+		print ${buffer}
+	end
+	stdio.fclose ${fp}
+corp
+
+require "stdio.ldg"
+
+if argv 0 == 2
+	set file argv 2
+	more ${file}
+else
+	println "Usage: more file"
+fi
+
+exit 0

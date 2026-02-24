@@ -1,0 +1,11 @@
+c:\gemsys\ldg\plugin.ldg
+.c[-y- -g+]
+.l[-y-]
+=
+pcstart.o
+plugin.c
+ldg.lib
+pcfltlib.lib
+pcgemlib.lib
+pcstdlib.lib
+pctoslib.lib

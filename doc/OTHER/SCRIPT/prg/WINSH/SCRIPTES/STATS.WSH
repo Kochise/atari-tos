@@ -1,0 +1,39 @@
+#! winsh
+# 
+# WinSh, par Dominique B‚r‚ziat, 1998
+# Cette scripte compte les ligne d'un fichier et sa taille
+
+proc stats file
+	set fp stdio.fopen ${file} "r"
+	if ${fp} == 0L
+		println "Error: no such file"
+		return
+	fi
+	set buffer reserv 255
+	set line 0L
+
+	while stdio.feof ${fp} == 0
+		stdio.fgets ${buffer} 255 ${fp}
+		incr ${line}
+	end
+
+	set size stdio.fsize ${fp}
+	stdio.fclose ${fp}
+	
+	println "${file}: ${line} lines ${size} bytes"
+corp
+
+require "stdio.ldg"
+
+if argv 0 > 1
+	set i 2
+	set file argv ${i}
+	while ${file} != 0
+		stats ${file}
+		incr ${i}
+		set file argv ${i}
+	end
+else
+	println "Usage: stats file"
+fi
+exit
