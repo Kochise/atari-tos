@@ -56,6 +56,8 @@ http://info-coach.fr/atari
 
 https://www.yardley.cc/atari
 
+https://github.com/frno7/toslibc
+
 https://bus-error.nokturnal.pl/atari_compendium/html/toc.htm
 
 https://www.fplanque.com/tech/retro/atari/atari-st-fd-image-file-formats
@@ -440,6 +442,30 @@ Thus typical data size is considered 16 bits in **TOS**. Here is the table of da
 
 To sum it up: if you don't need 32 bits operations, just don't use them.
 
+### Processor support
+
+The **Atari** **TOS** computers only used the **68000** in the **ST** line, and "full" (with `MMU`) **68030** `CPU` in the **TT** and **Falcon030**, so no support for **68010**, **68012** and **68020**. The `FPU` (either **68881** or **68882**) is not integrated into the **68030** and can be added as an option.
+
+Some accelerator card vendors proposed **68040** and **68060** `CPU` (with integrated `MMU` and "light" `FPU`), however they required a load of software patches, if not plain **TOS** replacement with third-parties equivalent (see above) for them to work.
+
+**Atari** also produced other computers that used **Intel** `CPU` instead, like the **8088** (in the **Portfolio**, **PC2** and **PC3**), **286** (in the **PC4** and **ABC 286**), **386** (in the **PC5** and **ABC 386**) or even **Inmos** `CPU` like the **Transputer** **T800** (in the **ATW-800**).
+
+While none of these used the **TOS** per se, some could run **DRI**'s **GEM/1** and **GEM/2** though. But that's another story...
+
+### Programming languages
+
+The **TOS** has been programmed in `m68k` assembly and `C` languages. Both were using early syntaxes (**MADMAC** for assembly and **ALCYON** for `C`), `C89` hasn't even been standardized yet, and the very first version of `C++` was from 1985, the year of the release of the **Atari** **ST**.
+
+Contrary to the infamous `x86` assembly language, the `m68k` assembly is heavily inspired from the **PDP-11** `CPU` and thus pretty much orthogonal. The `m68k` assembly language is very easy to understand do to simple register naming and flat memory model (one address one byte), unlike the `x86` segmented-memory model (it's... "complicated").
+
+Below is an interview of the **68000** engineers, by *Dave House*, general manager of **Intel**'s microprocessor (from **8086** to **486**) and peripheral operations:
+
+https://archive.computerhistory.org/resources/text/Oral_History/Motorola_68000/102658164.05.01.acc.pdf
+
+The **BDOS** and startup code of the **TOS** were developed in `m68k` assembly for maximum efficiency, while both the **AES** and the **VDI** were developed in `C`, with a slight object-oriented approach in mind.
+
+Yet the **ALCYON** `C` compiler used wasn't featuring much optimization capabilities, and not much further work through the use of `m68k` assembly have been done to provide the **AES** and the **VDI** with a noticeable speed boost in the subsequent versions. The **AES** 4.0 is being known for its notorious sluggishness, even on powerful hardware.
+
 ### SDK (Software Development Kit)
 
 Here are a few development kits (old and new):
@@ -455,3 +481,5 @@ https://retrogamecoders.com/atari-st-programming-cross-development-with-modern-i
 https://github.com/sidecartridge/atarist-toolkit-docker develop Atari ST software in a modern environment.
 
 https://github.com/dgis/vscode-atari-st-dev someone had to do it, so someone did it. Send prayers and thoughts.
+
+https://dhs.nu/files.php?t=codingtool a collection of very useful programming tools.
