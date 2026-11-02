@@ -1,0 +1,29 @@
+#
+# sample init.rc
+#
+# first, set the correct path
+#
+setenv PATH ",d:\bin,d:\gnu\bin,e:\mint\bin,f:\mgr\bin"
+#
+# next, set some general variables
+#
+setenv TEMP m:
+setenv TMPDIR m:
+setenv TZ EST5EDT
+#
+# next, set specific variables for the gcc, make, and mgr
+#
+setenv GCCEXEC d:\gnu\bin\gcc-
+setenv GNULIB d:\gnu\lib
+setenv GNUINC c:\libsrc\include
+setenv CC gcc
+setenv AS gcc-as
+setenv SHELL c:\init.prg
+setenv HOME e:\home
+setenv MGRFONT f:\mgr\font
+setenv MGRICON f:\mgr\icon
+setenv DEFAULT_FONT f:\mgr\font\ser7x12r.fnt
+setenv TERM builtin
+#
+# OK, now that everything's set up, run whatever programs we want to start
+#

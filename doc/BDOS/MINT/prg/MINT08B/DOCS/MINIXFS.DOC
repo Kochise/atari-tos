@@ -1,0 +1,98 @@
+Here is some information about the Minix filesystem support in this version
+of Mint.
+
+**** Version 0.33
+
+	Firstly my appologies for the mess in the original version. It crashed
+on partitions with sectors > 512 bytes , I don't have any so this slipped 
+through . The current version shouldn't  crash no matter what the sector size ,
+it will however only support 512 byte and 1K sectors for minix partitions, to
+support anything else is rather inefficient and messy , though I will add code
+for larger 'illogical sectors' if there is sufficient demand. 
+	There were a few other bugs in the original version , nothing of the 
+trash-partition variety (at least none *I* found !) , but many things which 
+either did not work or did not work properly. TOSIFY is a bit of a mess , 
+I personally have it set but it can cause problems when running MiNT domain 
+programs under TOS domain ones (unrecognised filenames messed up cwd etc) . 
+There is no easy fix for this.Running TOS domain under MiNT domain , TOS under
+TOS and MiNT under MiNT should be OK though .
+	The i/o code has been overhauled somewhat to read/write consecutive 
+sectors where possible ; this should speed things up considerably . Also 
+sparse file support has been added (though not extensively tested so use it 
+with care). 
+
+NB With MiNT domain and TOS domain programs (with TOSIFY off) the name field
+of a dta will *not* be null terminated,for 14 character filenames,this *must*
+be allowed for.
+
+**** Version 0.31
+
+	I am well aware that the code may not look too pretty ! It is in the
+process of being cleaned up at present.Since this could take a while I thought
+it best to release a version that worked,but was ugly,rather than a version that
+was functionally identical but looked nicer (and it gives me a chance to add new
+features , and fix bugs,as well as tidying up the code in the next release).
+	I have compiled this under gcc, I haven't tried to compile it under any
+other compiler.It may well cause problems on a non-ANSI compiler.
+	The code was written independently of the various Minix filesystems
+about although it was impossible not to use some of the structures present in 
+Minix (or ones similar to them). 
+	The current version scans all GEM partitions when MiNT starts up, 
+when I add floppy disk support it will probably do something different .
+	You must  have Minix  stored under  a GEM partition , that is  one
+that has the partition id 'GEM' and hasn't had its boot-sector obliterated ...
+basically if a minix partition has an icon on the desktop which shows '0 bytes
+in 0 items' you should be OK . 
+	A Minix filesystem behaves more or less like a TOS one so you should be
+able to access files on Minix partitions directly through other programs and add
+TOS programs to Minix partitions (I have TeX running quite happily on one of my
+partitions).
+	As  stated  above  this version of  does not support  floppy disks , 
+future versions will,just as soon as I work out a 'clean' way of handling it. 
+Removable media on hard-drives is a non-starter as well.
+	Filenames are converted to upper case and,although you'll get away
+with most filenames,ones containing slashes will confuse 'minixfs'. [Note also
+that filenames are truncated to avoid things like the desktop blowing up,this
+will occasionally mean that the same filename appears twice in a directory.
+][ This translation is no longer done by default -- ERS ].
+	MiNT domain programs get the 14 characters of the Minix file
+name in the 'dta' structure of Fsfirst/Fsnext with no translation . It is 
+also permissible to open directories on a Minix filesystem unlike TOS and
+deletion of open files is permissible too (but not advisable,unless you
+can guarantee that it is a minix partition you are doing this on,as TOS
+doesn't like this at all,and can trash a partition this way).
+	No access checking is done so everyone is basically 'root' although
+files/directories do have the uid/gid of the creator. I hope to remedy this
+on later versions. You can only access regular files and directories at 
+present,  so special files although they appear in 'dta' structures can't 
+be opened or deleted . Sparse files will also cause trouble ... this is also
+in the 'things to do' list. Fattrib is also a bit kludged and so setting files
+to 'read-only' doesn't do a thing at present.
+	There are assumptions that zone-size==block-size all over the code , 
+since the current (and previous) versions of 'mkfs' wont allow anything else
+this is valid ... for the moment , if this changes I'll fix it, at present 
+minixfs just complains and wont access such a partition.
+
+NOTE:	Since 'minixfs' does some low level things to a hard drive I cannot
+guarantee it wont do something nasty ... so keep backups handy. Having said
+that I haven't managed to do anything to my Minix partitions which even makes
+'fsck' (under Minix)  complain  let alone trash a  partition  (If anyone
+finds a repeatable way to get 'minixfs' to cause fsck to complain please tell
+me and I'll fix it).
+
+	Have fun ! Stephen N Henson. 
+
+P.S. 'Minixfs' is not my number one priority at present so don't expect things
+to be done overnight !
+
+All queries/bug-fixes/flames/etc. to ....
+
+JANET : 	olorin@uk.ac.ed.cs.tardis
+INTERNET :	olorin@tardis.cs.ed.ac.uk
+BITNET :	olorin%tardis.cs.ed.ac.uk@ukacrl
+
+Please avoid sending mail via uk.ac.ukc . This is the default for some
+sites if in doubt send to one of ....
+
+olorin%tardis.cs.ed.ac.uk@cunyvm.cuny.edu
+olorin%tardis.cs.ed.ac.uk%ukacrl@any_non_uk_bitnet_site.

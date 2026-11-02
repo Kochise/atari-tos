@@ -1,0 +1,40 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1991,1990 Eric R. Smith. All rights reserved. See the file COPYING
+for conditions of redistribution.
+
+MiNT COMES WITH ABSOLUTELY NO WARRANTY, NOR WILL I BE LIABLE FOR ANY
+DAMAGES INCURRED FROM THE USE OF IT. USE ENTIRELY AT YOUR OWN RISK!!!
+---------------------------------------------------------------------
+
+New features for MiNT 0.8:
+
+	-- the code for working around the dLibs argv[] bug has been
+removed, because it was interfering with programs that used
+base->p_parent to see if they were started as a .PRG or .ACC. Sorry,
+but if I have to break programs I'd rather break the programs that were
+obviously doing something illegal. Alas, this means lots of Sozobon
+compiled programs break -- the fix is to get Sozobon (a nice compiler),
+fix the library, and recompile.
+
+	-- file handles -2 and -3 are now supported, and may be redirected
+just like CON:, e.g. Fforce(-2, Fcreate("FOO", 0)) sends all printer output
+to the file "FOO"
+
+	-- data may be read from/written to process address spaces using the
+pseudo-files on drive X:
+
+	-- new TT GEMDOS calls (Mxalloc, etc.) are now supported,
+as are the concepts of "fast ram" and the various loader bits. Of course,
+if you don't have any fast ram in your computer this won't matter much.
+
+	-- improved minix filesystem support, including support for
+floppy disks and removable hard drives
+
+	-- the mouse driver now updates the line A mouse variables, so
+that MGR and similar programs will work with large screen emulators
+
+	-- signal handling has been integrated with normal exceptions,
+so that e.g. a bus error raises the SIGBUS signal. A side effect is 
+that instead of getting two bombs for a bus error, you get a message
+like "pid 4: BUS ERROR". You may or may not find this more useful.

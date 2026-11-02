@@ -1,0 +1,111 @@
+Here are some utilities for use with MiNT. All of these utilities may be
+distributed without restriction.
+
+bg.ttp: used to start programs in the background.
+	bg [-o file] command [args...]
+If "-o file" is given as an argument, then the standard output and standard
+error output of the command are redirected to the indicated file.
+"bg" exits with -1 if an error occured, or the process id of the newly started
+process if everything is all right.
+
+gem.prg: start the GEM desktop
+	gem
+This is provided so that the GEM desktop may be started under MiNT. IT MAY
+ONLY BE USED IF NO DESKTOP HAS STARTED YET, i.e. if MiNT ran from an AUTO
+folder and if "gem" hasn't been started before.
+
+kill.ttp: send a signal to one or more processes
+	kill [-sig] pid [pid ...]
+Kill sends the signal number "sig" to the processes which have the given
+process id's (the process id is given as its extension on a listing of drive
+X:). Usually this results in the death of the process. If "sig" is omitted,
+15 (SIGTERM) is assumed. Some useful signal numbers are:
+       9: SIGKILL: this cannot be caught or ignored, so it is certain death
+		for the process
+      17: SIGSTOP: stops the process
+      19: SIGCONT: forces a stopped process to continue.
+
+limit.ttp: run a program, restricting its resources
+	limit [-m maxalloc][-M maxmem][-t maxtime] program [args ... ]
+	limit -v
+Runs a subprogram with limited memory and time resources. "maxalloc"
+is the maximum amount of heap + malloc'd memory permitted to the program.
+"maxmem" is the maximum total amount of memory allotted to the program.
+If both allocation and total memory limits are in effect, a program is
+limited to the lesser of the two values. "maxtime" is the maximum amount
+of CPU time a process may consume; note that this is *not* the same
+as the real time the process has been executing, since processes that are
+waiting for input/output consume very little (if any) CPU time.
+   "maxalloc" and "maxmem" are numbers (optionally followed by "K" or "k"),
+denoting the memory size in bytes. "maxtime" has the form
+[[hh:]mm:]ss[.xxx], giving the number of hours, minutes, seconds, and
+milliseconds permitted; the hours, minutes, and milliseconds are all optional.
+e.g.:
+    limit -m 100K -M 200512 -t 12:22.15 foo
+runs command "foo" with a maximum memory allocation of 102400 bytes,
+a total memory limit of 200512 bytes, and a CPU time limit of
+12 minutes, 22.15 seconds.
+   If any of the limits are 0, then the corresponding limit is removed;
+otherwise, the default limits are whatever the limits were on the
+"limit" program itself. These may be printed with the "-v" flag.
+
+lpd.ttp: line printer daemon
+	bg lpd [printfile]
+This is a (very simple) MiNT based print spooler. It opens the file
+Q:\LPD.MSG and accepts print requests written to that file. The request
+should consist of the full pathname of a file, padded with zeros to 128
+bytes. The file is copied to the directory specified in the environment
+variable TEMP (default is the current directory), and is then printed as
+time allows. A 128 byte ASCII string is written back to Q:\LPD.MSG as a
+reply; this string describes the error that occured (if any).
+   If an argument is supplied to lpd, this is taken to be the name of the
+file for printer output, instead of V:\PRN.
+   lpd.ttp and lpr.ttp are provided as examples of how to use named FIFOs
+for interprocess communication.
+
+lpr.ttp: line printer
+	lpr filename
+This is an interface to lpd.ttp. It finds the full pathname of the
+name given to it and sends a message to lpd requesting that the
+file be printed, then waits for a reply and prints it.
+
+minit.ttp: Minix filesystem creator
+	minit [-b blocks] [-i inodes] drive
+This program creates a minix filesystem on the indicated drive. THIS WILL
+TOTALLY DESTROY ANY DATA ON THE DISK/PARTITION INDICATED!!!!!
+So be sure you really, really, want to do it. If you're not familiar with
+minix or unix, you probably shouldn't. You can specify the number of
+blocks/inodes to put on the drive; if you don't, sensible defaults are chosen.
+Example: minit a:
+
+mintvers.tos: print the MiNT version number
+	mintvers [-n]
+Prints the MiNT version number, and exits with the corresponding exit
+status. If an argument is given, nothing is printed. Shells can test
+the exit value to see if MiNT is active.
+
+nice.ttp: run a program with a different priority
+	nice [-#] command [args]
+This runs the given command at a changed priority. '#', if given, is
+a new "niceness". The higher the number, the nicer the program is, i.e.
+the lower the priority given to it. Negative niceness values correspond
+to higher priorities. The default niceness is +10.
+
+Examples: bg nice -20 make foo
+		runs "make foo" in the background at a much lower priority
+	nice --5 gulam
+		runs "gulam" at a higher priority
+
+pipe.ttp: run programs in a pipe
+	pipe cmd1 cmd2
+This runs the program "cmd1" with its output redirected to a pipe, and
+at the same time "cmd2" with its output redirected from the pipe. If arguments
+are given to cmd1 and cmd2, the whole commands must be enclosed in quotes,
+and "pipe" must be run from a shell that supports the MWC or Atari standard
+extended argument scheme.
+Example: pipe 'ls -l' 'cat -v'
+
+ps.ttp: print process status information
+	ps
+This just outputs the information available from looking at drive X: in a
+somewhat more human-readable form.

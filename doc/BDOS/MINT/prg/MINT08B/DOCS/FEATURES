@@ -1,0 +1,41 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1991,1990 Eric R. Smith. All rights reserved. See the file COPYING
+for conditions of redistribution.
+-------------------------------------------------------------------------
+Features of MiNT that are incompatible with TOS (some might regard these
+as bugs):
+
+Changing directories on drives other than the currently logged drive is
+not possible (actually, it doesn't seem to work right under TOS 1.4, anyways).
+MiNT only keeps one current directory per process.
+
+Processes may have only 20 open files each.
+
+Some low level disk utilities may get very confused if asked to operate on
+a pseudo-drive, like Q:, or on a non-tos filesystem.
+
+All of MiNT's console I/O routines (e.g. Cconws, Cconin, Cconout) can be
+redirected; TOS apparently always leaves these pointing at the console.
+I know of a PD shell that closes handles 0 and 1; it can still keep going
+under TOS, but not under MiNT. I regard this as a bug in the program, not
+in MiNT.
+
+The BIOS I/O routines on devices 0, 1, and 2 may be redirected by
+redirecting file handles -3, -2, and -1 respectively, i.e. they are
+no longer guaranteed to access the same printer, rs232, and console
+(although they do by default).
+
+MiNT's fs_first/fs_next routines handle the '?' wildcard differently than
+does TOS; this only affects pseudo-drives, and isn't likely to
+be a problem.
+
+Filenames that are 4 characters long, with a ':' in the 4th position,
+are assumed to be device names and are translated into references to drive
+V:, i.e. "con:" means "V:\CON". TOS doesn't always do this translation,
+it seems, because I can recall creating files named "con:" in the current
+directory (not that I *wanted* to, which is the whole point of MiNT's
+feature).
+
+All CTRL-ALT-function key combinations are reserved by MiNT. Not many
+programs use these, so this shouldn't be a big problem.

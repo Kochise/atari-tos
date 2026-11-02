@@ -1,0 +1,31 @@
+NOTE::: this file is not an "official" part of the MiNT distribution,
+and need not be included with either source or binary versions of MiNT.
+(You can do so if you like, of course.)
+
+
+Things to do soon:
+
+"true" shared memory
+
+have a "mint.inf" file for startups
+
+a U: drive which has a default (e.g. C:) and an ability to mount other
+drives onto directories
+
+=======================================================================
+
+Things to do eventually:
+
+user-installable file systems
+
+implement swapping for user processes
+
+re-arrange FILESYS structure to support NFS and similar Unix filesystems,
+with calls for stat, link, etc.
+
+a mintfs.c that provides a new, Unix-like filesystem (long names, case
+significant, etc.) with file owners and access permissions
+(actually, Stephen's minixfs has made this less necessary)
+
+replace all calls to TOS, and all interrupt routines, so that MiNT is
+a genuine replacement for TOS

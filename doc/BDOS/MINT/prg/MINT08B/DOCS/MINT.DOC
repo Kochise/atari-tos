@@ -1,0 +1,786 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1991,1990 Eric R. Smith. All rights reserved. See the file COPYING
+for conditions of redistribution.
+
+WARNING: This program does some very low level things to your computer.
+MiNT works well on my machine, and I trust my data to it. But
+then, I make regular backups, so even if a horrible bug in MiNT that
+I haven't found yet trashes my hard drive, I won't lose much. You'll
+have to decide for yourself about trusting your data to MiNT. I would
+certainly recommend regular backups in any event.
+
+MiNT COMES WITH ABSOLUTELY NO WARRANTY, NOR WILL I BE LIABLE FOR ANY
+DAMAGES INCURRED FROM THE USE OF IT. USE ENTIRELY AT YOUR OWN RISK!!!
+
+Introduction
+
+MiNT is an extension of (and eventually, I hope, a replacement for) TOS.
+It provides extra services such as multitasking and pipes. If you don't
+know what those terms mean, MiNT is probably not for you -- at this stage,
+MiNT is still very incomplete and should be regarded as "experimental".
+
+MiNT will run a great number of ("most", I hope) TOS programs, including
+GEM. As the name says, though, MiNT is not TOS, so it can't be expected to
+run all TOS programs, or even all well-behaved TOS programs. There are two
+classes of incompatibilities with TOS: bugs and features. Bugs are undoubtedly
+present; if you find any please report them to me. There are also some
+features of MiNT that may cause incompatibilites. Most of these are listed
+in the accompanying "features" file. 
+
+MiNT tries to emulate TOS 1.4 very closely. If you have TOS 1.0 or 1.2,
+you may think you can use MiNT instead of buying TOS 1.4. This isn't really
+a very good idea, because MiNT calls TOS, and so having the newer version
+of TOS will really speed things up. Besides, the GEM that comes with TOS 1.4
+is a lot better than the old GEM.
+
+
+Using MiNT
+
+MiNT can be started from an AUTO folder, by setting it as a BOOT program
+on the desktop (TOS 1.4 or higher only) or by running it. I prefer the AUTO
+folder way myself.
+
+If you put it in an AUTO folder, it should be the last thing in the folder
+(since any later programs in the folder will run only after MiNT is finished,
+and MiNT should never finish). You'll have to start GEM up seperately; a
+program ("gem.prg") is provided for this purpose. This may not work on a
+TT, in which case you will have to start MiNT from the desktop (directly
+or indirectly).
+
+MiNT always tries to run a program named "init.prg" in the current directory
+(which is the root directory if MiNT was started from an AUTO folder).
+This can be your favorite shell, or (if GEM is not yet active when MiNT runs)
+gem.prg. A fairly nice shell (thanks to Allan Pratt) is provided as a
+sample init.prg.
+
+Once MiNT is running, the computer should behave just as it does under TOS,
+except that some new drives (Q, V, and X) will be available, background
+processes can be started, and programs can use the new features of MiNT.
+
+MiNT can be asked to provide a trace of the currently executing programs.
+Hitting CTRL-ALT-F1 increases the debugging level; hitting CTRL-ALT-F2
+decreases it, and hitting CTRL-ALT-F3 sends the output to the printer
+instead of the screen. This feature was designed to aid in debugging MiNT
+itself, but can also be useful in finding problems with user programs.
+Debugging level 0 (the normal) prints messages only when something goes
+seriously wrong inside of MiNT itself. Debugging level 1 prints a message
+when any system call fails. Debugging level 2 provides a (sickeningly)
+exhaustive trace of what's going on in the system.
+
+CTRL-ALT-F5 shows what memory is being used in the system
+CTRL-ALT-F6 prints a list of all processes in the system
+CTRL-ALT-DEL provides a (warm) boot, as in TOS >= 1.4, and
+CTRL-ALT-SHIFT-DEL provides a cold boot.
+
+Some other keys are recognized by MiNT if the process is doing I/O in
+"cooked" mode:
+^C (CTRL-C): interrupt running program with signal SIGINT. This (usually)
+	will kill the process, unless it has made arrangements to catch it.
+	Note that ^C takes effect immediately under MiNT, whereas under TOS
+	it only takes effect when the process reads or writes.
+^\: send a QUIT signal to a process; usually the same end result as ^C, but
+	it is guaranteed to kill a TOS program (only MiNT specific programs
+	know how to catch it). Use with caution.
+^Z: suspend the current process
+
+These keys do *not* have any effect on processes operating in "raw" mode,
+such as editors. However, you can force these to work even on such programs
+by holding down the ALT key as well, i.e. CTRL-ALT-Z will always suspend
+the process. You should use caution when doing this, since some programs
+will function incorrectly and/or lose data if interrupted when they
+aren't expecting it.
+
+
+Pseudo Drives
+
+MiNT provides some fake "disk drives"; if the contents of these drives
+are listed, various "files" are shown. These "files" are not necessarily
+real files, but may represent other objects such as executing programs or
+regions of memory.
+
+The following drives are available:
+
+Drive Q:: contains files which are FIFO queues (e.g. pipes). All files
+created on drive Q are temporary; when the last program using a FIFO
+closes it, it is erased. Normally, drive Q will be empty, but it will
+have items on it when you're running a window manager, print spooler,
+or similar program that uses FIFOs or pseudo-ttys for communication.
+
+Drive V:: contains files which correspond to the BIOS devices; this allows
+you to access these devices from within programs. For example, saving an
+ASCII text file to "V:\PRN" should cause it to be printed on your printer.
+Of course, this will work *only* with ASCII data, so don't expect to get
+anything meaningful printed if you try to save your spreadsheet to "V:\PRN"!
+The following devices are available:
+   CENTR: the centronics printer port
+   RS232: the RS232 serial port
+   MDI: midi port
+   KBD: intelligent keyboard controller
+   PRN: printer device (not necessarily the real printer if redirected)
+   AUX: auxiliary terminal (usually, but not always, the rs232 port)
+   CON: current control terminal (NOT necessarily the keyboard/screen!)
+   TTY: same as above
+   FD0: current file handle 0 (standard input)
+   FD1: current file handle 1 (standard output)
+   FD2: current file handle 2 (standard error)
+   PHYSCON: (physical console) the keyboard/screen
+   MOUSE: the mouse
+   NULL: a null device (like Unix's /dev/null)
+
+The "FDx" file handles are useful for providing I/O redirection to programs
+that normally require file names on the command line; for example, if you
+want to run such a program in a pipeline.
+
+Drive X:: listing this drive gives information about currently executing
+processes, such as whether they're running, ready, or waiting, their process
+i.d. numbers, and the amount of memory they've taken. Deleting one of the
+"files" kills the corresponding process. (Killing MiNT is impossible;
+killing GEM is a very bad idea). The "files" will have names like "INIT.001";
+this means that the process name is "INIT" (presumably because it was started
+from a file like "INIT.PRG"), and its process i.d. is 1. You can rename
+processes just as if they were files, except that any extension you give is
+always replaced with the process i.d. (e.g. if you rename INIT.001 to FOO.BAR,
+it will really become FOO.001). The size of a process is the amount of memory
+that is allocated to it. Its date/time stamp reflects how much processor
+time it has consumed; for example, a process that has consumed 27 hours,
+13 minutes, and 6 seconds of computer time will have a date of Jan.2, 1980
+and a time of 03:13:06 (because of the way GEMDOS stores dates, the "0"
+point is midnight, Jan. 1, 1980). A process' current state is reflected
+by its attribute bits; most of these are not visible from the desktop, alas,
+but here are the combinations and their meanings:
+	attribute	  process state
+	  0x00		currently running
+	  0x01		ready to run
+	  0x20		waiting for an event (e.g. for a child to finish)
+	  0x21		waiting for I/O
+	  0x22		zombie (exited, but parent doesn't know yet)
+	  0x02		terminated and resident
+	  0x24		stopped by a signal
+Deleting a "file" on drive X: will send a SIGTERM signal to the corresponding
+process, which will usually result in that process being terminated. It
+is not possible to delete processes which are terminated and resident,
+or zombie processes.
+
+Note that the TOS 1.0 desktop won't recognize drives above P. Other versions
+of TOS will, though, so you can use the Install Drive menu selection to
+install the pseudo drives so that the desktop can recognize them.
+
+
+File Handles and Devices
+
+File handle -1 refers to the current control terminal, NOT necessarily
+the console (this is where it points by default). BIOS handle 2 also
+refers to the control terminal, so that e.g. Bconout(2, c) outputs
+a character to the control terminal. Thus,
+	Fforce(-1, Fopen("V:\RS232", 3));
+	r = Bconin(2);
+reads a character from the RS232 port under MiNT. This is done so that
+programs that use the BIOS for I/O will be able to run in windows or
+over the modem. Similarly, the DOS device CON: refers to the current
+control terminal, so Fopen("CON:", 3) is normally equivalent to Fdup(-1).
+To access the physical console, use device PHY:.
+
+In a similar fashion, file handle -2 and bios device 1 (DOS device AUX:)
+may be redirected away from the RS232 port (device V:\RS232), and
+file handle -3 and bios device 0 (DOS device PRN:) may be directed away
+from the Centronics printer port (device V:\CENTR). Since both the DOS
+handles and BIOS device numbers are redirected, any program at all will
+obey the redirection unless it accesses the hardware directly (or unless
+it was written for MiNT and specifically uses the new device names
+like V:\CENTR; this should be done only if *absolutely* necessary!).
+
+
+Background Processes
+
+(Note that the programs bg.ttp and pipe.ttp, along with some other
+sample MiNT utilities, are found in a separate file called
+"mntutl.zoo").
+
+Programs may be started in the background. A sample program ("bg.ttp")
+is provided that will do this for you. It works best from a shell;
+for example, to make foo.ttp in the background from gulam, type:
+	cd \foo\src
+	bg.ttp -o make.out make foo.ttp
+The "-o make.out" tells "bg" to redirect the command's standard tty,
+output, and error output (handles -1, 1, and 2) to "make.out".
+You might also want to redirect the standard input from an empty
+file, or from a file that will never have input waiting (like V:\NUL)
+so that "make" won't try to read anything from your console.
+
+Shells designed to work with MiNT (for example, the "init.prg" that is
+provided) may use the Unix "&" notation for running processes in the
+background; with this notation, the job above would be:
+	cd \foo\src
+	make foo.ttp >make.out &
+(here the ">make.out" is the notation for redirecting the standard output
+of a process). Note that the sample shell does not provide a way of
+redirecting the standard error output; however, it does provide job
+control (see below), and processes that try to write on the terminal
+will be stopped automatically.
+
+Only one GEM program can be active ("ready") at a time. This essentially
+means that GEM programs cannot be run in the background. It wouldn't
+make much sense, anyways, since GEM programs take over the whole screen.
+
+
+Pipes
+
+Pipes are special files that are used to communicate between processes. The
+data in a pipe is always in memory, so using a pipe instead of a temporary
+file is usually faster; it also doesn't consume disk space. Only 2048 bytes
+can be held in a pipe at once; when a process tries to write more data,
+it is suspended until another process reads some data, thus "emptying"
+the pipe. If there are no more readers, a process writing on a pipe is
+terminated.
+
+A simple "pipe" program is provided to run two programs concurrently,
+passing data between them in a pipe. The syntax is
+	pipe.ttp cmd1 cmd2
+which is equivalent to the Unix "cmd1 | cmd2". Note that if cmd1 or cmd2
+contain arguments, then you must run the "pipe" program from a shell that
+supports the Atari standard extended argument convention, and that you
+must enclose the commands in quotes, e.g. in gulam:
+	set env_style mw	# extended arguments
+	pipe 'ls.ttp -l foo' 'fgrep.ttp myfile'
+does the same as the Unix command
+	ls -l foo | fgrep myfile
+or using a temporary file
+	ls -l foo >junk; fgrep myfile <junk; rm junk
+
+Shells designed to work explicitly with MiNT will probably not need the
+external "pipe" command, and instead will use the Unix notation for
+pipelines. (The sample shell that comes with MiNT as init.prg does
+this). This second method is preferable, as it provides a way of
+joining more than two programs in a pipeline.
+
+
+Job Control
+
+MiNT currently (as of version 0.6) supports job control. The ^Z
+(control-Z) key can be used to suspend a process. The process can
+be restarted again if it is sent the appropriate signal. A sample
+program (fg.ttp) is provided that will do this; the syntax is 
+	fg.ttp process-name
+where "process-name" is either the process id of the process, or its
+name as displayed in the drive X: listing (e.g. gem.003). If the process
+was not stopped, an error will occur.
+There is also a "delayed" suspend key, ^Y, that takes effect only when
+a process attempts to read it.
+
+Some programs written for TOS put the terminal in "raw" mode, where no
+control characters are interpreted. You can use CTRL-ALT-Z to achieve
+the effect of ^Z for such programs. However, this feature should be used
+with caution -- it's possible that the TOS program had a good reason
+for not wanting to be interrupted!
+
+More sophisticated job control facilites can be provided by shells that
+are specifically written with MiNT in mind. The sample "init.prg"
+demonstrates this. Jobs run in the background from such shells are auto-
+matically stopped when they attempt to read from the terminal or write to it.
+Thus, you can run a long compile in the background, and if an error
+occurs and the compiler attempts to write on the screen, it will be stopped.
+
+
+Programming with MiNT
+
+A file (mintbind.h) is provided that gives a C interface to the new
+MiNT system calls. Users of other programming languages will have to write
+the interfaces themselves; it should be relatively straightforward, as long
+as your compiler provides a way to call GEMDOS directly.
+
+Testing for the presence of MiNT:
+
+There are several ways to check to see if MiNT is active. Probably the best
+way is to check the cookie jar; MiNT installs a cookie of
+0x4d694e54 (in ASCII, 'MiNT'), with a value consisting of the major/
+minor version numbers in the high/low bytes of the low word. Thus, MiNT
+version 1.2 will have a cookie value of 0x00000102L. (This isn't
+the place to explain the cookie jar, but basically it's a list of
+(cookie, value) pairs of longwords, terminated by cookie 0; a pointer
+to the jar is found at 0x5a0. MiNT always installs a cookie jar; versions
+of TOS prior to 1.6 don't always, in which case 0x5a0 will contain 0).
+
+A "quick and dirty" way to see if MiNT is active is to make a system
+call that only exists under MiNT (preferably one with no side effects!).
+Pgetpid() or Syield() are good choices. If MiNT is not active, these
+calls will fail, returning -32 (invalid function). This method has the
+disadvantage that future versions of TOS, or other multitasking programs,
+may use the same trap numbers as MiNT, but have different meanings.
+For this reason, the "cookie jar" method is preferred.
+
+Interprocess Communication:
+
+MiNT provides 3 forms of interprocess communication (IPC): signals, fifos,
+and shared memory.
+
+Signals:
+
+Signals are a way of notifying a process of an event. The Pkill(pid, sig)
+system call is used to send signal number "sig" to the process with process
+id "pid". It is called "Pkill" because the default action of most signals is
+to terminate the process. If a process wishes to catch a signal and do
+processing, it can use the Psignal(sig, func) system call to arrange to have
+function "func" called when signal "sig" is received. If func is 0, then
+the default action is restored. If func is 1, then the signal will be ignored.
+
+Processes can temporarily block receipt of signals via the Psigblock() and
+Psigsetmask() system calls.
+
+Fifos:
+
+Fifos are "first in first out" message queues. Pipes are a special kind of
+(unidirectional) fifo. Fifos are represented by files on drive Q:. They are
+created with the Fcreate(name, flags) system call. "name" will be the name
+under which the fifo is known (maximum 14 characters); "flags" is explained
+below. The returned file handle is treated just like an ordinary file, and
+may be written to and read from (unless the fifo is unidirectional, in
+which case it may only be written to). The program that creates the fifo
+is normally called the "server". Other programs ("clients") may use the
+Fopen(name, mode) system call to open the other end of the fifo and read
+the data that the server writes, or write data for the server to read.
+When the last program (either client or server) using a fifo closes it, the
+fifo is deleted automatically. Note that one program can be both client and
+server, if it creates a fifo with Fcreate and then opens it again with Fopen.
+Also, children of the server can inherit the Fcreate'd file handle.
+
+The bits in the "flags" argument to Fcreate have the following meanings:
+0x01: make fifo unidirectional (server can write, clients can read)
+0x02: cause reads to return EOF if no other processes are writing, and writes
+      to raise the SIGPIPE signal if no other processes are reading. The
+      default action (if this flag is not specify) is to block waiting for
+      reads and writes
+0x04: make the fifo a pseudo-tty; to client processes, the fifo will act
+      just like a terminal with the server "typing" the characters; for
+      example, if the server writes a ^C, SIGINT will be sent to clients
+
+Attempting to Fcreate() a fifo with the same name as an already existing
+one will result in an access error.
+
+Pipes may be created through the Fpipe() system call as well as through
+the Fcreate/Fopen pair; the former method is easier, since the kernel
+takes care of name conflicts, etc.
+
+Fifos may be locked by processes via the Fcntl system call, as follows:
+
+struct flock {
+	short l_type;		/* type of lock */
+#define F_RDLCK		0
+#define F_WRLCK		1
+#define F_UNLCK		3
+	long l_start;		/* start of locked region */
+	long l_len;		/* 0 for rest of file */
+	short l_pid;		/* set by F_GETLK */
+};
+
+Fcntl(fd, &lock, F_SETLK): set a lock as specified by the lock structure.
+The current version of MiNT only understands locks on the whole FIFO,
+so lock.l_start and lock.l_len should both be 0. If lock.l_type is F_UNLCK,
+then the lock is released. Otherwise, the file whole file is locked
+(future versions of MiNT may distinguish between read and write locks,
+but for now all locks are treated as write locks (F_WRLCK) and block both
+reads and writes). If another process has locked the fifo, returns -36
+(access denied). If a process holding a lock terminates, the fifo is
+automatically unlocked.
+
+Fcntl(fd, &lock, F_GETLK): if a lock exists on the fifo, set lock to
+indicate what kind of lock it is; otherwise, set lock.l_type to F_UNLCK.
+
+Locks are only "advisory"; that is, programs may ignore locks if they
+choose to do so. However, they are a good way to insure that two clients'
+data are not mixed together in a fifo.
+
+See the sample LPR and LPD utilites, and the MIWM window manager for
+demonstrations of how to use fifos.
+
+Shared memory:
+
+Children created with the Pexec(4,...) share all of their parents memory,
+as do children created with the Pvfork() system call. Hence, they may
+communicate with their parent (or with each other) via global variables.
+
+
+MiNT extensions to GEMDOS calls:
+
+Fsfirst/Fsnext:
+    MiNT domain processes (see the Pdomain()) system call below) get
+lower case filenames from Fsfirst/Fsnext on a TOS filesystem. This is
+because most programs end up converting them to lowercase anyways, to
+be more Unix-like. *Please* don't do this translation yourself, let
+MiNT handle it -- some filesystems (e.g. the minix one) are case
+sensitive! If you really, truly, prefer uppercase filenames, run in
+the TOS domain.
+
+Pexec(100, name, cmdline, environment):
+    Similar to Pexec(0, ...), except the calling program does not wait for
+the child to finish. Returns a negative error code, or the (positive)
+process I.D. of the child.
+
+Pexec(104, 0L, basepage, 0L):
+    Similar to Pexec(4, ...); starts executing a basepage previously
+set up by Pexec(5, ...). The caller does not wait for the child to
+finish. Returns a negative error code, or the process I.D. of the child.
+
+Pexec(200, name, cmdline, environment):
+    As with Pexec(0,...) and Pexec(100,...) this runs a program. However,
+with this variant the caller is completely replaced with the executing
+program. The process retains its process i.d. and most other attributes,
+but all of its memory is freed and a new address space is set up for it
+containing the code from the indicated program. Whereas Pexec(0,...)
+is like a subroutine call, Pexec(200,...) is like a "goto". It returns
+only if an error occurs.
+
+
+New MiNT calls:
+
+
+int Syield():					[ GEMDOS 0xff ]
+    Temporarily yields control of the processor so that other processes
+may execute. Programs that are looping, waiting for some condition, should
+make this call to avoid using more CPU time than necessary. (MiNT will
+pre-empt the process eventually; Syield() is just a way of notifying
+MiNT that it's OK to switch processes right now). Syield() always returns
+0.
+
+int Fpipe( int *ptr ):				[ GEMDOS 0x100 ]
+    Creates a pipe. On success, Fpipe() returns 0 and sets the two (16 bit)
+integers pointed to by "ptr" as follows: ptr[0] is the file handle of the
+read-only end of the pipe, and ptr[1] the file handle of the write-only end.
+If an error occurs during pipe creation, the (negative) error code is
+returned and the memory pointed to by "ptr" is left unchanged.
+
+int Fcntl( int f, long arg, int cmd):		[ GEMDOS 0x104 ]
+    Does various file control commands. "f" is the file handle of an open
+file; "cmd" is an integer specifying the file control option desired; and
+"arg" depends on "cmd" (quite often it's a pointer to a structure of some
+sort). The exact commands available vary depending on the type of file "f"
+is.
+
+long Finstat( int f ):				[ GEMDOS 0x105 ]
+    Returns the number of characters that may be read from the file whose
+handle is "f"; "0" means that there are no characters waiting. If the
+integer "f" is not a valid file handle, a negative error code is returned.
+BUGS: disk files always return "1", so this call is useful only for pipes
+and terminals.
+
+long Foutstat( int f )				[ GEMDOS 0x106 ]
+    Returns the number of bytes that may be written to a file before the
+writing process will have to go to sleep. Useful mainly for pipes or
+slow terminal devices.
+BUGS: always returns "1" for files on disk, even if the disk is full.
+
+long Fgetchar(int f, int mode):			[ GEMDOS 0x107 ]
+    Reads a character from the file whose handle is "f". "mode" controls
+how the reading is done; if (mode & 0x1) == 0x1 then the data is
+"cooked", i.e. ^C and other control characters are interpreted; if
+(mode & 0x2) == 0x2 then the character is echoed to the device it was
+read from. If no more data is available from the file, Fgetchar will
+return 0x0000ff1a. If an error occurs, a (long) negative error code will
+be returned. Otherwise, the character read is returned. Note that when
+reading from the console, the scan code is put in the second byte
+of the longword returned, just as the BIOS does. The GEMDOS console input
+calls (Cconin(), Crawcin(), Cauxin(), etc.) are translated by MiNT into
+this call.
+
+long Fputchar( int f, long c, int mode ):	[ GEMDOS 0x108 ]
+    Writes a character to the file whose handle is "f". "mode" is as for
+Fgetchar. "c" is long so that BIOS scan codes can be passed to pseudo-tty's
+and other terminal-like devices; for ordinary files, only the low byte of
+"c" is used.
+
+long Pwait():					[ GEMDOS 0x109 ]
+    Returns the exit status of children run asynchronously (e.g. with
+Pexec(100,...)). If necessary, it will wait until one of the children
+exits or is suspended. The returned value consists of the child's process
+id in the high word, and the child's exit code (the value the child passed to
+Pterm()) in the low word. If the caller has no un-waited for children left
+running, Pwait() will return -33 (file not found; think of it as searching
+drive X:). If the child is merely suspended, it's "exit code" will
+be (sig<<8)|127, where "sig" is the signal that stopped the child.
+Pwait() is equivalent to Pwait3(2, 0L). (see Pwait3).
+
+int Snice( int delta ):				[ GEMDOS 0x10a ]
+    Set the current processes "niceness". A nice process has a lower
+priority. Negative niceness means increase the priority. The priority
+is inherited by children, so shells can use this to set their children's
+priority. The new priority (which will be -delta if, as is the default,
+the process had 0 priority) is returned, so processes can use Snice(0)
+to determine their current priority.
+BUGS:
+    Scheduling is done more-or-less round-robin, by priority. A smarter
+algorithm would be nice.
+
+int Pgetpid():					[ GEMDOS 0x10b ]
+int Pgetppid():					[ GEMDOS 0x10c ]
+int Pgetpgrp():					[ GEMDOS 0x10d ]
+    Get the current process' process id, its parent's process id, or
+its process group, respectively.
+
+int Psetpgrp(pid, newgrp):			[ GEMDOS 0x10e ]
+    Sets the process group of the process with the given pid to
+"newgrp". The process must have the same user id, or it must be
+a child of the current process. If pid == 0, the process group
+of the current process is changed.
+
+int Pgetuid():					[ GEMDOS 0x10f ]
+    Returns the user id under which the current process is running.
+
+int Psetuid( int id ):				[ GEMDOS 0x110 ]
+    Sets the current process' user id to "id". Valid only if the
+user id is currently 0, otherwise it returns EACCDN (access denied).
+
+int Pkill( int pid, int sig ):			[ GEMDOS 0x111 ]
+    Sends the indicated signal to the process with the given pid. If
+pid is negative, it is sent to all processes whose process group is
+equal to pid. If pid == 0, it is sent to all processes with the same
+process group as the calling process (this includes the calling process,
+which must therefore make provisions to catch the signal).
+Returns 0 on success, EFILNF if process "pid" is not found, and EACCDN
+if the user id of process "pid" does not match the calling process'
+user id.
+
+long Psignal(int sig, long handler):		[ GEMDOS 0x112 ]
+    Installs a signal handler for the indicated signal. "handler" is the
+address of a function that will be called when the signal occurs; it
+should have prototype
+    void handler(long sig)
+The parameter passed to it is a 32 bit number indicating which signal
+happened, so that the same handler can deal with multiple signals.
+MiNT saves the process' context before calling the handler, so it does
+not have to worry about saving/restoring registers. The signal handling
+mechanism is based upon BSD; that is, the signal being dealt with is
+masked until the handler returns, so there is no danger of race
+conditions. The handler always runs in the same mode (user or supervisor)
+that the process was in at the time of the signal. System calls may
+be performed by the handler (the Pvfork() and Pfork() system calls, while
+legal, may not produce the desired results).
+    Normally, signal handlers will either return or terminate the program.
+In these cases, no special processing needs to be done. If, however,
+the handler exits via a longjmp() back to some other point in the program,
+the Psigreturn() system call must be invoked before the longjmp()
+This call fixes up the kernel's stack and unmasks the signal currently under
+consideration. Thus, a handler for ^C may look like this:
+
+    void catch_ctrlc(sig)
+        long sig;
+    {
+        Cconws("\r\nInterrupt ignored\r\n");
+        Psigreturn();
+        longjmp(top_of_program, 1);
+    }
+
+int Pvfork():					[ GEMDOS 0x113 ]
+    Creates a copy of the current process. As with the BSD "vfork()"
+system call (and unlike Unix's "fork()") both child and parent share the
+same address space. To avoid conflicts, the parent is put to sleep
+and is not awoken until the child exits or calls Pexec with mode 200
+(overlay); in the latter case, the child is given a new address space.
+The return value is 0 in the child, and the child's pid in the parent.
+On an error, a negative error value is returned and no child is started.
+BUGS:
+    This function should only be called from user mode; if called from
+supervisor mode, the child will be started in user mode anyways, and will
+have to call Super(0L) to reset to supervisor mode.
+
+int Pgetgid():					[ GEMDOS 0x114 ]
+    Gets the group id of the current process.
+
+int Psetgid(id):				[ GEMDOS 0x115 ]
+    Sets the group id of the current process to "id". Valid only if the process
+currently has group id 0 or user id 0.
+
+long Psigblock(mask):				[ GEMDOS 0x116 ]
+    Blocks the signals given in the 32 bit mask. For example, to block the
+SIGINT signal, do Psigblock(1L << SIGINT). This call adds to the set of
+blocked signals, so previously blocked signals remain blocked. The return
+value is the set of previously blocked signals, which can be restored by
+the Psigsetmask() call (see below). Note that some signals (e.g. SIGKILL)
+are not blockable, and requests to block them have no effect.
+
+long Psigsetmask(mask):				[ GEMDOS 0x117 ]
+    Replaces the set of blocked signals with the set in "mask". The 32
+bit mask is the same as the one for Psigblock (q.v.). The old set of
+blocked signals is returned.
+
+long Pusrval(arg):				[ GEMDOS 0x118 ]
+    Returns the process specific user value for this process. This is
+a long word that is part of the process structure, and may be used by
+window managers, etc. to provide extensions to MiNT. If arg is not -1,
+then the user value is set to arg. It is recommended that "arg" should
+be a pointer to a structure whose first member is the old user value;
+thus, a chain of structures may be established, terminated by a value
+of 0 (the value set by MiNT itself). Children inherit their parents
+user value.
+
+int Pdomain(newdom):				[ GEMDOS 0x119 ]
+    If newdom is not -1, sets the process domain of the current process
+to "newdom"; in any event, returns the previous domain of the process.
+Currently 2 process domains are supported. Domain 0 is the TOS domain,
+and is the default for all new processes; domain 1 is the MiNT domain.
+Certain system calls may behave differently in different domains. In the
+TOS domain, of course, all system calls are TOS compatible. If a process
+is running in the MiNT domain, the Fread() and Fwrite() system on terminals
+act more like the Unix read() and write() system calls, and terminal
+modes may be changed with the Fcntl() system call. Also, processes running
+under the MiNT domain may use the forward slash '/' as a directory
+separator, as well as the backward slash '\'.
+
+long Psigreturn():				[ GEMDOS 0x11a ]
+    Prepare to exit from a signal handler. This is done automatically by
+the kernel when a signal handler returns, so it is needed only before
+longjmp() calls. It will fail (harmlessly) and return a negative error
+code if no signal is being processed. (Note: the MiNT library longjmp()
+code already contains a Psigreturn, so if you're using that library
+you don't need to worry about this).
+
+long Pfork():					[ GEMDOS 0x11b ]
+    Create a new process that is a duplicate of the current one, but
+which has its own copy of the address space. This is a more expensive
+operation than Pvfork(), but may be necessary if the child wishes to
+manipulate global variables without changing their values in the parent.
+BUGS:
+    The child and parent do not operate asynchronously in the current
+version of MiNT; the parent is blocked until the child either exits
+or overlays itself with Pexec(200,...). This will be corrected in a
+future version of MiNT, so don't count on this behaviour!
+    As with Pvfork(), the child always starts in user mode.
+
+long Pwait3(int flag, long *rusage):		[ GEMDOS 0x11c ]
+    Wait for a child, and return its exit status. If (flag&1) == 1 and
+no unwaited for children exist, Pwait3 will return 0, otherwise it will
+wait for a child to exit. If (flag&2) == 2, children that are stopped
+due to job control are reported; otherwise, only children that have
+actually terminated are reported.
+The value returned is the same as for Pwait(), i.e. the child's
+process i.d. in the high word, and it's exit code in the low word.
+The "exit code" of a child stopped due to signal "sig" is (sig<<8)|127;
+the exit code of a child killed due to signal "sig" is (sig<<8).
+If no children exist at all, Pwait3 will return -33 (file not found).
+If "rusage" is nonzero, information about the child's resource usage is
+placed into the memory pointed by rusage, as follows:
+     rusage[0]: milliseconds spent by child in user space
+     rusage[1]: milliseconds spent by child in kernel space
+
+int Fselect(unsigned timeout, long *rfds, long *wfds, long *xfds):
+						[ GEMDOS 0x11d ]
+    See which open files are ready for reading, writing, or have error
+conditions on them (the last is not yet implemented). "rfds" and "wfds"
+are pointers to 32 bit bitmaps, which indicate which files we are interested
+in reading and writing, respectively; if a bit is on, the corresponding
+file descriptor is tested as to whether it is ready for reads or writes.
+If a bit is set for an invalid file descriptor, an error is returned.
+"timeout" is an unsigned integer giving the number of milliseconds to wait
+before returning; if it is 0, Fselect will block indefinitely.
+On return, the bitmaps pointed to by rfds and wfds are set to indicate which
+file descriptors (of those originally specified) are ready for reading/writing.
+Passing a null pointer for "rfds" or "wfds" is equivalent to passing a
+pointer to (long)0. Fselect(0, 0, 0, 0) will therefore go to sleep forever.
+Fselect returns the number of file descriptors of interest that are ready
+for reading and/or writing, or 0 if the timeout elapses without any of
+those descriptors becoming ready.
+
+void Prusage( long r[8] ):			[ GEMDOS 0x11e ]
+   Get various resource usage information from the operating system. The
+values are placed in the array "r" as follows:
+   r[0]: time spent by process in MiNT kernel (milliseconds)
+   r[1]: time spent by process in its own code (milliseconds)
+   r[2]: total kernel time spent by children of this process (milliseconds)
+   r[3]: total user code time spent by children (milliseconds)
+   r[4]: memory allocated to this process (bytes)
+   r[5]-r[7]: reserved
+
+long Psetlimit(int lim, long value):		[ GEMDOS 0x11f ]
+   Get/set a resource limit for a process. Which limit is affected is governed
+by the value of "lim", as follows:
+    1: get/set maximum CPU time for process (in milliseconds)
+    2: get/set total maximum memory allowed for process
+    3: get/set limit on Malloc'd memory for process
+If "value" is negative, the limit is unchanged; if "value" is 0, the
+corresponding resource is unlimited; otherwise, the resource limit is
+set to "value". The old limit is returned (0 if there was no limit).
+
+long Talarm( long secs ):			[ GEMDOS 0x120 ]
+    Set an alarm to go off "secs" seconds from now, and returns the amount
+previously on the timer. If "secs" == 0, cancels any pending alarm; if 
+"secs" is negative, returns the amount of time remaining before an alarm
+is to go off, without changing the alarm.
+
+void Pause():					[ GEMDOS 0x121 ]
+    Suspends the process until it receives a signal that is not being
+ignored and is not masked. Should be used only when you're sure you're
+going to get a signal eventually (e.g. if Talarm() was used to
+schedule a signal).
+
+long Sysconf( int n ):				[ GEMDOS 0x122 ]
+    Returns information about various limits/capabilites of the current
+version of MiNT. The variable "n" controls which limit or capability
+is returned, as follows:
+  n ==
+	-1	return max. legal value for n in Sysconf(n)
+	0	return max. number of memory regions per process
+	1	return max. length of Pexec() command line string
+	2	return max. number of open files per process
+	3	return number of supplementary group id's
+	4	return max. number of processes per user
+If any of these items are unlimited, 0x7fffffffL is returned, otherwise
+the appropriate limit is returned.
+SEE ALSO:
+	Dpathconf()
+
+long Psigpending()				[ GEMDOS 0x123 ]
+    return a longword containing the signals that have been sent to the
+process, but not yet handled because they have been blocked (via Psigblock,
+Psigsetmask, or as a result of signal handling)
+
+long Pathconf( char *name, int n ):		[ GEMDOS 0x124 ]
+    Returns information about various limits/capabilites of the file system
+on which the file or directory in "name" is located. The information returned
+depends upon n, as follows:
+  n ==
+	-1	return max. legal value for n in Pathconf(n)
+	0	return internal limit on number of open files
+	1	return max. number of links to a file
+	2	return max. length of a full pathname
+	3	return max. length of an individual file name
+	4	return number of bytes written atomically to a FIFO
+
+If any of these items are unlimited, 0x7fffffffL is returned, otherwise
+the appropriate limit is returned.
+SEE ALSO:
+	Sysconf()
+
+long *Dos_tab():				[ GEMDOS 0xffff ]
+long *Bios_tab():				[ BIOS 0xffff ]
+long *Xbios_tab():				[ XBIOS 0xffff ]
+    These calls return a pointer to the GEMDOS, BIOS, and XBIOS function
+tables, respectively. They correspond to function #-1 for each of the
+respective calls. The pointers returned may be manipulated by user
+programs, allowing for easy replacement of system routines by user supplied
+routines. For example, to change the Sversion() system call to return
+2*the GEMDOS version instead of the GEMDOS version, a program could do the
+following:
+    long (*old_sversion)();
+    long new_sversion() {
+        long old;
+        old = (old_sversion == NULL) ? Sversion() : (*old_sversion)();
+        return 2*old;
+    }
+    void install() {
+       long *dtab = Dos_tab();
+       old_sversion = (long (*)()) dtab[0x30];
+       dtab[0x30] = (long)new_sversion;  /* Sversion is GEMDOS call 0x30 */
+    }
+The installed routines are called with the parameters on the stack just
+as passed to GEMDOS (i.e. with 16 bit integers). The return value should
+be passed in D0 (most C compilers do this automatically). Registers need
+not be saved; MiNT does that automatically. Note that MiNT resets
+all the system vectors to point to TOS while executing system calls, so
+if you make a system call inside your routine, you'll be calling TOS,
+not MiNT. If you want to call MiNT, use the function tables to find
+the address of the MiNT routine you want. (WARNING: some function table
+entries will be 0; this indicates to MiNT that it should call through to
+TOS. See the example above.)
+    Caution is STRONGLY advised in the use of this feature; a miscue will
+crash the system. Make sure that the routines are de-installed when the
+program exits (or make the program stay in memory with the Ptermres() call).
+

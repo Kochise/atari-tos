@@ -1,0 +1,98 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1991,1990 Eric R. Smith. All rights reserved. See the file COPYING
+for conditions of redistribution.
+
+MiNT COMES WITH ABSOLUTELY NO WARRANTY, NOR WILL I BE LIABLE FOR ANY
+DAMAGES INCURRED FROM THE USE OF IT. USE ENTIRELY AT YOUR OWN RISK!!!
+---------------------------------------------------------------------
+
+Special thanks to:
+
+Stephen N. Henson (olorin@tardis.cs.ed.ac.uk) for the Minix filesytem
+    code.
+Allan Pratt (atari!apratt@ames.arc.nasa.gov) for TT support, a new and
+    improved init.prg, and lots of useful suggestions and advice.
+
+---------------------------------------------------------------------
+This is a beta-test version of MiNT, a multitasking TOS extender. It
+seems to work quite well with my setup, but treat it with caution -- it
+may be that the programs I use regularly are the *only* ones that it
+works with! I have tested (and used regularly) gulam, gcc, gnu make,
+uniterm, and various well-behaved games. I boot up with MiNT all the
+time, but then I make regular backups of everything so even if there's
+some horrible bug lurking in MiNT I won't get burned. (Of course, you
+make regular backups too -- don't you?).
+
+"mint.prg" and some program named "init.prg" are needed to start the
+system; "init.prg" is the first program run by MiNT, and can be
+your favorite shell. Note that Gulam makes a GEM call, so it can be
+used as "init.prg" only if you're running MiNT after GEM has started.
+The "init.prg" that comes with the system is useful because it directly
+supports pipes, background processes, and job control. There are versions
+of "bash" and "ksh" available for MiNT; you may prefer one of those
+shells.
+
+If you always boot with MiNT from your AUTO folder, you can rename
+"gem.prg" to "init.prg" to have the desktop come up automatically.
+(This may not work if you have a TT: see below).
+
+MiNT has been tested and seems to work on TOS 1.0 loaded from disk and
+TOS 1.4 in ROMs, so it should work on any ST (*). It does take up a fair
+amount of memory (probably 200K or so) so you'll likely want a 1040 or
+better to run it. MiNT is also reported to work on a TT, and should work
+on an ST with a 68030 board, as long as the version of TOS used sets
+the word at $59e to a non-zero value when the 68030 is in use; TOS 1.6
+and higher will do this, I think. I don't know about patched versions
+of TOS 1.4. One problem reported on the TT is that the supplied "gem.prg"
+doesn't work. The solution is to start MiNT from the desktop, either
+as an auto-booting program or just by double-clicking on it.
+(*) There are reports of incompatibilities between MiNT and TOS 1.0 in
+ROM. Perhaps it's time you got TOS 1.4 :-). If you do manage to get
+MiNT working with a ROM based TOS 1.0, please let me know what you
+had to do (if anything).
+
+My intention with the MiNT project is to eventually have a multitasking
+replacement for TOS. Obviously, I can't do this myself. So you're
+encouraged to do whatever you can to improve this system. Here are some
+things that would be nice, but that (for whatever reason) I'll probably
+not get around to:
+(1) a TCP/IP server of some sort (probably KA9Q could be adapted to
+    at least provide SLIP), plus a socket library using FIFO's to
+    communicate with it
+(2) there are some nifty multi-user games (e.g. tinymud and empire) that
+    would likely run OK with FIFO's for IPC
+(3) anyone want to try an X server?
+(4) a multitasking desktop, e.g. a MiNT aware Gemini
+(5) a multitasking replacement for GEM. This one will be a lot of work,
+    but the potential payoffs are great. Basing it on top of X or MGR
+    might save some work, and make it network-transparent to boot
+    (there is a version of MGR that runs under MiNT).
+
+The conditions for distribution are spelled out in the file "copying";
+this program is freeware, but it is *not* public domain. If you want
+to distribute MiNT with a commercial product, please contact me -- I'm
+sure we can work something out. If you come up with improvements and
+bug fixes for MiNT, please mail them to me and/or post them to Usenet.
+Please do *not* change the version number of MiNT, or distribute modified
+copies under the name MiNT (call it "newmint", or "better", or whatever).
+I want to make sure that when people talk about "MiNT version x.y",
+everyone's talking about the same thing.
+
+MiNT is not shareware, so you're not obliged to send me any money if
+you use it. However, if you like MiNT and decide it's worth a contribution
+(of whatever size), it will be gratefully accepted and used to finance
+further work on MiNT and other freeware programs (yes, I have to pay
+for my computer time myself, and yes, it costs a lot!). Sending
+bug fixes and improvements is also a nice way to show your appreciation
+and to help better the system. It is my sincere hope that MiNT will
+stimulate a great deal of good multitasking software for the ST, and will
+make programmers' lives much easier.
+
+My address is:
+--
+Eric R. Smith                     email:
+Dept. of Mathematics            eric.smith@uwo.ca
+University of Western Ontario   ersmith@uwovax.bitnet
+London, Ont. Canada N6A 5B7
+ph: (519) 661-3638

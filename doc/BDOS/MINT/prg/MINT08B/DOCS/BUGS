@@ -1,0 +1,27 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1991,1990 Eric R. Smith. All rights reserved. See the file COPYING
+for conditions of redistribution.
+========================================================================
+
+If a process deletes a file on a TOS filesystem that another process
+is using, serious problems (corrupted data and/or a system crash) will
+result!!
+
+After leaving MiNT, the current directory/drive may no longer be the
+same as they were when entering MiNT (GEMDOS apparently thinks that there
+has been a media change; I don't know why the drive gets messed up,
+though). Solution: never leave MiNT :-).
+
+The O_NDELAY, O_APPEND, etc. flags aren't implemented yet.
+
+Processes are restricted to having 64 memory regions at a time; once
+these are allocated, further Malloc or Pexec calls will fail until an
+Mfree is done. This is better than the 20 Malloc bug of TOS 1.0 and 1.2,
+but TOS 1.4 has no restriction on Mallocs. MiNT shouldn't, either.
+
+The wildcard matching used by pseudo-drives is a real kludge, and is neither
+TOS nor Unix compatible.
+
+Terminals connected to the RS232 or MIDI ports don't act like the console
+terminal; special characters (e.g. ^C or ^Z) are not interpreted.

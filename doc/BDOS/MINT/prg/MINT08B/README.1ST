@@ -1,0 +1,103 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1991,1990 Eric R. Smith. All rights reserved. See the file COPYING
+for conditions of redistribution.
+
+MiNT COMES WITH ABSOLUTELY NO WARRANTY, NOR WILL I BE LIABLE FOR ANY
+DAMAGES INCURRED FROM THE USE OF IT. USE ENTIRELY AT YOUR OWN RISK!!!
+---------------------------------------------------------------------
+OK, some of you don't want to read docs (even when there's a whole
+directory full of them). So here's the brief version of how to make
+MiNT run. For a list of new features in this version of MiNT, see the
+file "readme.new".
+
+(1) put mint.prg in the AUTO folder of your boot disk. Make sure it's the
+last thing in the folder -- anything after MiNT won't run. TT users:
+this may not work for you; see below.
+
+(2) put init.prg, gem.prg, and bgacc.acc in the root directory of your boot
+disk
+
+(3) reboot
+
+(4) MiNT should run and a prompt ("% ") will appear. Type "exit" (without
+the quotes) and press return to continue booting without MiNT. Type "gem"
+and press return to get the desktop, running under MiNT.
+
+(5) If you chose to boot with MiNT, a desk accessory entry labelled
+"Background Prg" should appear. Choosing this for the first time will
+bring up a file selector box. Use the file selector to choose a TOS
+or TTP program to run. You can return to the desktop by pressing
+the Control key and the "0" key on the number pad at the same time;
+the TOS/TTP program will continue running, and to re-connect to it
+select "Background Prg" again from the DA menu. See bgacc.doc for
+more information, and for important information about bugs.
+
+(6) If you have a TT, the above sequence may not work for you; for some
+reason, "gem.prg" crashes the system. You may, instead, run MiNT from
+the desktop or install it as an auto booting application. If you want
+to run GEM applications under MiNT, you'll have to run them from
+a CLI; thus, MiNT should be installed as a GEM application so that
+everything will be properly set up for the CLI.
+
+(7) If you have TOS 1.2 or higher, you can install some new drives on
+the desktop while running MiNT. Drive V: shows all of the BIOS devices
+available under MiNT, and drive X: shows all the processes active at the
+present time. You're allowed to rename processes just as though they were
+files. You can also delete them by dragging them to the desktop; you should
+be careful to make sure you really want them deleted, though! Deleting the
+MiNT process is impossible; deleting INIT or BGACC is possible, but is
+a very, very bad idea.
+
+(8) While MiNT is running, there are some special keys available:
+
+CTRL-ALT-C: kills all processes that are reading from/writing to the
+	screen. Useful for getting out of hung programs.
+CTRL-ALT-\ or CTRL-ALT-UNDO: similar to CTRL-ALT-C, but somewhat more
+	fatal (fewer programs choose to catch the signal these keys
+	raise)
+CTRL-ALT-DEL: resets the computer, as in TOS 1.4 and higher
+CTRL-ALT-F1: raises the "debug level" of MiNT. Pressing this key once
+	causes a message to be printed whenever an error occurs;
+	pressing it twice causes a detailed trace of system calls.
+	This key can be *very*, *very* useful in tracking down problems
+	with any program!
+CTRL-ALT-F2: lowers the debugging level -- press it as many times as
+	you pressed CTRL-ALT-F1 to turn off all debugging
+CTRL-ALT-F3: toggles debugging output between the screen (default) and
+	the printer
+CTRL-ALT-F5: shows all memory being used in the system
+CTRL-ALT-F6: shows all active processes in the system
+
+CTRL-Z: suspends processes reading from/writing to the screen if the
+	keyboard is not in "raw" mode. Use this key only if you're
+	running a shell that, like you, understands job control.
+CTRL-ALT-Z: suspends processes reading from/writing to the screen
+	no matter what. The warning with CTRL-ALT-Z applies doubly here!
+
+(8) If you have Minix partitions on your (fixed) hard drive, they can
+be accessed via MiNT just as though they were TOS partitions. See
+"minixfs.doc" for more details. The "minit" program that comes in
+mntutl8b.zoo may be used to create Minix partitions, but I recommend
+that you know what you're doing before trying this!
+
+
+Other Docs:
+
+"readme" contains a general introduction to MiNT
+"readme.new" summarizes the new features of this version of MiNT
+"copying" says under what conditions you can make copies of MiNT
+"mint.doc" contains more detailed information about MiNT, including
+   information of interest to programmers
+"bgacc.doc" contains information about the background program accessory
+"init.doc" tells about the default shell that runs when MiNT starts up;
+   you can use this shell to do lots of things
+"features" is a list of areas where MiNT is deliberately incompatible with
+   TOS
+"bugs" is a list of known bugs in MiNT -- read this one! Also, remember that
+   there are lots of unknown bugs in MiNT as well.
+"problems" is an (incomplete) list of programs that are known to have
+   problems working under MiNT
+"minixfs.doc" is a description of the (experimental) Minix filesystem
+   code by Stephen N. Henson.
+

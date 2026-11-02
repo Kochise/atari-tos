@@ -1,0 +1,197 @@
+NOTE::: this file is not an "official" part of the MiNT distribution,
+and need not be included with either source or binary versions of MiNT.
+(You can do so if you like, of course.)
+
+version 0.8
+
+minixfs.c:
+	incorporated changes to handle 1K sector sizes
+dos.c:
+	fixed Super() bug (thanks Stephen)
+dosdir.c:
+	Dsetdrv() fixed to return an error indication when one happens
+bios.c,biosfs.c,dosfile.c:
+	changed so that bios handles 0 and 1 can be redirected just like
+	handle 2 (via the new file handles -3 and -2 respectively; AUX:
+	and PRN: now refer to these files, and RS232 and CENTR to the
+	physical devices)
+mem.c, dosmem.c, dos.c:
+	added code to support new TT TOS calls Mxalloc and Maddalt, plus
+	program flags for loading/mallocing in alternate memory
+minixfs.c:
+	new version from Stephen, now supports floppies and other removable
+	media
+biosfs.c:
+	made mouse driver change the line A mouse position variables, so MGR
+	will work with bigscrn and similar large screen emulators
+bios.c:
+	changed IOREC to IOREC_T to avoid name conflicts with some osbind.h
+minixfs.[ch]:
+	changed lots of function parameter types to avoid promotion and
+	prototype problems with 32 bit code
+procfs.c:
+	changes to allow read/write from process space
+atarierr.h:
+	ENMFIL is -49, not -47 -- so much for Abacus' docs :-)
+proc.c:
+	kludge to let low priority processes run every so often, even
+	in the presence of a high priority process that is ready to run
+signal.c, main.c, intr.s:
+	integrated signals with normal exceptions, so that e.g.
+	a bus error raises SIGBUS. This improves the survivability
+	of the kernel, so that a bus error resulting from a bad
+	system call parameter won't kill MiNT, just the offending
+	process.
+mem.c,dosmem.c:
+	incorporated Allan's bugfixes; alternative RAM should work now
+mem.c,util.c:
+	added a new memory map for the kernel -- this should ease
+	the problems with programs grabbing all of available memory
+dosmem.c:
+	removed dLibs kludge -- some programs rely on p_parent being
+	non-zero to tell them that they're not accessories
+various places:
+	cleaned up job control stuff to be more Unix like
+dosmem.c:
+	p_wait3 now supports the WUNTRACED bit; if this isn't set,
+	processes stopped due to job control are *not* returned
+signal.c:
+	forced p_sigreturn() with no signal pending to unwind the
+	*whole* signal stack, in case there were multiple signals
+	pending at the time the user did a longjmp() (or whatever
+	prompted the Psigreturn())
+bios.c:
+	fixed the annoying problems with CTRL-ALT-Fx sometimes leaving
+	keys in the buffer
+intr.s, syscall.s, main.c:
+	make sure interrupts are off before changing any vectors
+intr.s,dossig.c:
+	fix exception handlers to be more careful about the distinction
+	between being in or out of the kernel
+biosfs.c, pipefs.c:
+	fix ^C and ^Y to send the signals to the whole process group,
+	and also to make sure processes don't read these keys if
+	they're turned into signals
+
+=============================================================================
+version 0.7
+
+lots of places:
+	memory handling was overhauled completely; kmalloc now allocates
+	memory from the same space as do m_alloc and p_exec, so there is
+	no artificial constraint on the number of processes
+mem.c, dosmem.c:
+	made sure that all sizes would always be rounded to the nearest
+	longword. Just in case they aren't, Malloc(-1L) rounds down to the
+        next smallest longword.
+signal.c:
+	corrected killpg() bug (wasn't checking signals, so the current
+	process didn't get the signal until later)
+main.c:
+	pass current environment along to init.prg, instead of forcing an
+	empty environment
+main.c:
+	AARGH! The cookie jar stuff was plain wrong (the last cookie should
+	have the total number of slots, not just the ones that are free).
+version.h, main.c:
+	made version numbering a bit easier (big deal)
+intr.s:
+	IPL 7 before reboot (thanks, Allan)
+biosfs.c:
+	made mouse compatible with TOS ALT-cursor keys (the Y direction was
+	wrong before)
+biosfs.c, tosfs.c, pipefs.c, procfs.c:
+	fsfirst/fsnext return all upper case in TOS domain now, but
+	lower case (or mixed) in MiNT domain; this is to try to wean
+	programmers off of the habit of assuming everything is upper case
+	(and converting accordingly)
+context.s,intr.s:
+	changes to make MiNT TT compatible. Thanks to Allan Pratt for this!
+various places:
+	call zero() instead of bzero()
+bios.c:
+	allow CTRL-ALT-C, CTRL-ALT-\, and CTRL-ALT-Z to force a SIGINT,
+	SIGQUIT, or SIGTSTP, respectively, even if the terminal is in raw
+	mode
+dos.c, dosdir.c:
+	NEW SYSTEM CALLS:
+	Sysconf(n) returns information about the global limits of the
+	currently running version of MiNT
+	Dpathconf(name, n) returns information about the file system that
+	the file "name" is located on
+dossig.c:
+	NEW SYSTEM CALL: Psigpending() returns the set of signals that
+	have been sent to the process, but not yet delivered.
+mem.c:
+	fixed up comments and debugging/trace info for load_region
+filesys.c:
+	make explicit the fact the individual file names are limited to
+	14 characters
+everywhere:
+	change FILENAME_MAX to PATH_MAX
+bios.c:
+	added CTRL-ALT-F5 (show memory usage) and CTRL-ALT-F6
+	(show processes)
+proc.c:
+	changed the process initialization code to better deal with job
+	control; also changed handle 2 to be AUX: (as under TOS) rather
+	than PRN:
+dosmem.c:
+	changed do_vfork() code so that the text segment of processes is
+	*not* saved in a fork() if the process has separate text, data, and
+	bss segments; this saves a fair bit of memory
+filesys.c:
+	changed pathname resolution code so that multiple slashes in a file
+	name have the same effect as single slashes. POSIX mandates this,
+	and some Unix programs expect it, too
+bios.c:
+	CTRL-ALT-UNDO now raises SIGQUIT, for the benefit of people with
+	foreign ROMs (some have trouble with ^\)
+minixfs.c:
+	new file, courtesy of Stephen N. Henson (olorin@tardis.cs.ed.ac.uk)
+	this is still "under construction"; see minixfs.doc for more details
+===========================================================================
+version 0.6
+
+bios.c, proc.c, biosfs.c:
+	added code to check for CTRL-ALT-key combinations on every
+	process switch; thus, debugging, rebooting, etc. do not require
+	waiting for a read from the keyboard. Also, ^C sends a SIGINT
+	immediately, and ^Z (SIGTSTP) and ^\ (SIGQUIT) take effect
+	right away, too.
+	CTRL-ALT-DEL supported for TOS < 1.4
+biosfs.c:
+	added a fake "third button" on the mouse (you get it by holding down
+	a shift key and a mouse button)
+	made mouse_read return at least 1 byte
+signal.c:
+	changed so stopped processes always have a return code of 0177
+dosfile.c:
+	added new call, f_select
+dos.c:
+	added new calls to get resource usage, and set resource limits
+bios.c, console.c:
+	changed return values of status calls from 1 to -1, to be TOS
+	compatible
+biosfs.c, pipefs.c, filesys.c, util.c:
+	added case-insensitive string comparison routine, and modified the
+	file systems to use it
+intr.s:
+	fixed the Psigreturn race condition bug
+dosmem.c:
+	made Pexec'ing processes immune to SIGINT, SIGHUP, and SIGTSTP
+signal.c:
+	revamped signal handling so that Psigreturn() no longer needs an
+	argument.
+proc.c:
+	added some sanity checks for things like stack overflow
+bios.c, tty.c, pipefs.c:
+	added real tty structures that programs can manipulate
+dos.c:
+	added Talarm() and Pause() system calls
+
+=========================================================================
+version 0.5
+
+First publically released version (made available for FTP as a beta test)
+

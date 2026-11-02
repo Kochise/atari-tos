@@ -1,0 +1,44 @@
+This file is not an "official" part of MiNT, but please distribute it
+with bgacc.acc
+-----------------------------------------------------------------------
+BGACC: a background program accessory for MiNT
+Written by Eric R. Smith (eric.smith@uwo.ca)
+
+This program is in the public domain. Do with it what you will. As a
+courtesy, please include these docs with all distributions, and give
+proper credit to the author.
+
+See the BUGS section below, please!
+
+"bgacc" is a simple little accessory that gives an easy way of running
+TOS programs in the background of a GEM session. Selecting this accessory
+pops up a file selector box; use this box to select the program you want
+to run. This should *not* be a GEM program; you already have a GEM program
+running, or you wouldn't be able to get to the menu bar! GEM will likely
+become horribly confused if there are two programs making GEM calls
+simultaneously.
+
+Once you've selected the program you want, it'll be run. To return to
+whatever GEM program you were using, hold the Control key down and press
+the "0" key on the keypad (the long one next to the "." :-). The TOS program
+will continue to run in the background; you can return to it by again
+selecting "Background Prg" from the desk accessory menu. If you exit from
+the background program, there will be a brief pause and the file selector
+box will appear again so that you can select another program to run.
+
+BUGS:
+It appears that bgacc somehow causes GEM to crash if you change
+resolutions :-(.
+
+HINTS:
+Note that you have to have MiNT in your auto folder, and run GEM manually,
+to make this work (i.e. GEM has to start up under MiNT, not vice-versa).
+Thus, it won't work on a TT, since you have to start MiNT after GEM on
+the TT. If MiNT isn't active when you boot up, the accessory will not
+install itself.
+
+Some graphics oriented programs don't actually make GEM AES calls, and
+these can be run from bgacc. Problems are less likely to occur if you
+run the program to completion. If you want to try experimenting, do it
+sometime when you're not doing anything important, and be prepared to
+reboot if you hang up GEM.
