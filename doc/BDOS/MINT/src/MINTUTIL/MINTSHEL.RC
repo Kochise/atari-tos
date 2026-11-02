@@ -1,0 +1,50 @@
+#
+# sample init.rc
+#
+# first, set MINT to the main MiNT directory
+#
+setenv MINT c:\mint
+#
+# Then set the path
+#
+setenv PATH c:\bin,c:\gnu\bin,$MINT\bin
+#
+# next, set some general variables
+#
+setenv TEMP m:
+setenv TMPDIR m:
+setenv TZ EST5EDT
+setenv HOME c:\home
+setenv SHELL $MINT\init.prg
+setenv PROMPT 'test> '
+#
+# next, set specific variables for the gcc and make
+#
+setenv GCCEXEC c:\gnu\bin\gcc-
+setenv GNULIB $MINT\mntlib\lib
+setenv GNUINC $MINT\mntlib\include
+setenv CC gcc
+setenv AS gcc-as
+#
+# Alcyon variables
+#
+setenv MACPATH c:\alcyon\include
+setenv ALNPATH c:\alcyon\lib
+setenv ALCPATH c:\alcyon\
+#
+# now set up some aliases
+#
+alias ls ls -F
+alias lim limit -m 2048k -M 2048k
+alias pwd cd
+#
+# MGR vars and aliases
+#
+setenv DEFAULT_FONT $MINT\mgr\font\gal7x11r.fnt
+setenv MGRFONT $MINT\mgr\font
+setenv MGRICON $MINT\mgr\icon
+alias clear echo ''
+alias inv echo 1S
+#
+# OK, now that everything's set up, run whatever programs we want to start
+#

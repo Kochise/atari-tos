@@ -1,0 +1,41 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1990,1991,1992 Eric R. Smith.
+Copyright 1992,1993 Atari Corporation
+All rights reserved.
+
+THE MiNT SOURCE CODE IS PROVIDED FREE OF CHARGE, AS IS. ATARI
+CORPORATION AND ERIC R. SMITH MAKE NO REPRESENTATIONS OR
+WARRANTIES WITH RESPECT TO THIS CODE, AND IN PARTICULAR
+SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF
+MERCHANTIBILITY OR FITNESS FOR A PARTICULAR PURPOSE. USE THIS
+CODE AT YOUR OWN RISK.
+----------------------------------------------------------------------------
+Here is the source code for the current version of MiNT. There are
+lots of changes, of course, but no docs. Sorry. The "changes" file
+does provide a useful list of things that have changed since previous
+versions of MiNT.
+
+Please read the notice in "copying" carefully. This code is completely
+unsupported; you use it at your own risk. Because it is unsupported
+(and undocumented) we are distributing it in source code only form.
+Users who wish a binary version of MiNT should purchase MultiTOS.
+Anyone who wants to use this version of MiNT should be fully aware
+of the risks involved in using unsupported software, and should
+also be comfortable enough with C and the process of compiling that
+they can fix bugs themselves. Please respect the conditions in "copying"
+(in particular please do not redistribute binary versions of this
+program). Source code to future versions of MiNT will not be made
+available if these conditions are violated.
+
+This version of MiNT is compiled to use memory protection by
+default. If you want to use the version of the AES from the ROM,
+you'll have to (a) turn off the -DMULTITOS flag in the makefile,
+and (b) after compiling rename "mint.prg" to "mintnp.prg". If
+MiNT notices that it is called "mintnp.prg", it will come up
+with memory protection disabled (this is necessary because the ROM
+AES violates memory protection in several ways). You can also
+disable memory protection by setting the "no_mem_prot" variable
+in memprot.c and recompiling.
+
+

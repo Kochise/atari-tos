@@ -1,0 +1,228 @@
+This file is not an "official" part of MiNT, but please distribute it
+with mintshel.ttp.
+-----------------------------------------------------------------------
+mintshel.ttp: by Allan Pratt and Eric Smith
+
+Here is a sample shell that can be used with MiNT. There's nothing
+particularly special about this shell (there are plenty of others that
+also work under MiNT), but it is small and it does understand job
+control, both of which are useful features.
+
+When started, mintshel looks in the current directory for the file
+"mintshel.rc"; if this file is found, the lines in it are read and processed
+just as if they had been typed at the keyboard. A prompt is then printed, and
+lines are read from the keyboard until an end of file character (^D) is
+encountered. Commands on a line may be separated by the ";" character (in
+which case they are executed one after another), the "&" character (in
+which case they are executed concurrently), or by the "|" character (in
+which case they are executed concurrently with the standard output of the
+first command connected to the standard input of the second command). Any
+line starting with a "#" character is treated as a comment, and ignored.
+
+External commands are searched for using the environment variable PATH,
+which should consist of directories separated by commas. See the sample
+mintshel.rc for an example. Arguments are passed to external commands using
+the Atari extended argument passing convention.
+
+I/O redirection is supported for external commands; to redirect the output
+of a command to a file, use ">file"; to append to a file use ">>file"; and
+to redirect input from a file use "<file".
+
+Command-line Arguments
+============ =========
+
+  -v		Causes all commands to be echoed to the screen before they're
+		executed.
+
+  -s		Causes batch files to be aborted if a command in the batch 
+		file exits with nonzero $STATUS.
+
+  -c args ...	All args after -c are collected into a line, and that line
+		is executed by the shell. Then the shell exits with that
+		command's $STATUS code.
+
+
+Variables
+=========
+Variables are set with setenv, and are referenced by prefixing their names
+with a "$", e.g.:
+   echo $PATH
+will echo the value of the environment variable PATH. The name may be
+enclosed in parentheses or braces; thus
+   setenv FOO foo
+   echo $(FOO)bar ${FOO}bar 
+will echo "foobar foobar". If there are no
+parentheses or braces, the name of the environment variable ends with the
+first character not in the set [A-Za-z0-9_?*], so "echo $FOO\bar" yields
+"foo\bar" and "echo $FOO*" does not yield files matching "foo*" but rather
+the value of the variable 'FOO*'.
+
+Typing "setenv" with no arguments will show the values of all environment
+variables.
+
+The following variables have special meaning to the shell:
+	$PATH: as mentioned above, is used to find programs.  Setting this
+causes an automatic "rehash" (see below).
+	$PROMPT: printed before each line of input in an interactive shell.
+	$BATCH_EXIT: the value of this variable should be a number.
+When nonzero, batch files (and even the shell itself) will exit when
+any command returns a nonzero exit code.
+	$VERBOSITY: when nonzero, all commands are displayed on the screen
+after being alias-expanded, wildcard-expanded, and variable-substituted,
+but before being executed.
+
+In addition, the following things can be used like environment variables,
+but they are not truly in your environment:
+	$CWD: yields your current working directory.
+	$STATUS: yields the exit code of the last command or batch file.
+		(the exit code of a batch file is the exit code of the
+		last command executed from that batch file.)
+
+If there is no variable with the name you give, an error message is printed
+and the command is not run.
+
+Wildcards
+=========
+It is possible to refer to a group of files with similar names by means
+of special characters ("wildcards"). For example, the pattern "*.c" means
+"all files that have the extension .c". Thus, if the current directory
+contains the files "foo", "foo.c", "bar.c", and "bar.doc", the command
+	echo *.c
+would be exactly equivalent to
+	echo foo.c bar.c
+and
+	echo *c
+would be the same as
+	echo foo.c bar.c bar.doc
+(Note that the files appear in their "true" order on the disk, not necessarily
+in alphabetical order).
+
+The following wildcards are supported:
+*:	matches any sequence of 0 or more characters
+?:	matches any 1 character
+[...]:  matches one character inside the brackets; if two characters are
+	seperated by a minus sign ('-') then all characters between those
+	two are also matched
+Examples:
+[ad-gz]*	matches all files beginning with 'a', 'd', 'e', 'f', 'g', or
+		'z' (read as "(a, or d through g, or z) followed by anything").
+*.*		matches all files containing a period. Note the difference
+		from some wildcard matching, in which '*.*' matches ALL files.
+a*.[ch]		matches all files starting with 'a' and having an extension
+		of '.c' or '.h'.
+
+If you have any wildcards in a command line, and none of them actually
+matches any files, an error message is printed and the command is not run.
+
+Batch Files
+===========
+Init commands may be placed in a file with a ".bat" extension; typing the
+filename (with or without the ".bat" extension) will then run those
+commands.
+
+Arguments to batch files are accessed in a way similar to environment
+variables: $1 yields the first argument to the batch file, $2 the second,
+and so on.  $0 yields to the name of the batch file itself, $* yields to
+all arguments from $1 on, $? yields to the number of arguments, and the
+built-in command 'shift' shifts $3 to $2, $2 to $1, and so on, and
+decrements $?.  'shift' leaves $0 alone.  Example of a simple batch file
+which executes the command named in its first argument, giving it the
+string "fixed_args" as its first argument and the rest of the batch-file
+command line as the rest of its args:
+
+    echo This is batch file $0, which will execute the command $1.
+    setenv cmdHOLD $1
+    shift
+    $cmdHOLD fixed_args $*
+
+Batch file arguments do nest, but each one is executed by the same shell,
+with the same environment and so on, so they can affect the global shell
+state (i.e. current directory, environment, aliases, etc.).  This is a lose
+and should be re-done.  In the meantime, if you want to execute a batch
+file in its own shell, use "mintshel -c batch_file_name batch_file_args ..."
+
+[Note to shell hackers: the ability to use $? relies on dollar substitution
+being done before wildcard substitution, because ? is a wildcard character.
+Also, the ability to use $? (and $STATUS) is useless without an "if"
+command.]
+
+Version note: arguments to batch files are new as of 2/91.
+
+Grubby details department: if a string starting with a digit gets to dollar
+substitution, atoi is called on it and that's what you get. The
+substitution for $1one is the first argument to the batch file, not
+getenv("1one").  $x where (x > $?) yields an error message and the command
+is abandoned.
+
+Builtin Commands
+================
+The following commands are built in:
+
+alias [string [command]]
+    With no arguments, prints a list of all aliases.
+    With one argument, shows what command the given string is aliased to.
+    With two or more arguments, the first argument ("string") becomes an
+    alias for the command consisting of all the other arguments. After this,
+    typing "string" is the same as typing that command.
+    Example:
+	alias c d:\bin\gcc.ttp -O -c
+	c foo.c
+	c bar.c
+    is the same as
+	d:\bin\gcc.ttp -O -c foo.c
+	d:\bin\gcc.ttp -O -c bar.c
+
+bg [pid]
+    Restart the job with process group "pid", but leave it in the background.
+    If "pid" is omitted, the last job in the list of jobs is used.
+
+cd [path]
+    Change the current directory to "path"; if no path is given, print
+    the current directory.
+
+echo [-n] [args]
+    Print the given arguments (if any) on the standard output, followed by
+    a newline character.  Suppress the newline character if -n is present.
+
+exit [code]
+    Leave the shell.  Exits with status code 'code' if present, else zero.
+
+fg [pid]
+    Bring the job with process group "pid" to the foreground. The process
+    group is the number in brackets reported by the "jobs" command. If
+    "pid" is omitted, the last job in the list of jobs is used.
+
+jobs
+    Print a list of all jobs that the shell knows about.
+
+kill [-sig] pid
+    Send the signal whose number is "sig" to process group "pid". The default
+    value for sig is 15 (SIGTERM); 9 (SIGKILL) is also useful, since it
+    cannot be caught or ignored.
+
+rehash [-l] [-v]
+    Scans the directories listed in the PATH environment variable for
+    executable programs and batch files, and adds them to a "hash buffer"
+    so they can be found quickly when used as commands.  With -l, the hash
+    buffer is then  listed to stdout.  With -v, it prints statistics
+    (currently just the number of file names in each "hash bucket"). This
+    happens automatically when the shell finds a PATH in its initial
+    environment, and any time the environment variable PATH it set.
+
+setenv [name [val]]
+    With no arguments, print the current environment; with 1 argument,
+    print the current value of that environment variable; with 2 arguments,
+    set the named variable to have value "val".
+
+shift
+    Shifts the args to a batch file, such that the old $1 is lost, the new
+    $1 is the old $2, and so on.
+
+which <name>
+    Prints the full pathname of the program or batch file which will be run
+    if <name> is used as a command, provided <name> is in the hash buffer. 
+    If it's not there, <name> itself is printed.
+
+BUGS:
+
+The output of built-in commands and batch files may not be redirected.

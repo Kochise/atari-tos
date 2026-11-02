@@ -1,0 +1,138 @@
+NAME
+	top - repeatedly display system status
+
+SYNOPSYS
+	top [-i] [-s seconds] [-w width] [-n nlines]
+
+DESCRIPTION
+
+"Top" is a program displays a periodically-updated picture of what's going
+on in your system.
+
+The display is a snapshot of system activity at periodic intervals. The top
+line of the display shows the number of milliseconds included in the
+interval, the percentage of that time not accounted for in the running
+times of processes listed (idle time), the number of processes, the number
+of running processes, and the total number of bytes used (the sum of the
+memory sizes of the processes listed).
+
+Below that each process in the system is listed, one per line.
+The fields of this line have the following meanings:
+
+	PID	The process ID of this process
+
+	PPID	The process ID of the parent of this process.
+
+	STATUS	The run state of the process: Wait, Sleep, Ready, Exit,
+		TSR, and Stop.  The Exit state means this process has
+		terminated, but its parent has not received its exit code. 
+		The Ready state includes the Run state.
+
+	SIZE	The amount of memory allocated to this process.
+
+	TIME	The amount of time this process has run.  This is the sum
+		of the user and system times of the process, displayed as
+		MM:SS.FF (minutes, seconds, and fraction of a second) or
+		HH:MM:SS (hours, minutes, and seconds) if the process has
+		run one hour or more.
+
+	%	The percentage of the time in this interval that this
+		process accounted for.
+
+	COMMAND	The command this process is running.
+
+The number of processes displayed is limited by the number of lines on
+your screen.
+
+OPTIONS
+
+	-s sleep
+		Set the interval between updates to 'sleep' seconds.
+		Default is 5.
+
+	-w width
+		Set the maximum width of a line to 'width'.  The arguments
+		in the COMMAND field will be truncated so the line is no
+		more than 'width' characters long.  The rest of the display
+		(PID, STATUS, etc.) is not affected.  Default is the width
+		of your screen.
+
+	-n nlines
+		Set the maximum number of processes to display.  This
+		defaults to the length of your screen minus three for
+		the status, input, and header lines.
+
+	-i	interactive mode
+
+		In Interactive mode the following single-key commands 
+		can be used:
+
+		s	Prompt for the number of seconds between intervals.
+
+		w	Prompt for the width; the width can be more than the
+			screen width, in which case long argument lists will
+			take up multiple lines.
+
+		n	Prompt for the maximum number of processes to
+			display (nlines). This can be smaller than your
+			screen size, but not  larger.
+
+		q	Quit.
+
+		^L	(control-L) clear and repaint the display.
+
+NOTES
+
+This program uses curses and termcap.  Appropriate environment variables
+must be set up.  The screen width and height, and thus the wraparound point
+for wide lines and the maximum number of processes to display, are set at
+startup time.
+
+The "snapshot of your system" really is a snapshot: if things are moving
+too fast, you can get blur.  If a process appears, runs, and exits during a
+single interval, top will never see it, and the time it took to run will
+appear as "idle" time, because it's not accounted for by the running times
+of the processes top did see.  In fact, any time a process exits, its
+running time during the last interval appears as idle time.  Also, a
+process ("A") can appear in the list along with another process ("B") which
+can only have started after "A" exited (e.g. if make is running, a link
+process can appear on the same list with an assembler process which
+produced the linker's input).  Finally, the sum of the percentages might be
+greater than 100.  All this is caused by strobe, roundoff, and nonzero
+shutter time effects.
+
+MiNT NOTES
+
+Interactive mode is slower, which is why it isn't the default.  It's slower
+because it uses Fselect to sleep while waiting for keyboard input, rather
+than using Talarm and Pause, and Fselect sits in a loop with Syield rather
+than truly blocking.  MiNT 0.9 is said to fix this.
+
+The Ready state includes the Run state: since top itself is always the
+running process when it gets a chance to check, having a separate name for
+it conveys no information.
+
+The COMMAND field is the concatenation of the "name" field of the process
+and the command-line arguments in the process' basepage.  It can be wildly
+inaccurate if the process is using its basepage as its DTA for a directory
+search.
+
+Processes are shown in the order they arrived from the directory search. If
+there are more processes than lines on your screen (or your nlines value),
+you'll see the older, less-interesting ones and lose the newer-more
+interesting ones off the bottom.
+
+Top sometimes gets a bus error; this could be a problem related to
+operating on processes which don't exist any more.  MiNT might have to keep
+a process around if any other process has it open (i.e. has Fopen'ed the
+process on drive X:).
+
+AUTHOR
+
+Top for MiNT was written in August, 1991 by Allan Pratt, Atari Corp.
+(atari!apratt).  The idea for top came from the program of that name for
+BSD UNIX systems. (UNIX is a trademark of AT&T.)  The source code is a
+hacked-over version of ps, written in March of 1991 by Tony Reynolds
+(cctony@sgisci1.ocis.olemiss.edu) and modified by Eric Smith (Mr. MiNT
+himself).
+

@@ -1,0 +1,29 @@
+MiNT is Not TOS: A Multitasking Operating System Extension for the Atari ST
+
+Copyright 1990,1991,1992 Eric R. Smith.
+Copyright 1992,1993 Atari Corporation
+All rights reserved.
+
+MINT is still under development, and is probably still very
+buggy. Treat it as you would any experimental software;
+with extreme caution. Please read the following notice
+carefully:
+
+THE MiNT SOURCE CODE IS PROVIDED FREE OF CHARGE, AS IS. ATARI
+CORPORATION AND ERIC R. SMITH MAKE NO REPRESENTATIONS OR
+WARRANTIES WITH RESPECT TO THIS CODE, AND IN PARTICULAR
+SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF
+MERCHANTIBILITY OR FITNESS FOR A PARTICULAR PURPOSE. USE THIS
+CODE AT YOUR OWN RISK.
+----------------------------------------------------------------------------
+
+Redistribution of this code for profit, or use of this code in any
+product, requires a license from Atari Corporation. The unmodified
+source code may be redistributed provided that no fee is charged
+for redistribution (other than a reasonable fee for the cost
+of the distribution media). Only the source code may be so
+redistributed; binaries compiled from the source may not be.
+Anyone trying to use this product should be an experienced
+programmer capable of compiling it, and who understands the importance
+of backups and the dangers of using beta test software.
+

@@ -1,0 +1,21 @@
+This is MH-MiNT 1.12h3:  MiNT 1.12 Patches from the MiNT Mailing List
+collected by Michael Hohmuth <hohmuth@inf.tu-dresden.de>
+
+20 Mar 1995
+
+/*
+ * This file belongs to MH-MiNT.  It's not in the original MiNT 1.12
+ * distribution.
+ */
+
+This is an attempt in helping to re-synchronize the MiNT source tree
+between the MiNT Mailing List folks.
+
+Please note that MH-MiNT is unsupported.  There is no warranty.  See
+the file COPYING for details.
+
+Please report bugs to mint@terminator.rs.itd.umich.edu.
+
+Michael Hohmuth
+-- 
+Email: hohmuth@inf.tu-dresden.de
